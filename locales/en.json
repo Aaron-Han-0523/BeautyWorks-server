@@ -1,1 +1,11 @@
-{}
+{
+	"home.title": "home.title",
+	"title": "title",
+	"users.id": "users.id",
+	"users.signIn.id.placeholder": "users.signIn.id.placeholder",
+	"users.password": "users.password",
+	"users.signIn.password.placeholder": "users.signIn.password.placeholder",
+	"users.signIn.btnName": "users.signIn.btnName",
+	"users.signIn.forgotQuestion": "users.signIn.forgotQuestion",
+	"users.signIn.signUp": "users.signIn.signUp"
+}

@@ -1,3 +1,11 @@
 {
-	"home.hello": "안녕"
+	"home.title": "안녕",
+	"title": "뷰티웍스",
+	"users.id": "email",
+	"users.signIn.id.placeholder": "Email",
+	"users.password": "password",
+	"users.signIn.password.placeholder": "Password",
+	"users.signIn.btnName": "Sing In",
+	"users.signIn.forgotQuestion": "Forgot Your Email or Password?",
+	"users.signIn.signUp": "Sign Up"
 }

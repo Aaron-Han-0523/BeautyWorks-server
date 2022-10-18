@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('users', {
     users_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "사용자 식별번호"
@@ -76,7 +77,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     lastAccessDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "마지막 접속날짜"
     }
   }, {
