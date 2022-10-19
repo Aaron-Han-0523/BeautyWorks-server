@@ -1,6 +1,9 @@
-const usersService = require('../services/users')
+const usersService = require('../services/users');
+const nodemailer = require('nodemailer');
+const systemInfo = require('../config/system.json');
 const encryption = require('../utils/encryption');
 const Sequelize = require('sequelize');
+const { __ } = require('i18n');
 const Op = Sequelize.Op;
 
 exports.login = async function (req, res, next) {
@@ -42,6 +45,38 @@ exports.logout = async (req, res, next) => {
         console.log("세션 삭제 완료");
         return res.redirect('/users/signIn');
     })
+}
+
+exports.validationEmail = async (req, res, next) => {
+    const targetEmail = req.body.email;
+    // console.log(systemInfo);
+    const transporter = nodemailer.createTransport({
+        service: systemInfo.emailService,
+        auth: {
+            user: systemInfo.emailUserid,
+            pass: systemInfo.emailPassword
+        }
+    });
+
+    let validationNumber = parseInt((Math.random() * 1000000) / 1);
+    // console.log(validationNumber);
+
+    let mailOptions = {
+        from: systemInfo.emailUserid,
+        to: targetEmail,
+        subject: __("users.signUp.validationMailTitle"),
+        text: __("users.signUp.validationMailcontents") + '\n' + validationNumber
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.error(error);
+            return res.status(500).send(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            return res.json(validationNumber);
+        }
+    });
 }
 
 

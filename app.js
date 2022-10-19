@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 const i18n = require('./i18n');
+const codezip = require('./codezip');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -41,7 +43,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use((req, res, next) => {
+  res.locals.codezip = codezip;
+  return next();
+})
 
 
 // 세션세팅

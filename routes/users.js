@@ -8,7 +8,11 @@ const usersService = require('../services/users');
 // 사용자 등록
 router
   .post('/signUp', usersController.add)
-  .get('/signUp', (req, res, next) => res.render('users/add'));
+  .get('/signUp', (req, res, next) => res.render('users/signUp'));
+
+// Email 확인
+router
+  .post('/validationEmail', usersController.validationEmail)
 
 // 사용자 접속
 router

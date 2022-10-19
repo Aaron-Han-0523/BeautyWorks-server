@@ -1,5 +1,6 @@
 orm.js
 config/
+test.js
 
 # Logs
 logs
