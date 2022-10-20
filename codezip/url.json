@@ -1,0 +1,17 @@
+{
+    "user": {
+        "questionMark": "http://intercome.help",
+        "signUp": "/users/signUp",
+        "signIn": "/users/signIn",
+        "signOut": "/users/signOut",
+        "myPage": "/users/myPage",
+        "myAccount": "/users/myAccount",
+        "dashboard": "/users/Dashboard",
+        "myProject": "/users/myProject",
+        "newProject": "/users/newProject",
+        "contents": "/users/contents",
+        "container": "/users/container",
+        "ingredientData": "/users/ingredientData",
+        "community": "/users/community"
+    }
+}

@@ -30,20 +30,26 @@
                   <div class="row px-3">
                     <div class="breadcrumb align-items-start d-flex pt-3">
                       <div class="p-1 col-3">
-                        <h5><strong>BREADCRUMB</strong></h5>
+                        <h5><strong>
+                            <%= __('MyPage') %>
+                          </strong></h5>
                       </div>
                       <div class="p-1 flex-grow-1">
                         <div>
-                          <img style="width: 25px;" src="\images\icon\down-arrow-svgrepo-com.svg">
+                          <a href="<%= codezip.url.user.myAccount %>">
+                            <img style="width: 25px;" src="\images\icon\down-arrow-svgrepo-com.svg">
+                          </a>
                         </div>
                       </div>
                       <div class="p-1">
-                        <h5>Log Out</h5>
+                        <h5>
+                          <%= __('LogOut') %>
+                        </h5>
                       </div>
                     </div>
                   </div>
+                  <!-- CONTENT AREA -->
                 </div>
-                <!-- CONTENT AREA -->
               </div>
 
             </div>

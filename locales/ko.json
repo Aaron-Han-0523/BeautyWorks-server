@@ -296,5 +296,22 @@
 	"menu2": "menu2",
 	"language": "언어",
 	"menu3": "menu3",
-	"menu3-1": "menu3-1"
+	"menu3-1": "menu3-1",
+	"Logout": "Logout",
+	"url.Logout": "url.Logout",
+	"url.Dashboard": "url.Dashboard",
+	"Dashboard": "Dashboard",
+	"Project": "Project",
+	"MyProject": "MyProject",
+	"newProject": "newProject",
+	"Customizing": "Customizing",
+	"Contents": "Contents",
+	"Container": "Container",
+	"Service": "Service",
+	"IngredientData": "IngredientData",
+	"News": "News",
+	"Community": "Community",
+	"LogOut": "LogOut",
+	"MyPage": "MyPage",
+	"MyAccount": "MyAccount"
 }

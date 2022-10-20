@@ -44,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
+  app.locals.codezip = codezip;
   res.locals.codezip = codezip;
   return next();
 })
@@ -82,7 +83,6 @@ app.use((req, res, next) => {
 })
 
 // routing
-app.use('/dashboard', (req, res) => res.render('dashboard/dashboard', { user: req.session.user }));
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 

@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
   if (!req.session.user) return res.redirect('/users/signIn');
   
-  return res.redirect('/dashboard');
+  return res.redirect('/users/dashboard');
 });
 
 module.exports = router;

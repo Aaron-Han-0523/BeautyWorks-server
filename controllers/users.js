@@ -25,7 +25,10 @@ exports.login = async function (req, res, next) {
             delete user.password;
             req.session.user = user
 
-            return res.redirect('/');
+            //세션 스토어가 이루어진 후 redirect를 해야함.
+            req.session.save(() => {
+                res.redirect('/');
+            });
         } else {
             console.log('비밀번호 불일치')
             return res.send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
@@ -147,6 +150,7 @@ exports.detail = async (req, res, next) => {
     //     data: data
     // });
     // else res.json(`fail id:${id}`)
+    return res.send('My Account')
 }
 
 exports.delete = async (req, res, next) => {

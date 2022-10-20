@@ -5,3 +5,5 @@ module.exports.mkdir = (dir) => {
         fs.mkdirSync(dir);
     }
 }
+
+module.exports.checkUser

@@ -19,23 +19,30 @@ router
   .post('/signIn', usersController.login)
   .get('/signIn', (req, res, next) => res.render('users/signIn'))
 
-// 사용자 접속
+
+////////////////////////////////////
+//    사용자 로그인 필요한 곳      //
+////////////////////////////////////
+router
+  .use((req, res, next) => {
+    if (!req.session.user) {
+      return res.redirect('/users/signIn');
+    }
+    return next();
+  })
+
+
+router.get('/layout', (req, res) => res.render('layout/layout', { user: req.session.user }));
+
+// 사용자 대시보드
+router.use('/dashboard', (req, res) => res.render('dashboard/dashboard', { user: req.session.user }));
+
+// 사용자 접속해제
 router
   .get('/signOut', usersController.logout);
 
-// 사용자 편집
-router
-  .put('/edit/:id', usersController.edit)
-  .post('/edit/:id', usersController.edit)
-  .get('/edit/:id', (req, res, next) => res.render('users/edit'));
-
-// 사용자 삭제
-router
-  .get('/delete/:id', usersController.delete)
-  .delete('/:id', usersController.delete);
-
-// 사용자 조회
-router.get('/:id', usersController.detail);
-router.get('/', usersController.index);
+// 사용자 마이페이지
+router.get('/myPage', (req, res) => res.render('users/myPage', { user: req.session.user }));
+router.get('/myAccount', (req, res) => res.render('users/myAccount', { user: req.session.user }));
 
 module.exports = router;

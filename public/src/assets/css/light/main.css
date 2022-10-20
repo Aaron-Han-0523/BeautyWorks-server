@@ -2925,8 +2925,8 @@ fieldset:disabled .btn {
 }
 
 .avatar-sm {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 24px;
+  height: 24px;
   font-size: 0.83333rem;
 }
 .avatar-sm svg {
