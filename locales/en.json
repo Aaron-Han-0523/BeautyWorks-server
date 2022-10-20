@@ -7,5 +7,9 @@
 	"users.signIn.password.placeholder": "users.signIn.password.placeholder",
 	"users.signIn.btnName": "users.signIn.btnName",
 	"users.signIn.forgotQuestion": "users.signIn.forgotQuestion",
-	"users.signIn.signUp": "users.signIn.signUp"
+	"users.signIn.signUp": "users.signIn.signUp",
+	"web.title": "web.title",
+	"menu1": "menu1",
+	"menu2": "menu2",
+	"language": "language"
 }

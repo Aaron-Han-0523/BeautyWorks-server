@@ -40,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "이름"
     },
-    lastname: {
+    lastName: {
       type: DataTypes.STRING(500),
       allowNull: false,
       comment: "성"

@@ -42,11 +42,10 @@ exports.changePassword = async (obj) => {
 }
 
 exports.create = async (obj) => {
-    console.log(obj)
+    console.log("create obj :", obj)
     return await users
         .create(Object.assign(obj, {
-            createUser: obj.user,
-            createDate: new Date()
+            registerDate: new Date()
         }))
         .then(result => {
             console.log("users create success");

@@ -58,11 +58,10 @@ exports.validationEmail = async (req, res, next) => {
         }
     });
 
-    let validationNumber = parseInt((Math.random() * 1000000) / 1);
-    // console.log(validationNumber);
+    let validationNumber = ('000000' + parseInt((Math.random() * 1000000) / 1)).slice(-6);
 
     let mailOptions = {
-        from: systemInfo.emailUserid,
+        from: systemInfo.systemEmailName + '<' + systemInfo.emailUserid + '>',
         to: targetEmail,
         subject: __("users.signUp.validationMailTitle"),
         text: __("users.signUp.validationMailcontents") + '\n' + validationNumber
@@ -81,23 +80,22 @@ exports.validationEmail = async (req, res, next) => {
 
 
 exports.add = async (req, res, next) => {
-    // const user = req.userInfo;
-    // let body = req.body;
-    // body.user = user.userid;
-    // body.password = await encryption.hashing(body.password);
-    // console.log("Users body :", body);
+    let body = req.body;
+    body.password = await encryption.hashing(body.password);
+    body.userType = 0;
+    body.email = body.emailId + '@' + body.emailDomain;
+    body.mobileContacts = "(" + body.country_number + ")" + body.phoneNum;
+    console.log("Users body :", body);
 
-    // body.user = user.userid;
-    // console.log(body);
-    // try {
-    //     let result = await usersService.create(body);
-    //     // console.log("result :",result);
-    //     return res.status(201).redirect('/users');
-    // }
-    // catch (e) {
-    //     console.error(e);
-    //     return res.status(409).json(`add fail`)
-    // }
+    try {
+        let result = await usersService.create(body);
+        // console.log("result :",result);
+        return res.status(201).redirect('/users/signIn');
+    }
+    catch (e) {
+        console.error(e);
+        return res.status(500).send(e);
+    }
 }
 
 exports.edit = async (req, res, next) => {

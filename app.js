@@ -75,7 +75,14 @@ app.get('/ko', (req, res) => {
   res.redirect('back');
 });
 
+// 프로젝트 업데이트 체크
+app.use((req, res, next) => {
+  res.locals.projectUpdated = false;
+  next();
+})
+
 // routing
+app.use('/dashboard', (req, res) => res.render('dashboard/dashboard', { user: req.session.user }));
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 
