@@ -14,7 +14,7 @@ module.exports.formatDateTime = (d_t) => {
     let hour = ("0" + d_t.getHours()).slice(-2);
     let minute = ("0" + d_t.getMinutes()).slice(-2);
     let seconds = ("0" + d_t.getSeconds()).slice(-2);
-    return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + seconds;
+    return year + "." + month + "." + day + " " + hour + ":" + minute + ":" + seconds;
 }
 
 module.exports.formatDate = (d_t) => {
@@ -25,5 +25,5 @@ module.exports.formatDate = (d_t) => {
     let hour = ("0" + d_t.getHours()).slice(-2);
     let minute = ("0" + d_t.getMinutes()).slice(-2);
     let seconds = ("0" + d_t.getSeconds()).slice(-2);
-    return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + seconds;
+    return year + "." + month + "." + day;
 }

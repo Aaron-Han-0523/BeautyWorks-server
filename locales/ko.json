@@ -320,5 +320,16 @@
 	"users.myAccount.btn.SaveChanges": "Save Changes",
 	"users.myAccount.btn.RemoveImage": "Remove Image",
 	"users.MyAccount.msg.SaveSuccess": "users.MyAccount.msg.SaveSuccess",
-	"users.MyAccount.msg.SaveFail": "users.MyAccount.msg.SaveFail"
+	"users.MyAccount.msg.SaveFail": "users.MyAccount.msg.SaveFail",
+	"users.dashboard.header.Progress": "Progress",
+	"users.dashboard.header.TempProgress": "임시 저장한 Progress",
+	"users.dashboard.header.CompletedProject": "Completed Project",
+	"users.community.header.News": "News",
+	"users.community.header.Community": "Community",
+	"users.community.btn.wirte": "게시글 작성",
+	"users.community.news.index.WrittenBy": "Written By",
+	"users.news.이전글": "이전글",
+	"users.news.목록": "목록",
+	"users.news.다음글": "다음글"
+
 }

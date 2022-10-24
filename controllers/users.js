@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer');
 const systemInfo = require('../config/system.json');
 const encryption = require('../utils/encryption');
 const Sequelize = require('sequelize');
-const { __ } = require('i18n');
 const Op = Sequelize.Op;
 
 exports.login = async function (req, res, next) {
@@ -66,8 +65,8 @@ exports.validationEmail = async (req, res, next) => {
     let mailOptions = {
         from: systemInfo.systemEmailName + '<' + systemInfo.emailUserid + '>',
         to: targetEmail,
-        subject: __("users.signUp.validationMailTitle"),
-        text: __("users.signUp.validationMailcontents") + '\n' + validationNumber
+        subject: res.locals.__("users.signUp.validationMailTitle"),
+        text: res.locals.__("users.signUp.validationMailcontents") + '\n' + validationNumber
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

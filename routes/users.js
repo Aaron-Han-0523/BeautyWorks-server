@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const communityRouter = require('./community');
+
 const usersController = require('../controllers/users');
 const usersService = require('../services/users');
 const multer = require("multer");
@@ -75,26 +77,32 @@ router
       else return res.redirect('/users/signIn');
     }
 
+    res.locals.user = req.session.user;
     return next();
   })
 
 
-router.get('/layout', (req, res) => res.render('layout/layout', { user: req.session.user }));
+router.get('/layout', (req, res) => res.render('layout/layout'));
 
 // 사용자 대시보드
-router.use('/dashboard', (req, res) => res.render('dashboard/dashboard', { user: req.session.user }));
+router.use('/dashboard', (req, res) => res.render('dashboard/dashboard'));
 
 // 사용자 접속해제
 router
   .get('/signOut', usersController.logout);
 
 // 사용자 마이페이지
-router.get('/myPage', (req, res) => res.render('users/myPage', { user: req.session.user }));
+router.get('/myPage', (req, res) => res.render('users/myPage'));
 
 // 사용자 계정
 router
   .post('/myAccount', upload().single('profileImagePath'), usersController.edit)
   .put('/myAccount', upload().single('profileImagePath'), usersController.edit)
-  .get('/myAccount', (req, res) => res.render('users/myAccount', { user: req.session.user }));
+  .get('/myAccount', (req, res) => res.render('users/myAccount'));
+
+
+// Community
+router
+  .use('/community', communityRouter)
 
 module.exports = router;

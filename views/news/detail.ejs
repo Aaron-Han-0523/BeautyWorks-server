@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+    <%- include ("../partials/client-nav.ejs") %>
+      <%- include ("../partials/chatMark.ejs") %>
+
+        <!--  BEGIN MAIN CONTAINER  -->
+        <div class="main-container" id="container">
+
+          <div class="overlay"></div>
+          <div class="search-overlay"></div>
+
+          <%- include ("../partials/client-sidebar.ejs") %>
+
+            <!--  BEGIN CONTENT AREA  -->
+            <div id="content" class="main-content">
+              <div class="layout-px-spacing">
+
+                <div class="middle-content container-xxl p-0">
+
+                  <!-- BREADCRUMB -->
+                  <div class="row px-3">
+                    <div class="breadcrumb align-datas-start d-flex br-20">
+                      <div class="p-1 col-3">
+                        <h5><strong>
+                            <%= __('News') %>
+                          </strong></h5>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- CONTENT AREA -->
+                  <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+                      <div class="widget-content widget-content-area br-20 p-3">
+
+                        <!-- title -->
+                        <div class="row breadcrumb m-2 br-20">
+                          <div class="text-center align-self-center">
+                            <h5><strong>
+                                <% if(nameOrderInKorean.indexOf(lang) !=-1) { %>
+                                  <%= `${data.title} ${__('users.community.news.index.WrittenBy')}
+                                    ${data.lastName}${data.firstName} ${formatDate(data.updateDate)}` %>
+                                    <% } else { %>
+                                      <%= `${data.title} ${__('users.community.news.index.WrittenBy')} ${data.firstName}
+                                        ${data.lastName} ${formatDate(data.updateDate)}` %>
+                                        <% } %>
+                              </strong></h5>
+                          </div>
+                        </div>
+
+                        <!-- contents -->
+                        <div class="row breadcrumb m-2 mt-3 br-20 p-3">
+                          <div class="">
+                            <h5>
+                              <%= data.contents %>
+                            </h5>
+                          </div>
+
+                          <!-- 네비게이션 -->
+                          <div class="row mt-5">
+                            <div class="col-4 text-start">
+                              <% if(prev) { %><a href="<%= codezip.url.users.news %>/<%= prev.news_id %>">
+                                  <h5><i class="fa-solid fa-chevron-left"></i>
+                                    <%= __('users.news.이전글') %>
+                                  </h5>
+                                </a>
+                                <% } %>
+                            </div>
+                            <div class="col-4 text-center"><a href="<%= codezip.url.users.community %>">
+                                <h5>
+                                  <%= __('users.news.목록') %>
+                                </h5>
+                              </a></div>
+                            <div class="col-4 text-end">
+                              <% if(next) { %><a href="<%= codezip.url.users.news %>/<%= next.news_id %>">
+                                  <h5>
+                                    <%= __('users.news.다음글') %><i class="fa-solid fa-chevron-right"></i>
+                                  </h5>
+                                </a>
+                                <% } %>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+        </div>
+        <!--  END CONTENT AREA  -->
+
+        <%- include ("../partials/footer.ejs") %>
+
+          </div>
+          <!-- END MAIN CONTAINER -->
+
+          <%- include ("../partials/commonScrpits.ejs") %>
+
+            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+            <script>
+              let isRemoveImage = false;
+
+              profileImagePath.addEventListener('change', (event) => {
+                loadImageFile(event.target, profileImage)
+                isRemoveImage = false;
+              })
+
+              function removeImage() {
+                profileImagePath.value = null;
+                profileImage.src = '<%= codezip.url.users.defaultProfileImage %>'
+                isRemoveImage = true;
+              }
+
+              userAccount.onsubmit = async (e) => {
+                e.preventDefault();
+
+                let body = new FormData(userAccount);
+                body.append("isRemoveImage", isRemoveImage);
+
+                let response = await fetch(userAccount.action, {
+                  method: 'POST',
+                  body: body
+                }).then(res => {
+                  if (res.ok) {
+                    alert("<%= __('users.MyAccount.msg.SaveSuccess') %>");
+                    window.location.reload();
+                  }
+                  else {
+                    alert("<%= __('users.MyAccount.msg.SaveFail') %>");
+                  }
+                  return res.json();
+                }).then(result => {
+                  console.log(result);
+                });
+              }
+
+            </script>
+            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

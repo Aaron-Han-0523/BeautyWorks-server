@@ -68,6 +68,7 @@ module.exports = function(sequelize, DataTypes) {
     profileImagePath: {
       type: DataTypes.STRING(500),
       allowNull: true,
+      defaultValue: "imagesdefault-user-profile.svg",
       comment: "프로필사진"
     },
     registerDate: {

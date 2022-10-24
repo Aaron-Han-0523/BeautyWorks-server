@@ -106,7 +106,6 @@ exports.readOne = async (id) => {
             .findOne({
                 where: {
                     users_id: id,
-                    deleteDate: null
                 }
             })
             .then(result => result.dataValues)

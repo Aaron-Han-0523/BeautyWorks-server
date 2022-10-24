@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('news', {
     news_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "공지사항 식별번호"
@@ -25,11 +26,13 @@ module.exports = function(sequelize, DataTypes) {
     createDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
     updateDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "변경일"
     }
   }, {

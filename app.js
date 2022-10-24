@@ -54,6 +54,7 @@ app.use((req, res, next) => {
   res.locals.codezip = codezip;
   res.locals.formatDate = myUtils.formatDate;
   res.locals.formatDateTime = myUtils.formatDateTime;
+  res.locals.nameOrderInKorean = ['ko'];
   return next();
 })
 

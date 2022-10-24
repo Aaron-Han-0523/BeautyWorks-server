@@ -26,11 +26,13 @@ module.exports = function(sequelize, DataTypes) {
     createDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
     updateDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "변경일"
     }
   }, {

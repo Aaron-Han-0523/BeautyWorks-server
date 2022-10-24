@@ -3,6 +3,9 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
+    <!-- 이미지 그룹 슬라이드 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
 </head>
 
 <body class="layout-boxed">
@@ -10,58 +13,252 @@
   <%- include ("../partials/loader.ejs") %>
 
     <%- include ("../partials/client-nav.ejs") %>
+      <%# include ("../partials/chatMark.ejs") %>
 
-      <!--  BEGIN MAIN CONTAINER  -->
-      <div class="main-container" id="container">
+        <!--  BEGIN MAIN CONTAINER  -->
+        <div class="main-container" id="container">
 
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
+          <div class="overlay"></div>
+          <div class="search-overlay"></div>
 
-        <%- include ("../partials/client-sidebar.ejs") %>
+          <%- include ("../partials/client-sidebar.ejs") %>
 
-          <!--  BEGIN CONTENT AREA  -->
-          <div id="content" class="main-content">
-            <div class="layout-px-spacing">
+            <!--  BEGIN CONTENT AREA  -->
+            <div id="content" class="main-content">
+              <div class="layout-px-spacing">
 
-              <div class="middle-content container-xxl p-0">
+                <div class="middle-content container-xxl p-0">
 
-                <div class="statbox widget box box-shadow">
                   <!-- BREADCRUMB -->
                   <div class="row px-3">
-                    <div class="breadcrumb align-items-start d-flex pt-3">
+                    <div class="breadcrumb align-items-end d-flex pt-3 br-20">
                       <div class="p-1 col-3">
-                        <h5><strong>BREADCRUMB</strong></h5>
-                      </div>
-                      <div class="p-1 flex-grow-1">
-                        <div>
-                          <img style="width: 25px;" src="\images\icon\down-arrow-svgrepo-com.svg">
-                        </div>
-                      </div>
-                      <div class="p-1">
-                        <h5>Log Out</h5>
+                        <h5><strong>
+                            <%= __('Dashboard') %>
+                          </strong></h5>
                       </div>
                     </div>
                   </div>
+                  <!-- CONTENT AREA -->
+                  <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+                      <!-- Progress -->
+                      <div class="widget-content widget-content-area br-20 px-4">
+                        <div class="form-group ms-3">
+                          <div class="row">
+                            <div class="col-6 col-md-4">
+                              <h5><strong>
+                                  <%= __('users.dashboard.header.Progress') %>
+                                </strong></h5>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12 col-md-12">
+                              <h6>1. My Suncream</h6>
+                              Porgress Bar
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12 col-md-12">
+                              <h6>1. My Suncream</h6>
+                              Porgress Bar
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12 col-md-12">
+                              <h6>1. My Suncream</h6>
+                              Porgress Bar
+                            </div>
+                          </div>
+
+                          <div class="row text-end">
+                            <a href="<%= codezip.url.users.myProject %>">
+                              <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <!-- 임시 저장한 Progress -->
+                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                        <div class="form-group ms-3">
+                          <div class="row">
+                            <div class="col-6 col-md-4">
+                              <h5><strong>
+                                  <%= __('users.dashboard.header.TempProgress') %>
+                                </strong></h5>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12 col-md-12">
+                              <h6>1. My Suncream</h6>
+                              Porgress Bar
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12 col-md-12">
+                              <h6>1. My Suncream</h6>
+                              Porgress Bar
+                            </div>
+                          </div>
+
+                          <div class="row text-end">
+                            <a href="<%= codezip.url.users.myProject %>">
+                              <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <!-- Completed Project -->
+                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                        <div class="form-group mx-3">
+                          <div class="row">
+                            <div class="col-6 col-md-4">
+                              <h5><strong>
+                                  <%= __('users.dashboard.header.CompletedProject') %>
+                                </strong></h5>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="swiper-container">
+                              <div class="swiper-wrapper">
+
+                                <div class="swiper-slide">
+                                  <div>
+                                    <img src="https://ktsmemo.cafe24.com/p/0740.jpg">
+                                    <div class="row mt-3 justify-content-center">
+                                      <p>헤라 셀 에센스<br />
+                                        바이옴 플러스 150ml<br />
+                                        Total 발주 수량 : 100000<br />
+                                        최근 발주 날짜: 2022.10.04</p>
+                                      <div><button class="col-12 btn" type="button">REORDER</button></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="swiper-slide">
+                                  <div>
+                                    <img src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
+                                    <div class="row mt-3 justify-content-center">
+                                      <p>헤라 셀 에센스<br />
+                                        바이옴 플러스 150ml<br />
+                                        Total 발주 수량 : 100000<br />
+                                        최근 발주 날짜: 2022.10.04</p>
+                                      <div><button class="col-12 btn" type="button">REORDER</button></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0553.jpg"></div>
+                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"></div>
+                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0099.jpg"></div>
+                                <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0716.jpg"></div>
+                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0786.jpg"></div>
+                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"></div>
+                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0742.jpg"></div>
+                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0698.jpg"></div>
+                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0095.jpg"></div>
+                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0315.jpg"></div>
+                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0625.jpg"></div>
+                                <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0289.jpg"></div>
+                                <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0646.jpg"></div>
+                                <div class="swiper-slide">- 끝 -</div>
+                              </div>
+                            </div>
+
+                            <!-- 인디케이터 -->
+                            <!-- <div class="swiper-indicator"></div> -->
+
+                            <!-- 네비게이션 -->
+                            <!-- 이전 버튼 -->
+                            <div class="swiper-btn-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                            <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+                            <div class="swiper-btn-next"><i class="fa-solid fa-chevron-right"></i></div>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </div>
                 </div>
-                <!-- CONTENT AREA -->
               </div>
+              <!--  END CONTENT AREA  -->
+
+              <%- include ("../partials/footer.ejs") %>
 
             </div>
+            <!-- END MAIN CONTAINER -->
 
+            <%- include ("../partials/commonScrpits.ejs") %>
 
+              <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+              <script>
+                let _ = new Swiper('.swiper-container', {
 
-            <%- include ("../partials/footer.ejs") %>
+                  slidesPerView: 4, // 동시에 보여줄 슬라이드 갯수
+                  spaceBetween: 10, // 슬라이드간 간격
+                  slidesPerGroup: 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 
-          </div>
-          <!--  END CONTENT AREA  -->
-      </div>
-      <!-- END MAIN CONTAINER -->
+                  // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+                  // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+                  loopFillGroupWithBlank: true,
 
-      <%- include ("../partials/commonScrpits.ejs") %>
+                  loop: true, // 무한 반복
 
-        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                  pagination: { // 페이징
+                    el: '.swiper-indicator',
+                    clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+                  },
+                  navigation: { // 네비게이션
+                    nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
+                    prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
+                  }
+                });
 
-        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                let isRemoveImage = false;
+
+                profileImagePath.addEventListener('change', (event) => {
+                  loadImageFile(event.target, profileImage)
+                  isRemoveImage = false;
+                })
+
+                function removeImage() {
+                  profileImagePath.value = null;
+                  profileImage.src = '<%= codezip.url.users.defaultProfileImage %>'
+                  isRemoveImage = true;
+                }
+
+                userAccount.onsubmit = async (e) => {
+                  e.preventDefault();
+
+                  let body = new FormData(userAccount);
+                  body.append("isRemoveImage", isRemoveImage);
+
+                  let response = await fetch(userAccount.action, {
+                    method: 'POST',
+                    body: body
+                  }).then(res => {
+                    if (res.ok) {
+                      alert("<%= __('users.MyAccount.msg.SaveSuccess') %>");
+                      window.location.reload();
+                    }
+                    else {
+                      alert("<%= __('users.MyAccount.msg.SaveFail') %>");
+                    }
+                    return res.json();
+                  }).then(result => {
+                    console.log(result);
+                  });
+                }
+
+              </script>
+              <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

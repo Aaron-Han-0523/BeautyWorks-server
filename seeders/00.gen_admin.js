@@ -29,7 +29,7 @@ module.exports = {
             email: "admin"
             , password: password
             , userType: 123
-            , country: 'ko'
+            , country: 'KR'
             , brandName: 'Beauty Works'
             , firstName: 'min'
             , lastname: "ad"

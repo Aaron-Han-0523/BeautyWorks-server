@@ -35,5 +35,9 @@
 	"users.myAccount.btn.SaveChanges": "users.myAccount.btn.SaveChanges",
 	"users.MyAccount.msg.SaveSuccess": "users.MyAccount.msg.SaveSuccess",
 	"users.MyAccount.msg.SaveFail": "users.MyAccount.msg.SaveFail",
-	"MyPage": "MyPage"
+	"MyPage": "MyPage",
+	"users.community.header.News": "users.community.header.News",
+	"users.community.news.index.WrittenBy": "users.community.news.index.WrittenBy",
+	"users.community.header.Community": "users.community.header.Community",
+	"users.community.btn.wirte": "users.community.btn.wirte"
 }
