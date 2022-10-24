@@ -431,7 +431,7 @@ var App = function() {
         init: function(Layout) {
             toggleFunction.overlay();
             toggleFunction.search();
-            toggleFunction.themeToggle(Layout);
+            // toggleFunction.themeToggle(Layout);
             
             /*
                 Desktop Resoltion fn

@@ -7,6 +7,7 @@ exports.getUser = async function (user_id) {
         console.log('find', user_id)
         var result = await users
             .findOne({
+                row: true,
                 where: {
                     email: user_id,
                 }
@@ -61,10 +62,8 @@ exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await users
         .update(Object.assign(obj, {
-            updateUser: obj.user,
-            updateDate: new Date()
         }), {
-            where: { userid: obj.userid }
+            where: { users_id: obj.users_id }
         })
         .then(result => {
             console.log("users update success");

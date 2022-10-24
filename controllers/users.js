@@ -102,22 +102,32 @@ exports.add = async (req, res, next) => {
 }
 
 exports.edit = async (req, res, next) => {
-    // // console.log("put - users edit")
-    // const user = req.userInfo;
-    // const id = req.params.id;
-    // let body = req.body;
-    // body.user = user.userid;
-    // if (body.password) body.password = await encryption.hashing(body.password);
-    // body.id = id;
+    console.log("users edit")
 
-    // let result = await usersService
-    //     .update(body)
-    //     .catch(err => console.error(err));
+    let user = req.session.user;
+    // console.log('user :', user);
 
-    // // console.log('result :', result)
-
-    // if (result) res.redirect(`/users/${id}`);
-    // else res.json(`fail id:${id}`)
+    let body = req.body;
+    // console.log('body :', body);
+    if (body.isRemoveImage == 'true') {
+        body.profileImagePath = res.locals.codezip.url.users.defaultProfileImage.slice(1);
+        console.log("default profile image path :", body.profileImagePath);
+    } else {
+        let file = req.file;
+        // console.log('file :', file);
+        if (file) body[file.fieldname] = file.path;
+    }
+    body = Object.assign(user, body);
+    usersService
+        .update(body)
+        .then(result => {
+            console.log("update result :", result);
+            return res.end()
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send();
+        });
 }
 
 exports.index = async (req, res, next) => {

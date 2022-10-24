@@ -1,6 +1,8 @@
 {
-    "user": {
+    "users": {
+        "defaultProfileImage": "/images/default-user-profile.svg",
         "questionMark": "http://intercome.help",
+        "chatMark": "#",
         "signUp": "/users/signUp",
         "signIn": "/users/signIn",
         "signOut": "/users/signOut",

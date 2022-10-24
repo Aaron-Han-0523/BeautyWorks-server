@@ -175,8 +175,6 @@ code {
 .widget.box .widget-header {
   background: #fff;
   padding: 0px 8px 0px;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
   border: 1px solid #e0e6ed;
   border-bottom: none;
 }
@@ -920,9 +918,9 @@ body:not(.dark) .navbar .dark-mode {
   padding: 10px 12px 6px 21px;
 }
 
-.sidebar-wrapper.sidebar-theme .theme-brand .nav-logo {
+/* .sidebar-wrapper.sidebar-theme .theme-brand .nav-logo {
   display: flex;
-}
+} */
 
 #sidebar .theme-brand div.theme-logo {
   align-self: center;
@@ -1007,6 +1005,7 @@ body:not(.dark) .navbar .dark-mode {
   font-size: 25px !important;
   color: #191e3a !important;
   line-height: 2.75rem;
+  
   padding: 0.39rem 0.8rem;
   text-transform: initial;
   position: unset;
