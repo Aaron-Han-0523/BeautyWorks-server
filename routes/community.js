@@ -9,14 +9,13 @@ const communityService = require('../services/community');
 // 추가
 router
   .post('/add', communityController.add)
-  .get('/add', (req, res, next) => res.render('community/add', { user: req.userInfo }))
+  .get('/add', (req, res, next) => res.render('community/add'))
 
 // 편집
 router
   .put('/edit/:id', communityController.edit)
   .post('/edit/:id', communityController.edit)
   .get('/edit/:id', async (req, res, next) => res.render('community/edit', {
-    user: req.userInfo,
     data: await communityService.readOne(req.params.id)
   }))
 

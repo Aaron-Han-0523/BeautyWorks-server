@@ -15,6 +15,7 @@
         "container": "/users/container",
         "ingredientData": "/users/ingredientData",
         "community": "/users/community",
+        "community_add": "/users/community/add",
         "news": "/users/community/news"
     }
 }

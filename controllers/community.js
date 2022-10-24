@@ -4,15 +4,15 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
-    const user = req.userInfo;
+    const user = res.locals.user;
     let body = req.body;
-    body.user = user.userid;
+    body.users_id = user.users_id;
     console.log("community body :", body);
 
     try {
         let result = await communityService.create(body);
         // console.log("result :",result);
-        return res.status(201).redirect('/community');
+        return res.status(201).redirect(res.locals.codezip.url.users.community);
     }
     catch (e) {
         console.error(e);
@@ -133,29 +133,29 @@ exports.delete = async (req, res, next) => {
     else res.json(`fail id:${id}`)
 }
 
-exports.search = async (req, res, next) => {
-    const user = req.userInfo;
-    let word = req.query.q;
-    console.log("search", word, "start")
+// exports.search = async (req, res, next) => {
+//     const user = req.userInfo;
+//     let word = req.query.q;
+//     console.log("search", word, "start")
 
-    let result = null;
-    try {
-        if (word) {
-            result = await communityService.allRead({
-                [Op.or]: [
-                    { title: { [Op.like]: `%${word}%` } },
-                    { content: { [Op.like]: `%${word}%` } }
-                ]
-            })
-        } else {
-            result = await communityService.allRead()
-        }
-    } catch (err) {
-        console.error(err)
-    }
+//     let result = null;
+//     try {
+//         if (word) {
+//             result = await communityService.allRead({
+//                 [Op.or]: [
+//                     { title: { [Op.like]: `%${word}%` } },
+//                     { content: { [Op.like]: `%${word}%` } }
+//                 ]
+//             })
+//         } else {
+//             result = await communityService.allRead()
+//         }
+//     } catch (err) {
+//         console.error(err)
+//     }
 
-    console.log("search result :", result)
+//     console.log("search result :", result)
 
-    if (result) return res.status(200).json({ user: user, data: result });
-    else res.status(400).json(`don't find ${word}`)
-}
+//     if (result) return res.status(200).json({ user: user, data: result });
+//     else res.status(400).json(`don't find ${word}`)
+// }

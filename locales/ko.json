@@ -330,6 +330,8 @@
 	"users.community.news.index.WrittenBy": "Written By",
 	"users.news.이전글": "이전글",
 	"users.news.목록": "목록",
-	"users.news.다음글": "다음글"
-
+	"users.news.다음글": "다음글",
+	"users.community.add.제목을 입력해주세요": "제목을 입력해주세요",
+	"users.community.add.내용을 입력해주세요": "내용을 입력해주세요",
+	"users.community.add.btn.확인": "확인"
 }

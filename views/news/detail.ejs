@@ -114,41 +114,6 @@
 
             <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
             <script>
-              let isRemoveImage = false;
-
-              profileImagePath.addEventListener('change', (event) => {
-                loadImageFile(event.target, profileImage)
-                isRemoveImage = false;
-              })
-
-              function removeImage() {
-                profileImagePath.value = null;
-                profileImage.src = '<%= codezip.url.users.defaultProfileImage %>'
-                isRemoveImage = true;
-              }
-
-              userAccount.onsubmit = async (e) => {
-                e.preventDefault();
-
-                let body = new FormData(userAccount);
-                body.append("isRemoveImage", isRemoveImage);
-
-                let response = await fetch(userAccount.action, {
-                  method: 'POST',
-                  body: body
-                }).then(res => {
-                  if (res.ok) {
-                    alert("<%= __('users.MyAccount.msg.SaveSuccess') %>");
-                    window.location.reload();
-                  }
-                  else {
-                    alert("<%= __('users.MyAccount.msg.SaveFail') %>");
-                  }
-                  return res.json();
-                }).then(result => {
-                  console.log(result);
-                });
-              }
 
             </script>
             <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
