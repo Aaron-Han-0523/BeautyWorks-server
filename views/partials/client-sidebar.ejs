@@ -3,17 +3,23 @@
 
     <nav id="sidebar">
 
-        <div class="navbar-nav theme-brand flex-row text-center">
+        <div class="navbar-nav theme-brand text-center">
             <div class="nav-item row">
                 <div class="col-3 theme-logo">
-                    <a href="<%= codezip.url.users.myPage %>">
-                        <img alt="avatar" src="/<%= user.profileImagePath %>" class="rounded-circle">
-                    </a>
+                    <div>
+                        <a href="<%= codezip.url.users.myPage %>">
+                            <img alt="avatar" src="/<%= user.profileImagePath %>" class="rounded-circle">
+                        </a>
+                    </div>
                 </div>
-                <div class="col pt-2">
+                <div class="col-9 pt-2 text-break">
                     <div>
                         <h6>
-                            <%= user.firstName + " " + user.lastName %>
+                            <% if(nameOrderInKorean.indexOf(lang) !=-1) { %>
+                                <%= user.lastName + user.firstName %>
+                                  <% } else { %>
+                                    <%= user.lastName + ' ' + user.firstName %>
+                                      <% } %>
                         </h6>
                     </div>
                     <div>
@@ -184,7 +190,7 @@
                 </h5>
             </div>
             <li class="menu">
-                <a href="<%= codezip.url.users.community %>" aria-expanded="false" class="dropdown-toggle">
+                <a href="<%= codezip.url.users.community.main %>" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

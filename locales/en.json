@@ -39,5 +39,13 @@
 	"users.community.header.News": "users.community.header.News",
 	"users.community.news.index.WrittenBy": "users.community.news.index.WrittenBy",
 	"users.community.header.Community": "users.community.header.Community",
-	"users.community.btn.wirte": "users.community.btn.wirte"
+	"users.community.btn.wirte": "users.community.btn.wirte",
+	"users.news.이전글": "users.news.이전글",
+	"users.news.목록": "users.news.목록",
+	"users.community.reply.btn.댓글 남기기": "users.community.reply.btn.댓글 남기기",
+	"users.pagination.처음으로": "users.pagination.처음으로",
+	"users.pagination.이전으로": "users.pagination.이전으로",
+	"users.pagination.다음으로": "users.pagination.다음으로",
+	"users.pagination.마지막으로": "users.pagination.마지막으로",
+	"users.community.msg.likeFail": "users.community.msg.likeFail"
 }

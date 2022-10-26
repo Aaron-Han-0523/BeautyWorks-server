@@ -39,7 +39,6 @@ module.exports = {
             , companyName: "devCompanyName"
             , team: "devTeam"
             , position: "devPosition"
-            , profileImagePath: "images/default-user-profile.svg"
         }
 
 

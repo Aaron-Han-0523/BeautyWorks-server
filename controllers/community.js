@@ -1,4 +1,8 @@
+const models = require('../models');
+const usersService = require('../services/users');
 const communityService = require('../services/community');
+const likeService = require('../services/like_community');
+const replyService = require('../services/community_reply');
 const newsService = require('../services/news');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -12,7 +16,7 @@ exports.add = async (req, res, next) => {
     try {
         let result = await communityService.create(body);
         // console.log("result :",result);
-        return res.status(201).redirect(res.locals.codezip.url.users.community);
+        return res.status(201).redirect(res.locals.codezip.url.users.community.main);
     }
     catch (e) {
         console.error(e);
@@ -22,21 +26,33 @@ exports.add = async (req, res, next) => {
 
 exports.edit = async (req, res, next) => {
     console.log("put - community edit")
-    const user = req.userInfo;
+    const user = res.locals.user;
     const id = req.params.id;
     let body = req.body;
-    body.user = user.userid;
     body.id = id;
     console.log("community body :", body);
 
-    let result = await communityService
+    const checkAuthor = await communityService.readOne(id).then(result => {
+        if (result.users_id != user.users_id) { return false; }
+        else { return true; }
+    }).catch(err => {
+        console.error(err);
+        throw res.status(500).send(err);
+    })
+    // console.log(checkAuthor);
+    if (!checkAuthor) {
+        return res.status(403).end();
+    }
+
+    communityService
         .update(body)
-        .catch(err => console.error(err));
-
-    // console.log('result :', result)
-
-    if (result) res.redirect(`/community/${id}`);
-    else res.json(`fail id:${id}`)
+        .then(result => {
+            return res.redirect(res.locals.codezip.url.users.community.main + '/' + id);
+        })
+        .catch(err => {
+            console.error(err);
+            return res.json(`fail id:${id}`)
+        });
 }
 
 exports.index = async (req, res, next) => {
@@ -78,9 +94,6 @@ exports.index = async (req, res, next) => {
         .catch(err => console.error(err));
 
     Promise.all([community, news]).then(data => {
-        // console.log("community :", data[0][0].count);
-        // console.log("news :", data[1].count);
-        // console.log("data :", data);
         return res.render('community/index', {
             community: {
                 count: data[0][0].count,
@@ -101,36 +114,101 @@ exports.index = async (req, res, next) => {
 exports.detail = async (req, res, next) => {
     const id = req.params.id;
     console.log(`open one data id-${id}`)
+    const reply_page = req.query.rp || 1;
+    const skip = req.query.skip;
+    const limit = req.query.limit;
 
-    const user = req.userInfo;
-    let data = await communityService
-        .readOne(id)
-        .catch(err => console.error(err));
+    const prev_id = communityService.getPrevID(id);
+    const next_id = communityService.getNextID(id);
+    const community = communityService.readOne(id);
+    const communityLikeCount = likeService.countLike(id);
 
-    console.log("data :", data);
+    let reply_paging = {
+        skip: skip ? skip : (reply_page - 1) * 4,
+        limit: limit ? limit : 4
+    }
+    const reply = replyService.allRead({ id: id }, reply_paging);
 
-    if (data) return res.render(`community/detail`, {
-        user: user,
-        data: data
-    });
-    else res.status(404).json(`fail id:${id}`)
+
+    Promise.all([community, communityLikeCount, prev_id, next_id, reply])
+        .then(async ([community, communityLike, prev_id, next_id, reply]) => {
+            // console.log('??', reply)
+
+            const user = await usersService.readOne(community.users_id);
+            community.firstName = user.firstName;
+            community.lastName = user.lastName;
+            // return res.json({
+            //     author: { users_id: user.users_id },
+            //     community: community,
+            //     communityLike: communityLike,
+            //     prev: prev_id[0] || null,
+            //     next: next_id[0] || null,
+            //     reply: {
+            //         count: reply[0].count,
+            //         data: reply[1],
+            //         page: reply_page,
+            //         word: word
+            //     }
+            // });
+            return res.render(`community/detail`, {
+                originalUrl: req.originalUrl.split('?')[0],
+                community: community,
+                communityLike: communityLike,
+                prev: prev_id[0] || null,
+                next: next_id[0] || null,
+                reply: {
+                    count: reply[0],
+                    data: reply[1],
+                    page: reply_page,
+                }
+            })
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send(err);
+        })
 }
 
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
-    const user = req.userInfo;
-    let obj = {};
-    obj.id = id;
-    obj.user = user.userid;
 
     let result = await communityService
-        .delete(obj)
-        .catch(err => console.error(err));
+        .delete(id)
+        .catch(err => {
+            console.error(err);
+            res.ststus(500).send(err)
+        });
 
     // console.log("delete result :", result)
 
-    if (result) return res.redirect('/community');
-    else res.json(`fail id:${id}`)
+    if (result) return res.redirect(res.locals.codezip.url.users.community.main);
+    else res.ststus(500).send(`fail id:${id}`)
+}
+
+exports.like = async (req, res, next) => {
+    const user = res.locals.user;
+    // console.log(user);
+    if (!user) {
+        return res.status(403).redirect(res.locals.codezip.url.users.signIn);
+    }
+    let body = Object.assign(req.body, user);
+
+    // console.log(body);
+    let result;
+    if (body.is_like) {
+        result = likeService.create(body);
+    } else {
+        result = likeService.delete(body);
+    }
+
+    result.then(result => {
+        // console.log(body);
+        // console.log(result);
+        res.end()
+    }).catch(err => {
+        console.error(err);
+        res.status(500).send(err);
+    });
 }
 
 // exports.search = async (req, res, next) => {

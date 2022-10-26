@@ -26,7 +26,7 @@ exports.login = async function (req, res, next) {
 
             //세션 스토어가 이루어진 후 redirect를 해야함.
             req.session.save(() => {
-                res.redirect('/');
+                return res.redirect('/');
             });
         } else {
             console.log('비밀번호 불일치')

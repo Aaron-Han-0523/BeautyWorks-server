@@ -14,8 +14,20 @@
         "contents": "/users/contents",
         "container": "/users/container",
         "ingredientData": "/users/ingredientData",
-        "community": "/users/community",
-        "community_add": "/users/community/add",
-        "news": "/users/community/news"
-    }
+        "news": "/users/community/news",
+        "community": {
+            "main": "/users/community",
+            "like": "/users/community/like",
+            "add": "/users/community/add",
+            "edit": "/users/community/edit",
+            "delete": "/users/community/delete",
+            "reply": {
+                "add": "/users/community/reply/add",
+                "edit": "/users/community/reply/edit",
+                "delete": "/users/community/reply",
+                "like": "/users/community/reply/like"
+            }
+        }
+    },
+    "admin": {}
 }

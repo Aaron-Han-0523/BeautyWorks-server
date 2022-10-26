@@ -4,10 +4,10 @@ const Op = Sequelize.Op;
 
 exports.getUser = async function (user_id) {
     try {
-        console.log('find', user_id)
+        console.log('user find', user_id)
         var result = await users
             .findOne({
-                row: true,
+                raw: true,
                 where: {
                     email: user_id,
                 }
@@ -22,7 +22,7 @@ exports.getUser = async function (user_id) {
 }
 
 exports.changePassword = async (obj) => {
-    console.log("update obj :", obj)
+    console.log("users update obj :", obj)
 
     return await users
         .update({
@@ -43,7 +43,7 @@ exports.changePassword = async (obj) => {
 }
 
 exports.create = async (obj) => {
-    console.log("create obj :", obj)
+    console.log("users create obj :", obj)
     return await users
         .create(Object.assign(obj, {
             registerDate: new Date()
@@ -59,7 +59,7 @@ exports.create = async (obj) => {
 }
 
 exports.update = async (obj) => {
-    console.log("update obj :", obj)
+    console.log("users update obj :", obj)
     return await users
         .update(Object.assign(obj, {
         }), {
@@ -104,11 +104,12 @@ exports.readOne = async (id) => {
         console.log('find', id)
         var result = await users
             .findOne({
+                raw: true,
                 where: {
                     users_id: id,
                 }
             })
-            .then(result => result.dataValues)
+            .then(result => result)
             .catch(err => { throw (err) })
         return result;
     } catch (e) {
@@ -140,11 +141,12 @@ exports.checkID = async function (userid) {
         console.log('check', userid)
         var result = await users
             .findOne({
+                raw: true,
                 where: {
                     userid: userid,
                 }
             })
-            .then(result => result.dataValues)
+            .then(result => result)
             .catch(err => { throw (err) })
         return result;
     } catch (e) {

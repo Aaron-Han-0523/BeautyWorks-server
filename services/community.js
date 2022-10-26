@@ -1,7 +1,6 @@
 const models = require('../models');
 const community = require('../models').community;
 const Sequelize = require('sequelize');
-const { promises } = require('nodemailer/lib/xoauth2');
 const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
@@ -16,7 +15,7 @@ exports.create = async (obj) => {
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 }
 
@@ -24,7 +23,6 @@ exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await community
         .update(Object.assign(obj, {
-            updateUser: obj.user,
             updateDate: new Date()
         }), {
             where: { community_id: obj.id }
@@ -35,7 +33,7 @@ exports.update = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -101,21 +99,21 @@ exports.allRead = async (condition = {}, paging = {}) => {
     //     })
     //     .catch(err => {
     //         // console.error(err);
-    //         throw new Error(err);
+    //         throw (err);
     //     })
 }
 
 exports.readOne = async (id) => {
     try {
         console.log('find', id)
-        var result = await users
+        var result = await community
             .findOne({
+                raw: true,
                 where: {
-                    users_id: id,
-                    deleteDate: null
+                    community_id: id,
                 }
             })
-            .then(result => result.dataValues)
+            .then(result => result)
             .catch(err => { throw (err) })
         return result;
     } catch (e) {
@@ -124,20 +122,45 @@ exports.readOne = async (id) => {
     }
 }
 
-exports.delete = async (obj) => {
+exports.delete = async (id) => {
     return await community
-        .update({
-            deleteUser: obj.user,
-            deleteDate: new Date()
-        }, {
-            where: { community_id: obj.id }
+        .destroy({
+            where: { community_id: id }
         })
         .then(result => {
-            console.log("community delete success");
-            return result.pop();
+            console.log("community delete success result :", result);
+            return result;
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
+}
+
+exports.getPrevID = async (id) => {
+    let query = `SELECT community_id FROM community WHERE community_id < ${id} ORDER BY community_id DESC LIMIT 1;`
+    return await models.sequelize.query(query)
+        .then(function (results, metadata) {
+            // 쿼리 실행 성공
+            return results[0];
+        })
+        .catch(function (err) {
+            // 쿼리 실행 에러 
+            console.error(err);
+            throw err;
+        });
+}
+
+exports.getNextID = async (id) => {
+    let query = `SELECT community_id FROM community WHERE community_id > ${id} ORDER BY community_id LIMIT 1;`
+    return await models.sequelize.query(query)
+        .then(function (results, metadata) {
+            // 쿼리 실행 성공
+            return results[0];
+        })
+        .catch(function (err) {
+            // 쿼리 실행 에러 
+            console.error(err);
+            throw err;
+        });
 }

@@ -60,6 +60,9 @@
     right: 5%;
     bottom: 5%;
 }
+.chatMark i {
+    font-size: 50px;
+}
 
 .swiper-container {
     width: 100%;

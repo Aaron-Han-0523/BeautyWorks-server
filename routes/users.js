@@ -73,12 +73,17 @@ router
     console.log("env :", process.env.NODE_ENV);
 
     if (!req.session.user) {
-      if (process.env.NODE_ENV == "development") req.session.user = await usersService.getUser("user-dev@email.com");
+      if (process.env.NODE_ENV == "development") {
+        req.session.user = await usersService.getUser("user-dev@email.com");
+
+      }
       else return res.redirect('/users/signIn');
     }
 
-    res.locals.user = req.session.user;
-    return next();
+    req.session.save(() => {
+      res.locals.user = req.session.user;
+      next();
+    })
   })
 
 

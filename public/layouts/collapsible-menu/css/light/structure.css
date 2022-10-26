@@ -1022,7 +1022,7 @@ body:not(.dark) .navbar .dark-mode {
 
 #sidebar * {
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 #sidebar ul.menu-categories {

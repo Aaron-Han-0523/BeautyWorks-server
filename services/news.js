@@ -80,7 +80,7 @@ exports.allRead = async (condition = {}, paging = {}) => {
 
     return Promise.all([count, data])
         .then(data => {
-            console.log(data)
+            // console.log(data)
             return data
         })
 
@@ -111,11 +111,12 @@ exports.readOne = async (id) => {
         console.log('find', id)
         var result = await news
             .findOne({
+                raw: true,
                 where: {
                     news_id: id,
                 }
             })
-            .then(result => result.dataValues)
+            .then(result => result)
             .catch(err => { throw (err) })
         return result;
     } catch (e) {
@@ -140,4 +141,32 @@ exports.delete = async (obj) => {
             // console.log(err);
             throw new Error(err);
         })
+}
+
+exports.getPrevID = async (id) => {
+    let query = `SELECT news_id FROM news WHERE news_id < ${id} ORDER BY news_id DESC LIMIT 1;`
+    return await models.sequelize.query(query)
+        .then(function (results, metadata) {
+            // 쿼리 실행 성공
+            return results[0];
+        })
+        .catch(function (err) {
+            // 쿼리 실행 에러 
+            console.error(err);
+            throw err;
+        });
+}
+
+exports.getNextID = async (id) => {
+    let query = `SELECT news_id FROM news WHERE news_id > ${id} ORDER BY news_id LIMIT 1;`
+    return await models.sequelize.query(query)
+        .then(function (results, metadata) {
+            // 쿼리 실행 성공
+            return results[0];
+        })
+        .catch(function (err) {
+            // 쿼리 실행 에러 
+            console.error(err);
+            throw err;
+        });
 }

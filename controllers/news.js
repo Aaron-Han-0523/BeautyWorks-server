@@ -78,46 +78,24 @@ exports.detail = async (req, res, next) => {
     const id = req.params.id;
     console.log(`open one data id-${id}`)
 
-    let query = `SELECT news_id FROM news WHERE news_id < ${id} ORDER BY news_id DESC LIMIT 1;`
-    const prev_id = models.sequelize.query(query)
-        .then(function (results, metadata) {
-            // 쿼리 실행 성공
-            return results[0];
-        })
-        .catch(function (err) {
-            // 쿼리 실행 에러 
-            console.error(err);
-            throw err;
-        });
+    const prev_id = newsService.getPrevID(id);
+    const next_id = newsService.getNextID(id);
 
-    query = `SELECT news_id FROM news WHERE news_id > ${id} ORDER BY news_id LIMIT 1;`
-    const next_id = models.sequelize.query(query)
-        .then(function (results, metadata) {
-            // 쿼리 실행 성공
-            return results[0];
-        })
-        .catch(function (err) {
-            // 쿼리 실행 에러 
-            console.error(err);
-            throw err;
-        });
-
-    const data = newsService
-        .readOne(id)
-        .catch(err => console.error(err));
+    const data = newsService.readOne(id);
 
     Promise.all([data, prev_id, next_id])
-        .then(async (results) => {
-            // console.log("data :", results[0]);
+        .then(async ([data, prev_id, next_id]) => {
+            console.log("data :", [data, prev_id, next_id]);
             // console.log("prev_id :", results[1][0]);
             // console.log("next_id :", results[2][0]);
-            const user = await usersService.readOne(results[0].users_id);
-            results[0].firstName = user.firstName;
-            results[0].lastName = user.lastName;
+            const user = await usersService.readOne(data.users_id);
+            console.log(user)
+            data.firstName = user.firstName;
+            data.lastName = user.lastName;
             return res.render(`news/detail`, {
-                data: results[0],
-                prev: results[1][0] || null,
-                next: results[2][0] || null,
+                data: data,
+                prev: prev_id[0] || null,
+                next: next_id[0] || null,
             })
         })
 }

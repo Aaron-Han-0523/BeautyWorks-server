@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const communityController = require('../controllers/community');
+const replyRouter = require('./community_reply');
 const newsController = require('../controllers/news');
 const communityService = require('../services/community');
 
@@ -15,9 +16,13 @@ router
 router
   .put('/edit/:id', communityController.edit)
   .post('/edit/:id', communityController.edit)
-  .get('/edit/:id', async (req, res, next) => res.render('community/edit', {
-    data: await communityService.readOne(req.params.id)
-  }))
+  .get('/edit/:id', async (req, res, next) => {
+    const data = await communityService.readOne(req.params.id);
+    if (res.locals.user.users_id != data.users_id) return res.status(403).end();
+    return res.render('community/edit', {
+      data: data
+    });
+  })
 
 // 삭제
 router
@@ -27,6 +32,14 @@ router
 router
   .get('/news/:id', newsController.detail)
   .get('/:id', communityController.detail)
+
+// 좋아요
+router
+  .post('/like', communityController.like)
+
+// 댓글
+router
+  .use('/reply', replyRouter)
 
 // 목록 조회
 router

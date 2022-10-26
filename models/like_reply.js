@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('news_reply', {
-    news_id: {
+  return sequelize.define('like_reply', {
+    community_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      comment: "공지사항 식별번호"
+      comment: "커뮤니티 식별번호"
     },
     reply_id: {
       type: DataTypes.INTEGER,
@@ -16,28 +16,12 @@ module.exports = function(sequelize, DataTypes) {
     users_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       comment: "사용자 식별번호"
-    },
-    contents: {
-      type: DataTypes.STRING(200),
-      allowNull: false,
-      comment: "내용"
-    },
-    createDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "생성일"
-    },
-    updateDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "변경일"
     }
   }, {
     sequelize,
-    tableName: 'news_reply',
+    tableName: 'like_reply',
     timestamps: false,
     indexes: [
       {
@@ -45,8 +29,9 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "news_id" },
+          { name: "community_id" },
           { name: "reply_id" },
+          { name: "users_id" },
         ]
       },
     ]

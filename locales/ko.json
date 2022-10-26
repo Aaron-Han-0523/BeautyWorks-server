@@ -333,5 +333,19 @@
 	"users.news.다음글": "다음글",
 	"users.community.add.제목을 입력해주세요": "제목을 입력해주세요",
 	"users.community.add.내용을 입력해주세요": "내용을 입력해주세요",
-	"users.community.add.btn.확인": "확인"
+	"users.community.add.btn.확인": "확인",
+	"users.community.index.WrittenBy": "Written By",
+	"users.community.btn.수정": "수정",
+	"users.community.btn.삭제": "삭제",
+	"users.community.msg.likeFail": "like Fail",
+	"users.community.reply.btn.댓글 남기기": "댓글 남기기",
+	"users.pagination.처음으로": "<i class='fa-solid fa-angles-left'></i>",
+	"users.pagination.이전으로": "<i class='fa-solid fa-angle-left'></i>",
+	"users.pagination.다음으로": "<i class='fa-solid fa-angle-right'></i>",
+	"users.pagination.마지막으로": "<i class='fa-solid fa-angles-right'></i>",
+	"users.community.reply.btn.확인": "확인",
+	"users.community.reply.btn.취소": "취소",
+	"users.community.msg.replyEditFail": "users.community.msg.replyEditFail",
+	"users.community.msg.replyDeleteFail": "users.community.msg.replyDeleteFail",
+	"Error": "Error"
 }
