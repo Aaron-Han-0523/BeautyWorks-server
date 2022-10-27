@@ -47,5 +47,12 @@
 	"users.pagination.이전으로": "users.pagination.이전으로",
 	"users.pagination.다음으로": "users.pagination.다음으로",
 	"users.pagination.마지막으로": "users.pagination.마지막으로",
-	"users.community.msg.likeFail": "users.community.msg.likeFail"
+	"users.community.msg.likeFail": "users.community.msg.likeFail",
+	"users.community.reply.btn.확인": "users.community.reply.btn.확인",
+	"users.community.reply.btn.취소": "users.community.reply.btn.취소",
+	"users.community.msg.replyEditFail": "users.community.msg.replyEditFail",
+	"Error": "Error",
+	"users.dashboard.header.Progress": "users.dashboard.header.Progress",
+	"users.dashboard.header.TempProgress": "users.dashboard.header.TempProgress",
+	"users.dashboard.header.CompletedProject": "users.dashboard.header.CompletedProject"
 }

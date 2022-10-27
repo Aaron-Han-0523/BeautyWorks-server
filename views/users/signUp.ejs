@@ -15,429 +15,433 @@
 <body class="form">
 
     <%- include ("../partials/loader.ejs") %>
+        <%- include ("../partials/client-nav.ejs") %>
 
-        <div class="auth-container d-flex">
+            <div class="auth-container d-flex">
 
-            <div class="container mx-auto align-self-center">
+                <div class="container mx-auto align-self-center">
 
-                <div class="row">
+                    <div class="row">
 
-                    <div class="col-10 flex-column align-self-center mx-auto">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="col-10 flex-column align-self-center mx-auto">
+                            <div class="card">
+                                <div class="card-body">
 
-                                <div class="row p-5">
-                                    <form method="post" id="join">
-                                        <div class="row mb-5">
-                                            <h2>
-                                                <%= __('users.signUp.title') %>
-                                            </h2>
-                                        </div>
-
-                                        <!-- 국가 선택 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.Country') %>
-                                                </h6>
+                                    <div class="row p-5">
+                                        <form method="post" id="join">
+                                            <div class="row mb-5">
+                                                <h2>
+                                                    <%= __('users.signUp.title') %>
+                                                </h2>
                                             </div>
-                                            <div class="col col-4">
-                                                <div class="dropdown">
-                                                    <input hidden name="country" id="country">
-                                                    <button class="form-select " type="button" id="select_country"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <%= __('selectPlzText') %>
-                                                    </button>
-                                                    <ul class="dropdown-menu scrollable-menu"
-                                                        aria-labelledby="select_country">
-                                                        <% for(let i=0; i< country_codes.length; i++) { %>
-                                                            <li>
-                                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                                    onclick="select_country_func('<%= country_codes[i] %>','<%= country_code2name[country_codes[i]] %>');">
-                                                                    <img class="me-2"
-                                                                        src="/images/flag/<%= country_codes[i] %>.png">
-                                                                    <%= country_code2name[country_codes[i]] %>
-                                                                </a>
-                                                            </li>
-                                                            <% } %>
-                                                    </ul>
+
+                                            <!-- 국가 선택 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.Country') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <div class="dropdown">
+                                                        <input hidden name="country" id="country">
+                                                        <button class="form-select " type="button" id="select_country"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <%= __('selectPlzText') %>
+                                                        </button>
+                                                        <ul class="dropdown-menu scrollable-menu"
+                                                            aria-labelledby="select_country">
+                                                            <% for(let i=0; i< country_codes.length; i++) { %>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"
+                                                                        onclick="select_country_func('<%= country_codes[i] %>','<%= country_code2name[country_codes[i]] %>');">
+                                                                        <img class="me-2"
+                                                                            src="/images/flag/<%= country_codes[i] %>.png">
+                                                                        <%= country_code2name[country_codes[i]] %>
+                                                                    </a>
+                                                                </li>
+                                                                <% } %>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
 
-                                        <!-- 브랜드명 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.BrandName') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="brandName"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 이름 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.FirstName') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="firstName"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                            <div class="col col-2 text-center">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.LastName') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="lastName"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 연락처 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.MobileContact') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-3">
-                                                <div class="dropdown">
-                                                    <input hidden name="country_number" id="country_number">
-                                                    <button class="form-select " type="button"
-                                                        id="select_country_number" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <%= __('selectPlzText') %>
-                                                    </button>
-                                                    <ul class="dropdown-menu scrollable-menu"
-                                                        aria-labelledby="select_country_number">
-                                                        <% for(let i=0; i< country_codes.length; i++) { %>
-                                                            <li>
-                                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                                    onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
-                                                                    <img class="me-2"
-                                                                        src="/images/flag/<%= country_codes[i] %>.png">
-                                                                    <%= country_code2phoneNum[country_codes[i]] %>
-                                                                </a>
-                                                            </li>
-                                                            <% } %>
-                                                    </ul>
+                                            <!-- 브랜드명 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.BrandName') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="brandName"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
                                                 </div>
                                             </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="phoneNum" id="phoneNum"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
 
 
-                                        <!-- Email 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.Email') %>
-                                                </h6>
+                                            <!-- 이름 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.FirstName') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="firstName"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
+                                                <div class="col col-2 text-center">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.LastName') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="lastName"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
                                             </div>
-                                            <div class="col col-8 d-flex align-items-baseline">
-                                                <input type="text" class="form-control" name="emailId" id="emailId"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                                <h6 class="mx-3">@</h6>
-                                                <input type="text" class="form-control" name="emailDomain"
-                                                    id="emailDomain" placeholder="<%= __('inputPlzText') %>" required>
+
+
+                                            <!-- 연락처 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.MobileContact') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <div class="dropdown">
+                                                        <input hidden name="country_number" id="country_number">
+                                                        <button class="form-select " type="button"
+                                                            id="select_country_number" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            <%= __('selectPlzText') %>
+                                                        </button>
+                                                        <ul class="dropdown-menu scrollable-menu"
+                                                            aria-labelledby="select_country_number">
+                                                            <% for(let i=0; i< country_codes.length; i++) { %>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"
+                                                                        onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
+                                                                        <img class="me-2"
+                                                                            src="/images/flag/<%= country_codes[i] %>.png">
+                                                                        <%= country_code2phoneNum[country_codes[i]] %>
+                                                                    </a>
+                                                                </li>
+                                                                <% } %>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="phoneNum"
+                                                        id="phoneNum" placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <button class="btn" type="button" onclick="send_validation_email();">
-                                                    <%= __('users.signUp.btn.emailCertification') %>
+
+
+                                            <!-- Email 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.Email') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-8 d-flex align-items-baseline">
+                                                    <input type="text" class="form-control" name="emailId" id="emailId"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                    <h6 class="mx-3">@</h6>
+                                                    <input type="text" class="form-control" name="emailDomain"
+                                                        id="emailDomain" placeholder="<%= __('inputPlzText') %>"
+                                                        required>
+                                                </div>
+                                                <div class="col">
+                                                    <button class="btn" type="button"
+                                                        onclick="send_validation_email();">
+                                                        <%= __('users.signUp.btn.emailCertification') %>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Email 검증 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.CertificationNumber') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="emailConfirmNumber"
+                                                        id="emailConfirmNumber" placeholder="<%= __('inputPlzText') %>"
+                                                        required>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 id="emailConfirmResult"></h6>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- 비밀번호 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.Password') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="password" class="form-control" name="password"
+                                                        id="password" placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- 비밀번호 확인 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.PasswordConfirm') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="password" class="form-control" name="passwordConfirm"
+                                                        id="passwordConfirm" placeholder="<%= __('inputPlzText') %>"
+                                                        required>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 id="passwordConfirmResult"></h6>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- 회사 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.CompanyName') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="<%= __('inputPlzText') %>">
+                                                </div>
+                                            </div>
+
+
+                                            <!-- 팀/직책 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.Team') %> / <%=
+                                                                __('users.signUp.InputLabel.Position') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-6 d-flex align-items-baseline">
+                                                    <input type="text" class="form-control" name="email"
+                                                        placeholder="<%= __('inputPlzText') %>">
+                                                    <h6 class="mx-3">/</h6>
+                                                    <input type="text" class="form-control" name="domain"
+                                                        placeholder="<%= __('inputPlzText') %>">
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Logistics Address 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.LogisticsAddress') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-6">
+                                                    <input type="text" class="form-control" name="logisticsAddress"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- 회사 주소 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.CompanyAddress') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-6">
+                                                    <input type="text" class="form-control" name="companyAddress"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- 연락 방법 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.ContactMethod') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="contactMethod"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Remark 입력 -->
+                                            <div class="row mb-4 align-items-end">
+                                                <div class="col col-2">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.Remark') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="remark"
+                                                        placeholder="<%= __('inputPlzText') %>" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex mt-5 justify-content-center">
+                                                <button class="btn col-2 mx-3 p-3 br-15">
+                                                    <%= __('users.signUp.btn.Join') %>
+                                                </button>
+                                                <button class="btn col-2 mx-3 p-3 br-15" type="button"
+                                                    onclick="cancel();">
+                                                    <%= __('users.signUp.btn.Cancel') %>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
 
-                                        <!-- Email 검증 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.CertificationNumber') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="emailConfirmNumber"
-                                                    id="emailConfirmNumber" placeholder="<%= __('inputPlzText') %>"
-                                                    required>
-                                            </div>
-                                            <div class="col">
-                                                <h6 id="emailConfirmResult"></h6>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 비밀번호 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.Password') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="password" class="form-control" name="password"
-                                                    id="password" placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 비밀번호 확인 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.PasswordConfirm') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="password" class="form-control" name="passwordConfirm"
-                                                    id="passwordConfirm" placeholder="<%= __('inputPlzText') %>"
-                                                    required>
-                                            </div>
-                                            <div class="col">
-                                                <h6 id="passwordConfirmResult"></h6>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 회사 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.CompanyName') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control"
-                                                    placeholder="<%= __('inputPlzText') %>">
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 팀/직책 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.Team') %> / <%=
-                                                            __('users.signUp.InputLabel.Position') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-6 d-flex align-items-baseline">
-                                                <input type="text" class="form-control" name="email"
-                                                    placeholder="<%= __('inputPlzText') %>">
-                                                <h6 class="mx-3">/</h6>
-                                                <input type="text" class="form-control" name="domain"
-                                                    placeholder="<%= __('inputPlzText') %>">
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Logistics Address 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.LogisticsAddress') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-6">
-                                                <input type="text" class="form-control" name="logisticsAddress"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 회사 주소 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.CompanyAddress') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-6">
-                                                <input type="text" class="form-control" name="companyAddress"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- 연락 방법 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.ContactMethod') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="contactMethod"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Remark 입력 -->
-                                        <div class="row mb-4 align-items-end">
-                                            <div class="col col-2">
-                                                <h6>
-                                                    <%= __('users.signUp.InputLabel.Remark') %>
-                                                </h6>
-                                            </div>
-                                            <div class="col col-4">
-                                                <input type="text" class="form-control" name="remark"
-                                                    placeholder="<%= __('inputPlzText') %>" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex mt-5 justify-content-center">
-                                            <button class="btn col-2 mx-3 p-3 br-15">
-                                                <%= __('users.signUp.btn.Join') %>
-                                            </button>
-                                            <button class="btn col-2 mx-3 p-3 br-15" type="button" onclick="cancel();">
-                                                <%= __('users.signUp.btn.Cancel') %>
-                                            </button>
-                                        </div>
-                                    </form>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-        <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/js/script.js"></script>
-        <script src="/js/validator.js"></script>
-        <script>
-            const passwordMinLength = 10;
-            const passwordMaxLength = 20;
+            <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+            <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="/js/script.js"></script>
+            <script src="/js/validator.js"></script>
+            <script>
+                const passwordMinLength = 10;
+                const passwordMaxLength = 20;
 
-            function select_country_func(code, name) {
-                let country = document.getElementById('country');
-                let select_country = document.getElementById('select_country');
+                function select_country_func(code, name) {
+                    let country = document.getElementById('country');
+                    let select_country = document.getElementById('select_country');
 
-                country.value = code;
-                select_country.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${name}`
-            }
-
-            function select_mobile_func(code, number) {
-                let country_number = document.getElementById('country_number');
-                let select_country_number = document.getElementById('select_country_number');
-
-                country_number.value = number;
-                select_country_number.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${number}`
-            }
-
-            async function send_validation_email() {
-                const receiverId = document.getElementById('emailId').value;
-                const receiverDomain = document.getElementById('emailDomain').value;
-                const targetEmail = receiverId + '@' + receiverDomain;
-
-                const url = '/users/validationEmail';
-                const certificationNumber = await fetch(url, {
-                    method: "post",
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify({ email: targetEmail })
-                }).then(res => {
-                    return res.json();
-                })
-                CertificationNumber.value = certificationNumber;
-                printEmailConfirm()
-            }
-
-            function checkEmailConfirm() {
-                if (CertificationNumber.value)
-                    return CertificationNumber.value == emailConfirmNumber.value;
-                else return false;
-            }
-
-            function printEmailConfirm() {
-                if (checkEmailConfirm()) {
-                    emailConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultSuccess') %>";
-                } else {
-                    emailConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultFail') %>";
+                    country.value = code;
+                    select_country.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${name}`
                 }
-            }
 
-            document.getElementById('emailConfirmNumber').addEventListener('keyup', (event) => {
-                printEmailConfirm();
-            });
+                function select_mobile_func(code, number) {
+                    let country_number = document.getElementById('country_number');
+                    let select_country_number = document.getElementById('select_country_number');
 
-            function checkPasswordConfirm() {
-                return passwordConfirm.value == password.value;
-            }
-
-            function printPasswordConfirm() {
-                if (checkPasswordConfirm()) {
-                    passwordConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultSuccess') %>";
-                } else {
-                    passwordConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultFail') %>";
+                    country_number.value = number;
+                    select_country_number.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${number}`
                 }
-            }
 
-            document.getElementById('passwordConfirm').addEventListener('keyup', (event) => {
-                printPasswordConfirm();
-            });
-
-            document.getElementById('password').addEventListener('keyup', (event) => {
-                printPasswordConfirm();
-            });
-
-            join.onsubmit = (e) => {
-                e.preventDefault();
-
-
-                // 검증
-                if (!country.value) return alert("<%= __('users.signUp.msg.NeedCountrySelect') %>")
-                if (!country_number.value) return alert("<%= __('users.signUp.msg.NeedCountryNumberSelect') %>")
-
-                if (!checkPasswordConfirm()) return alert("<%= __('users.signUp.msg.NeedPasswordConfirm') %>");
-                else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
-                else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
-
-                if (checkEmailConfirm()) {
+                async function send_validation_email() {
                     const receiverId = document.getElementById('emailId').value;
                     const receiverDomain = document.getElementById('emailDomain').value;
-                    const Email = receiverId + '@' + receiverDomain;
-                } else {
-                    return alert("<%= __('users.signUp.msg.NeedEmailConfirm') %>");
+                    const targetEmail = receiverId + '@' + receiverDomain;
+
+                    const url = '/users/validationEmail';
+                    const certificationNumber = await fetch(url, {
+                        method: "post",
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify({ email: targetEmail })
+                    }).then(res => {
+                        return res.json();
+                    })
+                    CertificationNumber.value = certificationNumber;
+                    printEmailConfirm()
                 }
 
-                let body = {};
-                for ([name, value] of new FormData(join)) body[name] = value;
+                function checkEmailConfirm() {
+                    if (CertificationNumber.value)
+                        return CertificationNumber.value == emailConfirmNumber.value;
+                    else return false;
+                }
 
-                const url = "/users/signUp";
-                fetch(url, {
-                    method: "post",
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    redirect: "follow",
-                    body: JSON.stringify(body)
-                }).then(res => {
-                    if (res.ok) {
-                        alert("<%= __('users.signUp.msg.SuccessJoin') %>");
-                        window.location.href = res.url;
-                        return;
+                function printEmailConfirm() {
+                    if (checkEmailConfirm()) {
+                        emailConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultSuccess') %>";
+                    } else {
+                        emailConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultFail') %>";
                     }
-                    else return alert("<%= __('users.signUp.msg.FailJoin') %>");
-                })
-            }
-        </script>
-        <!-- END GLOBAL MANDATORY SCRIPTS -->
-        <input hidden id="CertificationNumber">
+                }
+
+                document.getElementById('emailConfirmNumber').addEventListener('keyup', (event) => {
+                    printEmailConfirm();
+                });
+
+                function checkPasswordConfirm() {
+                    return passwordConfirm.value == password.value;
+                }
+
+                function printPasswordConfirm() {
+                    if (checkPasswordConfirm()) {
+                        passwordConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultSuccess') %>";
+                    } else {
+                        passwordConfirmResult.innerText = "<%= __('users.signUp.ConfirmResultFail') %>";
+                    }
+                }
+
+                document.getElementById('passwordConfirm').addEventListener('keyup', (event) => {
+                    printPasswordConfirm();
+                });
+
+                document.getElementById('password').addEventListener('keyup', (event) => {
+                    printPasswordConfirm();
+                });
+
+                join.onsubmit = (e) => {
+                    e.preventDefault();
+
+
+                    // 검증
+                    if (!country.value) return alert("<%= __('users.signUp.msg.NeedCountrySelect') %>")
+                    if (!country_number.value) return alert("<%= __('users.signUp.msg.NeedCountryNumberSelect') %>")
+
+                    if (!checkPasswordConfirm()) return alert("<%= __('users.signUp.msg.NeedPasswordConfirm') %>");
+                    else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
+                    else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
+
+                    if (checkEmailConfirm()) {
+                        const receiverId = document.getElementById('emailId').value;
+                        const receiverDomain = document.getElementById('emailDomain').value;
+                        const Email = receiverId + '@' + receiverDomain;
+                    } else {
+                        return alert("<%= __('users.signUp.msg.NeedEmailConfirm') %>");
+                    }
+
+                    let body = {};
+                    for ([name, value] of new FormData(join)) body[name] = value;
+
+                    const url = "/users/signUp";
+                    fetch(url, {
+                        method: "post",
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        redirect: "follow",
+                        body: JSON.stringify(body)
+                    }).then(res => {
+                        if (res.ok) {
+                            alert("<%= __('users.signUp.msg.SuccessJoin') %>");
+                            window.location.href = res.url;
+                            return;
+                        }
+                        else return alert("<%= __('users.signUp.msg.FailJoin') %>");
+                    })
+                }
+            </script>
+            <!-- END GLOBAL MANDATORY SCRIPTS -->
+            <input hidden id="CertificationNumber">
 </body>

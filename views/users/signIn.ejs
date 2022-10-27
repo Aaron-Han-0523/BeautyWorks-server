@@ -10,74 +10,75 @@
 <body class="form">
 
     <%- include ("../partials/loader.ejs") %>
+        <%- include ("../partials/client-nav.ejs") %>
 
-        <div class="auth-container d-flex">
+            <div class="auth-container d-flex">
 
-            <div class="container mx-auto align-self-center">
+                <div class="container mx-auto align-self-center">
 
-                <div class="row">
+                    <div class="row">
 
-                    <div class="col-sm-9 col-md-7 col-xl-5 flex-column align-self-center mx-auto">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="col-sm-9 col-md-7 col-xl-5 flex-column align-self-center mx-auto">
+                            <div class="card">
+                                <div class="card-body">
 
-                                <div class="row mx-4 my-1">
-                                    <form method="post">
-                                        <div class="">
-                                            <div class="col-12">
-                                                <div class="mb-3">
-                                                    <input type="text" id="<%= __('users.id') %>" class="form-control"
-                                                        name="<%= __('users.id') %>"
-                                                        placeholder="<%= __('users.signIn.id.placeholder') %>">
+                                    <div class="row mx-4 my-1">
+                                        <form method="post">
+                                            <div class="">
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <input type="text" id="<%= __('users.id') %>"
+                                                            class="form-control" name="<%= __('users.id') %>"
+                                                            placeholder="<%= __('users.signIn.id.placeholder') %>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <input type="password" class="form-control" name="password"
+                                                            placeholder="<%= __('users.signIn.password.placeholder') %>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="mb-4">
+                                                        <button class="btn btn-secondary w-100">
+                                                            <%= __('users.signIn.btnName') %>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="mb-4">
+                                                        <a href="#">
+                                                            <%= __('users.signIn.forgotQuestion') %>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="mb-4">
+                                                        <a href="/users/signUp" class="h6 fw-900"><strong>
+                                                                <%= __('users.signIn.signUp') %>
+                                                            </strong></a>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </form>
 
-                                            <div class="col-12">
-                                                <div class="mb-3">
-                                                    <input type="password" class="form-control" name="password"
-                                                        placeholder="<%= __('users.signIn.password.placeholder') %>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="mb-4">
-                                                    <button class="btn btn-secondary w-100">
-                                                        <%= __('users.signIn.btnName') %>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="mb-4">
-                                                    <a href="#">
-                                                        <%= __('users.signIn.forgotQuestion') %>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="mb-4">
-                                                    <a href="/users/signUp" class="h6 fw-900"><strong>
-                                                            <%= __('users.signIn.signUp') %>
-                                                        </strong></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
 
                                 </div>
-
                             </div>
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
-
-        <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-        <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- END GLOBAL MANDATORY SCRIPTS -->
+            <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+            <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- END GLOBAL MANDATORY SCRIPTS -->
 </body>

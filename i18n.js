@@ -19,6 +19,5 @@ i18n.configure({
 module.exports = (req, res, next) => {
     i18n.init(req, res);
     res.locals.__ = res.__;  // ejs에서 사용시 추가
-    res.locals.lang = req.cookies.lang;
     return next();
 };

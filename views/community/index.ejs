@@ -57,7 +57,7 @@
                                 <button class="col-12 btn br-15" type="button"
                                   onclick="location.href='<%= codezip.url.users.news + '/' + item.news_id %>'">
                                   <h6 class="m-1">
-                                    <% if(nameOrderInKorean.indexOf(lang) !=-1) { %>
+                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                                       <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
                                         ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
                                         <% } else { %>
@@ -208,7 +208,7 @@
                                 <button class="col-12 btn br-15" type="button"
                                   onclick="location.href='<%= codezip.url.users.community.main + '/' + item.community_id %>'">
                                   <h6 class="m-1">
-                                    <% if(nameOrderInKorean.indexOf(lang) !=-1) { %>
+                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                                       <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
                                         ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
                                         <% } else { %>

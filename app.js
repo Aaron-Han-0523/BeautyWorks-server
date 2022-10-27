@@ -85,9 +85,9 @@ app.get('/ko', (req, res) => {
   res.redirect('back');
 });
 
-// 프로젝트 업데이트 체크
+// 초기화
 app.use((req, res, next) => {
-  res.locals.projectUpdated = false;
+  res.locals.user = false;
   next();
 })
 
