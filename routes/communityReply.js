@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const replyController = require('../controllers/community_reply');
+const replyController = require('../controllers/communityReply');
 
 /* GET community listing. */
 // 추가

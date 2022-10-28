@@ -45,6 +45,7 @@
     ChannelIO('boot', {
         "pluginKey": "1c1f9ca1-0369-4320-9c2e-f73b8969a43b",
         "customLauncherSelector": ".chatMark",
+        "memberId": "<%= user.users_id %>"
     }, function onBoot(err, user) {
         if (err) {
             console.error(err);
@@ -59,7 +60,7 @@
         if (error) {
             console.error(error)
         } else {
-            console.log('updateUser success', user)
+            // console.log('updateUser success', user)
         }
     });
 </script>

@@ -1,8 +1,8 @@
 const models = require('../models');
 const usersService = require('../services/users');
 const communityService = require('../services/community');
-const likeService = require('../services/like_community');
-const replyService = require('../services/community_reply');
+const likeService = require('../services/likeCommunity');
+const replyService = require('../services/communityReply');
 const newsService = require('../services/news');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -61,7 +61,7 @@ exports.index = async (req, res, next) => {
     console.log("page query :", news_page, community_page)
 
     let word = req.query.q
-    if (word) word = word.replace(';', '').trim();
+    if (word) word = word.replace(/\;/g, '').trim();
     const skip = req.query.skip;
     const limit = req.query.limit;
 

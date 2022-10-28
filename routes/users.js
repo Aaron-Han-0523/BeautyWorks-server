@@ -32,10 +32,10 @@ let storage = (fileName) => multer.diskStorage({
     let basename = path.basename(file.originalname, extension);
     let encoding = ""
     for (let i = 0; i < basename.length; i++) {
-      encoding += basename.codePointAt(i);
+      encoding += basename.codePointAt(i).toString(16);
     }
     encoding = encoding.slice(0, 200);
-    callback(null, req.session.user.users_id + '-' + encoding + "-" + Date.now() + extension);
+    callback(null, req.res.locals.user.users_id + '-' + Date.now() + "-" + encoding + extension);
   },
 });
 
@@ -62,7 +62,9 @@ router
 // 사용자 접속
 router
   .post('/signIn', usersController.login)
-  .get('/signIn', (req, res, next) => res.render('users/signIn'))
+  .get('/signIn', (req, res, next) => {
+    res.render('users/signIn');
+  })
 
 
 ////////////////////////////////////
@@ -81,20 +83,20 @@ router
 
     req.session.save(() => {
       res.locals.user = req.session.user;
-      res.locals.user.projectUpdated = true;
       next();
     })
   })
 
 
-router.get('/layout', (req, res) => res.render('layout/layout'));
+// router.get('/layout', (req, res) => res.render('layout/layout'));
+// 알람 체크
+router.get('/checkAlarm', usersController.checkAlarm);
 
 // 사용자 대시보드
 router.use('/dashboard', (req, res) => res.render('dashboard/dashboard'));
 
 // 사용자 접속해제
-router
-  .get('/signOut', usersController.logout);
+router.get('/signOut', usersController.logout);
 
 // 사용자 마이페이지
 router.get('/myPage', (req, res) => res.render('users/myPage'));
@@ -107,7 +109,8 @@ router
 
 
 // Community
-router
-  .use('/community', communityRouter)
+router.use('/community', communityRouter)
 
+// My Project
+// New Project
 module.exports = router;

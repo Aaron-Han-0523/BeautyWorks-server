@@ -1,6 +1,6 @@
 const models = require('../models');
-const replyService = require('../services/community_reply');
-const likeService = require('../services/like_reply');
+const replyService = require('../services/communityReply');
+const likeService = require('../services/likeReply');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

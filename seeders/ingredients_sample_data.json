@@ -1,0 +1,127 @@
+{
+    "schema": {
+        "fields": [
+            {
+                "name": "materialNam",
+                "type": "string"
+            },
+            {
+                "name": "type",
+                "type": "string"
+            },
+            {
+                "name": "ingredientName",
+                "type": "string"
+            },
+            {
+                "name": "feature",
+                "type": "string"
+            },
+            {
+                "name": "effects",
+                "type": "string"
+            },
+            {
+                "name": "maker",
+                "type": "string"
+            },
+            {
+                "name": "supplier",
+                "type": "string"
+            }
+        ],
+        "pandas_version": "0.20.0"
+    },
+    "data": [
+        {
+            "materialNam": "Jojoba Oil Golden",
+            "type": "\uc624\uc77c\ub958,100% \uc2dd\ubb3c\ucd94\ucd9c\ubb3c\ub958",
+            "ingredientName": "Simmondsia Chinensis Seed Oil (\ud638\ud638\ubc14\uc528\uc624\uc77c)",
+            "feature": "- \uc774 \uc6d0\ub8cc\ub294 \uc0ac\ub9c9 \uad00\ubaa9\uc778 \ud638\ud638\ubc14 (Simmondsia Chinensis) \uc528\uc5d0\uc11c \ucd94\ucd9c\ud558\uac70\ub098 \uc555\ucc29\ud558\uc5ec \ub9cc\ub4e0 \ubd88\ud718\ubc1c\uc131 \uc624\uc77c\uc5d0\uc11c \uc5bb\uc740 \ubb3c\uc9c8\uc774\ub2e4. \ud5e4\uc5b4\ucee8\ub514\uc154\ub2dd\uc81c, \ud53c\ubd80\ucee8\ub514\uc154\ub2dd\uc81c(\uc218\ubd84\ucc28\ub2e8\uc81c)",
+            "effects": "",
+            "maker": "Kerfoot",
+            "supplier": "\uc774\uc6b0\ubc14\uc774\uc624"
+        },
+        {
+            "materialNam": "Glycytina DPG",
+            "type": "\ubbf8\uc6a9\uc131\ubd84,\uc2dd\ubb3c\ucd94\ucd9c\ubb3c\ub958",
+            "ingredientName": "Dipotassium Glycyrrhizate (\ub2e4\uc774\ud3ec\ud0c0\uc298\uae00\ub9ac\uc2dc\ub9ac\uc81c\uc774\ud2b8)",
+            "feature": "\uae00\ub9ac\uc2dc\ub9ac\uc9c4\uc0b0 K2, \uc218\uc6a9\uc131 \uac10\ucd08\uc0b0 \ucd94\ucd9c\ubb3c, \ud56d\uc5fc\uc99d\uc791\uc6a9",
+            "effects": "",
+            "maker": "MEHECO",
+            "supplier": "\uc774\uc6b0\ubc14\uc774\uc624"
+        },
+        {
+            "materialNam": "Glucan EW 0.4%(HD)",
+            "type": "\ubbf8\uc6a9\uc131\ubd84,\uc2dd\ubb3c\ucd94\ucd9c\ubb3c\ub958,,\ubcf4\uc2b5\uc81c\ub958- \ud3f4\ub9ac\uc0ac\uce74\ub77c\uc774\ub4dc",
+            "ingredientName": "1,2-Hexanediol (1,2-\ud5e5\uc0b0\ub2e4\uc774\uc62c)\n Beta-Glucan (\ubca0\ud0c0-\uae00\ub8e8\uce78)\n Glycerin (\uae00\ub9ac\uc138\ub9b0)\n Water (\uc815\uc81c\uc218)",
+            "feature": "It is used to penetrate intact human skin and help reduce the visible signs of aging. It provides immediate comfort and moisture that improves firmness and elasticity of skin as well as protects skin cells against UV radiation. It also stimulates fibroblast growth and collagen synthesis. Origin source: Mushroom",
+            "effects": "",
+            "maker": "EWOO",
+            "supplier": "\uc774\uc6b0\ubc14\uc774\uc624"
+        },
+        {
+            "materialNam": "Dipotassium Glycyrrhizinate(DPG)",
+            "type": "",
+            "ingredientName": "Dipotassium Glycyrrhizate (\ub2e4\uc774\ud3ec\ud0c0\uc298\uae00\ub9ac\uc2dc\ub9ac\uc81c\uc774\ud2b8)",
+            "feature": "\uae00\ub9ac\uc2dc\ub9ac\uc9c4\uc0b0 K2, \uc218\uc6a9\uc131 \uac10\ucd08\uc0b0 \ucd94\ucd9c\ubb3c, \ud56d\uc5fc\uc99d\uc791\uc6a9",
+            "effects": "",
+            "maker": "",
+            "supplier": ""
+        },
+        {
+            "materialNam": "Centella Asiatica (Hunan)",
+            "type": "\ubbf8\uc6a9\uc131\ubd84,\uc2dd\ubb3c\ucd94\ucd9c\ubb3c\ub958,100% \uc2dd\ubb3c\ucd94\ucd9c\ubb3c\ub958",
+            "ingredientName": "Centella Asiatica Root Extract (\ubcd1\ud480\ubfcc\ub9ac\ucd94\ucd9c\ubb3c)",
+            "feature": "\ubcd1\ud480\uc740 \uc778\ub3c4, \uc2a4\ub9ac\ub791\uce74, \ub0a8\uc544\ud504\ub9ac\uce74 \ub4f1\uc5d0\uc11c \uc790\uc0dd\ud558\ub294 \uc5ec\ub7ec\ud574\uc0b4\uc774 \uc2dd\ubb3c\ub85c, \uc544\ud504\ub9ac\uce74 \uc6d0\uc8fc\ubbfc\ub4e4\uc5d0\uac8c\ub294 \ubab8\uc5d0 \uc0c1\ucc98\uac00 \ub0ac\uc744 \ub54c \ubc14\ub974\ub294 \uadc0\ud55c \ud480\ub85c \uc5ec\uaca8\uc84c\ub2e4. \uc778\ub3c4 \ub4f1 \ub2e4\ub978 \ub098\ub77c\uc5d0\uc11c\ub3c4 \ubcd1\ud480\uc740 \uc608\ub85c\ubd80\ud130 \ud53c\ubd80 \uc190\uc0c1\uc744 \uc608\ubc29, \uce58\ub8cc\ud558\ub294\ub370\uc5d0 \uc0ac\uc6a9\ub418\uc5b4 \uc654\ub2e4. \uc5ec\ub4dc\ub984, \ubfb0\ub8e8\uc9c0\ub97c \uc9c4\uc815\uc2dc\ud0a4\ub294 \ud6a8\uacfc\ub3c4 \uc788\uc9c0\ub9cc, collagen \ud569\uc131\uc744 \ucd09\uc9c4\ud568\uc73c\ub85c\uc368 \uc0c1\ucc98\ubd80\uc704\uc758 \uc7ac\uc0dd \ud6a8\uacfc\ub3c4 \uc9c0\ub2cc\ub2e4. Madecassoside\ub77c\ub294 \uc131\ubd84\uc774 \ucf5c\ub77c\uac90 \ud569\uc131 \ubc0f \uc5fc\uc99d \uc644\ud654 \ud6a8\ub2a5\uc744 \ubcf4\uc778\ub2e4\uace0 \uc54c\ub824\uc838 \uc788\ub2e4.",
+            "effects": "",
+            "maker": "HUNAN",
+            "supplier": "\uc774\uc6b0\ubc14\uc774\uc624"
+        },
+        {
+            "materialNam": "\ud788\ube44\uc2a4\ucee4\uc2a4\uaf43\ucd94\ucd9c\ubb3c",
+            "type": "\ucd94\ucd9c\ubb3c",
+            "ingredientName": "Hibiscus Sabdariffa Flower Extract (\ud788\ube44\uc2a4\ucee4\uc2a4\uaf43\ucd94\ucd9c\ubb3c)",
+            "feature": "",
+            "effects": "\ud56d\uc0b0\ud654",
+            "maker": "",
+            "supplier": ""
+        },
+        {
+            "materialNam": "\ud770\ubc84\ub4dc\ub098\ubb34\uaecd\uc9c8\ucd94\ucd9c\ubb3c-PSI",
+            "type": "\ucd94\ucd9c\ubb3c",
+            "ingredientName": "Salix Alba Bark Extract (\ud770\ubc84\ub4dc\ub098\ubb34\uaecd\uc9c8\ucd94\ucd9c\ubb3c)",
+            "feature": "",
+            "effects": "\uac01\uc9c8\uac1c\uc120\/\ud56d\uc5ec\ub4dc\ub984\/\ud56d\uc5fc",
+            "maker": "\uc990\uac70\uc6b4\ud68c\uc0ac",
+            "supplier": "\uc990\uac70\uc6b4\ud68c\uc0ac (031-364-8866)"
+        },
+        {
+            "materialNam": "\ud751\ucc28\ucd94\ucd9c\ubb3c-PF",
+            "type": "\ucd94\ucd9c\ubb3c",
+            "ingredientName": "Camellia Sinensis Leaf Extract (\ub179\ucc28\ucd94\ucd9c\ubb3c)",
+            "feature": "",
+            "effects": "\ud56d\uc0b0\ud654\/\ud56d\uc5fc",
+            "maker": "\uc990\uac70\uc6b4\ud68c\uc0ac",
+            "supplier": "\uc990\uac70\uc6b4\ud68c\uc0ac (031-364-8866)"
+        },
+        {
+            "materialNam": "\ud751\ubbf8\ucd94\ucd9c\ubb3c-PF",
+            "type": "\ucd94\ucd9c\ubb3c",
+            "ingredientName": "Oryza Sativa Extract (\uc300\ucd94\ucd9c\ubb3c)",
+            "feature": "",
+            "effects": "",
+            "maker": "\uc990\uac70\uc6b4\ud68c\uc0ac",
+            "supplier": "\uc990\uac70\uc6b4\ud68c\uc0ac (031-364-8866)"
+        },
+        {
+            "materialNam": "\ud751\ub9c8\ub298\ucd94\ucd9c\ubb3c-PF",
+            "type": "\ucd94\ucd9c\ubb3c",
+            "ingredientName": "Allium Sativum Bulb Extract (\ub9c8\ub298\ucd94\ucd9c\ubb3c)",
+            "feature": "",
+            "effects": "",
+            "maker": "\uc990\uac70\uc6b4\ud68c\uc0ac",
+            "supplier": "\uc990\uac70\uc6b4\ud68c\uc0ac (031-364-8866)"
+        }
+    ]
+}

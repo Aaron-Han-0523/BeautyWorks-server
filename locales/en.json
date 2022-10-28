@@ -54,5 +54,6 @@
 	"Error": "Error",
 	"users.dashboard.header.Progress": "users.dashboard.header.Progress",
 	"users.dashboard.header.TempProgress": "users.dashboard.header.TempProgress",
-	"users.dashboard.header.CompletedProject": "users.dashboard.header.CompletedProject"
+	"users.dashboard.header.CompletedProject": "users.dashboard.header.CompletedProject",
+	"NewProject": "NewProject"
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const communityController = require('../controllers/community');
-const replyRouter = require('./community_reply');
+const replyRouter = require('./communityReply');
 const newsController = require('../controllers/news');
 const communityService = require('../services/community');
 

@@ -103,7 +103,7 @@ exports.add = async (req, res, next) => {
 exports.edit = async (req, res, next) => {
     console.log("users edit")
 
-    let user = req.session.user;
+    let user = res.locals.user;
     // console.log('user :', user);
 
     let body = req.body;
@@ -117,6 +117,29 @@ exports.edit = async (req, res, next) => {
         if (file) body[file.fieldname] = file.path;
     }
     body = Object.assign(user, body);
+    usersService
+        .update(body)
+        .then(result => {
+            console.log("update result :", result);
+            return res.end()
+        })
+        .catch(err => {
+            console.error(err);
+            return res.status(500).send();
+        });
+}
+
+
+exports.checkAlarm = async (req, res, next) => {
+    console.log("user check alram")
+
+    let user = res.locals.user;
+    // console.log('user :', user);
+
+    let body = {};
+    body.id = user.users_id;
+    body.isProjectUpdate = false;
+
     usersService
         .update(body)
         .then(result => {

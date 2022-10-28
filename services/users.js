@@ -63,7 +63,7 @@ exports.update = async (obj) => {
     return await users
         .update(Object.assign(obj, {
         }), {
-            where: { users_id: obj.users_id }
+            where: { users_id: obj.users_id || obj.id }
         })
         .then(result => {
             console.log("users update success");
