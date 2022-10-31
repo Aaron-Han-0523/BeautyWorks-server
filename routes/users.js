@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const communityRouter = require('./community');
+const newProjectRouter = require('./newProject');
 
 const usersController = require('../controllers/users');
 const usersService = require('../services/users');
@@ -113,4 +114,6 @@ router.use('/community', communityRouter)
 
 // My Project
 // New Project
+router.use('/newProject', newProjectRouter)
+
 module.exports = router;

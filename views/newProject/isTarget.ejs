@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+    <%- include ("../partials/loader.ejs") %>
+
+        <%- include ("../partials/client-nav.ejs") %>
+            <%- include ("../partials/chatMark.ejs") %>
+
+                <!--  BEGIN MAIN CONTAINER  -->
+                <div class="main-container" id="container">
+
+                    <div class="overlay"></div>
+                    <div class="search-overlay"></div>
+
+                    <%- include ("../partials/client-sidebar.ejs") %>
+
+                        <!--  BEGIN CONTENT AREA  -->
+                        <div id="content" class="main-content">
+                            <div class="layout-px-spacing">
+
+                                <div class="middle-content container-xxl p-0">
+
+                                    <!-- BREADCRUMB -->
+                                    <div class="row px-3">
+                                        <div class="breadcrumb align-items-start d-flex br-20">
+                                            <div class="p-1 col-3">
+                                                <h5><strong>
+                                                        <%= __('타겟제품 유무 확인') %>
+                                                    </strong></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- CONTENT AREA -->
+                                    <div class="row layout-top-spacing justify-content-center">
+                                        <div class="col-xxl-5 col-xl-6 col-md-7 col-sm-10 layout-spacing">
+
+                                            <div class="widget-content widget-content-area br-20 py-5 px-0 bg-gray">
+
+                                                <form id="isTarget" class="px-3 mx-3" method="post">
+                                                    <div class="form-group text-center">
+                                                        <!-- title -->
+                                                        <div>
+                                                            <h5>
+                                                                <%= __('users.newProject.isTarget.question') %>
+                                                            </h5>
+                                                        </div>
+                                                        <!-- target url input -->
+                                                        <div class="mt-5">
+                                                            <div>
+                                                                <%= __('users.newProject.isTarget.urlInput.before') %>
+                                                            </div>
+                                                            <div
+                                                                class="form-control my-3 d-flex align-items-baseline px-3 br-15">
+                                                                <input class="w-100 align-placeholder" name="targetURL"
+                                                                    style="border: 0px;"
+                                                                    placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>"
+                                                                    autofocus required>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- 버튼 -->
+                                                        <div class="mt-5 d-flex">
+                                                            <button disabled id="nextBtn"
+                                                                class="col-5 btn-outline-gray bg-white py-3 px-5 br-15 me-auto">
+                                                                <%= __('users.newProject.isTarget.btn.next') %>
+                                                            </button>
+                                                            <button type="button"
+                                                                class="col-5 btn-outline-gray bg-white py-3 px-5 br-15"
+                                                                onclick="location.href='<%= codezip.url.users.contents %>';">
+                                                                <%= __('users.newProject.isTarget.btn.pass') %>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  END CONTENT AREA  -->
+
+                        <%- include ("../partials/footer.ejs") %>
+
+                </div>
+                <!-- END MAIN CONTAINER -->
+
+                <%- include ("../partials/commonScrpits.ejs") %>
+
+                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                    <script>
+                        isTarget[0].addEventListener('keyup', (event) => {
+                            if (event.target.value) {
+                                nextBtn.disabled = false;
+                            } else {
+                                nextBtn.disabled = true;
+                            }
+                        })
+
+                        isTarget.onsubmit = async (e) => {
+                            e.preventDefault();
+
+                            if (!isTarget[0].value) {
+                                alert('')
+                            }
+
+                            let response = await fetch(isTarget.action, {
+                                method: 'POST',
+                                body: new URLSearchParams(new FormData(isTarget))
+                            }).then(res => {
+                                if (res.ok) alert("저장되었습니다.");
+                                else {
+                                    alert("전송 실패!!");
+                                }
+                                return res.json();
+                            }).then(result => {
+                                console.log(result);
+                            });
+                        }
+                    </script>
+                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

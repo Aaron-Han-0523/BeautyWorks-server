@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+    <%- include ("../partials/loader.ejs") %>
+
+        <%- include ("../partials/client-nav.ejs") %>
+            <%- include ("../partials/chatMark.ejs") %>
+
+                <!--  BEGIN MAIN CONTAINER  -->
+                <div class="main-container" id="container">
+
+                    <div class="overlay"></div>
+                    <div class="search-overlay"></div>
+
+                    <%- include ("../partials/client-sidebar.ejs") %>
+
+                        <!--  BEGIN CONTENT AREA  -->
+                        <div id="content" class="main-content">
+                            <div class="layout-px-spacing">
+
+                                <div class="middle-content container-xxl p-0">
+
+                                    <!-- BREADCRUMB -->
+                                    <div class="row px-3">
+                                        <div class="breadcrumb align-items-start d-flex br-20">
+                                            <div class="p-1 col-3">
+                                                <h5><strong>
+                                                        <%= __('MOQ/예산확인') %>
+                                                    </strong></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- CONTENT AREA -->
+                                    <div class="row layout-top-spacing justify-content-center">
+                                        <div class="col-xxl-5 col-xl-6 col-md-7 col-sm-10 layout-spacing">
+
+                                            <div class="widget-content widget-content-area br-20 py-5 px-5 bg-gray">
+
+                                                <form id="moq" class="px-3 mx-3" method="post">
+                                                    <div class="form-group text-center">
+                                                        <!-- title -->
+                                                        <div>
+                                                            <h3>
+                                                                <%= __('users.newProject.moq.title') %>
+                                                            </h3>
+                                                        </div>
+                                                        <!-- 예산 입력 -->
+                                                        <div class="mt-4">
+                                                            <div>
+                                                                <%= __('users.newProject.moq.budgetInput.before') %>
+                                                            </div>
+                                                            <div
+                                                                class="form-control my-2 d-flex align-items-baseline px-0 br-15">
+                                                                <span class="ms-2" style="left:0px;">$</span>
+                                                                <input class="w-100 align-placeholder text-center"
+                                                                    name="budget" style="border: 0px;"
+                                                                    placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>"
+                                                                    autofocus required>
+                                                            </div>
+                                                            <div style="color: red;">
+                                                                <%= __('users.newProject.moq.budgetInput.after') %>
+                                                            </div>
+                                                        </div>
+                                                        <!-- MOQ 선택 -->
+                                                        <div class="mt-5">
+                                                            <div>
+                                                                <%= __('users.newProject.moq.moqSelect.before1') %>
+                                                            </div>
+                                                            <div>
+                                                                <%= __('users.newProject.moq.moqSelect.before2') %>
+                                                            </div>
+                                                            <div>
+                                                                <select class="form-select br-15 text-center" name="moq"
+                                                                    required>
+                                                                    <option value="">
+                                                                        <%= __('users.newProject.moq.moqSelect.placeholder')
+                                                                            %>
+                                                                    </option>
+                                                                    <option
+                                                                        value="<%= __('users.newProject.moq.moqSelect.value1') %>">
+                                                                        <%= __('users.newProject.moq.moqSelect.option1')
+                                                                            %>
+                                                                    </option>
+                                                                    <option
+                                                                        value="<%= __('users.newProject.moq.moqSelect.value2') %>">
+                                                                        <%= __('users.newProject.moq.moqSelect.option2')
+                                                                            %>
+                                                                    </option>
+                                                                    <option
+                                                                        value="<%= __('users.newProject.moq.moqSelect.value3') %>">
+                                                                        <%= __('users.newProject.moq.moqSelect.option3')
+                                                                            %>
+                                                                    </option>
+                                                                    <option
+                                                                        value="<%= __('users.newProject.moq.moqSelect.value4') %>">
+                                                                        <%= __('users.newProject.moq.moqSelect.option4')
+                                                                            %>
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!-- 개당 단가 출력 -->
+                                                        <div class="mt-5">
+                                                            <div>
+                                                                <%= __('users.newProject.moq.checkUnitPrice.before') %>
+                                                            </div>
+                                                            <div
+                                                                class="form-control my-2 d-flex align-items-baseline px-0 br-15">
+                                                                <span class="ms-2" style="left:0px;">$</span>
+                                                                <input class="w-100 align-placeholder text-center"
+                                                                    style="border: 0px;" id="unitPrice"
+                                                                    placeholder="<%= __('users.newProject.moq.checkUnitPrice.placeholder') %>"
+                                                                    readonly>
+                                                            </div>
+                                                        </div>
+                                                        <!-- 버튼 -->
+                                                        <div class="mt-4">
+                                                            <button class="btn-outline-gray bg-white py-3 px-5 br-15">
+                                                                <%= __('users.newProject.moq.btn.next') %>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  END CONTENT AREA  -->
+
+                        <%- include ("../partials/footer.ejs") %>
+
+                </div>
+                <!-- END MAIN CONTAINER -->
+
+                <%- include ("../partials/commonScrpits.ejs") %>
+
+                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                    <script>
+                        function unitPriceCalc() {
+                            if (+moq[0].value && +moq[1].value) {
+                                unitPrice.value = parseInt(+moq[0].value / +moq[1].value)
+                            }
+                        }
+
+                        moq[0].addEventListener('keyup', (event) => {
+                            unitPriceCalc()
+                        })
+
+                        moq[1].addEventListener('change', (event) => {
+                            unitPriceCalc()
+                        })
+
+                        moq.onsubmit = async (e) => {
+                            e.preventDefault();
+
+                            let response = await fetch(moq.action, {
+                                method: 'POST',
+                                body: new URLSearchParams(new FormData(moq))
+                            }).then(res => {
+                                if (res.ok) alert("저장되었습니다.");
+                                else {
+                                    alert("전송 실패!!");
+                                }
+                                return res.json();
+                            }).then(result => {
+                                console.log(result);
+                            });
+                        }
+                    </script>
+                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

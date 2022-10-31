@@ -10,7 +10,15 @@
         "myAccount": "/users/myAccount",
         "dashboard": "/users/Dashboard",
         "myProject": "/users/myProject",
-        "newProject": "/users/newProject",
+        "newProject": {
+            "main": "/users/newProject",
+            "_0": "/users/newProject/moq",
+            "_1": "/users/newProject/isTarget",
+            "_2": "/users/newProject/basic",
+            "_3": "/users/newProject/option",
+            "_4": "/users/newProject/draft",
+            "_5": "/users/newProject/order"
+        },
         "contents": "/users/contents",
         "container": "/users/container",
         "ingredientData": "/users/ingredientData",

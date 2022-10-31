@@ -134,6 +134,9 @@ h6 {
     height: 100%;
 }
 
+/************************/
+/*      step bar        */
+/************************/
 .stepper-wrapper {
     font-family: Arial;
     margin-top: 1rem;
@@ -192,6 +195,7 @@ h6 {
 .stepper-item.active {
     font-weight: bold;
 }
+
 .stepper-item.active .step-counter {
     background-color: #ff0;
 }
@@ -216,4 +220,43 @@ h6 {
 
 .stepper-item:last-child::after {
     content: none;
+}
+
+.bg-gray {
+    --bs-bg-opacity: 1;
+    background-color: rgba(224, 230, 237, 0.9) !important
+}
+
+.align-placeholder::placeholder {
+    color: #888ea8;
+    font-size: 15px;
+    text-align: center;
+}
+
+.align-placeholder::-webkit-input-placeholder,
+.align-placeholder::-ms-input-placeholder,
+.align-placeholder::-moz-placeholder {
+    color: #888ea8;
+    font-size: 15px;
+    text-align: center;
+}
+
+.btn-outline-gray {
+    border: 1px solid #bfc9d4 !important;
+    color: #3b3f5c !important;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.btn-check:active+.btn-outline-gray,
+.btn-check:checked+.btn-outline-gray {
+    background-color: #bfc9d4 !important;
+    color: #fff !important;
+}
+
+.btn-outline-gray.active,
+.btn-outline-gray.dropdown-toggle.show,
+.btn-outline-gray:active {
+    background-color: #bfc9d4 !important;
+    color: #fff !important;
 }
