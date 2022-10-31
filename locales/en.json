@@ -55,5 +55,15 @@
 	"users.dashboard.header.Progress": "users.dashboard.header.Progress",
 	"users.dashboard.header.TempProgress": "users.dashboard.header.TempProgress",
 	"users.dashboard.header.CompletedProject": "users.dashboard.header.CompletedProject",
-	"NewProject": "NewProject"
+	"NewProject": "NewProject",
+	"project_phase.1": "project_phase.1",
+	"project_phase.2": "project_phase.2",
+	"project_phase.3": "project_phase.3",
+	"project_phase.0.0": "project_phase.0.0",
+	"project_phase.0.1": "project_phase.0.1",
+	"users.dashboard.header.RemommendedProject": "users.dashboard.header.RemommendedProject",
+	"users.dashboard.header.RemommendedIngredient": "users.dashboard.header.RemommendedIngredient",
+	"users.dashboard.remommendedIngredient.thead.성분명": "users.dashboard.remommendedIngredient.thead.성분명",
+	"users.dashboard.remommendedIngredient.thead.종류": "users.dashboard.remommendedIngredient.thead.종류",
+	"users.dashboard.remommendedIngredient.thead.기능": "users.dashboard.remommendedIngredient.thead.기능"
 }

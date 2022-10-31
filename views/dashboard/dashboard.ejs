@@ -53,22 +53,22 @@
                                 </strong></h5>
                             </div>
                           </div>
-                          <div class="row">
+                          <div class="row mt-3">
                             <div class="col-12 col-md-12">
                               <h6>1. My Suncream</h6>
-                              Porgress Bar
+                              <%- include("../partials/progressbar/"+1+".ejs") %>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-12 col-md-12">
-                              <h6>1. My Suncream</h6>
-                              Porgress Bar
+                              <h6>2. My Suncream</h6>
+                              <%- include("../partials/progressbar/"+2+".ejs") %>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-12 col-md-12">
-                              <h6>1. My Suncream</h6>
-                              Porgress Bar
+                              <h6>3. My Suncream</h6>
+                              <%- include("../partials/progressbar/"+3+".ejs") %>
                             </div>
                           </div>
 
@@ -91,16 +91,16 @@
                                 </strong></h5>
                             </div>
                           </div>
-                          <div class="row">
+                          <div class="row mt-3">
                             <div class="col-12 col-md-12">
                               <h6>1. My Suncream</h6>
-                              Porgress Bar
+                              <%- include("../partials/temp_progressbar/"+0+".ejs") %>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-12 col-md-12">
                               <h6>1. My Suncream</h6>
-                              Porgress Bar
+                              <%- include("../partials/temp_progressbar/"+1+".ejs") %>
                             </div>
                           </div>
 
@@ -123,7 +123,7 @@
                                 </strong></h5>
                             </div>
                           </div>
-                          <div class="row">
+                          <div class="row mt-3">
                             <div class="swiper-container">
                               <div class="swiper-wrapper">
 
@@ -182,7 +182,157 @@
                         </div>
                       </div>
 
+                      <div class="row d-flex">
+                        <!-- 추천 프로젝트 -->
+                        <div class="col-6">
+                          <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                            <div class="row">
+                              <h5>
+                                <%= __('users.dashboard.header.RemommendedProject') %>
+                              </h5>
+                            </div>
+                            <div class="row mt-3">
+                              <div class="col">
+                                <div class="preview">
+                                  <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
+                                </div>
+                                <div class="row mt-3 justify-content-center text-center">
+                                  <p>Top / 소분류명<br />
+                                    스킨/토너<br />
+                                    대한민국 2021 award</p>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="preview">
+                                  <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
+                                </div>
+                                <div class="row mt-3 justify-content-center text-center">
+                                  <p>Top / 소분류명<br />
+                                    스킨/토너<br />
+                                    대한민국 2021 award</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="text-end">
+                              <a href="<%= codezip.url.users.contents %>">
+                                <i class="fa-solid fa-chevron-right"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 추천 성분 -->
+                        <div class="col-6">
+                          <div class="widget-content widget-content-area br-20 px-0 mt-3 align-items-start flex-column"
+                            style="height: 95%;">
+                            <div class="d-flex align-items-start flex-column mb-3 w-100 h-100 p-0">
+                              <div class="row header px-4">
+                                <h2>
+                                  <%= __('users.dashboard.header.RemommendedIngredient') %>
+                                </h2>
+                              </div>
+                              <div class="row mt-3 w-100 mx-0">
+                                <div class="table-responsive p-0">
+                                  <table class="table table-no-space table-bordered text-break">
+                                    <thead class="text-center">
+                                      <th>
+                                        <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
+                                      </th>
+                                      <th>
+                                        <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
+                                      </th>
+                                      <th>
+                                        <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
+                                      </th>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                      <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                      </tr>
+                                      <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                      </tr>
+                                      <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="text-end px-4 mt-auto w-100">
+                                <a href="<%= codezip.url.users.ingredientData %>">
+                                  <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
+
+                      <!-- News & Community -->
+                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                        <!-- News -->
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-6 col-md-4">
+                              <h5><strong>
+                                  <%= __('users.community.header.News') %>
+                                </strong></h5>
+                            </div>
+                          </div>
+                          <!-- list -->
+                          <div class="widget-content widget-content-area br-20 p-2 mt-2">
+                            <div class="my-2">
+                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                                <h6 class="m-1">
+                                  title
+                                </h6>
+                              </button>
+                            </div>
+                            <div class="my-2">
+                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                                <h6 class="m-1">
+                                  title
+                                </h6>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Community -->
+                        <div class="form-group mt-3">
+                          <div class="row">
+                            <div class="col-6 col-md-4">
+                              <h5><strong>
+                                  <%= __('users.community.header.Community') %>
+                                </strong></h5>
+                            </div>
+                          </div>
+                          <!-- list -->
+                          <div class="widget-content widget-content-area br-20 p-2 mt-2">
+                            <div class="my-2">
+                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                                <h6 class="m-1">
+                                  title
+                                </h6>
+                              </button>
+                            </div>
+                            <div class="my-2">
+                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                                <h6 class="m-1">
+                                  title
+                                </h6>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
 
                   </div>
