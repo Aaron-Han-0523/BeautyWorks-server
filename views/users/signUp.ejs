@@ -8,8 +8,7 @@
     <%- include ("../partials/header.ejs") %>
 
         <% const country_codes=codezip.country.codes; %>
-            <% const country_code2name=codezip.country.code2name; %>
-                <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
+            <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
 </head>
 
 <body class="form">
@@ -19,11 +18,11 @@
 
             <div class="auth-container d-flex">
 
-                <div class="container mx-auto align-self-center">
+                <div class="container mx-auto">
 
                     <div class="row">
 
-                        <div class="col-10 flex-column align-self-center mx-auto">
+                        <div class="col-10 flex-column mx-auto">
                             <div class="card">
                                 <div class="card-body">
 
@@ -36,10 +35,10 @@
                                             </div>
 
                                             <!-- 국가 선택 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.Country') %>
+                                                        <%= __('users.signUp.InputLabel.Country') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -54,10 +53,10 @@
                                                             <% for(let i=0; i< country_codes.length; i++) { %>
                                                                 <li>
                                                                     <a class="dropdown-item" href="javascript:void(0);"
-                                                                        onclick="select_country_func('<%= country_codes[i] %>','<%= country_code2name[country_codes[i]] %>');">
+                                                                        onclick="select_country_func('<%= country_codes[i] %>','<%= __(country_codes[i]) %>');">
                                                                         <img class="me-2"
                                                                             src="/images/flag/<%= country_codes[i] %>.png">
-                                                                        <%= country_code2name[country_codes[i]] %>
+                                                                        <%= __(country_codes[i]) %>
                                                                     </a>
                                                                 </li>
                                                                 <% } %>
@@ -68,10 +67,10 @@
 
 
                                             <!-- 브랜드명 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.BrandName') %>
+                                                        <%= __('users.signUp.InputLabel.BrandName') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -82,10 +81,10 @@
 
 
                                             <!-- 이름 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.FirstName') %>
+                                                        <%= __('users.signUp.InputLabel.FirstName') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -94,7 +93,7 @@
                                                 </div>
                                                 <div class="col col-2 text-center">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.LastName') %>
+                                                        <%= __('users.signUp.InputLabel.LastName') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -105,10 +104,10 @@
 
 
                                             <!-- 연락처 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.MobileContact') %>
+                                                        <%= __('users.signUp.InputLabel.MobileContact') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-3">
@@ -142,10 +141,10 @@
 
 
                                             <!-- Email 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.Email') %>
+                                                        <%= __('users.signUp.InputLabel.Email') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-8 d-flex align-items-baseline">
@@ -165,10 +164,10 @@
                                             </div>
 
                                             <!-- Email 검증 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.CertificationNumber') %>
+                                                        <%= __('users.signUp.InputLabel.CertificationNumber') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -183,10 +182,10 @@
 
 
                                             <!-- 비밀번호 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.Password') %>
+                                                        <%= __('users.signUp.InputLabel.Password') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -197,10 +196,10 @@
 
 
                                             <!-- 비밀번호 확인 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.PasswordConfirm') %>
+                                                        <%= __('users.signUp.InputLabel.PasswordConfirm') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -215,7 +214,7 @@
 
 
                                             <!-- 회사 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
                                                         <%= __('users.signUp.InputLabel.CompanyName') %>
@@ -229,7 +228,7 @@
 
 
                                             <!-- 팀/직책 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
                                                         <%= __('users.signUp.InputLabel.Team') %> / <%=
@@ -247,10 +246,10 @@
 
 
                                             <!-- Logistics Address 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.LogisticsAddress') %>
+                                                        <%= __('users.signUp.InputLabel.LogisticsAddress') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-6">
@@ -261,10 +260,10 @@
 
 
                                             <!-- 회사 주소 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.CompanyAddress') %>
+                                                        <%= __('users.signUp.InputLabel.CompanyAddress') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-6">
@@ -275,10 +274,10 @@
 
 
                                             <!-- 연락 방법 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.ContactMethod') %>
+                                                        <%= __('users.signUp.InputLabel.ContactMethod') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">
@@ -289,10 +288,10 @@
 
 
                                             <!-- Remark 입력 -->
-                                            <div class="row mb-4 align-items-end">
+                                            <div class="row mb-4 align-items-center">
                                                 <div class="col col-2">
                                                     <h6>
-                                                        <%= __('users.signUp.InputLabel.Remark') %>
+                                                        <%= __('users.signUp.InputLabel.Remark') %><span style="color: red;">*</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col col-4">

@@ -146,6 +146,10 @@
                     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
                     <script>
                         function unitPriceCalc() {
+                            if (moq[1].value == '0') {
+                                unitPrice.value = "<%= __('챗봇으로 문의해주세요.') %>"
+                                return;
+                            }
                             if (+moq[0].value && +moq[1].value) {
                                 unitPrice.value = parseInt(+moq[0].value / +moq[1].value)
                             }
@@ -166,9 +170,9 @@
                                 method: 'POST',
                                 body: new URLSearchParams(new FormData(moq))
                             }).then(res => {
-                                if (res.ok) alert("저장되었습니다.");
+                                if (res.ok) alert("<%= __('users.msg.SuccessSave') %>");
                                 else {
-                                    alert("전송 실패!!");
+                                    alert("<%= __('users.msg.FailSave') %>");
                                 }
                                 return res.json();
                             }).then(result => {
