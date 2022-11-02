@@ -23,11 +23,14 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
+    // forEach 사용가능하게 추가
+    HTMLCollection.prototype.forEach = Array.prototype.forEach;
+
     $.datepicker.setDefaults({
         changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
         changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
     });
-    $.datepicker.regional['ko'] = {
+    $.datepicker.regional['<%= locale %>'] = {
         closeText: '닫기',
         prevText: '이전달',
         nextText: '다음달',

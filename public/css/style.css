@@ -15,6 +15,14 @@
     border: 1px solid #e0e6ed;
 }
 
+.br-circle {
+    border-radius: 50%;
+}
+
+.form-check-input.br-circle {
+    border-radius: 50%;
+}
+
 .br-10 {
     border-radius: 10px;
 }
@@ -26,6 +34,11 @@
 .btr-15 {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+}
+
+.bbr-15 {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .br-20 {
@@ -225,6 +238,11 @@ h6 {
 .bg-gray {
     --bs-bg-opacity: 1;
     background-color: rgba(224, 230, 237, 0.9) !important
+}
+
+.bg-darkgray {
+    --bs-bg-opacity: 1;
+    background-color: #767676 !important
 }
 
 .align-placeholder::placeholder {

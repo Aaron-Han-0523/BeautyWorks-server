@@ -504,11 +504,9 @@ span.red {
 }
 /*      Form Group Label       */
 .form-group label, label {
-  font-size: 15px;
   color: #0e1726;
   letter-spacing: 1px;
   display: inline-block;
-  margin-bottom: 0.5rem;
 }
 
 /*  Disable forms     */
@@ -542,7 +540,7 @@ span.red {
   font-size: 15px;
   padding: 8px 10px;
   letter-spacing: 1px;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 6px;
   background: #fff;
   height: auto;
@@ -629,7 +627,7 @@ span.red {
 .form-select {
   height: auto;
   font-size: 15px;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   letter-spacing: 1px;
   border: 1px solid #bfc9d4;
   color: #3b3f5c;
@@ -3232,6 +3230,7 @@ fieldset:disabled .btn {
   border: 1px solid #ebedf2;
   border-top: 0px;
   border-bottom: 0px;
+  border-left: 0px;
 }
 .table-bordered > thead > tr th:first-child {
   border-left: 0px;
@@ -3266,16 +3265,16 @@ fieldset:disabled .btn {
   border-bottom-right-radius: 0;
 }
 .table-bordered.table-hover > tbody > tr:hover:first-child td:first-child {
-  border-top-left-radius: 10px;
+  border-top-left-radius: 15px;
 }
 .table-bordered.table-hover > tbody > tr:hover:first-child td:last-child {
-  border-top-right-radius: 10px;
+  border-top-right-radius: 15px;
 }
 .table-bordered.table-hover > tbody > tr:hover:last-child td:first-child {
-  border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 15px;
 }
 .table-bordered.table-hover > tbody > tr:hover:last-child td:last-child {
-  border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 15px;
 }
 
 /* 

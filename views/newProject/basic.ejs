@@ -508,6 +508,11 @@
             }
 
             function next() {
+              
+              // UI 확인용
+              location.href = '<%= codezip.url.users.newProject._3 %>';
+              return;
+
               fetch(basic.action, {
                 method: "post",
                 body: new URLSearchParams(new FormData(basic))

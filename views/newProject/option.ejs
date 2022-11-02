@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <%- include ("../partials/header.ejs") %>
+        <% const numberOfProduct=codezip.numberOfProduct; %>
+            <% const country_codes=codezip.country.codes; %>
+</head>
+
+<body class="layout-boxed">
+
+    <%- include ("../partials/loader.ejs") %>
+        <div>
+            <%- include ("../partials/client-nav.ejs") %>
+                <%- include ("../partials/chatMark.ejs") %>
+        </div>
+        <!--  BEGIN MAIN CONTAINER  -->
+        <div class="main-container" id="container">
+
+            <div class="overlay"></div>
+            <div class="search-overlay"></div>
+
+            <%- include ("../partials/client-sidebar.ejs") %>
+
+                <!--  BEGIN CONTENT AREA  -->
+                <div id="content" class="main-content">
+                    <div class="layout-px-spacing">
+
+                        <div class="middle-content container-xxl p-0">
+
+                            <!-- BREADCRUMB -->
+                            <div class="row px-3">
+                                <div class="breadcrumb align-items-start d-flex br-20">
+                                    <div class="p-1 col-3">
+                                        <h5><strong>
+                                                <%= __('샘플의뢰서 옵션') %>
+                                            </strong></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CONTENT AREA -->
+                            <div class="row layout-top-spacing">
+                                <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+                                    <div class="widget-content widget-content-area br-20 py-5 px-5">
+
+                                        <form id="option" class="px-3 mx-3" method="post" enctype="multipart/form-data">
+                                            <div class="form-group text-break">
+
+                                                <!-- 제품 효과 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.productEffects') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <input hidden type="text" name="productEffects" required>
+                                                        <button class="form-select text-start" type="button"
+                                                            id="productEffects_print" data-bs-toggle="offcanvas"
+                                                            data-bs-target="#select_productEffects"
+                                                            aria-controls="select_productEffects">
+                                                            <%= __('plzSelectText') %>
+                                                        </button>
+                                                        <!-- 제품효과 모달창 -->
+                                                        <div class="offcanvas br-15" id="select_productEffects"
+                                                            data-bs-scroll="true" data-bs-backdrop="true"
+                                                            style="width: 50vw; left:5vw">
+                                                            <div class="offcanvas-header mt-2">
+                                                                <div></div>
+                                                                <h1 class="offcanvas-title fs-5">
+                                                                    <%= __('users.newProject.option.productEffects') %>
+                                                                </h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="offcanvas"></button>
+                                                            </div>
+                                                            <div class="offcanvas-body mx-5">
+                                                                <!-- 일반 제품효과 -->
+                                                                <div class="row">
+                                                                    <% for(let i=0; i< codezip.effects.product.length;
+                                                                        i++) { %>
+                                                                        <div class="col d-flex dropdown-item">
+                                                                            <input
+                                                                                class="productEffects form-check-input bg-darkgray br-circle mx-1"
+                                                                                type="checkbox"
+                                                                                id="productEffects<%= i %>">
+                                                                            <label for="productEffects<%= i %>"
+                                                                                class="productEffectsLabel flex-fill h5">
+                                                                                <%= __(codezip.effects.product[i])%>
+                                                                            </label>
+                                                                        </div>
+                                                                        <% if(i%2==1){ %>
+                                                                            <div class="my-1"></div>
+                                                                            <% } %>
+                                                                                <% } %>
+                                                                </div>
+                                                                <!-- 선케어 제품효과-->
+                                                                <div class="row">
+                                                                    <% for(let i=0; i< codezip.effects.suncare.length;
+                                                                        i++) { %>
+                                                                        <div class="col d-flex dropdown-item">
+                                                                            <input
+                                                                                class="productEffects form-check-input bg-darkgray br-circle mx-1"
+                                                                                type="checkbox"
+                                                                                id="suncareEffects<%= i %>">
+                                                                            <label for="suncareEffects<%= i %>"
+                                                                                class="productEffectsLabel flex-fill h5">
+                                                                                <%=__(codezip.effects.suncare[i])%>
+                                                                            </label>
+                                                                        </div>
+                                                                        <% if(i%2==1){ %>
+                                                                            <div class="my-1"></div>
+                                                                            <% } %>
+                                                                                <% } %>
+                                                                </div>
+                                                                <!-- 기타 -->
+                                                                <div class="row">
+                                                                    <div class="col d-flex dropdown-item">
+                                                                        <input
+                                                                            class="productEffectsEtc form-check-input bg-darkgray br-circle mx-1"
+                                                                            type="checkbox"
+                                                                            id="productEffectsEtc_check">
+                                                                        <label for="productEffectsEtc_check"
+                                                                            class="flex-fill h5">
+                                                                            <%= __("기타")%>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="offcanvas-footer text-center my-3">
+                                                                <button type="button"
+                                                                    class="btn-outline-gray bg-gray br-15 p-3 px-5"
+                                                                    data-bs-dismiss="offcanvas">
+                                                                    <%= __('users.newProject.option.btn.확인') %>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input hidden type="text" class="form-control"
+                                                            name="productEffectsEtc"
+                                                            placeholder="<%= __('plzInputText') %>" required>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 컨셉성분 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.ingredients') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <input hidden type="text" name="ingredients" required>
+                                                        <button class="form-select text-start" type="button"
+                                                            id="ingredients_print" data-bs-toggle="offcanvas"
+                                                            data-bs-target="#select_ingredients"
+                                                            aria-controls="select_ingredients">
+                                                            <%= __('plzSelectText') %>
+                                                        </button>
+                                                        <!-- 컨셉성분 모달창 -->
+                                                        <div class="offcanvas br-15 bg-white"
+                                                            style="border: 1px solid; width: 100%; left:3%;"
+                                                            id="select_ingredients" data-bs-scroll="true"
+                                                            data-bs-backdrop="true">
+                                                            <div class="offcanvas-header justify-content-end pb-0">
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="offcanvas"></button>
+                                                            </div>
+                                                            <div class="offcanvas-body mx-5 mt-0 pt-0"
+                                                                style="border-top:0px;">
+                                                                <form method="get" action="/users/ingdient/search">
+                                                                    <!-- 통합 검색-->
+                                                                    <div class="w-100">
+                                                                        <div class="d-flex px-5">
+                                                                            <label
+                                                                                class="col-3 h5 align-self-center mb-0">
+                                                                                <strong>
+                                                                                    <%= __('통합 검색') %>
+                                                                                </strong>
+                                                                            </label>
+                                                                            <input name="q" class="form-control"
+                                                                                placeholder="<%= __('plzInputText') %>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- 종류/기능 검색-->
+                                                                    <div class="row mt-3">
+                                                                        <div class="col row">
+                                                                            <div class="d-flex px-5">
+                                                                                <label
+                                                                                    class="col-3 h5 align-self-center mb-0">
+                                                                                    <strong>
+                                                                                        <%= __('종류') %>
+                                                                                    </strong>
+                                                                                </label>
+                                                                                <input hidden name="type">
+                                                                                <!-- 컨셉성분 종류 -->
+                                                                                <button class="form-select text-start"
+                                                                                    type="button" id="select_type"
+                                                                                    data-bs-toggle="dropdown"
+                                                                                    aria-expanded="false">
+                                                                                    <%= __('plzSelectText') %>
+                                                                                </button>
+                                                                                <ul class="dropdown-menu"
+                                                                                    aria-labelledby="select_type">
+                                                                                    <% for(let i=0; i<
+                                                                                        codezip.ingredient_category.length;
+                                                                                        i++) { %>
+                                                                                        <li class="me-3 d-flex">
+                                                                                            <label
+                                                                                                class="dropdown-item form-check-label ingredient_category-label"
+                                                                                                for="ingredient_category<%= i %>">
+                                                                                                <%= __(codezip.ingredient_category[i])
+                                                                                                    %>
+                                                                                            </label>
+                                                                                            <input
+                                                                                                class="form-check-input ingredient_category"
+                                                                                                type="checkbox"
+                                                                                                id="ingredient_category<%= i %>">
+                                                                                        </li>
+                                                                                        <% } %>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col row">
+                                                                            <div class="d-flex px-5">
+                                                                                <label
+                                                                                    class="col-3 h5 align-self-center mb-0">
+                                                                                    <strong>
+                                                                                        <%= __('기능') %>
+                                                                                    </strong>
+                                                                                </label>
+                                                                                <input hidden name="effects">
+                                                                                <!-- 컨셉성분 기능 -->
+                                                                                <button class="form-select text-start"
+                                                                                    type="button" id="select_effects"
+                                                                                    data-bs-toggle="dropdown"
+                                                                                    aria-expanded="false">
+                                                                                    <%= __('plzSelectText') %>
+                                                                                </button>
+                                                                                <ul class="dropdown-menu"
+                                                                                    aria-labelledby="select_effects">
+                                                                                    <% for(let i=0; i<
+                                                                                        codezip.effects.ingredient.length;
+                                                                                        i++) { %>
+                                                                                        <li class="me-3 d-flex">
+                                                                                            <label
+                                                                                                class="dropdown-item form-check-label ingredient_effects-label"
+                                                                                                for="ingredient_effects<%= i %>">
+                                                                                                <%= __(codezip.effects.ingredient[i])
+                                                                                                    %>
+                                                                                            </label>
+                                                                                            <input
+                                                                                                class="form-check-input ingredient_effects"
+                                                                                                type="checkbox"
+                                                                                                id="ingredient_effects<%= i %>">
+                                                                                        </li>
+                                                                                        <% } %>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <!-- 결과 테이블 -->
+                                                                <div class="table-responsive mt-4 pt-4">
+                                                                    <table style="border: 1px solid var(--bs-gray-500);"
+                                                                        class="table table-no-space table-bordered table-hover text-break  br-15 text-center">
+                                                                        <thead class="">
+                                                                            <th>
+                                                                                <%= __('ingdients.성분명') %>
+                                                                            </th>
+                                                                            <th>
+                                                                                <%= __('ingdients.종류') %>
+                                                                            </th>
+                                                                            <th>
+                                                                                <%= __('ingdients.기능') %>
+                                                                            </th>
+                                                                            <th>
+                                                                                <%= __('ingdients.특징') %>
+                                                                            </th>
+                                                                            <th>
+                                                                                <%= __('선택') %>
+                                                                            </th>
+                                                                        </thead>
+                                                                        <tbody class="table-group-divider bbr-15">
+                                                                            <tr>
+                                                                                <td>1</td>
+                                                                                <td>2</td>
+                                                                                <td>3</td>
+                                                                                <td>4</td>
+                                                                                <td hidden>1</td>
+                                                                                <td><input type="checkbox"
+                                                                                        class="form-check-input" id="">
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>1</td>
+                                                                                <td>2</td>
+                                                                                <td>3</td>
+                                                                                <td>4</td>
+                                                                                <td hidden>1</td>
+                                                                                <td><input type="checkbox"
+                                                                                        class="form-check-input" id="">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 제형 선택 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.formulation') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <select class="form-select" name="formulation">
+                                                            <option value="">
+                                                                <%= __('plzSelectText') %>
+                                                            </option>
+                                                            <% codezip.formulation.forEach((item,index)=>{ %>
+                                                                <option value="<%= item.slice(0,-1) %>">
+                                                                    <%= item %>
+                                                                </option>
+                                                                <% }) %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 사용감 입력 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.useEffects') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <input hidden type="text" name="useEffects" required>
+                                                        <button class="form-select text-start" type="button"
+                                                            id="useEffects_print" data-bs-toggle="offcanvas"
+                                                            data-bs-target="#select_useEffects"
+                                                            aria-controls="select_useEffects">
+                                                            <%= __('plzSelectText') %>
+                                                        </button>
+                                                        <!-- 사용감 모달창 -->
+                                                        <div class="offcanvas br-15" id="select_useEffects"
+                                                            data-bs-scroll="true" data-bs-backdrop="true">
+                                                            <div class="offcanvas-header mt-2">
+                                                                <div></div>
+                                                                <h1 class="offcanvas-title fs-5">
+                                                                    <%= __('users.newProject.option.useEffects') %>
+                                                                </h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="offcanvas"></button>
+                                                            </div>
+                                                            <div class="offcanvas-body mx-5">
+                                                                <div>
+                                                                    <%
+                                                                        codezip.effects.use.boolean.forEach((item,index)=>
+                                                                        {
+                                                                        %>
+                                                                        <div class="row pt-3 pb-2"
+                                                                            style="border-bottom: 1px solid #bfc9d4;">
+                                                                            <div class="col-4">
+                                                                                <h5>
+                                                                                    <%= __("use_effects."+item) %>
+                                                                                </h5>
+                                                                            </div>
+                                                                            <div class="col-8 row">
+                                                                                <div class="col d-flex dropdown-item">
+                                                                                    <input
+                                                                                        class="useEffects_bool form-check-input bg-darkgray br-circle mx-1"
+                                                                                        type="checkbox"
+                                                                                        id="useEffects-<%= index %>-1">
+                                                                                    <label
+                                                                                        for="useEffects-<%= index %>-1"
+                                                                                        class="flex-fill useEffects_bool-label">
+                                                                                        <h5>
+                                                                                            <%= __("use_effects."+item+".true")
+                                                                                                %>
+                                                                                        </h5>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="col d-flex dropdown-item">
+                                                                                    <input
+                                                                                        class="useEffects_bool form-check-input bg-darkgray br-circle mx-1"
+                                                                                        type="checkbox"
+                                                                                        id="useEffects-<%= index %>-0"
+                                                                                        checked>
+                                                                                    <label
+                                                                                        for="useEffects-<%= index %>-0"
+                                                                                        class="flex-fill useEffects_bool-label">
+                                                                                        <h5>
+                                                                                            <%= __("use_effects."+item+".false")
+                                                                                                %>
+                                                                                        </h5>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% }) %>
+                                                                </div>
+                                                                <!-- Other effects -->
+                                                                <div class="row mt-3">
+                                                                    <div class="col-4">
+                                                                        <h5>
+                                                                            <%= __("use_effects.OtherEffects") %>
+                                                                        </h5>
+                                                                        <h6 style="color: red;">
+                                                                            <%= __("use_effects.중복선택가능") %>
+                                                                        </h6>
+                                                                    </div>
+                                                                    <div class="col-8 row">
+                                                                        <% for(let i=0; i< codezip.effects.use.other;
+                                                                            i++){ %>
+                                                                            <div class="col d-flex dropdown-item">
+                                                                                <input
+                                                                                    class="useEffects_other form-check-input bg-darkgray br-circle mx-1"
+                                                                                    type="checkbox"
+                                                                                    id="useEffects-<%= codezip.effects.use.boolean.length +i %>">
+                                                                                <label
+                                                                                    for="useEffects-<%= codezip.effects.use.boolean.length +i %>"
+                                                                                    class="useEffects_other-label flex-fill">
+                                                                                    <h5>
+                                                                                        <%= __("use_effects."+i) %>
+                                                                                    </h5>
+                                                                                </label>
+                                                                            </div>
+                                                                            <% if(i%2==1){ %>
+                                                                                <div></div>
+                                                                                <% } %>
+                                                                                    <% } %>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="offcanvas-footer text-center my-3">
+                                                                <button type="button"
+                                                                    class="btn-outline-gray bg-gray br-15 p-3 px-5"
+                                                                    data-bs-dismiss="offcanvas">
+                                                                    <%= __('users.newProject.option.btn.확인') %>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 색상 입력 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.color') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <input type="text" class="form-control" name="color" id="color"
+                                                            placeholder="<%= __('inputPlzText') %>">
+                                                    </div>
+                                                    <div class="col col-4" style="color: red;">
+                                                        <%= __("변경을 원할 시 기입해주세요.") %>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 향 입력 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.fragrance') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <input type="text" class="form-control" name="fragrance"
+                                                            id="fragrance" placeholder="<%= __('inputPlzText') %>">
+                                                    </div>
+                                                    <div class="col col-4" style="color: red;">
+                                                        <%= __("변경을 원할 시 기입해주세요.") %>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- 추가사항 입력 -->
+                                                <div class="row mb-5 align-items-center">
+                                                    <div class="col col-2">
+                                                        <h6>
+                                                            <%= __('users.newProject.option.etc') %>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col col-5">
+                                                        <input type="text" class="form-control" name="etc" id="etc"
+                                                            placeholder="<%= __('inputPlzText') %>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex mt-5 justify-content-center">
+                                                    <button id="saveBtn" class="btn col-2 mx-3 p-3 br-15" type="button"
+                                                        onclick="next();">
+                                                        <%= __('users.newProject.option.btn.확인') %>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--  END CONTENT AREA  -->
+
+                <%- include ("../partials/footer.ejs") %>
+
+        </div>
+        <!-- END MAIN CONTAINER -->
+
+        <%- include ("../partials/commonScrpits.ejs") %>
+            <div>
+                <% let useEffects_print="" ; codezip.effects.use.boolean.forEach((item,index)=>{
+                    useEffects_print+= " "+__("use_effects."+item+".false")+"," })
+                    %>
+
+            </div>
+            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+            <script>
+                const option = document.forms[0];
+                const effects = JSON.parse('<%- JSON.stringify(codezip.effects) %>');
+                useEffects_print.innerText = "<%= useEffects_print %>".slice(0, -1)
+
+                productEffectsEtc_check.addEventListener('change', (event) => {
+                    if (event.target.checked) {
+                        option['productEffectsEtc'].hidden = false;
+                    } else {
+                        option['productEffectsEtc'].hidden = true;
+                    }
+                })
+
+                // 제품 효과 추가/제거
+                document.forms[0].getElementsByClassName('productEffects').forEach((item, index) => {
+                    item.addEventListener("change", (e) => {
+                        const obj = option['productEffects'];
+                        const code = effects.product[index] + ',';
+                        let value = obj.value;
+                        let text = document.getElementsByClassName('productEffectsLabel')[index].innerText.trim();
+                        text = " " + text + ",";
+                        const print_place = productEffects_print;
+
+
+                        if (value) print_place.innerHTML += ",";
+                        else print_place.innerHTML = "";
+
+                        if (e.target.checked) {
+                            print_place.innerHTML += text;
+                            obj.value += code;
+                        } else {
+                            print_place.innerHTML = print_place.innerHTML.replace(text, "");
+                            obj.value = obj.value.replace(code, '');
+                        }
+                        print_place.innerHTML = print_place.innerHTML.slice(0, -1);
+                        if (!obj.value) print_place.innerHTML = "<%= __('plzSelectText') %>"
+                    })
+                })
+
+                // 사용감 추가/제거 1
+                document.forms[0].getElementsByClassName('useEffects_bool').forEach((item, index) => {
+                    item.addEventListener("change", (e) => {
+                        const obj = option['useEffects'];
+                        let value = +obj.value;
+                        let text = document.getElementsByClassName('useEffects_bool-label')[index].innerText.trim();
+                        text = " " + text + ",";
+                        const print_place = useEffects_print;
+                        const code = 1 << parseInt(index / 2);
+
+                        let info = item.id.split('-');
+                        let item_bool = parseInt(info.pop())
+                        info.push(item_bool ? '0' : '1');
+                        const opposition = document.getElementById(info.join('-'));
+                        let opposition_index = parseInt(info.pop()) ? index - 1 : index + 1;
+                        let opposition_text = document.getElementsByClassName('useEffects_bool-label')[opposition_index].innerText.trim();
+                        opposition_text = " " + opposition_text + ",";
+
+                        // console.log(opposition_text);
+
+                        print_place.innerHTML += ",";
+
+                        if (e.target.checked) {
+                            opposition.checked = false;
+                            print_place.innerHTML += text;
+                            print_place.innerHTML = print_place.innerHTML.replace(opposition_text, "");
+                            obj.value = item_bool ? value | code : value & code;
+                        } else {
+                            opposition.checked = true;
+                            print_place.innerHTML += opposition_text;
+                            print_place.innerHTML = print_place.innerHTML.replace(text, "");
+                            obj.value = item_bool ? value & code : value | code;
+                        }
+
+                        // console.log(obj.value);
+
+                        print_place.innerHTML = print_place.innerHTML.slice(0, -1);
+                        // if (!+obj.value) print_place.innerHTML = "<%= __('plzSelectText') %>"
+                    })
+                })
+
+                // 사용감 추가/제거 2
+                document.forms[0].getElementsByClassName('useEffects_other').forEach((item, index) => {
+                    item.addEventListener("change", (e) => {
+                        const obj = option['useEffects'];
+                        const code = 1 << effects.use.boolean.length + index;
+                        let value = +obj.value;
+                        let text = document.getElementsByClassName('useEffects_other-label')[index].innerText.trim();
+                        text = " " + text + ",";
+                        const print_place = useEffects_print;
+
+
+                        print_place.innerHTML += ",";
+
+                        if (e.target.checked) {
+                            print_place.innerHTML += text;
+                            obj.value = value + code;
+                        } else {
+                            print_place.innerHTML = print_place.innerHTML.replace(text, "");
+                            obj.value = value - code;
+                        }
+
+                        // console.log(obj.value);
+
+                        print_place.innerHTML = print_place.innerHTML.slice(0, -1);
+                        // if (!+obj.value) print_place.innerHTML = "<%= __('plzSelectText') %>"
+                    })
+                })
+
+                document.forms[0].getElementsByClassName('...').forEach((item, index) => {
+                    item.addEventListener("change", (e) => {
+
+                    })
+                })
+
+                function next() {
+                    // UI 확인용
+                    location.href = '<%= codezip.url.users.newProject._4 %>';
+                    return;
+
+                    fetch(option.action, {
+                        method: "post",
+                        body: new URLSearchParams(new FormData(option))
+                    }).then(res => {
+                        if (res.ok) {
+                            alert("<%= __('users.msg.SuccessSave') %>");
+                            window.location.href = res.url;
+                            return;
+                        }
+                        else return alert("<%= __('users.msg.FailSave') %>");
+                    })
+                }
+
+            </script>
+            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

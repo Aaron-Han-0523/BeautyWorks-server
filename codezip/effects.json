@@ -1,0 +1,44 @@
+{
+    "product": [
+        "PDE00",
+        "PDE01",
+        "PDE02",
+        "PDE03",
+        "PDE04",
+        "PDE05",
+        "PDE06",
+        "PDE07",
+        "PDE08",
+        "PDE09"
+    ],
+    "suncare": [
+        "SCE00",
+        "SCE01"
+    ],
+    "use": {
+        "boolean": [
+            "Base",
+            "Absorption",
+            "Spreadability",
+            "Formula"
+        ],
+        "other": 2
+    },
+    "ingredient": [
+        "IE00",
+        "IE01",
+        "IE02",
+        "IE03",
+        "IE04",
+        "IE05",
+        "IE06",
+        "IE07",
+        "IE08",
+        "IE09",
+        "IE10",
+        "IE11",
+        "IE12",
+        "IE13",
+        "IE14"
+    ]
+}

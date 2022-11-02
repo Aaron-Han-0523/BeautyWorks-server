@@ -166,6 +166,11 @@
                         moq.onsubmit = async (e) => {
                             e.preventDefault();
 
+                            // UI 확인용
+                            location.href = '<%= codezip.url.users.newProject._1 %>'; 
+                            return;
+                            //
+
                             let response = await fetch(moq.action, {
                                 method: 'POST',
                                 body: new URLSearchParams(new FormData(moq))
