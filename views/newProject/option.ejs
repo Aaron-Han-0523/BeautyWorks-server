@@ -3,8 +3,8 @@
 
 <head>
     <%- include ("../partials/header.ejs") %>
-        <% const numberOfProduct=codezip.numberOfProduct; %>
-            <% const country_codes=codezip.country.codes; %>
+        <% let useEffects_print="" ; codezip.effects.use.boolean.forEach((item,index)=>{
+            useEffects_print+= " "+__("use_effects."+item+".false")+"," })%>
 </head>
 
 <body class="layout-boxed">
@@ -349,7 +349,7 @@
                                                             id="useEffects_print" data-bs-toggle="offcanvas"
                                                             data-bs-target="#select_useEffects"
                                                             aria-controls="select_useEffects">
-                                                            <%= __('plzSelectText') %>
+                                                            <%= useEffects_print.slice(0, -1) %>
                                                         </button>
                                                         <!-- 사용감 모달창 -->
                                                         <div class="offcanvas br-15" id="select_useEffects"
@@ -525,17 +525,11 @@
         <!-- END MAIN CONTAINER -->
 
         <%- include ("../partials/commonScrpits.ejs") %>
-            <div>
-                <% let useEffects_print="" ; codezip.effects.use.boolean.forEach((item,index)=>{
-                    useEffects_print+= " "+__("use_effects."+item+".false")+"," })
-                    %>
 
-            </div>
             <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
             <script>
                 const option = document.forms[0];
                 const effects = JSON.parse('<%- JSON.stringify(codezip.effects) %>');
-                useEffects_print.innerText = "<%= useEffects_print %>".slice(0, -1)
 
                 productEffectsEtc_check.addEventListener('change', (event) => {
                     if (event.target.checked) {
@@ -648,7 +642,7 @@
 
                 function next() {
                     // UI 확인용
-                    location.href = '<%= codezip.url.users.newProject._4 %>';
+                    location.replace('<%= codezip.url.users.newProject._4 %>');
                     return;
 
                     fetch(option.action, {

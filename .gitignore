@@ -3,6 +3,8 @@ config/
 test.js
 uploads
 
+.vscode/
+
 # Logs
 logs
 *.log

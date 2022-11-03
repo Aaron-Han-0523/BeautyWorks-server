@@ -9,7 +9,10 @@
         "myPage": "/users/myPage",
         "myAccount": "/users/myAccount",
         "dashboard": "/users/Dashboard",
-        "myProject": "/users/myProject",
+        "myProject": {
+            "main": "/users/myProject",
+            "dashboard": "/users/myProject/dashboard"
+        },
         "newProject": {
             "main": "/users/newProject",
             "_0": "/users/newProject/moq",

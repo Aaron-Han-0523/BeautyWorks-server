@@ -287,7 +287,7 @@
                                 </label>
 
                                 <input type="radio" class="btn-check" name="koreaCertification"
-                                  id="koreaCertification_false" autocomplete="off" value="">
+                                  id="koreaCertification_false" autocomplete="off" value="" checked>
                                 <label class="col-5 btn btn-outline-gray my-0" for="koreaCertification_false">
                                   <%= __('users.newProject.basic.btn.no') %>
                                 </label>
@@ -310,7 +310,7 @@
                                 </label>
 
                                 <input type="radio" class="btn-check" name="inStock" id="inStock_false"
-                                  autocomplete="off" value="">
+                                  autocomplete="off" value="" checked>
                                 <label class="col-5 btn btn-outline-gray my-0" for="inStock_false">
                                   <%= __('users.newProject.basic.btn.no') %>
                                 </label>
@@ -508,9 +508,9 @@
             }
 
             function next() {
-              
+
               // UI 확인용
-              location.href = '<%= codezip.url.users.newProject._3 %>';
+              location.replace('<%= codezip.url.users.newProject._3 %>');
               return;
 
               fetch(basic.action, {
