@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 exports.login = async function (req, res, next) {
     const body = req.body;
 
-    console.log(body)
+    // console.log(body)
     console.log("try", body.email, "login by", req.ip);
 
     const user = await usersService.getUser(body.email)
@@ -20,9 +20,9 @@ exports.login = async function (req, res, next) {
 
     if (user) {
         if (user.password == hashedPassword) {
-
+            console.log(body.email, "connect");
             delete user.password;
-            req.session.user = user
+            req.session.user = user;
 
             //세션 스토어가 이루어진 후 redirect를 해야함.
             req.session.save(() => {

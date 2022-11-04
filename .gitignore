@@ -1,3 +1,5 @@
+.sequelizerc
+ecosystem.config.js
 orm.js
 config/
 test.js
