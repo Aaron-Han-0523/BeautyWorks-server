@@ -35,14 +35,7 @@
             </div>
         </div>
 
-        <div class="ms-3 mb-3">
-            <h6><a href="<%= codezip.url.users.signOut %>">
-                    <%= __(' LogOut') %>
-                                                </a>
-                        </h6>
-                    </div>
-
-                    <ul class="list-unstyled menu-categories" id="accordionExample">
+        <ul class="list-unstyled menu-categories" id="accordionExample">
                         <li class="menu active"></li>
 
                         <div class="mb-3">
@@ -57,149 +50,163 @@
                                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                         </svg>
                                         <span>
-                                            <%= __('Dashboard') %>
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
+                                            <%= __(' Dashboard') %>
+                                                </span>
+                    </div>
+                    </a>
+                    </li>
+                </div>
+
+
+                <div class="ms-3 mt-3">
+                    <h5>
+                        <%= __('Project') %>
+                    </h5>
+                </div>
+                <li class="menu">
+                    <a href="<%= codezip.url.users.myProject.main %>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>
+                                <%= __('MyProject') %>
+                            </span>
                         </div>
-
-
-                        <div class="ms-3 mt-3">
-                            <h5>
-                                <%= __('Project') %>
-                            </h5>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<%= codezip.url.users.newProject.main %>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-file-plus">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="12" y1="18" x2="12" y2="12"></line>
+                                <line x1="9" y1="15" x2="15" y2="15"></line>
+                            </svg>
+                            <span>
+                                <%= __('NewProject') %>
+                            </span>
                         </div>
-                        <li class="menu">
-                            <a href="<%= codezip.url.users.myProject.main %>" aria-expanded="false" class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-file-text">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                        <polyline points="14 2 14 8 20 8"></polyline>
-                                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                                        <polyline points="10 9 9 9 8 9"></polyline>
-                                    </svg>
-                                    <span>
-                                        <%= __('MyProject') %>
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="menu">
-                            <a href="<%= codezip.url.users.newProject.main %>" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-file-plus">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                        <polyline points="14 2 14 8 20 8"></polyline>
-                                        <line x1="12" y1="18" x2="12" y2="12"></line>
-                                        <line x1="9" y1="15" x2="15" y2="15"></line>
-                                    </svg>
-                                    <span>
-                                        <%= __('NewProject') %>
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
+                    </a>
+                </li>
 
 
-                        <div class="ms-3 mt-3">
-                            <h5>
-                                <%= __('Customizing') %>
-                            </h5>
+                <div class="ms-3 mt-3">
+                    <h5>
+                        <%= __('Customizing') %>
+                    </h5>
+                </div>
+                <li class="menu">
+                    <a href="<%= codezip.url.users.contents %>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-box">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
+                            <span>
+                                <%= __('Contents') %>
+                            </span>
                         </div>
-                        <li class="menu">
-                            <a href="<%= codezip.url.users.contents %>" aria-expanded="false" class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-box">
-                                        <path
-                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                                        <line x1="12" y1="22.08" x2="12" y2="12" />
-                                    </svg>
-                                    <span>
-                                        <%= __('Contents') %>
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="menu">
-                            <a href="<%= codezip.url.users.container %>" aria-expanded="false" class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-package">
-                                        <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
-                                        <path
-                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                                        <line x1="12" y1="22.08" x2="12" y2="12" />
-                                    </svg>
-                                    <span>
-                                        <%= __('Container') %>
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
-
-
-                        <div class="ms-3 mt-3">
-                            <h5>
-                                <%= __('Service') %>
-                            </h5>
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="<%= codezip.url.users.container %>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-package">
+                                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
+                            <span>
+                                <%= __('Container') %>
+                            </span>
                         </div>
-                        <li class="menu">
-                            <a href="<%= codezip.url.users.ingredientData %>" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-inbox">
-                                        <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
-                                        <path
-                                            d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
-                                    </svg>
-                                    <span>
-                                        <%= __('IngredientData') %>
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
+                    </a>
+                </li>
 
 
-                        <div class="ms-3 mt-3">
-                            <h5>
-                                <%= __('News') %>
-                            </h5>
+                <div class="ms-3 mt-3">
+                    <h5>
+                        <%= __('Service') %>
+                    </h5>
+                </div>
+                <li class="menu">
+                    <a href="<%= codezip.url.users.ingredientData %>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-inbox">
+                                <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+                                <path
+                                    d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+                            </svg>
+                            <span>
+                                <%= __('IngredientData') %>
+                            </span>
                         </div>
-                        <li class="menu">
-                            <a href="<%= codezip.url.users.community.main %>" aria-expanded="false"
-                                class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-users">
-                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="9" cy="7" r="4"></circle>
-                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                    </svg>
-                                    <span>
-                                        <%= __('Community') %>
-                                    </span>
-                                </div>
-                            </a>
-                        </li>
+                    </a>
+                </li>
 
 
-                    </ul>
+                <div class="ms-3 mt-3">
+                    <h5>
+                        <%= __('News') %>
+                    </h5>
+                </div>
+                <li class="menu">
+                    <a href="<%= codezip.url.users.community.main %>" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>
+                                <%= __('Community') %>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu my-5 h6">
+                    <a href="<%= codezip.url.users.signOut %>" aria-expanded="false" class="dropdown-toggle ps-0">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" stroke="currentColor" width="24px" height="24px" stroke-width="2"
+                                stroke-linecap="round" viewBox="0 0 76 85"
+                                >
+                                <path
+                                    d=" M4.116826,78.265404   C4.013828,55.503761 4.004358,33.174091 4.001761,10.844418   C4.001094,5.110954 5.633172,3.164078 11.493685,3.054947   C21.821774,2.862622 32.168144,2.702272 42.482834,3.120762   C48.066319,3.347296 50.111496,4.964166 50.024464,10.953341   C49.920639,18.097635 49.999989,25.244595 49.999989,32.757912   C48.379898,32.856651 46.978878,32.942039 44.999851,33.062656   C44.999851,26.376459 44.834988,19.922174 45.064762,13.481969   C45.192432,9.903473 43.832859,8.870009 40.404411,8.939007   C31.409502,9.120029 22.407000,9.094803 13.410821,8.948723   C10.272186,8.897758 8.923581,9.773623 8.943764,13.164448   C9.059805,32.660618 9.052705,52.158115 8.947888,71.654411   C8.930679,74.855194 9.904271,76.115456 13.229795,76.056175   C22.392075,75.892853 31.560974,75.895958 40.723400,76.055168   C43.999668,76.112099 45.147400,74.955482 45.053230,71.699997   C44.870495,65.382965 44.999775,59.056904 44.999775,52.369476   C46.643154,52.369476 48.139885,52.369476 49.998058,52.369476   C49.998058,60.263142 50.100910,68.066177 49.959629,75.864799   C49.874367,80.571159 45.989986,81.757523 42.545216,81.873688   C32.225281,82.221680 21.878883,82.206718 11.559663,81.848320   C9.077263,81.762108 6.660084,79.797905 4.116826,78.265404  z" />
+                                <path
+                                    d=" M59.014618,26.045418   C61.348267,27.193729 63.484882,28.141630 65.157600,29.615877   C67.892479,32.026257 70.339447,34.765663 72.881897,37.391415   C75.979965,40.590984 76.047028,44.575195 72.781273,47.673988   C68.716423,51.531021 64.464005,55.191494 60.245110,58.882576   C59.964554,59.128029 59.282509,58.914581 57.212154,58.914581   C58.536896,56.183857 59.391861,53.891689 60.689957,51.886368   C62.151241,49.628956 64.011978,47.630116 66.067307,45.057789   C50.499809,45.057789 35.586002,45.057789 20.322596,45.057789   C20.176996,43.435238 20.051184,42.033199 19.889898,40.235855   C35.192932,40.235855 50.269775,40.235855 66.303703,40.235855   C63.861748,37.226780 61.647526,35.077080 60.184765,32.500732   C59.138016,30.657087 59.098286,28.241688 59.014618,26.045418  z" />
+                            </svg>
+                            <%= __(' Log out') %>
+                        </div>
+                    </a>
+                </li>
+
+
+                </ul>
     </nav>
 </div>
 <!--  END SIDEBAR  -->

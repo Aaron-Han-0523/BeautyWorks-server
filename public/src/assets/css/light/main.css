@@ -3299,13 +3299,13 @@ fieldset:disabled .btn {
 }
 
 .nav-link {
-  color: #3b3f5c;
+  color: gray;
 }
 .nav-link:hover {
-  color: #515365;
+  color: black;
 }
 .nav-link:hover svg {
-  color: #515365;
+  color: black;
 }
 
 .btn-toolbar {

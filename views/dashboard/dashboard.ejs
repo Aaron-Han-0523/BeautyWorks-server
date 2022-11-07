@@ -13,365 +13,366 @@
   <%- include ("../partials/loader.ejs") %>
 
     <%- include ("../partials/client-nav.ejs") %>
-      <%- include ("../partials/chatMark.ejs") %>
 
-        <!--  BEGIN MAIN CONTAINER  -->
-        <div class="main-container" id="container">
+      <!--  BEGIN MAIN CONTAINER  -->
+      <div class="main-container" id="container">
 
-          <div class="overlay"></div>
-          <div class="search-overlay"></div>
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
 
-          <%- include ("../partials/client-sidebar.ejs") %>
+        <%- include ("../partials/client-sidebar.ejs") %>
 
-            <!--  BEGIN CONTENT AREA  -->
-            <div id="content" class="main-content">
-              <div class="layout-px-spacing">
+          <!--  BEGIN CONTENT AREA  -->
+          <div id="content" class="main-content">
+            <div class="layout-px-spacing">
 
-                <div class="middle-content container-xxl p-0">
+              <div class="middle-content container-xxl p-0">
 
-                  <!-- BREADCRUMB -->
-                  <div class="row px-3">
-                    <div class="breadcrumb align-items-end d-flex pt-3 br-20">
-                      <div class="p-1 col-3">
-                        <h5><strong>
-                            <%= __('Dashboard') %>
-                          </strong></h5>
-                      </div>
+                <!-- BREADCRUMB -->
+                <div class="row px-3">
+                  <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+                    <div class="p-1 col-3">
+                      <h5><strong>
+                          <%= __('Dashboard') %>
+                        </strong></h5>
                     </div>
                   </div>
-                  <!-- CONTENT AREA -->
-                  <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                </div>
+                <!-- CONTENT AREA -->
+                <div class="row layout-top-spacing">
+                  <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
-                      <!-- Progress -->
-                      <div class="widget-content widget-content-area br-20 px-4">
-                        <div class="form-group ms-3">
-                          <div class="row">
-                            <div class="col-6 col-md-4">
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.Progress') %>
-                                </strong></h5>
+                    <!-- Progress -->
+                    <div class="widget-content widget-content-area br-20 px-4">
+                      <div class="form-group ms-3">
+                        <div class="row">
+                          <div class="col-6 col-md-4">
+                            <h5><strong>
+                                <%= __('users.dashboard.header.Progress') %>
+                              </strong></h5>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-12 col-md-12">
+                            <h6>1. My Suncream</h6>
+                            <%- include("../partials/progressbar/"+1+".ejs") %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-12">
+                            <h6>2. My Suncream</h6>
+                            <%- include("../partials/progressbar/"+2+".ejs") %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-12">
+                            <h6>3. My Suncream</h6>
+                            <%- include("../partials/progressbar/"+3+".ejs") %>
+                          </div>
+                        </div>
+
+                        <div class="row text-end">
+                          <a href="<%= codezip.url.users.myProject.main %>">
+                            <i class="fa-solid fa-chevron-right"></i>
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <!-- 임시 저장한 Progress -->
+                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                      <div class="form-group ms-3">
+                        <div class="row">
+                          <div class="col-6 col-md-4">
+                            <h5><strong>
+                                <%= __('users.dashboard.header.TempProgress') %>
+                              </strong></h5>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-12 col-md-12">
+                            <h6>1. My Suncream</h6>
+                            <%- include("../partials/temp_progressbar/"+1+".ejs") %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-12">
+                            <h6>1. My Suncream</h6>
+                            <%- include("../partials/temp_progressbar/"+2+".ejs") %>
+                          </div>
+                        </div>
+
+                        <div class="row text-end">
+                          <a href="<%= codezip.url.users.myProject.main %>">
+                            <i class="fa-solid fa-chevron-right"></i>
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <!-- Completed Project -->
+                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                      <div class="form-group mx-3">
+                        <div class="row">
+                          <div class="col-6 col-md-4">
+                            <h5><strong>
+                                <%= __('users.dashboard.header.CompletedProject') %>
+                              </strong></h5>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="swiper-container">
+                            <div class="swiper-wrapper">
+
+                              <div class="swiper-slide">
+                                <div>
+                                  <img src="https://ktsmemo.cafe24.com/p/0740.jpg">
+                                  <div class="row mt-3 justify-content-center">
+                                    <p>헤라 셀 에센스<br />
+                                      바이옴 플러스 150ml<br />
+                                      Total 발주 수량 : 100000<br />
+                                      최근 발주 날짜: 2022.10.04</p>
+                                    <div><button class="col-12 btn" type="button">REORDER</button></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="swiper-slide">
+                                <div>
+                                  <img src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
+                                  <div class="row mt-3 justify-content-center">
+                                    <p>헤라 셀 에센스<br />
+                                      바이옴 플러스 150ml<br />
+                                      Total 발주 수량 : 100000<br />
+                                      최근 발주 날짜: 2022.10.04</p>
+                                    <div><button class="col-12 btn" type="button">REORDER</button></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0553.jpg"></div>
+                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"></div>
+                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0099.jpg"></div>
+                              <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0716.jpg"></div>
+                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0786.jpg"></div>
+                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"></div>
+                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0742.jpg"></div>
+                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0698.jpg"></div>
+                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0095.jpg"></div>
+                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0315.jpg"></div>
+                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0625.jpg"></div>
+                              <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0289.jpg"></div>
+                              <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0646.jpg"></div>
+                              <div class="swiper-slide">- 끝 -</div>
                             </div>
+                          </div>
+
+                          <!-- 인디케이터 -->
+                          <!-- <div class="swiper-indicator"></div> -->
+
+                          <!-- 네비게이션 -->
+                          <!-- 이전 버튼 -->
+                          <div class="swiper-btn-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                          <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+                          <div class="swiper-btn-next"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="row d-flex">
+                      <!-- 추천 프로젝트 -->
+                      <div class="col-6">
+                        <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                          <div class="row">
+                            <h5>
+                              <%= __('users.dashboard.header.RemommendedProject') %>
+                            </h5>
                           </div>
                           <div class="row mt-3">
-                            <div class="col-12 col-md-12">
-                              <h6>1. My Suncream</h6>
-                              <%- include("../partials/progressbar/"+1+".ejs") %>
+                            <div class="col">
+                              <div class="preview">
+                                <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
+                              </div>
+                              <div class="row mt-3 justify-content-center text-center">
+                                <p>Top / 소분류명<br />
+                                  스킨/토너<br />
+                                  대한민국 2021 award</p>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="preview">
+                                <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
+                              </div>
+                              <div class="row mt-3 justify-content-center text-center">
+                                <p>Top / 소분류명<br />
+                                  스킨/토너<br />
+                                  대한민국 2021 award</p>
+                              </div>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-12 col-md-12">
-                              <h6>2. My Suncream</h6>
-                              <%- include("../partials/progressbar/"+2+".ejs") %>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-12 col-md-12">
-                              <h6>3. My Suncream</h6>
-                              <%- include("../partials/progressbar/"+3+".ejs") %>
-                            </div>
-                          </div>
-
-                          <div class="row text-end">
-                            <a href="<%= codezip.url.users.myProject.main %>">
+                          <div class="text-end">
+                            <a href="<%= codezip.url.users.contents %>">
                               <i class="fa-solid fa-chevron-right"></i>
                             </a>
                           </div>
-
                         </div>
                       </div>
-
-                      <!-- 임시 저장한 Progress -->
-                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                        <div class="form-group ms-3">
-                          <div class="row">
-                            <div class="col-6 col-md-4">
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.TempProgress') %>
-                                </strong></h5>
+                      <!-- 추천 성분 -->
+                      <div class="col-6">
+                        <div class="widget-content widget-content-area br-20 px-0 mt-3 align-items-start flex-column"
+                          style="height: 95%;">
+                          <div class="d-flex align-items-start flex-column mb-3 w-100 h-100 p-0">
+                            <div class="row header px-4">
+                              <h2>
+                                <%= __('users.dashboard.header.RemommendedIngredient') %>
+                              </h2>
                             </div>
-                          </div>
-                          <div class="row mt-3">
-                            <div class="col-12 col-md-12">
-                              <h6>1. My Suncream</h6>
-                              <%- include("../partials/temp_progressbar/"+1+".ejs") %>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-12 col-md-12">
-                              <h6>1. My Suncream</h6>
-                              <%- include("../partials/temp_progressbar/"+2+".ejs") %>
-                            </div>
-                          </div>
-
-                          <div class="row text-end">
-                            <a href="<%= codezip.url.users.myProject.main %>">
-                              <i class="fa-solid fa-chevron-right"></i>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-
-                      <!-- Completed Project -->
-                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                        <div class="form-group mx-3">
-                          <div class="row">
-                            <div class="col-6 col-md-4">
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.CompletedProject') %>
-                                </strong></h5>
-                            </div>
-                          </div>
-                          <div class="row mt-3">
-                            <div class="swiper-container">
-                              <div class="swiper-wrapper">
-
-                                <div class="swiper-slide">
-                                  <div>
-                                    <img src="https://ktsmemo.cafe24.com/p/0740.jpg">
-                                    <div class="row mt-3 justify-content-center">
-                                      <p>헤라 셀 에센스<br />
-                                        바이옴 플러스 150ml<br />
-                                        Total 발주 수량 : 100000<br />
-                                        최근 발주 날짜: 2022.10.04</p>
-                                      <div><button class="col-12 btn" type="button">REORDER</button></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="swiper-slide">
-                                  <div>
-                                    <img src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
-                                    <div class="row mt-3 justify-content-center">
-                                      <p>헤라 셀 에센스<br />
-                                        바이옴 플러스 150ml<br />
-                                        Total 발주 수량 : 100000<br />
-                                        최근 발주 날짜: 2022.10.04</p>
-                                      <div><button class="col-12 btn" type="button">REORDER</button></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0553.jpg"></div>
-                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"></div>
-                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0099.jpg"></div>
-                                <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0716.jpg"></div>
-                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0786.jpg"></div>
-                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"></div>
-                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0742.jpg"></div>
-                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0698.jpg"></div>
-                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0095.jpg"></div>
-                                <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0315.jpg"></div>
-                                <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0625.jpg"></div>
-                                <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0289.jpg"></div>
-                                <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0646.jpg"></div>
-                                <div class="swiper-slide">- 끝 -</div>
+                            <div class="row mt-3 w-100 mx-0">
+                              <div class="table-responsive p-0">
+                                <table class="table table-no-space table-bordered text-break">
+                                  <thead class="text-center">
+                                    <th>
+                                      <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
+                                    </th>
+                                    <th>
+                                      <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
+                                    </th>
+                                    <th>
+                                      <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
+                                    </th>
+                                  </thead>
+                                  <tbody class="table-group-divider">
+                                    <tr>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                               </div>
                             </div>
-
-                            <!-- 인디케이터 -->
-                            <!-- <div class="swiper-indicator"></div> -->
-
-                            <!-- 네비게이션 -->
-                            <!-- 이전 버튼 -->
-                            <div class="swiper-btn-prev"><i class="fa-solid fa-chevron-left"></i></div>
-                            <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                            <div class="swiper-btn-next"><i class="fa-solid fa-chevron-right"></i></div>
-
-                          </div>
-
-                        </div>
-                      </div>
-
-                      <div class="row d-flex">
-                        <!-- 추천 프로젝트 -->
-                        <div class="col-6">
-                          <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                            <div class="row">
-                              <h5>
-                                <%= __('users.dashboard.header.RemommendedProject') %>
-                              </h5>
-                            </div>
-                            <div class="row mt-3">
-                              <div class="col">
-                                <div class="preview">
-                                  <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
-                                </div>
-                                <div class="row mt-3 justify-content-center text-center">
-                                  <p>Top / 소분류명<br />
-                                    스킨/토너<br />
-                                    대한민국 2021 award</p>
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="preview">
-                                  <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
-                                </div>
-                                <div class="row mt-3 justify-content-center text-center">
-                                  <p>Top / 소분류명<br />
-                                    스킨/토너<br />
-                                    대한민국 2021 award</p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="text-end">
-                              <a href="<%= codezip.url.users.contents %>">
+                            <div class="text-end px-4 mt-auto w-100">
+                              <a href="<%= codezip.url.users.ingredientData %>">
                                 <i class="fa-solid fa-chevron-right"></i>
                               </a>
                             </div>
                           </div>
                         </div>
-                        <!-- 추천 성분 -->
-                        <div class="col-6">
-                          <div class="widget-content widget-content-area br-20 px-0 mt-3 align-items-start flex-column"
-                            style="height: 95%;">
-                            <div class="d-flex align-items-start flex-column mb-3 w-100 h-100 p-0">
-                              <div class="row header px-4">
-                                <h2>
-                                  <%= __('users.dashboard.header.RemommendedIngredient') %>
-                                </h2>
-                              </div>
-                              <div class="row mt-3 w-100 mx-0">
-                                <div class="table-responsive p-0">
-                                  <table class="table table-no-space table-bordered text-break">
-                                    <thead class="text-center">
-                                      <th>
-                                        <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
-                                      </th>
-                                      <th>
-                                        <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
-                                      </th>
-                                      <th>
-                                        <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
-                                      </th>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                      <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                      <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                      <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                              <div class="text-end px-4 mt-auto w-100">
-                                <a href="<%= codezip.url.users.ingredientData %>">
-                                  <i class="fa-solid fa-chevron-right"></i>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <!-- News & Community -->
-                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                        <!-- News -->
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-6 col-md-4">
-                              <h5><strong>
-                                  <%= __('users.community.header.News') %>
-                                </strong></h5>
-                            </div>
-                          </div>
-                          <!-- list -->
-                          <div class="widget-content widget-content-area br-20 p-2 mt-2">
-                            <div class="my-2">
-                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                                <h6 class="m-1">
-                                  title
-                                </h6>
-                              </button>
-                            </div>
-                            <div class="my-2">
-                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                                <h6 class="m-1">
-                                  title
-                                </h6>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Community -->
-                        <div class="form-group mt-3">
-                          <div class="row">
-                            <div class="col-6 col-md-4">
-                              <h5><strong>
-                                  <%= __('users.community.header.Community') %>
-                                </strong></h5>
-                            </div>
-                          </div>
-                          <!-- list -->
-                          <div class="widget-content widget-content-area br-20 p-2 mt-2">
-                            <div class="my-2">
-                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                                <h6 class="m-1">
-                                  title
-                                </h6>
-                              </button>
-                            </div>
-                            <div class="my-2">
-                              <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                                <h6 class="m-1">
-                                  title
-                                </h6>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-
                       </div>
                     </div>
 
+
+                    <!-- News & Community -->
+                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                      <!-- News -->
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-6 col-md-4">
+                            <h5><strong>
+                                <%= __('users.community.header.News') %>
+                              </strong></h5>
+                          </div>
+                        </div>
+                        <!-- list -->
+                        <div class="widget-content widget-content-area br-20 p-2 mt-2">
+                          <div class="my-2">
+                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                              <h6 class="m-1">
+                                title
+                              </h6>
+                            </button>
+                          </div>
+                          <div class="my-2">
+                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                              <h6 class="m-1">
+                                title
+                              </h6>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Community -->
+                      <div class="form-group mt-3">
+                        <div class="row">
+                          <div class="col-6 col-md-4">
+                            <h5><strong>
+                                <%= __('users.community.header.Community') %>
+                              </strong></h5>
+                          </div>
+                        </div>
+                        <!-- list -->
+                        <div class="widget-content widget-content-area br-20 p-2 mt-2">
+                          <div class="my-2">
+                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                              <h6 class="m-1">
+                                title
+                              </h6>
+                            </button>
+                          </div>
+                          <div class="my-2">
+                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
+                              <h6 class="m-1">
+                                title
+                              </h6>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
+
                 </div>
               </div>
-              <!--  END CONTENT AREA  -->
-
-              <%- include ("../partials/footer.ejs") %>
-
             </div>
-            <!-- END MAIN CONTAINER -->
+            <!--  END CONTENT AREA  -->
 
-            <%- include ("../partials/commonScrpits.ejs") %>
+            <%- include ("../partials/footer.ejs") %>
 
-              <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-              <script>
-                let _ = new Swiper('.swiper-container', {
+          </div>
+          <!-- END MAIN CONTAINER -->
 
-                  slidesPerView: 4, // 동시에 보여줄 슬라이드 갯수
-                  spaceBetween: 10, // 슬라이드간 간격
-                  slidesPerGroup: 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+          <%- include ("../partials/commonScrpits.ejs") %>
 
-                  // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-                  // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-                  loopFillGroupWithBlank: true,
+            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+            <script>
+              let _ = new Swiper('.swiper-container', {
 
-                  loop: true, // 무한 반복
+                slidesPerView: 4, // 동시에 보여줄 슬라이드 갯수
+                spaceBetween: 10, // 슬라이드간 간격
+                slidesPerGroup: 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 
-                  pagination: { // 페이징
-                    el: '.swiper-indicator',
-                    clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-                  },
-                  navigation: { // 네비게이션
-                    nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
-                    prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
-                  }
-                });
-              </script>
-              <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+                // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+                loopFillGroupWithBlank: true,
+
+                loop: true, // 무한 반복
+
+                pagination: { // 페이징
+                  el: '.swiper-indicator',
+                  clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+                },
+                navigation: { // 네비게이션
+                  nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
+                  prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
+                }
+              });
+            </script>
+            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+            <%# include ("../partials/chatMark.ejs") %>
+
 </body>
 
 </html>

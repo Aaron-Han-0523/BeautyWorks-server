@@ -573,5 +573,9 @@
 	"users.newProject.order.이메일.warning": "",
 	"users.newProject.order.msg.confirm": "샘플 주문이 완료되었습니다.",
 	"btn.확인": "확인",
-	"MY PROJECT": "MY PROJECT"
+	"MY PROJECT": "MY PROJECT",
+	" Dashboard": " Dashboard",
+	" Project": " Project",
+	"Main": "Main",
+	" Main": " Main"
 }

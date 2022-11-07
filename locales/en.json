@@ -473,5 +473,8 @@
 	"users.newProject.order.head.warning": "users.newProject.order.head.warning",
 	"users.newProject.order.head.info": "users.newProject.order.head.info",
 	"users.newProject.order.출시국가": "users.newProject.order.출시국가",
-	"users.newProject.order.btn.배송 신청": "users.newProject.order.btn.배송 신청"
+	"users.newProject.order.btn.배송 신청": "users.newProject.order.btn.배송 신청",
+	" Main": " Main",
+	" Dashboard": " Dashboard",
+	" Log out": " Log out"
 }
