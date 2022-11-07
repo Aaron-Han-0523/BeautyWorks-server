@@ -38,6 +38,17 @@
                 "delete": "/users/community/reply",
                 "like": "/users/community/reply/like"
             }
+        },
+        "progress_icon": {
+            "_0": "/images/progress_icon/0.png",
+            "_1": "/images/progress_icon/1.png",
+            "_2": "/images/progress_icon/2.png",
+            "_3": "/images/progress_icon/3.png",
+            "_4": "/images/progress_icon/4.png",
+            "_5": "/images/progress_icon/5.png",
+            "_6": "/images/progress_icon/6.png",
+            "_7": "/images/progress_icon/7.png",
+            "_8": "/images/progress_icon/8.png"
         }
     },
     "admin": {}

@@ -7,6 +7,43 @@ body {
     font-family: 'Poppins';
 }
 
+:root {
+    --BW-blue: rgb(0, 129, 226);
+    --BW-progress-0: rgb(165, 218, 255);
+    --BW-progress-1: rgb(165, 218, 255);
+    --BW-progress-2: rgb(165, 218, 255);
+    --BW-progress-3: rgb(102, 171, 255);
+    --BW-progress-4: rgb(123, 129, 255);
+    --BW-progress-5: rgb(123, 129, 255);
+    --BW-progress-6: rgb(123, 129, 255);
+    --BW-progress-7: rgb(199, 115, 255);
+    --BW-progress-8: rgb(199, 115, 255);
+    --BW-progress-group-0: rgb(165, 218, 255);
+    --BW-progress-group-1: rgb(102, 171, 255);
+    --BW-progress-group-2: rgb(123, 129, 255);
+    --BW-progress-group-3: rgb(199, 115, 255);
+    --BW-progress-default: rgb(228, 228, 228);
+}
+
+/***********************/
+/*      nav bar        */
+/***********************/
+.header-container {
+    background: #fff;
+    z-index: 1030;
+    position: fixed;
+    top: 0;
+    /* margin-top: 10px; */
+    right: 0;
+    left: 0px;
+    -webkit-transition: 0.3s left, 0s padding;
+    transition: 0.3s left, 0s padding;
+    backdrop-filter: blur(31px);
+    padding: 11px 20px 11px 16px;
+    height: 60px;
+    width: 100%;
+}
+
 .navbar-item svg,
 .navbar-item img {
     width: 30px;
@@ -18,6 +55,9 @@ body {
     height: 40px;
 }
 
+/************************/
+/*      nav bar end     */
+/************************/
 @media (min-width: 1400px) {
 
     .container,
@@ -45,6 +85,10 @@ body {
     /* box-shadow: 0 6px 10px 0 rgba(255, 255, 255, 0.14), 0 1px 18px 0 rgba(255, 255, 255, 0.12), 0 3px 5px -1px rgba(255, 255, 255, 0.2); */
     /* background-color: rgba(224, 230, 237, 0.9) !important; */
     /* border: 1px solid #e0e6ed; */
+}
+
+.main-menu {
+    color: var(--BW-blue);
 }
 
 .br-circle {
@@ -86,12 +130,6 @@ body {
     background: #fff;
     padding: 0px 8px 0px;
     border: 1px solid #e0e6ed;
-}
-
-.widget-content-area {
-    border: 1px solid #e0e6ed;
-    box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
-    background-color: #fff;
 }
 
 .file .btn {
@@ -174,21 +212,98 @@ h6 {
     margin-bottom: 0;
 }
 
+ul div.main-menu h5{
+    color: rgb(51, 51, 51);
+}
+
+h5 {
+    color: rgb(102, 102, 102);
+}
+
 .preview>img {
     width: 100%;
     height: 100%;
 }
 
 /************************/
-/*      step bar        */
+/*      progress        */
 /************************/
+.progress-card-name {
+    margin-top: 5px;
+    padding-left: 2vw;
+}
+
+.progress-card-body {
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.progress-card-img {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.progress-card-img img {
+    width: 100px;
+    height: 100px;
+}
+
+.progress-0 {
+    background-color: var(--BW-progress-0);
+}
+
+.progress-1 {
+    background-color: var(--BW-progress-1);
+}
+
+.progress-2 {
+    background-color: var(--BW-progress-2);
+}
+
+.progress-3 {
+    background-color: var(--BW-progress-3);
+}
+
+.progress-4 {
+    background-color: var(--BW-progress-4);
+}
+
+.progress-5 {
+    background-color: var(--BW-progress-5);
+}
+
+.progress-6 {
+    background-color: var(--BW-progress-6);
+}
+
+.progress-7 {
+    background-color: var(--BW-progress-7);
+}
+
+.progress-8 {
+    background-color: var(--BW-progress-8);
+}
+
+.progress-card {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+}
+
 .stepper-wrapper {
-    font-family: Arial;
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-    word-break: break-all;
+    word-break: normal;
+}
+
+.step-name {
+    font-size: small;
+    color: rgb(77, 77, 77);
 }
 
 .stepper-item {
@@ -197,59 +312,112 @@ h6 {
     flex-direction: column;
     align-items: center;
     flex: 1;
-
-    @media (max-width: 768px) {
-        font-size: 12px;
-    }
 }
 
 .stepper-item::before {
     position: absolute;
     content: "";
-    border-bottom: 2px solid #00f;
-    width: 100%;
-    top: 5px;
+    border-bottom: 2px solid var(--BW-progress-default);
+    width: 90%;
+    top: 10px;
     left: -50%;
     z-index: 2;
 }
 
-.stepper-item::after {
+/* .stepper-item::after {
     position: absolute;
     content: "";
-    border-bottom: 2px solid #00f;
+    border-bottom: 2px solid var(--BW-progress-default);
     width: 100%;
-    top: 5px;
+    top: 10px;
     left: 50%;
     z-index: 2;
-}
+} */
 
 .stepper-item .step-counter {
     position: relative;
-    z-index: 5;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: #fff;
     margin-bottom: 6px;
-    border: 1px solid #00f;
+    border: 1px solid var(--BW-progress-default);
 }
 
-.stepper-item.active {
+.stepper-item._0.active .step-counter {
+    border-color: var(--BW-progress-group-0);
+}
+
+.stepper-item._1.active .step-counter {
+    border-color: var(--BW-progress-group-1);
+}
+
+.stepper-item._2.active .step-counter {
+    border-color: var(--BW-progress-group-2);
+}
+
+.stepper-item._3.active .step-counter {
+    border-color: var(--BW-progress-group-3);
+}
+
+/* .stepper-item.active {
     font-weight: bold;
+} */
+
+/* .stepper-item.active .step-counter {
+    background-color: #ff0;
+} */
+
+.stepper-item.active::before {
+    z-index: 5;
+    border-bottom-style: dashed;
 }
 
-.stepper-item.active .step-counter {
-    background-color: #ff0;
+.stepper-item._0.active::before {
+    border-color: var(--BW-progress-group-0);
+}
+
+.stepper-item._1.active::before {
+    border-color: var(--BW-progress-group-1);
+}
+
+.stepper-item._2.active::before {
+    border-color: var(--BW-progress-group-2);
+}
+
+.stepper-item._3.active::before {
+    border-color: var(--BW-progress-group-3);
 }
 
 .stepper-item.completed .step-counter {
-    background-color: #00f;
+    border: 0px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 11' fill='none'%3e%3cpath d='M11.0426 1.02893C11.3258 0.695792 11.8254 0.655283 12.1585 0.938451C12.4917 1.22162 12.5322 1.72124 12.249 2.05437L5.51985 9.97104C5.23224 10.3094 4.72261 10.3451 4.3907 10.05L0.828197 6.88335C0.50141 6.59288 0.471975 6.09249 0.762452 5.7657C1.05293 5.43891 1.55332 5.40948 1.88011 5.69995L4.83765 8.32889L11.0426 1.02893Z' fill='%23FFFFFF'/%3e%3c/svg%3e");
+    background-size: 60% 70%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.stepper-item.completed::after {
+.stepper-item.completed._0 .step-counter {
+    background-color: var(--BW-progress-group-0);
+}
+
+.stepper-item.completed._1 .step-counter {
+    background-color: var(--BW-progress-group-1);
+}
+
+.stepper-item.completed._2 .step-counter {
+    background-color: var(--BW-progress-group-2);
+}
+
+.stepper-item.completed._3 .step-counter {
+    background-color: var(--BW-progress-group-3);
+}
+
+/* .stepper-item.completed::before {
     position: absolute;
     content: "";
     border-bottom: 2px solid #00f;
@@ -257,6 +425,32 @@ h6 {
     top: 5px;
     left: 50%;
     z-index: 3;
+} */
+
+.stepper-item.completed::before {
+    position: absolute;
+    /* content: ""; */
+    border-bottom: 2px solid;
+    width: 100%;
+    top: 10px;
+    left: -50%;
+    z-index: 3;
+}
+
+.stepper-item._0.completed::before {
+    border-color: var(--BW-progress-group-0);
+}
+
+.stepper-item._1.completed::before {
+    border-color: var(--BW-progress-group-1);
+}
+
+.stepper-item._2.completed::before {
+    border-color: var(--BW-progress-group-2);
+}
+
+.stepper-item._3.completed::before {
+    border-color: var(--BW-progress-group-3);
 }
 
 .stepper-item:first-child::before {
@@ -358,6 +552,9 @@ h6 {
     border-right: 2px solid #000;
 }
 
+/************************/
+/*      sidebar        */
+/************************/
 #sidebar ul.menu-categories {
     font-weight: bolder;
 }
@@ -377,18 +574,6 @@ h6 {
     background-size: cover;
 }
 
-.header-container {
-    background: #fff;
-    z-index: 1030;
-    position: fixed;
-    top: 0;
-    /* margin-top: 10px; */
-    right: 0;
-    left: 0px;
-    -webkit-transition: 0.3s left, 0s padding;
-    transition: 0.3s left, 0s padding;
-    backdrop-filter: blur(31px);
-    padding: 11px 20px 11px 16px;
-    height: 60px;
-    width: 100%;
-}
+/************************/
+/*      sidebar end     */
+/************************/
