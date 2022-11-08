@@ -358,10 +358,13 @@
 	"project_phase4.1": "",
 	"project_phase4.2": "",
 	"project_phase5.0": "",
+	"project_phase5.1": "",
 	"project_phase6.0": "",
 	"project_phase6.1": "",
 	"project_phase7.0": "",
+	"project_phase7.1": "",
 	"project_phase8.0": "",
+	"project_phase8.1": "",
 	"home.title": "home.title",
 	"title": "title",
 	"users.id": "users.id",
@@ -542,5 +545,6 @@
 	"users.signUp.msg.SuccessJoin": "users.signUp.msg.SuccessJoin",
 	"users.signUp.msg.FailJoin": "users.signUp.msg.FailJoin",
 	"users.signUp.InputLabel.Country": "Country",
-	"users.signUp.InputLabel.Email": "Email"
+	"users.signUp.InputLabel.Email": "Email",
+	"users.signUp.InputLabel.Remark": "users.signUp.InputLabel.Remark"
 }

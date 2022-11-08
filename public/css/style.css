@@ -332,7 +332,7 @@ h5 {
     position: absolute;
     content: "";
     border-bottom: 2px solid var(--BW-progress-default);
-    width: 90%;
+    width: 100%;
     top: 10px;
     left: -50%;
     z-index: 2;
