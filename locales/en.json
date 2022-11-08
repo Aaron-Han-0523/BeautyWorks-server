@@ -529,7 +529,6 @@
 	"users.signUp.InputLabel.LogisticsAddress": "Logistics Address",
 	"users.signUp.InputLabel.CompanyAddress": "Company Address",
 	"users.signUp.InputLabel.ContactMethod": "Contact Method",
-	"users.signUp.InputLabel.Remark": "Remark",
 	"users.signUp.btn.Join": "Join",
 	"users.signUp.btn.Cancel": "Cancel",
 	"users.signUp.ConfirmResultSuccess": "Confirm!",
@@ -542,6 +541,6 @@
 	"users.signUp.msg.NeedEmailConfirm": "users.signUp.msg.NeedEmailConfirm",
 	"users.signUp.msg.SuccessJoin": "users.signUp.msg.SuccessJoin",
 	"users.signUp.msg.FailJoin": "users.signUp.msg.FailJoin",
-	"users.signUp.InputLabel.Country": "users.signUp.InputLabel.Country",
-	"users.signUp.InputLabel.Email": "users.signUp.InputLabel.Email"
+	"users.signUp.InputLabel.Country": "Country",
+	"users.signUp.InputLabel.Email": "Email"
 }
