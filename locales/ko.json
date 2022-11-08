@@ -589,5 +589,6 @@
 	"users.myProject.header.CompletedProject": "Completed Project",
 	"users.myProject.CompletedProject.Total발주수량": "Total 발주 수량",
 	"users.myProject.CompletedProject.최근 발주 날짜": "최근 발주 날짜",
-	"My Project": "My Project"
+	"My Project": "My Project",
+	"users.myProject.stepName.add.sampleNumber": "차 샘플링"
 }

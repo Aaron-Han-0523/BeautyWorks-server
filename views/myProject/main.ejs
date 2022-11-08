@@ -158,17 +158,29 @@
                           <% if(i < item.detailPhase) { %>
                           <div class="stepper-item _<%= item.phase %> completed">
                             <div class="step-counter"></div>
-                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %></div>
+                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
+                              <% if(item.phase==1 && i==1) { %>
+                              <%=  '(' +item.sampleNumber+__('users.myProject.stepName.add.sampleNumber') + ')' %>
+                              <% } %>
+                            </div>
                           </div>
                           <% }else if(i == item.detailPhase) { %>
                           <div class="stepper-item _<%= item.phase %> active">
                             <div class="step-counter"></div>
-                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %></div>
+                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
+                              <% if(item.phase==1 && i==1) { %>
+                              <%=  '(' +item.sampleNumber+__('users.myProject.stepName.add.sampleNumber') + ')' %>
+                              <% } %>
+                            </div>
                           </div>
                           <% }else{ %>
                           <div class="stepper-item _<%= item.phase %>">
                             <div class="step-counter"></div>
-                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %></div>
+                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
+                              <% if(item.phase==1 && i==1) { %>
+                              <%=  '(' +item.sampleNumber+__('users.myProject.stepName.add.sampleNumber') + ')' %>
+                              <% } %>
+                            </div>
                           </div>
                           <% }} %>
                         </div>
