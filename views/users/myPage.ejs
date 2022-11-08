@@ -9,67 +9,67 @@
 
   <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
 
-      <!--  BEGIN MAIN CONTAINER  -->
-      <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-        <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-          <!--  BEGIN CONTENT AREA  -->
-          <div id="content" class="main-content">
-            <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-              <div class="middle-content container-xxl p-0">
+        <div class="middle-content container-xxl p-0">
 
-                <div class="statbox widget box box-shadow">
-                  <!-- BREADCRUMB -->
-                  <div class="row px-3">
-                    <div class="breadcrumb align-items-start d-flex pt-3">
-                      <div class="p-1 col-3">
-                        <h5><strong>
-                            <%= __('MyPage') %>
-                          </strong></h5>
-                      </div>
-                      <div class="p-1 flex-grow-1">
-                        <div>
-                          <a href="<%= codezip.url.users.myAccount %>">
-                            <img style="width: 25px;" src="\images\icon\down-arrow-svgrepo-com.svg">
-                          </a>
-                        </div>
-                      </div>
-                      <div class="p-1">
-                        <h5>
-                          <a href="<%= codezip.url.users.signOut %>">
-                            <%= __(' LogOut') %>
-                          </a>
-                        </h5>
-                      </div>
-                    </div>
+          <div class="statbox widget box box-shadow">
+            <!-- BREADCRUMB -->
+            <div class="row px-3">
+              <div class="breadcrumb align-items-start d-flex pt-3">
+                <div class="p-1 col-3">
+                  <h5><strong>
+                      <%= __('MyPage') %>
+                    </strong></h5>
+                </div>
+                <div class="p-1 flex-grow-1">
+                  <div>
+                    <a href="<%= codezip.url.users.myAccount %>">
+                      <img style="width: 25px;" src="\images\icon\down-arrow-svgrepo-com.svg">
+                    </a>
                   </div>
-                  <!-- CONTENT AREA -->
+                </div>
+                <div class="p-1">
+                  <h5>
+                    <a href="<%= codezip.url.users.signOut %>">
+                      <%= ('LogOut') %>
+                    </a>
+                  </h5>
                 </div>
               </div>
-
             </div>
-
-
-
-            <%- include ("../partials/footer.ejs") %>
-
+            <!-- CONTENT AREA -->
           </div>
-          <!--  END CONTENT AREA  -->
+        </div>
+
       </div>
-      <!-- END MAIN CONTAINER -->
 
-      <%- include ("../partials/commonScrpits.ejs") %>
 
-        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
-        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+      <%- include ("../partials/footer.ejs") %>
+
+    </div>
+    <!--  END CONTENT AREA  -->
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

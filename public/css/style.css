@@ -212,7 +212,7 @@ h6 {
     margin-bottom: 0;
 }
 
-ul div.main-menu h5{
+ul div.main-menu h5 {
     color: rgb(51, 51, 51);
 }
 
@@ -220,9 +220,21 @@ h5 {
     color: rgb(102, 102, 102);
 }
 
+.h6 {
+    color: #000;
+}
+
 .preview>img {
     width: 100%;
     height: 100%;
+}
+
+.outline-badge-new {
+    font-size: xx-small;
+    color: #e2a03f;
+    background-color: transparent;
+    border: 1px solid #e2a03f;
+    border-radius: 5px;
 }
 
 /************************/
@@ -302,6 +314,8 @@ h5 {
 }
 
 .step-name {
+    text-align: center;
+    padding: 5px;
     font-size: small;
     color: rgb(77, 77, 77);
 }
@@ -348,19 +362,24 @@ h5 {
     border: 1px solid var(--BW-progress-default);
 }
 
-.stepper-item._0.active .step-counter {
+.stepper-item._0.active .step-counter,
+.stepper-item._1.active .step-counter,
+.stepper-item._2.active .step-counter {
     border-color: var(--BW-progress-group-0);
 }
 
-.stepper-item._1.active .step-counter {
+.stepper-item._3.active .step-counter {
     border-color: var(--BW-progress-group-1);
 }
 
-.stepper-item._2.active .step-counter {
+.stepper-item._4.active .step-counter,
+.stepper-item._5.active .step-counter,
+.stepper-item._6.active .step-counter {
     border-color: var(--BW-progress-group-2);
 }
 
-.stepper-item._3.active .step-counter {
+.stepper-item._7.active .step-counter,
+.stepper-item._8.active .step-counter {
     border-color: var(--BW-progress-group-3);
 }
 
@@ -377,19 +396,24 @@ h5 {
     border-bottom-style: dashed;
 }
 
-.stepper-item._0.active::before {
+.stepper-item._0.active::before,
+.stepper-item._1.active::before,
+.stepper-item._2.active::before {
     border-color: var(--BW-progress-group-0);
 }
 
-.stepper-item._1.active::before {
+.stepper-item._3.active::before {
     border-color: var(--BW-progress-group-1);
 }
 
-.stepper-item._2.active::before {
+.stepper-item._4.active::before,
+.stepper-item._5.active::before,
+.stepper-item._6.active::before {
     border-color: var(--BW-progress-group-2);
 }
 
-.stepper-item._3.active::before {
+.stepper-item._7.active::before,
+.stepper-item._8.active::before {
     border-color: var(--BW-progress-group-3);
 }
 
@@ -401,19 +425,24 @@ h5 {
     background-position: center;
 }
 
-.stepper-item.completed._0 .step-counter {
+.stepper-item.completed._0 .step-counter,
+.stepper-item.completed._1 .step-counter,
+.stepper-item.completed._2 .step-counter {
     background-color: var(--BW-progress-group-0);
 }
 
-.stepper-item.completed._1 .step-counter {
+.stepper-item.completed._3 .step-counter {
     background-color: var(--BW-progress-group-1);
 }
 
-.stepper-item.completed._2 .step-counter {
+.stepper-item.completed._4 .step-counter,
+.stepper-item.completed._5 .step-counter,
+.stepper-item.completed._6 .step-counter {
     background-color: var(--BW-progress-group-2);
 }
 
-.stepper-item.completed._3 .step-counter {
+.stepper-item.completed._7 .step-counter,
+.stepper-item.completed._8 .step-counter {
     background-color: var(--BW-progress-group-3);
 }
 
@@ -437,19 +466,24 @@ h5 {
     z-index: 3;
 }
 
-.stepper-item._0.completed::before {
+.stepper-item._0.completed::before,
+.stepper-item._1.completed::before,
+.stepper-item._2.completed::before {
     border-color: var(--BW-progress-group-0);
 }
 
-.stepper-item._1.completed::before {
+.stepper-item._3.completed::before {
     border-color: var(--BW-progress-group-1);
 }
 
-.stepper-item._2.completed::before {
+.stepper-item._4.completed::before,
+.stepper-item._5.completed::before,
+.stepper-item._6.completed::before {
     border-color: var(--BW-progress-group-2);
 }
 
-.stepper-item._3.completed::before {
+.stepper-item._7.completed::before,
+.stepper-item._8.completed::before {
     border-color: var(--BW-progress-group-3);
 }
 

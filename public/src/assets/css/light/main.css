@@ -3630,7 +3630,7 @@ fieldset:disabled .btn {
 
 .table thead tr th {
   border: none;
-  background: #ebedf2;
+  background: rgb(242, 244, 247);
   padding: 10px 21px 10px 21px;
   vertical-align: middle;
 }
@@ -3680,11 +3680,11 @@ fieldset:disabled .btn {
 }
 
 .table tbody tr td {
-  border: none;
+  border-bottom: 1px solid gray;
   padding: 10px 21px 10px 21px;
   vertical-align: middle;
   letter-spacing: normal;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .table> :not(:first-child) {

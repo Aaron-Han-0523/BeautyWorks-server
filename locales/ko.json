@@ -509,7 +509,6 @@
 	"users.newProject.basic.distributionChannel": "유통채널",
 	"select": "선택",
 	"choose category1 first": "먼저 카테고리를 선택해주세요.",
-	" LogOut": " LogOut",
 	"users.newProject.basic.btn.Save": "Save",
 	"users.newProject.basic.btn.Next": "Next",
 	"users.msg.SuccessSave": "저장되었습니다.",
@@ -569,10 +568,13 @@
 	"users.newProject.order.msg.confirm": "샘플 주문이 완료되었습니다.",
 	"btn.확인": "확인",
 	"MY PROJECT": "MY PROJECT",
-	" Dashboard": " Dashboard",
-	" Project": " Project",
 	"Main": "Main",
-	" Main": " Main",
 	"Lounge": "Lounge",
-	" Log out": " Log out"
+	"Show All": "Show All",
+	"users.dashboard.CompletedProject.Total발주수량": "Total발주수량",
+	"users.dashboard.CompletedProject.최근 발주 날짜": "최근 발주 날짜",
+	"REORDER": "REORDER",
+	"Log out": "Log out",
+	"users.dashboard.header.News": "Lounge",
+	"users.dashboard.header.Community": "Community"
 }

@@ -65,8 +65,8 @@ exports.validationEmail = async (req, res, next) => {
     let mailOptions = {
         from: systemInfo.systemEmailName + '<' + systemInfo.emailUserid + '>',
         to: targetEmail,
-        subject: res.locals.__("users.signUp.validationMailTitle"),
-        text: res.locals.__("users.signUp.validationMailcontents") + '\n' + validationNumber
+        subject: res.__("users.signUp.validationMailTitle"),
+        text: res.__("users.signUp.validationMailcontents") + '\n' + validationNumber
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

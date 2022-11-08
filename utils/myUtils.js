@@ -27,3 +27,13 @@ module.exports.formatDate = (d_t) => {
     let seconds = ("0" + d_t.getSeconds()).slice(-2);
     return year + "." + month + "." + day;
 }
+
+// array = "1,2,3,4"
+module.exports.array_i18n = (array, i18n_func) => {
+    array = array.split(',');
+    let result = [];
+    array.forEach((item, index) => {
+        result.push(i18n_func(item));
+    })
+    return result;
+}

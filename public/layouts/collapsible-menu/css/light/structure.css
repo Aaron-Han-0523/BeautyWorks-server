@@ -50,7 +50,7 @@ h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.1rem;
   color: #515365;
 }
 
@@ -153,10 +153,9 @@ code {
 }
 
 .widget {
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
 }
 
 .layout-top-spacing {
@@ -880,7 +879,7 @@ body:not(.dark) .navbar .dark-mode {
 }
 
 .sidebar-theme {
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(242,244,247);
 }
 
 .sidebar-closed>.sidebar-wrapper {

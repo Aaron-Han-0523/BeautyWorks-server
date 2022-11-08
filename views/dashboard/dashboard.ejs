@@ -3,415 +3,501 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
-    <!-- 이미지 그룹 슬라이드 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
+  <!-- 이미지 그룹 슬라이드 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
 </head>
 
 <body class="layout-boxed">
 
   <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
 
-      <!--  BEGIN MAIN CONTAINER  -->
-      <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-        <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-          <!--  BEGIN CONTENT AREA  -->
-          <div id="content" class="main-content">
-            <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-              <div class="middle-content container-xxl">
+        <div class="middle-content container-xxl">
 
-                <!-- BREADCRUMB -->
-                <div class="row px-3">
-                  <div class="breadcrumb align-items-end d-flex pt-3 br-20">
-                    <div class="p-1 col-3">
-                      <h6 class="main-menu">
-                        <%= __('Main') %>
-                      </h6>
-                      <h4><strong>
-                          <%= __('Dashboard') %>
-                        </strong></h4>
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="p-1 col-3">
+                <h6 class="main-menu">
+                  <%= __('Main') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Dashboard') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT AREA -->
+          <div class="row mt-3">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <!-- Progress -->
+              <div class="widget-content widget-content-area br-20 px-4">
+                <div class="form-group ms-3">
+
+                  <div class="row mb-3">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.dashboard.header.Progress') %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.myProject.main %>">
+                          <%= __('Show All') %>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <!-- CONTENT AREA -->
-                <div class="row mt-3">
-                  <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-
-                    <!-- Progress -->
-                    <div class="widget-content widget-content-area br-20 px-4">
-                      <div class="form-group ms-3">
-
-                        <div class="row mb-3">
-                          <div class="justify-content-between d-flex px-0">
-                            <div>
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.Progress') %>
-                                </strong>
-                              </h5>
-                            </div>
-                            <div class="row text-end">
-                              <a href="<%= codezip.url.users.myProject.main %>">
-                                <%= __('Show All') %>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div>
-                          <% let project=[]; %>
-                            <% project.push({projectName:"1. My Suncream",phase:7}) %>
-                              <% project.push({projectName:"2. My Suncream",phase:8}) %>
-                                <% project.push({projectName:"3. My Suncream",phase:1}) %>
-                        </div>
-                        <% project.forEach((item,index)=>{ %>
-                          <div class="row">
-                            <div class="progress-card">
-                              <div class="progress-card-img progress-<%= item.phase %>">
-                                <img src="<%= codezip.url.users.progress_icon['_'+item.phase] %>">
-                              </div>
-                              <div class="progress-card-body">
-                                <div class="progress-card-name">
-                                  <h6>
-                                    <%= item.projectName %>
-                                  </h6>
-                                </div>
-                                <%- include("../partials/progressbar/"+item.phase+".ejs") %>
-                              </div>
-                            </div>
-                          </div>
-                          <% }) %>
-
+                  <!-- /* 테스트 데이터 생성 -->
+                  <div>
+                    <% let project=[]; %>
+                    <% project.push({
+                      projectName:"1. My Suncream",
+                      phase:7
+                    }) %>
+                    <% project.push({
+                      projectName:"2. My Suncream",
+                      phase:8
+                    }) %>
+                    <% project.push({
+                      projectName:"3. My Suncream",
+                      phase:1
+                    }) %>
+                  </div>
+                  <!-- 테스트 데이터 생성 */ -->
+                  <% project.forEach((item,index)=>{ %>
+                  <div class="row">
+                    <div class="progress-card">
+                      <div class="progress-card-img progress-<%= item.phase %>">
+                        <img src="<%= codezip.url.users.progress_icon['_'+item.phase] %>">
                       </div>
-                    </div>
-
-                    <!-- 임시 저장한 Progress -->
-                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                      <div class="form-group ms-3">
-                        <div class="row mb-3">
-                          <div class="justify-content-between d-flex px-0">
-                            <div>
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.TempProgress') %>
-                                </strong>
-                              </h5>
-                            </div>
-                            <div class="row text-end">
-                              <a href="<%= codezip.url.users.myProject.main %>">
-                                <%= __('Show All') %>
-                              </a>
-                            </div>
-                          </div>
+                      <div class="progress-card-body">
+                        <div class="progress-card-name">
+                          <h6>
+                            <%= (index+1)+'. '+item.projectName %>
+                          </h6>
                         </div>
-                        <% let temp_project=[]; %>
-                          <% temp_project.push({projectName:"1. My Suncream",phase:0,detailPhase:1}) %>
-                            <% temp_project.push({projectName:"2. My Suncream",phase:0,detailPhase:2}) %>
-                              <% temp_project.forEach((item,index)=>{ %>
-                                <div class="row">
-                                  <div class="progress-card">
-                                    <div class="progress-card-img progress-<%= item.phase %>">
-                                      <img src="<%= codezip.url.users.progress_icon['_'+item.phase] %>">
-                                    </div>
-                                    <div class="progress-card-body">
-                                      <div class="progress-card-name">
-                                        <h6>
-                                          <%= item.projectName %>
-                                        </h6>
-                                      </div>
-                                      <%- include("../partials/temp_progressbar/"+item.detailPhase+".ejs") %>
-                                    </div>
-                                  </div>
-                                </div>
-                                <% }) %>
-
+                        <%- include("../partials/progressbar/"+item.phase+".ejs") %>
                       </div>
-                    </div>
-
-                    <!-- Completed Project -->
-                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                      <div class="form-group mx-3">
-                        <div class="row mb-3">
-                          <div class="justify-content-between d-flex px-0">
-                            <div>
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.CompletedProject') %>
-                                </strong>
-                              </h5>
-                            </div>
-                            <div class="row text-end">
-                              <a href="<%= codezip.url.users.myProject.main %>">
-                                <%= __('Show All') %>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row mt-3">
-                          <div class="swiper-container">
-                            <div class="swiper-wrapper">
-
-                              <div class="swiper-slide">
-                                <div>
-                                  <img src="https://ktsmemo.cafe24.com/p/0740.jpg">
-                                  <div class="row mt-3 justify-content-center">
-                                    <p>헤라 셀 에센스<br />
-                                      바이옴 플러스 150ml<br />
-                                      Total 발주 수량 : 100000<br />
-                                      최근 발주 날짜: 2022.10.04</p>
-                                    <div><button class="col-12 btn" type="button">REORDER</button></div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="swiper-slide">
-                                <div>
-                                  <img src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
-                                  <div class="row mt-3 justify-content-center">
-                                    <p>헤라 셀 에센스<br />
-                                      바이옴 플러스 150ml<br />
-                                      Total 발주 수량 : 100000<br />
-                                      최근 발주 날짜: 2022.10.04</p>
-                                    <div><button class="col-12 btn" type="button">REORDER</button></div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0553.jpg"></div>
-                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"></div>
-                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0099.jpg"></div>
-                              <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0716.jpg"></div>
-                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0786.jpg"></div>
-                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"></div>
-                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0742.jpg"></div>
-                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0698.jpg"></div>
-                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0095.jpg"></div>
-                              <div class="swiper-slide"><img src="http://oldmidi.cdn3.cafe24.com/p/0315.jpg"></div>
-                              <div class="swiper-slide"><img src="http://ktsmemo.cdn3.cafe24.com/p/0625.jpg"></div>
-                              <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0289.jpg"></div>
-                              <div class="swiper-slide"><img src="https://ktsmemo.cafe24.com/p/0646.jpg"></div>
-                              <div class="swiper-slide">- 끝 -</div>
-                            </div>
-                          </div>
-
-                          <!-- 인디케이터 -->
-                          <!-- <div class="swiper-indicator"></div> -->
-
-                          <!-- 네비게이션 -->
-                          <!-- 이전 버튼 -->
-                          <div class="swiper-btn-prev"><i class="fa-solid fa-chevron-left"></i></div>
-                          <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                          <div class="swiper-btn-next"><i class="fa-solid fa-chevron-right"></i></div>
-
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <!-- 추천 프로젝트 -->
-                      <div class="col-6">
-                        <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                          <div class="justify-content-between d-flex px-0">
-                            <div>
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.RemommendedProject') %>
-                                </strong>
-                              </h5>
-                            </div>
-                            <div class="row text-end">
-                              <a href="<%= codezip.url.users.contents %>">
-                                <%= __('Show All') %>
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="row mt-3">
-                            
-
-                            <div class="col">
-                              <div class="preview">
-                                <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
-                              </div>
-                              <div class="row mt-3 justify-content-center text-center">
-                                <p>Top / 소분류명<br />
-                                  스킨/토너<br />
-                                  대한민국 2021 award</p>
-                              </div>
-                            </div>
-                            <div class="col">
-                              <div class="preview">
-                                <img class="br-15" src="http://ktsmemo.cdn3.cafe24.com/p/0387.jpg">
-                              </div>
-                              <div class="row mt-3 justify-content-center text-center">
-                                <p>Top / 소분류명<br />
-                                  스킨/토너<br />
-                                  대한민국 2021 award</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- 추천 성분 -->
-                      <div class="col-6">
-                        <div class="widget-content widget-content-area br-20 px-0 mt-3 align-items-start flex-column"
-                          style="height: 95%;">
-                          <div class="justify-content-between d-flex px-0">
-                            <div>
-                              <h5><strong>
-                                  <%= __('users.dashboard.header.RemommendedIngredient') %>
-                                </strong>
-                              </h5>
-                            </div>
-                            <div class="row text-end">
-                              <a href="<%= codezip.url.users.ingredientData %>">
-                                <%= __('Show All') %>
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="d-flex align-items-start flex-column mb-3 w-100 h-100 p-0">
-                            <div class="row mt-3 w-100 mx-0">
-                              <div class="table-responsive p-0">
-                                <table class="table table-no-space table-bordered text-break">
-                                  <thead class="text-center">
-                                    <th>
-                                      <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
-                                    </th>
-                                    <th>
-                                      <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
-                                    </th>
-                                    <th>
-                                      <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
-                                    </th>
-                                  </thead>
-                                  <tbody class="table-group-divider">
-                                    <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                    </tr>
-                                    <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                    </tr>
-                                    <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <!-- News & Community -->
-                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                      <!-- News -->
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-6 col-md-4">
-                            <h5><strong>
-                                <%= __('users.community.header.News') %>
-                              </strong></h5>
-                          </div>
-                        </div>
-                        <!-- list -->
-                        <div class="widget-content widget-content-area br-20 p-2 mt-2">
-                          <div class="my-2">
-                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                              <h6 class="m-1">
-                                title
-                              </h6>
-                            </button>
-                          </div>
-                          <div class="my-2">
-                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                              <h6 class="m-1">
-                                title
-                              </h6>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Community -->
-                      <div class="form-group mt-3">
-                        <div class="row">
-                          <div class="col-6 col-md-4">
-                            <h5><strong>
-                                <%= __('users.community.header.Community') %>
-                              </strong></h5>
-                          </div>
-                        </div>
-                        <!-- list -->
-                        <div class="widget-content widget-content-area br-20 p-2 mt-2">
-                          <div class="my-2">
-                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                              <h6 class="m-1">
-                                title
-                              </h6>
-                            </button>
-                          </div>
-                          <div class="my-2">
-                            <button class="col-12 btn br-15" type="button" onclick="location.href='#';">
-                              <h6 class="m-1">
-                                title
-                              </h6>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
                     </div>
                   </div>
+                  <% }) %>
 
                 </div>
               </div>
-            </div>
-            <!--  END CONTENT AREA  -->
 
-            <%- include ("../partials/footer.ejs") %>
+              <!-- 임시 저장한 Progress -->
+              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                <div class="form-group ms-3">
+                  <div class="row mb-3">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __("users.dashboard.header.TempProgress") %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.myProject.main %>">
+                          <%= __("Show All") %>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /* 테스트 데이터 생성 -->
+                  <div>
+                    <% let temp_project=[]; %>
+                    <% temp_project.push({
+                      projectName:"1. My Suncream",
+                      phase:0,
+                      detailPhase:1
+                    }) %>
+                    <% temp_project.push({
+                      projectName:"2. My Suncream",
+                      phase:0,
+                      detailPhase:2
+                    }) %>
+                  </div>
+                  <!-- 테스트 데이터 생성 */ -->
+                  <% temp_project.forEach((item,index)=>{ %>
+                  <div class="row">
+                    <div class="progress-card">
+                      <div class="progress-card-img progress-<%= item.phase %>">
+                        <img src="<%=codezip.url.users.progress_icon[`_`+item.phase] %>">
+                      </div>
+                      <div class="progress-card-body">
+                        <div class="progress-card-name">
+                          <h6>
+                            <%= (index+1)+". "+item.projectName %>
+                          </h6>
+                        </div>
+                        <%- include("../partials/temp_progressbar/"+item.detailPhase+".ejs") %>
+                      </div>
+                    </div>
+                  </div>
+                  <% }) %>
+
+                </div>
+              </div>
+              <div>
+                <% __('users.dashboard.header.RemommendedProject') %>
+              </div>
+              <!-- /* 테스트 데이터 생성 -->
+              <div>
+                <% let completed_project=[]; %>
+                <% completed_project.push({
+                  productName:"My Suncream",
+                  volume:110,
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                })%>
+                <% completed_project.push({
+                  productName:"My Suncream",
+                  volume:120,
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:20000,
+                  lastOrderDate:new Date(2022,10,15),
+                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                
+                })%>
+                <% completed_project.push({
+                  productName:"My Suncream",
+                  volume:130,
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:30000,
+                  lastOrderDate:new Date(2022,10,25),
+                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                })%>
+              </div>
+              <!-- 테스트 데이터 생성 */ -->
+              <!-- Completed Project -->
+              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                <div class="form-group mx-3">
+                  <div class="row mb-3">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __("users.dashboard.header.CompletedProject") %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.myProject.main %>">
+                          <%= __("Show All") %>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="d-flex justify-content-between px-0">
+                      <% completed_project.forEach((item,index)=>{ %>
+                      <div class="widget p-4" style="width: 32%;">
+                        <div class="d-flex">
+                          <img class="align-self-stretch w-50 br-10" style="height: calc(100%-50px);" src="<%= item.imagePaths.split(`,`)[0] %>">
+                          <div class="px-3 flex-grow-1">
+                            <p>
+                              <%= item.productName %>
+                            </p>
+                            <p>
+                              <%= __("product"+item.category1+"."+item.category2) %>
+                            </p>
+                            <p>
+                              <%= item.volume %>
+                            </p>
+                            <p>
+                              <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                            </p>
+                            <p>
+                              <%= item.totalOrderAmount %>
+                            </p>
+                            <p>
+                              <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                            </p>
+                            <p>
+                              <%= formatDate(item.lastOrderDate) %>
+                            </p>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="row mx-0 mt-3">
+                          <button class="col-12 btn btn-outline-primary" type="button">
+                            <%= __('REORDER') %>
+                          </button>
+                        </div>
+                      </div>
+                      <% }) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 추천 프로젝트 & 추천 성분 -->
+              <div class="row mt-5">
+                <!-- 추천 프로젝트 -->
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
+
+                    <div class="justify-content-between d-flex px-0 mb-3">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.dashboard.header.RemommendedProject') %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.contents %>">
+                          <%= __('Show All') %>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="widget row mx-0 h-100 align-content-center">
+                      <!-- /* 테스트 데이터 생성 -->
+                      <div>
+                        <% let recommended_project=[]; %>
+                        <% recommended_project.push({
+                          productName:"테스트추천프로젝트1",
+                          category1:0,
+                          category2:0,
+                          imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                        })%>
+                        <% recommended_project.push({
+                          productName:"테스트추천프로젝트2",
+                          category1:1,
+                          category2:0,
+                          imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                        })%>
+                        <% recommended_project.push({
+                          productName:"테스트추천프로젝트3",
+                          category1:2,
+                          category2:0,
+                          imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                        })%>
+                      </div>
+                      <!-- 테스트 데이터 생성 */ -->
+                      <% recommended_project.forEach((item,index)=>{ %>
+                      <div class="col">
+                        <div class="preview">
+                          <img class="br-15" src="<%= item.imagePaths.split(',')[0] %>">
+                        </div>
+                        <div class="row mt-3 justify-content-center">
+                          <p>Top / <%= __('product'+item.category1) %><br />
+                            <span style="color: gray;">
+                              <%= __('product'+item.category1+'.'+item.category2) %>
+                            </span><br />
+                            <strong>
+                              <%= item.productName %>
+                            </strong>
+                          </p>
+                        </div>
+                      </div>
+                      <% }) %>
+                    </div>
+                  </div>
+                </div>
+                <!-- 추천 성분 -->
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 pe-4 h-100 d-flex flex-column">
+                    <div class="justify-content-between d-flex px-0 mb-3">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.dashboard.header.RemommendedIngredient') %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.ingredientData %>">
+                          <%= __('Show All') %>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="widget row mx-0 h-100 align-content-center">
+                      <!-- /* 테스트 데이터 생성 -->
+                      <div>
+                        <% let remommended_ingredient=[]; %>
+                        <% remommended_ingredient.push({ingredientName:"테스트추천성분1", type:"IC00,IC03",
+                                              effects:"IE00,IE01,IE02"}) %>
+                        <% remommended_ingredient.push({ingredientName:"테스트추천성분2",
+                                                type:"IC01,IC03", effects:"IE03,IE04,IE05"}) %>
+                        <% remommended_ingredient.push({ingredientName:"테스트추천성분3",
+                                                  type:"IC00,IC02", effects:"IE06,IE07,IE08"}) %>
+                      </div>
+                      <!-- 테스트 데이터 생성 */ -->
+                      <div class="table-responsive p-0">
+                        <table class="table text-break">
+                          <thead class="text-center">
+                            <th>
+                              <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
+                            </th>
+                            <th>
+                              <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
+                            </th>
+                            <th>
+                              <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
+                            </th>
+                          </thead>
+                          <tbody class="table-group-divider text-break">
+                            <% remommended_ingredient.forEach((item,index)=>{ %>
+                            <tr>
+                              <td>
+                                <%= item.ingredientName %>
+                              </td>
+                              <td>
+                                <%= array_i18n(item.type,__).join(', ') %>
+                              </td>
+                              <td><%= array_i18n(item.effects,__).join(', ') %></td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- News & Community -->
+              <div class="row mt-5">
+                <!-- News -->
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
+
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.dashboard.header.News') %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.news %>">
+                          <%= __('Show All') %>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- /* 테스트 데이터 생성 -->
+                    <div>
+                      <% let news=[]; %>
+                      <% news.push({
+                        title:"반갑습니다.",
+                        firstName:"이름",
+                        lastName:"성",
+                        updateDate:new Date(2022,10,15),
+                      })%>
+                      <% news.push({
+                        title:"환영합니다.",
+                        firstName:"FirstName",
+                        lastName:"LastName",
+                        updateDate:new Date(2022,10,25),
+                      })%>
+                    </div>
+                    <!-- 테스트 데이터 생성 */ -->
+                    <% news.forEach((item,index)=>{ %>
+                    <div class="widget row mx-0 h-50 align-content-center mt-3">
+                      <%- include('../partials/badge/new.ejs') %>
+                      <div class="h6"><%= item.title %></div>
+                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.lastName} ${item.firstName}` %></div>
+                      <% } else { %>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.firstName} ${item.lastName}` %></div>
+                      <% } %>
+                    </div>
+                    <% }) %>
+                  </div>
+                </div>
+                <!-- community -->
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 pe-4 h-100 d-flex flex-column">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.dashboard.header.Community') %>
+                          </strong>
+                        </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.community.main %>">
+                          <%= __('Show All') %>
+                        </a>
+                      </div>
+                    </div>
+
+                    <!-- /* 테스트 데이터 생성 -->
+                    <div>
+                      <% let community=[]; %>
+                      <% community.push({
+                        title:"감사합니다.",
+                        firstName:"이름",
+                        lastName:"성",
+                        updateDate:new Date(2022,10,15),
+                      })%>
+                      <% community.push({
+                        title:"안녕하세요.",
+                        firstName:"FirstName",
+                        lastName:"LastName",
+                        updateDate:new Date(2022,10,25),
+                      })%>
+                    </div>
+                    <!-- 테스트 데이터 생성 */ -->
+                    <% community.forEach((item,index)=>{ %>
+                    <div class="widget row mx-0 h-50 align-content-center mt-3">
+                      <%- include('../partials/badge/new.ejs') %>
+                      <div class="h6"><%= item.title %></div>
+                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.lastName} ${item.firstName}` %></div>
+                      <% } else { %>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.firstName} ${item.lastName}` %></div>
+                      <% } %>
+                    </div>
+                    <% }) %>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
 
           </div>
-          <!-- END MAIN CONTAINER -->
+        </div>
+      </div>
+      <!--  END CONTENT AREA  -->
 
-          <%- include ("../partials/commonScrpits.ejs") %>
+      <%- include ("../partials/footer.ejs") %>
 
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-            <script>
-              let _ = new Swiper('.swiper-container', {
+    </div>
+    <!-- END MAIN CONTAINER -->
 
-                slidesPerView: 4, // 동시에 보여줄 슬라이드 갯수
-                spaceBetween: 10, // 슬라이드간 간격
-                slidesPerGroup: 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+    <%- include ("../partials/commonScrpits.ejs") %>
 
-                // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-                // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-                loopFillGroupWithBlank: true,
-
-                loop: true, // 무한 반복
-
-                pagination: { // 페이징
-                  el: '.swiper-indicator',
-                  clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-                },
-                navigation: { // 네비게이션
-                  nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
-                  prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
-                }
-              });
-            </script>
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-            <%# include ("../partials/chatMark.ejs") %>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script>
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <%# include ("../partials/chatMark.ejs") %>
 
 </body>
 

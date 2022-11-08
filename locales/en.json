@@ -391,7 +391,6 @@
 	"Main": "Main",
 	"NewProject": "NewProject",
 	"Lounge": "Lounge",
-	" Log out": " Log out",
 	"users.dashboard.header.Progress": "Project in progress",
 	"users.dashboard.header.TempProgress": "Project in draft",
 	"users.dashboard.header.CompletedProject": "Completed Project",
@@ -505,5 +504,12 @@
 	"users.newProject.basic.inStock.btn.yes": "Self Shipment",
 	"users.newProject.basic.instock.btn.no": "BeautyWorks",
 	"Show All": "Show All",
-	"MY PROJECT": "MY PROJECT"
+	"MY PROJECT": "MY PROJECT",
+	"users.dashboard.CompletedProject.Total발주수량": "users.dashboard.CompletedProject.Total발주수량",
+	"users.dashboard.CompletedProject.최근 발주 날짜": "users.dashboard.CompletedProject.최근 발주 날짜",
+	"Log out": "Log out",
+	"REORDER": "REORDER",
+	"users.dashboard.header.News": "users.dashboard.header.News",
+	"users.community.news.index.WrittenBy": "Written By",
+	"users.dashboard.header.Community": "users.dashboard.header.Community"
 }
