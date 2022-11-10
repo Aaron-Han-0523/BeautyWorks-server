@@ -4,24 +4,24 @@ const newsService = require('../services/news');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-// exports.add = async (req, res, next) => {
-//     const user = req.userInfo;
-//     let body = req.body;
-//     body.user = user.userid;
-//     console.log("news body :", body);
+exports.add = async (req, res, next) => {
+    // const user = req.userInfo;
+    // let body = req.body;
+    // body.user = user.userid;
+    // console.log("news body :", body);
 
-//     try {
-//         let result = await newsService.create(body);
-//         // console.log("result :",result);
-//         return res.status(201).redirect('/news');
-//     }
-//     catch (e) {
-//         console.error(e);
-//         return res.status(409).json(`add fail`)
-//     }
-// }
+    // try {
+    //     let result = await newsService.create(body);
+    //     // console.log("result :",result);
+    //     return res.status(201).redirect('/news');
+    // }
+    // catch (e) {
+    //     console.error(e);
+    //     return res.status(409).json(`add fail`)
+    // }
+}
 
-// exports.edit = async (req, res, next) => {
+exports.edit = async (req, res, next) => {
 //     console.log("put - news edit")
 //     const user = req.userInfo;
 //     const id = req.params.id;
@@ -38,9 +38,9 @@ const Op = Sequelize.Op;
 
 //     if (result) res.redirect(`/news/${id}`);
 //     else res.json(`fail id:${id}`)
-// }
+}
 
-// exports.index = async (req, res, next) => {
+exports.index = async (req, res, next) => {
 //     const page = req.query.p ? req.query.p : 1;
 //     const word = req.query.q;
 //     const skip = req.query.skip;
@@ -72,7 +72,7 @@ const Op = Sequelize.Op;
 //         page: page,
 //         word: word
 //     });
-// }
+}
 
 exports.detail = async (req, res, next) => {
     const id = req.params.id;
@@ -100,7 +100,7 @@ exports.detail = async (req, res, next) => {
         })
 }
 
-// exports.delete = async (req, res, next) => {
+exports.delete = async (req, res, next) => {
 //     const id = req.params.id;
 //     const user = req.userInfo;
 //     let obj = {};
@@ -142,4 +142,4 @@ exports.detail = async (req, res, next) => {
 
 //     if (result) return res.status(200).json({ user: user, data: result });
 //     else res.status(400).json(`don't find ${word}`)
-// }
+}

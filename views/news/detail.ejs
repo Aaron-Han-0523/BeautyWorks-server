@@ -68,7 +68,7 @@
                           <!-- 네비게이션 -->
                           <div class="row mt-5">
                             <div class="col-4 text-start">
-                              <% if(prev) { %><a href="<%= codezip.url.users.news %>/<%= prev.news_id %>">
+                              <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.news_id %>">
                                   <h5><i class="fa-solid fa-chevron-left"></i>
                                     <%= __('users.news.이전글') %>
                                   </h5>
@@ -81,7 +81,7 @@
                                 </h5>
                               </a></div>
                             <div class="col-4 text-end">
-                              <% if(next) { %><a href="<%= codezip.url.users.news %>/<%= next.news_id %>">
+                              <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.news_id %>">
                                   <h5>
                                     <%= __('users.news.다음글') %><i class="fa-solid fa-chevron-right"></i>
                                   </h5>

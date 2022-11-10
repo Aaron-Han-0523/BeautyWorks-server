@@ -67,8 +67,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     profileImagePath: {
       type: DataTypes.STRING(500),
-      allowNull: true,
-      defaultValue: "images\/default-user-profile.svg",
+      allowNull: false,
+      defaultValue: "\/images\/default-user-profile.svg",
       comment: "프로필사진"
     },
     registerDate: {
@@ -80,6 +80,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "마지막 접속날짜"
+    },
+    isProjectUpdate: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: 0,
+      comment: "프로젝트알림여부"
     }
   }, {
     sequelize,

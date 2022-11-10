@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const communityRouter = require('./community');
+const newsRouter = require('./news');
 const newProjectRouter = require('./newProject');
 const myProjectRouter = require('./myProject');
 
@@ -24,7 +25,7 @@ function formatDate(d_t) {
 // 업로드 파일 저장 설정
 let storage = (fileName) => multer.diskStorage({
   destination: function (req, file, callback) {
-    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, "review");
+    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, "profileImage");
     const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
     myUtils.mkdir(FOLDER_PATH);
 
@@ -109,6 +110,8 @@ router
   .put('/myAccount', upload().single('profileImagePath'), usersController.edit)
   .get('/myAccount', (req, res) => res.render('users/myAccount'));
 
+// news
+router.use('/news', newsRouter)
 
 // Community
 router.use('/community', communityRouter)

@@ -3,7 +3,6 @@ const router = express.Router();
 
 const communityController = require('../controllers/community');
 const replyRouter = require('./communityReply');
-const newsController = require('../controllers/news');
 const communityService = require('../services/community');
 
 /* GET community listing. */
@@ -30,7 +29,6 @@ router
 
 // 상세 조회
 router
-  .get('/news/:id', newsController.detail)
   .get('/:id', communityController.detail)
 
 // 좋아요

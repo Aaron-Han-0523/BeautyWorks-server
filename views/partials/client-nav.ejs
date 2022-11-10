@@ -11,7 +11,7 @@
         </svg>
       </a>
       <% } %>
-      <img style="height: 30px;" src="/images/BeautyWorks_logo.png" />
+      <img style="height: 30px;" src="<%= codezip.url.logo_img_src %>" />
     </div>
     <div class="h-100">
       <ul class="navbar-item flex-row ms-lg-auto ms-0">
@@ -65,7 +65,7 @@
         <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
           <a href="<%= codezip.url.users.myPage %>" class="nav-link user">
             <div class="profileImage">
-              <img alt="avatar" src="/<%= user.profileImagePath %>" class="rounded-circle">
+              <img alt="avatar" src="<%= user.profileImagePath %>" class="rounded-circle">
             </div>
           </a>
         </li>

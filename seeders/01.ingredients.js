@@ -1,7 +1,7 @@
 'use strict';
 
 require('dotenv').config();
-const sample_data = require('./ingredients_sample_data.json');
+const default_data = require('./ingredients_data.json');
 
 module.exports = {
     async up(queryInterface, Sequelize) {
@@ -15,7 +15,7 @@ module.exports = {
          * }], {});
         */
 
-        await queryInterface.bulkInsert('ingredients', sample_data.data, {});
+        await queryInterface.bulkInsert('ingredients', default_data.data, {});
     },
 
     async down(queryInterface, Sequelize) {

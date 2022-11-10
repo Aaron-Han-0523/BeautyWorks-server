@@ -3,530 +3,519 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
-    <% const numberOfProduct=codezip.numberOfProduct; %>
-      <% const country_codes=codezip.country.codes; %>
+  <% const numberOfProduct=codezip.numberOfProduct; %>
+  <% const country_codes=codezip.country.codes; %>
 </head>
 
 <body class="layout-boxed">
 
   <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/client-nav.ejs") %>
-      <%- include ("../partials/chatMark.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
 
-        <!--  BEGIN MAIN CONTAINER  -->
-        <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-          <div class="overlay"></div>
-          <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-          <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-            <!--  BEGIN CONTENT AREA  -->
-            <div id="content" class="main-content">
-              <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                <div class="middle-content container-xxl p-0">
+        <div class="middle-content container-xxl p-0">
 
-                  <!-- BREADCRUMB -->
-                  <div class="row px-3">
-                    <div class="breadcrumb align-items-start d-flex br-20">
-                      <div class="p-1 col-3">
-                        <h5><strong>
-                            <%= __('샘플의뢰서 기본') %>
-                          </strong></h5>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- CONTENT AREA -->
-                  <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-
-                      <div class="widget-content widget-content-area br-20 py-5 px-5">
-
-                        <form id="basic" class="px-3 mx-3" method="post" enctype="multipart/form-data">
-                          <div class="form-group text-break">
-
-                            <!-- 제품명 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.projectName') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input class="form-control" name="projectName" id="projectName"
-                                  placeholder="<%= __('inputPlzText') %>" required>
-                              </div>
-                            </div>
-
-
-                            <!-- 브랜드명 입력 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.brandName') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input type="text" class="form-control" name="brandName"
-                                  placeholder="<%= __('inputPlzText') %>" required value="<%= user.brandName %>">
-                              </div>
-                            </div>
-
-
-                            <!-- 카테고리 선택 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.category1') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input hidden type="text" name="category1" required>
-                                <input type="text" class="form-control" id="category1_print"
-                                  placeholder="<%= __('selectPlzText') %>" readonly required>
-                              </div>
-                              <div class="col col-3">
-                                <button class="form-select text-start" type="button" id="select_category1"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                  <%= __('select') %>
-                                </button>
-                                <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_category1">
-                                  <% for(let i=0; i< numberOfProduct.category1; i++) { %>
-                                    <li>
-                                      <a class="dropdown-item" href="javascript:void(0);"
-                                        onclick="select_category1_func('<%= i %>','<%= __(`product`+i) %>');">
-                                        <%= __('product'+i) %>
-                                      </a>
-                                    </li>
-                                    <% } %>
-                                </ul>
-                              </div>
-                            </div>
-
-
-                            <!-- 품목 선택 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.category2') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input hidden type="text" name="category2" required>
-                                <input type="text" class="form-control" id="category2_print"
-                                  placeholder="<%= __('selectPlzText') %>" readonly required>
-                              </div>
-                              <div class="col col-3">
-                                <button class="form-select text-start" type="button" id="select_category2"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                  <%= __('select') %>
-                                </button>
-                                <ul id="category2_list" class="dropdown-menu scrollable-menu"
-                                  aria-labelledby="select_category2">
-                                  <li>
-                                    <%= __('choose category1 first') %>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-
-
-                            <!-- 용량 선택 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.capacity') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input type="text" class="form-control" name="capacity" id="capacity"
-                                  placeholder="<%= __('inputPlzText') %>" required>
-                              </div>
-                            </div>
-
-
-                            <!-- 대상연령 입력 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.targetAge') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input hidden type="text" name="targetAge" required>
-                                <input type="text" class="form-control" id="targetAge_print"
-                                  placeholder="<%= __('selectPlzText') %>" readonly required>
-                              </div>
-                              <div class="col col-3">
-                                <button class="form-select text-start" type="button" id="select_age"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                  <%= __('select') %>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="select_age">
-                                  <% for(let i=0; i< 8; i++) { %>
-                                    <li class="me-3 d-flex">
-                                      <label class="dropdown-item form-check-label targetAgeLabel" for="age<%= i %>">
-                                        <%= __('age'+i) %>
-                                      </label>
-                                      <input class="form-check-input age" type="checkbox" id="age<%= i %>">
-                                    </li>
-                                    <% } %>
-                                </ul>
-                              </div>
-                            </div>
-
-
-                            <!-- 성별 입력 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.targetSex') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input hidden type="text" name="targetSex" required>
-                                <input type="text" class="form-control" id="targetSex_print"
-                                  placeholder="<%= __('selectPlzText') %>" readonly required>
-                              </div>
-                              <div class="col col-3">
-                                <button class="form-select text-start" type="button" id="select_sex"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                  <%= __('select') %>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="select_sex">
-                                  <% for(let i=0; i< 2; i++) { %>
-                                    <li class="me-3 d-flex">
-                                      <label class="dropdown-item form-check-label targetSexLabel" for="sex<%= i %>">
-                                        <%= __('sex'+i) %>
-                                      </label>
-                                      <input class="form-check-input sex" type="checkbox" id="sex<%= i %>">
-                                    </li>
-                                    <% } %>
-                                </ul>
-                              </div>
-                            </div>
-
-
-                            <!-- 판매국가 입력 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.targetCountry') %><span style="color: red;">*</span>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input hidden type="text" name="targetCountry" value="">
-                                <input type="text" class="form-control" id="targetCountry_print"
-                                  placeholder="<%= __('selectPlzText') %>" readonly required>
-                              </div>
-                              <div class="col col-3">
-                                <button class="form-select text-start" type="button" id="select_country"
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                                  <%= __('select') %>
-                                </button>
-                                <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
-                                  <% for(let i=0; i< country_codes.length; i++) { %>
-                                    <li class="me-3 dropdown-item">
-                                      <div class="d-flex">
-                                        <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
-                                        <label class="form-check-label flex-grow-1 targetCountryLabel"
-                                          for="country<%= i %>">
-                                          <%= __(country_codes[i]) %>
-                                        </label>
-                                        <input class="form-check-input country" type="checkbox" id="country<%= i %>">
-                                      </div>
-                                    </li>
-                                    <% } %>
-                                </ul>
-                              </div>
-                            </div>
-
-
-                            <!-- 유통채널 입력 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.distributionChannel') %>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input type="text" class="form-control" name="distributionChannel"
-                                  id="distributionChannel" placeholder="<%= __('inputPlzText') %>">
-                              </div>
-                            </div>
-
-
-                            <!-- 해외 인증 여부 입력 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.exportable') %>
-                                </h6>
-                              </div>
-                              <div class="col col-6">
-                                <input type="text" class="form-control" name="exportable" id="exportable"
-                                  placeholder="<%= __('inputPlzText') %>">
-                              </div>
-                            </div>
-
-
-                            <!-- 한국 기능성 인증 진행 여부 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.koreaCertification') %>
-                                </h6>
-                              </div>
-                              <div class="col col-6 d-flex align-items-baseline">
-                                <input type="radio" class="btn-check" name="koreaCertification"
-                                  id="koreaCertification_true" autocomplete="off" value="1">
-                                <label class="col-5 btn btn-outline-gray my-0 me-4" for="koreaCertification_true">
-                                  <%= __('users.newProject.basic.btn.yes') %>
-                                </label>
-
-                                <input type="radio" class="btn-check" name="koreaCertification"
-                                  id="koreaCertification_false" autocomplete="off" value="" checked>
-                                <label class="col-5 btn btn-outline-gray my-0" for="koreaCertification_false">
-                                  <%= __('users.newProject.basic.btn.no') %>
-                                </label>
-                              </div>
-                            </div>
-
-
-                            <!-- 부자재 입고 유무 -->
-                            <div class="row mb-5 align-items-center">
-                              <div class="col col-2">
-                                <h6>
-                                  <%= __('users.newProject.basic.inStock') %>
-                                </h6>
-                              </div>
-                              <div class="col col-6 d-flex align-items-baseline">
-                                <input type="radio" class="btn-check" name="inStock" id="inStock_true"
-                                  autocomplete="off" value="1">
-                                <label class="col-5 btn btn-outline-gray my-0 me-4" for="inStock_true">
-                                  <%= __('users.newProject.basic.inStock.btn.yes') %>
-                                </label>
-
-                                <input type="radio" class="btn-check" name="inStock" id="inStock_false"
-                                  autocomplete="off" value="" checked>
-                                <label class="col-5 btn btn-outline-gray my-0" for="inStock_false">
-                                  <%= __('users.newProject.basic.instock.btn.no') %>
-                                </label>
-                              </div>
-                            </div>
-
-
-                            <div class="d-flex mt-5 justify-content-center">
-                              <button id="saveBtn" class="btn col-2 mx-3 p-3 br-15" type="button" onclick="save();">
-                                <%= __('users.newProject.basic.btn.Save') %>
-                              </button>
-                              <button id="nextBtn" class="btn col-2 mx-3 p-3 br-15" type="button" onclick="next();"
-                                hidden>
-                                <%= __('users.newProject.basic.btn.Next') %>
-                              </button>
-                            </div>
-
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="p-1 col-3">
+                <h6 class="main-menu">
+                  <%= __('Project') %>
+                </h6>
+                <h4><strong>
+                    <%= __('New Project') %>
+                  </strong></h4>
               </div>
             </div>
-            <!--  END CONTENT AREA  -->
+          </div>
 
-            <%- include ("../partials/footer.ejs") %>
+          <!-- CONTENT AREA -->
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <div class="widget-content widget-content-area br-20 py-5">
+
+                <form id="basic" method="post" enctype="multipart/form-data">
+                  <div class="form-group ms-3 text-break">
+                    <div class="row mb-3">
+                      <h5 class="p-0"><strong>
+                          <%= __('샘플의뢰서 기본') %>
+                        </strong>
+                      </h5>
+                    </div>
+
+                    <div class="row widget" style="padding:75px 150px 75px 150px">
+
+                      <!-- 제품명 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.projectName') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="projectName" id="projectName" placeholder="<%= __('plzInputText') %>" required>
+                        </div>
+                      </div>
+
+
+                      <!-- 브랜드명 입력 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.brandName') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input type="text" class="form-control" name="brandName" placeholder="<%= __('plzInputText') %>" required value="<%= user.brandName %>">
+                        </div>
+                      </div>
+
+
+                      <!-- 카테고리 선택 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.category1') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input hidden type="text" name="category1" required>
+                          <input type="text" class="form-control" id="category1_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                        </div>
+                        <div class="col col-2">
+                          <button class="form-select text-center" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('select') %>
+                          </button>
+                          <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_category1">
+                            <% for(let i=0; i< numberOfProduct.category1; i++) { %>
+                            <li>
+                              <a class="dropdown-item" href="javascript:void(0);" onclick="select_category1_func('<%= i %>','<%= __(`product`+i) %>');">
+                                <%= __('product'+i) %>
+                              </a>
+                            </li>
+                            <% } %>
+                          </ul>
+                        </div>
+                      </div>
+
+
+                      <!-- 품목 선택 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.category2') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input hidden type="text" name="category2" required>
+                          <input type="text" class="form-control" id="category2_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                        </div>
+                        <div class="col col-2">
+                          <button class="form-select text-center" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('select') %>
+                          </button>
+                          <ul id="category2_list" class="dropdown-menu scrollable-menu" aria-labelledby="select_category2">
+                            <li>
+                              <%= __('choose category1 first') %>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+
+                      <!-- 용량 선택 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.capacity') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input type="text" class="form-control" name="capacity" id="capacity" placeholder="<%= __('plzInputText') %>" required>
+                        </div>
+                      </div>
+
+
+                      <!-- 대상연령 입력 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.targetAge') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input hidden type="text" name="targetAge" required>
+                          <input type="text" class="form-control" id="targetAge_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                        </div>
+                        <div class="col col-2">
+                          <button class="form-select text-center" type="button" id="select_age" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('select') %>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="select_age">
+                            <% for(let i=0; i< 8; i++) { %>
+                            <li class="me-3 d-flex">
+                              <label class="dropdown-item form-check-label targetAgeLabel" for="age<%= i %>">
+                                <%= __('age'+i) %>
+                              </label>
+                              <input class="form-check-input age" type="checkbox" id="age<%= i %>">
+                            </li>
+                            <% } %>
+                          </ul>
+                        </div>
+                      </div>
+
+
+                      <!-- 성별 입력 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.targetSex') %><span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input hidden type="text" name="targetSex" required>
+                          <input type="text" class="form-control" id="targetSex_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                        </div>
+                        <div class="col col-2">
+                          <button class="form-select text-center" type="button" id="select_sex" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('select') %>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="select_sex">
+                            <% for(let i=0; i< 2; i++) { %>
+                            <li class="me-3 d-flex">
+                              <label class="dropdown-item form-check-label targetSexLabel" for="sex<%= i %>">
+                                <%= __('sex'+i) %>
+                              </label>
+                              <input class="form-check-input sex" type="checkbox" id="sex<%= i %>">
+                            </li>
+                            <% } %>
+                          </ul>
+                        </div>
+                      </div>
+
+
+                      <!-- 판매국가 입력 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.targetCountry') %>
+                            <span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input hidden type="text" name="targetCountry" value="">
+                          <input type="text" class="form-control" id="targetCountry_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                        </div>
+                        <div class="col col-2">
+                          <button class="form-select text-center" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('select') %>
+                          </button>
+                          <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
+                            <% for(let i=0; i< country_codes.length; i++) { %>
+                            <li class="me-3 dropdown-item">
+                              <div class="d-flex">
+                                <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
+                                <label class="form-check-label flex-grow-1 targetCountryLabel" for="country<%= i %>">
+                                  <%= __(country_codes[i]) %>
+                                </label>
+                                <input class="form-check-input country" type="checkbox" id="country<%= i %>">
+                              </div>
+                            </li>
+                            <% } %>
+                          </ul>
+                        </div>
+                      </div>
+
+
+                      <!-- 유통채널 입력 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.distributionChannel') %>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input type="text" class="form-control" name="distributionChannel" id="distributionChannel" placeholder="<%= __('plzInputText') %>">
+                        </div>
+                      </div>
+
+
+                      <!-- 해외 인증 여부 입력 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.exportable') %>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input type="text" class="form-control" name="exportable" id="exportable" placeholder="<%= __('plzInputText') %>">
+                        </div>
+                      </div>
+
+
+                      <!-- 한국 기능성 인증 진행 여부 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.koreaCertification') %>
+                          </h6>
+                        </div>
+                        <div class="col col-4 d-flex align-items-baseline">
+                          <input type="radio" class="btn-check" name="koreaCertification" id="koreaCertification_true" autocomplete="off" value="1">
+                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="koreaCertification_true">
+                            <%= __('users.newProject.basic.btn.yes') %>
+                          </label>
+
+                          <input type="radio" class="btn-check" name="koreaCertification" id="koreaCertification_false" autocomplete="off" value="" checked>
+                          <label class="col-5 btn btn-outline-primary my-0" for="koreaCertification_false">
+                            <%= __('users.newProject.basic.btn.no') %>
+                          </label>
+                        </div>
+                      </div>
+
+
+                      <!-- 부자재 입고 유무 -->
+                      <div class="row mb-5 align-items-center">
+                        <div class="col col-3">
+                          <h6>
+                            <%= __('users.newProject.basic.inStock') %>
+                          </h6>
+                        </div>
+                        <div class="col col-4 d-flex align-items-baseline">
+                          <input type="radio" class="btn-check" name="inStock" id="inStock_true" autocomplete="off" value="1">
+                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="inStock_true">
+                            <%= __('users.newProject.basic.inStock.btn.yes') %>
+                          </label>
+
+                          <input type="radio" class="btn-check" name="inStock" id="inStock_false" autocomplete="off" value="" checked>
+                          <label class="col-5 btn btn-outline-primary my-0" for="inStock_false">
+                            <%= __('users.newProject.basic.inStock.btn.no') %>
+                          </label>
+                        </div>
+                      </div>
+
+
+                      <div class="d-flex mt-5 justify-content-center">
+                        <button id="saveBtn" class="btn btn-outline-primary col-2 mx-3 p-3 br-15" type="button" onclick="save();">
+                          <%= __('users.newProject.basic.btn.Save') %>
+                        </button>
+                        <button id="nextBtn" class="btn btn-outline-primary col-2 mx-3 p-3 br-15" type="button" onclick="next();" hidden>
+                          <%= __('users.newProject.basic.btn.Next') %>
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
 
         </div>
-        <!-- END MAIN CONTAINER -->
+      </div>
+    </div>
+    <!--  END CONTENT AREA  -->
 
-        <%- include ("../partials/commonScrpits.ejs") %>
+    <%- include ("../partials/footer.ejs") %>
 
-          <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-          <div>
-            <% let category2_name_list={} %>
-              <% for (let i=0; i < numberOfProduct.category1; i++) { %>
-                <% category2_name_list[i]={}; %>
-                  <% for (let j=0; j < numberOfProduct.category2[i]; j++) { %>
-                    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
-                      <% } } %>
-          </div>
-          <script>
-            const numberOfProduct = JSON.parse('<%- JSON.stringify(numberOfProduct) %>');
-            // console.log(numberOfProduct);
-            const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
-            // console.log(category2_name_list);
-            const country_codes = JSON.parse('<%- JSON.stringify(country_codes) %>');
-            // console.log(country_codes);
+  </div>
+  <!-- END MAIN CONTAINER -->
 
-            function select_category1_func(value, printName) {
-              // console.log("v:", value, "p", printName);
-              document.forms[0]['category1'].value = value;
-              category1_print.value = printName;
-              let temp_html = "";
-              let category2_n = numberOfProduct.category2[value];
-              for (let i = 0; i < category2_n; i++) {
-                temp_html += `<li>
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <div>
+    <% let category2_name_list={} %>
+    <% for (let i=0; i < numberOfProduct.category1; i++) { %>
+    <% category2_name_list[i]={}; %>
+    <% for (let j=0; j < numberOfProduct.category2[i]; j++) { %>
+    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
+    <% } } %>
+  </div>
+  <script>
+    const numberOfProduct = JSON.parse('<%- JSON.stringify(numberOfProduct) %>');
+    // console.log(numberOfProduct);
+    const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
+    // console.log(category2_name_list);
+    const country_codes = JSON.parse('<%- JSON.stringify(country_codes) %>');
+    // console.log(country_codes);
+
+    function select_category1_func(value, printName) {
+      // console.log("v:", value, "p", printName);
+      document.forms[0]['category1'].value = value;
+      category1_print.value = printName;
+      let temp_html = "";
+      let category2_n = numberOfProduct.category2[value];
+      for (let i = 0; i < category2_n; i++) {
+        temp_html += `<li>
                             <a class="dropdown-item" href="javascript:void(0);"
                               onclick="select_category2_func('${i}','${category2_name_list[value][i]}');">
                               ${category2_name_list[value][i]}
                             </a>
                           </li>`
-              }
-              category2_list.innerHTML = temp_html;
-              checkValues();
-            }
+      }
+      category2_list.innerHTML = temp_html;
+      checkValues();
+    }
 
-            function select_category2_func(value, printName) {
-              // console.log("v:", value, "p", printName);
-              document.forms[0]["category2"].value = value;
-              category2_print.value = printName;
-              checkValues();
-            }
+    function select_category2_func(value, printName) {
+      // console.log("v:", value, "p", printName);
+      document.forms[0]["category2"].value = value;
+      category2_print.value = printName;
+      checkValues();
+    }
 
-            HTMLCollection.prototype.forEach = Array.prototype.forEach;
-            document.forms[0].getElementsByClassName('age').forEach((item, index) => {
-              item.addEventListener("change", (e) => {
-                const obj = document.forms[0]['targetAge'];
-                let value = +obj.value;
-                let text = document.getElementsByClassName('targetAgeLabel')[index].innerText.trim();
-                text = " " + text + ",";
-                const print_place = targetAge_print;
-                if (value) print_place.value += ",";
+    HTMLCollection.prototype.forEach = Array.prototype.forEach;
+    document.forms[0].getElementsByClassName('age').forEach((item, index) => {
+      item.addEventListener("change", (e) => {
+        const obj = document.forms[0]['targetAge'];
+        let value = +obj.value;
+        let text = document.getElementsByClassName('targetAgeLabel')[index].innerText.trim();
+        text = " " + text + ",";
+        const print_place = targetAge_print;
+        if (value) print_place.value += ",";
 
-                if (e.target.checked) {
-                  print_place.value += text;
-                  value += 1 << index;
-                  obj.value = value;
-                  // console.log(obj.value);
-                } else {
-                  let temp_text = print_place.value;
-                  print_place.value = temp_text.replace(text, "");
-                  value -= 1 << index;
-                  obj.value = value || '';
-                  // console.log(obj.value);
-                }
-                print_place.value = print_place.value.slice(0, -1);
-                checkValues();
-              })
-            })
+        if (e.target.checked) {
+          print_place.value += text;
+          value += 1 << index;
+          obj.value = value;
+          // console.log(obj.value);
+        } else {
+          let temp_text = print_place.value;
+          print_place.value = temp_text.replace(text, "");
+          value -= 1 << index;
+          obj.value = value || '';
+          // console.log(obj.value);
+        }
+        print_place.value = print_place.value.slice(0, -1);
+        checkValues();
+      })
+    })
 
-            document.forms[0].getElementsByClassName('sex').forEach((item, index) => {
-              item.addEventListener("change", (e) => {
-                const obj = document.forms[0]['targetSex'];
-                let value = +obj.value;
-                let text = document.getElementsByClassName('targetSexLabel')[index].innerText.trim();
-                text = " " + text + ",";
-                const print_place = targetSex_print;
-                if (value) print_place.value += ",";
+    document.forms[0].getElementsByClassName('sex').forEach((item, index) => {
+      item.addEventListener("change", (e) => {
+        const obj = document.forms[0]['targetSex'];
+        let value = +obj.value;
+        let text = document.getElementsByClassName('targetSexLabel')[index].innerText.trim();
+        text = " " + text + ",";
+        const print_place = targetSex_print;
+        if (value) print_place.value += ",";
 
-                if (e.target.checked) {
-                  print_place.value += text;
-                  value += 1 << index;
-                  obj.value = value;
-                  // console.log(obj.value);
-                } else {
-                  let temp_text = print_place.value;
-                  print_place.value = temp_text.replace(text, "");
-                  value -= 1 << index;
-                  obj.value = value || '';
-                  // console.log(obj.value);
-                }
-                print_place.value = print_place.value.slice(0, -1);
-                checkValues();
-              })
-            })
+        if (e.target.checked) {
+          print_place.value += text;
+          value += 1 << index;
+          obj.value = value;
+          // console.log(obj.value);
+        } else {
+          let temp_text = print_place.value;
+          print_place.value = temp_text.replace(text, "");
+          value -= 1 << index;
+          obj.value = value || '';
+          // console.log(obj.value);
+        }
+        print_place.value = print_place.value.slice(0, -1);
+        checkValues();
+      })
+    })
 
-            document.forms[0].getElementsByClassName('country').forEach((item, index) => {
-              item.addEventListener("change", (e) => {
-                const obj = document.forms[0]['targetCountry'];
-                let code = country_codes[index] + ',';
-                let text = document.getElementsByClassName('targetCountryLabel')[index].innerText.trim();
-                text = " " + text + ",";
-                const print_place = targetCountry_print;
-                // console.log(Object.keys(value));
-                if (obj.value) print_place.value += ",";
+    document.forms[0].getElementsByClassName('country').forEach((item, index) => {
+      item.addEventListener("change", (e) => {
+        const obj = document.forms[0]['targetCountry'];
+        let code = country_codes[index] + ',';
+        let text = document.getElementsByClassName('targetCountryLabel')[index].innerText.trim();
+        text = " " + text + ",";
+        const print_place = targetCountry_print;
+        // console.log(Object.keys(value));
+        if (obj.value) print_place.value += ",";
 
-                if (e.target.checked) {
-                  print_place.value += text;
-                  obj.value += code;
-                  // console.log(obj.value);
-                } else {
-                  let temp_text = print_place.value;
-                  print_place.value = temp_text.replace(text, "");
-                  obj.value = obj.value.replace(code, '');
-                  // console.log(obj.value);
-                }
-                print_place.value = print_place.value.slice(0, -1);
-                checkValues();
-              })
-            })
+        if (e.target.checked) {
+          print_place.value += text;
+          obj.value += code;
+          // console.log(obj.value);
+        } else {
+          let temp_text = print_place.value;
+          print_place.value = temp_text.replace(text, "");
+          obj.value = obj.value.replace(code, '');
+          // console.log(obj.value);
+        }
+        print_place.value = print_place.value.slice(0, -1);
+        checkValues();
+      })
+    })
 
-            function checkValues() {
-              let formData = new FormData(basic);
-              let cnt = 0;
-              let checkReady = false;
+    function checkValues() {
+      let formData = new FormData(basic);
+      let cnt = 0;
+      let checkReady = false;
 
-              for ([name, value] of formData) {
-                // console.log(name, Boolean(value));
+      for ([name, value] of formData) {
+        // console.log(name, Boolean(value));
 
-                if (!value) break;
-                cnt += 1;
-                if (cnt > 7) {
-                  checkReady = true;
-                  break;
-                }
-              }
+        if (!value) break;
+        cnt += 1;
+        if (cnt > 7) {
+          checkReady = true;
+          break;
+        }
+      }
 
-              if (checkReady) {
-                saveBtn.hidden = true;
-                nextBtn.hidden = false;
-              } else {
-                saveBtn.hidden = false;
-                nextBtn.hidden = true;
-              }
-            }
+      if (checkReady) {
+        saveBtn.hidden = true;
+        nextBtn.hidden = false;
+      } else {
+        saveBtn.hidden = false;
+        nextBtn.hidden = true;
+      }
+    }
 
-            document.forms[0].addEventListener('input', (e) => {
-              checkValues();
-            })
+    document.forms[0].addEventListener('input', (e) => {
+      checkValues();
+    })
 
-            function save() {
-              fetch(basic.action, {
-                method: "post",
-                body: new URLSearchParams(new FormData(basic))
-              }).then(res => {
-                if (res.ok) {
-                  return alert("<%= __('users.msg.SuccessSave') %>");
-                }
-                else return alert("<%= __('users.msg.FailSave') %>");
-              })
-            }
+    function save() {
+      fetch(basic.action, {
+        method: "post",
+        body: new URLSearchParams(new FormData(basic))
+      }).then(res => {
+        if (res.ok) {
+          return alert("<%= __('users.msg.SuccessSave') %>");
+        } else return alert("<%= __('users.msg.FailSave') %>");
+      })
+    }
 
-            function next() {
+    function next() {
 
-              // UI 확인용
-              location.replace('<%= codezip.url.users.newProject._3 %>');
-              return;
+      // UI 확인용
+      location.replace('<%= codezip.url.users.newProject._3 %>');
+      return;
 
-              fetch(basic.action, {
-                method: "post",
-                body: new URLSearchParams(new FormData(basic))
-              }).then(res => {
-                if (res.ok) {
-                  alert("<%= __('users.msg.SuccessSave') %>");
-                  window.location.href = res.url;
-                  return;
-                }
-                else return alert("<%= __('users.msg.FailSave') %>");
-              })
-            }
-          </script>
-          <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+      fetch(basic.action, {
+        method: "post",
+        body: new URLSearchParams(new FormData(basic))
+      }).then(res => {
+        if (res.ok) {
+          alert("<%= __('users.msg.SuccessSave') %>");
+          window.location.href = res.url;
+          return;
+        } else return alert("<%= __('users.msg.FailSave') %>");
+      })
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

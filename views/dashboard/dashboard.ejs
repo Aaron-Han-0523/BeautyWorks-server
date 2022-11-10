@@ -160,19 +160,19 @@
               </div>
               <!-- /* 테스트 데이터 생성 -->
               <div>
-                <% let completed_project=[]; %>
-                <% completed_project.push({
-                  productName:"My Suncream",
-                  volume:110,
+                <% let completed_project={data:[]}; %>
+                <% completed_project.data.push({
+                  productName:"My Suncream1",
+                  volume:"110ml",
                   category1:0,
                   category2:0,
                   totalOrderAmount:10000,
                   lastOrderDate:new Date(2022,10,5),
                   imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                 })%>
-                <% completed_project.push({
-                  productName:"My Suncream",
-                  volume:120,
+                <% completed_project.data.push({
+                  productName:"My Suncream2",
+                  volume:"120ml",
                   category1:0,
                   category2:0,
                   totalOrderAmount:20000,
@@ -180,14 +180,23 @@
                   imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
                 
                 })%>
-                <% completed_project.push({
-                  productName:"My Suncream",
-                  volume:130,
+                <% completed_project.data.push({
+                  productName:"My Suncream3",
+                  volume:"110g",
                   category1:0,
                   category2:0,
                   totalOrderAmount:30000,
                   lastOrderDate:new Date(2022,10,25),
                   imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                })%>
+                <% completed_project.data.push({
+                  productName:"My Suncream4",
+                  volume:"210g",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
@@ -211,43 +220,140 @@
                   </div>
 
                   <div class="row mt-3">
-                    <div class="d-flex justify-content-between px-0">
-                      <% completed_project.forEach((item,index)=>{ %>
-                      <div class="widget p-4" style="width: 32%;">
-                        <div class="d-flex">
-                          <img class="align-self-stretch w-50 br-10" style="height: calc(100%-50px);" src="<%= item.imagePaths.split(`,`)[0] %>">
-                          <div class="px-3 flex-grow-1">
-                            <p>
-                              <%= item.productName %>
-                            </p>
-                            <p>
-                              <%= __("product"+item.category1+"."+item.category2) %>
-                            </p>
-                            <p>
-                              <%= item.volume %>
-                            </p>
-                            <p>
-                              <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                            </p>
-                            <p>
-                              <%= item.totalOrderAmount %>
-                            </p>
-                            <p>
-                              <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                            </p>
-                            <p>
-                              <%= formatDate(item.lastOrderDate) %>
-                            </p>
-                            </p>
-                          </div>
+                    <div class="widget p-4 row" id="completed_project">
+                      <% completed_project.data.forEach((item,index)=>{ %>
+                      <div class="col d-flex flex-column">
+                        <!-- style="height: calc(100%-50px);" -->
+                        <div class="preview">
+                          <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
+                        </div>
+                        <div class="mb-auto mt-3">
+                          <h6>
+                            <%= item.productName %>
+                          </h6>
+                          <h6>
+                            <%= __("product"+item.category1+"."+item.category2) %>
+                            <%= " " + item.volume %>
+                          </h6>
+                          <p>
+                            <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                            <%= ' : ' + item.totalOrderAmount %>
+                            <br>
+                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                            <%= ' : ' + formatDate(item.lastOrderDate) %>
+                          </p>
                         </div>
                         <div class="row mx-0 mt-3">
-                          <button class="col-12 btn btn-outline-primary" type="button">
+                          <button class="btn btn-outline-primary" type="button">
                             <%= __('REORDER') %>
                           </button>
                         </div>
                       </div>
                       <% }) %>
+
+                      <!-- pagination -->
+                      <% let page=1 %>
+                      <!-- +completed_project.data.length -->
+                      <% let count=10 %>
+                      <% let end_page=parseInt((count-1)/4)+1; %>
+                      <% if(end_page>1) { %>
+                      <div class="d-flex justify-content-center mt-4">
+                        <!-- 페이징처리 시작 -->
+                        <!-- 처음 & 이전페이지 -->
+                        <ul class="p-2 pagination">
+                          <% if (page==1) { %>
+                          <li class="page-item disabled"><a class="page-link">
+                              <%- __('users.pagination.처음으로') %>
+                            </a>
+                          </li>
+                          <li class="page-item disabled"><a class="page-link">
+                              <%- __('users.pagination.이전으로') %>
+                            </a>
+                          </li>
+                          <% } else { %>
+                          <li class="page-item"><a class="page-link" >
+                              <%- __('users.pagination.처음으로') %>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" >
+                              <%- __('users.pagination.이전으로') %>
+                            </a>
+                          </li>
+                          <% } %>
+                        </ul>
+                        <!-- 페이지 리스트 -->
+                        <ul class="p-2 pagination">
+                          <% let end_list_num=end_page> 6 ? 5:end_page %>
+                          <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
+                          <li class="page-item disabled">
+                            <a class="page-link current_page">
+                              <%= i %>
+                            </a>
+                          </li>
+                          <% } else { %>
+                          <li class="page-item"><a class="page-link" >
+                              <%= i %>
+                            </a></li>
+                          <% }} %>
+                          <% } else if ( page> end_page-3 ) {
+                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
+                          <li class="page-item disabled">
+                            <a class="page-link current_page">
+                              <%= i %>
+                            </a>
+                          </li>
+                          <% } else { %>
+                          <li class="page-item">
+                            <a class="page-link" >
+                              <%= i %>
+                            </a>
+                          </li>
+                          <% }} %>
+                          <% } else { for (let i=page-2; i < page+3; i++) { if (page==i) {
+                                                        %>
+                          <li class="page-item disabled">
+                            <a class="page-link current_page">
+                              <%= i %>
+                            </a>
+                          </li>
+                          <% } else { %>
+                          <li class="page-item">
+                            <a class="page-link" >
+                              <%= i %>
+                            </a>
+                          </li>
+                          <% }} %>
+                          <% } %>
+                        </ul>
+                        <!-- 다음 & 마지막페이지 -->
+                        <ul class="p-2 pagination">
+                          <% if(page==end_page){ %>
+                          <li class="page-item disabled">
+                            <a class="page-link">
+                              <%- __('users.pagination.다음으로') %>
+                            </a>
+                          </li>
+                          <li class="page-item disabled">
+                            <a class="page-link">
+                              <%- __('users.pagination.마지막으로') %>
+                            </a>
+                          </li>
+                          <% } else { %>
+                          <li class="page-item">
+                            <a class="page-link" >
+                              <%- __('users.pagination.다음으로') %>
+                            </a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" >
+                              <%- __('users.pagination.마지막으로') %>
+                            </a>
+                          </li>
+                          <% } %>
+                        </ul>
+                        <!-- 페이징처리 끝 -->
+                      </div>
+                      <% } %>
                     </div>
                   </div>
                 </div>
@@ -298,11 +404,11 @@
                       </div>
                       <!-- 테스트 데이터 생성 */ -->
                       <% recommended_project.forEach((item,index)=>{ %>
-                      <div class="col">
+                      <div class="col-4">
                         <div class="preview">
                           <img class="br-15" src="<%= item.imagePaths.split(',')[0] %>">
                         </div>
-                        <div class="row mt-3 justify-content-center">
+                        <div class="row mt-3 justify-content-center text-break">
                           <p>Top / <%= __('product'+item.category1) %><br />
                             <span style="color: gray;">
                               <%= __('product'+item.category1+'.'+item.category2) %>
@@ -328,7 +434,7 @@
                         </h5>
                       </div>
                       <div class="row text-end">
-                        <a href="<%= codezip.url.users.ingredientData %>">
+                        <a href="<%= codezip.url.users.ingredient %>">
                           <%= __('Show All') %>
                         </a>
                       </div>
@@ -394,7 +500,7 @@
                         </h5>
                       </div>
                       <div class="row text-end">
-                        <a href="<%= codezip.url.users.news %>">
+                        <a href="<%= codezip.url.users.news.main %>">
                           <%= __('Show All') %>
                         </a>
                       </div>
@@ -468,9 +574,9 @@
                       <%- include('../partials/badge/new.ejs') %>
                       <div class="h6"><%= item.title %></div>
                       <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.lastName} ${item.firstName}` %></div>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.lastName} ${item.firstName}` %></div>
                       <% } else { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.firstName} ${item.lastName}` %></div>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.firstName} ${item.lastName}` %></div>
                       <% } %>
                     </div>
                     <% }) %>

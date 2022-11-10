@@ -109,12 +109,12 @@ exports.edit = async (req, res, next) => {
     let body = req.body;
     // console.log('body :', body);
     if (body.isRemoveImage == 'true') {
-        body.profileImagePath = res.locals.codezip.url.users.defaultProfileImage.slice(1);
+        body.profileImagePath = res.locals.codezip.url.users.defaultProfileImage;
         console.log("default profile image path :", body.profileImagePath);
     } else {
         let file = req.file;
         // console.log('file :', file);
-        if (file) body[file.fieldname] = file.path;
+        if (file) body[file.fieldname] = '/' + file.path;
     }
     body = Object.assign(user, body);
     usersService

@@ -2,87 +2,88 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
-        <link href="/src/assets/css/light/authentication/auth-boxed.css" rel="stylesheet" type="text/css" />
-        <!-- <link href="/src/assets/css/dark/authentication/auth-boxed.css" rel="stylesheet" type="text/css" /> -->
+  <%- include ("../partials/header.ejs") %>
+  <link href="/src/assets/css/light/authentication/auth-boxed.css" rel="stylesheet" type="text/css" />
+  <!-- <link href="/src/assets/css/dark/authentication/auth-boxed.css" rel="stylesheet" type="text/css" /> -->
 </head>
 
-<body class="form">
+<body class="form" style="background-color: var(--BW-form-color);">
 
-    <%- include ("../partials/loader.ejs") %>
-        <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
 
-            <div class="auth-container d-flex">
+  <div class="auth-container d-flex">
 
-                <div class="container mx-auto align-self-center">
+    <div class="container mx-auto align-self-center">
 
-                    <div class="row">
+      <div class="row">
 
-                        <div class="col-sm-9 col-md-7 col-xl-5 flex-column align-self-center mx-auto">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <div class="row mx-4 my-1">
-                                        <form method="post">
-                                            <div class="">
-                                                <div class="col-12">
-                                                    <div class="mb-3">
-                                                        <input type="text" id="<%= __('users.id') %>"
-                                                            class="form-control" name="<%= __('users.id') %>"
-                                                            placeholder="<%= __('users.signIn.id.placeholder') %>" autofocus>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="mb-3">
-                                                        <input type="password" class="form-control" name="password"
-                                                            placeholder="<%= __('users.signIn.password.placeholder') %>">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="mb-4">
-                                                        <button class="btn btn-secondary w-100">
-                                                            <%= __('users.signIn.btnName') %>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="mb-4">
-                                                        <a href="#">
-                                                            <%= __('users.signIn.forgotQuestion') %>
-                                                        </a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="mb-4">
-                                                        <a href="/users/signUp" class="h6 fw-900"><strong>
-                                                                <%= __('users.signIn.signUp') %>
-                                                            </strong></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
+        <div class="col-sm-9 col-md-7 col-xl-5 flex-column align-self-center mx-auto">
+          <div class="card bg-white">
+            <div class="card-body">
+              <div class="row mx-4 my-4">
+                <div class="row my-4 pb-4">
+                  <div class="text-center">
+                    <img style="height: 30px;" src="<%= codezip.url.logo_img_src %>">
+                  </div>
+                </div>
+                <form method="post">
+                  <div class="">
+                    <div class="col-12">
+                      <div class="mb-3">
+                        <input type="text" id="<%= __('users.id') %>" class="form-control" name="<%= __('users.id') %>" placeholder="<%= __('users.signIn.id.placeholder') %>" autofocus>
+                      </div>
                     </div>
 
-                </div>
+                    <div class="col-12">
+                      <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="<%= __('users.signIn.password.placeholder') %>">
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="mb-4">
+                        <button class="btn btn-primary w-100">
+                          <%= __('users.signIn.btnName') %>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="mt-4 pt-4">
+                        <a href="#">
+                          <%= __('users.signIn.forgotQuestion') %>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="mb-4">
+                        <a href="/users/signUp" class="h6 fw-900"><strong>
+                            <%= __('users.signIn.signUp') %>
+                          </strong></a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
 
             </div>
+          </div>
+        </div>
 
-            <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-            <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- END GLOBAL MANDATORY SCRIPTS -->
-            <script>
-                localStorage.clear();
-                sessionStorage.clear();
-            </script>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+  <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- END GLOBAL MANDATORY SCRIPTS -->
+  <script>
+    localStorage.clear();
+    sessionStorage.clear();
+  </script>
 </body>

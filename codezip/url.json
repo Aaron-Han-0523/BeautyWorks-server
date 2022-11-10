@@ -1,4 +1,5 @@
 {
+    "logo_img_src": "/images/BeautyWorks_logo.png",
     "users": {
         "defaultProfileImage": "/images/default-user-profile.png",
         "questionMark": "http://intercome.help",
@@ -24,8 +25,13 @@
         },
         "contents": "/users/contents",
         "container": "/users/container",
-        "ingredientData": "/users/ingredientData",
-        "news": "/users/community/news",
+        "ingredient": "/users/ingredient",
+        "news": {
+            "main": "/users/news",
+            "add": "/users/news/add",
+            "edit": "/users/news/edit",
+            "delete": "/users/news/delete"
+        },
         "community": {
             "main": "/users/community",
             "like": "/users/community/like",

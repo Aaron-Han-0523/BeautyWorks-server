@@ -2,134 +2,144 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
+  <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed">
 
-    <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
-        <%- include ("../partials/client-nav.ejs") %>
-            <%- include ("../partials/chatMark.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
 
-                <!--  BEGIN MAIN CONTAINER  -->
-                <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-                    <div class="overlay"></div>
-                    <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-                    <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-                        <!--  BEGIN CONTENT AREA  -->
-                        <div id="content" class="main-content">
-                            <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                                <div class="middle-content container-xxl p-0">
+        <div class="middle-content container-xxl p-0">
 
-                                    <!-- BREADCRUMB -->
-                                    <div class="row px-3">
-                                        <div class="breadcrumb align-items-start d-flex br-20">
-                                            <div class="p-1 col-3">
-                                                <h5><strong>
-                                                        <%= __('타겟제품 유무 확인') %>
-                                                    </strong></h5>
-                                            </div>
-                                        </div>
-                                    </div>
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Project') %>
+                </h6>
+                <h4><strong>
+                    <%= __('New Project') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
 
-                                    <!-- CONTENT AREA -->
-                                    <div class="row layout-top-spacing justify-content-center">
-                                        <div class="col-xxl-5 col-xl-6 col-md-7 col-sm-10 layout-spacing">
+          <div class="row px-3">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col-3">
+                <h5><strong>
+                    <%= __('타겟제품 유무 확인') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
 
-                                            <div class="widget-content widget-content-area br-20 py-5 px-0 bg-gray">
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb py-0">
 
-                                                <form id="isTarget" class="px-3 mx-3" method="post">
-                                                    <div class="form-group text-center">
-                                                        <!-- title -->
-                                                        <div>
-                                                            <h5>
-                                                                <%= __('users.newProject.isTarget.question') %>
-                                                            </h5>
-                                                        </div>
-                                                        <!-- target url input -->
-                                                        <div class="mt-5">
-                                                            <div>
-                                                                <%= __('users.newProject.isTarget.urlInput.before') %>
-                                                            </div>
-                                                            <div
-                                                                class="form-control my-3 d-flex align-items-baseline px-3 br-15">
-                                                                <input class="w-100 align-placeholder" name="targetURL"
-                                                                    style="border: 0px;"
-                                                                    placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>"
-                                                                    autofocus required>
-                                                            </div>
-                                                        </div>
+              <div class="widget w-100 p-5">
 
-                                                        <!-- 버튼 -->
-                                                        <div class="mt-5 d-flex">
-                                                            <button disabled id="nextBtn"
-                                                                class="col-5 btn-outline-gray bg-white py-3 px-5 br-15 me-auto">
-                                                                <%= __('users.newProject.isTarget.btn.next') %>
-                                                            </button>
-                                                            <button type="button"
-                                                                class="col-5 btn-outline-gray bg-white py-3 px-5 br-15"
-                                                                onclick="location.href='<%= codezip.url.users.contents %>';">
-                                                                <%= __('users.newProject.isTarget.btn.pass') %>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--  END CONTENT AREA  -->
+                <form id="isTarget" method="post">
+                  <div class="form-group p-5">
+                    <!-- title -->
+                    <div>
+                      <h5>
+                        <%= __('users.newProject.isTarget.question') %>
+                      </h5>
+                    </div>
+                    <!-- target url input -->
+                    <div class="mt-0">
+                      <div>
+                        <%= __('users.newProject.isTarget.urlInput.before') %>
+                      </div>
+                      <div class="form-control mt-3 d-flex align-items-baseline px-3 br-15">
+                        <input class="form-control w-100 align-placeholder" name="targetURL" style="border: 0px;" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" autofocus required>
+                      </div>
+                    </div>
 
-                        <%- include ("../partials/footer.ejs") %>
+                    
+                  </div>
 
-                </div>
-                <!-- END MAIN CONTAINER -->
+                  <hr class="mt-0">
 
-                <%- include ("../partials/commonScrpits.ejs") %>
+                  <!-- 버튼 -->
+                  <div class="mt-5 d-flex justify-content-center">
+                    <button disabled id="nextBtn" class="col-2 btn btn-outline-primary py-3 px-5 br-15 me-5">
+                      <%= __('users.newProject.isTarget.btn.next') %>
+                    </button>
+                    <button type="button" class="col-2 btn btn-outline-primary py-3 px-5 br-15" onclick="location.href='<%= codezip.url.users.contents %>';">
+                      <%= __('users.newProject.isTarget.btn.pass') %>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  END CONTENT AREA  -->
 
-                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                    <script>
-                        isTarget[0].addEventListener('keyup', (event) => {
-                            if (event.target.value) {
-                                nextBtn.disabled = false;
-                            } else {
-                                nextBtn.disabled = true;
-                            }
-                        })
+    <%- include ("../partials/footer.ejs") %>
 
-                        isTarget.onsubmit = async (e) => {
-                            e.preventDefault();
+  </div>
+  <!-- END MAIN CONTAINER -->
 
-                            // UI 확인용
-                            location.replace('<%= codezip.url.users.newProject._2 %>');
-                            return;
+  <%- include ("../partials/commonScrpits.ejs") %>
 
-                            if (!isTarget[0].value) {
-                                alert('')
-                            }
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    isTarget[0].addEventListener('keyup', (event) => {
+      if (event.target.value) {
+        nextBtn.disabled = false;
+      } else {
+        nextBtn.disabled = true;
+      }
+    })
 
-                            let response = await fetch(isTarget.action, {
-                                method: 'POST',
-                                body: new URLSearchParams(new FormData(isTarget))
-                            }).then(res => {
-                                if (res.ok) alert("<%= __('users.msg.SuccessSave') %>");
-                                else {
-                                    alert("<%= __('users.msg.FailSave') %>");
-                                }
-                                return res.json();
-                            }).then(result => {
-                                console.log(result);
-                            });
-                        }
-                    </script>
-                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    isTarget.onsubmit = async (e) => {
+      e.preventDefault();
+
+      // UI 확인용
+      location.replace('<%= codezip.url.users.newProject._2 %>');
+      return;
+
+      if (!isTarget[0].value) {
+        alert('')
+      }
+
+      let response = await fetch(isTarget.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(isTarget))
+      }).then(res => {
+        if (res.ok) alert("<%= __('users.msg.SuccessSave') %>");
+        else {
+          alert("<%= __('users.msg.FailSave') %>");
+        }
+        return res.json();
+      }).then(result => {
+        console.log(result);
+      });
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

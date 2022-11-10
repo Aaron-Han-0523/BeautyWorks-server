@@ -7,23 +7,6 @@ body {
     font-family: 'Poppins';
 }
 
-:root {
-    --BW-blue: rgb(0, 129, 226);
-    --BW-progress-0: rgb(165, 218, 255);
-    --BW-progress-1: rgb(165, 218, 255);
-    --BW-progress-2: rgb(165, 218, 255);
-    --BW-progress-3: rgb(102, 171, 255);
-    --BW-progress-4: rgb(123, 129, 255);
-    --BW-progress-5: rgb(123, 129, 255);
-    --BW-progress-6: rgb(123, 129, 255);
-    --BW-progress-7: rgb(199, 115, 255);
-    --BW-progress-8: rgb(199, 115, 255);
-    --BW-progress-group-0: rgb(165, 218, 255);
-    --BW-progress-group-1: rgb(102, 171, 255);
-    --BW-progress-group-2: rgb(123, 129, 255);
-    --BW-progress-group-3: rgb(199, 115, 255);
-    --BW-progress-default: rgb(228, 228, 228);
-}
 
 /***********************/
 /*      nav bar        */
@@ -76,11 +59,26 @@ body {
     overflow-x: hidden;
 }
 
+.scrollable-menu::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.scrollable-menu::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #217af4; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+.scrollable-menu::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
 .breadcrumb {
     background: #fff;
     top: 60px;
     /* margin-top: 10px; */
-    padding: 11px 20px 11px 20px;
+    padding: 20px 20px 20px 20px;
     min-height: 60px;
     /* box-shadow: 0 6px 10px 0 rgba(255, 255, 255, 0.14), 0 1px 18px 0 rgba(255, 255, 255, 0.12), 0 3px 5px -1px rgba(255, 255, 255, 0.2); */
     /* background-color: rgba(224, 230, 237, 0.9) !important; */
@@ -593,7 +591,8 @@ h5 {
     font-weight: bolder;
 }
 
-#sidebar ul.menu-categories div {
+#sidebar ul.menu-categories div.main-menu,
+#sidebar ul.menu-categories li div {
     padding-left: 20px;
 }
 

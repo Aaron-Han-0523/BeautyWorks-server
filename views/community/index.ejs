@@ -9,353 +9,336 @@
 
   <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/client-nav.ejs") %>
-      <%- include ("../partials/chatMark.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
 
-        <!--  BEGIN MAIN CONTAINER  -->
-        <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-          <div class="overlay"></div>
-          <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-          <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-            <!--  BEGIN CONTENT AREA  -->
-            <div id="content" class="main-content">
-              <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                <div class="middle-content container-xxl p-0">
+        <div class="middle-content container-xxl p-0">
 
-                  <!-- BREADCRUMB -->
-                  <div class="row px-3">
-                    <div class="breadcrumb align-items-start d-flex pt-3 br-20">
-                      <div class="p-1 col-3">
-                        <h5><strong>
-                            <%= __('Community') %>
-                          </strong></h5>
-                      </div>
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-start d-flex pt-3 br-20">
+              <div class="p-1 col-3">
+                <h5><strong>
+                    <%= __('Community') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT AREA -->
+          <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <!-- News -->
+              <div class="widget-content widget-content-area br-20 px-4">
+                <div class="form-group ms-3">
+                  <div class="row">
+                    <div class="col-6 col-md-4">
+                      <h5><strong>
+                          <%= __('users.community.header.News') %>
+                        </strong></h5>
                     </div>
                   </div>
-                  <!-- CONTENT AREA -->
-                  <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-
-                      <!-- News -->
-                      <div class="widget-content widget-content-area br-20 px-4">
-                        <div class="form-group ms-3">
-                          <div class="row">
-                            <div class="col-6 col-md-4">
-                              <h5><strong>
-                                  <%= __('users.community.header.News') %>
-                                </strong></h5>
-                            </div>
-                          </div>
-                          <!-- list -->
-                          <div class="row mt-3">
-                            <% news.data.forEach((item, index)=>{ %>
-                              <div class="my-1">
-                                <button class="col-12 btn br-15" type="button"
-                                  onclick="location.href='<%= codezip.url.users.news + '/' + item.news_id %>'">
-                                  <h6 class="m-1">
-                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                      <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
+                  <!-- list -->
+                  <div class="row mt-3">
+                    <% news.data.forEach((item, index)=>{ %>
+                    <div class="my-1">
+                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.news.main + '/' + item.news_id %>'">
+                        <h6 class="m-1">
+                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
                                         ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
-                                        <% } else { %>
-                                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
+                          <% } else { %>
+                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
                                             ${item.firstName} ${item.lastName} ${formatDate(item.updateDate)}` %>
-                                            <% } %>
-                                  </h6>
-                                </button>
-                              </div>
-                              <% }) %>
-                          </div>
-
-                          <!-- pagination -->
-                          <% let page=+news.page %>
-                            <% let count=+news.count %>
-                              <% let end_page=parseInt((count-1)/4)+1; %>
-                                <% if(end_page>1) { %>
-                                  <div class="d-flex justify-content-center mt-3">
-                                    <!-- 페이징처리 시작 -->
-                                    <!-- 처음 & 이전페이지 -->
-                                    <ul class="p-2 pagination">
-                                      <% if (page==1) { %>
-                                        <li class="page-item disabled"><a class="page-link">
-                                            <%- __('users.pagination.처음으로') %>
-                                          </a>
-                                        </li>
-                                        <li class="page-item disabled"><a class="page-link">
-                                            <%- __('users.pagination.이전으로') %>
-                                          </a>
-                                        </li>
-                                        <% } else { %>
-                                          <li class="page-item"><a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?np=1&cp=<%= community.page %>">
-                                              <%- __('users.pagination.처음으로') %>
-                                            </a>
-                                          </li>
-                                          <li class="page-item"><a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?np=<%= page-1 %>&cp=<%= community.page %>">
-                                              <%- __('users.pagination.이전으로') %>
-                                            </a>
-                                          </li>
-                                          <% } %>
-                                    </ul>
-                                    <!-- 페이지 리스트 -->
-                                    <ul class="p-2 pagination">
-                                      <% let end_list_num=end_page> 6 ? 5:end_page %>
-                                        <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
-                                          <li class="page-item disabled">
-                                            <a class="page-link current_page">
-                                              <%= i %>
-                                            </a>
-                                          </li>
-                                          <% } else { %>
-                                            <li class="page-item"><a class="page-link"
-                                                href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= community.page %>">
-                                                <%= i %>
-                                              </a></li>
-                                            <% }} %>
-                                              <% } else if ( page> end_page-3 ) {
-                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
-                                                  <li class="page-item disabled">
-                                                    <a class="page-link current_page">
-                                                      <%= i %>
-                                                    </a>
-                                                  </li>
-                                                  <% } else { %>
-                                                    <li class="page-item">
-                                                      <a class="page-link"
-                                                        href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= community.page %>">
-                                                        <%= i %>
-                                                      </a>
-                                                    </li>
-                                                    <% }} %>
-                                                      <% } else { for (let i=page-2; i < page+3; i++) { if (page==i) {
-                                                        %>
-                                                        <li class="page-item disabled">
-                                                          <a class="page-link current_page">
-                                                            <%= i %>
-                                                          </a>
-                                                        </li>
-                                                        <% } else { %>
-                                                          <li class="page-item">
-                                                            <a class="page-link"
-                                                              href="<%= codezip.url.users.community %>?np=<%= i %>&cp=<%= community.page %>">
-                                                              <%= i %>
-                                                            </a>
-                                                          </li>
-                                                          <% }} %>
-                                                            <% } %>
-                                    </ul>
-                                    <!-- 다음 & 마지막페이지 -->
-                                    <ul class="p-2 pagination">
-                                      <% if(page==end_page){ %>
-                                        <li class="page-item disabled">
-                                          <a class="page-link">
-                                            <%- __('users.pagination.다음으로') %>
-                                          </a>
-                                        </li>
-                                        <li class="page-item disabled">
-                                          <a class="page-link">
-                                            <%- __('users.pagination.마지막으로') %>
-                                          </a>
-                                        </li>
-                                        <% } else { %>
-                                          <li class="page-item">
-                                            <a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?np=<%= +page+1 %>&cp=<%= community.page %>">
-                                              <%- __('users.pagination.다음으로') %>
-                                            </a>
-                                          </li>
-                                          <li class="page-item">
-                                            <a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?np=<%= end_page %>&cp=<%= community.page %>">
-                                              <%- __('users.pagination.마지막으로') %>
-                                            </a>
-                                          </li>
-                                          <% } %>
-                                    </ul>
-                                    <!-- 페이징처리 끝 -->
-                                  </div>
-                                  <% } %>
-
-                        </div>
-                      </div>
-
-                      <!-- Community -->
-                      <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                        <div class="form-group ms-3">
-                          <div class="row">
-                            <div class="col-12 row pe-0">
-                              <div class="col">
-                                <h5><strong>
-                                    <%= __('users.community.header.Community') %>
-                                  </strong></h5>
-                              </div>
-                              <div class="col text-end pe-0">
-                                <button class="btn br-20" type="button"
-                                  onclick="location.href='<%= codezip.url.users.community.add %>';">
-                                  <%= __('users.community.btn.wirte') %>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- list -->
-                          <div class="row mt-3">
-                            <% community.data.forEach((item, index)=>{ %>
-                              <div class="my-1">
-                                <button class="col-12 btn br-15" type="button"
-                                  onclick="location.href='<%= codezip.url.users.community.main + '/' + item.community_id %>'">
-                                  <h6 class="m-1">
-                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                      <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                        ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
-                                        <% } else { %>
-                                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                            ${item.firstName} ${item.lastName} ${formatDate(item.updateDate)}` %>
-                                            <% } %>
-                                  </h6>
-                                </button>
-                              </div>
-                              <% }) %>
-                          </div>
-
-                          <!-- pagination -->
-                          <% page=+community.page %>
-                            <% count=+community.count %>
-                              <% end_page=parseInt((count-1)/4)+1; %>
-                                <% if(end_page>1) { %>
-                                  <div class="d-flex justify-content-center  mt-3">
-                                    <!-- 페이징처리 시작 -->
-                                    <!-- 처음 & 이전페이지 -->
-                                    <ul class="p-2 pagination">
-                                      <% if (page==1) { %>
-                                        <li class="page-item disabled"><a class="page-link">
-                                            <%- __('users.pagination.처음으로') %>
-                                          </a>
-                                        </li>
-                                        <li class="page-item disabled"><a class="page-link">
-                                            <%- __('users.pagination.이전으로') %>
-                                          </a>
-                                        </li>
-                                        <% } else { %>
-                                          <li class="page-item"><a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?cp=1&np=<%= news.page %>">
-                                              <%- __('users.pagination.처음으로') %>
-                                            </a>
-                                          </li>
-                                          <li class="page-item"><a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?cp=<%= page-1 %>&np=<%= news.page %>">
-                                              <%- __('users.pagination.이전으로') %>
-                                            </a>
-                                          </li>
-                                          <% } %>
-                                    </ul>
-                                    <!-- 페이지 리스트 -->
-                                    <ul class="p-2 pagination">
-                                      <% let end_list_num=end_page> 6 ? 5:end_page %>
-                                        <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
-                                          <li class="page-item disabled">
-                                            <a class="page-link current_page">
-                                              <%= i %>
-                                            </a>
-                                          </li>
-                                          <% } else { %>
-                                            <li class="page-item"><a class="page-link"
-                                                href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
-                                                <%= i %>
-                                              </a></li>
-                                            <% }} %>
-                                              <% } else if ( page> end_page-3 ) {
-                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
-                                                  <li class="page-item disabled">
-                                                    <a class="page-link current_page">
-                                                      <%= i %>
-                                                    </a>
-                                                  </li>
-                                                  <% } else { %>
-                                                    <li class="page-item">
-                                                      <a class="page-link"
-                                                        href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
-                                                        <%= i %>
-                                                      </a>
-                                                    </li>
-                                                    <% }} %>
-                                                      <% } else { for (let i=page-2; i < +page+3; i++) { if (page==i) {
-                                                        %>
-                                                        <li class="page-item disabled">
-                                                          <a class="page-link current_page">
-                                                            <%= i %>
-                                                          </a>
-                                                        </li>
-                                                        <% } else { %>
-                                                          <li class="page-item">
-                                                            <a class="page-link"
-                                                              href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
-                                                              <%= i %>
-                                                            </a>
-                                                          </li>
-                                                          <% }} %>
-                                                            <% } %>
-                                    </ul>
-                                    <!-- 다음 & 마지막페이지 -->
-                                    <ul class="p-2 pagination">
-                                      <% if(page==end_page){ %>
-                                        <li class="page-item disabled">
-                                          <a class="page-link">
-                                            <%- __('users.pagination.다음으로') %>
-                                          </a>
-                                        </li>
-                                        <li class="page-item disabled">
-                                          <a class="page-link">
-                                            <%- __('users.pagination.마지막으로') %>
-                                          </a>
-                                        </li>
-                                        <% } else { %>
-                                          <li class="page-item">
-                                            <a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?cp=<%= +page+1 %>&np=<%= news.page %>">
-                                              <%- __('users.pagination.다음으로') %>
-                                            </a>
-                                          </li>
-                                          <li class="page-item">
-                                            <a class="page-link"
-                                              href="<%= codezip.url.users.community.main %>?cp=<%= end_page %>&np=<%= news.page %>">
-                                              <%- __('users.pagination.마지막으로') %>
-                                            </a>
-                                          </li>
-                                          <% } %>
-                                    </ul>
-                                    <!-- 페이징처리 끝 -->
-                                  </div>
-                                  <% } %>
-
-                        </div>
-                      </div>
-
-
+                          <% } %>
+                        </h6>
+                      </button>
                     </div>
+                    <% }) %>
                   </div>
+
+                  <!-- pagination -->
+                  <% let page=+news.page %>
+                  <% let count=+news.count %>
+                  <% let end_page=parseInt((count-1)/4)+1; %>
+                  <% if(end_page>1) { %>
+                  <div class="d-flex justify-content-center mt-3">
+                    <!-- 페이징처리 시작 -->
+                    <!-- 처음 & 이전페이지 -->
+                    <ul class="p-2 pagination">
+                      <% if (page==1) { %>
+                      <li class="page-item disabled"><a class="page-link">
+                          <%- __('users.pagination.처음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item disabled"><a class="page-link">
+                          <%- __('users.pagination.이전으로') %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=1&cp=<%= community.page %>">
+                          <%- __('users.pagination.처음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= page-1 %>&cp=<%= community.page %>">
+                          <%- __('users.pagination.이전으로') %>
+                        </a>
+                      </li>
+                      <% } %>
+                    </ul>
+                    <!-- 페이지 리스트 -->
+                    <ul class="p-2 pagination">
+                      <% let end_list_num=end_page> 6 ? 5:end_page %>
+                      <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= community.page %>">
+                          <%= i %>
+                        </a></li>
+                      <% }} %>
+                      <% } else if ( page> end_page-3 ) {
+                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= community.page %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% }} %>
+                      <% } else { for (let i=page-2; i < page+3; i++) { if (page==i) {
+                                                        %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community %>?np=<%= i %>&cp=<%= community.page %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% }} %>
+                      <% } %>
+                    </ul>
+                    <!-- 다음 & 마지막페이지 -->
+                    <ul class="p-2 pagination">
+                      <% if(page==end_page){ %>
+                      <li class="page-item disabled">
+                        <a class="page-link">
+                          <%- __('users.pagination.다음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link">
+                          <%- __('users.pagination.마지막으로') %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= +page+1 %>&cp=<%= community.page %>">
+                          <%- __('users.pagination.다음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= end_page %>&cp=<%= community.page %>">
+                          <%- __('users.pagination.마지막으로') %>
+                        </a>
+                      </li>
+                      <% } %>
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                  </div>
+                  <% } %>
 
                 </div>
               </div>
-            </div>
-            <!--  END CONTENT AREA  -->
 
-            <%- include ("../partials/footer.ejs") %>
+              <!-- Community -->
+              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                <div class="form-group ms-3">
+                  <div class="row">
+                    <div class="col-12 row pe-0">
+                      <div class="col">
+                        <h5><strong>
+                            <%= __('users.community.header.Community') %>
+                          </strong></h5>
+                      </div>
+                      <div class="col text-end pe-0">
+                        <button class="btn br-20" type="button" onclick="location.href='<%= codezip.url.users.community.add %>';">
+                          <%= __('users.community.btn.wirte') %>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list -->
+                  <div class="row mt-3">
+                    <% community.data.forEach((item, index)=>{ %>
+                    <div class="my-1">
+                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.community.main + '/' + item.community_id %>'">
+                        <h6 class="m-1">
+                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
+                                        ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
+                          <% } else { %>
+                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
+                                            ${item.firstName} ${item.lastName} ${formatDate(item.updateDate)}` %>
+                          <% } %>
+                        </h6>
+                      </button>
+                    </div>
+                    <% }) %>
+                  </div>
+
+                  <!-- pagination -->
+                  <% page=+community.page %>
+                  <% count=+community.count %>
+                  <% end_page=parseInt((count-1)/4)+1; %>
+                  <% if(end_page>1) { %>
+                  <div class="d-flex justify-content-center  mt-3">
+                    <!-- 페이징처리 시작 -->
+                    <!-- 처음 & 이전페이지 -->
+                    <ul class="p-2 pagination">
+                      <% if (page==1) { %>
+                      <li class="page-item disabled"><a class="page-link">
+                          <%- __('users.pagination.처음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item disabled"><a class="page-link">
+                          <%- __('users.pagination.이전으로') %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?cp=1&np=<%= news.page %>">
+                          <%- __('users.pagination.처음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= page-1 %>&np=<%= news.page %>">
+                          <%- __('users.pagination.이전으로') %>
+                        </a>
+                      </li>
+                      <% } %>
+                    </ul>
+                    <!-- 페이지 리스트 -->
+                    <ul class="p-2 pagination">
+                      <% let end_list_num=end_page> 6 ? 5:end_page %>
+                      <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
+                          <%= i %>
+                        </a></li>
+                      <% }} %>
+                      <% } else if ( page> end_page-3 ) {
+                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% }} %>
+                      <% } else { for (let i=page-2; i < +page+3; i++) { if (page==i) {
+                                                        %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% }} %>
+                      <% } %>
+                    </ul>
+                    <!-- 다음 & 마지막페이지 -->
+                    <ul class="p-2 pagination">
+                      <% if(page==end_page){ %>
+                      <li class="page-item disabled">
+                        <a class="page-link">
+                          <%- __('users.pagination.다음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link">
+                          <%- __('users.pagination.마지막으로') %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= +page+1 %>&np=<%= news.page %>">
+                          <%- __('users.pagination.다음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= end_page %>&np=<%= news.page %>">
+                          <%- __('users.pagination.마지막으로') %>
+                        </a>
+                      </li>
+                      <% } %>
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                  </div>
+                  <% } %>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
 
         </div>
-        <!-- END MAIN CONTAINER -->
+      </div>
+    </div>
+    <!--  END CONTENT AREA  -->
 
-        <%- include ("../partials/commonScrpits.ejs") %>
+    <%- include ("../partials/footer.ejs") %>
 
-          <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-          <script>
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
 
 
-          </script>
-          <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>
