@@ -10,7 +10,7 @@ i18n.configure({
     directory: __dirname + '/locales',
 
     //기본 사용언어 설정
-    defaultLocale: 'ko',
+    defaultLocale: 'en',
 
     //사용언어를 저장할 cookie 이름
     cookie: 'lang'
