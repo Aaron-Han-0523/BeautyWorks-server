@@ -30,9 +30,9 @@ module.exports = {
             , password: password
             , userType: 123
             , country: 'KR'
-            , brandName: 'Beauty Works'
-            , firstName: 'min'
-            , lastname: "ad"
+            , brandName: 'BeautyWorks'
+            , firstName: 'administrator'
+            , lastname: "관리자"
             , mobileContacts: "000-0000-0000"
             , registerDate: new Date()
         }

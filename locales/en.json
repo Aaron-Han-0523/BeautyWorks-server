@@ -367,7 +367,7 @@
 	"project_phase8.1": "phase8.1",
 	"home.title": "home.title",
 	"title": "title",
-	"users.id": "users.id",
+	"users.id": "email",
 	"users.signIn.id.placeholder": "Email",
 	"users.password": "password",
 	"users.signIn.password.placeholder": "Password",
@@ -569,5 +569,18 @@
 	"New Project": "New Project",
 	"users.newProject.basic.inStock.btn.no": "BeautyWorks",
 	"MyPage": "MyPage",
-	"users.newProject.moq.moqSelect.after": "* For other selections, please contact Chatbot.<br>* It could be different depending on the product category."
+	"users.newProject.moq.moqSelect.after": "* For other selections, please contact Chatbot.<br>* It could be different depending on the product category.",
+	"users.myAccount.label.ProfileImage": "Profile Image",
+	"users.myAccount.btn.UploadImage": "Upload Image",
+	"users.myAccount.btn.RemoveImage": "Remove Image",
+	"users.myAccount.label.DisplayName": "Display Name",
+	"users.myAccount.label.CompanyName": "Company Name",
+	"users.myAccount.label.Team/PositionName": "Team / Position",
+	"users.myAccount.label.EmailAddress": "Email",
+	"users.myAccount.btn.SaveChanges": "Save Changes",
+	"users.MyAccount.msg.SaveSuccess": "users.MyAccount.msg.SaveSuccess",
+	"users.MyAccount.msg.SaveFail": "users.MyAccount.msg.SaveFail",
+	"users.myAccount.label.BrandName": "Brand Name",
+	"users.myAccount.label.LogisticsAddress": "Logistics Address",
+	"users.myAccount.label.CompanyAddress": "Company Address"
 }
