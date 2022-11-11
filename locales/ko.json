@@ -594,5 +594,12 @@
 	"users.newProject.basic.inStock.btn.no": "BeautyWorks",
 	"users.signUp.InputLabel.Remark": "users.signUp.InputLabel.Remark",
 	"users.signUp.msg.required": "필수입력사항",
-	"users.newProject.moq.moqSelect.after": ""
+	"users.newProject.moq.moqSelect.after": "",
+	"users.myPage.header.내가찜한내용물": "users.myPage.header.내가찜한내용물",
+	"users.myPage.header.내가작성한게시글": "users.myPage.header.내가작성한게시글",
+	"users.myPage.header.내가좋아하는게시글": "users.myPage.header.내가좋아하는게시글",
+	"users.myPage.table.thead.writer": "users.myPage.table.thead.writer",
+	"users.myPage.table.thead.date": "users.myPage.table.thead.date",
+	"users.myPage.table.thead.title": "users.myPage.table.thead.title",
+	"users.myPage.header.내가좋아하는댓글": "users.myPage.header.내가좋아하는댓글"
 }

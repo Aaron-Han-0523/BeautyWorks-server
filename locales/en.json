@@ -390,7 +390,7 @@
 	"ingredient": "Ingredient",
 	"News": "News",
 	"Community": "Community",
-	"MyAccount": "MyAccount",
+	"MyAccount": "My Account",
 	"Main": "Main",
 	"NewProject": "NewProject",
 	"Lounge": "Lounge",
@@ -568,7 +568,7 @@
 	"users.signUp.msg.required": "Required field",
 	"New Project": "New Project",
 	"users.newProject.basic.inStock.btn.no": "BeautyWorks",
-	"MyPage": "MyPage",
+	"MyPage": "My Page",
 	"users.newProject.moq.moqSelect.after": "* For other selections, please contact Chatbot.<br>* It could be different depending on the product category.",
 	"users.myAccount.label.ProfileImage": "Profile Image",
 	"users.myAccount.btn.UploadImage": "Upload Image",
@@ -582,5 +582,13 @@
 	"users.MyAccount.msg.SaveFail": "users.MyAccount.msg.SaveFail",
 	"users.myAccount.label.BrandName": "Brand Name",
 	"users.myAccount.label.LogisticsAddress": "Logistics Address",
-	"users.myAccount.label.CompanyAddress": "Company Address"
+	"users.myAccount.label.CompanyAddress": "Company Address",
+	"users.myPage.header.내가찜한내용물": "My wish list",
+	"users.myPage.header.내가작성한게시글": "My post",
+	"users.myPage.header.내가좋아하는게시글": "My favorite posts",
+	"users.myPage.header.내가좋아하는댓글": "My favorite comments",
+	"users.myPage.table.thead.writer": "User naem",
+	"users.myPage.table.thead.date": "Date",
+	"users.myPage.table.thead.title": "Title",
+	"users.myPage.table.thead.number": "No."
 }

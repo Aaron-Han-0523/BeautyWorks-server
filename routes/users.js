@@ -86,6 +86,7 @@ router
 
     req.session.save(() => {
       res.locals.user = req.session.user;
+      // console.log(res.locals.user)
       next();
     })
   })

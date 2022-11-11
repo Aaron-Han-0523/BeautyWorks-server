@@ -16,8 +16,7 @@
 
     <div class="overlay"></div>
     <div class="search-overlay"></div>
-
-    <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs", {user:user}) %>
 
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content">
@@ -25,40 +24,451 @@
 
         <div class="middle-content container-xxl p-0">
 
-          <div class="statbox widget box box-shadow">
-            <!-- BREADCRUMB -->
-            <div class="row px-3">
-              <div class="breadcrumb align-items-center d-flex pt-3 br-20">
-                <div class="p-1">
-                  <h4><strong>
-                      <%= __('MyAccount') %>
-                    </strong>
-                  </h4>
-                </div>
-                <div class="p-1 flex-grow-1">
-                  <div>
-                    <a href="<%= codezip.url.users.myAccount %>" class="text-primary sidebar-theme px-1 br-4">
-                      <i class="fa-solid fa-angle-down"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="py-2 px-3 sidebar-theme br-10">
-                  <a href="<%= codezip.url.users.signOut %>" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" width="24px" height="24px" stroke-width="2" stroke-linecap="round" viewBox="0 0 76 85">
-                        <path d=" M4.116826,78.265404   C4.013828,55.503761 4.004358,33.174091 4.001761,10.844418   C4.001094,5.110954 5.633172,3.164078 11.493685,3.054947   C21.821774,2.862622 32.168144,2.702272 42.482834,3.120762   C48.066319,3.347296 50.111496,4.964166 50.024464,10.953341   C49.920639,18.097635 49.999989,25.244595 49.999989,32.757912   C48.379898,32.856651 46.978878,32.942039 44.999851,33.062656   C44.999851,26.376459 44.834988,19.922174 45.064762,13.481969   C45.192432,9.903473 43.832859,8.870009 40.404411,8.939007   C31.409502,9.120029 22.407000,9.094803 13.410821,8.948723   C10.272186,8.897758 8.923581,9.773623 8.943764,13.164448   C9.059805,32.660618 9.052705,52.158115 8.947888,71.654411   C8.930679,74.855194 9.904271,76.115456 13.229795,76.056175   C22.392075,75.892853 31.560974,75.895958 40.723400,76.055168   C43.999668,76.112099 45.147400,74.955482 45.053230,71.699997   C44.870495,65.382965 44.999775,59.056904 44.999775,52.369476   C46.643154,52.369476 48.139885,52.369476 49.998058,52.369476   C49.998058,60.263142 50.100910,68.066177 49.959629,75.864799   C49.874367,80.571159 45.989986,81.757523 42.545216,81.873688   C32.225281,82.221680 21.878883,82.206718 11.559663,81.848320   C9.077263,81.762108 6.660084,79.797905 4.116826,78.265404  z" />
-                        <path d=" M59.014618,26.045418   C61.348267,27.193729 63.484882,28.141630 65.157600,29.615877   C67.892479,32.026257 70.339447,34.765663 72.881897,37.391415   C75.979965,40.590984 76.047028,44.575195 72.781273,47.673988   C68.716423,51.531021 64.464005,55.191494 60.245110,58.882576   C59.964554,59.128029 59.282509,58.914581 57.212154,58.914581   C58.536896,56.183857 59.391861,53.891689 60.689957,51.886368   C62.151241,49.628956 64.011978,47.630116 66.067307,45.057789   C50.499809,45.057789 35.586002,45.057789 20.322596,45.057789   C20.176996,43.435238 20.051184,42.033199 19.889898,40.235855   C35.192932,40.235855 50.269775,40.235855 66.303703,40.235855   C63.861748,37.226780 61.647526,35.077080 60.184765,32.500732   C59.138016,30.657087 59.098286,28.241688 59.014618,26.045418  z" />
-                      </svg>
-                      <span><%= __('Log out') %></span>
-                    </div>
+          <!-- BREADCRUMB -->
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb align-items-center d-flex pt-3 br-20">
+              <div class="p-1">
+                <h4><strong>
+                    <%= __('MyPage') %>
+                  </strong>
+                </h4>
+              </div>
+              <div class="p-1 flex-grow-1">
+                <div>
+                  <a href="<%= codezip.url.users.myAccount %>" class="text-primary sidebar-theme px-1 br-4">
+                    <i class="fa-solid fa-angle-down"></i>
                   </a>
                 </div>
               </div>
+              <div class="py-2 px-3 sidebar-theme br-10">
+                <a href="<%= codezip.url.users.signOut %>" aria-expanded="false" class="dropdown-toggle">
+                  <div class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" width="24px" height="24px" stroke-width="2" stroke-linecap="round" viewBox="0 0 76 85">
+                      <path d=" M4.116826,78.265404   C4.013828,55.503761 4.004358,33.174091 4.001761,10.844418   C4.001094,5.110954 5.633172,3.164078 11.493685,3.054947   C21.821774,2.862622 32.168144,2.702272 42.482834,3.120762   C48.066319,3.347296 50.111496,4.964166 50.024464,10.953341   C49.920639,18.097635 49.999989,25.244595 49.999989,32.757912   C48.379898,32.856651 46.978878,32.942039 44.999851,33.062656   C44.999851,26.376459 44.834988,19.922174 45.064762,13.481969   C45.192432,9.903473 43.832859,8.870009 40.404411,8.939007   C31.409502,9.120029 22.407000,9.094803 13.410821,8.948723   C10.272186,8.897758 8.923581,9.773623 8.943764,13.164448   C9.059805,32.660618 9.052705,52.158115 8.947888,71.654411   C8.930679,74.855194 9.904271,76.115456 13.229795,76.056175   C22.392075,75.892853 31.560974,75.895958 40.723400,76.055168   C43.999668,76.112099 45.147400,74.955482 45.053230,71.699997   C44.870495,65.382965 44.999775,59.056904 44.999775,52.369476   C46.643154,52.369476 48.139885,52.369476 49.998058,52.369476   C49.998058,60.263142 50.100910,68.066177 49.959629,75.864799   C49.874367,80.571159 45.989986,81.757523 42.545216,81.873688   C32.225281,82.221680 21.878883,82.206718 11.559663,81.848320   C9.077263,81.762108 6.660084,79.797905 4.116826,78.265404  z" />
+                      <path d=" M59.014618,26.045418   C61.348267,27.193729 63.484882,28.141630 65.157600,29.615877   C67.892479,32.026257 70.339447,34.765663 72.881897,37.391415   C75.979965,40.590984 76.047028,44.575195 72.781273,47.673988   C68.716423,51.531021 64.464005,55.191494 60.245110,58.882576   C59.964554,59.128029 59.282509,58.914581 57.212154,58.914581   C58.536896,56.183857 59.391861,53.891689 60.689957,51.886368   C62.151241,49.628956 64.011978,47.630116 66.067307,45.057789   C50.499809,45.057789 35.586002,45.057789 20.322596,45.057789   C20.176996,43.435238 20.051184,42.033199 19.889898,40.235855   C35.192932,40.235855 50.269775,40.235855 66.303703,40.235855   C63.861748,37.226780 61.647526,35.077080 60.184765,32.500732   C59.138016,30.657087 59.098286,28.241688 59.014618,26.045418  z" />
+                    </svg>
+                    <span><%= __('Log out') %></span>
+                  </div>
+                </a>
+              </div>
             </div>
-            <!-- CONTENT AREA -->
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row mt-3">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <!-- 내가 찜한 내용물 -->
+              <!-- /* 테스트 데이터 생성 -->
+              <div>
+                <% let myWishList={data:[],count:100}; %>
+                <% myWishList.data.push({
+                  productName:"My Suncream1",
+                  volume:"110ml",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                })%>
+                <% myWishList.data.push({
+                  productName:"My Suncream2",
+                  volume:"120ml",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:20000,
+                  lastOrderDate:new Date(2022,10,15),
+                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                
+                })%>
+                <% myWishList.data.push({
+                  productName:"My Suncream3",
+                  volume:"110g",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:30000,
+                  lastOrderDate:new Date(2022,10,25),
+                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                })%>
+                <% myWishList.data.push({
+                  productName:"My Suncream4",
+                  volume:"210g",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                })%>
+              </div>
+              <!-- 테스트 데이터 생성 */ -->
+              <!-- Completed Project -->
+              <div class="widget-content widget-content-area br-20 px-5 mt-3">
+                <div class="form-group mx-3">
+                  <div class="row mb-3">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __("users.myPage.header.내가찜한내용물") %>
+                          </strong>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="widget px-4 pt-5 pb-0 row" id="myWishList">
+                      <% myWishList.data.forEach((item,index)=>{ %>
+                      <div class="col d-flex flex-column">
+                        <!-- style="height: calc(100%-50px);" -->
+                        <div class="preview">
+                          <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
+                        </div>
+                        <div class="mb-auto mt-3">
+                          <h6>
+                            <%= item.productName %>
+                          </h6>
+                          <h6>
+                            <%= __("product"+item.category1+"."+item.category2) %>
+                            <%= " " + item.volume %>
+                          </h6>
+                          <p>
+                            <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                            <%= ' : ' + item.totalOrderAmount %>
+                            <br>
+                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                            <%= ' : ' + formatDate(item.lastOrderDate) %>
+                          </p>
+                        </div>
+                      </div>
+                      <% }) %>
+                      <!-- pagination -->
+                      <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
+                      <%- make_pagination_by_func(
+                          __,
+                          1,
+                          myWishList.count,
+                          codezip.url.users.community.main,
+                          "myWishListReload",
+                          4
+                        ) %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Completed Project -->
+              <!-- /* 테스트 데이터 생성 -->
+              <div>
+                <% let myPost={data:[], count:5}; %>
+                <% myPost.data.push({
+                  community_id:17,
+                  title:"테스트추천프로젝트5",
+                  firstName:"tester5",
+                  lastName:"테스터5",
+                  createDate:new Date(2022,10,15),
+                })%>
+                <% myPost.data.push({
+                  community_id:13,
+                  title:"테스트추천프로젝트4",
+                  firstName:"tester4",
+                  lastName:"테스터4",
+                  createDate:new Date(2022,10,14),
+                })%>
+                <% myPost.data.push({
+                  community_id:10,
+                  title:"테스트추천프로젝트3",
+                  firstName:"tester3",
+                  lastName:"테스터3",
+                  createDate:new Date(2022,10,13),
+                })%>
+                <% myPost.data.push({
+                  community_id:6,
+                  title:"테스트추천프로젝트2",
+                  firstName:"tester2",
+                  lastName:"테스터2",
+                  createDate:new Date(2022,10,12),
+                })%>
+              </div>
+              <!-- 테스트 데이터 생성 */ -->
+              <!-- 내가 작성한 게시글 -->
+              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                <div class="form-group mx-3">
+                  <div class="row mb-3">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <h5><strong>
+                            <%= __("users.myPage.header.내가작성한게시글") %>
+                          </strong>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="widget p-4 pb-0 row" id="completed_project">
+                      <div class="flex-row row mb-auto">
+                        <div class="table-responsive p-0">
+                          <table class="table text-break">
+                            <thead class="text-center">
+                              <tr>
+                                <th scope="col">
+                                  <%= __('users.myPage.table.thead.number') %>
+                                </th>
+                                <th scope="col">
+                                  <%= __('users.myPage.table.thead.title') %>
+                                </th>
+                                <th scope="col">
+                                  <%= __('users.myPage.table.thead.date') %>
+                                </th>
+                                <th scope="col">
+                                  <%= __('users.myPage.table.thead.writer') %>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider text-break">
+                              <% myPost.data.forEach((item,index)=>{ %>
+                              <tr scope="row">
+                                <td class="col-1 text-center"><%= item.community_id %></td>
+                                <td><%= item.title %></td>
+                                <td class="col-2 text-center flex-grow-1">
+                                  <%= formatDate(item.createDate) %>
+                                </td>
+                                <td class="col-3 text-center">
+                                  <%= __('users.community.index.WrittenBy') %>
+                                  <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                                  <%= ` ${item.lastName} ${item.firstName}` %>
+                                  <% } else { %>
+                                  <%= ` ${item.firstName} ${item.lastName}` %>
+                                  <% } %>
+                                </td>
+                                <% }) %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <div>
+                        <!-- pagination -->
+                        <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
+                        <%- make_pagination_by_func(
+                          __,
+                          1,
+                          myPost.count,
+                          codezip.url.users.community.main,
+                          "myPostReload",
+                          4
+                        ) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 내가 좋아하는 게시글 & 내가 좋아하는 댓글 -->
+              <div class="row mt-5">
+                <!-- 내가 좋아하는 게시글 -->
+                <div class="col">
+                  <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
+
+                    <div class="justify-content-between d-flex px-0 mb-3">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.myPage.header.내가좋아하는게시글') %>
+                          </strong>
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div class="widget row pt-5 ps-5 mx-0 h-100 align-content-center d-flex flex-column">
+                      <!-- /* 테스트 데이터 생성 -->
+                      <div>
+                        <% let myFavoritePosts={data:[],count:10}; %>
+                        <% myFavoritePosts.data.push({
+                          title:"테스트추천프로젝트5",
+                          firstName:"tester5",
+                          lastName:"테스터5",
+                          createDate:new Date(2022,10,15),
+                          profileImagePath:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                        })%>
+                        <% myFavoritePosts.data.push({
+                          title:"테스트추천프로젝트4",
+                          firstName:"tester4",
+                          lastName:"테스터4",
+                          createDate:new Date(2022,10,14),
+                          profileImagePath:"http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"
+                        })%>
+                        <% myFavoritePosts.data.push({
+                          title:"테스트추천프로젝트3",
+                          firstName:"tester3",
+                          lastName:"테스터3",
+                          createDate:new Date(2022,10,13),
+                          profileImagePath:"http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                        })%>
+                        <% myFavoritePosts.data.push({
+                          title:"테스트추천프로젝트2",
+                          firstName:"tester2",
+                          lastName:"테스터2",
+                          createDate:new Date(2022,10,12),
+                          profileImagePath:"http://oldmidi.cdn3.cafe24.com/p/0009.jpg"
+                        })%>
+                      </div>
+                      <!-- 테스트 데이터 생성 */ -->
+                      <div class="flex-row row mb-auto">
+                        <div class="table-responsive p-0">
+                          <table class="table text-break">
+                            <thead class="text-center">
+                              <th>
+                                <%= __('users.myPage.table.thead.writer') %>
+                              </th>
+                              <th>
+                                <%= __('users.myPage.table.thead.date') %>
+                              </th>
+                              <th>
+                                <%= __('users.myPage.table.thead.title') %>
+                              </th>
+                            </thead>
+                            <tbody class="table-group-divider text-break">
+                              <% myFavoritePosts.data.forEach((item,index)=>{ %>
+                              <tr>
+                                <td class="d-flex align-items-center">
+                                  <div class="profileImage me-1">
+                                    <img alt="avatar" src="<%= item.profileImagePath %>" class="rounded-circle">
+                                  </div>
+                                  <div>
+                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                                    <%= `${item.lastName} ${item.firstName}` %>
+                                    <% } else { %>
+                                    <%= `${item.firstName} ${item.lastName}` %>
+                                    <% } %>
+                                  </div>
+                                </td>
+                                <td>
+                                  <%= formatDate(item.createDate) %>
+                                </td>
+                                <td><%= item.title %></td>
+                              </tr>
+                              <% }) %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div>
+                        <!-- pagination -->
+                        <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
+                        <%- make_pagination_by_func(
+                          __,
+                          1,
+                          myFavoritePosts.count,
+                          codezip.url.users.community.main,
+                          "myFavoritePostsReload",
+                          4
+                        ) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 내가 좋아하는 댓글 -->
+                <div class="col">
+                  <div class="widget-content widget-content-area p-0 pe-4 h-100 d-flex flex-column">
+                    <div class="justify-content-between d-flex px-0 mb-3">
+                      <div>
+                        <h5><strong>
+                            <%= __('users.myPage.header.내가좋아하는댓글') %>
+                          </strong>
+                        </h5>
+                      </div>
+                    </div>
+
+                    <div class="widget row pt-5 ps-5  mx-0 h-100 align-content-center d-flex flex-column">
+                      <!-- /* 테스트 데이터 생성 -->
+                      <div>
+                        <% let myFavoriteComments={data:[],count:3}; %>
+                        <% myFavoriteComments.data.push({
+                            contents:"댓글내용1",
+                            firstName:"tester1",
+                            lastName:"테스터1",
+                            createDate:new Date(2022,10,10),
+                            profileImagePath:"http://oldmidi.cdn3.cafe24.com/p/0001.jpg"
+                          })%>
+                        <% myFavoriteComments.data.push({
+                            contents:"댓글내용2",
+                            firstName:"tester2",
+                            lastName:"테스터2",
+                            createDate:new Date(2022,10,10),
+                            profileImagePath:"http://oldmidi.cdn3.cafe24.com/p/0002.jpg"
+                          })%>
+                        <% myFavoriteComments.data.push({
+                            contents:"댓글내용3",
+                            firstName:"tester3",
+                            lastName:"테스터3",
+                            createDate:new Date(2022,10,10),
+                            profileImagePath:"http://oldmidi.cdn3.cafe24.com/p/0003.jpg"
+                          })%>
+                      </div>
+                      <!-- 테스트 데이터 생성 */ -->
+                      <div class="flex-row row mb-auto">
+                        <div class="table-responsive p-0">
+                          <table class="table text-break">
+                            <thead class="text-center">
+                              <th>
+                                <%= __('users.myPage.table.thead.writer') %>
+                              </th>
+                              <th>
+                                <%= __('users.myPage.table.thead.date') %>
+                              </th>
+                              <th>
+                                <%= __('users.myPage.table.thead.title') %>
+                              </th>
+                            </thead>
+                            <tbody class="table-group-divider text-break">
+                              <% myFavoriteComments.data.forEach((item,index)=>{ %>
+                              <tr>
+                                <td class="d-flex align-items-center">
+                                  <div class="profileImage me-1">
+                                    <img alt="avatar" src="<%= item.profileImagePath %>" class="rounded-circle">
+                                  </div>
+                                  <div>
+                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                                    <%= `${item.lastName} ${item.firstName}` %>
+                                    <% } else { %>
+                                    <%= `${item.firstName} ${item.lastName}` %>
+                                    <% } %>
+                                  </div>
+                                </td>
+                                <td>
+                                  <%= formatDate(item.createDate) %>
+                                </td>
+                                <td><%= item.contents %></td>
+                              </tr>
+                              <% }) %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <!-- pagination -->
+                      <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
+                      <%- make_pagination_by_func(
+                          __,
+                          1,
+                          myFavoriteComments.count,
+                          codezip.url.users.community.main,
+                          "myFavoriteCommentsReload",
+                          4
+                        ) %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
           </div>
         </div>
-
       </div>
 
 
@@ -73,7 +483,144 @@
   <%- include ("../partials/commonScrpits.ejs") %>
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    function make_pagination_by_func(page, count, baseURL, func_name, limit = 10) {
+      let end_page = parseInt((count - 1) / limit) + 1;
+      let end_list_num = end_page > 6 ? 5 : end_page;
+      let temp_html = `<div class="d-flex justify-content-center mt-4">
+      <!-- 페이징처리 시작 -->
+      <!-- 처음 & 이전페이지 -->
+      <ul class="p-2 pagination">
+        `;
+      if (page == 1) {
+        temp_html += `
+        <li class="page-item disabled"><button type="button" class="page-link">
+            <%= __('users.pagination.처음으로') %>
+          </button>
+        </li>
+        <li class="page-item disabled"><button type="button" class="page-link">
+            <%= __('users.pagination.이전으로') %>
+          </button>
+        </li>
+        `;
+      } else {
+        temp_html += `
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', 1);">
+            <%= __('users.pagination.처음으로') %>
+          </button>
+        </li>
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${page - 1});">
+            <%= __('users.pagination.이전으로') %>
+          </button>
+        </li>
+        `;
+      }
+      temp_html += `
+      </ul>
+      <!-- 페이지 리스트 -->
+      <ul class="p-2 pagination">
+        `;
+      if (page < 4) {
+        for (let i = 1; i <= end_list_num; i++) {
 
+          if (page == i) {
+            temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link current_page">
+            ${i}
+          </button>
+        </li>
+        `;
+          } else {
+            temp_html += `
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+            ${i}
+          </button></li>
+        `;
+          }
+        }
+        temp_html += `
+        `;
+      } else if (page > end_page - 3) {
+        for (let i = end_page - 4; i <= end_page; i++) {
+          if (page == i) {
+            temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link current_page">
+            ${i}
+          </button>
+        </li>
+        `;
+          } else {
+            temp_html += `
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+            ${i}
+          </button>
+        </li>
+        `;
+          }
+        }
+      } else {
+        for (let i = page - 2; i < page + 3; i++) {
+          if (page == i) {
+            temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link current_page">
+            ${i}
+          </button>
+        </li>
+        `;
+          } else {
+            temp_html += `
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+            ${i}
+          </button>
+        </li>
+        `;
+          }
+        }
+      }
+      temp_html += `
+      </ul>
+      <!-- 다음 & 마지막페이지 -->
+      <ul class="p-2 pagination">
+        `;
+      if (page == end_page) {
+        temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link">
+            <%= __('users.pagination.다음으로') %>
+          </button>
+        </li>
+        <li class="page-item disabled">
+          <button type="button" class="page-link">
+            <%= __('users.pagination.마지막으로') %>
+          </button>
+        </li>
+        `;
+      } else {
+        temp_html += `
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${page + 1});">
+            <%= __('users.pagination.다음으로') %>
+          </button>
+        </li>
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${end_page});">
+            <%= __('users.pagination.마지막으로') %>
+          </button>
+        </li>
+        `;
+      }
+      temp_html += `
+      </ul>
+      <!-- 페이징처리 끝 -->
+    </div>`
+      return temp_html;
+    };
+  </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 

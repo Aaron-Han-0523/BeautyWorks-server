@@ -486,7 +486,10 @@ h5 {
 }
 
 .stepper-item:first-child::before {
-    content: none;
+    z-index: 8;
+    border-color: #fff !important;
+    width: 50%;
+    left: 0%;
 }
 
 .stepper-item:last-child::after {

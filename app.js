@@ -59,6 +59,8 @@ app.use((req, res, next) => {
   res.locals.formatDate = myUtils.formatDate;
   res.locals.formatDateTime = myUtils.formatDateTime;
   res.locals.array_i18n = myUtils.array_i18n;
+  res.locals.make_pagination_by_href = myUtils.make_pagination_by_href;
+  res.locals.make_pagination_by_func = myUtils.make_pagination_by_func;
   res.locals.nameOrderInKorean = ['ko','ja'];
   return next();
 })
