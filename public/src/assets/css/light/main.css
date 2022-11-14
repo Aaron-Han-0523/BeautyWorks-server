@@ -614,7 +614,7 @@ label {
 
 .form-control:disabled:not(.flatpickr-input),
 .form-control[readonly]:not(.flatpickr-input) {
-  background-color: var(--BW-form-color);
+  background-color: var(--bs-gray-300);
   cursor: no-drop;
 }
 
@@ -3679,7 +3679,7 @@ fieldset:disabled .btn {
   border: none;
 }
 
-.table tbody tr td {
+.table tbody tr {
   border-bottom: 1px solid gray;
   padding: 10px 21px 10px 21px;
   vertical-align: middle;

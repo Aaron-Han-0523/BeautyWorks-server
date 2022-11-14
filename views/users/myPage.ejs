@@ -101,9 +101,9 @@
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
-              <!-- Completed Project -->
-              <div class="widget-content widget-content-area br-20 px-5 mt-3">
-                <div class="form-group mx-3">
+              <!-- 내가 찜한 내용물 -->
+              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                <div class="form-group ms-3">
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
@@ -115,8 +115,8 @@
                     </div>
                   </div>
 
-                  <div class="row mt-3">
-                    <div class="widget px-4 pt-5 pb-0 row" id="myWishList">
+                  <div class="row">
+                    <div class="widget pt-5 pb-0 row mx-0" id="myWishList">
                       <% myWishList.data.forEach((item,index)=>{ %>
                       <div class="col d-flex flex-column">
                         <!-- style="height: calc(100%-50px);" -->
@@ -157,43 +157,43 @@
                 </div>
               </div>
 
-              <!-- Completed Project -->
+              <!-- 내가 작성한 게시글 -->
               <!-- /* 테스트 데이터 생성 -->
               <div>
                 <% let myPost={data:[], count:5}; %>
                 <% myPost.data.push({
                   community_id:17,
                   title:"테스트추천프로젝트5",
-                  firstName:"tester5",
-                  lastName:"테스터5",
+                  firstName: user.firstName,
+                  lastName: user.lastName,
                   createDate:new Date(2022,10,15),
                 })%>
                 <% myPost.data.push({
                   community_id:13,
                   title:"테스트추천프로젝트4",
-                  firstName:"tester4",
-                  lastName:"테스터4",
+                  firstName: user.firstName,
+                  lastName: user.lastName,
                   createDate:new Date(2022,10,14),
                 })%>
                 <% myPost.data.push({
                   community_id:10,
                   title:"테스트추천프로젝트3",
-                  firstName:"tester3",
-                  lastName:"테스터3",
+                  firstName: user.firstName,
+                  lastName: user.lastName,
                   createDate:new Date(2022,10,13),
                 })%>
                 <% myPost.data.push({
                   community_id:6,
                   title:"테스트추천프로젝트2",
-                  firstName:"tester2",
-                  lastName:"테스터2",
+                  firstName: user.firstName,
+                  lastName: user.lastName,
                   createDate:new Date(2022,10,12),
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
               <!-- 내가 작성한 게시글 -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                <div class="form-group mx-3">
+                <div class="form-group ms-3">
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
@@ -206,7 +206,7 @@
                   </div>
 
                   <div class="row mt-3">
-                    <div class="widget p-4 pb-0 row" id="completed_project">
+                    <div class="widget p-4 pb-0 row mx-0" id="completed_project">
                       <div class="flex-row row mb-auto">
                         <div class="table-responsive p-0">
                           <table class="table text-break">
@@ -268,7 +268,7 @@
               <!-- 내가 좋아하는 게시글 & 내가 좋아하는 댓글 -->
               <div class="row mt-5">
                 <!-- 내가 좋아하는 게시글 -->
-                <div class="col">
+                <div class="col-6">
                   <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0 mb-3">
@@ -370,8 +370,8 @@
                 </div>
 
                 <!-- 내가 좋아하는 댓글 -->
-                <div class="col">
-                  <div class="widget-content widget-content-area p-0 pe-4 h-100 d-flex flex-column">
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 pe-3 h-100 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
                         <h5><strong>

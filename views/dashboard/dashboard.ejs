@@ -68,15 +68,15 @@
                   <div>
                     <% let project=[]; %>
                     <% project.push({
-                      projectName:"1. My Suncream",
+                      projectName:"My Suncream1",
                       phase:7
                     }) %>
                     <% project.push({
-                      projectName:"2. My Suncream",
+                      projectName:"My Suncream2",
                       phase:8
                     }) %>
                     <% project.push({
-                      projectName:"3. My Suncream",
+                      projectName:"My Suncream3",
                       phase:1
                     }) %>
                   </div>
@@ -159,7 +159,7 @@
               <!-- Completed Project -->
               <!-- /* 테스트 데이터 생성 -->
               <div>
-                <% let completed_project={data:[]}; %>
+                <% let completed_project={data:[],page:1,count:10}; %>
                 <% completed_project.data.push({
                   productName:"My Suncream1",
                   volume:"110ml",
@@ -201,7 +201,7 @@
               <!-- 테스트 데이터 생성 */ -->
               <!-- Completed Project -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                <div class="form-group mx-3">
+                <div class="form-group ms-3">
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
@@ -219,7 +219,7 @@
                   </div>
 
                   <div class="row mt-3">
-                    <div class="widget p-4 row" id="completed_project">
+                    <div class="widget p-4 row mx-0" id="completed_project">
                       <% completed_project.data.forEach((item,index)=>{ %>
                       <div class="col d-flex flex-column">
                         <!-- style="height: calc(100%-50px);" -->
@@ -251,108 +251,15 @@
                       <% }) %>
 
                       <!-- pagination -->
-                      <% let page=1 %>
-                      <!-- +completed_project.data.length -->
-                      <% let count=10 %>
-                      <% let end_page=parseInt((count-1)/4)+1; %>
-                      <% if(end_page>1) { %>
-                      <div class="d-flex justify-content-center mt-4">
-                        <!-- 페이징처리 시작 -->
-                        <!-- 처음 & 이전페이지 -->
-                        <ul class="p-2 pagination">
-                          <% if (page==1) { %>
-                          <li class="page-item disabled"><a class="page-link">
-                              <%- __('users.pagination.처음으로') %>
-                            </a>
-                          </li>
-                          <li class="page-item disabled"><a class="page-link">
-                              <%- __('users.pagination.이전으로') %>
-                            </a>
-                          </li>
-                          <% } else { %>
-                          <li class="page-item"><a class="page-link" >
-                              <%- __('users.pagination.처음으로') %>
-                            </a>
-                          </li>
-                          <li class="page-item"><a class="page-link" >
-                              <%- __('users.pagination.이전으로') %>
-                            </a>
-                          </li>
-                          <% } %>
-                        </ul>
-                        <!-- 페이지 리스트 -->
-                        <ul class="p-2 pagination">
-                          <% let end_list_num=end_page> 6 ? 5:end_page %>
-                          <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
-                          <li class="page-item disabled">
-                            <a class="page-link current_page">
-                              <%= i %>
-                            </a>
-                          </li>
-                          <% } else { %>
-                          <li class="page-item"><a class="page-link" >
-                              <%= i %>
-                            </a></li>
-                          <% }} %>
-                          <% } else if ( page> end_page-3 ) {
-                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
-                          <li class="page-item disabled">
-                            <a class="page-link current_page">
-                              <%= i %>
-                            </a>
-                          </li>
-                          <% } else { %>
-                          <li class="page-item">
-                            <a class="page-link" >
-                              <%= i %>
-                            </a>
-                          </li>
-                          <% }} %>
-                          <% } else { for (let i=page-2; i < page+3; i++) { if (page==i) {
-                                                        %>
-                          <li class="page-item disabled">
-                            <a class="page-link current_page">
-                              <%= i %>
-                            </a>
-                          </li>
-                          <% } else { %>
-                          <li class="page-item">
-                            <a class="page-link" >
-                              <%= i %>
-                            </a>
-                          </li>
-                          <% }} %>
-                          <% } %>
-                        </ul>
-                        <!-- 다음 & 마지막페이지 -->
-                        <ul class="p-2 pagination">
-                          <% if(page==end_page){ %>
-                          <li class="page-item disabled">
-                            <a class="page-link">
-                              <%- __('users.pagination.다음으로') %>
-                            </a>
-                          </li>
-                          <li class="page-item disabled">
-                            <a class="page-link">
-                              <%- __('users.pagination.마지막으로') %>
-                            </a>
-                          </li>
-                          <% } else { %>
-                          <li class="page-item">
-                            <a class="page-link" >
-                              <%- __('users.pagination.다음으로') %>
-                            </a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" >
-                              <%- __('users.pagination.마지막으로') %>
-                            </a>
-                          </li>
-                          <% } %>
-                        </ul>
-                        <!-- 페이징처리 끝 -->
-                      </div>
-                      <% } %>
+                      <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
+                      <%- make_pagination_by_href(
+                          __,
+                          completed_project.page,
+                          completed_project.count,
+                          codezip.url.users.community.main,
+                          4
+                        ) %>
+
                     </div>
                   </div>
                 </div>
@@ -372,7 +279,7 @@
                         </h5>
                       </div>
                       <div class="row text-end">
-                        <a href="<%= codezip.url.users.contents %>">
+                        <a href="<%= codezip.url.users.formula %>">
                           <%= __('Show All') %>
                         </a>
                       </div>
@@ -424,7 +331,7 @@
                 </div>
                 <!-- 추천 성분 -->
                 <div class="col-6">
-                  <div class="widget-content widget-content-area p-0 pe-4 h-100 d-flex flex-column">
+                  <div class="widget-content widget-content-area p-0 pe-2 h-100 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
                         <h5><strong>
@@ -536,7 +443,7 @@
                 </div>
                 <!-- community -->
                 <div class="col-6">
-                  <div class="widget-content widget-content-area p-0 pe-4 h-100 d-flex flex-column">
+                  <div class="widget-content widget-content-area p-0 pe-2 h-100 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0">
                       <div>
                         <h5><strong>

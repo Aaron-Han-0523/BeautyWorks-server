@@ -18,9 +18,10 @@ const i18n = require('./i18n');
 const codezip = require('./codezip');
 const myUtils = require('./utils/myUtils');
 process.env.codezip = codezip;
-
+adminRouter
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
 
 
 // DB 동기화
@@ -116,6 +117,7 @@ app.use(
   express.static(path.join(process.cwd(), process.env.UPLOADFILES_ROOT))
 );
 app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 app.use('/', indexRouter);
 
 

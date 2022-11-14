@@ -123,4 +123,14 @@ router.use('/myProject', myProjectRouter)
 // New Project
 router.use('/newProject', newProjectRouter)
 
+// Formula
+
+// Packaing
+
+// Ingredient
+
+// Documents
+
+
+router.get('/', (req, res, next) => res.redirect(res.locals.codezip.url.users.dashboard))
 module.exports = router;

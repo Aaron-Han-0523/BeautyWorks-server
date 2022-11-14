@@ -192,128 +192,111 @@
                 </div>
               </div>
 
+              <!-- Completed Project -->
               <!-- /* 테스트 데이터 생성 -->
               <div>
-                <% let completed_project=[]; %>
-                <% completed_project.push({
+                <% let completed_project={data:[],page:1,count:10}; %>
+                <% completed_project.data.push({
                   productName:"My Suncream1",
-                  volume:110,
+                  volume:"110ml",
                   category1:0,
                   category2:0,
                   totalOrderAmount:10000,
                   lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                 })%>
-                <% completed_project.push({
+                <% completed_project.data.push({
                   productName:"My Suncream2",
-                  volume:120,
+                  volume:"120ml",
                   category1:0,
                   category2:0,
                   totalOrderAmount:20000,
                   lastOrderDate:new Date(2022,10,15),
-                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg"
+                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
                 
                 })%>
-                <% completed_project.push({
+                <% completed_project.data.push({
                   productName:"My Suncream3",
-                  volume:130,
+                  volume:"110g",
                   category1:0,
                   category2:0,
                   totalOrderAmount:30000,
                   lastOrderDate:new Date(2022,10,25),
                   imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
                 })%>
-                <% completed_project.push({
+                <% completed_project.data.push({
                   productName:"My Suncream4",
-                  volume:140,
+                  volume:"210g",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                })%>
-                <%# completed_project.push({
-                  productName:"My Suncream5",
-                  volume:150,
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                })%>
-                <%# completed_project.push({
-                  productName:"My Suncream6",
-                  volume:160,
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0095.jpg"
-                })%>
-                <%# completed_project.push({
-                  productName:"My Suncream7",
-                  volume:170,
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0698.jpg"
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
               <!-- Completed Project -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                <div class="form-group">
+                <div class="form-group ms-3">
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
                         <h5><strong>
-                            <%= __("users.myProject.header.CompletedProject") %>
+                            <%= __("users.dashboard.header.CompletedProject") %>
                           </strong>
                         </h5>
+                      </div>
+                      <div class="row text-end">
+                        <a href="<%= codezip.url.users.myProject.main %>">
+                          <%= __("Show All") %>
+                        </a>
                       </div>
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="swiper-container p-2">
-                      <div class="swiper-wrapper">
-                        <% completed_project.forEach((item,index)=>{ %>
-                        <div class="swiper-slide">
-                          <div class="widget p-4 w-100">
-                            <div class="d-flex">
-                              <img class="align-self-stretch w-50 br-10" style="height: calc(100%-50px);" src="<%= item.imagePaths.split(`,`)[0] %>">
-                              <div class="px-3 flex-grow-1 text-start">
-                                <p><%= item.productName %></p>
-                                <p><%= __("product"+item.category1+"."+item.category2) %></p>
-                                <p><%= item.volume %></p>
-                                <p><%= __("users.myProject.CompletedProject.Total발주수량") %></p>
-                                <p><%= item.totalOrderAmount %></p>
-                                <p><%= __("users.myProject.CompletedProject.최근 발주 날짜") %></p>
-                                <p><%= formatDate(item.lastOrderDate) %></p>
-                              </div>
-                            </div>
-                            <div class="row mx-0 mt-3">
-                              <button class="col-12 btn btn-outline-primary" type="button">
-                                <%= __('REORDER') %>
-                              </button>
-                            </div>
-                          </div>
+                  <div class="row mt-3">
+                    <div class="widget p-4 row mx-0" id="completed_project">
+                      <% completed_project.data.forEach((item,index)=>{ %>
+                      <div class="col d-flex flex-column">
+                        <!-- style="height: calc(100%-50px);" -->
+                        <div class="preview">
+                          <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
                         </div>
-                        <% }) %>
+                        <div class="mb-auto mt-3">
+                          <h6>
+                            <%= item.productName %>
+                          </h6>
+                          <h6>
+                            <%= __("product"+item.category1+"."+item.category2) %>
+                            <%= " " + item.volume %>
+                          </h6>
+                          <p>
+                            <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                            <%= ' : ' + item.totalOrderAmount %>
+                            <br>
+                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                            <%= ' : ' + formatDate(item.lastOrderDate) %>
+                          </p>
+                        </div>
+                        <div class="row mx-0 mt-3">
+                          <button class="btn btn-outline-primary" type="button">
+                            <%= __('REORDER') %>
+                          </button>
+                        </div>
                       </div>
+                      <% }) %>
+
+                      <!-- pagination -->
+                      <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
+                      <%- make_pagination_by_href(
+                          __,
+                          completed_project.page,
+                          completed_project.count,
+                          codezip.url.users.community.main,
+                          4
+                        ) %>
+
                     </div>
-
-                    <!-- 인디케이터 -->
-                    <!-- <div class="swiper-indicator"></div> -->
-
-                    <% if(completed_project.length > 3) { %>
-                    <!-- 네비게이션 -->
-                    <!-- 이전 버튼 -->
-                    <div class="swiper-btn-prev"><i class="fa-solid fa-chevron-left"></i></div>
-                    <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                    <div class="swiper-btn-next"><i class="fa-solid fa-chevron-right"></i></div>
-                    <% } %>
                   </div>
                 </div>
               </div>

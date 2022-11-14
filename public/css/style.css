@@ -308,7 +308,7 @@ h5 {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    word-break: normal;
+    word-break: break-word;
 }
 
 .step-name {
