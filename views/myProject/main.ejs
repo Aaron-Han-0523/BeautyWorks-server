@@ -65,13 +65,13 @@
                       projectName:"My Suncream",
                       phase:0,
                       detailPhase:1,
-                      registerDate: new Date(2022,10,15)
+                      create_date: new Date(2022,10,15)
                       }) %>
                     <% temp_project.push({
                       projectName:"My Suncream",
                       phase:0,
                       detailPhase:2,
-                      registerDate: new Date(2022,10,25)
+                      create_date: new Date(2022,10,25)
                       }) %>
                   </div>
                   <!-- 테스트 데이터 생성 */ -->
@@ -85,7 +85,7 @@
                         <div class="progress-card-name">
                           <h6>
                             <%= (index+1)+". "+item.projectName %>
-                            <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.registerDate) %></span>
+                            <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
                           </h6>
                         </div>
                         <%- include("../partials/temp_progressbar/"+item.detailPhase+".ejs") %>
@@ -120,7 +120,7 @@
                         phase:i,
                         detailPhase:1,
                         sampleNumber: 10,
-                        registerDate: new Date(2022,10,i)
+                        create_date: new Date(2022,10,i)
                       })
                     } %>
                   </div>
@@ -138,7 +138,7 @@
                             <div class="align-self-center">
                               <h6>
                                 <%= (index+1)+'. '+item.projectName %>
-                                <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.registerDate) %></span>
+                                <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
                               </h6>
                             </div>
                             <div class="row text-end me-4">

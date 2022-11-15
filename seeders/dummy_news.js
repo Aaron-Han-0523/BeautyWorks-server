@@ -18,7 +18,7 @@ module.exports = {
             let obj = {
                 users_id: 1
                 , title: "공지 제목" + i
-                , contents: "공지 내용" + i
+                , content: "공지 내용" + i
             }
             data.push(obj);
         }

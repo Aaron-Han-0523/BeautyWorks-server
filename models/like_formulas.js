@@ -1,21 +1,21 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('like_community', {
-    community_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      comment: "커뮤니티 식별번호"
-    },
+  return sequelize.define('like_formulas', {
     users_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       comment: "사용자 식별번호"
+    },
+    formulas_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      comment: "formulas 식별번호"
     }
   }, {
     sequelize,
-    tableName: 'like_community',
+    tableName: 'like_formulas',
     timestamps: false,
     indexes: [
       {
@@ -23,8 +23,8 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "community_id" },
           { name: "users_id" },
+          { name: "formulas_id" },
         ]
       },
     ]

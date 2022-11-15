@@ -8,7 +8,7 @@
         <div class="col-3 theme-logo p-0">
           <div>
             <a href="<%= codezip.url.users.myPage %>">
-              <img alt="avatar" src="<%= user.profileImagePath %>" class="rounded-circle">
+              <img alt="avatar" src="<%= user.profile_image_path %>" class="rounded-circle">
             </a>
           </div>
         </div>
@@ -16,9 +16,9 @@
           <div>
             <h6 style="color: rgb(26,26,26);"><strong>
                 <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                <%= user.lastName + ' ' + user.firstName %>
+                <%= user.last_name + ' ' + user.first_name %>
                 <% } else { %>
-                <%= user.firstName + ' ' + user.lastName %>
+                <%= user.first_name + ' ' + user.last_name %>
                 <% } %>
               </strong>
             </h6>
@@ -26,7 +26,7 @@
           <div>
             <p style="color: rgb(150,150,150);">
               <% let company_team_position=[]; %>
-              <% if(user.companyName) company_team_position.push(user.companyName); %>
+              <% if(user.company_name) company_team_position.push(user.company_name); %>
               <% if(user.team) company_team_position.push(user.team) %>
               <% if(user.position) company_team_position.push(user.position) %>
               <%= company_team_position.join("/") %>

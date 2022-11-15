@@ -29,14 +29,13 @@ module.exports = {
         {
             email: "user-dev@email.com"
             , password: password
-            , userType: 0
+            , user_type: 0
             , country: 'KR'
-            , brandName: 'devBrandName'
-            , firstName: 'devFirstName'
-            , lastName: "devLastName"
-            , mobileContacts: "123-1234-1234"
-            , registerDate: new Date()
-            , companyName: "devCompanyName"
+            , brand_name: 'devbrandName'
+            , first_name: 'devfirstName'
+            , last_name: "devlastName"
+            , mobile_contact: "123-1234-1234"
+            , company_name: "devcompanyName"
             , team: "devTeam"
             , position: "devPosition"
         }

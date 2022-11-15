@@ -58,10 +58,10 @@
                         <h6 class="m-1">
                           <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                           <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                        ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
+                                        ${item.last_name}${item.first_name} ${formatDate(item.updateDate)}` %>
                           <% } else { %>
                           <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                            ${item.firstName} ${item.lastName} ${formatDate(item.updateDate)}` %>
+                                            ${item.first_name} ${item.last_name} ${formatDate(item.updateDate)}` %>
                           <% } %>
                         </h6>
                       </button>
@@ -88,11 +88,11 @@
                         </a>
                       </li>
                       <% } else { %>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=1&cp=<%= community.page %>">
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=1&cp=<%= communities.page %>">
                           <%- __('users.pagination.처음으로') %>
                         </a>
                       </li>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= page-1 %>&cp=<%= community.page %>">
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= page-1 %>&cp=<%= communities.page %>">
                           <%- __('users.pagination.이전으로') %>
                         </a>
                       </li>
@@ -108,7 +108,7 @@
                         </a>
                       </li>
                       <% } else { %>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= community.page %>">
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= communities.page %>">
                           <%= i %>
                         </a></li>
                       <% }} %>
@@ -121,7 +121,7 @@
                       </li>
                       <% } else { %>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= community.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= i %>&cp=<%= communities.page %>">
                           <%= i %>
                         </a>
                       </li>
@@ -135,7 +135,7 @@
                       </li>
                       <% } else { %>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community %>?np=<%= i %>&cp=<%= community.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.community %>?np=<%= i %>&cp=<%= communities.page %>">
                           <%= i %>
                         </a>
                       </li>
@@ -157,12 +157,12 @@
                       </li>
                       <% } else { %>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= +page+1 %>&cp=<%= community.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= +page+1 %>&cp=<%= communities.page %>">
                           <%- __('users.pagination.다음으로') %>
                         </a>
                       </li>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= end_page %>&cp=<%= community.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.community.main %>?np=<%= end_page %>&cp=<%= communities.page %>">
                           <%- __('users.pagination.마지막으로') %>
                         </a>
                       </li>
@@ -194,16 +194,16 @@
                   </div>
                   <!-- list -->
                   <div class="row mt-3">
-                    <% community.data.forEach((item, index)=>{ %>
+                    <% communities.data.forEach((item, index)=>{ %>
                     <div class="my-1">
-                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.community.main + '/' + item.community_id %>'">
+                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.community.main + '/' + item.id %>'">
                         <h6 class="m-1">
                           <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                           <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                        ${item.lastName}${item.firstName} ${formatDate(item.updateDate)}` %>
+                                        ${item.last_name}${item.first_name} ${formatDate(item.updateDate)}` %>
                           <% } else { %>
                           <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                            ${item.firstName} ${item.lastName} ${formatDate(item.updateDate)}` %>
+                                            ${item.first_name} ${item.last_name} ${formatDate(item.updateDate)}` %>
                           <% } %>
                         </h6>
                       </button>
@@ -212,8 +212,8 @@
                   </div>
 
                   <!-- pagination -->
-                  <% page=+community.page %>
-                  <% count=+community.count %>
+                  <% page=+communities.page %>
+                  <% count=+communities.count %>
                   <% end_page=parseInt((count-1)/4)+1; %>
                   <% if(end_page>1) { %>
                   <div class="d-flex justify-content-center  mt-3">

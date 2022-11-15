@@ -416,14 +416,14 @@
                       <% let news=[]; %>
                       <% news.push({
                         title:"반갑습니다.",
-                        firstName:"이름",
-                        lastName:"성",
+                        first_name:"이름",
+                        last_name:"성",
                         updateDate:new Date(2022,10,15),
                       })%>
                       <% news.push({
                         title:"환영합니다.",
-                        firstName:"FirstName",
-                        lastName:"LastName",
+                        first_name:"first_name",
+                        last_name:"last_name",
                         updateDate:new Date(2022,10,25),
                       })%>
                     </div>
@@ -433,9 +433,9 @@
                       <%- include('../partials/badge/new.ejs') %>
                       <div class="h6"><%= item.title %></div>
                       <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.lastName} ${item.firstName}` %></div>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %></div>
                       <% } else { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.firstName} ${item.lastName}` %></div>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %></div>
                       <% } %>
                     </div>
                     <% }) %>
@@ -463,14 +463,14 @@
                       <% let community=[]; %>
                       <% community.push({
                         title:"감사합니다.",
-                        firstName:"이름",
-                        lastName:"성",
+                        first_name:"이름",
+                        last_name:"성",
                         updateDate:new Date(2022,10,15),
                       })%>
                       <% community.push({
                         title:"안녕하세요.",
-                        firstName:"FirstName",
-                        lastName:"LastName",
+                        first_name:"first_name",
+                        last_name:"last_name",
                         updateDate:new Date(2022,10,25),
                       })%>
                     </div>
@@ -480,9 +480,9 @@
                       <%- include('../partials/badge/new.ejs') %>
                       <div class="h6"><%= item.title %></div>
                       <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.lastName} ${item.firstName}` %></div>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.last_name} ${item.first_name}` %></div>
                       <% } else { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.firstName} ${item.lastName}` %></div>
+                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.first_name} ${item.last_name}` %></div>
                       <% } %>
                     </div>
                     <% }) %>

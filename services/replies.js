@@ -1,25 +1,25 @@
 const models = require('../models');
-const reply = models.community_reply;
+const replies = models.replies;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 exports.count = async (id) => {
-    return await reply.count({
-        where: { community_id: id }
+    return await replies.count({
+        where: { communities_id: id }
     })
 }
 
 exports.allRead = async (condition = {}, paging = {}) => {
     console.log(paging.skip, '~', paging.limit);
     let query = `
-    select users.firstName, users.lastName, rp.*, count(like_rp.users_id) as likeCount, JSON_ARRAYAGG(like_rp.users_id) as users
-    from community_reply rp
+    select users.first_name, users.last_name, rp.*, count(like_rp.users_id) as like_count, JSON_ARRAYAGG(like_rp.users_id) as users
+    from replies rp
     join users
-        on users.users_id=(select rp.users_id where rp.community_id=${condition.id})
-    left join like_reply like_rp
-		on rp.community_id=like_rp.community_id and rp.reply_id=like_rp.reply_id
-    group by reply_id
-    order by rp.reply_id desc
+        on users.id=(select rp.users_id where rp.communities_id=${condition.id})
+    left join like_replies like_rp
+		on rp.communities_id=like_rp.communities_id and rp.id=like_rp.replies_id
+    group by replies_id
+    order by rp.id desc
     limit ${paging.skip}, ${paging.limit};
     `
     const data = models.sequelize.query(query)
@@ -44,13 +44,13 @@ exports.allRead = async (condition = {}, paging = {}) => {
 }
 
 exports.maxId = async (id) => {
-    return reply.max('reply_id', {
-        where: { community_id: id }
+    return replies.max('id', {
+        where: { communities_id: id }
     })
 }
 
 exports.create = async (obj) => {
-    const newId = await this.maxId(obj.community_id)
+    const newId = await this.maxId(obj.communities_id)
         .then(result => {
             // console.log("max id :", result);
             if (result === null) {
@@ -64,13 +64,13 @@ exports.create = async (obj) => {
             throw err;
         })
 
-    obj.reply_id = newId
+    obj.id = newId
 
-    return await reply
+    return await replies
         .create(Object.assign(obj, {
         }))
         .then(result => {
-            console.log("community reply create success");
+            console.log("community replies create success");
             return result;
         })
         .catch((err) => {
@@ -80,28 +80,28 @@ exports.create = async (obj) => {
 }
 
 exports.readOne = async (obj) => {
-    console.log("find community reply", obj);
-    return await reply.findOne({
+    console.log("find community replies", obj);
+    return await replies.findOne({
         raw: true,
         where: {
-            community_id: obj.community_id,
-            reply_id: obj.reply_id
+            communities_id: obj.communities_id,
+            id: obj.id
         }
     })
 }
 
 exports.update = async (obj) => {
     console.log("update obj :", obj)
-    return await reply
+    return await replies
         .update(Object.assign(obj, {
         }), {
             where: {
-                community_id: obj.community_id,
-                reply_id: obj.reply_id
+                communities_id: obj.communities_id,
+                id: obj.id
             }
         })
         .then(result => {
-            console.log("community reply update success");
+            console.log("community replies update success");
             return result.pop();
         })
         .catch(err => {
@@ -111,10 +111,12 @@ exports.update = async (obj) => {
 }
 
 exports.delete = async (obj) => {
-    return await reply.destroy({
+    return await replies.update({
+        delete_date: new Date()
+    }, {
         where: {
-            community_id: obj.community_id,
-            reply_id: obj.reply_id
+            communities_id: obj.communities_id,
+            id: obj.id
         }
     })
 }

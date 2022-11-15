@@ -1,22 +1,22 @@
 const models = require('../models');
+const codezip = require('../codezip');
 const usersService = require('../services/users');
-const communityService = require('../services/community');
-const likeService = require('../services/likeCommunity');
-const replyService = require('../services/communityReply');
+const communitiesService = require('../services/communities');
+const likeService = require('../services/like_communities');
+const repliesService = require('../services/replies');
 const newsService = require('../services/news');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const { Op } = require('sequelize');
 
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
     let body = req.body;
     body.users_id = user.users_id;
-    console.log("community body :", body);
+    console.log("communities body :", body);
 
     try {
-        let result = await communityService.create(body);
+        let result = await communitiesService.create(body);
         // console.log("result :",result);
-        return res.status(201).redirect(res.locals.codezip.url.users.community.main);
+        return res.status(201).redirect(codezip.url.users.communities.main);
     }
     catch (e) {
         console.error(e);
@@ -25,14 +25,14 @@ exports.add = async (req, res, next) => {
 }
 
 exports.edit = async (req, res, next) => {
-    console.log("put - community edit")
+    console.log("put - communities edit")
     const user = res.locals.user;
     const id = req.params.id;
     let body = req.body;
     body.id = id;
-    console.log("community body :", body);
+    console.log("communities body :", body);
 
-    const checkAuthor = await communityService.readOne(id).then(result => {
+    const checkAuthor = await communitiesService.readOne(id).then(result => {
         if (result.users_id != user.users_id) { return false; }
         else { return true; }
     }).catch(err => {
@@ -44,10 +44,10 @@ exports.edit = async (req, res, next) => {
         return res.status(403).end();
     }
 
-    communityService
+    communitiesService
         .update(body)
         .then(result => {
-            return res.redirect(res.locals.codezip.url.users.community.main + '/' + id);
+            return res.redirect(codezip.url.users.communities.main + '/' + id);
         })
         .catch(err => {
             console.error(err);
@@ -57,8 +57,8 @@ exports.edit = async (req, res, next) => {
 
 exports.index = async (req, res, next) => {
     const news_page = req.query.np || 1;
-    const community_page = req.query.cp || 1;
-    console.log("page query :", news_page, community_page)
+    const communities_page = req.query.cp || 1;
+    console.log("page query :", news_page, communities_page)
 
     let word = req.query.q
     if (word) word = word.replace(/\;/g, '').trim();
@@ -69,8 +69,8 @@ exports.index = async (req, res, next) => {
         skip: skip ? skip : (news_page - 1) * 4,
         limit: limit ? limit : 4
     }
-    let community_paging = {
-        skip: skip ? skip : (community_page - 1) * 4,
+    let communities_paging = {
+        skip: skip ? skip : (communities_page - 1) * 4,
         limit: limit ? limit : 4
     }
     let condition = word ?
@@ -85,20 +85,20 @@ exports.index = async (req, res, next) => {
         }
         : {}
 
-    const community = communityService
-        .allRead(condition, community_paging)
+    const communities = communitiesService
+        .allRead(condition, communities_paging)
         .catch(err => console.error(err));
 
     const news = newsService
         .allRead(condition, news_paging)
         .catch(err => console.error(err));
 
-    Promise.all([community, news]).then(data => {
+    Promise.all([communities, news]).then(data => {
         return res.render('community/index', {
-            community: {
+            communities: {
                 count: data[0][0].count,
                 data: data[0][1],
-                page: community_page,
+                page: communities_page,
                 word: word
             },
             news: {
@@ -118,29 +118,29 @@ exports.detail = async (req, res, next) => {
     const skip = req.query.skip;
     const limit = req.query.limit;
 
-    const prev_id = communityService.getPrevID(id);
-    const next_id = communityService.getNextID(id);
-    const community = communityService.readOne(id);
-    const communityLikeCount = likeService.countLike(id);
+    const prev_id = communitiesService.getPrevID(id);
+    const next_id = communitiesService.getNextID(id);
+    const community = communitiesService.readOne(id);
+    const communitylike_count = likeService.countLike(id);
 
     let reply_paging = {
         skip: skip ? skip : (reply_page - 1) * 4,
         limit: limit ? limit : 4
     }
-    const reply = replyService.allRead({ id: id }, reply_paging);
+    const reply = repliesService.allRead({ id: id }, reply_paging);
 
 
-    Promise.all([community, communityLikeCount, prev_id, next_id, reply])
-        .then(async ([community, communityLike, prev_id, next_id, reply]) => {
+    Promise.all([community, communitylike_count, prev_id, next_id, reply])
+        .then(async ([community, communitylike_count, prev_id, next_id, reply]) => {
             // console.log('??', reply)
 
             const user = await usersService.readOne(community.users_id);
-            community.firstName = user.firstName;
-            community.lastName = user.lastName;
+            community.first_name = user.first_name;
+            community.last_name = user.last_name;
             // return res.json({
             //     author: { users_id: user.users_id },
-            //     community: community,
-            //     communityLike: communityLike,
+            //     communities: communities,
+            //     communitiesLike: communitiesLike,
             //     prev: prev_id[0] || null,
             //     next: next_id[0] || null,
             //     reply: {
@@ -153,7 +153,7 @@ exports.detail = async (req, res, next) => {
             return res.render(`community/detail`, {
                 originalUrl: req.originalUrl.split('?')[0],
                 community: community,
-                communityLike: communityLike,
+                communityLike: communitylike_count,
                 prev: prev_id[0] || null,
                 next: next_id[0] || null,
                 reply: {
@@ -172,7 +172,7 @@ exports.detail = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
 
-    let result = await communityService
+    let result = await communitiesService
         .delete(id)
         .catch(err => {
             console.error(err);
@@ -181,7 +181,7 @@ exports.delete = async (req, res, next) => {
 
     // console.log("delete result :", result)
 
-    if (result) return res.redirect(res.locals.codezip.url.users.community.main);
+    if (result) return res.redirect(codezip.url.users.communities.main);
     else res.ststus(500).send(`fail id:${id}`)
 }
 
@@ -189,9 +189,9 @@ exports.like = async (req, res, next) => {
     const user = res.locals.user;
     // console.log(user);
     if (!user) {
-        return res.status(403).redirect(res.locals.codezip.url.users.signIn);
+        return res.status(403).redirect(codezip.url.users.signIn);
     }
-    let body = Object.assign(req.body, user);
+    let body = Object.assign(req.body, { users_id: user.id });
 
     // console.log(body);
     let result;
@@ -219,14 +219,14 @@ exports.like = async (req, res, next) => {
 //     let result = null;
 //     try {
 //         if (word) {
-//             result = await communityService.allRead({
+//             result = await communitiesService.allRead({
 //                 [Op.or]: [
 //                     { title: { [Op.like]: `%${word}%` } },
 //                     { content: { [Op.like]: `%${word}%` } }
 //                 ]
 //             })
 //         } else {
-//             result = await communityService.allRead()
+//             result = await communitiesService.allRead()
 //         }
 //     } catch (err) {
 //         console.error(err)

@@ -1,37 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('ingredients', {
+  return sequelize.define('communities', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "원료 식별번호"
+      comment: "커뮤니티 식별번호"
     },
-    material_name: {
-      type: DataTypes.STRING(1000),
-      allowNull: true,
-      comment: "원료명"
-    },
-    ingredient_name: {
-      type: DataTypes.STRING(1000),
+    users_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      comment: "성분명"
+      comment: "사용자 식별번호"
     },
-    type: {
+    title: {
       type: DataTypes.STRING(100),
-      allowNull: true,
-      comment: "종류"
+      allowNull: false,
+      comment: "제목"
     },
-    effects: {
-      type: DataTypes.STRING(10000),
-      allowNull: true,
-      comment: "기능"
-    },
-    feature: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      comment: "특징"
+    content: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+      comment: "내용"
     },
     create_date: {
       type: DataTypes.DATE,
@@ -52,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'ingredients',
+    tableName: 'communities',
     timestamps: false,
     indexes: [
       {

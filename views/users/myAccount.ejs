@@ -73,17 +73,17 @@
                       <div class="col">
                         <div class="row">
                           <div class="col-4 pe-1">
-                            <img id="profileImage" class="br-10 w-100" src="<%= user.profileImagePath %>">
+                            <img id="profileImage" class="br-10 w-100" src="<%= user.profile_image_path %>">
                           </div>
                         </div>
                         <div class="mt-2 row">
                           <div class="col-4 pe-1 py-2">
-                            <label class="m-0 p-0 w-100 h-100" for="profileImagePath">
+                            <label class="m-0 p-0 w-100 h-100" for="profile_image_path">
                               <div class="btn btn-outline-primary w-100">
                                 <%= __('users.myAccount.btn.UploadImage') %>
                               </div>
                             </label>
-                            <input type="file" name="profileImagePath" id="profileImagePath" hidden>
+                            <input type="file" name="profile_image_path" id="profile_image_path" hidden>
                           </div>
                           <div class="col-4 px-1 py-2">
                             <button type="button" class="btn btn-outline-primary w-100" onclick="removeImage();">
@@ -104,10 +104,10 @@
                         </div>
                         <div class="col row">
                           <div class="col">
-                            <input class="form-control" type="text" value="<%= user.firstName %>" disabled>
+                            <input class="form-control" type="text" value="<%= user.first_name %>" disabled>
                           </div>
                           <div class="col">
-                            <input class="form-control" type="text" value="<%= user.lastName %>" disabled>
+                            <input class="form-control" type="text" value="<%= user.last_name %>" disabled>
                           </div>
                         </div>
                       </div>
@@ -118,12 +118,12 @@
                       <div class="row">
                         <div class="col-3">
                           <h6>
-                            <%= __('users.myAccount.label.CompanyName') %>
+                            <%= __('users.myAccount.label.company_name') %>
                           </h6>
                         </div>
                         <div class="row col">
                           <div class="col">
-                            <input class="form-control" type="text" name="companyName" value="<%= user.companyName %>">
+                            <input class="form-control" type="text" name="company_name" value="<%= user.company_name %>">
                           </div>
                         </div>
                       </div>
@@ -134,12 +134,12 @@
                       <div class="row">
                         <div class="col-3">
                           <h6>
-                            <%= __('users.myAccount.label.BrandName') %>
+                            <%= __('users.myAccount.label.brand_name') %>
                           </h6>
                         </div>
                         <div class="row col">
                           <div class="col">
-                            <input class="form-control" type="text" name="brandName" value="<%= user.brandName %>">
+                            <input class="form-control" type="text" name="brand_name" value="<%= user.brand_name %>">
                           </div>
                         </div>
                       </div>
@@ -187,12 +187,12 @@
                       <div class="row">
                         <div class="col-3">
                           <h6>
-                            <%= __('users.myAccount.label.LogisticsAddress') %>
+                            <%= __('users.myAccount.label.logistics_address') %>
                           </h6>
                         </div>
                         <div class="row col">
                           <div class="col">
-                            <input class="form-control" type="text" name="logisticsAddress" value="<%= user.logisticsAddress %>">
+                            <input class="form-control" type="text" name="logistics_address" value="<%= user.logistics_address %>">
                           </div>
                         </div>
                       </div>
@@ -203,12 +203,12 @@
                       <div class="row">
                         <div class="col-3">
                           <h6>
-                            <%= __('users.myAccount.label.CompanyAddress') %>
+                            <%= __('users.myAccount.label.company_address') %>
                           </h6>
                         </div>
                         <div class="row col">
                           <div class="col">
-                            <input class="form-control" type="text" name="companyAddress" value="<%= user.companyAddress %>">
+                            <input class="form-control" type="text" name="company_address" value="<%= user.company_address %>">
                           </div>
                         </div>
                       </div>
@@ -247,13 +247,13 @@
   <script>
     let isRemoveImage = false;
 
-    profileImagePath.addEventListener('change', (event) => {
+    profile_image_path.addEventListener('change', (event) => {
       loadImageFile(event.target, profileImage)
       isRemoveImage = false;
     })
 
     function removeImage() {
-      profileImagePath.value = null;
+      profile_image_path.value = null;
       profileImage.src = '<%= codezip.url.users.defaultProfileImage %>'
       isRemoveImage = true;
     }

@@ -26,7 +26,7 @@ exports.update = async (obj) => {
             updateUser: obj.user,
             updateDate: new Date()
         }), {
-            where: { news_id: obj.id }
+            where: { id: obj.id }
         })
         .then(result => {
             console.log("news update success");
@@ -42,11 +42,15 @@ exports.allRead = async (condition = {}, paging = {}) => {
     // console.log('all news read');
     let word = condition.word || '';
     let query = `
-    select users.firstName, users.lastName, news.* from news
+    select users.first_name, users.last_name, news.* from news
     join users
-        on users.users_id=(select news.users_id
-            where (news.title like('%${word}%') or news.contents like('%${word}%')))
-    order by news.news_id desc
+        on users.id=(
+            select news.users_id
+            where (
+                news.title like('%${word}%') or news.content like('%${word}%')
+                )
+            )
+    order by news.id desc
     limit ${paging.skip}, ${paging.limit};
     `
     const data = models.sequelize.query(query)
@@ -63,8 +67,8 @@ exports.allRead = async (condition = {}, paging = {}) => {
     query = `
     select count(*) as count from news
     join users
-        on users.users_id=news.users_id
-    where (news.title like('%${word}%') or news.contents like('%${word}%'))
+        on users.id=news.users_id
+    where (news.title like('%${word}%') or news.content like('%${word}%'))
     `
     const count = models.sequelize.query(query)
         .then(function (results, metadata) {
@@ -90,7 +94,7 @@ exports.allRead = async (condition = {}, paging = {}) => {
     //         where: Object.assign(condition, {
     //         }),
     //         order: [
-    //             ['news_id', 'DESC'],
+    //             ['id', 'DESC'],
     //         ],
     //         offset: paging.skip,
     //         limit: paging.limit
@@ -113,7 +117,7 @@ exports.readOne = async (id) => {
             .findOne({
                 raw: true,
                 where: {
-                    news_id: id,
+                    id: id,
                 }
             })
             .then(result => result)
@@ -131,7 +135,7 @@ exports.delete = async (obj) => {
             deleteUser: obj.user,
             deleteDate: new Date()
         }, {
-            where: { news_id: obj.id }
+            where: { id: obj.id }
         })
         .then(result => {
             console.log("news delete success");
@@ -144,7 +148,7 @@ exports.delete = async (obj) => {
 }
 
 exports.getPrevID = async (id) => {
-    let query = `SELECT news_id FROM news WHERE news_id < ${id} ORDER BY news_id DESC LIMIT 1;`
+    let query = `SELECT id FROM news WHERE id < ${id} ORDER BY id DESC LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
             // 쿼리 실행 성공
@@ -158,7 +162,7 @@ exports.getPrevID = async (id) => {
 }
 
 exports.getNextID = async (id) => {
-    let query = `SELECT news_id FROM news WHERE news_id > ${id} ORDER BY news_id LIMIT 1;`
+    let query = `SELECT id FROM news WHERE id > ${id} ORDER BY id LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
             // 쿼리 실행 성공

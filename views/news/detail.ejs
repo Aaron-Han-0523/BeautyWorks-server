@@ -48,27 +48,27 @@
                             <h5><strong>
                                 <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                                   <%= `${data.title} ${__('users.community.news.index.WrittenBy')}
-                                    ${data.lastName}${data.firstName} ${formatDate(data.updateDate)}` %>
+                                    ${data.last_name}${data.first_name} ${formatDate(data.updateDate)}` %>
                                     <% } else { %>
-                                      <%= `${data.title} ${__('users.community.news.index.WrittenBy')} ${data.firstName}
-                                        ${data.lastName} ${formatDate(data.updateDate)}` %>
+                                      <%= `${data.title} ${__('users.community.news.index.WrittenBy')} ${data.first_name}
+                                        ${data.last_name} ${formatDate(data.updateDate)}` %>
                                         <% } %>
                               </strong></h5>
                           </div>
                         </div>
 
-                        <!-- contents -->
+                        <!-- content -->
                         <div class="row breadcrumb m-2 mt-3 br-20 p-3">
                           <div class="">
                             <h5>
-                              <%= data.contents %>
+                              <%= data.content %>
                             </h5>
                           </div>
 
                           <!-- 네비게이션 -->
                           <div class="row mt-5">
                             <div class="col-4 text-start">
-                              <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.news_id %>">
+                              <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.id %>">
                                   <h5><i class="fa-solid fa-chevron-left"></i>
                                     <%= __('users.news.이전글') %>
                                   </h5>
@@ -81,7 +81,7 @@
                                 </h5>
                               </a></div>
                             <div class="col-4 text-end">
-                              <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.news_id %>">
+                              <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.id %>">
                                   <h5>
                                     <%= __('users.news.다음글') %><i class="fa-solid fa-chevron-right"></i>
                                   </h5>

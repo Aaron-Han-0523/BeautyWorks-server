@@ -11,16 +11,7 @@ const usersService = require('../services/users');
 const multer = require("multer");
 const path = require("path");
 const myUtils = require('../utils/myUtils');
-
-// 날짜 형식 포맷터 YYYY-MM-DD_시간h분m초s
-function formatDate(d_t) {
-  let year = d_t.getFullYear(); let month = ("0"
-    + (d_t.getMonth() + 1)).slice(-2); let day = ("0" +
-      d_t.getDate()).slice(-2); let hour = ("0" + d_t.getHours()).slice(-2);
-  let minute = ("0" + d_t.getMinutes()).slice(-2); let seconds = ("0" +
-    d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day
-      + "_" + hour + "h" + minute + "m" + seconds + "s"
-}
+const codezip = require('../codezip');
 
 // 업로드 파일 저장 설정
 let storage = (fileName) => multer.diskStorage({
@@ -97,7 +88,10 @@ router
 router.get('/checkAlarm', usersController.checkAlarm);
 
 // 사용자 대시보드
-router.use('/dashboard', (req, res) => res.render('dashboard/dashboard'));
+router.use('/dashboard', (req, res) => {
+
+  res.render('dashboard/dashboard');
+})
 
 // 사용자 접속해제
 router.get('/signOut', usersController.logout);
@@ -107,8 +101,8 @@ router.get('/myPage', (req, res) => res.render('users/myPage'));
 
 // 사용자 계정
 router
-  .post('/myAccount', upload().single('profileImagePath'), usersController.edit)
-  .put('/myAccount', upload().single('profileImagePath'), usersController.edit)
+  .post('/myAccount', upload().single('profile_image_path'), usersController.edit)
+  .put('/myAccount', upload().single('profile_image_path'), usersController.edit)
   .get('/myAccount', (req, res) => res.render('users/myAccount'));
 
 // news
@@ -132,5 +126,5 @@ router.use('/newProject', newProjectRouter)
 // Documents
 
 
-router.get('/', (req, res, next) => res.redirect(res.locals.codezip.url.users.dashboard))
+router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))
 module.exports = router;

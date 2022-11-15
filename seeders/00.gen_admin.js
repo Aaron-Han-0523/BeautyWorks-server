@@ -28,13 +28,12 @@ module.exports = {
         let admin = {
             email: "admin"
             , password: password
-            , userType: 123
+            , user_type: 1<<5
             , country: 'KR'
-            , brandName: 'BeautyWorks'
-            , firstName: 'administrator'
-            , lastname: "관리자"
-            , mobileContacts: "000-0000-0000"
-            , registerDate: new Date()
+            , company_name: 'BeautyWorks'
+            , first_name: 'administrator'
+            , last_name: "관리자"
+            , mobile_contact: "000-0000-0000"
         }
 
         await queryInterface.bulkInsert('users', [admin], {});

@@ -46,7 +46,6 @@ exports.create = async (obj) => {
     console.log("users create obj :", obj)
     return await users
         .create(Object.assign(obj, {
-            registerDate: new Date()
         }))
         .then(result => {
             console.log("users create success");
@@ -106,7 +105,7 @@ exports.readOne = async (id) => {
             .findOne({
                 raw: true,
                 where: {
-                    users_id: id,
+                    id: id,
                 }
             })
             .then(result => result)

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('users', {
-    users_id: {
+    id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "사용자 식별번호"
     },
     email: {
-      type: DataTypes.STRING(320),
+      type: DataTypes.STRING(500),
       allowNull: false,
       comment: "이메일(ID)",
       unique: "users_UK"
@@ -19,33 +19,44 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "비밀번호"
     },
-    userType: {
+    user_type: {
       type: DataTypes.TINYINT,
       allowNull: false,
       defaultValue: 0,
       comment: "권한코드"
     },
     country: {
-      type: DataTypes.STRING(2),
+      type: DataTypes.STRING(5),
       allowNull: false,
-      comment: "국가명"
+      comment: "국가"
     },
-    brandName: {
+    profile_image_path: {
       type: DataTypes.STRING(300),
       allowNull: false,
-      comment: "브랜드명"
+      defaultValue: "\/images\/default-user-profile.png",
+      comment: "프로필사진"
     },
-    firstName: {
+    first_name: {
       type: DataTypes.STRING(500),
       allowNull: false,
       comment: "이름"
     },
-    lastName: {
+    last_name: {
       type: DataTypes.STRING(500),
       allowNull: false,
       comment: "성"
     },
-    companyName: {
+    mobile_contact: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+      comment: "핸드폰번호"
+    },
+    brand_name: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
+      comment: "브랜드명"
+    },
+    company_name: {
       type: DataTypes.STRING(500),
       allowNull: true,
       comment: "회사명"
@@ -60,32 +71,43 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "직급"
     },
-    mobileContacts: {
+    logistics_address: {
       type: DataTypes.STRING(500),
-      allowNull: false,
-      comment: "핸드폰번호"
+      allowNull: true,
+      comment: "택배주소"
     },
-    profileImagePath: {
+    company_address: {
       type: DataTypes.STRING(500),
-      allowNull: false,
-      defaultValue: "\/images\/default-user-profile.svg",
-      comment: "프로필사진"
+      allowNull: true,
+      comment: "회사주소"
     },
-    registerDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      comment: "가입날짜"
-    },
-    lastAccessDate: {
+    last_access_date: {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "마지막 접속날짜"
     },
-    isProjectUpdate: {
-      type: DataTypes.BOOLEAN,
+    is_project_update: {
+      type: DataTypes.TINYINT,
       allowNull: true,
       defaultValue: 0,
       comment: "프로젝트알림여부"
+    },
+    create_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "생성일"
+    },
+    update_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "수정일"
+    },
+    delete_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "삭제일"
     }
   }, {
     sequelize,
@@ -97,7 +119,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "users_id" },
+          { name: "id" },
         ]
       },
       {

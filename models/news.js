@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('news', {
-    news_id: {
+    id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -14,26 +14,31 @@ module.exports = function(sequelize, DataTypes) {
       comment: "사용자 식별번호"
     },
     title: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(100),
       allowNull: false,
       comment: "제목"
     },
-    contents: {
+    content: {
       type: DataTypes.STRING(500),
       allowNull: false,
       comment: "내용"
     },
-    createDate: {
+    create_date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
-    updateDate: {
+    update_date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "변경일"
+      comment: "수정일"
+    },
+    delete_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "삭제일"
     }
   }, {
     sequelize,
@@ -45,7 +50,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "news_id" },
+          { name: "id" },
         ]
       },
     ]

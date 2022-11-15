@@ -1,32 +1,44 @@
 var DataTypes = require("sequelize").DataTypes;
-var _community = require("./community");
-var _community_reply = require("./community_reply");
+var _communities = require("./communities");
+var _documents = require("./documents");
+var _formulas = require("./formulas");
 var _ingredients = require("./ingredients");
-var _like_community = require("./like_community");
-var _like_reply = require("./like_reply");
+var _like_communities = require("./like_communities");
+var _like_formulas = require("./like_formulas");
+var _like_replies = require("./like_replies");
 var _news = require("./news");
-var _user_log = require("./user_log");
+var _packages = require("./packages");
+var _projects = require("./projects");
+var _replies = require("./replies");
 var _users = require("./users");
 
 function initModels(sequelize) {
-  var community = _community(sequelize, DataTypes);
-  var community_reply = _community_reply(sequelize, DataTypes);
+  var communities = _communities(sequelize, DataTypes);
+  var documents = _documents(sequelize, DataTypes);
+  var formulas = _formulas(sequelize, DataTypes);
   var ingredients = _ingredients(sequelize, DataTypes);
-  var like_community = _like_community(sequelize, DataTypes);
-  var like_reply = _like_reply(sequelize, DataTypes);
+  var like_communities = _like_communities(sequelize, DataTypes);
+  var like_formulas = _like_formulas(sequelize, DataTypes);
+  var like_replies = _like_replies(sequelize, DataTypes);
   var news = _news(sequelize, DataTypes);
-  var user_log = _user_log(sequelize, DataTypes);
+  var packages = _packages(sequelize, DataTypes);
+  var projects = _projects(sequelize, DataTypes);
+  var replies = _replies(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
 
 
   return {
-    community,
-    community_reply,
+    communities,
+    documents,
+    formulas,
     ingredients,
-    like_community,
-    like_reply,
+    like_communities,
+    like_formulas,
+    like_replies,
     news,
-    user_log,
+    packages,
+    projects,
+    replies,
     users,
   };
 }

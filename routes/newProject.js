@@ -3,6 +3,7 @@ const router = express.Router();
 
 // const newProjectController = require('../controllers/newProject');
 // const newProjectService = require('../services/newProject');
+const codezip = require('../codezip')
 
 /* GET newProject listing. */
 // MOQ/예산확인
@@ -35,5 +36,5 @@ router
   //   .post('/isTarget', newProjectController.edit)
   .get('/order', (req, res, next) => res.render('newProject/order'))
 
-router.get('/', (req, res, next) => res.redirect(res.locals.codezip.url.users.newProject._0))
+router.get('/', (req, res, next) => res.redirect(codezip.url.users.newProject._0))
 module.exports = router;

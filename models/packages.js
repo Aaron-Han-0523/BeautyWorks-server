@@ -1,37 +1,52 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('ingredients', {
+  return sequelize.define('packages', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "원료 식별번호"
+      comment: "용기 식별번호"
     },
-    material_name: {
-      type: DataTypes.STRING(1000),
-      allowNull: true,
-      comment: "원료명"
-    },
-    ingredient_name: {
-      type: DataTypes.STRING(1000),
-      allowNull: false,
-      comment: "성분명"
-    },
-    type: {
+    packaging_name: {
       type: DataTypes.STRING(100),
-      allowNull: true,
-      comment: "종류"
+      allowNull: false,
+      comment: "용기명"
     },
-    effects: {
-      type: DataTypes.STRING(10000),
+    packaging_type: {
+      type: DataTypes.TINYINT,
       allowNull: true,
-      comment: "기능"
+      comment: "용기종류"
     },
-    feature: {
+    category1: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "대분류"
+    },
+    category2: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "중분류"
+    },
+    category3: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "소분류"
+    },
+    capacity: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+      comment: "용량"
+    },
+    use: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
+      comment: "용도"
+    },
+    image_paths: {
       type: DataTypes.TEXT,
       allowNull: true,
-      comment: "특징"
+      comment: "이미지"
     },
     create_date: {
       type: DataTypes.DATE,
@@ -52,7 +67,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'ingredients',
+    tableName: 'packages',
     timestamps: false,
     indexes: [
       {

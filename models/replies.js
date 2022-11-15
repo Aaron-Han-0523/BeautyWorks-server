@@ -1,43 +1,48 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('community', {
-    community_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
+  return sequelize.define('replies', {
+    communities_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       comment: "커뮤니티 식별번호"
+    },
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      comment: "댓글 식별번호"
     },
     users_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       comment: "사용자 식별번호"
     },
-    title: {
-      type: DataTypes.STRING(20),
-      allowNull: false,
-      comment: "제목"
-    },
-    contents: {
-      type: DataTypes.STRING(500),
+    content: {
+      type: DataTypes.STRING(200),
       allowNull: false,
       comment: "내용"
     },
-    createDate: {
+    create_date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
-    updateDate: {
+    update_date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "변경일"
+      comment: "수정일"
+    },
+    delete_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "삭제일"
     }
   }, {
     sequelize,
-    tableName: 'community',
+    tableName: 'replies',
     timestamps: false,
     indexes: [
       {
@@ -45,7 +50,8 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "community_id" },
+          { name: "communities_id" },
+          { name: "id" },
         ]
       },
     ]

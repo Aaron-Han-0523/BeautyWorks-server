@@ -65,17 +65,17 @@
                             </div>
                             <div class="row">
                               <div class="col-6 col-md-4">
-                                <img id="profileImage" style="height: 200px;" src="<%= user.profileImagePath %>">
+                                <img id="profileImage" style="height: 200px;" src="<%= user.profile_image_path %>">
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-6 col-md-4 mt-2">
-                                <label class="btn mb-0 col-12" for="profileImagePath">
+                                <label class="btn mb-0 col-12" for="profile_image_path">
                                   <div class="mt-1">
                                     <%= __('users.myAccount.btn.UploadImage') %>
                                   </div>
                                 </label>
-                                <input type="file" name="profileImagePath" id="profileImagePath" hidden>
+                                <input type="file" name="profile_image_path" id="profile_image_path" hidden>
                               </div>
                               <div class="row">
                                 <div class="col-6 col-md-4 mt-2 text-center">
@@ -97,10 +97,10 @@
                                 </div>
                                 <div class="row">
                                   <div class="col-6 col-md-4">
-                                    <input class="form-control" type="text" value="<%= user.firstName %>" disabled>
+                                    <input class="form-control" type="text" value="<%= user.first_name %>" disabled>
                                   </div>
                                   <div class="col-6 col-md-4">
-                                    <input class="form-control" type="text" value="<%= user.lastName %>" disabled>
+                                    <input class="form-control" type="text" value="<%= user.last_name %>" disabled>
                                   </div>
                                 </div>
                               </div>
@@ -110,13 +110,13 @@
                               <div class="row">
                                 <div>
                                   <h6>
-                                    <%= __('users.myAccount.label.CompanyName') %>
+                                    <%= __('users.myAccount.label.company_name') %>
                                   </h6>
                                 </div>
                                 <div class="row">
                                   <div class="col-6 col-md-4">
-                                    <input class="form-control" type="text" name="companyName"
-                                      value="<%= user.companyName %>">
+                                    <input class="form-control" type="text" name="company_name"
+                                      value="<%= user.company_name %>">
                                   </div>
                                 </div>
                               </div>

@@ -1,17 +1,17 @@
+const repliesService = require('../services/replies');
+const likeService = require('../services/like_replies');
 const models = require('../models');
-const replyService = require('../services/communityReply');
-const likeService = require('../services/likeReply');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const codezip = require('../codezip');
+const { Op } = require('sequelize');
 
 exports.add = async (req, res, next) => {
     let body = req.body;
-    body.community_id = req.params.id;
-    body.users_id = res.locals.user.users_id;
+    body.communities_id = req.params.id;
+    body.users_id = res.locals.user.id;
     console.log("reply body :", body);
     console.log("referer :", req.headers.referer);
 
-    await replyService.create(body)
+    await repliesService.create(body)
         .then(result => {
             console.log(result);
             return res.redirect(req.headers.referer.split('?')[0])
@@ -26,14 +26,14 @@ exports.edit = async (req, res, next) => {
     console.log("reply edit");
     const user = res.locals.user;
     let body = req.body;
-    const target = await replyService.readOne(body);
+    const target = await repliesService.readOne(body);
     // console.log(target);
-    if (user.users_id != target.users_id) {
+    if (user.id != target.users_id) {
         return res.status(403).end();
     }
     console.log("reply edit body :", body);
 
-    replyService.update(body)
+    repliesService.update(body)
         .then(result => {
             console.log(result);
             return res.end();
@@ -48,15 +48,15 @@ exports.delete = async (req, res, next) => {
     console.log("reply delete");
     const user = res.locals.user;
     let obj = {}
-    obj.community_id = req.params.community_id;
-    obj.reply_id = req.params.reply_id;
+    obj.communities_id = req.params.community_id;
+    obj.id = req.params.reply_id;
     //console.log(obj)
-    const target = await replyService.readOne(obj);
-    if (user.users_id != target.users_id) {
+    const target = await repliesService.readOne(obj);
+    if (user.id != target.users_id) {
         return res.status(403).end();
     }
 
-    let result = await replyService
+    let result = await repliesService
         .delete(obj)
         .then(result => {
             res.end();
@@ -75,14 +75,14 @@ exports.delete = async (req, res, next) => {
 //     let result = null;
 //     try {
 //         if (word) {
-//             result = await replyService.allRead({
+//             result = await repliesService.allRead({
 //                 [Op.or]: [
 //                     { title: { [Op.like]: `%${word}%` } },
 //                     { content: { [Op.like]: `%${word}%` } }
 //                 ]
 //             })
 //         } else {
-//             result = await replyService.allRead()
+//             result = await repliesService.allRead()
 //         }
 //     } catch (err) {
 //         console.error(err)
@@ -98,9 +98,9 @@ exports.like = async (req, res, next) => {
     const user = res.locals.user;
     // console.log(user);
     if (!user) {
-        return res.status(403).redirect(res.locals.codezip.url.users.signIn);
+        return res.status(403).redirect(codezip.url.users.signIn);
     }
-    let body = Object.assign(req.body, user);
+    let body = Object.assign(req.body, { users_id: user.id });
 
     // console.log(body);
     let result;

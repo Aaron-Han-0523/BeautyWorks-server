@@ -1,17 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('like_reply', {
-    community_id: {
+  return sequelize.define('like_communities', {
+    communities_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       comment: "커뮤니티 식별번호"
-    },
-    reply_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      comment: "댓글 식별번호"
     },
     users_id: {
       type: DataTypes.INTEGER,
@@ -21,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'like_reply',
+    tableName: 'like_communities',
     timestamps: false,
     indexes: [
       {
@@ -29,8 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "community_id" },
-          { name: "reply_id" },
+          { name: "communities_id" },
           { name: "users_id" },
         ]
       },

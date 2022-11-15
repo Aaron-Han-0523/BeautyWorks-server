@@ -1,15 +1,15 @@
 const models = require('../models');
-const like_reply = models.like_reply;
+const like_replies = models.like_replies;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 
 exports.create = async (obj) => {
-  return await like_reply
+  return await like_replies
     .create(Object.assign(obj, {
     }))
     .then(result => {
-      console.log("like_reply create success");
+      console.log("like_replies create success");
       return result;
     })
     .catch((err) => {
@@ -19,16 +19,16 @@ exports.create = async (obj) => {
 }
 
 exports.delete = async (obj) => {
-  return await like_reply
+  return await like_replies
     .destroy({
       where: {
-        community_id: obj.community_id,
-        reply_id: obj.reply_id,
+        communities_id: obj.communities_id,
+        replies_id: obj.replies_id,
         users_id: obj.users_id
       }
     })
     .then(result => {
-      console.log("like_reply delete success");
+      console.log("like_replies delete success");
       return result;
     })
     .catch((err) => {
@@ -38,16 +38,16 @@ exports.delete = async (obj) => {
 }
 
 exports.checkLike = async (obj) => {
-  return await like_reply
+  return await like_replies
     .findOne({
       where: {
-        community_id: obj.community_id,
-        reply_id: obj.reply_id,
+        communities_id: obj.communities_id,
+        replies_id: obj.replies_id,
         users_id: obj.users_id
       }
     })
     .then(result => {
-      console.log("like_reply find success");
+      console.log("like_replies find success");
       return result;
     })
     .catch((err) => {
@@ -57,18 +57,18 @@ exports.checkLike = async (obj) => {
 }
 
 exports.countLike = async (id) => {
-  return await like_reply
+  return await like_replies
     .findAll({
       where: {
-        community_id: id,
-        reply_id: obj.reply_id,
+        communities_id: id,
+        replies_id: obj.replies_id,
       },
       attributes: [
-        [sequelize.fn('count', sequelize.col('community_id')), 'count']
+        [sequelize.fn('count', sequelize.col('communities_id')), 'count']
       ]
     })
     .then(result => {
-      console.log("like_reply count success");
+      console.log("like_replies count success");
       return result;
     })
     .catch((err) => {
@@ -78,14 +78,14 @@ exports.countLike = async (id) => {
 }
 
 exports.getLikelist = async (id) => {
-  return await like_reply
+  return await like_replies
     .findAll({
       where: {
         users_id: id,
       }
     })
     .then(result => {
-      console.log("like_reply get list success");
+      console.log("like_replies get list success");
       return result;
     })
     .catch((err) => {

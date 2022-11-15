@@ -18,13 +18,13 @@ module.exports = {
             let obj = {
                 users_id: 2
                 , title: "커뮤 제목" + i
-                , contents: "커뮤 내용" + i
+                , content: "커뮤 내용" + i
             }
             data.push(obj);
         }
 
 
-        await queryInterface.bulkInsert('community', data, {});
+        await queryInterface.bulkInsert('communities', data, {});
     },
 
     async down(queryInterface, Sequelize) {
@@ -34,7 +34,7 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('community', null, {});
+        await queryInterface.bulkDelete('communities', null, {});
 
     }
 };

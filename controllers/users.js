@@ -2,8 +2,8 @@ const usersService = require('../services/users');
 const nodemailer = require('nodemailer');
 const systemInfo = require('../config/system.json');
 const encryption = require('../utils/encryption');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const {Op} = require('sequelize');
+const codezip = require('../codezip');
 
 exports.login = async function (req, res, next) {
     const body = req.body;
@@ -84,9 +84,9 @@ exports.validationEmail = async (req, res, next) => {
 exports.add = async (req, res, next) => {
     let body = req.body;
     body.password = await encryption.hashing(body.password);
-    body.userType = 0;
+    body.user_type = 0;
     body.email = body.emailId + '@' + body.emailDomain;
-    body.mobileContacts = "(" + body.country_number + ")" + body.phoneNum;
+    body.mobile_contact = "(" + body.country_number + ")" + body.phoneNum;
     console.log("Users body :", body);
 
     try {
@@ -109,8 +109,8 @@ exports.edit = async (req, res, next) => {
     let body = req.body;
     // console.log('body :', body);
     if (body.isRemoveImage == 'true') {
-        body.profileImagePath = res.locals.codezip.url.users.defaultProfileImage;
-        console.log("default profile image path :", body.profileImagePath);
+        body.profile_image_path = codezip.url.users.defaultProfileImage;
+        console.log("default profile image path :", body.profile_image_path);
     } else {
         let file = req.file;
         // console.log('file :', file);
@@ -138,13 +138,13 @@ exports.checkAlarm = async (req, res, next) => {
 
     let body = {};
     body.id = user.users_id;
-    body.isProjectUpdate = false;
+    body.is_project_update = false;
 
     usersService
         .update(body)
         .then(result => {
-            console.log("update result :", result);
-            return res.end()
+            console.log("update data count :", result);
+            return res.redirect(codezip.url.users.myProject.main)
         })
         .catch(err => {
             console.error(err);

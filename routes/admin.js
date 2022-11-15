@@ -11,6 +11,7 @@ const usersService = require('../services/users');
 const multer = require("multer");
 const path = require("path");
 const myUtils = require('../utils/myUtils');
+const codezip = require('../codezip');
 
 // 업로드 파일 저장 설정
 let storage = (fileName) => multer.diskStorage({
@@ -88,8 +89,8 @@ router.get('/myPage', (req, res) => res.render('users/myPage'));
 
 // 사용자 계정
 router
-  .post('/myAccount', upload().single('profileImagePath'), usersController.edit)
-  .put('/myAccount', upload().single('profileImagePath'), usersController.edit)
+  .post('/myAccount', upload().single('profile_image_path'), usersController.edit)
+  .put('/myAccount', upload().single('profile_image_path'), usersController.edit)
   .get('/myAccount', (req, res) => res.render('users/myAccount'));
 
 // news
@@ -113,5 +114,5 @@ router.use('/newProject', newProjectRouter)
 // Documents
 
 
-router.get('/', (req, res, next) => res.redirect(res.locals.codezip.url.users.dashboard))
+router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))
 module.exports = router;

@@ -1,37 +1,32 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('ingredients', {
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
+  return sequelize.define('documents', {
+    users_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      comment: "원료 식별번호"
+      comment: "사용자 식별번호"
     },
-    material_name: {
-      type: DataTypes.STRING(1000),
-      allowNull: true,
-      comment: "원료명"
-    },
-    ingredient_name: {
-      type: DataTypes.STRING(1000),
+    id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      comment: "성분명"
+      primaryKey: true,
+      comment: "프로젝트 식별번호"
     },
-    type: {
+    title: {
       type: DataTypes.STRING(100),
       allowNull: true,
-      comment: "종류"
+      comment: "제목"
     },
-    effects: {
-      type: DataTypes.STRING(10000),
+    message: {
+      type: DataTypes.STRING(1000),
       allowNull: true,
-      comment: "기능"
+      comment: "메시지"
     },
-    feature: {
+    file_path: {
       type: DataTypes.TEXT,
       allowNull: true,
-      comment: "특징"
+      comment: "파일 경로"
     },
     create_date: {
       type: DataTypes.DATE,
@@ -52,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'ingredients',
+    tableName: 'documents',
     timestamps: false,
     indexes: [
       {
@@ -60,6 +55,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
+          { name: "users_id" },
           { name: "id" },
         ]
       },

@@ -90,8 +90,8 @@ exports.detail = async (req, res, next) => {
             // console.log("next_id :", results[2][0]);
             const user = await usersService.readOne(data.users_id);
             console.log(user)
-            data.firstName = user.firstName;
-            data.lastName = user.lastName;
+            data.first_name = user.first_name;
+            data.last_name = user.last_name;
             return res.render(`news/detail`, {
                 data: data,
                 prev: prev_id[0] || null,

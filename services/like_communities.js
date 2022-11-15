@@ -1,14 +1,14 @@
 const models = require('../models');
-const like_community = require('../models').like_community;
+const like_communities = require('../models').like_communities;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-  return await like_community
+  return await like_communities
     .create(Object.assign(obj, {
     }))
     .then(result => {
-      console.log("like_community create success");
+      console.log("like_communities create success");
       return result;
     })
     .catch((err) => {
@@ -18,15 +18,15 @@ exports.create = async (obj) => {
 }
 
 exports.delete = async (obj) => {
-  return await like_community
+  return await like_communities
     .destroy({
       where: {
-        community_id: obj.community_id,
+        communities_id: obj.communities_id,
         users_id: obj.users_id
       }
     })
     .then(result => {
-      console.log("like_community delete success");
+      console.log("like_communities delete success");
       return result;
     })
     .catch((err) => {
@@ -36,15 +36,15 @@ exports.delete = async (obj) => {
 }
 
 exports.countLike = async (id) => {
-  return await like_community
+  return await like_communities
     .findAndCountAll({
       raw: true,
       where: {
-        community_id: id,
+        communities_id: id,
       },
     })
     .then(result => {
-      console.log("like_community count success");
+      console.log("like_communities count success");
       let newRows = []
       result.rows.forEach(element => {
         newRows.push(element.users_id);
@@ -59,14 +59,14 @@ exports.countLike = async (id) => {
 }
 
 exports.getLikelist = async (id) => {
-  return await like_community
+  return await like_communities
     .findAll({
       where: {
         users_id: id,
       }
     })
     .then(result => {
-      console.log("like_community get list success");
+      console.log("like_communities get list success");
       return result;
     })
     .catch((err) => {

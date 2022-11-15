@@ -48,22 +48,22 @@
                             <h5><strong>
                                 <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                                   <%= `${community.title} ${__('users.community.index.WrittenBy')}
-                                    ${community.lastName}${community.firstName} ${formatDate(community.updateDate)}` %>
+                                    ${community.last_name}${community.first_name} ${formatDate(community.updateDate)}` %>
                                     <% } else { %>
                                       <%= `${community.title} ${__('users.community.news.index.WrittenBy')}
-                                        ${community.firstName} ${community.lastName}
+                                        ${community.first_name} ${community.last_name}
                                         ${formatDate(community.updateDate)}` %>
                                         <% } %>
                               </strong></h5>
                           </div>
                           <div class="p-1 d-flex">
-                            <h5 id="communityLikeCount" class="mx-1"><strong>
+                            <h5 id="communitylike_count" class="mx-1"><strong>
                                 <%= communityLike.count %>
                               </strong>
                             </h5>
                             <h5><a id="communityLikeBtn" href="javascript:void(0);"
-                                onclick="toggleLike('<%= community.community_id %>');">
-                                <% if(communityLike.rows.indexOf(user.users_id)==-1) { %>
+                                onclick="toggleLike('<%= community.id %>');">
+                                <% if(communityLike.rows.indexOf(user.id)==-1) { %>
                                   <i class="fa-star fa-regular"></i>
                                   <% }else{ %>
                                     <i class="fa-star fa-solid"></i>
@@ -72,11 +72,11 @@
                           </div>
                         </div>
 
-                        <!-- contents -->
+                        <!-- content -->
                         <div class="row breadcrumb m-2 mt-3 br-20 p-3">
                           <div class="">
                             <h5>
-                              <%= community.contents %>
+                              <%= community.content %>
                             </h5>
                           </div>
 
@@ -84,7 +84,7 @@
                           <div class="row mt-5">
                             <div class="col-4 text-start">
                               <% if(prev) { %><a
-                                  href="<%= codezip.url.users.community.main %>/<%= prev.community_id %>">
+                                  href="<%= codezip.url.users.community.main %>/<%= prev.id %>">
                                   <h5><i class="fa-solid fa-chevron-left"></i>
                                     <%= __('users.news.이전글') %>
                                   </h5>
@@ -98,7 +98,7 @@
                               </a></div>
                             <div class="col-4 text-end">
                               <% if(next) { %><a
-                                  href="<%= codezip.url.users.community.main %>/<%= next.community_id %>">
+                                  href="<%= codezip.url.users.community.main %>/<%= next.id %>">
                                   <h5>
                                     <%= __('users.news.다음글') %><i class="fa-solid fa-chevron-right"></i>
                                   </h5>
@@ -113,45 +113,45 @@
                         <div class="row breadcrumb m-2 mt-3 br-20 p-3">
                           <!-- 댓글 내용 -->
                           <% reply.data.forEach((item,index)=>{ %>
-                            <div id="reply_area<%= item.reply_id %>" class="row reply">
+                            <div id="reply_area<%= item.id %>" class="row reply">
                               <div class="col-3 text-break">
                                 <h6>
                                   <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                    <%= item.lastName + item.firstName + ' ' + formatDate(item.updateDate) %>
+                                    <%= item.last_name + item.first_name + ' ' + formatDate(item.updateDate) %>
                                       <% } else { %>
-                                        <%= item.lastName + ' ' + item.firstName + ' ' + formatDate(item.updateDate) %>
+                                        <%= item.last_name + ' ' + item.first_name + ' ' + formatDate(item.updateDate) %>
                                           <% } %>
                                 </h6>
-                                <% if(item.users_id==user.users_id) { %>
+                                <% if(item.users_id==user.id) { %>
                                   <div class="mb-1">
                                     <button class="btn bg-white p-1 m-1" type="button"
-                                      onclick="reply_edit_active('<%= item.community_id %>','<%= item.reply_id %>');">
+                                      onclick="reply_edit_active('<%= item.communities_id %>','<%= item.id %>');">
                                       <%= __('users.community.btn.수정') %>
                                     </button>
                                     <button class="btn bg-white p-1 m-1" type="button"
-                                      onclick="reply_delete('<%= item.community_id %>','<%= item.reply_id %>');">
+                                      onclick="reply_delete('<%= item.communities_id %>','<%= item.id %>');">
                                       <%= __('users.community.btn.삭제') %>
                                     </button>
                                   </div>
                                   <% } %>
                               </div>
-                              <div id="reply_contents<%= item.reply_id %>" class="col-8 text-break">
-                                <%= item.contents %>
+                              <div id="reply_content<%= item.id %>" class="col-8 text-break">
+                                <%= item.content %>
                               </div>
                               <!-- 댓글 좋아요 -->
                               <div class="col-1 p-0 align-self-center text-end">
                                 <div class="p-1 d-flex">
-                                  <h5 id="replyLikeCount<%= item.reply_id %>" class="mx-1"><strong>
-                                      <%= item.likeCount %>
+                                  <h5 id="replylike_count<%= item.id %>" class="mx-1"><strong>
+                                      <%= item.like_count %>
                                     </strong>
                                   </h5>
                                   <h5>
-                                    <% if(item.users_id==user.users_id) { %>
+                                    <% if(item.users_id==user.id) { %>
                                       <i class="fa-thumbs-up fa-regular"></i>
                                       <% }else{ %>
-                                        <a id="replyLikeBtn<%= item.reply_id %>" href="javascript:void(0);"
-                                          onclick="toggleReplyLike('<%= item.community_id %>','<%= item.reply_id %>');">
-                                          <% if(item.users.indexOf(user.users_id)==-1) { %>
+                                        <a id="replyLikeBtn<%= item.id %>" href="javascript:void(0);"
+                                          onclick="toggleReplyLike('<%= item.communities_id %>','<%= item.id %>');">
+                                          <% if(item.users.indexOf(user.id)==-1) { %>
                                             <i class="fa-thumbs-up fa-regular"></i>
                                             <% }else{ %>
                                               <i class="fa-thumbs-up fa-solid"></i>
@@ -167,8 +167,8 @@
                               <!-- 댓글 남기기 -->
                               <div>
                                 <form method="post"
-                                  action="<%= codezip.url.users.community.reply.add %>/<%= community.community_id %>">
-                                  <textarea rows="10" name="contents" class="form-control br-20"></textarea>
+                                  action="<%= codezip.url.users.community.reply.add %>/<%= community.id %>">
+                                  <textarea rows="10" name="content" class="form-control br-20"></textarea>
                                   <div class="text-end">
                                     <button class="btn bg-white mt-2">
                                       <%= __('users.community.reply.btn.댓글 남기기') %>
@@ -284,14 +284,14 @@
                         </div>
 
                         <!-- 수정 삭제 버튼 -->
-                        <% if(community.users_id==user.users_id) { %>
+                        <% if(community.users_id==user.id) { %>
                           <div class="text-end">
                             <a class="btn btn-lg col-2 mx-2 p-3 br-15"
-                              href="<%= codezip.url.users.community.edit %>/<%= community.community_id %>">
+                              href="<%= codezip.url.users.community.edit %>/<%= community.communities_id %>">
                               <%= __('users.community.btn.수정') %>
                             </a>
                             <a class="btn btn-lg col-2 mx-2 p-3 br-15"
-                              href="<%= codezip.url.users.community.delete %>/<%= community.community_id %>">
+                              href="<%= codezip.url.users.community.delete %>/<%= community.communities_id %>">
                               <%= __('users.community.btn.삭제') %>
                             </a>
                           </div>
@@ -328,12 +328,12 @@
                 if (target.classList.contains('fa-regular')) {
                   target.classList.remove('fa-regular');
                   target.classList.add('fa-solid');
-                  communityLikeCount.innerText = +communityLikeCount.innerText + 1
+                  communitylike_count.innerText = +communitylike_count.innerText + 1
                   is_like = true;
                 } else {
                   target.classList.remove('fa-solid');
                   target.classList.add('fa-regular');
-                  communityLikeCount.innerText = +communityLikeCount.innerText - 1
+                  communitylike_count.innerText = +communitylike_count.innerText - 1
                   is_like = false;
                 }
 
@@ -344,7 +344,7 @@
                     'Content-Type': 'application/json;charset=utf-8'
                   },
                   body: JSON.stringify({
-                    community_id: id,
+                    communities_id: id,
                     is_like: is_like
                   })
                 }).then(res => {
@@ -361,22 +361,22 @@
               }
 
               // 댓글 좋아요
-              async function toggleReplyLike(community_id, reply_id) {
-                const replyLikeBtn = document.getElementById('replyLikeBtn' + reply_id);
+              async function toggleReplyLike(communities_id, replies_id) {
+                const replyLikeBtn = document.getElementById('replyLikeBtn' + replies_id);
                 const target = replyLikeBtn.getElementsByClassName('fa-thumbs-up')[0];
-                const replyLikeCount = document.getElementById('replyLikeCount' + reply_id);
+                const replylike_count = document.getElementById('replylike_count' + replies_id);
 
                 let is_like;
 
                 if (target.classList.contains('fa-regular')) {
                   target.classList.remove('fa-regular');
                   target.classList.add('fa-solid');
-                  replyLikeCount.innerText = +replyLikeCount.innerText + 1
+                  replylike_count.innerText = +replylike_count.innerText + 1
                   is_like = true;
                 } else {
                   target.classList.remove('fa-solid');
                   target.classList.add('fa-regular');
-                  replyLikeCount.innerText = +replyLikeCount.innerText - 1
+                  replylike_count.innerText = +replylike_count.innerText - 1
                   is_like = false;
                 }
 
@@ -387,8 +387,8 @@
                     'Content-Type': 'application/json;charset=utf-8'
                   },
                   body: JSON.stringify({
-                    community_id: community_id,
-                    reply_id: reply_id,
+                    communities_id: communities_id,
+                    replies_id: replies_id,
                     is_like: is_like
                   })
                 }).then(res => {
@@ -404,13 +404,13 @@
                 })
               }
 
-              async function reply_edit_active(community_id, reply_id) {
-                const target = document.getElementById('reply_area' + reply_id);
-                const text = document.getElementById('reply_contents' + reply_id).innerText;
+              async function reply_edit_active(communities_id, replies_id) {
+                const target = document.getElementById('reply_area' + replies_id);
+                const text = document.getElementById('reply_content' + replies_id).innerText;
                 let temp_html = `<div class="bg-white p-2 m-2 br-20">
-                <textarea id="replyEditTarget${reply_id}" rows="10" name="contents" class="form-control br-20">${text}</textarea>
+                <textarea id="replyEditTarget${replies_id}" rows="10" name="content" class="form-control br-20">${text}</textarea>
                   <div class="text-end mt-2 me-3">
-                    <button class="btn" type="button" onclick="reply_edit(${community_id},${reply_id});">
+                    <button class="btn" type="button" onclick="reply_edit(${communities_id},${replies_id});">
                       <%= __('users.community.reply.btn.확인') %>
                     </button>
                     <button class="btn" type="button" onclick="location.reload();">
@@ -423,15 +423,15 @@
                 target.innerHTML = temp_html;
               }
 
-              async function reply_edit(community_id, reply_id) {
+              async function reply_edit(communities_id, replies_id) {
                 const url = '<%= codezip.url.users.community.reply.edit %>';
-                let contents = document.getElementById('replyEditTarget' + reply_id).value;
+                let content = document.getElementById('replyEditTarget' + replies_id).value;
                 fetch(url, {
                   method: "put",
                   body: new URLSearchParams({
-                    community_id: community_id,
-                    reply_id: reply_id,
-                    contents: contents
+                    communities_id: communities_id,
+                    id: replies_id,
+                    content: content
                   })
                 }).then(res => {
                   if (res.ok) {
@@ -445,13 +445,13 @@
                 })
               }
 
-              async function reply_delete(community_id, reply_id) {
-                let url = '<%= codezip.url.users.community.reply.delete %>/' + community_id + '/' + reply_id;
+              async function reply_delete(communities_id, replies_id) {
+                let url = '<%= codezip.url.users.community.reply.delete %>/' + communities_id + '/' + replies_id;
                 fetch(url, {
                   method: "delete",
                   body: new URLSearchParams({
-                    community_id: community_id,
-                    reply_id: reply_id,
+                    communities_id: communities_id,
+                    id: replies_id,
                   })
                 }).then(res => {
                   if (res.ok) {
