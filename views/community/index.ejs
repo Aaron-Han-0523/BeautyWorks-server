@@ -54,7 +54,7 @@
                   <div class="row mt-3">
                     <% news.data.forEach((item, index)=>{ %>
                     <div class="my-1">
-                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.news.main + '/' + item.news_id %>'">
+                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.news.main + '/' + item.id %>'">
                         <h6 class="m-1">
                           <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                           <%= `${item.title} ${__('users.community.news.index.WrittenBy')}

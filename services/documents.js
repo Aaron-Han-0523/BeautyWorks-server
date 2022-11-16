@@ -1,5 +1,5 @@
-const { Service } = require('./utils/template');
-const models = require('./models');
+const { Service } = require('../utils/template');
+const models = require('../models');
 
 const service = new Service(models.documents);
 

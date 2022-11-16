@@ -29,7 +29,7 @@ let storage = (fileName) => multer.diskStorage({
       encoding += basename.codePointAt(i).toString(16);
     }
     encoding = encoding.slice(0, 200);
-    callback(null, req.res.locals.user.users_id + '-' + myUtils.formatDate(Date.now()) + "-" + encoding + extension);
+    callback(null, req.res.locals.user.id + '-' + myUtils.formatDate(Date.now()) + "-" + encoding + extension);
   },
 });
 

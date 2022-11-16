@@ -86,7 +86,7 @@ exports.index = async (req, res, next) => {
 
     let condition = {};
     if ([1].indexOf(user.user_type) == -1) {
-        condition.users_id = user.users_id;
+        condition.users_id = user.id;
         condition.delete_date = null;
     }
     let limit = req.query.limit;
@@ -108,7 +108,7 @@ exports.detail = async (req, res, next) => {
 
     let condition = {};
     if ([1].indexOf(user.user_type) == -1) {
-        condition.users_id = user.users_id;
+        condition.users_id = user.id;
         condition.delete_date = null;
     }
 

@@ -4,6 +4,7 @@ orm.js
 config/
 test.js
 uploads
+test_codes/
 
 .vscode/
 

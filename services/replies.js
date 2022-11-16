@@ -9,7 +9,7 @@ exports.count = async (id) => {
     })
 }
 
-exports.allRead = async (condition = {}, paging = {}) => {
+exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     console.log(paging.skip, '~', paging.limit);
     let query = `
     select users.first_name, users.last_name, rp.*, count(like_rp.users_id) as like_count, JSON_ARRAYAGG(like_rp.users_id) as users

@@ -16,7 +16,7 @@ router
   .post('/edit/:id', newsController.edit)
   .get('/edit/:id', async (req, res, next) => {
     const data = await newsService.readOne(req.params.id);
-    if (res.locals.user.users_id != data.users_id) return res.status(403).end();
+    if (res.locals.user.id != data.users_id) return res.status(403).end();
     return res.render('news/edit', {
       data: data
     });

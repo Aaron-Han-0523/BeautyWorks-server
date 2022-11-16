@@ -25,18 +25,28 @@ module.exports = {
 
         // console.log(password.length)
 
+        let super_admin = {
+            email: "superadmin"
+            , password: password
+            , user_type: 200
+            , country: 'KR'
+            , company_name: 'BeautyWorks'
+            , first_name: 'Administrator'
+            , last_name: "관리자"
+            , mobile_contact: "000-0000-0000"
+        }
         let admin = {
             email: "admin"
             , password: password
-            , user_type: 1<<5
+            , user_type: 100
             , country: 'KR'
             , company_name: 'BeautyWorks'
-            , first_name: 'administrator'
+            , first_name: 'Administrator'
             , last_name: "관리자"
             , mobile_contact: "000-0000-0000"
         }
 
-        await queryInterface.bulkInsert('users', [admin], {});
+        await queryInterface.bulkInsert('users', [super_admin, admin], {});
     },
 
     async down(queryInterface, Sequelize) {

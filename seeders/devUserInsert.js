@@ -27,7 +27,7 @@ module.exports = {
 
         let dev =
         {
-            email: "user-dev@email.com"
+            email: "dev@email.com"
             , password: password
             , user_type: 0
             , country: 'KR'

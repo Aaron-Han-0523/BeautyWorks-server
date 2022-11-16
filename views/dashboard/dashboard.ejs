@@ -210,11 +210,6 @@
                           </strong>
                         </h5>
                       </div>
-                      <div class="row text-end">
-                        <a href="<%= codezip.url.users.myProject.main %>">
-                          <%= __("Show All") %>
-                        </a>
-                      </div>
                     </div>
                   </div>
 
@@ -274,7 +269,7 @@
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
                         <h5><strong>
-                            <%= __('users.dashboard.header.RemommendedProject') %>
+                            <%= __('users.dashboard.header.RemommendedFormula') %>
                           </strong>
                         </h5>
                       </div>
@@ -288,41 +283,41 @@
                     <div class="widget row mx-0 h-100 align-content-center">
                       <!-- /* 테스트 데이터 생성 -->
                       <div>
-                        <% let recommended_project=[]; %>
-                        <% recommended_project.push({
-                          productName:"테스트추천프로젝트1",
+                        <%# let recommended_formula=[]; %>
+                        <%# recommended_formula.push({
+                          product_name:"테스트추천프로젝트1",
                           category1:0,
                           category2:0,
-                          imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                          image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                         })%>
-                        <% recommended_project.push({
-                          productName:"테스트추천프로젝트2",
+                        <%# recommended_formula.push({
+                          product_name:"테스트추천프로젝트2",
                           category1:1,
                           category2:0,
-                          imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                          image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
                         })%>
-                        <% recommended_project.push({
-                          productName:"테스트추천프로젝트3",
+                        <%# recommended_formula.push({
+                          product_name:"테스트추천프로젝트3",
                           category1:2,
                           category2:0,
-                          imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                          image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
                         })%>
+                        <%# console.log(recommended_formula) %>
                       </div>
                       <!-- 테스트 데이터 생성 */ -->
-                      <% recommended_project.forEach((item,index)=>{ %>
+                      <% recommended_formula.forEach((item,index)=>{ %>
                       <div class="col-4">
+                        <% if(item.image_paths) { %>
                         <div class="preview">
-                          <img class="br-15" src="<%= item.imagePaths.split(',')[0] %>">
+                          <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
                         </div>
+                        <% } %>
                         <div class="row mt-3 justify-content-center text-break">
-                          <p>Top / <%= __('product'+item.category1) %><br />
-                            <span style="color: gray;">
-                              <%= __('product'+item.category1+'.'+item.category2) %>
-                            </span><br />
-                            <strong>
-                              <%= item.productName %>
-                            </strong>
+                          <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
+                          <p style="color: gray;">
+                            <%= __('product'+item.category1+'.'+item.category2) %>
                           </p>
+                          <p><strong><%= item.product_name %></strong></p>
                         </div>
                       </div>
                       <% }) %>
@@ -349,25 +344,26 @@
                     <div class="widget row mx-0 h-100 align-content-center">
                       <!-- /* 테스트 데이터 생성 -->
                       <div>
-                        <% let remommended_ingredient=[]; %>
-                        <% remommended_ingredient.push({ingredientName:"테스트추천성분1", type:"IC00,IC03",
+                        <%# let remommended_ingredient=[]; %>
+                        <%# remommended_ingredient.push({ingredient_name:"테스트추천성분1", type:"IC00,IC03",
                                               effects:"IE00,IE01,IE02"}) %>
-                        <% remommended_ingredient.push({ingredientName:"테스트추천성분2",
+                        <%# remommended_ingredient.push({ingredient_name:"테스트추천성분2",
                                                 type:"IC01,IC03", effects:"IE03,IE04,IE05"}) %>
-                        <% remommended_ingredient.push({ingredientName:"테스트추천성분3",
+                        <%# remommended_ingredient.push({ingredient_name:"테스트추천성분3",
                                                   type:"IC00,IC02", effects:"IE06,IE07,IE08"}) %>
+                        <%# console.log(remommended_ingredient) %>
                       </div>
                       <!-- 테스트 데이터 생성 */ -->
                       <div class="table-responsive p-0">
                         <table class="table text-break">
                           <thead class="text-center">
-                            <th>
+                            <th class="col-5 px-0">
                               <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
                             </th>
-                            <th>
+                            <th class="col-2 px-0">
                               <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
                             </th>
-                            <th>
+                            <th class="col-5 px-0">
                               <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
                             </th>
                           </thead>
@@ -375,9 +371,9 @@
                             <% remommended_ingredient.forEach((item,index)=>{ %>
                             <tr>
                               <td>
-                                <%= item.ingredientName %>
+                                <%= item.ingredient_name %>
                               </td>
-                              <td>
+                              <td class="text-center">
                                 <%= array_i18n(item.type,__).join(', ') %>
                               </td>
                               <td><%= array_i18n(item.effects,__).join(', ') %></td>
@@ -395,7 +391,7 @@
               <!-- News & Community -->
               <div class="row mt-5">
                 <!-- News -->
-                <div class="col-6">
+                <div class="col-6 h-100">
                   <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0">
@@ -413,36 +409,42 @@
                     </div>
                     <!-- /* 테스트 데이터 생성 -->
                     <div>
-                      <% let news=[]; %>
-                      <% news.push({
+                      <%# let news=[]; %>
+                      <%# news.push({
                         title:"반갑습니다.",
                         first_name:"이름",
                         last_name:"성",
                         updateDate:new Date(2022,10,15),
                       })%>
-                      <% news.push({
+                      <%# news.push({
                         title:"환영합니다.",
                         first_name:"first_name",
                         last_name:"last_name",
                         updateDate:new Date(2022,10,25),
                       })%>
+                      <%# console.log(news) %>
                     </div>
                     <!-- 테스트 데이터 생성 */ -->
                     <% news.forEach((item,index)=>{ %>
-                    <div class="widget row mx-0 h-50 align-content-center mt-3">
-                      <%- include('../partials/badge/new.ejs') %>
-                      <div class="h6"><%= item.title %></div>
-                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %></div>
-                      <% } else { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %></div>
-                      <% } %>
-                    </div>
+                    <a class="pb-3 hover" href="<%= codezip.url.users.news.main + '/' + item.id %>">
+                      <div class="widget row mx-0 h-50 align-content-center mt-3 h-100 text-ellipsis">
+                        <%- include('../partials/badge/new.ejs') %>
+                        <div class="fs-6"><%= item.title %></div>
+                        <div>
+                          <%= `${formatDate(item.update_date)}` %>
+                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                          <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
+                          <% } else { %>
+                          <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
+                          <% } %>
+                        </div>
+                      </div>
+                    </a>
                     <% }) %>
                   </div>
                 </div>
                 <!-- community -->
-                <div class="col-6">
+                <div class="col-6 h-100">
                   <div class="widget-content widget-content-area p-0 pe-2 h-100 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0">
                       <div>
@@ -460,31 +462,37 @@
 
                     <!-- /* 테스트 데이터 생성 -->
                     <div>
-                      <% let community=[]; %>
-                      <% community.push({
+                      <%# let community=[]; %>
+                      <%# community.push({
                         title:"감사합니다.",
                         first_name:"이름",
                         last_name:"성",
                         updateDate:new Date(2022,10,15),
                       })%>
-                      <% community.push({
+                      <%# community.push({
                         title:"안녕하세요.",
                         first_name:"first_name",
                         last_name:"last_name",
                         updateDate:new Date(2022,10,25),
                       })%>
+                      <%# console.log(community) %>
                     </div>
                     <!-- 테스트 데이터 생성 */ -->
                     <% community.forEach((item,index)=>{ %>
-                    <div class="widget row mx-0 h-50 align-content-center mt-3">
-                      <%- include('../partials/badge/new.ejs') %>
-                      <div class="h6"><%= item.title %></div>
-                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.last_name} ${item.first_name}` %></div>
-                      <% } else { %>
-                      <div><%= `${formatDate(item.updateDate)} ${__('users.community.index.WrittenBy')} ${item.first_name} ${item.last_name}` %></div>
-                      <% } %>
-                    </div>
+                    <a class="pb-3 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
+                      <div class="widget row mx-0 h-50 align-content-center mt-3 h-100 text-ellipsis">
+                        <%- include('../partials/badge/new.ejs') %>
+                        <div class="fs-6"><%= item.title %></div>
+                        <div class="">
+                          <%= `${formatDate(item.update_date)}` %>
+                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                          <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
+                          <% } else { %>
+                          <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
+                          <% } %>
+                        </div>
+                      </div>
+                    </a>
                     <% }) %>
                   </div>
                 </div>

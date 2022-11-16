@@ -63,7 +63,8 @@
               <div>
                 <% let myWishList={data:[],count:100}; %>
                 <% myWishList.data.push({
-                  productName:"My Suncream1",
+                  product_name:"My Suncream1",
+                  top_or_new:1,
                   volume:"110ml",
                   category1:0,
                   category2:0,
@@ -72,7 +73,8 @@
                   imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                 })%>
                 <% myWishList.data.push({
-                  productName:"My Suncream2",
+                  product_name:"My Suncream2",
+                  top_or_new:1,
                   volume:"120ml",
                   category1:0,
                   category2:0,
@@ -82,7 +84,8 @@
                 
                 })%>
                 <% myWishList.data.push({
-                  productName:"My Suncream3",
+                  product_name:"My Suncream3",
+                  top_or_new:1,
                   volume:"110g",
                   category1:0,
                   category2:0,
@@ -91,7 +94,8 @@
                   imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
                 })%>
                 <% myWishList.data.push({
-                  productName:"My Suncream4",
+                  product_name:"My Suncream4",
+                  top_or_new:1,
                   volume:"210g",
                   category1:0,
                   category2:0,
@@ -123,21 +127,12 @@
                         <div class="preview">
                           <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
                         </div>
-                        <div class="mb-auto mt-3">
-                          <h6>
-                            <%= item.productName %>
-                          </h6>
-                          <h6>
-                            <%= __("product"+item.category1+"."+item.category2) %>
-                            <%= " " + item.volume %>
-                          </h6>
-                          <p>
-                            <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                            <%= ' : ' + item.totalOrderAmount %>
-                            <br>
-                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                            <%= ' : ' + formatDate(item.lastOrderDate) %>
+                        <div class="row mt-3 justify-content-center text-break">
+                          <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
+                          <p style="color: gray;">
+                            <%= __('product'+item.category1+'.'+item.category2) %>
                           </p>
+                          <p><strong><%= item.product_name %></strong></p>
                         </div>
                       </div>
                       <% }) %>

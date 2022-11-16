@@ -29,7 +29,7 @@ let storage = (fileName) => multer.diskStorage({
       encoding += basename.codePointAt(i).toString(16);
     }
     encoding = encoding.slice(0, 200);
-    callback(null, req.res.locals.user.users_id + '-' + Date.now() + "-" + encoding + extension);
+    callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + encoding + extension);
   },
 });
 
@@ -88,10 +88,7 @@ router
 router.get('/checkAlarm', usersController.checkAlarm);
 
 // 사용자 대시보드
-router.use('/dashboard', (req, res) => {
-
-  res.render('dashboard/dashboard');
-})
+router.use('/dashboard', usersController.main)
 
 // 사용자 접속해제
 router.get('/signOut', usersController.logout);

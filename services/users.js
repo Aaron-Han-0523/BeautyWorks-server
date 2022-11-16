@@ -134,22 +134,3 @@ exports.delete = async (obj) => {
             throw (err);
         })
 }
-
-exports.checkID = async function (userid) {
-    try {
-        console.log('check', userid)
-        var result = await users
-            .findOne({
-                raw: true,
-                where: {
-                    userid: userid,
-                }
-            })
-            .then(result => result)
-            .catch(err => { throw (err) })
-        return result;
-    } catch (e) {
-        console.log(e);
-        // throw (' while getUser');
-    }
-}

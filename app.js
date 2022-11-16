@@ -70,8 +70,8 @@ app.use((req, res, next) => {
 // redis 세팅
 const RedisStore = connectRedis(session);
 const client = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
+  host: process.env.REDIS_HOST || "127.0.0.1",
+  port: process.env.REDIS_PORT || 6379,
   // password: process.env.REDIS_PASSWORD,
   logErrors: true, // 레디스 에러 로깅
   legacyMode: true,

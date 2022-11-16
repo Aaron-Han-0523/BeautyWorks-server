@@ -1,8 +1,14 @@
 const usersService = require('../services/users');
+const projectsService = require('../services/projects');
+const formulasService = require('../services/formulas');
+const ingredientsService = require('../services/ingredients');
+const newsService = require('../services/news');
+const communitiesService = require('../services/communities');
 const nodemailer = require('nodemailer');
 const systemInfo = require('../config/system.json');
 const encryption = require('../utils/encryption');
-const {Op} = require('sequelize');
+const { getRandomInt } = require('../utils/myUtils');
+const { Op } = require('sequelize');
 const codezip = require('../codezip');
 
 exports.login = async function (req, res, next) {
@@ -51,6 +57,19 @@ exports.logout = async (req, res, next) => {
 
 exports.validationEmail = async (req, res, next) => {
     const targetEmail = req.body.email;
+
+    const isEmail = await usersService.getUser(targetEmail).then(result => {
+        if (result) {
+            return true;
+        } else {
+            return false;
+        }
+    })
+    if (isEmail) {
+        return res.status(400).send("The email exists.")
+    }
+
+
     // console.log(systemInfo);
     const transporter = nodemailer.createTransport({
         service: systemInfo.emailService,
@@ -74,7 +93,7 @@ exports.validationEmail = async (req, res, next) => {
             console.error(error);
             return res.status(500).send(error);
         } else {
-            console.log('Email sent: ' + info.response);
+            console.log('Email sent: ' + info.accepted);
             return res.json(validationNumber);
         }
     });
@@ -137,7 +156,7 @@ exports.checkAlarm = async (req, res, next) => {
     // console.log('user :', user);
 
     let body = {};
-    body.id = user.users_id;
+    body.id = user.id;
     body.is_project_update = false;
 
     usersService
@@ -150,6 +169,57 @@ exports.checkAlarm = async (req, res, next) => {
             console.error(err);
             return res.status(500).send();
         });
+}
+
+exports.main = async (req, res) => {
+    const page = req.query.p || 1;
+    const limit = req.query.limit || 4;
+    const skip = page * limit;
+
+    const project = projectsService.allRead({ phase: { [Op.between]: [1, 8] } }, 3)
+    const temp_project = projectsService.allRead({ phase: 0 }, 2)
+    const completed_project = projectsService.allRead({ phase: 9 }, limit, skip)
+
+    const recommended_formula = formulasService.allRead()
+        .then(result => {
+            let data = [];
+            let random_index = [];
+            while (random_index.length < 3) {
+                let n = getRandomInt(result.count);
+                if (!random_index.includes(n)) random_index.push(n);
+            }
+            for (let i = 0; i < random_index.length; i++) {
+                data.push(result.rows[random_index[i]])
+            }
+            return data
+        })
+    const remommended_ingredient = ingredientsService.allRead()
+        .then(result => {
+            let data = [];
+            let random_index = [];
+            while (random_index.length < 3) {
+                let n = getRandomInt(result.count);
+                if (!random_index.includes(n)) random_index.push(n);
+            }
+            for (let i = 0; i < random_index.length; i++) {
+                data.push(result.rows[random_index[i]])
+            }
+            return data
+        })
+
+    const news = newsService.allRead(undefined, { skip: 0, limit: 2 })
+    const community = communitiesService.allRead(undefined, { skip: 0, limit: 2 })
+
+    Promise.all([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community])
+        .then(([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community]) => {
+            res.render('dashboard/dashboard', {
+                recommended_formula: recommended_formula,
+                remommended_ingredient: remommended_ingredient,
+                news: news[1],
+                community: community[1]
+            });
+        })
+
 }
 
 exports.index = async (req, res, next) => {

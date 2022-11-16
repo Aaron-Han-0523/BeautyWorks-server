@@ -10,7 +10,7 @@ const { Op } = require('sequelize');
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
     let body = req.body;
-    body.users_id = user.users_id;
+    body.users_id = user.id;
     console.log("communities body :", body);
 
     try {
@@ -33,7 +33,7 @@ exports.edit = async (req, res, next) => {
     console.log("communities body :", body);
 
     const checkAuthor = await communitiesService.readOne(id).then(result => {
-        if (result.users_id != user.users_id) { return false; }
+        if (result.users_id != user.id) { return false; }
         else { return true; }
     }).catch(err => {
         console.error(err);
@@ -138,7 +138,7 @@ exports.detail = async (req, res, next) => {
             community.first_name = user.first_name;
             community.last_name = user.last_name;
             // return res.json({
-            //     author: { users_id: user.users_id },
+            //     author: { users_id: user.id },
             //     communities: communities,
             //     communitiesLike: communitiesLike,
             //     prev: prev_id[0] || null,

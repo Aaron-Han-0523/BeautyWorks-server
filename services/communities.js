@@ -37,7 +37,7 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition = {}, paging = {}) => {
+exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     console.log(paging.skip, '~', paging.limit);
     let word = condition.word || '';
     let query = `

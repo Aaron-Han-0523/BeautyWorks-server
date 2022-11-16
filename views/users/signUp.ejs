@@ -346,7 +346,11 @@
     async function send_validation_email() {
       const receiverId = document.getElementById('emailId').value;
       const receiverDomain = document.getElementById('emailDomain').value;
-      const targetEmail = receiverId + '@' + receiverDomain;
+      const targetEmail = (receiverId + '@' + receiverDomain).trim();
+
+      if (targetEmail == '@') {
+        return;
+      }
 
       const url = '/users/validationEmail';
       const certificationNumber = await fetch(url, {
@@ -358,7 +362,11 @@
           email: targetEmail
         })
       }).then(res => {
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        } else if (res.status == 400) {
+          alert("<%= __('users.signUp.msg.emailExist') %>")
+        }
       })
       CertificationNumber.value = certificationNumber;
       printEmailConfirm()

@@ -17,7 +17,7 @@ router
   .post('/edit/:id', communityController.edit)
   .get('/edit/:id', async (req, res, next) => {
     const data = await communityService.readOne(req.params.id);
-    if (res.locals.user.users_id != data.users_id) return res.status(403).end();
+    if (res.locals.user.id != data.users_id) return res.status(403).end();
     return res.render('community/edit', {
       data: data
     });
