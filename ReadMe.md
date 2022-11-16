@@ -34,7 +34,7 @@
 - FILE_MAX_SIZE
     - 업로드 파일 크기 제한(MB)
 예시
-```
+```Shell:.env
 NODE_ENV=development  
 ACCESS_MAXAGE=240  
 SECRET_KEY=VQWNEO8Hb&o*INOPAV  
@@ -45,7 +45,7 @@ FILE_MAX_SIZE=10
 ```
 ## 2. config/config.json 생성  
 예시
-```
+```json
 {  
   "NODE_ENV값": {  
     "username": "YourUserId",  
@@ -58,7 +58,7 @@ FILE_MAX_SIZE=10
 ```
 ## 3. config/system.json 생성  
 예시
-```
+```json
 {
     "emailService": "gmail",
     "emailUserid": "YourEmailId",
@@ -97,7 +97,7 @@ server {
 - ## 환경설정
 ```'/etc/nginx/nginx.conf'``` 파일에서 파일 업로드 크기 제한 해제  
 (기본 값은 1MB이다.)  
-```conf:nginx.conf  
+```Shell:nginx.conf  
 http{   
     client_max_body_size 0; // 이 부분 추가  
     ...  
@@ -106,7 +106,7 @@ http{
 
 파일 업로드에 60초이상 걸린다면 시간제한도 풀어줘야 한다.  
 
-```conf:nginx.conf  
+```Shell:nginx.conf  
 http{   
     client_max_body_size 0;  
     client_body_timeout 7d; // 이 부분 추가  
@@ -125,7 +125,7 @@ http{
 - ### 환경설정
     - ```pm2 init simple``` 명령어를 사용하여 ```ecosystem.config.js```파일 생성  
 #### **ecosystem.config.js 파일 내용**
-```
+```js
 module.exports = {
   apps : [{
     name   : "app",
