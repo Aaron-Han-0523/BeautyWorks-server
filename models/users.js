@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "비밀번호"
     },
     user_type: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.TINYINT.UNSIGNED,
       allowNull: false,
       defaultValue: 0,
       comment: "권한코드"

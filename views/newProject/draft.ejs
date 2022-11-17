@@ -522,15 +522,15 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.option.formulation') %>
+                            <%= __('users.newProject.option.texture') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <select class="form-select" name="formulation">
+                          <select class="form-select" name="texture">
                             <option value="">
                               <%= __('plzSelectText') %>
                             </option>
-                            <% codezip.formulation.forEach((item,index)=>{ %>
+                            <% codezip.texture.forEach((item,index)=>{ %>
                             <option value="<%= item.slice(0,-1) %>">
                               <%= item %>
                             </option>
