@@ -82,20 +82,45 @@ exports.recovery = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
+    console.log('api', req.query)
     const user = res.locals.user;
 
+    const page = req.query.p || 1;
+    delete req.query.p;
+    const limit = req.query.limit || 8;
+    delete req.query.limit;
+    const skip = (page - 1) * limit;
+
+    delete req.query.n;
     let condition = {};
-    if ([1].indexOf(user.user_type) == -1) {
-        condition.users_id = user.id;
+    for ([key, value] of Object.entries(req.query)) {
+        if (value) {
+            condition[key] = value;
+        }
+    }
+    console.log(condition)
+    if (req.baseUrl.split('/')[1] != 'admin') {
+        // condition.users_id = user.id;
         condition.delete_date = null;
     }
-    let limit = req.query.limit;
-    let skip = req.query.skip;
 
     await formulasService
         .allRead(condition, limit, skip)
         .then((result) => {
             console.log("keys :", Object.keys(result))
+            if (req.api) {
+                res.json({
+                    page: page,
+                    limit: limit,
+                    formulas: result
+                })
+            } else {
+                res.render('formula/index', {
+                    page: page,
+                    limit: limit,
+                    formulas: result
+                })
+            }
         })
         .catch((err) => {
             console.error(err);
@@ -107,15 +132,25 @@ exports.detail = async (req, res, next) => {
     const user = res.locals.user;
 
     let condition = {};
-    if ([1].indexOf(user.user_type) == -1) {
-        condition.users_id = user.id;
+    if (req.baseUrl.split('/')[1] != 'admin') {
+        // condition.users_id = user.id;
         condition.delete_date = null;
     }
+    condition.id = req.params.id;
 
     await formulasService
         .readOne(condition)
         .then((result) => {
             console.log("find :", result);
+            if (req.api) {
+                res.json({
+                    formula: result
+                })
+            } else {
+                res.render('formula/detail', {
+                    formula: result
+                })
+            }
         })
         .catch((err) => {
             console.error(err);

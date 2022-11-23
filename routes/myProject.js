@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// const myProjectController = require('../controllers/myProject');
+const projectsController = require('../controllers/projects');
 // const myProjectService = require('../services/myProject');
 
 /* GET myProject listing. */
@@ -13,8 +13,8 @@ router
 
 // 샘플 확정
 router
-    // .post('/chooseSample', myProjectController.edit)
+// .post('/샘플확정', myProjectController.edit)
 
 // 메인
-router.get('/', (req, res, next) => res.render('myProject/main'))
+router.get('/', projectsController.index)
 module.exports = router;

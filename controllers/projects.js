@@ -1,37 +1,69 @@
 const projectsService = require('../services/projects');
+const myUtils = require('../utils/myUtils');
+const { Op } = require('sequelize');
 
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
     let body = req.body;
     body.users_id = user.id;
 
-    body.id = await projectsService.maxId({ users_id: user.id }).then(result => {
-        // console.log("max id :", result);
-        if (result === null) {
-            return 1;
-        } else {
-            return result + 1;
-        }
-    });
+    const id = req.query.n;
+    console.log(req.query);
+    if (id) {
+        body.id = id;
+    } else {
+        body.project_name = "New Project - " + myUtils.formatDateTime(new Date);
+        body.id = await projectsService.maxId({ users_id: user.id }).then(result => {
+            // console.log("max id :", result);
+            if (result === null) {
+                return 1;
+            } else {
+                return result + 1;
+            }
+        });
+    }
+    console.log(body);
 
     await projectsService
-        .create(body)
+        .upsert(body)
         .then((created_obj) => {
-            res.stutus(201).send(created_obj.id);
+            res.status(201).json(created_obj.id);
         })
         .catch((err) => {
             console.log("fail to create projects");
             console.log(body);
             console.error(err);
-            res.stutus(500).end();
+            res.status(500).end();
         });
 }
 
 exports.edit = async (req, res, next) => {
-    const id = req.params.id;
-    let condition = { id: id };
+    console.log("Project edit");
 
+    const user = res.locals.user;
+    const id = req.query.n || req.params.id;
+    if (!id) return;
+
+    let condition = { id: id };
+    if (req.baseUrl.split('/')[1] == 'users') {
+        condition.users_id = user.id;
+        let project = await projectsService.readOne(condition);
+        if (![0, 1].includes(project.phase) || project.detail_phase > req.body.detail_phase) {
+            delete req.body.detail_phase;
+        }
+    }
+    else if (req.baseUrl.split('/')[1] == 'admin') {
+        throw new Error("미구현");
+    }
+    else {
+        return;
+    }
     let body = req.body;
+    for ([key, value] of Object.entries(body)) {
+        if (!value) body[key] = null;
+    }
+
+    console.log(body);
 
     await projectsService
         .update(body, condition)
@@ -44,12 +76,13 @@ exports.edit = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err);
             res.status(500).end();
         })
 }
 
 exports.delete = async (req, res, next) => {
-    const id = req.params.id;
+    const id = req.query.n;
     let condition = { id: id };
 
     await projectsService
@@ -71,7 +104,7 @@ exports.delete = async (req, res, next) => {
 }
 
 exports.recovery = async (req, res, next) => {
-    const id = req.params.id;
+    const id = req.query.n;
     let condition = { id: id };
 
     await projectsService
@@ -96,17 +129,26 @@ exports.index = async (req, res, next) => {
     const user = res.locals.user;
 
     let condition = {};
-    if ([1].indexOf(user.user_type) == -1) {
+    if ([1].includes(user.user_type)) {
         condition.users_id = user.id;
         condition.delete_date = null;
     }
-    let limit = req.query.limit;
-    let skip = req.query.skip;
+    const page = req.query.p || 1;
+    const limit = req.query.limit || 4;
+    const skip = (page - 1) * limit;
 
-    await projectsService
-        .allRead(condition, limit, skip)
-        .then((result) => {
-            console.log("keys :", Object.keys(result))
+    const project = projectsService.allRead(Object.assign(condition, { phase: { [Op.between]: [1, 8] } }))
+    const temp_project = projectsService.allRead(Object.assign(condition, { phase: 0 }))
+    const completed_project = projectsService.allRead(Object.assign(condition, { phase: 9 }), limit, skip)
+
+    Promise.all([project, temp_project, completed_project])
+        .then(([project, temp_project, completed_project]) => {
+            res.render('myProject/main', {
+                page: page,
+                project: project.rows,
+                temp_project: temp_project.rows,
+                completed_project: completed_project,
+            });
         })
         .catch((err) => {
             console.error(err);

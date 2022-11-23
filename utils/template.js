@@ -41,6 +41,23 @@ module.exports.Service = class {
             })
     }
 
+    upsert = async (obj) => {
+        return await this.model
+            .upsert(obj)
+            .then(([instance, created]) => {
+                if (created) {
+                    console.log("create success");
+                } else {
+                    console.log("update success");
+                }
+                return instance;
+            })
+            .catch((err) => {
+                console.log("upsert fail");
+                throw err;
+            })
+    }
+
     allRead = async (condition = {}, limit, skip) => {
         return await this.model
             .findAndCountAll({

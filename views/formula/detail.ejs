@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <% const numberOfProduct=codezip.numberOfProduct; %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/client-sidebar.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content  p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3 pt-2">
+                <h6 class="main-menu">
+                  <%= __('Customizing') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Formula') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col-3 pt-2">
+                <h5><strong>
+                    <%= __('users.formula.title.Benchmark') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
+              <div class="widget w-100" style="padding: 5%;">
+                <!-- sub title -->
+                <div class="form-group mx-5 my-5">
+                  <div class="row">
+                    <h6 class="text-gray"><span class="text-black me-2"><%= formula.product_name %></span><%= formula.award %></h6>
+                  </div>
+                  <div class="row mt-3">
+                    <!-- gallery -->
+                    <div class="col-5">
+                      <div class="preview text-center">
+                        <img id="largeImg" src="<%= formula.image_paths.split(',')[0] %>">
+                      </div>
+                      <div id="thumbs" class="row mt-3 mx-1">
+                        <% formula.image_paths.split(',').forEach((item,index)=>{ %>
+                        <div class="w-20 preview px-1">
+                          <% if(index==0) { %>
+                          <a class="select" href="<%= item %>">
+                            <% }else{ %>
+                            <a class="" href="<%= item %>">
+                              <% } %>
+                              <img class="br-10" src="<%= item %>">
+                            </a>
+                        </div>
+                        <% }) %>
+                      </div>
+
+                    </div>
+                    <!-- content -->
+                    <div class="col-7  ms-auto ps-5 text-black me-0 text-break">
+                      <div class="row d-flex">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.top_or_new') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break">
+                            <%= __('top_or_new.'+formula.top_or_new) %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.category1') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= __('product'+formula.category1) %></div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.category2') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= __('product'+formula.category1+'.'+formula.category2) %></div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.efficacy') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break">
+                            <%= formula.efficacy %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.ingredients') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= formula.ingredients %></div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.viscosity') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= formula.viscosity %>%</div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.applies') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= formula.applies %></div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.color') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= formula.color %></div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-3 pt-2"><%= __('users.formula.label.fragrance') %></div>
+                        <div class="col-9">
+                          <div class="form-control text-break"><%= formula.fragrance %></div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="text-center pt-4">
+                  <button class="col-2 btn btn-outline-primary me-3" type="button" onclick="history.back();"><%= __('btn.previous') %></button>
+                  <button id="nextBtn" class="col-2 btn btn-outline-primary" type="button" onclick="project_next('<%= formula.id %>','<%= formula.category1 %>','<%= formula.category2 %>');" hidden><%= __('btn.next') %></button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+
+    <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    thumbs.onclick = function(event) {
+      event.preventDefault();
+      let thumbnail = event.target.closest('a');
+      console.log('dd')
+      if (!thumbnail) return;
+      document.getElementById("thumbs").getElementsByClassName('select')[0].classList.remove('select');
+
+      showThumbnail(thumbnail.href, thumbnail.title);
+      thumbnail.classList.add('select')
+    }
+
+    function showThumbnail(href, title) {
+      largeImg.src = href;
+    }
+
+    function project_next(formula_id, category1, category2) {
+      const project_id = new URLSearchParams(location.search).get('n');
+      if (!project_id) return location.href = "<%= codezip.url.users.myProject.main %>";
+
+      const url = location.origin + '/<%= codezip.url.users.api.projects.edit %>/' + project_id;
+
+      fetch(url, {
+        method: 'put',
+        body: new URLSearchParams({
+          formulas_id: formula_id,
+          category1: category1,
+          category2: category2,
+          detail_phase: 2,
+        })
+      }).then((res) => {
+        if (res.ok) {
+          // alert('ok');
+          location.href = "<%= codezip.url.users.newProject._2 %>" + location.search;
+        } else {
+          throw new Error(res.status);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert('fail');
+      })
+    }
+
+    window.addEventListener('load', event => {
+      const project_id = new URLSearchParams(location.search).get('n');
+      if (project_id) nextBtn.hidden = false;
+    })
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+</body>
+
+</html>

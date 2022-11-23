@@ -85,7 +85,7 @@ exports.index = async (req, res, next) => {
     const user = res.locals.user;
 
     let condition = {};
-    if ([1].indexOf(user.user_type) == -1) {
+    if (req.baseUrl.split('/')[1] != 'admin') {
         condition.users_id = user.id;
         condition.delete_date = null;
     }
@@ -107,7 +107,7 @@ exports.detail = async (req, res, next) => {
     const user = res.locals.user;
 
     let condition = {};
-    if ([1].indexOf(user.user_type) == -1) {
+    if (req.baseUrl.split('/')[1] != 'admin') {
         condition.users_id = user.id;
         condition.delete_date = null;
     }

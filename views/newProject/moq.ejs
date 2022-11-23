@@ -24,7 +24,7 @@
     <div id="content" class="main-content">
       <div class="layout-px-spacing">
 
-        <div class="middle-content container-xxl p-0">
+        <div class="middle-content p-0">
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
@@ -71,7 +71,7 @@
                       </div>
                       <div class="form-control my-2 d-flex align-items-baseline px-0 br-15">
                         <span class="ms-2" style="left:0px;">$</span>
-                        <input class="form-control w-100 align-placeholder text-center" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" autofocus required>
+                        <input class="form-control w-100 align-placeholder text-center" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" autofocus required value="<%= project.budget %>">
                       </div>
                       <div style="color: red;">
                         <%= __('users.newProject.moq.budgetInput.after') %>
@@ -88,24 +88,20 @@
                       <div>
                         <select class="form-select br-15 text-center" name="moq" required>
                           <option value="">
-                            <%= __('users.newProject.moq.moqSelect.placeholder')
-                                                                            %>
+                            <%= __('users.newProject.moq.moqSelect.placeholder') %>
                           </option>
-                          <option value="<%= __('users.newProject.moq.moqSelect.value1') %>">
-                            <%= __('users.newProject.moq.moqSelect.option1')
-                                                                            %>
+                          <% for(let i=0;i< codezip.moq_select_list.length; i++) { %>
+                          <% if(project.moq==+codezip.moq_select_list[i].replace(/,/g,'')){ %>
+                          <option value="<%= codezip.moq_select_list[i].replace(/,/g,'') %>" selected>
+                            <%= codezip.moq_select_list[i] %>
                           </option>
-                          <option value="<%= __('users.newProject.moq.moqSelect.value2') %>">
-                            <%= __('users.newProject.moq.moqSelect.option2')
-                                                                            %>
+                          <% }else{ %>
+                          <option value="<%= codezip.moq_select_list[i].replace(/,/g,'') %>">
+                            <%= codezip.moq_select_list[i] %>
                           </option>
-                          <option value="<%= __('users.newProject.moq.moqSelect.value3') %>">
-                            <%= __('users.newProject.moq.moqSelect.option3')
-                                                                            %>
-                          </option>
-                          <option value="<%= __('users.newProject.moq.moqSelect.value4') %>">
-                            <%= __('users.newProject.moq.moqSelect.option4')
-                                                                            %>
+                          <% }} %>
+                          <option value="0">
+                            <%= __('users.newProject.moq.moqSelect.others') %>
                           </option>
                         </select>
                       </div>
@@ -172,24 +168,32 @@
     moq.onsubmit = async (e) => {
       e.preventDefault();
 
-      // UI 확인용
-      location.replace('<%= codezip.url.users.newProject._1 %>');
-      return;
-      //
+      let body = new FormData(moq)
+      if (!location.search) {
+        body.set("detail_phase", 1);
+      }
 
       let response = await fetch(moq.action, {
         method: 'POST',
-        body: new URLSearchParams(new FormData(moq))
+        body: new URLSearchParams(body)
       }).then(res => {
-        if (res.ok) alert("<%= __('users.msg.SuccessSave') %>");
-        else {
-          alert("<%= __('users.msg.FailSave') %>");
+        if (!res.ok) {
+          throw new Error(res.status);
         }
         return res.json();
       }).then(result => {
-        console.log(result);
+        // console.log(result);
+        // alert("<%= __('users.msg.SuccessSave') %>")
+        location.replace(`<%= codezip.url.users.newProject._1 %>?n=${result}`);
+      }).catch(err => {
+        console.log(err)
+        alert("<%= __('users.msg.FailSave') %>");
       });
     }
+
+    window.addEventListener('load', event => {
+      unitPriceCalc();
+    })
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>

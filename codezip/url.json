@@ -1,5 +1,6 @@
 {
     "logo_img_src": "/images/BeautyWorks_logo.png",
+    "default_formula_img": "/images/default-formula.png",
     "users": {
         "defaultProfileImage": "/images/default-user-profile.png",
         "questionMark": "http://intercome.help",
@@ -24,7 +25,7 @@
             "_5": "/users/newProject/order"
         },
         "formula": "/users/formula",
-        "container": "/users/container",
+        "packaging": "/users/packaging",
         "ingredient": "/users/ingredient",
         "news": {
             "main": "/users/news",
@@ -55,6 +56,12 @@
             "_6": "/images/progress_icon/6.png",
             "_7": "/images/progress_icon/7.png",
             "_8": "/images/progress_icon/8.png"
+        },
+        "api": {
+            "formula": "/users/api/formula",
+            "projects": {
+                "edit": "users/api/projects/edit"
+            }
         }
     },
     "admin": {}

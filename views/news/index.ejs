@@ -31,37 +31,32 @@
             <div class="breadcrumb align-items-start d-flex pt-3 br-20">
               <div class="p-1 col-3">
                 <h5><strong>
-                    <%= __('Community') %>
+                    <%= __('News') %>
                   </strong></h5>
               </div>
             </div>
           </div>
           <!-- CONTENT AREA -->
-          <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+              <div class="widget w-100">
 
-              <!-- Community -->
-              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+
+              <!-- News -->
+              <div class="widget-content widget-content-area br-20 px-4">
                 <div class="form-group ms-3">
                   <div class="row">
-                    <div class="col-12 row pe-0">
-                      <div class="col">
-                        <h5><strong>
-                            <%= __('users.community.header.Community') %>
-                          </strong></h5>
-                      </div>
-                      <div class="col text-end pe-0">
-                        <button class="btn br-20" type="button" onclick="location.href='<%= codezip.url.users.community.add %>';">
-                          <%= __('users.community.btn.wirte') %>
-                        </button>
-                      </div>
+                    <div class="col-6 col-md-4">
+                      <h5><strong>
+                          <%= __('users.community.header.News') %>
+                        </strong></h5>
                     </div>
                   </div>
                   <!-- list -->
                   <div class="row mt-3">
-                    <% communities.data.forEach((item, index)=>{ %>
+                    <% news.data.forEach((item, index)=>{ %>
                     <div class="my-1">
-                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.community.main + '/' + item.id %>'">
+                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.news.main + '/' + item.id %>'">
                         <h6 class="m-1">
                           <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                           <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
@@ -77,11 +72,11 @@
                   </div>
 
                   <!-- pagination -->
-                  <% page=+communities.page %>
-                  <% count=+communities.count %>
-                  <% end_page=parseInt((count-1)/4)+1; %>
+                  <% let page=+news.page %>
+                  <% let count=+news.count %>
+                  <% let end_page=parseInt((count-1)/4)+1; %>
                   <% if(end_page>1) { %>
-                  <div class="d-flex justify-content-center  mt-3">
+                  <div class="d-flex justify-content-center mt-3">
                     <!-- 페이징처리 시작 -->
                     <!-- 처음 & 이전페이지 -->
                     <ul class="p-2 pagination">
@@ -95,11 +90,11 @@
                         </a>
                       </li>
                       <% } else { %>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?cp=1&np=<%= news.page %>">
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.news.main %>?np=1&cp=<%= news.page %>">
                           <%- __('users.pagination.처음으로') %>
                         </a>
                       </li>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= page-1 %>&np=<%= news.page %>">
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= page-1 %>&cp=<%= news.page %>">
                           <%- __('users.pagination.이전으로') %>
                         </a>
                       </li>
@@ -115,7 +110,7 @@
                         </a>
                       </li>
                       <% } else { %>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
+                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= i %>&cp=<%= news.page %>">
                           <%= i %>
                         </a></li>
                       <% }} %>
@@ -128,12 +123,12 @@
                       </li>
                       <% } else { %>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= i %>&cp=<%= news.page %>">
                           <%= i %>
                         </a>
                       </li>
                       <% }} %>
-                      <% } else { for (let i=page-2; i < +page+3; i++) { if (page==i) {
+                      <% } else { for (let i=page-2; i < page+3; i++) { if (page==i) {
                                                         %>
                       <li class="page-item disabled">
                         <a class="page-link current_page">
@@ -142,7 +137,7 @@
                       </li>
                       <% } else { %>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= i %>&np=<%= news.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.news %>?np=<%= i %>&cp=<%= news.page %>">
                           <%= i %>
                         </a>
                       </li>
@@ -164,12 +159,12 @@
                       </li>
                       <% } else { %>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= +page+1 %>&np=<%= news.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= +page+1 %>&cp=<%= news.page %>">
                           <%- __('users.pagination.다음으로') %>
                         </a>
                       </li>
                       <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.community.main %>?cp=<%= end_page %>&np=<%= news.page %>">
+                        <a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= end_page %>&cp=<%= news.page %>">
                           <%- __('users.pagination.마지막으로') %>
                         </a>
                       </li>
@@ -181,7 +176,7 @@
 
                 </div>
               </div>
-
+              </div>
 
             </div>
           </div>

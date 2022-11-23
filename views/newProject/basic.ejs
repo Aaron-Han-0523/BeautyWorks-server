@@ -5,6 +5,7 @@
   <%- include ("../partials/header.ejs") %>
   <% const numberOfProduct=codezip.numberOfProduct; %>
   <% const country_codes=codezip.country.codes; %>
+  <% let country_code2name = {}; %>
 </head>
 
 <body class="layout-boxed">
@@ -26,7 +27,7 @@
     <div id="content" class="main-content">
       <div class="layout-px-spacing">
 
-        <div class="middle-content container-xxl p-0">
+        <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
@@ -48,26 +49,26 @@
 
               <div class="widget-content widget-content-area br-20 py-5">
 
-                <form id="basic" method="post" enctype="multipart/form-data">
-                  <div class="form-group ms-3 text-break">
-                    <div class="row mb-3">
-                      <h5 class="p-0"><strong>
-                          <%= __('샘플의뢰서 기본') %>
-                        </strong>
-                      </h5>
-                    </div>
+                <div class="form-group ms-3 text-break">
+                  <div class="row mb-3">
+                    <h5 class="p-0"><strong>
+                        <%= __('샘플의뢰서 기본') %>
+                      </strong>
+                    </h5>
+                  </div>
 
-                    <div class="row widget" style="padding:75px 150px 75px 150px">
+                  <div class="row widget" style="padding:5% 5%">
+                    <form id="basic" method="post" enctype="multipart/form-data" style="padding:0% 5%">
 
                       <!-- 제품명 -->
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.projectName') %><span style="color: red;">*</span>
+                            <%= __('users.newProject.basic.project_name') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input class="form-control" name="projectName" id="projectName" placeholder="<%= __('plzInputText') %>" required>
+                          <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.project_name %>">
                         </div>
                       </div>
 
@@ -84,6 +85,7 @@
                         </div>
                       </div>
 
+                      <input hidden id="formulas_id" value="<%= project.formulas_id %>">
 
                       <!-- 카테고리 선택 -->
                       <div class="row mb-5 align-items-center">
@@ -94,16 +96,16 @@
                         </div>
                         <div class="col">
                           <input hidden type="text" name="category1" required>
-                          <input type="text" class="form-control" id="category1_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input type="text" class="form-control" id="category1_print" placeholder="<%= __('Select') %>" readonly required>
                         </div>
-                        <div class="col col-2">
-                          <button class="form-select text-center" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('select') %>
+                        <div class="col col-3">
+                          <button class="form-select text-start" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('Select') %>
                           </button>
                           <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_category1">
                             <% for(let i=0; i< numberOfProduct.category1; i++) { %>
                             <li>
-                              <a class="dropdown-item" href="javascript:void(0);" onclick="select_category1_func('<%= i %>','<%= __(`product`+i) %>');">
+                              <a class="dropdown-item" href="javascript:void(0);" onclick="select_category1_func('<%= i %>');">
                                 <%= __('product'+i) %>
                               </a>
                             </li>
@@ -122,15 +124,15 @@
                         </div>
                         <div class="col">
                           <input hidden type="text" name="category2" required>
-                          <input type="text" class="form-control" id="category2_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input type="text" class="form-control" id="category2_print" placeholder="<%= __('Select') %>" readonly required>
                         </div>
-                        <div class="col col-2">
-                          <button class="form-select text-center" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('select') %>
+                        <div class="col col-3">
+                          <button class="form-select text-start" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= __('Select') %>
                           </button>
                           <ul id="category2_list" class="dropdown-menu scrollable-menu" aria-labelledby="select_category2">
                             <li>
-                              <%= __('choose category1 first') %>
+                              <%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %>
                             </li>
                           </ul>
                         </div>
@@ -145,7 +147,21 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="capacity" id="capacity" placeholder="<%= __('plzInputText') %>" required>
+                          <input type="text" class="form-control" name="capacity" placeholder="<%= __('plzInputText') %>" required value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
+                        </div>
+                        <div class="col col-3">
+                          <%# console.log("??",project.capacity.split(' ')[1],"??") %>
+                          <input hidden type="text" id="capacity_unit" value="<%= project.capacity ? project.capacity.split(' ')[1] : '' %>">
+                          <button class="form-select text-start" type="button" id="select_capacity_unit" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= project.capacity&&project.capacity.split(' ')[1] ? project.capacity.split(' ')[1] : __('Select') %>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="capacity_unit">
+                            <% codezip.capacity_unit.forEach((item,index)=>{ %>
+                            <li class="dropdown-item capacity_unit">
+                              <%= item %>
+                            </li>
+                            <% }) %>
+                          </ul>
                         </div>
                       </div>
 
@@ -154,24 +170,24 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.targetAge') %><span style="color: red;">*</span>
+                            <%= __('users.newProject.basic.target_age') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="targetAge" required>
-                          <input type="text" class="form-control" id="targetAge_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input hidden type="text" name="target_age" required>
+                          <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('중복선택가능') %>" readonly required>
                         </div>
-                        <div class="col col-2">
-                          <button class="form-select text-center" type="button" id="select_age" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('select') %>
+                        <div class="col col-3">
+                          <button class="form-select text-start" type="button" id="select_age" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                            <%= __('Select') %>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="select_age">
-                            <% for(let i=0; i< 8; i++) { %>
-                            <li class="me-3 d-flex">
-                              <label class="dropdown-item form-check-label targetAgeLabel" for="age<%= i %>">
+                            <% for(let i=0; i< 9; i++) { %>
+                            <li class="dropdown-item d-flex">
+                              <input class="form-check-input age me-3" type="checkbox" id="age<%= i %>">
+                              <label class="form-check-label flex-grow-1 target_age_label" for="age<%= i %>">
                                 <%= __('age'+i) %>
                               </label>
-                              <input class="form-check-input age" type="checkbox" id="age<%= i %>">
                             </li>
                             <% } %>
                           </ul>
@@ -183,24 +199,24 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.targetSex') %><span style="color: red;">*</span>
+                            <%= __('users.newProject.basic.target_gender') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="targetSex" required>
-                          <input type="text" class="form-control" id="targetSex_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input hidden type="text" name="target_gender" required>
+                          <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('중복선택가능') %>" readonly required>
                         </div>
-                        <div class="col col-2">
-                          <button class="form-select text-center" type="button" id="select_sex" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('select') %>
+                        <div class="col col-3">
+                          <button class="form-select text-start" type="button" id="select_gender" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                            <%= __('Select') %>
                           </button>
-                          <ul class="dropdown-menu" aria-labelledby="select_sex">
+                          <ul class="dropdown-menu" aria-labelledby="select_gender">
                             <% for(let i=0; i< 2; i++) { %>
-                            <li class="me-3 d-flex">
-                              <label class="dropdown-item form-check-label targetSexLabel" for="sex<%= i %>">
-                                <%= __('sex'+i) %>
+                            <li class="dropdown-item d-flex">
+                              <input class="form-check-input gender me-3" type="checkbox" id="gender<%= i %>">
+                              <label class="form-check-label flex-grow-1 target_gender_label" for="gender<%= i %>">
+                                <%= __('gender'+i) %>
                               </label>
-                              <input class="form-check-input sex" type="checkbox" id="sex<%= i %>">
                             </li>
                             <% } %>
                           </ul>
@@ -212,30 +228,30 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.targetCountry') %>
+                            <%= __('users.newProject.basic.target_country') %>
                             <span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="targetCountry" value="">
-                          <input type="text" class="form-control" id="targetCountry_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input hidden type="text" name="target_country" value="">
+                          <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('중복선택가능') %>" readonly required>
                         </div>
-                        <div class="col col-2">
-                          <button class="form-select text-center" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('select') %>
+                        <div class="col col-3 btn-group" role="group">
+                          <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                            <%= __('Select') %>
                           </button>
                           <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
-                            <% for(let i=0; i< country_codes.length; i++) { %>
-                            <li class="me-3 dropdown-item">
+                            <% country_codes.forEach((item,index)=>{ country_code2name[item] = __(item); %>
+                            <li class="dropdown-item">
                               <div class="d-flex">
-                                <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
-                                <label class="form-check-label flex-grow-1 targetCountryLabel" for="country<%= i %>">
-                                  <%= __(country_codes[i]) %>
+                                <input class="form-check-input country me-3" type="checkbox" id="country-<%= item %>">
+                                <img class="me-2" src="/images/flag/<%= item %>.png">
+                                <label class="form-check-label flex-grow-1 target_country_label" for="country-<%= item %>">
+                                  <%= __(item) %>
                                 </label>
-                                <input class="form-check-input country" type="checkbox" id="country<%= i %>">
                               </div>
                             </li>
-                            <% } %>
+                            <% }) %>
                           </ul>
                         </div>
                       </div>
@@ -245,11 +261,11 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.distributionChannel') %>
+                            <%= __('users.newProject.basic.distribution_channel') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="distributionChannel" id="distributionChannel" placeholder="<%= __('plzInputText') %>">
+                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('plzInputText') %>" value="<%= project.distribution_channel %>">
                         </div>
                       </div>
 
@@ -258,11 +274,11 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.exportable') %>
+                            <%= __('users.newProject.basic.overseas_certifications') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="exportable" id="exportable" placeholder="<%= __('plzInputText') %>">
+                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('plzInputText') %>" value="<%= project.overseas_certifications %>">
                         </div>
                       </div>
 
@@ -271,17 +287,27 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.koreaCertification') %>
+                            <%= __('users.newProject.basic.korea_certification') %>
                           </h6>
                         </div>
-                        <div class="col col-4 d-flex align-items-baseline">
-                          <input type="radio" class="btn-check" name="koreaCertification" id="koreaCertification_true" autocomplete="off" value="1">
-                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="koreaCertification_true">
+                        <div class="col col-9 col-xxl-6 d-flex align-items-baseline">
+                          <% if(project.korea_certification=="1") { %>
+                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1" checked>
+                          <% }else{ %>
+                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1">
+                          <% } %>
+
+                          <label class="col-6 btn btn-outline-primary my-0 me-4" for="korea_certification_true">
                             <%= __('users.newProject.basic.btn.yes') %>
                           </label>
 
-                          <input type="radio" class="btn-check" name="koreaCertification" id="koreaCertification_false" autocomplete="off" value="" checked>
-                          <label class="col-5 btn btn-outline-primary my-0" for="koreaCertification_false">
+                          <% if(project.korea_certification=="0") { %>
+                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0" checked>
+                          <% }else{ %>
+                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0">
+                          <% } %>
+
+                          <label class="col-6 btn btn-outline-primary my-0" for="korea_certification_false">
                             <%= __('users.newProject.basic.btn.no') %>
                           </label>
                         </div>
@@ -292,35 +318,47 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.inStock') %>
+                            <%= __('users.newProject.basic.sourcing_of_packaging') %>
                           </h6>
                         </div>
-                        <div class="col col-4 d-flex align-items-baseline">
-                          <input type="radio" class="btn-check" name="inStock" id="inStock_true" autocomplete="off" value="1">
-                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="inStock_true">
-                            <%= __('users.newProject.basic.inStock.btn.yes') %>
+                        <div class="col col-9 col-xxl-6 d-flex align-items-baseline">
+                          <% if(project.sourcing_of_packaging=="1") { %>
+                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1" checked>
+                          <% }else{ %>
+                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1">
+                          <% } %>
+
+                          <label class="col-6 btn btn-outline-primary my-0 me-4" for="sourcing_of_packaging_true">
+                            <%= __('users.newProject.basic.sourcing_of_packaging.btn.yes') %>
                           </label>
 
-                          <input type="radio" class="btn-check" name="inStock" id="inStock_false" autocomplete="off" value="" checked>
-                          <label class="col-5 btn btn-outline-primary my-0" for="inStock_false">
-                            <%= __('users.newProject.basic.inStock.btn.no') %>
+                          <% if(project.sourcing_of_packaging=="0") { %>
+                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0" checked>
+                          <% }else{ %>
+                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0">
+                          <% } %>
+
+                          <label class="col-6 btn btn-outline-primary my-0" for="sourcing_of_packaging_false">
+                            <%= __('users.newProject.basic.sourcing_of_packaging.btn.no') %>
                           </label>
                         </div>
                       </div>
 
+                    </form>
 
-                      <div class="d-flex mt-5 justify-content-center">
-                        <button id="saveBtn" class="btn btn-outline-primary col-2 mx-3 p-3 br-15" type="button" onclick="save();">
-                          <%= __('users.newProject.basic.btn.Save') %>
-                        </button>
-                        <button id="nextBtn" class="btn btn-outline-primary col-2 mx-3 p-3 br-15" type="button" onclick="next();" hidden>
-                          <%= __('users.newProject.basic.btn.Next') %>
-                        </button>
-                      </div>
+                    <hr>
 
+                    <div class="d-flex mt-4 justify-content-center">
+                      <button id="saveBtn" class="btn btn-outline-primary col-3 mx-3 p-3 br-10" type="button" onclick="save();">
+                        <%= __('users.newProject.basic.btn.Save') %>
+                      </button>
+                      <button id="nextBtn" class="btn btn-outline-primary col-3 mx-3 p-3 br-10" type="button" onclick="next();" hidden>
+                        <%= __('users.newProject.basic.btn.Next') %>
+                      </button>
                     </div>
+
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -339,8 +377,10 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <div>
+    <% let category1_name_list=[]; %>
     <% let category2_name_list={} %>
     <% for (let i=0; i < numberOfProduct.category1; i++) { %>
+    <% category1_name_list.push(__('product'+i)); %>
     <% category2_name_list[i]={}; %>
     <% for (let j=0; j < numberOfProduct.category2[i]; j++) { %>
     <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
@@ -348,116 +388,125 @@
   </div>
   <script>
     const numberOfProduct = JSON.parse('<%- JSON.stringify(numberOfProduct) %>');
-    // console.log(numberOfProduct);
+    const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
     const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
-    // console.log(category2_name_list);
     const country_codes = JSON.parse('<%- JSON.stringify(country_codes) %>');
-    // console.log(country_codes);
+    const target_country_dict = JSON.parse(`<%- JSON.stringify(country_code2name) %>`);
+    let target_age_list = [];
+    let target_gender_list = [];
 
-    function select_category1_func(value, printName) {
+    function print_target_country(value) {
+      let text_list = [];
+      if (!value) {
+        target_country_print.value = ''
+        return;
+      }
+      value.split(',').forEach((code, index) => {
+        text_list.push(target_country_dict[code])
+        document.getElementById('country-' + code).checked = true;
+      })
+      target_country_print.value = text_list.join(', ')
+    }
+
+    function print_target_gender(value) {
+      let text_list = [];
+      for (let i = 0; i < target_gender_list.length; i++) {
+        if (value & (1 << i)) {
+          text_list.push(target_gender_list[i]);
+          document.getElementById('gender' + i).checked = true;
+        }
+      }
+      target_gender_print.value = text_list.join(', ')
+    }
+
+    function print_target_age(value) {
+      let text_list = [];
+      for (let i = 0; i < target_age_list.length; i++) {
+        if (value & (1 << i)) {
+          text_list.push(target_age_list[i]);
+          document.getElementById('age' + i).checked = true;
+        }
+      }
+      target_age_print.value = text_list.join(', ')
+    }
+
+    function select_category1_func(value) {
       // console.log("v:", value, "p", printName);
       document.forms[0]['category1'].value = value;
-      category1_print.value = printName;
+      category1_print.value = category1_name_list[value];
       let temp_html = "";
       let category2_n = numberOfProduct.category2[value];
       for (let i = 0; i < category2_n; i++) {
         temp_html += `<li>
                             <a class="dropdown-item" href="javascript:void(0);"
-                              onclick="select_category2_func('${i}','${category2_name_list[value][i]}');">
+                              onclick="select_category2_func('${i}');">
                               ${category2_name_list[value][i]}
                             </a>
                           </li>`
       }
       category2_list.innerHTML = temp_html;
-      checkValues();
+      //checkValues();
     }
 
-    function select_category2_func(value, printName) {
+    function select_category2_func(value) {
       // console.log("v:", value, "p", printName);
+      let category = document.forms[0]['category1'].value;
       document.forms[0]["category2"].value = value;
-      category2_print.value = printName;
-      checkValues();
+      category2_print.value = category2_name_list[category][value];
+      //checkValues();
     }
 
-    HTMLCollection.prototype.forEach = Array.prototype.forEach;
     document.forms[0].getElementsByClassName('age').forEach((item, index) => {
-      item.addEventListener("change", (e) => {
-        const obj = document.forms[0]['targetAge'];
+      item.addEventListener("change", (event) => {
+        const obj = document.forms[0]['target_age'];
         let value = +obj.value;
-        let text = document.getElementsByClassName('targetAgeLabel')[index].innerText.trim();
-        text = " " + text + ",";
-        const print_place = targetAge_print;
-        if (value) print_place.value += ",";
 
-        if (e.target.checked) {
-          print_place.value += text;
+        if (event.target.checked) {
           value += 1 << index;
           obj.value = value;
-          // console.log(obj.value);
         } else {
-          let temp_text = print_place.value;
-          print_place.value = temp_text.replace(text, "");
           value -= 1 << index;
           obj.value = value || '';
-          // console.log(obj.value);
         }
-        print_place.value = print_place.value.slice(0, -1);
-        checkValues();
+        print_target_age(obj.value);
       })
     })
 
-    document.forms[0].getElementsByClassName('sex').forEach((item, index) => {
-      item.addEventListener("change", (e) => {
-        const obj = document.forms[0]['targetSex'];
+    document.forms[0].getElementsByClassName('gender').forEach((item, index) => {
+      item.addEventListener("change", (event) => {
+        const obj = document.forms[0]['target_gender'];
         let value = +obj.value;
-        let text = document.getElementsByClassName('targetSexLabel')[index].innerText.trim();
-        text = " " + text + ",";
-        const print_place = targetSex_print;
-        if (value) print_place.value += ",";
 
-        if (e.target.checked) {
-          print_place.value += text;
+        if (event.target.checked) {
           value += 1 << index;
           obj.value = value;
-          // console.log(obj.value);
         } else {
-          let temp_text = print_place.value;
-          print_place.value = temp_text.replace(text, "");
           value -= 1 << index;
           obj.value = value || '';
-          // console.log(obj.value);
         }
-        print_place.value = print_place.value.slice(0, -1);
-        checkValues();
+        print_target_gender(obj.value);
       })
     })
 
     document.forms[0].getElementsByClassName('country').forEach((item, index) => {
-      item.addEventListener("change", (e) => {
-        const obj = document.forms[0]['targetCountry'];
-        let code = country_codes[index] + ',';
-        let text = document.getElementsByClassName('targetCountryLabel')[index].innerText.trim();
-        text = " " + text + ",";
-        const print_place = targetCountry_print;
-        // console.log(Object.keys(value));
-        if (obj.value) print_place.value += ",";
+      item.addEventListener("change", (event) => {
+        const obj = document.forms[0]['target_country'];
+        let values = obj.value ? obj.value.split(',') : [];
+        let code = country_codes[index];
 
-        if (e.target.checked) {
-          print_place.value += text;
-          obj.value += code;
-          // console.log(obj.value);
+        //console.log(values)
+        if (event.target.checked) {
+          values.push(code);
         } else {
-          let temp_text = print_place.value;
-          print_place.value = temp_text.replace(text, "");
-          obj.value = obj.value.replace(code, '');
-          // console.log(obj.value);
+          values.splice(values.indexOf(code), 1);
         }
-        print_place.value = print_place.value.slice(0, -1);
-        checkValues();
+        //console.log(values)
+        obj.value = values.join(',')
+        print_target_country(obj.value);
       })
     })
 
-    function checkValues() {
+    function checkRequired() {
       let formData = new FormData(basic);
       let cnt = 0;
       let checkReady = false;
@@ -472,6 +521,12 @@
           break;
         }
       }
+      if (!capacity_unit.value) checkReady = false;
+      return checkReady;
+    }
+
+    function checkValues() {
+      let checkReady = checkRequired();
 
       if (checkReady) {
         saveBtn.hidden = true;
@@ -482,38 +537,99 @@
       }
     }
 
-    document.forms[0].addEventListener('input', (e) => {
+    document.addEventListener('input', (e) => {
       checkValues();
     })
 
+    document.addEventListener('change', (e) => {
+      checkValues();
+    })
+
+    document.addEventListener('click', (e) => {
+      checkValues();
+    })
+
+    function basic_body() {
+      let body = new FormData(basic);
+      body.set('capacity', basic.capacity.value + ' ' + capacity_unit.value);
+      return body;
+    }
+
     function save() {
+      let body = basic_body();
+
       fetch(basic.action, {
         method: "post",
-        body: new URLSearchParams(new FormData(basic))
+        body: new URLSearchParams(body)
       }).then(res => {
         if (res.ok) {
-          return alert("<%= __('users.msg.SuccessSave') %>");
-        } else return alert("<%= __('users.msg.FailSave') %>");
+          alert("<%= __('users.msg.SuccessSave') %>");
+        } else {
+          throw new Error(res.status);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.msg.FailSave') %>");
       })
     }
 
     function next() {
+      if (!checkRequired()) return;
 
-      // UI 확인용
-      location.replace('<%= codezip.url.users.newProject._3 %>');
-      return;
+      let body = basic_body();
+      body.set('detail_phase', 3)
 
       fetch(basic.action, {
         method: "post",
-        body: new URLSearchParams(new FormData(basic))
+        body: new URLSearchParams(body)
       }).then(res => {
         if (res.ok) {
-          alert("<%= __('users.msg.SuccessSave') %>");
-          window.location.href = res.url;
-          return;
-        } else return alert("<%= __('users.msg.FailSave') %>");
+          // alert("<%= __('users.msg.SuccessSave') %>");
+          location.replace('<%= codezip.url.users.newProject._3 %>');
+        } else {
+          throw new Error(res.status);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.msg.FailSave') %>");
       })
     }
+
+    document.getElementsByClassName('capacity_unit').forEach((item, index) => {
+      item.addEventListener('click', (event) => {
+        const text = event.target.innerText;
+        select_capacity_unit.innerText = text;
+        capacity_unit.value = text;
+      })
+    })
+  </script>
+  <script>
+    window.addEventListener('load', event => {
+      select_category1_func('<%= project.category1 %>')
+      select_category2_func('<%= project.category2 %>')
+
+      document.getElementsByClassName('target_gender_label').forEach((item, index) => {
+        let text = item.innerText.trim();
+        target_gender_list.push(text);
+      })
+
+      document.getElementsByClassName('target_age_label').forEach((item, index) => {
+        let text = item.innerText.trim();
+        target_age_list.push(text);
+      })
+
+      let target_age = '<%= project.target_age %>';
+      print_target_age(target_age);
+      basic['target_age'].value = target_age;
+
+      let target_gender = '<%= project.target_gender %>';
+      print_target_gender(target_gender);
+      basic['target_gender'].value = target_gender;
+
+      let target_country = '<%= project.target_country %>';
+      print_target_country(target_country);
+      basic['target_country'].value = target_country;
+    })
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>

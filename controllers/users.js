@@ -172,13 +172,14 @@ exports.checkAlarm = async (req, res, next) => {
 }
 
 exports.main = async (req, res) => {
+    const user = res.locals.user;
     const page = req.query.p || 1;
     const limit = req.query.limit || 4;
-    const skip = page * limit;
+    const skip = (page - 1) * limit;
 
-    const project = projectsService.allRead({ phase: { [Op.between]: [1, 8] } }, 3)
-    const temp_project = projectsService.allRead({ phase: 0 }, 2)
-    const completed_project = projectsService.allRead({ phase: 9 }, limit, skip)
+    const project = projectsService.allRead({ users_id: user.id, phase: { [Op.between]: [1, 8] } }, 3)
+    const temp_project = projectsService.allRead({ users_id: user.id, phase: 0 }, 2)
+    const completed_project = projectsService.allRead({ users_id: user.id, phase: 9 }, limit, skip)
 
     const recommended_formula = formulasService.allRead()
         .then(result => {
@@ -212,7 +213,12 @@ exports.main = async (req, res) => {
 
     Promise.all([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community])
         .then(([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community]) => {
+            // console.log(completed_project);
             res.render('dashboard/dashboard', {
+                page: page,
+                project: project.rows,
+                temp_project: temp_project.rows,
+                completed_project: completed_project,
                 recommended_formula: recommended_formula,
                 remommended_ingredient: remommended_ingredient,
                 news: news[1],

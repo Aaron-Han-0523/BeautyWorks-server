@@ -179,7 +179,7 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
   return temp_html;
 }
 // 부트스트랩 v5 이용
-module.exports.make_pagination_by_func = function (i18n_func, page, count, baseURL, func_name, limit = 10) {
+module.exports.make_pagination_by_func = function (i18n_func, page, count, func_name, limit = 10) {
   let end_page = parseInt((count - 1) / limit) + 1;
   let end_list_num = end_page > 6 ? 5 : end_page;
   let temp_html = `<div class="d-flex justify-content-center">
@@ -200,11 +200,11 @@ module.exports.make_pagination_by_func = function (i18n_func, page, count, baseU
       `;
   } else {
     temp_html += `
-      <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', 1);">
+      <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(1);">
           ${i18n_func('users.pagination.처음으로')}
         </button>
       </li>
-      <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${page - 1});">
+      <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(${page - 1});">
           ${i18n_func('users.pagination.이전으로')}
         </button>
       </li>
@@ -227,7 +227,7 @@ module.exports.make_pagination_by_func = function (i18n_func, page, count, baseU
       `;
       } else {
         temp_html += `
-      <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+      <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(${i});">
           ${i}
         </button></li>
       `;
@@ -247,7 +247,7 @@ module.exports.make_pagination_by_func = function (i18n_func, page, count, baseU
       } else {
         temp_html += `
       <li class="page-item">
-        <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+        <button type="button" class="page-link" onclick="${func_name}(${i});">
           ${i}
         </button>
       </li>
@@ -267,7 +267,7 @@ module.exports.make_pagination_by_func = function (i18n_func, page, count, baseU
       } else {
         temp_html += `
       <li class="page-item">
-        <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+        <button type="button" class="page-link" onclick="${func_name}(${i});">
           ${i}
         </button>
       </li>
@@ -295,12 +295,12 @@ module.exports.make_pagination_by_func = function (i18n_func, page, count, baseU
   } else {
     temp_html += `
       <li class="page-item">
-        <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${page + 1});">
+        <button type="button" class="page-link" onclick="${func_name}(${page + 1});">
           ${i18n_func('users.pagination.다음으로')}
         </button>
       </li>
       <li class="page-item">
-        <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${end_page});">
+        <button type="button" class="page-link" onclick="${func_name}(${end_page});">
           ${i18n_func('users.pagination.마지막으로')}
         </button>
       </li>

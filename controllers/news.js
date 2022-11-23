@@ -41,37 +41,59 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-//     const page = req.query.p ? req.query.p : 1;
-//     const word = req.query.q;
-//     const skip = req.query.skip;
-//     const limit = req.query.limit;
+    const news_page = req.query.np || 1;
+//    const communities_page = req.query.cp || 1;
+//    console.log("page query :", news_page, communities_page)
 
-//     let paging = {
-//         skip: skip ? skip : (page - 1) * 10,
-//         limit: limit ? limit : 10
-//     }
-//     let condition = word ?
-//         {
-//             [Op.or]: [
-//                 { title: { [Op.like]: `%${word}%` } },
-//                 { content: { [Op.like]: `%${word}%` } }
-//             ]
-//         }
-//         : {}
+    let word = req.query.q
+    if (word) word = word.replace(/\;/g, '').trim();
+    const skip = req.query.skip;
+    const limit = req.query.limit;
 
-//     const data = await newsService
-//         .allRead(condition, paging)
-//         .catch(err => console.error(err));
+    let news_paging = {
+        skip: skip ? skip : (news_page - 1) * 4,
+        limit: limit ? limit : 4
+    }
+//    let communities_paging = {
+//        skip: skip ? skip : (communities_page - 1) * 4,
+//        limit: limit ? limit : 4
+//    }
+    let condition = word ?
+        // {
+        //     [Op.or]: [
+        //         { title: { [Op.like]: `%${word}%` } },
+        //         { content: { [Op.like]: `%${word}%` } }
+        //     ]
+        // }
+        {
+            word: word
+        }
+        : {}
 
-//     // console.log("data :", data);
+//    const communities = communitiesService
+//        .allRead(condition, communities_paging)
+//        .catch(err => console.error(err));
 
-//     return res.render('news/index', {
-//         count: data.count,
-//         data: data.rows,
-//         user: req.userInfo,
-//         page: page,
-//         word: word
-//     });
+    const news = newsService
+        .allRead(condition, news_paging)
+        .catch(err => console.error(err));
+
+    Promise.all([news]).then(data => {
+        return res.render('news/index', {
+//            communities: {
+//                count: data[0][0].count,
+//                data: data[0][1],
+//                page: communities_page,
+//                word: word
+//            },
+            news: {
+                count: data[0][0].count,
+                data: data[0][1],
+                page: news_page,
+                word: word
+            }
+        });
+    })
 }
 
 exports.detail = async (req, res, next) => {

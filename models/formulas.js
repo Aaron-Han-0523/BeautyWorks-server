@@ -13,6 +13,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "제품명"
     },
+    award: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: "어워드"
+    },
     top_or_new: {
       type: DataTypes.TINYINT,
       allowNull: true,
@@ -39,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "성분"
     },
-    texture: {
+    viscosity: {
       type: DataTypes.TINYINT,
       allowNull: true,
       comment: "제형"

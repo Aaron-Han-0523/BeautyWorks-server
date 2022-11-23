@@ -26,7 +26,7 @@
     <div id="content" class="main-content">
       <div class="layout-px-spacing">
 
-        <div class="middle-content container-xxl">
+        <div class="middle-content p-0">
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
@@ -60,17 +60,17 @@
                   </div>
                   <!-- /* 테스트 데이터 생성 -->
                   <div>
-                    <% let temp_project=[]; %>
-                    <% temp_project.push({
-                      projectName:"My Suncream",
+                    <%# let temp_project=[]; %>
+                    <%# temp_project.push({
+                      project_name:"My Suncream",
                       phase:0,
-                      detailPhase:1,
+                      detail_phase:1,
                       create_date: new Date(2022,10,15)
                       }) %>
-                    <% temp_project.push({
-                      projectName:"My Suncream",
+                    <%# temp_project.push({
+                      project_name:"My Suncream",
                       phase:0,
-                      detailPhase:2,
+                      detail_phase:2,
                       create_date: new Date(2022,10,25)
                       }) %>
                   </div>
@@ -84,11 +84,11 @@
                       <div class="progress-card-body">
                         <div class="progress-card-name">
                           <h6>
-                            <%= (index+1)+". "+item.projectName %>
+                            <%= (index+1)+". "+item.project_name %>
                             <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
                           </h6>
                         </div>
-                        <%- include("../partials/temp_progressbar/"+item.detailPhase+".ejs") %>
+                        <%- include("../partials/temp_progressbar/"+item.detail_phase+".ejs", {project: item}) %>
                       </div>
                     </div>
                   </div>
@@ -113,12 +113,12 @@
                   </div>
                   <!-- /* 테스트 데이터 생성 -->
                   <div>
-                    <% let project=[]; %>
-                    <% for(let i=1;i< 9;i++){
+                    <%# let project=[]; %>
+                    <%# for(let i=1;i< 9;i++){
                       project.push({
-                        projectName:"My Suncream"+i,
+                        project_name:"My Suncream"+i,
                         phase:i,
-                        detailPhase:1,
+                        detail_phase:1,
                         sampleNumber: 10,
                         create_date: new Date(2022,10,i)
                       })
@@ -126,7 +126,7 @@
                   </div>
                   <!-- 테스트 데이터 생성 */ -->
                   <% project.forEach((item,index)=>{
-                    let numberOfdetailPhase = codezip.numberOfProjectState.detailPhase[item.phase] %>
+                    let number_of_detail_phase = codezip.numberOfProjectState.detail_phase[item.phase] %>
                   <div class="row">
                     <div class="progress-card">
                       <div class="progress-card-img progress-<%= item.phase %>">
@@ -137,16 +137,16 @@
                           <div class="justify-content-between d-flex px-0">
                             <div class="align-self-center">
                               <h6>
-                                <%= (index+1)+'. '+item.projectName %>
+                                <%= (index+1)+'. '+item.project_name %>
                                 <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
                               </h6>
                             </div>
                             <div class="row text-end me-4">
                               <% if(item.phase==1) { %>
-                              <% if((item.detailPhase+1)==numberOfdetailPhase) { %>
-                              <button class="btn btn-outline-primary" type="button"><%= __('users.myProject.btn.chooseSample') %></button>
+                              <% if((item.detail_phase+1)==number_of_detail_phase) { %>
+                              <button class="btn btn-outline-primary" type="button"><%= __('users.myProject.btn.샘플확정') %></button>
                               <% }else{ %>
-                              <button class="btn btn-outline-gray" disabled><%= __('users.myProject.btn.chooseSample') %></button>
+                              <button class="btn btn-outline-gray" disabled><%= __('users.myProject.btn.샘플확정') %></button>
                               <% }}else{ %>
                               <% } %>
                             </div>
@@ -154,188 +154,178 @@
 
                         </div>
                         <div class="stepper-wrapper">
-                          <% for(let i=0; i < numberOfdetailPhase; i++ ) { %>
-                          <% if(i < item.detailPhase) { %>
+                          <% for(let i=0; i < number_of_detail_phase; i++ ) { %>
+                          <% if(i < item.detail_phase) { %>
                           <div class="stepper-item _<%= item.phase %> completed">
-                            <div class="step-counter"></div>
-                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
-                              <% if(item.phase==1 && i==1) { %>
-                              <%=  '(' +item.sampleNumber+__('users.myProject.stepName.add.sampleNumber') + ')' %>
+                            <% }else if(i == item.detail_phase) { %>
+                            <div class="stepper-item _<%= item.phase %> active">
+                              <% }else{ %>
+                              <div class="stepper-item _<%= item.phase %>">
+                                <% } %>
+                                <div class="step-counter"></div>
+                                <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
+                                  <% if(item.phase==1 && i==1) { %>
+                                  <%=  '(' + __('users.myProject.stepName.add.sampleNumber',item.sample_number) + ')' %>
+                                  <% } %>
+                                </div>
+                              </div>
                               <% } %>
                             </div>
                           </div>
-                          <% }else if(i == item.detailPhase) { %>
-                          <div class="stepper-item _<%= item.phase %> active">
-                            <div class="step-counter"></div>
-                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
-                              <% if(item.phase==1 && i==1) { %>
-                              <%=  '(' +item.sampleNumber+__('users.myProject.stepName.add.sampleNumber') + ')' %>
-                              <% } %>
-                            </div>
-                          </div>
-                          <% }else{ %>
-                          <div class="stepper-item _<%= item.phase %>">
-                            <div class="step-counter"></div>
-                            <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
-                              <% if(item.phase==1 && i==1) { %>
-                              <%=  '(' +item.sampleNumber+__('users.myProject.stepName.add.sampleNumber') + ')' %>
-                              <% } %>
-                            </div>
-                          </div>
-                          <% }} %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <% }) %>
-
-                </div>
-              </div>
-
-              <!-- Completed Project -->
-              <!-- /* 테스트 데이터 생성 -->
-              <div>
-                <% let completed_project={data:[],page:1,count:10}; %>
-                <% completed_project.data.push({
-                  productName:"My Suncream1",
-                  volume:"110ml",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                })%>
-                <% completed_project.data.push({
-                  productName:"My Suncream2",
-                  volume:"120ml",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:20000,
-                  lastOrderDate:new Date(2022,10,15),
-                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                
-                })%>
-                <% completed_project.data.push({
-                  productName:"My Suncream3",
-                  volume:"110g",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
-                })%>
-                <% completed_project.data.push({
-                  productName:"My Suncream4",
-                  volume:"210g",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
-                })%>
-              </div>
-              <!-- 테스트 데이터 생성 */ -->
-              <!-- Completed Project -->
-              <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                <div class="form-group ms-3">
-                  <div class="row mb-3">
-                    <div class="justify-content-between d-flex px-0">
-                      <div>
-                        <h5><strong>
-                            <%= __("users.dashboard.header.CompletedProject") %>
-                          </strong>
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mt-3">
-                    <div class="widget p-4 row mx-0" id="completed_project">
-                      <% completed_project.data.forEach((item,index)=>{ %>
-                      <div class="col d-flex flex-column">
-                        <!-- style="height: calc(100%-50px);" -->
-                        <div class="preview">
-                          <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
-                        </div>
-                        <div class="mb-auto mt-3">
-                          <h6>
-                            <%= item.productName %>
-                          </h6>
-                          <h6>
-                            <%= __("product"+item.category1+"."+item.category2) %>
-                            <%= " " + item.volume %>
-                          </h6>
-                          <p>
-                            <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                            <%= ' : ' + item.totalOrderAmount %>
-                            <br>
-                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                            <%= ' : ' + formatDate(item.lastOrderDate) %>
-                          </p>
-                        </div>
-                        <div class="row mx-0 mt-3">
-                          <button class="btn btn-outline-primary" type="button">
-                            <%= __('REORDER') %>
-                          </button>
                         </div>
                       </div>
                       <% }) %>
 
-                      <!-- pagination -->
-                      <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
-                      <%- make_pagination_by_href(
-                          __,
-                          completed_project.page,
-                          completed_project.count,
-                          codezip.url.users.community.main,
-                          4
-                        ) %>
-
                     </div>
                   </div>
+
+                  <!-- Completed Project -->
+                  <!-- /* 테스트 데이터 생성 -->
+                  <div>
+                    <%# let completed_project={rows:[],page:1,count:10}; %>
+                    <%# completed_project.rows.push({
+                      project_name:"My Suncream1",
+                      capacity:"110ml",
+                      category1:0,
+                      category2:0,
+                      total_order_quantity:10000,
+                      recent_order_date:new Date(2022,10,5),
+                      image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                    })%>
+                    <%# completed_project.rows.push({
+                      project_name:"My Suncream2",
+                      capacity:"120ml",
+                      category1:0,
+                      category2:0,
+                      total_order_quantity:20000,
+                      recent_order_date:new Date(2022,10,15),
+                      image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                    })%>
+                    <%# completed_project.rows.push({
+                      project_name:"My Suncream3",
+                      capacity:"110g",
+                      category1:0,
+                      category2:0,
+                      total_order_quantity:30000,
+                      recent_order_date:new Date(2022,10,25),
+                      image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                    })%>
+                    <%# completed_project.rows.push({
+                      project_name:"My Suncream4",
+                      capacity:"210g",
+                      category1:0,
+                      category2:0,
+                      total_order_quantity:10000,
+                      recent_order_date:new Date(2022,10,5),
+                      image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                    })%>
+                  </div>
+                  <!-- 테스트 데이터 생성 */ -->
+                  <!-- Completed Project -->
+                  <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                    <div class="form-group ms-3">
+                      <div class="row mb-3">
+                        <div class="justify-content-between d-flex px-0">
+                          <div>
+                            <h5><strong>
+                                <%= __("users.dashboard.header.CompletedProject") %>
+                              </strong>
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <% if(completed_project.count){ %>
+                        <div class="widget p-4 row mx-0 justify-content-center" id="completed_project">
+                          <% completed_project.rows.forEach((item,index)=>{ %>
+                          <div class="col-3 d-flex flex-column">
+                            <!-- style="height: calc(100%-50px);" -->
+                            <% if(item.image_paths) { %>
+                            <div class="preview">
+                              <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
+                            </div>
+                            <% } %>
+                            <div class="mb-auto mt-3">
+                              <h6>
+                                <%= item.project_name %>
+                              </h6>
+                              <h6>
+                                <%= __("product"+item.category1+"."+item.category2) %>
+                                <%= " " + item.capacity %>
+                              </h6>
+                              <p>
+                                <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                                <%= ' : ' + item.total_order_quantity %>
+                                <br>
+                                <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                                <%= ' : ' + formatDate(item.recent_order_date) %>
+                              </p>
+                            </div>
+                            <div class="row mx-0 mt-3">
+                              <button class="btn btn-outline-primary" type="button">
+                                <%= __('REORDER') %>
+                              </button>
+                            </div>
+                          </div>
+                          <% }) %>
+
+                          <!-- pagination -->
+                          <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
+                          <%- make_pagination_by_href(
+                              __,
+                              page,
+                              completed_project.count,
+                              codezip.url.users.dashboard,
+                              4
+                            ) %>
+
+                        </div>
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+
               </div>
-
             </div>
-
           </div>
+          <!--  END CONTENT AREA  -->
+
+          <%- include ("../partials/footer.ejs") %>
+
         </div>
-      </div>
-      <!--  END CONTENT AREA  -->
+        <!-- END MAIN CONTAINER -->
 
-      <%- include ("../partials/footer.ejs") %>
+        <%- include ("../partials/commonScrpits.ejs") %>
 
-    </div>
-    <!-- END MAIN CONTAINER -->
+        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+        <script>
+          let _ = new Swiper('.swiper-container', {
 
-    <%- include ("../partials/commonScrpits.ejs") %>
+            slidesPerView: 3, // 동시에 보여줄 슬라이드 갯수
+            spaceBetween: 20, // 슬라이드간 간격
+            slidesPerGroup: 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-    <script>
-      let _ = new Swiper('.swiper-container', {
+            // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+            // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+            loopFillGroupWithBlank: true,
 
-        slidesPerView: 3, // 동시에 보여줄 슬라이드 갯수
-        spaceBetween: 20, // 슬라이드간 간격
-        slidesPerGroup: 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+            loop: false, // 무한 반복
 
-        // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-        // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-        loopFillGroupWithBlank: true,
-
-        loop: false, // 무한 반복
-
-        pagination: { // 페이징
-          el: '.swiper-indicator',
-          clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-        },
-        navigation: { // 네비게이션
-          nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
-          prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
-        }
-      });
-    </script>
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-    <%- include ("../partials/chatMark.ejs") %>
+            pagination: { // 페이징
+              el: '.swiper-indicator',
+              clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+            },
+            navigation: { // 네비게이션
+              nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
+              prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
+            }
+          });
+        </script>
+        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+        <%- include ("../partials/chatMark.ejs") %>
 
 </body>
 

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <% const numberOfProduct=codezip.numberOfProduct; %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/client-sidebar.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content  p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Customizing') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Formula') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col-3">
+                <h5><strong>
+                    <%= __('users.formula.title.Benchmark') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
+              <div class="widget w-100 py-5 px-4">
+                <!-- select -->
+                <form>
+                  <div class="my-4 text-center mx-5 px-5">
+                    <div class="row align-items-center">
+                      <div class="col-2 h6"><%= __('users.formula.select.label.top_or_new') %></div>
+                      <div class="col">
+                        <select class="form-select" name="top_or_new">
+                          <option value="1"><%= __('users.formula.select.label.top') %></option>
+                          <option value="0"><%= __('users.formula.select.label.new') %></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row align-items-center my-3">
+                      <div class="col-2 h6"><%= __('users.formula.select.label.category1') %></div>
+                      <div class="col-3">
+                        <select class="form-select" name="category1">
+                          <option value=""><%= __('Select') %></option>
+                          <% for(let i=0; i< numberOfProduct.category1; i++) { %>
+                          <option value="<%= i %>" onclick="select_category1_func('<%= i %>','<%= __(`product`+i) %>');"><%= __('product'+i) %></option>
+                          <% } %>
+                        </select>
+                      </div>
+                      <div class="col-2 h6"><%= __('users.formula.select.label.category2') %></div>
+                      <div class="col">
+                        <select class="form-select" name="category2" id="category2_list">
+                          <option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- formulas -->
+                <div class="layout-top-spacing pt-5 px-3">
+                  <div id="subTitle" class="h5 text-black"><%= __('users.formula.subTitle.top') %></div>
+                  <div id="formulas_content" class="row pt-4">
+                  </div>
+                </div>
+
+                <!-- Pagination -->
+                <div id="formulas_pagination">
+                  <!-- make_pagination_by_func = function (i18n_func, page, count, func_name, limit = 10) -->
+                  <%- make_pagination_by_func(
+                  __,
+                  page,
+                  formulas.count,
+                  "load_formula",
+                  limit
+                ) %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+
+    <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    function make_pagination_by_func(page, count, func_name, limit = 8) {
+      let end_page = parseInt((count - 1) / limit) + 1;
+      let end_list_num = end_page > 6 ? 5 : end_page;
+      let temp_html = `<div class="d-flex justify-content-center mt-4">
+      <!-- 페이징처리 시작 -->
+      <!-- 처음 & 이전페이지 -->
+      <ul class="p-2 pagination">
+        `;
+      if (page == 1) {
+        temp_html += `
+        <li class="page-item disabled"><button type="button" class="page-link">
+            <%- __('users.pagination.처음으로') %>
+          </button>
+        </li>
+        <li class="page-item disabled"><button type="button" class="page-link">
+            <%- __('users.pagination.이전으로') %>
+          </button>
+        </li>
+        `;
+      } else {
+        temp_html += `
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(1);">
+            <%- __('users.pagination.처음으로') %>
+          </button>
+        </li>
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(${page - 1});">
+            <%- __('users.pagination.이전으로') %>
+          </button>
+        </li>
+        `;
+      }
+      temp_html += `
+      </ul>
+      <!-- 페이지 리스트 -->
+      <ul class="p-2 pagination">
+        `;
+      if (page < 4) {
+        for (let i = 1; i <= end_list_num; i++) {
+
+          if (page == i) {
+            temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link current_page">
+            ${i}
+          </button>
+        </li>
+        `;
+          } else {
+            temp_html += `
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(${i});">
+            ${i}
+          </button></li>
+        `;
+          }
+        }
+        temp_html += `
+        `;
+      } else if (page > end_page - 3) {
+        for (let i = end_page - 4; i <= end_page; i++) {
+          if (page == i) {
+            temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link current_page">
+            ${i}
+          </button>
+        </li>
+        `;
+          } else {
+            temp_html += `
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}(${i});">
+            ${i}
+          </button>
+        </li>
+        `;
+          }
+        }
+      } else {
+        for (let i = page - 2; i < page + 3; i++) {
+          if (page == i) {
+            temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link current_page">
+            ${i}
+          </button>
+        </li>
+        `;
+          } else {
+            temp_html += `
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}(${i});">
+            ${i}
+          </button>
+        </li>
+        `;
+          }
+        }
+      }
+      temp_html += `
+      </ul>
+      <!-- 다음 & 마지막페이지 -->
+      <ul class="p-2 pagination">
+        `;
+      if (page == end_page) {
+        temp_html += `
+        <li class="page-item disabled">
+          <button type="button" class="page-link">
+            <%- __('users.pagination.다음으로') %>
+          </button>
+        </li>
+        <li class="page-item disabled">
+          <button type="button" class="page-link">
+            <%- __('users.pagination.마지막으로') %>
+          </button>
+        </li>
+        `;
+      } else {
+        temp_html += `
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}(${page + 1});">
+            <%- __('users.pagination.다음으로') %>
+          </button>
+        </li>
+        <li class="page-item">
+          <button type="button" class="page-link" onclick="${func_name}(${end_page});">
+            <%- __('users.pagination.마지막으로') %>
+          </button>
+        </li>
+        `;
+      }
+      temp_html += `
+      </ul>
+      <!-- 페이징처리 끝 -->
+    </div>`
+      return temp_html;
+    };
+  </script>
+  <div>
+    <% let category1_name_list=[]; %>
+    <% let category2_name_list={}; %>
+    <% for (let i=0; i < numberOfProduct.category1; i++) { %>
+    <% category1_name_list.push(__('product'+i)); %>
+    <% category2_name_list[i]={}; %>
+    <% for (let j=0; j < numberOfProduct.category2[i]; j++) { %>
+    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
+    <% } } %>
+  </div>
+  <script>
+    const numberOfProduct = JSON.parse('<%- JSON.stringify(numberOfProduct) %>');
+    const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
+    const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
+
+    function change_subTitle() {
+      if (+document.forms[0]["top_or_new"].value) {
+        subTitle.innerText = "<%= __('users.formula.subTitle.top') %>";
+      } else {
+        subTitle.innerText = "<%= __('users.formula.subTitle.new') %>";
+      }
+    }
+
+    function load_formula(page = 1) {
+      // console.log('p', page);
+
+      change_subTitle()
+
+      let body = {};
+      for ([name, value] of new FormData(document.forms[0])) {
+        if (value) {
+          body[name] = value;
+        }
+      }
+      body['p'] = page;
+
+      // console.log(new URLSearchParams(body).toString())
+      const url = '<%= codezip.url.users.api.formula %>';
+      fetch(url + '?' + new URLSearchParams(body)).then(res => {
+        if (res.ok) {
+          show_formula(res.json())
+        } else {
+          throw new Error(res.status)
+        }
+      }).catch(err => {
+        console.error(err)
+        alert("<%= __('users.formula.msg.FailSearch') %> :", err)
+      })
+    }
+
+    async function show_formula(res) {
+      res.then(result => {
+        console.log(result);
+        let formulas = result.formulas;
+        let temp_html = "";
+
+        formulas.rows.forEach((item, index) => {
+          let href = location.pathname + '/' + item.id + location.search;
+          temp_html += `<div class="w-25 my-3 hover"><a class="" href="${href}">`
+          if (item.image_paths) { 
+            temp_html += `<div class="preview"><img class="br-10" src="${item.image_paths.split(',')[0]}"></div>`
+          }
+          temp_html += `<div class="fs-6 text-black">${category1_name_list[item.category1]}</div>
+        <div>${item.product_name}</div>
+      </a></div>`
+        })
+        formulas_content.innerHTML = temp_html;
+
+        //make_pagination_by_func(page, count, func_name, limit)
+        formulas_pagination.innerHTML = make_pagination_by_func(+result.page, +formulas.count, "load_formula")
+      });
+
+    }
+
+    window.addEventListener('load', event => {
+      load_formula();
+    })
+
+    document.forms[0]['category1'].addEventListener('input', (event) => {
+      let value = event.target.value;
+      let temp_html = "";
+      if (value) {
+        let category2_n = numberOfProduct.category2[value];
+        temp_html += `<option value=''><%= __('Select') %></option>`
+        for (let i = 0; i < category2_n; i++) {
+          temp_html += `<option value='${i}'>${category2_name_list[value][i]}</option>`
+        }
+      } else {
+        temp_html = `<option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>`
+      }
+      category2_list.innerHTML = temp_html;
+    })
+
+    document.forms[0].addEventListener('input', (event) => {
+      load_formula()
+    })
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+</body>
+
+</html>

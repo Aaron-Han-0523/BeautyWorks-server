@@ -26,7 +26,7 @@
     <div id="content" class="main-content">
       <div class="layout-px-spacing">
 
-        <div class="middle-content container-xxl">
+        <div class="middle-content p-0">
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
@@ -66,17 +66,17 @@
                   </div>
                   <!-- /* 테스트 데이터 생성 -->
                   <div>
-                    <% let project=[]; %>
-                    <% project.push({
-                      projectName:"My Suncream1",
+                    <%# let project=[]; %>
+                    <%# project.push({
+                      project_name:"My Suncream1",
                       phase:7
                     }) %>
-                    <% project.push({
-                      projectName:"My Suncream2",
+                    <%# project.push({
+                      project_name:"My Suncream2",
                       phase:8
                     }) %>
-                    <% project.push({
-                      projectName:"My Suncream3",
+                    <%# project.push({
+                      project_name:"My Suncream3",
                       phase:1
                     }) %>
                   </div>
@@ -90,7 +90,7 @@
                       <div class="progress-card-body">
                         <div class="progress-card-name">
                           <h6>
-                            <%= (index+1)+'. '+item.projectName %>
+                            <%= (index+1)+'. '+item.project_name %>
                           </h6>
                         </div>
                         <%- include("../partials/progressbar/"+item.phase+".ejs") %>
@@ -122,32 +122,33 @@
                   </div>
                   <!-- /* 테스트 데이터 생성 -->
                   <div>
-                    <% let temp_project=[]; %>
-                    <% temp_project.push({
-                      projectName:"1. My Suncream",
+                    <%# let temp_project=[]; %>
+                    <%# temp_project.push({
+                      project_name:"My Suncream",
                       phase:0,
-                      detailPhase:1
+                      detail_phase:1
                     }) %>
-                    <% temp_project.push({
-                      projectName:"2. My Suncream",
+                    <%# temp_project.push({
+                      project_name:"My Suncream",
                       phase:0,
-                      detailPhase:2
+                      detail_phase:2
                     }) %>
+                    <%# console.log(temp_project) %>
                   </div>
                   <!-- 테스트 데이터 생성 */ -->
                   <% temp_project.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
                       <div class="progress-card-img progress-<%= item.phase %>">
-                        <img src="<%=codezip.url.users.progress_icon[`_`+item.phase] %>">
+                        <img src="<%= codezip.url.users.progress_icon[`_`+item.phase] %>">
                       </div>
                       <div class="progress-card-body">
                         <div class="progress-card-name">
                           <h6>
-                            <%= (index+1)+". "+item.projectName %>
+                            <%= (index+1)+". "+item.project_name %>
                           </h6>
                         </div>
-                        <%- include("../partials/temp_progressbar/"+item.detailPhase+".ejs") %>
+                        <%- include("../partials/temp_progressbar/"+item.detail_phase+".ejs", {project: item}) %>
                       </div>
                     </div>
                   </div>
@@ -159,43 +160,43 @@
               <!-- Completed Project -->
               <!-- /* 테스트 데이터 생성 -->
               <div>
-                <% let completed_project={data:[],page:1,count:10}; %>
-                <% completed_project.data.push({
-                  productName:"My Suncream1",
-                  volume:"110ml",
+                <%# let completed_project={rows:[],page:1,count:2}; %>
+                <%# completed_project.rows.push({
+                  project_name:"My Suncream1",
+                  capacity:"110ml",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                  total_order_quantity:10000,
+                  recent_order_date:new Date(2022,10,5),
+                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                 })%>
-                <% completed_project.data.push({
-                  productName:"My Suncream2",
-                  volume:"120ml",
+                <%# completed_project.rows.push({
+                  project_name:"My Suncream2",
+                  capacity:"120ml",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:20000,
-                  lastOrderDate:new Date(2022,10,15),
-                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                  total_order_quantity:20000,
+                  recent_order_date:new Date(2022,10,15),
+                  image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
                 
                 })%>
-                <% completed_project.data.push({
-                  productName:"My Suncream3",
-                  volume:"110g",
+                <%# completed_project.rows.push({
+                  project_name:"My Suncream3",
+                  capacity:"110g",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                  total_order_quantity:30000,
+                  recent_order_date:new Date(2022,10,25),
+                  image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
                 })%>
-                <% completed_project.data.push({
-                  productName:"My Suncream4",
-                  volume:"210g",
+                <%# completed_project.rows.push({
+                  project_name:"My Suncream4",
+                  capacity:"210g",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                  total_order_quantity:10000,
+                  recent_order_date:new Date(2022,10,5),
+                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
@@ -214,27 +215,30 @@
                   </div>
 
                   <div class="row mt-3">
-                    <div class="widget p-4 row mx-0" id="completed_project">
-                      <% completed_project.data.forEach((item,index)=>{ %>
-                      <div class="col d-flex flex-column">
+                    <% if(completed_project.count){ %>
+                    <div class="widget p-4 row mx-0 justify-content-center" id="completed_project">
+                      <% completed_project.rows.forEach((item,index)=>{ %>
+                      <div class="col-3 d-flex flex-column">
                         <!-- style="height: calc(100%-50px);" -->
+                        <% if(item.image_paths) { %>
                         <div class="preview">
-                          <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
+                          <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
                         </div>
+                        <% } %>
                         <div class="mb-auto mt-3">
                           <h6>
-                            <%= item.productName %>
+                            <%= item.project_name %>
                           </h6>
                           <h6>
                             <%= __("product"+item.category1+"."+item.category2) %>
-                            <%= " " + item.volume %>
+                            <%= " " + item.capacity %>
                           </h6>
                           <p>
                             <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                            <%= ' : ' + item.totalOrderAmount %>
+                            <%= ' : ' + item.total_order_quantity %>
                             <br>
                             <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                            <%= ' : ' + formatDate(item.lastOrderDate) %>
+                            <%= ' : ' + formatDate(item.recent_order_date) %>
                           </p>
                         </div>
                         <div class="row mx-0 mt-3">
@@ -249,13 +253,14 @@
                       <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
                       <%- make_pagination_by_href(
                           __,
-                          completed_project.page,
+                          page,
                           completed_project.count,
-                          codezip.url.users.community.main,
+                          codezip.url.users.dashboard,
                           4
                         ) %>
 
                     </div>
+                    <% } %>
                   </div>
                 </div>
               </div>
@@ -307,18 +312,20 @@
                       <!-- 테스트 데이터 생성 */ -->
                       <% recommended_formula.forEach((item,index)=>{ %>
                       <div class="col-4">
-                        <% if(item.image_paths) { %>
-                        <div class="preview">
-                          <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
-                        </div>
-                        <% } %>
-                        <div class="row mt-3 justify-content-center text-break">
-                          <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
-                          <p style="color: gray;">
-                            <%= __('product'+item.category1+'.'+item.category2) %>
-                          </p>
-                          <p><strong><%= item.product_name %></strong></p>
-                        </div>
+                        <a class="hover" href="<%= codezip.url.users.formula +'/'+item.id %>">
+                          <% if(item.image_paths) { %>
+                          <div class="preview">
+                            <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
+                          </div>
+                          <% } %>
+                          <div class="row mt-3 justify-content-center text-break">
+                            <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
+                            <p style="color: gray;">
+                              <%= __('product'+item.category1+'.'+item.category2) %>
+                            </p>
+                            <p><strong><%= item.product_name %></strong></p>
+                          </div>
+                        </a>
                       </div>
                       <% }) %>
                     </div>
@@ -358,13 +365,13 @@
                         <table class="table text-break">
                           <thead class="text-center">
                             <th class="col-5 px-0">
-                              <%= __('users.dashboard.remommendedIngredient.thead.성분명') %>
+                              <%= __('ingredients.성분명') %>
                             </th>
                             <th class="col-2 px-0">
-                              <%= __('users.dashboard.remommendedIngredient.thead.종류') %>
+                              <%= __('ingredients.종류') %>
                             </th>
                             <th class="col-5 px-0">
-                              <%= __('users.dashboard.remommendedIngredient.thead.기능') %>
+                              <%= __('ingredients.기능') %>
                             </th>
                           </thead>
                           <tbody class="table-group-divider text-break">

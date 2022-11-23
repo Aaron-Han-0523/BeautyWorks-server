@@ -805,67 +805,67 @@ progress {
 
 .col-auto {
     flex: 0 0 auto;
-    width: auto
+    width: auto !important
 }
 
 .col-1 {
     flex: 0 0 auto;
-    width: 8.33333333%
+    width: 8.33333333% !important
 }
 
 .col-2 {
     flex: 0 0 auto;
-    width: 16.66666667%
+    width: 16.66666667% !important
 }
 
 .col-3 {
     flex: 0 0 auto;
-    width: 25%
+    width: 25% !important
 }
 
 .col-4 {
     flex: 0 0 auto;
-    width: 33.33333333%
+    width: 33.33333333% !important
 }
 
 .col-5 {
     flex: 0 0 auto;
-    width: 41.66666667%
+    width: 41.66666667% !important
 }
 
 .col-6 {
     flex: 0 0 auto;
-    width: 50%
+    width: 50% !important
 }
 
 .col-7 {
     flex: 0 0 auto;
-    width: 58.33333333%
+    width: 58.33333333% !important
 }
 
 .col-8 {
     flex: 0 0 auto;
-    width: 66.66666667%
+    width: 66.66666667% !important
 }
 
 .col-9 {
     flex: 0 0 auto;
-    width: 75%
+    width: 75% !important
 }
 
 .col-10 {
     flex: 0 0 auto;
-    width: 83.33333333%
+    width: 83.33333333% !important
 }
 
 .col-11 {
     flex: 0 0 auto;
-    width: 91.66666667%
+    width: 91.66666667% !important
 }
 
 .col-12 {
     flex: 0 0 auto;
-    width: 100%
+    width: 100% !important
 }
 
 .offset-1 {
@@ -4262,10 +4262,10 @@ fieldset:disabled .btn {
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: .25rem 1rem;
+    margin: .25rem 0;
     clear: both;
     font-weight: 400;
-    color: #212529;
+    /* color: #212529; */
     text-align: inherit;
     text-decoration: none;
     white-space: nowrap;
@@ -6264,7 +6264,7 @@ fieldset:disabled .btn {
 
 .modal-dialog {
     position: relative;
-    width: auto;
+    /* width: auto; */
     margin: .5rem;
     pointer-events: none
 }
@@ -6304,6 +6304,7 @@ fieldset:disabled .btn {
 .modal-dialog-centered {
     display: flex;
     align-items: center;
+    justify-content: center;
     min-height: calc(100% - 1rem)
 }
 
@@ -6311,7 +6312,7 @@ fieldset:disabled .btn {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
@@ -6381,9 +6382,9 @@ fieldset:disabled .btn {
     margin: .25rem
 }
 
-@media (min-width:576px) {
+@media (min-width:750px) {
     .modal-dialog {
-        max-width: 500px;
+        max-width: 700px;
         margin: 1.75rem auto
     }
 

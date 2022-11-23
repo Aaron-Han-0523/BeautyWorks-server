@@ -22,7 +22,7 @@
     <div id="content" class="main-content">
       <div class="layout-px-spacing">
 
-        <div class="middle-content container-xxl p-0">
+        <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
           <div class="row px-3 mt-3">
@@ -65,43 +65,43 @@
                 <% myWishList.data.push({
                   product_name:"My Suncream1",
                   top_or_new:1,
-                  volume:"110ml",
+                  capacity:"110ml",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                  total_order_quantity:10000,
+                  recent_order_date:new Date(2022,10,5),
+                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                 })%>
                 <% myWishList.data.push({
                   product_name:"My Suncream2",
                   top_or_new:1,
-                  volume:"120ml",
+                  capacity:"120ml",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:20000,
-                  lastOrderDate:new Date(2022,10,15),
-                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                  total_order_quantity:20000,
+                  recent_order_date:new Date(2022,10,15),
+                  image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
                 
                 })%>
                 <% myWishList.data.push({
                   product_name:"My Suncream3",
                   top_or_new:1,
-                  volume:"110g",
+                  capacity:"110g",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                  total_order_quantity:30000,
+                  recent_order_date:new Date(2022,10,25),
+                  image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
                 })%>
                 <% myWishList.data.push({
                   product_name:"My Suncream4",
                   top_or_new:1,
-                  volume:"210g",
+                  capacity:"210g",
                   category1:0,
                   category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                  total_order_quantity:10000,
+                  recent_order_date:new Date(2022,10,5),
+                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
@@ -125,7 +125,7 @@
                       <div class="col d-flex flex-column">
                         <!-- style="height: calc(100%-50px);" -->
                         <div class="preview">
-                          <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
+                          <img class="br-10" src="<%= item.image_paths.split(`,`)[0] %>">
                         </div>
                         <div class="row mt-3 justify-content-center text-break">
                           <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
@@ -479,7 +479,7 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
-    function make_pagination_by_func(page, count, baseURL, func_name, limit = 10) {
+    function make_pagination_by_func(page, count, func_name, limit = 10) {
       let end_page = parseInt((count - 1) / limit) + 1;
       let end_list_num = end_page > 6 ? 5 : end_page;
       let temp_html = `<div class="d-flex justify-content-center mt-4">
@@ -500,11 +500,11 @@
         `;
       } else {
         temp_html += `
-        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', 1);">
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(1);">
             <%= __('users.pagination.처음으로') %>
           </button>
         </li>
-        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${page - 1});">
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(${page - 1});">
             <%= __('users.pagination.이전으로') %>
           </button>
         </li>
@@ -528,7 +528,7 @@
         `;
           } else {
             temp_html += `
-        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+        <li class="page-item"><button type="button" class="page-link" onclick="${func_name}(${i});">
             ${i}
           </button></li>
         `;
@@ -549,7 +549,7 @@
           } else {
             temp_html += `
         <li class="page-item">
-          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+          <button type="button" class="page-link" onclick="${func_name}(${i});">
             ${i}
           </button>
         </li>
@@ -569,7 +569,7 @@
           } else {
             temp_html += `
         <li class="page-item">
-          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${i});">
+          <button type="button" class="page-link" onclick="${func_name}(${i});">
             ${i}
           </button>
         </li>
@@ -598,12 +598,12 @@
       } else {
         temp_html += `
         <li class="page-item">
-          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${page + 1});">
+          <button type="button" class="page-link" onclick="${func_name}(${page + 1});">
             <%= __('users.pagination.다음으로') %>
           </button>
         </li>
         <li class="page-item">
-          <button type="button" class="page-link" onclick="${func_name}('${baseURL}', ${end_page});">
+          <button type="button" class="page-link" onclick="${func_name}(${end_page});">
             <%= __('users.pagination.마지막으로') %>
           </button>
         </li>

@@ -5,6 +5,8 @@ const communityRouter = require('./community');
 const newsRouter = require('./news');
 const newProjectRouter = require('./newProject');
 const myProjectRouter = require('./myProject');
+const formulaRouter = require('./formula');
+const projectsRouter = require('./projects');
 
 const usersController = require('../controllers/users');
 const usersService = require('../services/users');
@@ -70,7 +72,7 @@ router
 
     if (!req.session.user) {
       if (process.env.NODE_ENV == "development") {
-        req.session.user = await usersService.getUser("user-dev@email.com");
+        req.session.user = await usersService.getUser("dev@email.com");
       }
       else return res.redirect('/users/signIn');
     }
@@ -115,12 +117,23 @@ router.use('/myProject', myProjectRouter)
 router.use('/newProject', newProjectRouter)
 
 // Formula
+router.use('/formula', formulaRouter)
 
 // Packaing
 
 // Ingredient
 
 // Documents
+
+// Projects
+router.use('/projects', projectsRouter)
+
+// api
+router.use('/api', (req, res, next) => {
+  console.log("api request")
+  req.api = true;
+  next();
+}, router)
 
 
 router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))

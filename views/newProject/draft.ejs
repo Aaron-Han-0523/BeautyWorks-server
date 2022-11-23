@@ -5,9 +5,9 @@
   <%- include ("../partials/header.ejs") %>
   <% const numberOfProduct=codezip.numberOfProduct; %>
   <% const country_codes=codezip.country.codes; %>
-  <% let useEffects_print="";
+  <% let applies_print="";
   codezip.effects.use.boolean.forEach((item,index) => {
-    useEffects_print += " " + __("use_effects."+item+".false") + ",";
+    applies_print += " " + __("use_effects."+item+".false") + ",";
   })%>
 </head>
 
@@ -30,7 +30,7 @@
     <div id="content" class="main-content">
       <div class="layout-px-spacing">
 
-        <div class="middle-content container-xxl p-0">
+        <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
@@ -60,17 +60,17 @@
                         </strong>
                       </h5>
                     </div>
-                    <div class="row widget" style="padding:75px 150px 75px 150px">
+                    <div class="row widget" style="padding:5% 10%">
 
                       <!-- 제품명 -->
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.projectName') %><span style="color: red;">*</span>
+                            <%= __('users.newProject.basic.project_name') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input class="form-control" name="projectName" id="projectName" placeholder="<%= __('plzInputText') %>" required>
+                          <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" required>
                         </div>
                       </div>
 
@@ -133,7 +133,7 @@
                           </button>
                           <ul id="category2_list" class="dropdown-menu scrollable-menu" aria-labelledby="select_category2">
                             <li>
-                              <%= __('choose category1 first') %>
+                              <%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %>
                             </li>
                           </ul>
                         </div>
@@ -157,12 +157,12 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.targetAge') %><span style="color: red;">*</span>
+                            <%= __('users.newProject.basic.target_age') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="targetAge" required>
-                          <input type="text" class="form-control" id="targetAge_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input hidden type="text" name="target_age" required>
+                          <input type="text" class="form-control" id="target_age_print" placeholder="<%= __('plzSelectText') %>" readonly required>
                         </div>
                         <div class="col col-2">
                           <button class="form-select text-center" type="button" id="select_age" data-bs-toggle="dropdown" aria-expanded="false">
@@ -171,7 +171,7 @@
                           <ul class="dropdown-menu" aria-labelledby="select_age">
                             <% for(let i=0; i< 8; i++) { %>
                             <li class="me-3 d-flex">
-                              <label class="dropdown-item form-check-label targetAgeLabel" for="age<%= i %>">
+                              <label class="dropdown-item form-check-label target_ageLabel" for="age<%= i %>">
                                 <%= __('age'+i) %>
                               </label>
                               <input class="form-check-input age" type="checkbox" id="age<%= i %>">
@@ -186,24 +186,24 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.targetSex') %><span style="color: red;">*</span>
+                            <%= __('users.newProject.basic.target_gender') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="targetSex" required>
-                          <input type="text" class="form-control" id="targetSex_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input hidden type="text" name="target_gender" required>
+                          <input type="text" class="form-control" id="target_gender_print" placeholder="<%= __('plzSelectText') %>" readonly required>
                         </div>
                         <div class="col col-2">
-                          <button class="form-select text-center" type="button" id="select_sex" data-bs-toggle="dropdown" aria-expanded="false">
+                          <button class="form-select text-center" type="button" id="select_gender" data-bs-toggle="dropdown" aria-expanded="false">
                             <%= __('select') %>
                           </button>
-                          <ul class="dropdown-menu" aria-labelledby="select_sex">
+                          <ul class="dropdown-menu" aria-labelledby="select_gender">
                             <% for(let i=0; i< 2; i++) { %>
                             <li class="me-3 d-flex">
-                              <label class="dropdown-item form-check-label targetSexLabel" for="sex<%= i %>">
-                                <%= __('sex'+i) %>
+                              <label class="dropdown-item form-check-label target_genderLabel" for="gender<%= i %>">
+                                <%= __('gender'+i) %>
                               </label>
-                              <input class="form-check-input sex" type="checkbox" id="sex<%= i %>">
+                              <input class="form-check-input gender" type="checkbox" id="gender<%= i %>">
                             </li>
                             <% } %>
                           </ul>
@@ -215,13 +215,13 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.targetCountry') %>
+                            <%= __('users.newProject.basic.target_country') %>
                             <span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="targetCountry" value="">
-                          <input type="text" class="form-control" id="targetCountry_print" placeholder="<%= __('plzSelectText') %>" readonly required>
+                          <input hidden type="text" name="target_country" value="">
+                          <input type="text" class="form-control" id="target_country_print" placeholder="<%= __('plzSelectText') %>" readonly required>
                         </div>
                         <div class="col col-2">
                           <button class="form-select text-center" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
@@ -232,7 +232,7 @@
                             <li class="me-3 dropdown-item">
                               <div class="d-flex">
                                 <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
-                                <label class="form-check-label flex-grow-1 targetCountryLabel" for="country<%= i %>">
+                                <label class="form-check-label flex-grow-1 target_countryLabel" for="country<%= i %>">
                                   <%= __(country_codes[i]) %>
                                 </label>
                                 <input class="form-check-input country" type="checkbox" id="country<%= i %>">
@@ -248,11 +248,11 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.distributionChannel') %>
+                            <%= __('users.newProject.basic.distribution_channel') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="distributionChannel" id="distributionChannel" placeholder="<%= __('plzInputText') %>">
+                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('plzInputText') %>">
                         </div>
                       </div>
 
@@ -261,11 +261,11 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.exportable') %>
+                            <%= __('users.newProject.basic.overseas_certifications') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="exportable" id="exportable" placeholder="<%= __('plzInputText') %>">
+                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('plzInputText') %>">
                         </div>
                       </div>
 
@@ -274,17 +274,17 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.koreaCertification') %>
+                            <%= __('users.newProject.basic.korea_certification') %>
                           </h6>
                         </div>
                         <div class="col d-flex align-items-baseline">
-                          <input type="radio" class="btn-check" name="koreaCertification" id="koreaCertification_true" autocomplete="off" value="1">
-                          <label class="col btn btn-outline-primary my-0 me-4" for="koreaCertification_true">
+                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1">
+                          <label class="col btn btn-outline-primary my-0 me-4" for="korea_certification_true">
                             <%= __('users.newProject.basic.btn.yes') %>
                           </label>
 
-                          <input type="radio" class="btn-check" name="koreaCertification" id="koreaCertification_false" autocomplete="off" value="" checked>
-                          <label class="col btn btn-outline-primary my-0" for="koreaCertification_false">
+                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="" checked>
+                          <label class="col btn btn-outline-primary my-0" for="korea_certification_false">
                             <%= __('users.newProject.basic.btn.no') %>
                           </label>
                           <div class="col"></div>
@@ -296,18 +296,18 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.basic.inStock') %>
+                            <%= __('users.newProject.basic.sourcing_of_packaging') %>
                           </h6>
                         </div>
                         <div class="col d-flex align-items-baseline">
-                          <input type="radio" class="btn-check" name="inStock" id="inStock_true" autocomplete="off" value="1">
-                          <label class="col btn btn-outline-primary my-0 me-4" for="inStock_true">
-                            <%= __('users.newProject.basic.inStock.btn.yes') %>
+                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1">
+                          <label class="col btn btn-outline-primary my-0 me-4" for="sourcing_of_packaging_true">
+                            <%= __('users.newProject.basic.sourcing_of_packaging.btn.yes') %>
                           </label>
 
-                          <input type="radio" class="btn-check" name="inStock" id="inStock_false" autocomplete="off" value="" checked>
-                          <label class="col btn btn-outline-primary my-0" for="inStock_false">
-                            <%= __('users.newProject.basic.inStock.btn.no') %>
+                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="" checked>
+                          <label class="col btn btn-outline-primary my-0" for="sourcing_of_packaging_false">
+                            <%= __('users.newProject.basic.sourcing_of_packaging.btn.no') %>
                           </label>
                           <div class="col"></div>
                         </div>
@@ -318,20 +318,20 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.option.productEffects') %>
+                            <%= __('users.newProject.option.efficacy') %>
                           </h6>
                         </div>
                         <div class="col col-6">
-                          <input hidden type="text" name="productEffects" required>
-                          <button class="form-select text-start" type="button" id="productEffects_print" data-bs-toggle="offcanvas" data-bs-target="#select_productEffects" aria-controls="select_productEffects">
+                          <input hidden type="text" name="efficacy" required>
+                          <button class="form-select text-start" type="button" id="efficacy_print" data-bs-toggle="offcanvas" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
                             <%= __('plzSelectText') %>
                           </button>
                           <!-- 제품효과 모달창 -->
-                          <div class="offcanvas br-15" id="select_productEffects" data-bs-scroll="true" data-bs-backdrop="true" style="width: 50vw; left:5vw">
+                          <div class="offcanvas br-15" id="select_efficacy" data-bs-scroll="true" data-bs-backdrop="true" style="width: 50vw; left:5vw">
                             <div class="offcanvas-header mt-2">
                               <div></div>
                               <h1 class="offcanvas-title fs-5">
-                                <%= __('users.newProject.option.productEffects') %>
+                                <%= __('users.newProject.option.efficacy') %>
                               </h1>
                               <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                             </div>
@@ -340,8 +340,8 @@
                               <div class="row">
                                 <% for(let i=0; i< codezip.effects.product.length; i++) { %>
                                 <div class="col d-flex dropdown-item">
-                                  <input class="productEffects form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="productEffects<%= i %>">
-                                  <label for="productEffects<%= i %>" class="productEffectsLabel flex-fill h5">
+                                  <input class="efficacy form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="efficacy<%= i %>">
+                                  <label for="efficacy<%= i %>" class="efficacyLabel flex-fill h5">
                                     <%= __(codezip.effects.product[i])%>
                                   </label>
                                 </div>
@@ -354,8 +354,8 @@
                               <div class="row">
                                 <% for(let i=0; i< codezip.effects.suncare.length; i++) { %>
                                 <div class="col d-flex dropdown-item">
-                                  <input class="productEffects form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="suncareEffects<%= i %>">
-                                  <label for="suncareEffects<%= i %>" class="productEffectsLabel flex-fill h5">
+                                  <input class="efficacy form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="suncareEffects<%= i %>">
+                                  <label for="suncareEffects<%= i %>" class="efficacyLabel flex-fill h5">
                                     <%=__(codezip.effects.suncare[i])%>
                                   </label>
                                 </div>
@@ -367,8 +367,8 @@
                               <!-- 기타 -->
                               <div class="row">
                                 <div class="col d-flex dropdown-item">
-                                  <input class="productEffectsEtc form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="productEffectsEtc_check">
-                                  <label for="productEffectsEtc_check" class="flex-fill h5">
+                                  <input class="etc_efficacy form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="etc_efficacy_check">
+                                  <label for="etc_efficacy_check" class="flex-fill h5">
                                     <%= __("기타")%>
                                   </label>
                                 </div>
@@ -383,7 +383,7 @@
                           </div>
                         </div>
                         <div class="col">
-                          <input hidden type="text" class="form-control" name="productEffectsEtc" placeholder="<%= __('plzInputText') %>" required>
+                          <input hidden type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('plzInputText') %>" required>
                         </div>
                       </div>
 
@@ -424,7 +424,7 @@
                                     <div class="d-flex px-5">
                                       <label class="col-3 h5 align-self-center mb-0">
                                         <strong>
-                                          <%= __('종류') %>
+                                          <%= __('ingredients.종류') %>
                                         </strong>
                                       </label>
                                       <input hidden name="type">
@@ -448,7 +448,7 @@
                                     <div class="d-flex px-5">
                                       <label class="col-3 h5 align-self-center mb-0">
                                         <strong>
-                                          <%= __('기능') %>
+                                          <%= __('ingredients.기능') %>
                                         </strong>
                                       </label>
                                       <input hidden name="effects">
@@ -475,16 +475,16 @@
                                 <table style="border: 1px solid var(--bs-gray-500);" class="table table-no-space table-bordered table-hover text-break  br-15 text-center">
                                   <thead class="">
                                     <th>
-                                      <%= __('ingdients.성분명') %>
+                                      <%= __('ingredients.성분명') %>
                                     </th>
                                     <th>
-                                      <%= __('ingdients.종류') %>
+                                      <%= __('ingredients.종류') %>
                                     </th>
                                     <th>
-                                      <%= __('ingdients.기능') %>
+                                      <%= __('ingredients.기능') %>
                                     </th>
                                     <th>
-                                      <%= __('ingdients.특징') %>
+                                      <%= __('ingredients.특징') %>
                                     </th>
                                     <th>
                                       <%= __('선택') %>
@@ -522,15 +522,15 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.option.texture') %>
+                            <%= __('users.newProject.option.viscosity') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <select class="form-select" name="texture">
+                          <select class="form-select" name="viscosity">
                             <option value="">
                               <%= __('plzSelectText') %>
                             </option>
-                            <% codezip.texture.forEach((item,index)=>{ %>
+                            <% codezip.viscosity.forEach((item,index)=>{ %>
                             <option value="<%= item.slice(0,-1) %>">
                               <%= item %>
                             </option>
@@ -544,20 +544,20 @@
                       <div class="row mb-5 align-items-center">
                         <div class="col col-3">
                           <h6>
-                            <%= __('users.newProject.option.useEffects') %>
+                            <%= __('users.newProject.option.applies') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input hidden type="text" name="useEffects" required>
-                          <button class="form-select text-start" type="button" id="useEffects_print" data-bs-toggle="offcanvas" data-bs-target="#select_useEffects" aria-controls="select_useEffects">
-                            <%= useEffects_print.slice(0, -1) %>
+                          <input hidden type="text" name="applies" required>
+                          <button class="form-select text-start" type="button" id="applies_print" data-bs-toggle="offcanvas" data-bs-target="#select_applies" aria-controls="select_applies">
+                            <%= applies_print.slice(0, -1) %>
                           </button>
                           <!-- 사용감 모달창 -->
-                          <div class="offcanvas br-15" id="select_useEffects" data-bs-scroll="true" data-bs-backdrop="true">
+                          <div class="offcanvas br-15" id="select_applies" data-bs-scroll="true" data-bs-backdrop="true">
                             <div class="offcanvas-header mt-2">
                               <div></div>
                               <h1 class="offcanvas-title fs-5">
-                                <%= __('users.newProject.option.useEffects') %>
+                                <%= __('users.newProject.option.applies') %>
                               </h1>
                               <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                             </div>
@@ -572,16 +572,16 @@
                                   </div>
                                   <div class="col-8 row">
                                     <div class="col d-flex dropdown-item">
-                                      <input class="useEffects_bool form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="useEffects-<%= index %>-1">
-                                      <label for="useEffects-<%= index %>-1" class="flex-fill useEffects_bool-label">
+                                      <input class="applies_bool form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="applies-<%= index %>-1">
+                                      <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label">
                                         <h5>
                                           <%= __("use_effects."+item+".true") %>
                                         </h5>
                                       </label>
                                     </div>
                                     <div class="col d-flex dropdown-item">
-                                      <input class="useEffects_bool form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="useEffects-<%= index %>-0" checked>
-                                      <label for="useEffects-<%= index %>-0" class="flex-fill useEffects_bool-label">
+                                      <input class="applies_bool form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="applies-<%= index %>-0" checked>
+                                      <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label">
                                         <h5>
                                           <%= __("use_effects."+item+".false") %>
                                         </h5>
@@ -606,8 +606,8 @@
                                   <% for(let i=0; i<
                                                                                     codezip.effects.use.other; i++){ %>
                                   <div class="col d-flex dropdown-item">
-                                    <input class="useEffects_other form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="useEffects-<%= codezip.effects.use.boolean.length +i %>">
-                                    <label for="useEffects-<%= codezip.effects.use.boolean.length +i %>" class="useEffects_other-label flex-fill">
+                                    <input class="applies_other form-check-input bg-darkgray br-circle mx-1" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>">
+                                    <label for="applies-<%= codezip.effects.use.boolean.length +i %>" class="applies_other-label flex-fill">
                                       <h5>
                                         <%= __("use_effects."+i)
                                                                                                     %>
@@ -737,23 +737,23 @@
     const option = document.forms[0];
     const effects = JSON.parse('<%- JSON.stringify(codezip.effects) %>');
 
-    productEffectsEtc_check.addEventListener('change', (event) => {
+    etc_efficacy_check.addEventListener('change', (event) => {
       if (event.target.checked) {
-        option['productEffectsEtc'].hidden = false;
+        option['etc_efficacy'].hidden = false;
       } else {
-        option['productEffectsEtc'].hidden = true;
+        option['etc_efficacy'].hidden = true;
       }
     })
 
     // 제품 효과 추가/제거
-    document.forms[0].getElementsByClassName('productEffects').forEach((item, index) => {
+    document.forms[0].getElementsByClassName('efficacy').forEach((item, index) => {
       item.addEventListener("change", (e) => {
-        const obj = option['productEffects'];
+        const obj = option['efficacy'];
         const code = effects.product[index] + ',';
         let value = obj.value;
-        let text = document.getElementsByClassName('productEffectsLabel')[index].innerText.trim();
+        let text = document.getElementsByClassName('efficacyLabel')[index].innerText.trim();
         text = " " + text + ",";
-        const print_place = productEffects_print;
+        const print_place = efficacy_print;
 
 
         if (value) print_place.innerHTML += ",";
@@ -772,13 +772,13 @@
     })
 
     // 사용감 추가/제거 1
-    document.forms[0].getElementsByClassName('useEffects_bool').forEach((item, index) => {
+    document.forms[0].getElementsByClassName('applies_bool').forEach((item, index) => {
       item.addEventListener("change", (e) => {
-        const obj = option['useEffects'];
+        const obj = option['applies'];
         let value = +obj.value;
-        let text = document.getElementsByClassName('useEffects_bool-label')[index].innerText.trim();
+        let text = document.getElementsByClassName('applies_bool-label')[index].innerText.trim();
         text = " " + text + ",";
-        const print_place = useEffects_print;
+        const print_place = applies_print;
         const code = 1 << parseInt(index / 2);
 
         let info = item.id.split('-');
@@ -786,7 +786,7 @@
         info.push(item_bool ? '0' : '1');
         const opposition = document.getElementById(info.join('-'));
         let opposition_index = parseInt(info.pop()) ? index - 1 : index + 1;
-        let opposition_text = document.getElementsByClassName('useEffects_bool-label')[opposition_index].innerText.trim();
+        let opposition_text = document.getElementsByClassName('applies_bool-label')[opposition_index].innerText.trim();
         opposition_text = " " + opposition_text + ",";
 
         // console.log(opposition_text);
@@ -813,14 +813,14 @@
     })
 
     // 사용감 추가/제거 2
-    document.forms[0].getElementsByClassName('useEffects_other').forEach((item, index) => {
+    document.forms[0].getElementsByClassName('applies_other').forEach((item, index) => {
       item.addEventListener("change", (e) => {
-        const obj = option['useEffects'];
+        const obj = option['applies'];
         const code = 1 << effects.use.boolean.length + index;
         let value = +obj.value;
-        let text = document.getElementsByClassName('useEffects_other-label')[index].innerText.trim();
+        let text = document.getElementsByClassName('applies_other-label')[index].innerText.trim();
         text = " " + text + ",";
-        const print_place = useEffects_print;
+        const print_place = applies_print;
 
 
         print_place.innerHTML += ",";
@@ -882,11 +882,11 @@
     HTMLCollection.prototype.forEach = Array.prototype.forEach;
     document.forms[0].getElementsByClassName('age').forEach((item, index) => {
       item.addEventListener("change", (e) => {
-        const obj = document.forms[0]['targetAge'];
+        const obj = document.forms[0]['target_age'];
         let value = +obj.value;
-        let text = document.getElementsByClassName('targetAgeLabel')[index].innerText.trim();
+        let text = document.getElementsByClassName('target_ageLabel')[index].innerText.trim();
         text = " " + text + ",";
-        const print_place = targetAge_print;
+        const print_place = target_age_print;
         if (value) print_place.value += ",";
 
         if (e.target.checked) {
@@ -906,13 +906,13 @@
       })
     })
 
-    document.forms[0].getElementsByClassName('sex').forEach((item, index) => {
+    document.forms[0].getElementsByClassName('gender').forEach((item, index) => {
       item.addEventListener("change", (e) => {
-        const obj = document.forms[0]['targetSex'];
+        const obj = document.forms[0]['target_gender'];
         let value = +obj.value;
-        let text = document.getElementsByClassName('targetSexLabel')[index].innerText.trim();
+        let text = document.getElementsByClassName('target_genderLabel')[index].innerText.trim();
         text = " " + text + ",";
-        const print_place = targetSex_print;
+        const print_place = target_gender_print;
         if (value) print_place.value += ",";
 
         if (e.target.checked) {
@@ -934,11 +934,11 @@
 
     document.forms[0].getElementsByClassName('country').forEach((item, index) => {
       item.addEventListener("change", (e) => {
-        const obj = document.forms[0]['targetCountry'];
+        const obj = document.forms[0]['target_country'];
         let code = country_codes[index] + ',';
-        let text = document.getElementsByClassName('targetCountryLabel')[index].innerText.trim();
+        let text = document.getElementsByClassName('target_countryLabel')[index].innerText.trim();
         text = " " + text + ",";
-        const print_place = targetCountry_print;
+        const print_place = target_country_print;
         // console.log(Object.keys(value));
         if (obj.value) print_place.value += ",";
 

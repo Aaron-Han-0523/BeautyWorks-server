@@ -15,12 +15,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     formulas_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       comment: "formulas 식별번호"
     },
     packages_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       comment: "용기 식별번호"
     },
     project_name: {
@@ -30,13 +30,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     phase: {
       type: DataTypes.TINYINT,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0,
       comment: "진행단계"
     },
     detail_phase: {
       type: DataTypes.TINYINT,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0,
       comment: "세부진행단계"
     },
@@ -47,19 +47,30 @@ module.exports = function(sequelize, DataTypes) {
       comment: "샘플링횟수"
     },
     budget: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+      type: DataTypes.BIGINT.UNSIGNED,
+      allowNull: false,
       comment: "예산"
     },
     moq: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       comment: "MOQ"
+    },
+    target_url: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "타겟제품 url"
     },
     feedback: {
       type: DataTypes.STRING(500),
       allowNull: true,
       comment: "샘플 피드백"
+    },
+    sample_comfirmed: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 0,
+      comment: "샘플 확정 여부"
     },
     brand_name: {
       type: DataTypes.STRING(100),
@@ -77,12 +88,12 @@ module.exports = function(sequelize, DataTypes) {
       comment: "품목"
     },
     capacity: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(100),
       allowNull: true,
       comment: "용량"
     },
     target_age: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.INTEGER,
       allowNull: true,
       comment: "대상연령"
     },
@@ -92,17 +103,17 @@ module.exports = function(sequelize, DataTypes) {
       comment: "대상성별"
     },
     target_country: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(1000),
       allowNull: true,
       comment: "판매국가"
     },
     distribution_channel: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.STRING(1000),
       allowNull: true,
       comment: "유통채널"
     },
-    exportable: {
-      type: DataTypes.TINYINT,
+    overseas_certifications: {
+      type: DataTypes.STRING(1000),
       allowNull: true,
       comment: "해외 인증 및 허가진행 유무"
     },
@@ -111,13 +122,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "한국 기능성 인증 진행 여부"
     },
-    in_stock: {
+    sourcing_of_packaging: {
       type: DataTypes.TINYINT,
       allowNull: true,
       comment: "부자재 입고 유무"
     },
     efficacy: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(500),
       allowNull: true,
       comment: "제품효과"
     },
@@ -131,7 +142,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "컨셉성분"
     },
-    texture: {
+    viscosity: {
       type: DataTypes.TINYINT,
       allowNull: true,
       comment: "제형"
@@ -200,6 +211,16 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true,
       comment: "이미지 경로"
+    },
+    total_order_quantity: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      comment: "총 발주 수량"
+    },
+    recent_order_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "최근 발주 날짜"
     },
     create_date: {
       type: DataTypes.DATE,
