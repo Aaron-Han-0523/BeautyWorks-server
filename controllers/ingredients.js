@@ -82,20 +82,45 @@ exports.recovery = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
+    console.log('api', req.query)
     const user = res.locals.user;
 
+    const page = req.query.p || 1;
+    delete req.query.p;
+    const limit = req.query.limit || 10;
+    delete req.query.limit;
+    const skip = (page - 1) * limit;
+
+    delete req.query.n;
     let condition = {};
+    for ([key, value] of Object.entries(req.query)) {
+        if (value) {
+            condition[key] = value;
+        }
+    }
+    console.log(condition)
     if (req.baseUrl.split('/')[1] != 'admin') {
-        condition.users_id = user.id;
+        // condition.users_id = user.id;
         condition.delete_date = null;
     }
-    let limit = req.query.limit;
-    let skip = req.query.skip;
 
     await ingredientsService
         .allRead(condition, limit, skip)
         .then((result) => {
             console.log("keys :", Object.keys(result))
+            if (req.api) {
+                res.json({
+                    page: page,
+                    limit: limit,
+                    ingredients: result
+                })
+            } else {
+                res.render('ingredient/index', {
+                    page: page,
+                    limit: limit,
+                    ingredients: result
+                })
+            }
         })
         .catch((err) => {
             console.error(err);

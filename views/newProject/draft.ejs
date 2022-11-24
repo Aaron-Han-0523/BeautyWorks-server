@@ -433,12 +433,12 @@
                                         <%= __('plzSelectText') %>
                                       </button>
                                       <ul class="dropdown-menu" aria-labelledby="select_type">
-                                        <% for(let i=0; i< codezip.ingredient_category.length; i++) { %>
+                                        <% for(let i=0; i< codezip.ingredient_type.length; i++) { %>
                                         <li class="me-3 d-flex">
-                                          <label class="dropdown-item form-check-label ingredient_category-label" for="ingredient_category<%= i %>">
-                                            <%= __(codezip.ingredient_category[i]) %>
+                                          <label class="dropdown-item form-check-label ingredient_type-label" for="ingredient_type<%= i %>">
+                                            <%= __(codezip.ingredient_type[i]) %>
                                           </label>
-                                          <input class="form-check-input ingredient_category" type="checkbox" id="ingredient_category<%= i %>">
+                                          <input class="form-check-input ingredient_type" type="checkbox" id="ingredient_type<%= i %>">
                                         </li>
                                         <% } %>
                                       </ul>

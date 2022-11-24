@@ -175,8 +175,8 @@
       })
     }
 
-    async function show_formula(res_json) {
-      res_json.then(result => {
+    async function show_formula(res) {
+      res.then(result => {
         console.log(result);
         let formulas = result.formulas;
         let temp_html = "";

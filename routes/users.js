@@ -7,6 +7,7 @@ const newProjectRouter = require('./newProject');
 const myProjectRouter = require('./myProject');
 const formulaRouter = require('./formula');
 const projectsRouter = require('./projects');
+const ingredientRouter = require('./ingredient');
 
 const usersController = require('../controllers/users');
 const usersService = require('../services/users');
@@ -122,6 +123,7 @@ router.use('/formula', formulaRouter)
 // Packaing
 
 // Ingredient
+router.use('/ingredient', ingredientRouter)
 
 // Documents
 

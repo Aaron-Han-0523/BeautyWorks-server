@@ -464,7 +464,7 @@
 	"users.newProject.option.viscosity": "Viscosity",
 	"users.newProject.option.applies": "Applies",
 	"users.newProject.option.color": "Color",
-	"변경을 원할 시 기입해주세요.": "Please fill in if you want modification.",
+	"변경을 원할 시 기입해주세요.": "* Please fill in if you want modification.",
 	"users.newProject.option.fragrance": "Fragrance",
 	"users.newProject.option.etc": "Options",
 	"샘플의뢰서 초안": "Draft Request form",

@@ -71,9 +71,9 @@ router
       }
       project = projectsService.readOne(condition);
     }
-    let ingredients = ingredientsService.allRead({}, 10)
-    Promise.all([project, ingredients]).then(([project, ingredients]) => {
-      res.render('newProject/option', { project: project, ingredients: ingredients })
+    // let ingredients = ingredientsService.allRead({}, 10)
+    Promise.all([project]).then(([project]) => {
+      res.render('newProject/option', { project: project })
     })
   })
 

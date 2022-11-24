@@ -59,6 +59,7 @@
         },
         "api": {
             "formula": "/users/api/formula",
+            "ingredient": "/users/api/ingredient",
             "projects": {
                 "edit": "users/api/projects/edit"
             }
