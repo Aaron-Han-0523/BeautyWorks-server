@@ -71,7 +71,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" value="<%= project.project_name %>">
+                          <input readonly class="form-control" name="project_name" id="project_name" value="<%= project.project_name %>">
                         </div>
                       </div>
 
@@ -83,7 +83,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" value="<%= project.brand_name %>">
+                          <input readonly type="text" class="form-control" name="brand_name" value="<%= project.brand_name %>">
                         </div>
                       </div>
 
@@ -97,7 +97,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" id="category1_print" placeholder="" value="<%= __('product'+project.category1) %>">
+                          <input readonly type="text" class="form-control" id="category1_print" value="<%= __('product'+project.category1) %>">
                         </div>
                       </div>
 
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col">
                           <input readonly hidden type="text" name="category2">
-                          <input readonly type="text" class="form-control" id="category2_print" placeholder="" value="<%= __('product'+project.category1+'.'+project.category2) %>">
+                          <input readonly type="text" class="form-control" id="category2_print" value="<%= __('product'+project.category1+'.'+project.category2) %>">
                         </div>
                       </div>
 
@@ -122,7 +122,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" value="<%= project.capacity %>">
+                          <input readonly type="text" class="form-control" name="capacity" value="<%= project.capacity %>">
                         </div>
                       </div>
 
@@ -189,7 +189,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>">
+                          <input readonly type="text" class="form-control" name="distribution_channel" id="distribution_channel" value="<%= project.distribution_channel %>">
                         </div>
                       </div>
 
@@ -201,7 +201,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>">
+                          <input readonly type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" value="<%= project.overseas_certifications %>">
                         </div>
                       </div>
 
@@ -272,9 +272,11 @@
 
                       <%
                         let efficacy_text_list = [];
-                        project.efficacy.split(',').forEach((code, index)=>{
-                          efficacy_text_list.push(__(code));
-                        })
+                        if(project.efficacy) {
+                          project.efficacy.split(',').forEach((code, index)=>{
+                            efficacy_text_list.push(__(code));
+                          })
+                        }
                         %>
                       <!-- 제품 효과 -->
                       <div class="row mt-3 align-items-center">
@@ -284,7 +286,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly class="form-control text-start text-ellipsis" value="<%= efficacy_text_list %>">
+                          <input readonly class="form-control text-start text-ellipsis" value="<%= efficacy_text_list.join(', ') %>">
                         </div>
                       </div>
 
@@ -348,7 +350,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="color" id="color" placeholder="<%= __('plzInputText') %>" value="<%= project.color %>">
+                          <input readonly type="text" class="form-control" name="color" id="color" value="<%= project.color %>">
                         </div>
                       </div>
 
@@ -361,7 +363,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="fragrance" id="fragrance" placeholder="<%= __('plzInputText') %>" value="<%= project.fragrance %>">
+                          <input readonly type="text" class="form-control" name="fragrance" id="fragrance" value="<%= project.fragrance %>">
                         </div>
                       </div>
 
@@ -374,7 +376,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" name="others" id="others" placeholder="<%= __('placeholder.options') %>" value="<%= project.others %>">
+                          <input readonly type="text" class="form-control" name="others" id="others" value="<%= project.others %>">
                         </div>
                       </div>
 

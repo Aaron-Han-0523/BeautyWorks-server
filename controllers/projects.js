@@ -49,7 +49,7 @@ exports.edit = async (req, res, next) => {
     if (req.baseUrl.split('/')[1] == 'users') {
         condition.users_id = user.id;
         let project = await projectsService.readOne(condition);
-        if (![0, 1].includes(project.phase) || project.detail_phase > req.body.detail_phase) {
+        if ([0].includes(project.phase) && project.detail_phase > req.body.detail_phase) {
             delete req.body.detail_phase;
         }
     }
@@ -160,10 +160,22 @@ exports.index = async (req, res, next) => {
 exports.detail = async (req, res, next) => {
     const user = res.locals.user;
 
-    let condition = {};
-    if ([1].includes(user.user_type)) {
+    const id = req.query.n || req.params.id;
+    if (!id) return;
+
+    let condition = { id: id };
+    if (req.baseUrl.split('/')[1] == 'users') {
         condition.users_id = user.id;
-        condition.delete_date = null;
+        let project = await projectsService.readOne(condition);
+        if ([0].includes(project.phase) && project.detail_phase > req.body.detail_phase) {
+            delete req.body.detail_phase;
+        }
+    }
+    else if (req.baseUrl.split('/')[1] == 'admin') {
+        throw new Error("미구현");
+    }
+    else {
+        return;
     }
     projectsService
         .readOne(condition)

@@ -30,8 +30,8 @@
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
-              <div class="p-1 col-3">
+            <div class="breadcrumb align-items-end d-flex p-3 br-20">
+              <div class="col-3">
                 <h6 class="main-menu">
                   <%= __('Project') %>
                 </h6>
@@ -42,184 +42,209 @@
             </div>
           </div>
 
-          <div class="row px-3">
-            <div class="breadcrumb align-items-center br-20">
-              <h5><strong>
-                  <%= __('샘플 수령주소 입력') %>
-                </strong>
-              </h5>
-            </div>
-          </div>
+
           <!-- CONTENT AREA -->
-          <div class="row layout-top-spacing">
+          <div class="row">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
-              <div class="widget-content widget-content-area br-20 py-5 px-5">
+              <div class="widget-content widget-content-area br-20">
 
-                <div>
-                  <div class="outline-gray br-15 px-3 pb-4 pt-0 text-center" style="white-space: pre-line;">
-                    <%- __("users.newProject.order.msg.head") %>
+                <div class="d-flex flex-nowrap mb-3 justify-content-between">
+                  <div>
+                    <h5 class="p-0"><strong>
+                        <%= __('샘플 수령주소 입력') %>
+                      </strong>
+                    </h5>
                   </div>
-                  <div class="mt-5 text-center">
+                  <div>
+                    <p style="color: gray;">
+                      <span style="color: red;">*</span>
+                      <%= __('users.basic.msg.required') %>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="widget" style="padding: 0 5vmax; padding-bottom:5vmax;">
+
+                  <div class="align-self-center" style="padding: 5vmax;">
+                    <div class="form-control px-3 py-5 text-center text-black fs-5 h-25" style="white-space: pre-line;"><%- __("users.newProject.order.msg.head") %></div>
+                  </div>
+
+                  <hr style="margin-bottom: 5vmax;">
+
+                  <div class="mb-5 text-center fs-5 text-black">
                     <%= __("users.newProject.order.head.수취인") %><span style="color: red;">
                       <%= __("users.newProject.order.head.warning") %>
                     </span><span style="color: blue;">
                       <%= __("users.newProject.order.head.info") %>
                     </span>
                   </div>
-                </div>
 
-
-                <hr>
-
-                <!-- 정보 입력 -->
-                <form id="order" class="mx-2" method="post" enctype="multipart/form-data">
-                  <div class="form-group">
-                    <!-- 출시국가 -->
-                    <div class="row align-items-center">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.출시국가') %>
-                        </h6>
-                      </div>
-                      <div class="col-4">
-                        <div class="dropdown">
-                          <input hidden name="country" id="country">
-                          <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('plzSelectText') %>
-                          </button>
-                          <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
-                            <% for(let i=0; i< country_codes.length; i++) {
-                                                                            %>
-                            <li>
-                              <a class="dropdown-item" href="javascript:void(0);" onclick="select_country_func('<%= country_codes[i] %>','<%= __(country_codes[i]) %>');">
-                                <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
-                                <%= __(country_codes[i]) %>
-                              </a>
-                            </li>
-                            <% } %>
-                          </ul>
+                  <!-- 정보 입력 -->
+                  <form id="order" method="post" enctype="multipart/form-data">
+                    <div class="form-group" style="padding: 0 5vmax;">
+                      <!-- 출시국가 -->
+                      <div class="row align-items-center">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.출시국가') %>
+                            <span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <div class="dropdown">
+                            <input hidden name="country" id="country">
+                            <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= __('placeholder.country') %>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
+                              <% for(let i=0; i< country_codes.length; i++) { %>
+                              <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="select_country_func('<%= country_codes[i] %>','<%= __(country_codes[i]) %>');">
+                                  <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
+                                  <%= __(country_codes[i]) %>
+                                </a>
+                              </li>
+                              <% } %>
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.출시국가.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 수취인명 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.수취인명') %>
-                        </h6>
+                      <!-- 수취인명 -->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.수취인명') %>
+                            <span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="receiver_name" id="receiver_name" placeholder="<%= __('plzInputText') %>">
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="receiverName" id="receiverName" placeholder="<%= __('plzInputText') %>">
-                      </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.수취인명.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 연락처 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.연락처') %>
-                        </h6>
+                      <!-- 연락처 -->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.연락처') %>
+                            <span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col col-2">
+                          <div class="dropdown">
+                            <input hidden name="country_number" id="country_number">
+                            <button class="form-select text-start" type="button" id="select_country_number" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= __('Select') %>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country_number">
+                              <% for(let i=0; i< country_codes.length; i++) { %>
+                              <li>
+                                <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
+                                  <div class="col-1">
+                                    <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
+                                  </div>
+                                  <div class="col-3">
+                                    <%= country_code2phoneNum[country_codes[i]] %>
+                                  </div>
+                                  <div>
+                                    <%= __(country_codes[i]) %>
+                                  </div>
+                                </a>
+                              </li>
+                              <% } %>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col ">
+                          <input type="text" class="form-control" name="phone_num" id="phone_num" placeholder="<%= __('placeholder.mobilePhone') %>" required>
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="receiverPhoneNum" id="receiverPhoneNum" placeholder="<%= __('plzInputText') %>">
+                      <!-- 연락처 warning-->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                        </div>
+                        <div class="col fs-8" style="color: red; white-space: pre-line;"><%= __('users.newProject.order.연락처.warning') %></div>
                       </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.연락처.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 주소 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.주소') %>
-                        </h6>
+                      <!-- 주소 -->
+                      <div class="row align-items-center mt-4">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.주소') %>
+                            <span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="street" id="street" placeholder="<%= __('users.newProject.order.주소.warning') %>">
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="street" id="street" placeholder="<%= __('plzInputText') %>">
-                      </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.주소.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 도시 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.도시') %>
-                        </h6>
+                      <!-- 도시 -->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.도시') %>
+                            <span style="color: red;">*</span>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="city" id="city" placeholder="<%= __('plzInputText') %>">
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="city" id="city" placeholder="<%= __('plzInputText') %>">
-                      </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.도시.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 주/도 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.주/도') %>
-                        </h6>
+                      <!-- 주/도 -->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.주/도') %>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="state" id="state" placeholder="<%= __('plzInputText') %>">
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="state" id="state" placeholder="<%= __('plzInputText') %>">
-                      </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.주/도.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 우편번호 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.우편번호') %>
-                        </h6>
+                      <!-- 우편번호 -->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.우편번호') %>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="zip_code" id="zip_code" placeholder="<%= __('plzInputText') %>">
+                        </div>
+                        <div class="col fs-8" style="color: red; white-space: pre-line;"><%= __('users.newProject.order.우편번호.warning') %></div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="zipCode" id="zipCode" placeholder="<%= __('plzInputText') %>">
-                      </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.우편번호.warning') %>
-                      </div>
-                    </div>
 
-                    <!-- 이메일 -->
-                    <div class="row align-items-center mt-5">
-                      <div class="col-2">
-                        <h6>
-                          <%= __('users.newProject.order.이메일') %>
-                        </h6>
+                      <!-- 이메일 -->
+                      <div class="row align-items-center mt-3">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.newProject.order.이메일') %>
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <input class="form-control" name="email" id="email" placeholder="<%= __('plzInputText') %>">
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <input class="form-control" name="email" id="email" placeholder="<%= __('plzInputText') %>">
-                      </div>
-                      <div class="col" style="color: red; white-space: pre-line;">
-                        <%= __('users.newProject.order.이메일.warning') %>
-                      </div>
-                    </div>
 
-                    <div class="form-group layout-top-spacing pt-5">
-                      <div class="text-center">
-                        <button class="btn btn-lg py-3 br-15" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                          <%= __('users.newProject.order.btn.배송 신청') %>
-                        </button>
-                      </div>
                     </div>
+                  </form>
 
-                </form>
+                  <hr class="mt-5">
+
+                  <div class="form-group mt-5">
+                    <div class="text-center">
+                      <button type="button" id="btn_apply" class="col-1 btn btn-outline-primary py-3 br-10" data-bs-toggle="modal" data-bs-target="#confirmModal" disabled>
+                        <%= __('users.newProject.order.btn.배송 신청') %>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -234,15 +259,18 @@
   </div>
   <!-- END MAIN CONTAINER -->
   <div>
-    <div class="modal fade" id="confirmModal" tabindex="-1">
+    <div class="modal" id="confirmModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; width: 50%;">
-        <div class="modal-content bg-gray py-5 px-3">
-          <div class="h4 text-center">
-            <%= __('users.newProject.order.msg.confirm') %>
+        <div class="modal-content br-10 p-5">
+          <div class="text-center text-black">
+            <%- __('users.newProject.order.msg.confirm') %>
           </div>
           <div class="mt-5 text-center">
-            <button type="button" class="btn btn-outline-gray bg-white mx-5 py-3 px-5 br-15" data-bs-dismiss="modal">
+            <button class="col-3 btn btn-outline-primary br-10 me-3 py-3" form="order">
               <%= __('btn.확인') %>
+            </button>
+            <button type="button" class="col-3 btn-outline-primary br-10 py-3" data-bs-dismiss="modal">
+              <%= __('btn.cancel') %>
             </button>
           </div>
         </div>
@@ -254,16 +282,93 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
-    const confirmModal = document.getElementById('confirmModal')
-    confirmModal.addEventListener('hidden.bs.modal', event => {
-      location.replace("<%= codezip.url.users.dashboard %>");
-    })
+    // const confirmModal = document.getElementById('confirmModal')
+    // confirmModal.addEventListener('hidden.bs.modal', event => {
+    // })
 
     order.onsubmit = (e) => {
       e.preventDefault();
-      console.log("!!!!!");
 
+      if (!checkRequired()) return alert("<%= __('users.msg.need_to_check_rquired_field') %>");
+
+      let body = new FormData(order);
+      let contact_number = "(" + order.country_number.value + ")" + order.phone_num.value;
+      body.set("contact_number", contact_number);
+      body.delete('country_number');
+      body.delete('phone_num');
+      body.set("request_date", new Date());
+      body.set("phase", 1);
+      body.set("detail_phase", 0);
+
+      fetch(order.action,{
+        method: 'post',
+        body: new URLSearchParams(body)
+      }).then(res=>{
+        if(res.ok){
+          location.replace("<%= codezip.url.users.dashboard %>");
+        }else{
+          throw new Erro(res.status)
+        }
+      }).catch(err=>{
+        console.log(err);
+        alert('<%= __("users.msg.FailSave") %>');
+      })
     }
+  </script>
+  <script>
+    function select_country_func(code, name) {
+      let country = document.getElementById('country');
+      let select_country = document.getElementById('select_country');
+
+      country.value = code;
+      select_country.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${name}`
+    }
+
+    function select_mobile_func(code, number) {
+      let country_number = document.getElementById('country_number');
+      let select_country_number = document.getElementById('select_country_number');
+
+      country_number.value = number;
+      select_country_number.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${number}`
+    }
+  </script>
+  <script>
+    function checkRequired() {
+      let formData = new FormData(order);
+      let cnt = 0;
+      let checkReady = false;
+
+      for ([name, value] of formData) {
+        // console.log(name, Boolean(value));
+
+        if (!value) break;
+        cnt += 1;
+        if (cnt > 5) {
+          checkReady = true;
+          break;
+        }
+      }
+      return checkReady;
+    }
+
+    function checkValues() {
+      let ready_submit = checkRequired();
+
+      if (ready_submit) btn_apply.disabled = false;
+      else btn_apply.disabled = true;
+    }
+
+    document.addEventListener('input', (e) => {
+      checkValues();
+    })
+
+    document.addEventListener('change', (e) => {
+      checkValues();
+    })
+
+    document.addEventListener('click', (e) => {
+      checkValues();
+    })
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>

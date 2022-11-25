@@ -90,6 +90,7 @@ router
         id: id
       }
       project = await projectsService.readOne(condition);
+      console.log(project)
     } res.render('newProject/final', { project: project })
   })
 

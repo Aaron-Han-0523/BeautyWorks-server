@@ -3,6 +3,14 @@
     src: url('/fonts/Poppins-Medium.ttf') format('truetype');
 }
 
+.btn {
+    padding: .5rem 0;
+}
+
+.modal {
+    background-color: rgba(100, 128, 225, 0.1);
+}
+
 body {
     font-family: 'Poppins';
 }
