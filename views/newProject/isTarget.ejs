@@ -60,17 +60,40 @@
                   <div class="form-group p-5">
                     <!-- title -->
                     <div>
-                      <h5>
+                      <div class="h6">
                         <%= __('users.newProject.isTarget.question') %>
-                      </h5>
+                      </div>
+                      <div class="col-3 d-flex flex-nowrap">
+                        <% if(project.target_url) { %>
+                        <input type="radio" class="btn-check" name="have" id="have_benchmark_ture" checked>
+                        <% }else{ %>
+                        <input type="radio" class="btn-check" name="have" id="have_benchmark_ture">
+                        <% } %>
+                        <label class="col-6 btn btn-outline-primary my-0 me-4" for="have_benchmark_ture">
+                          <%= __('users.newProject.basic.btn.yes') %>
+                        </label>
+
+                        <% if(project.target_url) { %>
+                        <input type="radio" class="btn-check" name="have" id="have_benchmark_false">
+                        <% }else{ %>
+                        <input type="radio" class="btn-check" name="have" id="have_benchmark_false" checked>
+                        <% } %>
+                        <label class="col-6 btn btn-outline-primary my-0" for="have_benchmark_false">
+                          <%= __('users.newProject.basic.btn.no') %>
+                        </label>
+                      </div>
                     </div>
                     <!-- target url input -->
-                    <div class="mt-0">
-                      <div>
+                    <div class="mt-5">
+                      <div class="h6">
                         <%= __('users.newProject.isTarget.urlInput.before') %>
                       </div>
-                      <div class="form-control mt-3 d-flex align-items-baseline px-3 br-15">
-                        <input class="form-control w-100 align-placeholder" name="target_url" style="border: 0px;" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="<%= project.target_url %>">
+                      <div class="mt-3 d-flex align-items-baseline br-15">
+                        <% if(project.target_url) { %>
+                        <input class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="<%= project.target_url %>">
+                        <% }else{ %>
+                        <input class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="" disabled>
+                        <% } %>
                       </div>
                     </div>
 
@@ -81,11 +104,11 @@
 
                   <!-- 버튼 -->
                   <div class="mt-5 d-flex justify-content-center">
-                    <button disabled id="nextBtn" class="col-2 btn btn-outline-primary py-3 br-15 me-5">
-                      <%= __('users.newProject.isTarget.btn.next') %>
-                    </button>
-                    <button class="col-2 btn btn-outline-primary py-3 br-15">
-                      <%= __('users.newProject.isTarget.btn.pass') %>
+                    <a class="col-1 btn btn-outline-primary py-3 br-10 me-5" href="<%= codezip.url.users.newProject._0 %>?n=<%= project.id %>">
+                      <%= __('btn.previous') %>
+                    </a>
+                    <button class="col-1 btn btn-outline-primary py-3 br-10">
+                      <%= __('btn.next') %>
                     </button>
                   </div>
                 </form>
@@ -118,8 +141,18 @@
       check_target_url(isTarget[0].value)
     })
 
-    isTarget[0].addEventListener('keyup', (event) => {
+    isTarget.target_url.addEventListener('keyup', (event) => {
       check_target_url(event.target.value)
+    })
+
+    document.querySelectorAll('input[name="have"]').forEach(el => {
+      el.addEventListener('change', (event) => {
+        if (have_benchmark_ture.checked) {
+          target_url.disabled = false;
+        } else {
+          target_url.disabled = true;
+        }
+      })
     })
 
     isTarget.onsubmit = async (e) => {

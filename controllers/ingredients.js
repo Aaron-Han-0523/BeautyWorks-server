@@ -1,4 +1,5 @@
 const ingredientsService = require('../services/ingredients');
+const { Op } = require('sequelize');
 
 exports.add = async (req, res, next) => {
     let body = req.body;
@@ -82,7 +83,6 @@ exports.recovery = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    console.log('api', req.query)
     const user = res.locals.user;
 
     const page = req.query.p || 1;
@@ -92,10 +92,19 @@ exports.index = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     delete req.query.n;
+
+    console.log('api', req.query)
+
     let condition = {};
     for ([key, value] of Object.entries(req.query)) {
-        if (value) {
-            condition[key] = value;
+        // condition[key] = { [Op.substring]: value }; // 배열은 in 연산
+        if (typeof value === "string") {
+            condition[key] = { [Op.substring]: value }
+        } else {
+            condition[Op.or] = [];
+            value.forEach((code, index) => {
+                condition[Op.or].push({ [key]: { [Op.substring]: code } })
+            });
         }
     }
     console.log(condition)

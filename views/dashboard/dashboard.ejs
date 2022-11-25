@@ -146,6 +146,7 @@
                         <div class="progress-card-name">
                           <h6>
                             <%= (index+1)+". "+item.project_name %>
+                            <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
                           </h6>
                         </div>
                         <%- include("../partials/temp_progressbar/"+item.detail_phase+".ejs", {project: item}) %>

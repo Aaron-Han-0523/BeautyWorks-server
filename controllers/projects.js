@@ -13,6 +13,7 @@ exports.add = async (req, res, next) => {
         body.id = id;
     } else {
         body.project_name = "New Project - " + myUtils.formatDateTime(new Date);
+        body.brand_name = user.brand_name;
         body.id = await projectsService.maxId({ users_id: user.id }).then(result => {
             // console.log("max id :", result);
             if (result === null) {
@@ -164,11 +165,11 @@ exports.detail = async (req, res, next) => {
         condition.users_id = user.id;
         condition.delete_date = null;
     }
-
-    await projectsService
+    projectsService
         .readOne(condition)
         .then((result) => {
             console.log("find :", result);
+            res.render('newProject/draft', { project: result })
         })
         .catch((err) => {
             console.error(err);

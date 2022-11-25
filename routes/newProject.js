@@ -77,10 +77,10 @@ router
     })
   })
 
-// 샘플의뢰서 초안
+// 샘플의뢰서 마지막 수정
 router
-  //   .post('/draft', projectsController.edit)
-  .get('/draft', async (req, res, next) => {
+  .post('/final', projectsController.edit)
+  .get('/final', async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
@@ -90,12 +90,16 @@ router
         id: id
       }
       project = await projectsService.readOne(condition);
-    } res.render('newProject/draft', { project: project })
+    } res.render('newProject/final', { project: project })
   })
+
+// 샘플의뢰서 초안
+router
+  .get('/draft', projectsController.detail)
 
 // 샘플 수령주소
 router
-  //   .post('/order', projectsController.edit)
+  .post('/order', projectsController.edit)
   .get('/order', async (req, res, next) => {
     let project = {};
     const id = req.query.n;

@@ -30,9 +30,9 @@
         <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
+          <div class="px-3">
             <div class="breadcrumb align-items-end d-flex pt-3 br-20">
-              <div class="p-1 col-3">
+              <div class="col-3">
                 <h6 class="main-menu">
                   <%= __('Project') %>
                 </h6>
@@ -50,18 +50,26 @@
               <div class="widget-content widget-content-area br-20 py-5">
 
                 <div class="form-group ms-3 text-break">
-                  <div class="row mb-3">
-                    <h5 class="p-0"><strong>
-                        <%= __('샘플의뢰서 기본') %>
-                      </strong>
-                    </h5>
+                  <div class="d-flex flex-nowrap mb-3 justify-content-between">
+                    <div>
+                      <h5 class="p-0"><strong>
+                          <%= __('샘플의뢰서 기본') %>
+                        </strong>
+                      </h5>
+                    </div>
+                    <div>
+                      <p style="color: gray;">
+                        <span style="color: red;">*</span>
+                        <%= __('users.basic.msg.required') %>
+                      </p>
+                    </div>
                   </div>
 
-                  <div class="row widget" style="padding:5% 5%">
+                  <div class="widget" style="padding:5% 5%">
                     <form id="basic" method="post" enctype="multipart/form-data" style="padding:0% 5%">
 
                       <!-- 제품명 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.project_name') %><span style="color: red;">*</span>
@@ -72,23 +80,22 @@
                         </div>
                       </div>
 
-
                       <!-- 브랜드명 입력 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.brand_name') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" required value="<%= user.brand_name %>">
+                          <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.brand_name %>">
                         </div>
                       </div>
 
                       <input hidden id="formulas_id" value="<%= project.formulas_id %>">
 
                       <!-- 카테고리 선택 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.category1') %><span style="color: red;">*</span>
@@ -114,9 +121,8 @@
                         </div>
                       </div>
 
-
                       <!-- 품목 선택 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.category2') %><span style="color: red;">*</span>
@@ -138,16 +144,15 @@
                         </div>
                       </div>
 
-
                       <!-- 용량 선택 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.capacity') %><span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="capacity" placeholder="<%= __('plzInputText') %>" required value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
+                          <input type="text" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" required value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
                         </div>
                         <div class="col col-3">
                           <%# console.log("??",project.capacity.split(' ')[1],"??") %>
@@ -165,9 +170,8 @@
                         </div>
                       </div>
 
-
                       <!-- 대상연령 입력 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.target_age') %><span style="color: red;">*</span>
@@ -175,7 +179,7 @@
                         </div>
                         <div class="col">
                           <input hidden type="text" name="target_age" required>
-                          <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('중복선택가능') %>" readonly required>
+                          <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('placeholder.target_age') %>" readonly required>
                         </div>
                         <div class="col col-3">
                           <button class="form-select text-start" type="button" id="select_age" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -194,9 +198,8 @@
                         </div>
                       </div>
 
-
                       <!-- 성별 입력 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.target_gender') %><span style="color: red;">*</span>
@@ -204,7 +207,7 @@
                         </div>
                         <div class="col">
                           <input hidden type="text" name="target_gender" required>
-                          <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('중복선택가능') %>" readonly required>
+                          <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('placeholder.target_gender') %>" readonly required>
                         </div>
                         <div class="col col-3">
                           <button class="form-select text-start" type="button" id="select_gender" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -223,9 +226,8 @@
                         </div>
                       </div>
 
-
                       <!-- 판매국가 입력 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.target_country') %>
@@ -234,9 +236,9 @@
                         </div>
                         <div class="col">
                           <input hidden type="text" name="target_country" value="">
-                          <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('중복선택가능') %>" readonly required>
+                          <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('placeholder.target_country') %>" readonly required>
                         </div>
-                        <div class="col col-3 btn-group" role="group">
+                        <div class="col col-3">
                           <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                             <%= __('Select') %>
                           </button>
@@ -256,35 +258,33 @@
                         </div>
                       </div>
 
-
                       <!-- 유통채널 입력 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.distribution_channel') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('plzInputText') %>" value="<%= project.distribution_channel %>">
+                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>">
                         </div>
                       </div>
 
-
                       <!-- 해외 인증 여부 입력 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.overseas_certifications') %>
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('plzInputText') %>" value="<%= project.overseas_certifications %>">
+                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>">
                         </div>
                       </div>
 
 
                       <!-- 한국 기능성 인증 진행 여부 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.korea_certification') %>
@@ -297,7 +297,7 @@
                           <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1">
                           <% } %>
 
-                          <label class="col-6 btn btn-outline-primary my-0 me-4" for="korea_certification_true">
+                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="korea_certification_true">
                             <%= __('users.newProject.basic.btn.yes') %>
                           </label>
 
@@ -307,7 +307,7 @@
                           <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0">
                           <% } %>
 
-                          <label class="col-6 btn btn-outline-primary my-0" for="korea_certification_false">
+                          <label class="col-5 btn btn-outline-primary my-0" for="korea_certification_false">
                             <%= __('users.newProject.basic.btn.no') %>
                           </label>
                         </div>
@@ -315,20 +315,20 @@
 
 
                       <!-- 부자재 입고 유무 -->
-                      <div class="row mb-5 align-items-center">
+                      <div class="row mt-3 align-items-center">
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.sourcing_of_packaging') %>
                           </h6>
                         </div>
-                        <div class="col col-9 col-xxl-6 d-flex align-items-baseline">
+                        <div class="col col-9 col-xxl-4 d-flex align-items-baseline">
                           <% if(project.sourcing_of_packaging=="1") { %>
                           <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1" checked>
                           <% }else{ %>
                           <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1">
                           <% } %>
 
-                          <label class="col-6 btn btn-outline-primary my-0 me-4" for="sourcing_of_packaging_true">
+                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="sourcing_of_packaging_true">
                             <%= __('users.newProject.basic.sourcing_of_packaging.btn.yes') %>
                           </label>
 
@@ -338,7 +338,7 @@
                           <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0">
                           <% } %>
 
-                          <label class="col-6 btn btn-outline-primary my-0" for="sourcing_of_packaging_false">
+                          <label class="col-5 btn btn-outline-primary my-0" for="sourcing_of_packaging_false">
                             <%= __('users.newProject.basic.sourcing_of_packaging.btn.no') %>
                           </label>
                         </div>
@@ -349,10 +349,13 @@
                     <hr>
 
                     <div class="d-flex mt-4 justify-content-center">
-                      <button id="saveBtn" class="btn btn-outline-primary col-3 mx-3 p-3 br-10" type="button" onclick="save();">
+                      <a class="col-1 btn btn-outline-primary py-3 br-10 me-5" href="<%= codezip.url.users.newProject._1 %>?n=<%= project.id %>">
+                        <%= __('btn.previous') %>
+                      </a>
+                      <button id="saveBtn" class="btn btn-outline-primary col-1 py-3 br-10 me-5" type="button" onclick="save();">
                         <%= __('users.newProject.basic.btn.Save') %>
                       </button>
-                      <button id="nextBtn" class="btn btn-outline-primary col-3 mx-3 p-3 br-10" type="button" onclick="next();" hidden>
+                      <button id="nextBtn" class="btn btn-outline-primary col-1 py-3 br-10" type="button" onclick="next();">
                         <%= __('users.newProject.basic.btn.Next') %>
                       </button>
                     </div>
@@ -526,6 +529,7 @@
     }
 
     function checkValues() {
+      return;
       let checkReady = checkRequired();
 
       if (checkReady) {
@@ -574,7 +578,7 @@
     }
 
     function next() {
-      if (!checkRequired()) return;
+      if (!checkRequired()) return alert("<%= __('users.msg.need_to_check_rquired_field') %>");
 
       let body = basic_body();
       body.set('detail_phase', 3)
@@ -585,7 +589,7 @@
       }).then(res => {
         if (res.ok) {
           // alert("<%= __('users.msg.SuccessSave') %>");
-          location.replace('<%= codezip.url.users.newProject._3 %>');
+          location.replace('<%= codezip.url.users.newProject._3 %>' + location.search);
         } else {
           throw new Error(res.status);
         }

@@ -5,7 +5,6 @@
   <%- include ("../partials/header.ejs") %>
   <% let applies_true_text_list =[]; %>
   <% let applies_false_text_list =[]; %>
-  <%  %>
   <link href="/src/assets/css/light/components/modal.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -70,8 +69,13 @@
                         </div>
                         <div class="col col-5">
                           <input hidden type="text" name="efficacy" value="<%= project.efficacy %>">
-                          <button class="form-select text-start text-ellipsis" type="button" id="efficacy_print" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
-                            <%= __('plzSelectText') %>
+                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
+                            <div class="flex-fill" id="efficacy_print">
+                              <%= __('Select') %>
+                            </div>
+                            <div class="text-primary">
+                              <i class="fa-solid fa-plus"></i>
+                            </div>
                           </button>
                           <!-- 제품효과 모달창 -->
                           <div class=" modal" id="select_efficacy" aria-labelledby="" aria-hidden="true">
@@ -104,7 +108,7 @@
 
                                     <!-- 선케어 제품효과-->
                                     <% codezip.effects.suncare.forEach((item, index)=>{ %>
-                                    <% if(project.category1&&(projcet.category1==3)) { %>
+                                    <% if(project.category1&&(project.category1==3)) { %>
                                     <div class="col-4 py-3 border-bottom">
                                       <div class="d-flex dropdown-item">
                                         <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
@@ -167,7 +171,7 @@
                         </div>
                         <div class="col-9">
                           <input hidden type="text" name="ingredients" value="<%= project.ingredients %>">
-                          <button class="form-control text-start text-ellipsis d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
+                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
                             <div class="flex-fill" id="ingredients_print">
                               <%= project.ingredients || __('통합 검색') %>
                             </div>
@@ -189,7 +193,7 @@
                         <div class="col">
                           <select class="form-select" name="viscosity">
                             <option value="">
-                              <%= __('plzSelectText') %>
+                              <%= __('Select') %>
                             </option>
                             <% codezip.viscosity.forEach((item,index)=>{ %>
                             <% if(project.viscosity==item.slice(0,-1)) { %>"
@@ -215,8 +219,13 @@
                         </div>
                         <div class="col-9">
                           <input hidden type="text" name="applies" value="<%= project.applies %>">
-                          <button class="form-select text-start text-ellipsis" type="button" id="applies_print" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
-                            <%# applies_print.slice(0, -1) %>
+                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
+                            <div class="flex-fill" id="applies_print">
+                              <%= __('Select') %>
+                            </div>
+                            <div class="text-primary">
+                              <i class="fa-solid fa-plus"></i>
+                            </div>
                           </button>
                           <!-- 사용감 모달창 -->
                           <div class="modal br-15" id="select_applies" data-bs-scroll="true" data-bs-backdrop="true">
@@ -339,7 +348,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="others" id="others" placeholder="<%= __('plzInputText') %>" value="<%= project.others %>">
+                          <input type="text" class="form-control" name="others" id="others" placeholder="<%= __('placeholder.options') %>" value="<%= project.others %>">
                         </div>
                       </div>
 
@@ -348,7 +357,7 @@
                     <hr>
 
                     <div class="d-flex mt-4 justify-content-center">
-                      <button id="saveBtn" class="btn btn-outline-primary col-3 mx-3 p-3 br-15" type="button" onclick="next();">
+                      <button id="saveBtn" class="col-1 btn btn-outline-primary py-3 br-10" type="button" onclick="next();">
                         <%= __('users.newProject.option.btn.확인') %>
                       </button>
                     </div>
@@ -370,13 +379,18 @@
 
   <!-- 컨셉성분 모달창 -->
   <div class="modal" id="select_ingredients" data-bs-scroll="true" data-bs-backdrop="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered col-11 mw-100">
-      <div class="modal-content br-15">
-        <div class="modal-header justify-content-end pb-0">
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-dialog-scrollable col-8 mw-100">
+      <div class="modal-content br-15 w-100">
+        <div class="modal-header justify-content-end text-gray p-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
         <div class="modal-body mx-5 mt-0 pt-0" style="border-top:0px;">
-          <form id="search_ingredients" action="/users/api/ingedient">
+          <form id="search_ingredients">
             <!-- 통합 검색-->
             <div class="d-flex">
               <label class="col-2 h6 align-self-center mb-0">
@@ -396,7 +410,7 @@
               <!-- <input hidden name="type"> -->
               <div class="col-4">
                 <button class="form-select text-start" type="button" id="select_type" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                  <%= __('plzSelectText') %>
+                  <%= __('select') %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="select_type">
                   <% codezip.ingredient_type.forEach((code,index)=>{ %>
@@ -416,9 +430,9 @@
               </label>
               <div class="col-4">
                 <button class="form-select text-start" type="button" id="select_effects" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                  <%= __('plzSelectText') %>
+                  <%= __('select') %>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="select_effects">
+                <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_effects">
                   <% codezip.effects.ingredient.forEach((code, index)=>{ %>
                   <li class="dropdown-item d-flex">
                     <input class="form-check-input mx-3 ingredient_effects" name="effects" type="checkbox" id="ingredient_effects-<%= code %>" value="<%= code %>">
@@ -431,7 +445,7 @@
               </div>
             </div>
             <!-- 결과 테이블 -->
-            <div class="table-responsive mt-4 pt-4">
+            <div class="table-responsive mt-4 pt-4 mb-auto ">
               <table class="table table-no-space table-bordered table-hover text-break text-center br-10">
                 <thead class="">
                   <th>
@@ -497,7 +511,7 @@
   </script>
   <script>
     function print_efficacy(value) {
-      if (!value) return efficacy_print.innerText = "<%= __('plzSelectText') %>"
+      if (!value) return efficacy_print.innerText = "<%= __('Select') %>"
 
       let text_list = [];
       value.split(',').forEach((code, index) => {
@@ -517,9 +531,6 @@
       }
 
     })
-  </script>
-  <script>
-
   </script>
   <script>
     // 제품 효과 추가/제거
@@ -628,6 +639,11 @@
       fetch(url).then(res => {
         ingredients_reload(res.json());
       })
+    }
+
+    search_ingredients.onsubmit = (event) => {
+      event.preventDefault();
+      searching_ingredients();
     }
 
     function ingredients_reload(res_json) {

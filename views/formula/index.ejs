@@ -58,8 +58,8 @@
               <div class="widget w-100 py-5 px-4">
                 <!-- select -->
                 <form>
-                  <div class="my-4 text-center mx-5 px-5">
-                    <div class="row align-items-center">
+                  <div class="my-4 mx-5 px-5">
+                    <div class="row align-items-center mx-5">
                       <div class="col-2 h6"><%= __('users.formula.select.label.top_or_new') %></div>
                       <div class="col">
                         <select class="form-select" name="top_or_new">
@@ -69,7 +69,7 @@
                       </div>
                     </div>
 
-                    <div class="row align-items-center my-3">
+                    <div class="row align-items-center my-3 mx-5">
                       <div class="col-2 h6"><%= __('users.formula.select.label.category1') %></div>
                       <div class="col-3">
                         <select class="form-select" name="category1">
@@ -79,7 +79,7 @@
                           <% } %>
                         </select>
                       </div>
-                      <div class="col-2 h6"><%= __('users.formula.select.label.category2') %></div>
+                      <div class="col-1 h6 text-center"><%= __('users.formula.select.label.category2') %></div>
                       <div class="col">
                         <select class="form-select" name="category2" id="category2_list">
                           <option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>

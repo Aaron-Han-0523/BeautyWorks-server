@@ -105,7 +105,7 @@
                     <div class="col col-3">
                       <div class="dropdown">
                         <input hidden name="country_number" id="country_number">
-                        <button class="form-select " type="button" id="select_country_number" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="form-select text-start" type="button" id="select_country_number" data-bs-toggle="dropdown" aria-expanded="false">
                           <%= __('plzSelectText') %>
                         </button>
                         <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country_number">
@@ -128,7 +128,7 @@
                       </div>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('plzInputText.mobilePhone') %>" required>
+                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('placeholder.mobilePhone') %>" required>
                     </div>
                   </div>
 
@@ -160,7 +160,7 @@
                       </h6>
                     </div>
                     <div class="col col-7">
-                      <input type="text" class="form-control" name="emailConfirmNumber" id="emailConfirmNumber" placeholder="<%= __('plzInputText.vertificationCode') %>" required>
+                      <input type="text" class="form-control" name="emailConfirmNumber" id="emailConfirmNumber" placeholder="<%= __('placeholder.vertificationCode') %>" required>
                     </div>
                     <div class="col">
                       <h6 id="emailConfirmResult" class="text-muted">

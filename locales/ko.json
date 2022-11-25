@@ -556,6 +556,11 @@
 	"users.newProject.order.이메일.warning": "",
 	"users.newProject.order.msg.confirm": "샘플 주문이 완료되었습니다.",
 	"btn.확인": "확인",
+	"btn.previous": "Previous",
+	"btn.save": "Save",
+	"btn.next": "Next",
+	"btn.yes": "Yes",
+	"btn.no": "No",
 	"MY PROJECT": "MY PROJECT",
 	"Main": "Main",
 	"Lounge": "Lounge",
@@ -603,8 +608,8 @@
 	"users.myAccount.label.logistics_address": "Logistics Address",
 	"users.myAccount.label.company_address": "Company Address",
 	"": "",
-	"plzInputText.mobilePhone": "plzInputText.mobilePhone",
-	"plzInputText.vertificationCode": "plzInputText.vertificationCode",
+	"placeholder.mobilePhone": "Enter vertification code",
+	"placeholder.vertificationCode": "Enter vertification code",
 	"plzInputText.logistics_address": "plzInputText.logistics_address",
 	"plzInputText.company_address": "plzInputText.company_address"
 }

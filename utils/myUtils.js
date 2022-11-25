@@ -16,6 +16,8 @@ module.exports.getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
 }
 
+const en_month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 module.exports.formatDateTime = (d_t, sep = '.') => {
   if (!d_t) return '';
   let year = d_t.getFullYear();
@@ -29,10 +31,11 @@ module.exports.formatDateTime = (d_t, sep = '.') => {
 
 module.exports.formatDate = (d_t, sep = '.') => {
   if (!d_t) return '';
-  let year = d_t.getFullYear();
-  let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
+  let year = ("" + d_t.getFullYear()).slice(-2);
+  let month = en_month[d_t.getMonth()];
+  // let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
   let day = ("0" + d_t.getDate()).slice(-2);
-  return year + sep + month + sep + day;
+  return day + sep + month + sep + year;
 }
 
 // array = "1,2,3,4"

@@ -11,6 +11,10 @@ body {
     color: var(--BW-blue) !important;
 }
 
+.pe-2-5 {
+    padding-right: .75rem !important
+}
+
 .fs-7 {
     font-size: 1rem;
 }
@@ -30,12 +34,43 @@ body {
     text-overflow: ellipsis;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.scrollable-menu::-webkit-scrollbar {
+    width: 8px;
+    /* 스크롤바의 너비 */
+}
+
+.scrollable-menu::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #217af4;
+    /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+}
+
+.scrollable-menu::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);
+    /*스크롤바 뒷 배경 색상*/
+}
+
+
 .table.table-bordered {
     border: 1px solid #ebedf2;
 }
 
 .table thead {
     background-color: var(--BW-form-color);
+}
+
+.form-check-input:checked~label,
+.form-check-input[checked]~label {
+    color: black;
 }
 
 /***********************/
@@ -81,31 +116,6 @@ body {
     .container-xxl {
         max-width: 100%;
     }
-}
-
-.scrollable-menu {
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
-}
-
-.scrollable-menu::-webkit-scrollbar {
-    width: 8px;
-    /* 스크롤바의 너비 */
-}
-
-.scrollable-menu::-webkit-scrollbar-thumb {
-    height: 30%;
-    /* 스크롤바의 길이 */
-    background: #217af4;
-    /* 스크롤바의 색상 */
-
-    border-radius: 10px;
-}
-
-.scrollable-menu::-webkit-scrollbar-track {
-    background: rgba(33, 122, 244, .1);
-    /*스크롤바 뒷 배경 색상*/
 }
 
 .breadcrumb {
@@ -263,7 +273,7 @@ h5 {
 
 .outline-badge-new {
     font-size: xx-small;
-    color: #e2a03f;
+    color: #e2a03f !important;
     background-color: transparent;
     border: 1px solid #e2a03f;
     border-radius: 5px;
@@ -543,7 +553,7 @@ h5 {
 .align-placeholder::placeholder {
     color: #888ea8;
     font-size: 15px;
-    text-align: center;
+    text-align: start;
 }
 
 .align-placeholder::-webkit-input-placeholder,
@@ -551,7 +561,7 @@ h5 {
 .align-placeholder::-moz-placeholder {
     color: #888ea8;
     font-size: 15px;
-    text-align: center;
+    text-align: start;
 }
 
 .btn-outline-gray {
