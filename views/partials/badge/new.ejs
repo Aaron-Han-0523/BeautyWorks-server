@@ -1,1 +1,6 @@
-<div class="mb-1"><span class="outline-badge-new px-3">New</span></div>
+<%
+let day_1_ago = new Date(Date.now() - 1 *24*3600*1000);
+if(date > day_1_ago) {
+%>
+<span class="mx-1 mark mark-outline-new bg-white">New</span>
+<% } %>

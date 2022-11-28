@@ -64,16 +64,31 @@
                   <div class="row mt-3">
                     <!-- gallery -->
                     <div class="col-5">
-                      <div class="preview text-center">
-                        <img id="largeImg" src="<%= formula.image_paths.split(',')[0] %>">
+                      <div class="preview text-center gallery">
+                        <div class="gallery-inner">
+                          <img id="largeImg" src="<%= formula.image_paths.split(',')[0] %>" alt="0">
+                        </div>
+                        <button class="gallery-prev fs-1" type="button" onclick="gallery_prev();">
+                          <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <button class="gallery-next fs-1" type="button" onclick="gallery_next();">
+                          <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                        <a class="fs-2 like" href="javascript:void(0);" onclick="like_formula();">
+                          <% if(is_like) { %>
+                          <i class="fa-solid fa-heart active"></i>
+                          <% }else{ %>
+                          <i class="fa-regular fa-heart"></i>
+                          <% } %>
+                        </a>
                       </div>
                       <div id="thumbs" class="row mt-3 mx-1">
                         <% formula.image_paths.split(',').forEach((item,index)=>{ %>
                         <div class="w-20 preview px-1">
                           <% if(index==0) { %>
-                          <a class="select" href="<%= item %>">
+                          <a class="select" href="<%= item %>" title="<%= index %>">
                             <% }else{ %>
-                            <a class="" href="<%= item %>">
+                            <a class="" href="<%= item %>" title="<%= index %>">
                               <% } %>
                               <img class="br-10" src="<%= item %>">
                             </a>
@@ -179,19 +194,64 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
-    thumbs.onclick = function(event) {
-      event.preventDefault();
-      let thumbnail = event.target.closest('a');
-      console.log('dd')
-      if (!thumbnail) return;
-      document.getElementById("thumbs").getElementsByClassName('select')[0].classList.remove('select');
+    function like_formula() {
+      const url = '<%= codezip.url.users.formula.like %>/' + location.pathname.split('/')[location.pathname.split('/').length - 1];
+      const target = document.querySelector("a.like");
 
+      fetch(url).then(res => {
+        if (res.ok) {
+          if (target.querySelector('i').classList.contains('active')) {
+            target.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+          } else {
+            target.innerHTML = `<i class="fa-solid fa-heart active"></i>`;
+          }
+        } else {
+          throw new Error(res.status)
+        }
+      }).catch(err => {
+        console.log(err);
+        alert("<%= __('users.msg.FailSave') %>");
+        location.reload();
+      })
+    }
+  </script>
+  <script>
+    const img_total_n = "<%= formula.image_paths ? formula.image_paths.split(',').length : 0 %>"
+
+    function gallery_prev() {
+      let img_n = largeImg.alt - 1;
+      if (img_n < 0) {
+        img_n = img_total_n - 1;
+      }
+      let thumbnail = document.querySelector(`#thumbs a[title="${img_n}"]`);
+      select_gallery(thumbnail);
+    }
+
+    function gallery_next() {
+      let img_n = +largeImg.alt + 1;
+      if (img_n >= img_total_n) {
+        img_n = 0;
+      }
+      let thumbnail = document.querySelector(`#thumbs a[title="${img_n}"]`);
+      select_gallery(thumbnail);
+    }
+
+    function select_gallery(thumbnail) {
       showThumbnail(thumbnail.href, thumbnail.title);
+      document.querySelector('#thumbs a.select').classList.remove('select');
       thumbnail.classList.add('select')
     }
 
     function showThumbnail(href, title) {
       largeImg.src = href;
+      largeImg.alt = title;
+    }
+
+    thumbs.onclick = function(event) {
+      event.preventDefault();
+      let thumbnail = event.target.closest('a');
+      if (!thumbnail) return;
+      select_gallery(thumbnail);
     }
 
     function project_next(formula_id, category1, category2) {

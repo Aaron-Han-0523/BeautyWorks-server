@@ -6,7 +6,7 @@ const Op = Sequelize.Op;
 exports.create = async (obj) => {
     return await communities
         .create(Object.assign(obj, {
-            createDate: new Date(),
+            create_date: new Date(),
             updateDate: new Date(),
         }))
         .then(result => {

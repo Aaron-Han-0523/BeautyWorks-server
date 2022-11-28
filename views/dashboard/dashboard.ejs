@@ -280,7 +280,7 @@
                         </h5>
                       </div>
                       <div class="row text-end">
-                        <a href="<%= codezip.url.users.formula %>">
+                        <a href="<%= codezip.url.users.formula.main %>">
                           <%= __('Show All') %>
                         </a>
                       </div>
@@ -313,7 +313,7 @@
                       <!-- 테스트 데이터 생성 */ -->
                       <% recommended_formula.forEach((item,index)=>{ %>
                       <div class="col-4">
-                        <a class="hover" href="<%= codezip.url.users.formula +'/'+item.id %>">
+                        <a class="hover" href="<%= codezip.url.users.formula.main +'/'+item.id %>">
                           <% if(item.image_paths) { %>
                           <div class="preview">
                             <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
@@ -422,21 +422,23 @@
                         title:"반갑습니다.",
                         first_name:"이름",
                         last_name:"성",
-                        updateDate:new Date(2022,10,15),
+                        update_date:new Date(2022,10,15),
                       })%>
                       <%# news.push({
                         title:"환영합니다.",
                         first_name:"first_name",
                         last_name:"last_name",
-                        updateDate:new Date(2022,10,25),
+                        update_date:new Date(2022,10,25),
                       })%>
                       <%# console.log(news) %>
                     </div>
                     <!-- 테스트 데이터 생성 */ -->
                     <% news.forEach((item,index)=>{ %>
-                    <a class="pb-3 hover" href="<%= codezip.url.users.news.main + '/' + item.id %>">
+                    <a class="pb-2 hover" href="<%= codezip.url.users.news.main + '/' + item.id %>">
                       <div class="widget row mx-0 h-50 align-content-center mt-3 h-100 text-ellipsis">
-                        <%- include('../partials/badge/new.ejs') %>
+                        <div>
+                          <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
+                        </div>
                         <div class="fs-6"><%= item.title %></div>
                         <div>
                           <%= `${formatDate(item.update_date)}` %>
@@ -475,21 +477,23 @@
                         title:"감사합니다.",
                         first_name:"이름",
                         last_name:"성",
-                        updateDate:new Date(2022,10,15),
+                        update_date:new Date(2022,10,15),
                       })%>
                       <%# community.push({
                         title:"안녕하세요.",
                         first_name:"first_name",
                         last_name:"last_name",
-                        updateDate:new Date(2022,10,25),
+                        update_date:new Date(2022,10,25),
                       })%>
                       <%# console.log(community) %>
                     </div>
                     <!-- 테스트 데이터 생성 */ -->
                     <% community.forEach((item,index)=>{ %>
-                    <a class="pb-3 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
+                    <a class="pb-2 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
                       <div class="widget row mx-0 h-50 align-content-center mt-3 h-100 text-ellipsis">
-                        <%- include('../partials/badge/new.ejs') %>
+                        <div class="">
+                          <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
+                        </div>
                         <div class="fs-6"><%= item.title %></div>
                         <div class="">
                           <%= `${formatDate(item.update_date)}` %>

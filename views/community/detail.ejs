@@ -9,469 +9,487 @@
 
   <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/client-nav.ejs") %>
-      <%- include ("../partials/chatMark.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
 
-        <!--  BEGIN MAIN CONTAINER  -->
-        <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-          <div class="overlay"></div>
-          <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-          <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-            <!--  BEGIN CONTENT AREA  -->
-            <div id="content" class="main-content">
-              <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                <div class="middle-content  p-0">
+        <div class="middle-content  p-0">
 
-                  <!-- BREADCRUMB -->
-                  <div class="row px-3">
-                    <div class="breadcrumb align-communitys-start d-flex br-20">
-                      <div class="p-1 col-3">
-                        <h5><strong>
-                            <%= __('Community') %>
-                          </strong></h5>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- CONTENT AREA -->
-                  <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-
-                      <div class="widget-content widget-content-area br-20 p-3">
-
-                        <!-- title -->
-                        <div class="breadcrumb m-2 br-20 d-flex justify-content-between">
-                          <div class="p-1">
-                            <h5><strong>
-                                <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                  <%= `${community.title} ${__('users.community.index.WrittenBy')}
-                                    ${community.last_name}${community.first_name} ${formatDate(community.updateDate)}` %>
-                                    <% } else { %>
-                                      <%= `${community.title} ${__('users.community.news.index.WrittenBy')}
-                                        ${community.first_name} ${community.last_name}
-                                        ${formatDate(community.updateDate)}` %>
-                                        <% } %>
-                              </strong></h5>
-                          </div>
-                          <div class="p-1 d-flex">
-                            <h5 id="communitylike_count" class="mx-1"><strong>
-                                <%= communityLike.count %>
-                              </strong>
-                            </h5>
-                            <h5><a id="communityLikeBtn" href="javascript:void(0);"
-                                onclick="toggleLike('<%= community.id %>');">
-                                <% if(communityLike.rows.indexOf(user.id)==-1) { %>
-                                  <i class="fa-star fa-regular"></i>
-                                  <% }else{ %>
-                                    <i class="fa-star fa-solid"></i>
-                                    <% } %>
-                              </a></h5>
-                          </div>
-                        </div>
-
-                        <!-- content -->
-                        <div class="row breadcrumb m-2 mt-3 br-20 p-3">
-                          <div class="">
-                            <h5>
-                              <%= community.content %>
-                            </h5>
-                          </div>
-
-                          <!-- 네비게이션 -->
-                          <div class="row mt-5">
-                            <div class="col-4 text-start">
-                              <% if(prev) { %><a
-                                  href="<%= codezip.url.users.community.main %>/<%= prev.id %>">
-                                  <h5><i class="fa-solid fa-chevron-left"></i>
-                                    <%= __('users.news.이전글') %>
-                                  </h5>
-                                </a>
-                                <% } %>
-                            </div>
-                            <div class="col-4 text-center"><a href="<%= codezip.url.users.community.main %>">
-                                <h5>
-                                  <%= __('users.news.목록') %>
-                                </h5>
-                              </a></div>
-                            <div class="col-4 text-end">
-                              <% if(next) { %><a
-                                  href="<%= codezip.url.users.community.main %>/<%= next.id %>">
-                                  <h5>
-                                    <%= __('users.news.다음글') %><i class="fa-solid fa-chevron-right"></i>
-                                  </h5>
-                                </a>
-                                <% } %>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- 댓글 -->
-
-                        <div class="row breadcrumb m-2 mt-3 br-20 p-3">
-                          <!-- 댓글 내용 -->
-                          <% reply.data.forEach((item,index)=>{ %>
-                            <div id="reply_area<%= item.id %>" class="row reply">
-                              <div class="col-3 text-break">
-                                <h6>
-                                  <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                    <%= item.last_name + item.first_name + ' ' + formatDate(item.updateDate) %>
-                                      <% } else { %>
-                                        <%= item.last_name + ' ' + item.first_name + ' ' + formatDate(item.updateDate) %>
-                                          <% } %>
-                                </h6>
-                                <% if(item.users_id==user.id) { %>
-                                  <div class="mb-1">
-                                    <button class="btn bg-white p-1 m-1" type="button"
-                                      onclick="reply_edit_active('<%= item.communities_id %>','<%= item.id %>');">
-                                      <%= __('users.community.btn.수정') %>
-                                    </button>
-                                    <button class="btn bg-white p-1 m-1" type="button"
-                                      onclick="reply_delete('<%= item.communities_id %>','<%= item.id %>');">
-                                      <%= __('users.community.btn.삭제') %>
-                                    </button>
-                                  </div>
-                                  <% } %>
-                              </div>
-                              <div id="reply_content<%= item.id %>" class="col-8 text-break">
-                                <%= item.content %>
-                              </div>
-                              <!-- 댓글 좋아요 -->
-                              <div class="col-1 p-0 align-self-center text-end">
-                                <div class="p-1 d-flex">
-                                  <h5 id="replylike_count<%= item.id %>" class="mx-1"><strong>
-                                      <%= item.like_count %>
-                                    </strong>
-                                  </h5>
-                                  <h5>
-                                    <% if(item.users_id==user.id) { %>
-                                      <i class="fa-thumbs-up fa-regular"></i>
-                                      <% }else{ %>
-                                        <a id="replyLikeBtn<%= item.id %>" href="javascript:void(0);"
-                                          onclick="toggleReplyLike('<%= item.communities_id %>','<%= item.id %>');">
-                                          <% if(item.users.indexOf(user.id)==-1) { %>
-                                            <i class="fa-thumbs-up fa-regular"></i>
-                                            <% }else{ %>
-                                              <i class="fa-thumbs-up fa-solid"></i>
-                                              <% }} %>
-                                        </a>
-                                  </h5>
-                                </div>
-                              </div>
-                              <hr />
-                            </div>
-                            <% }) %>
-
-                              <!-- 댓글 남기기 -->
-                              <div>
-                                <form method="post"
-                                  action="<%= codezip.url.users.community.reply.add %>/<%= community.id %>">
-                                  <textarea rows="10" name="content" class="form-control br-20"></textarea>
-                                  <div class="text-end">
-                                    <button class="btn bg-white mt-2">
-                                      <%= __('users.community.reply.btn.댓글 남기기') %>
-                                    </button>
-                                  </div>
-                                </form>
-                              </div>
-                              <!-- pagination -->
-                              <% let page=+reply.page %>
-                                <% let count=+reply.count %>
-                                  <% let end_page=parseInt((count-1)/4)+1; %>
-                                    <% if(end_page>1) { %>
-                                      <div class="d-flex justify-content-center  mt-3">
-                                        <!-- 페이징처리 시작 -->
-                                        <!-- 처음 & 이전으로 -->
-                                        <ul class="p-2 pagination">
-                                          <% if (page==1) { %>
-                                            <li class="page-item disabled"><a class="page-link">
-                                                <%- __('users.pagination.처음으로') %>
-                                              </a>
-                                            </li>
-                                            <li class="page-item disabled"><a class="page-link">
-                                                <%- __('users.pagination.이전으로') %>
-                                              </a>
-                                            </li>
-                                            <% } else { %>
-                                              <li class="page-item"><a class="page-link" href="<%= originalUrl %>?rp=1">
-                                                  <%- __('users.pagination.처음으로') %>
-                                                </a>
-                                              </li>
-                                              <li class="page-item"><a class="page-link"
-                                                  href="<%= originalUrl %>?rp=<%= page-1 %>">
-                                                  <%- __('users.pagination.이전으로') %>
-                                                </a>
-                                              </li>
-                                              <% } %>
-                                        </ul>
-                                        <!-- 페이지 리스트 -->
-                                        <ul class="p-2 pagination">
-                                          <% end_list_num=end_page> 6 ? 5:end_page %>
-                                            <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
-                                              <li class="page-item disabled">
-                                                <a class="page-link current_page">
-                                                  <%= i %>
-                                                </a>
-                                              </li>
-                                              <% } else { %>
-                                                <li class="page-item"><a class="page-link"
-                                                    href="<%= originalUrl %>?rp=<%= i %>">
-                                                    <%= i %>
-                                                  </a></li>
-                                                <% }} %>
-                                                  <% } else if ( page> end_page-3 ) {
-                                                    for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
-                                                      <li class="page-item disabled">
-                                                        <a class="page-link current_page">
-                                                          <%= i %>
-                                                        </a>
-                                                      </li>
-                                                      <% } else { %>
-                                                        <li class="page-item">
-                                                          <a class="page-link" href="<%= originalUrl %>?rp=<%= i %>">
-                                                            <%= i %>
-                                                          </a>
-                                                        </li>
-                                                        <% }} %>
-                                                          <% } else { for (let i=page-2; i < +page+3; i++) { if
-                                                            (page==i) { %>
-                                                            <li class="page-item disabled">
-                                                              <a class="page-link current_page">
-                                                                <%= i %>
-                                                              </a>
-                                                            </li>
-                                                            <% } else { %>
-                                                              <li class="page-item">
-                                                                <a class="page-link"
-                                                                  href="<%= originalUrl %>?rp=<%= i %>">
-                                                                  <%= i %>
-                                                                </a>
-                                                              </li>
-                                                              <% }} %>
-                                                                <% } %>
-                                        </ul>
-                                        <!-- 다음 & 마지막으로 -->
-                                        <ul class="p-2 pagination">
-                                          <% if(page==end_page){ %>
-                                            <li class="page-item disabled">
-                                              <a class="page-link">
-                                                <%- __('users.pagination.다음으로') %>
-                                              </a>
-                                            </li>
-                                            <li class="page-item disabled">
-                                              <a class="page-link">
-                                                <%- __('users.pagination.마지막으로') %>
-                                              </a>
-                                            </li>
-                                            <% } else { %>
-                                              <li class="page-item">
-                                                <a class="page-link" href="<%= originalUrl %>?rp=<%= +page+1 %>">
-                                                  <%- __('users.pagination.다음으로') %>
-                                                </a>
-                                              </li>
-                                              <li class="page-item">
-                                                <a class="page-link" href="<%= originalUrl %>?rp=<%= end_page %>">
-                                                  <%- __('users.pagination.마지막으로') %>
-                                                </a>
-                                              </li>
-                                              <% } %>
-                                        </ul>
-                                        <!-- 페이징처리 끝 -->
-                                      </div>
-                                      <% } %>
-                        </div>
-
-                        <!-- 수정 삭제 버튼 -->
-                        <% if(community.users_id==user.id) { %>
-                          <div class="text-end">
-                            <a class="btn btn-lg col-2 mx-2 p-3 br-15"
-                              href="<%= codezip.url.users.community.edit %>/<%= community.communities_id %>">
-                              <%= __('users.community.btn.수정') %>
-                            </a>
-                            <a class="btn btn-lg col-2 mx-2 p-3 br-15"
-                              href="<%= codezip.url.users.community.delete %>/<%= community.communities_id %>">
-                              <%= __('users.community.btn.삭제') %>
-                            </a>
-                          </div>
-                          <% } %>
-
-                      </div>
-
-                    </div>
-                  </div>
-
-
-                </div>
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Lounge') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Community') %>
+                  </strong></h4>
               </div>
             </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col">
+                <h5><strong>
+                    <%= __('users.community.subtitle') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 widget-content-area pt-0">
+
+              <div class="widget w-100">
+
+                <!-- title -->
+                <div class="form-control m-2 d-flex justify-content-between">
+                  <div class="p-1">
+                    <h6>
+                      <%= `${community.title}` %>
+                    </h6>
+                  </div>
+                  <div class="p-1 d-flex">
+                    <h6 class="me-3">
+                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                      <%= `${__('users.community.index.WrittenBy')} |
+                                  ${community.last_name}${community.first_name} ${formatDate(community.update_date)}` %>
+                      <% } else { %>
+                      <%= `${__('users.community.news.index.WrittenBy')} |
+                                      ${community.first_name} ${community.last_name}
+                                      ${formatDate(community.update_date)}` %>
+                      <% } %>
+                    </h6>
+                    <!-- <h6 id="communitylike_count" class="mx-1"><strong>
+                        <%# communityLike.count %>
+                      </strong>
+                    </h6> -->
+                    <h6><a id="communityLikeBtn" href="javascript:void(0);" onclick="toggleLike('<%= community.id %>');">
+                        <% if(communityLike.rows.indexOf(user.id)==-1) { %>
+                        <i class="fa-star fa-regular"></i>
+                        <% }else{ %>
+                        <i class="fa-star fa-solid text-primary"></i>
+                        <% } %>
+                      </a></h6>
+                  </div>
+                </div>
+
+                <!-- content -->
+                <div class="row breadcrumb m-2 mt-3 br-20 p-3">
+                  <div class="py-5">
+                    <p>
+                      <%= community.content %>
+                    </p>
+                  </div>
+
+                  <hr>
+
+                  <div class="d-flex mt-3 align-items-center">
+                    <div class="col-4"></div>
+                    <!-- 네비게이션 -->
+                    <div class="col-4 d-flex justify-content-center align-items-end">
+                      <div class="w-auto mx-3 hover">
+                        <% if(prev) { %><a href="<%= codezip.url.users.community.main %>/<%= prev.id %>">
+                          <h6><i class="fa-solid fa-chevron-left fs-5 me-3"></i>
+                            <%= __('btn.이전글') %>
+                          </h6>
+                        </a>
+                        <% } %>
+                      </div>
+                      <div class="w-auto text-center mx-3 hover"><a href="<%= codezip.url.users.community.main %>">
+                          <h6>
+                            <%= __('btn.목록') %>
+                          </h6>
+                        </a></div>
+                      <div class="w-auto mx-3 hover">
+                        <% if(next) { %><a href="<%= codezip.url.users.community.main %>/<%= next.id %>">
+                          <h6>
+                            <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right fs-5 ms-3"></i>
+                          </h6>
+                        </a>
+                        <% } %>
+                      </div>
+                    </div>
+                    <!-- 수정 삭제 버튼 -->
+                    <div class="text-end col-4">
+                      <% if(community.users_id==user.id) { %>
+                      <a class="col-4 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.edit %>/<%= community.communities_id %>">
+                        <%= __('users.community.btn.수정') %>
+                      </a>
+                      <a class="col-4 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.delete %>/<%= community.communities_id %>">
+                        <%= __('users.community.btn.삭제') %>
+                      </a>
+                      <% } %>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- 댓글 -->
+
+                <div class="row breadcrumb m-2 mt-3 br-20 p-3">
+                  <!-- 댓글 내용 -->
+                  <% reply.data.forEach((item,index)=>{ %>
+                  <div id="reply_area<%= item.id %>" class="row reply">
+                    <div class="col-3 text-break">
+                      <h6>
+                        <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                        <%= item.last_name + item.first_name + ' ' + formatDate(item.update_date) %>
+                        <% } else { %>
+                        <%= item.last_name + ' ' + item.first_name + ' ' + formatDate(item.update_date) %>
+                        <% } %>
+                      </h6>
+                      <% if(item.users_id==user.id) { %>
+                      <div class="mb-1">
+                        <button class="btn btn-outline-primary  p-1 m-1" type="button" onclick="reply_edit_active('<%= item.communities_id %>','<%= item.id %>');">
+                          <%= __('users.community.btn.수정') %>
+                        </button>
+                        <button class="btn btn-outline-primary  p-1 m-1" type="button" onclick="reply_delete('<%= item.communities_id %>','<%= item.id %>');">
+                          <%= __('users.community.btn.삭제') %>
+                        </button>
+                      </div>
+                      <% } %>
+                    </div>
+                    <div id="reply_content<%= item.id %>" class="col-8 text-break">
+                      <%= item.content %>
+                    </div>
+                    <!-- 댓글 좋아요 -->
+                    <div class="col-1 p-0 align-self-center text-end">
+                      <div class="p-1 d-flex">
+                        <h6 id="replylike_count<%= item.id %>" class="mx-1"><strong>
+                            <%= item.like_count %>
+                          </strong>
+                        </h6>
+                        <h6>
+                          <% if(item.users_id==user.id) { %>
+                          <i class="fa-thumbs-up fa-regular"></i>
+                          <% }else{ %>
+                          <a id="replyLikeBtn<%= item.id %>" href="javascript:void(0);" onclick="toggleReplyLike('<%= item.communities_id %>','<%= item.id %>');">
+                            <% if(item.users.indexOf(user.id)==-1) { %>
+                            <i class="fa-thumbs-up fa-regular"></i>
+                            <% }else{ %>
+                            <i class="fa-thumbs-up fa-solid"></i>
+                            <% }} %>
+                          </a>
+                        </h6>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                  <% }) %>
+
+                  <!-- 댓글 남기기 -->
+                  <div>
+                    <form method="post" action="<%= codezip.url.users.community.reply.add %>/<%= community.id %>" class="border border-gray px-4 py-2 br-4">
+                      <textarea rows="10" name="content" class="form-control bg-white bc-white" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>"></textarea>
+                      <hr class="m-0">
+                      <div class="d-flex justify-content-between">
+                        <div id="textCount align-self-center">
+                          <p>0 / 3000</p>
+                        </div>
+                        <button class="w-auto btn btn-outline-primary mt-2 px-3">
+                          <%= __('users.community.reply.btn.댓글 남기기') %>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- pagination -->
+                  <% let page=+reply.page %>
+                  <% let count=+reply.count %>
+                  <% let end_page=parseInt((count-1)/4)+1; %>
+                  <% if(end_page>1) { %>
+                  <div class="d-flex justify-content-center  mt-3">
+                    <!-- 페이징처리 시작 -->
+                    <!-- 처음 & 이전으로 -->
+                    <ul class="p-2 pagination">
+                      <% if (page==1) { %>
+                      <li class="page-item disabled"><a class="page-link">
+                          <%- __('users.pagination.처음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item disabled"><a class="page-link">
+                          <%- __('users.pagination.이전으로') %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item"><a class="page-link" href="<%= originalUrl %>?rp=1">
+                          <%- __('users.pagination.처음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="<%= originalUrl %>?rp=<%= page-1 %>">
+                          <%- __('users.pagination.이전으로') %>
+                        </a>
+                      </li>
+                      <% } %>
+                    </ul>
+                    <!-- 페이지 리스트 -->
+                    <ul class="p-2 pagination">
+                      <% end_list_num=end_page> 6 ? 5:end_page %>
+                      <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item"><a class="page-link" href="<%= originalUrl %>?rp=<%= i %>">
+                          <%= i %>
+                        </a></li>
+                      <% }} %>
+                      <% } else if ( page> end_page-3 ) {
+                                                    for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= originalUrl %>?rp=<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% }} %>
+                      <% } else { for (let i=page-2; i < +page+3; i++) { if
+                                                            (page==i) { %>
+                      <li class="page-item disabled">
+                        <a class="page-link current_page">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= originalUrl %>?rp=<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% }} %>
+                      <% } %>
+                    </ul>
+                    <!-- 다음 & 마지막으로 -->
+                    <ul class="p-2 pagination">
+                      <% if(page==end_page){ %>
+                      <li class="page-item disabled">
+                        <a class="page-link">
+                          <%- __('users.pagination.다음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item disabled">
+                        <a class="page-link">
+                          <%- __('users.pagination.마지막으로') %>
+                        </a>
+                      </li>
+                      <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= originalUrl %>?rp=<%= +page+1 %>">
+                          <%- __('users.pagination.다음으로') %>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="<%= originalUrl %>?rp=<%= end_page %>">
+                          <%- __('users.pagination.마지막으로') %>
+                        </a>
+                      </li>
+                      <% } %>
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                  </div>
+                  <% } %>
+                </div>
+
+
+
+              </div>
+
+            </div>
+          </div>
+
 
         </div>
-        <!--  END CONTENT AREA  -->
+      </div>
+    </div>
 
-        <%- include ("../partials/footer.ejs") %>
+  </div>
+  <!--  END CONTENT AREA  -->
 
-          </div>
-          <!-- END MAIN CONTAINER -->
+  <%- include ("../partials/footer.ejs") %>
 
-          <%- include ("../partials/commonScrpits.ejs") %>
+  </div>
+  <!-- END MAIN CONTAINER -->
 
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-            <script>
-              // 게시글 좋아요
-              async function toggleLike(id) {
-                const communityLikeBtn = document.getElementById('communityLikeBtn');
-                const target = communityLikeBtn.getElementsByClassName('fa-star')[0];
-                let is_like;
+  <%- include ("../partials/commonScrpits.ejs") %>
 
-                if (target.classList.contains('fa-regular')) {
-                  target.classList.remove('fa-regular');
-                  target.classList.add('fa-solid');
-                  communitylike_count.innerText = +communitylike_count.innerText + 1
-                  is_like = true;
-                } else {
-                  target.classList.remove('fa-solid');
-                  target.classList.add('fa-regular');
-                  communitylike_count.innerText = +communitylike_count.innerText - 1
-                  is_like = false;
-                }
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    // 게시글 좋아요
+    async function toggleLike(id) {
+      const communityLikeBtn = document.getElementById('communityLikeBtn');
+      const target = communityLikeBtn.getElementsByClassName('fa-star')[0];
+      let is_like;
 
-                const url = '<%= codezip.url.users.community.like %>'
-                fetch(url, {
-                  method: 'post',
-                  headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                  },
-                  body: JSON.stringify({
-                    communities_id: id,
-                    is_like: is_like
-                  })
-                }).then(res => {
-                  if (res.ok) {
+      if (target.classList.contains('fa-regular')) {
+        target.classList.remove('fa-regular');
+        target.classList.add('fa-solid');
+        target.classList.add('text-primary');
+        communitylike_count.innerText = +communitylike_count.innerText + 1
+        is_like = true;
+      } else {
+        target.classList.remove('text-primary');
+        target.classList.remove('fa-solid');
+        target.classList.add('fa-regular');
+        communitylike_count.innerText = +communitylike_count.innerText - 1
+        is_like = false;
+      }
 
-                  } else {
-                    throw new Error(res.statusText);
-                  }
-                }).catch(err => {
-                  console.error(err);
-                  alert("<%= __('users.community.msg.likeFail') %>");
-                  window.location.reload();
-                })
-              }
+      const url = '<%= codezip.url.users.community.like %>'
+      fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          communities_id: id,
+          is_like: is_like
+        })
+      }).then(res => {
+        if (res.ok) {
 
-              // 댓글 좋아요
-              async function toggleReplyLike(communities_id, replies_id) {
-                const replyLikeBtn = document.getElementById('replyLikeBtn' + replies_id);
-                const target = replyLikeBtn.getElementsByClassName('fa-thumbs-up')[0];
-                const replylike_count = document.getElementById('replylike_count' + replies_id);
+        } else {
+          throw new Error(res.statusText);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.community.msg.likeFail') %>");
+        window.location.reload();
+      })
+    }
 
-                let is_like;
+    // 댓글 좋아요
+    async function toggleReplyLike(communities_id, replies_id) {
+      const replyLikeBtn = document.getElementById('replyLikeBtn' + replies_id);
+      const target = replyLikeBtn.getElementsByClassName('fa-thumbs-up')[0];
+      const replylike_count = document.getElementById('replylike_count' + replies_id);
 
-                if (target.classList.contains('fa-regular')) {
-                  target.classList.remove('fa-regular');
-                  target.classList.add('fa-solid');
-                  replylike_count.innerText = +replylike_count.innerText + 1
-                  is_like = true;
-                } else {
-                  target.classList.remove('fa-solid');
-                  target.classList.add('fa-regular');
-                  replylike_count.innerText = +replylike_count.innerText - 1
-                  is_like = false;
-                }
+      let is_like;
 
-                const url = '<%= codezip.url.users.community.reply.like %>'
-                fetch(url, {
-                  method: 'post',
-                  headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                  },
-                  body: JSON.stringify({
-                    communities_id: communities_id,
-                    replies_id: replies_id,
-                    is_like: is_like
-                  })
-                }).then(res => {
-                  if (res.ok) {
+      if (target.classList.contains('fa-regular')) {
+        target.classList.remove('fa-regular');
+        target.classList.add('fa-solid');
+        replylike_count.innerText = +replylike_count.innerText + 1
+        is_like = true;
+      } else {
+        target.classList.remove('fa-solid');
+        target.classList.add('fa-regular');
+        replylike_count.innerText = +replylike_count.innerText - 1
+        is_like = false;
+      }
 
-                  } else {
-                    throw new Error(res.text());
-                  }
-                }).catch(err => {
-                  console.error(err);
-                  alert("<%= __('users.community.msg.likeFail') %>");
-                  window.location.reload();
-                })
-              }
+      const url = '<%= codezip.url.users.community.reply.like %>'
+      fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          communities_id: communities_id,
+          replies_id: replies_id,
+          is_like: is_like
+        })
+      }).then(res => {
+        if (res.ok) {
 
-              async function reply_edit_active(communities_id, replies_id) {
-                const target = document.getElementById('reply_area' + replies_id);
-                const text = document.getElementById('reply_content' + replies_id).innerText;
-                let temp_html = `<div class="bg-white p-2 m-2 br-20">
+        } else {
+          throw new Error(res.text());
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.community.msg.likeFail') %>");
+        window.location.reload();
+      })
+    }
+
+    async function reply_edit_active(communities_id, replies_id) {
+      const target = document.getElementById('reply_area' + replies_id);
+      const text = document.getElementById('reply_content' + replies_id).innerText;
+      let temp_html = `<div class="bg-white p-2 m-2 br-20">
                 <textarea id="replyEditTarget${replies_id}" rows="10" name="content" class="form-control br-20">${text}</textarea>
                   <div class="text-end mt-2 me-3">
-                    <button class="btn" type="button" onclick="reply_edit(${communities_id},${replies_id});">
+                    <button class="btn btn-outline-primary" type="button" onclick="reply_edit(${communities_id},${replies_id});">
                       <%= __('users.community.reply.btn.확인') %>
                     </button>
-                    <button class="btn" type="button" onclick="location.reload();">
+                    <button class="btn btn-outline-primary" type="button" onclick="location.reload();">
                       <%= __('users.community.reply.btn.취소') %>
                     </button>
                   </div>
                 </div>
                 <hr/>
                 `
-                target.innerHTML = temp_html;
-              }
+      target.innerHTML = temp_html;
+    }
 
-              async function reply_edit(communities_id, replies_id) {
-                const url = '<%= codezip.url.users.community.reply.edit %>';
-                let content = document.getElementById('replyEditTarget' + replies_id).value;
-                fetch(url, {
-                  method: "put",
-                  body: new URLSearchParams({
-                    communities_id: communities_id,
-                    id: replies_id,
-                    content: content
-                  })
-                }).then(res => {
-                  if (res.ok) {
-                    location.reload();
-                  } else {
-                    throw new Error();
-                  }
-                }).catch(err => {
-                  alert("<%= __('users.community.msg.replyEditFail') %>");
-                  window.location.reload();
-                })
-              }
+    async function reply_edit(communities_id, replies_id) {
+      const url = '<%= codezip.url.users.community.reply.edit %>';
+      let content = document.getElementById('replyEditTarget' + replies_id).value;
+      fetch(url, {
+        method: "put",
+        body: new URLSearchParams({
+          communities_id: communities_id,
+          id: replies_id,
+          content: content
+        })
+      }).then(res => {
+        if (res.ok) {
+          location.reload();
+        } else {
+          throw new Error();
+        }
+      }).catch(err => {
+        alert("<%= __('users.community.msg.replyEditFail') %>");
+        window.location.reload();
+      })
+    }
 
-              async function reply_delete(communities_id, replies_id) {
-                let url = '<%= codezip.url.users.community.reply.delete %>/' + communities_id + '/' + replies_id;
-                fetch(url, {
-                  method: "delete",
-                  body: new URLSearchParams({
-                    communities_id: communities_id,
-                    id: replies_id,
-                  })
-                }).then(res => {
-                  if (res.ok) {
-                    let reply = document.getElementsByClassName('reply');
-                    // console.log(reply.length);
-                    if (reply && reply.length <= 1) {
-                      location.href = location.pathname;
-                    } else {
-                      location.reload();
-                    }
-                  } else {
-                    throw new Error();
-                  }
-                }).catch(err => {
-                  alert("<%= __('Error') %>");
-                  location.href = location.pathname;
-                })
-              }
-            </script>
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    async function reply_delete(communities_id, replies_id) {
+      let url = '<%= codezip.url.users.community.reply.delete %>/' + communities_id + '/' + replies_id;
+      fetch(url, {
+        method: "delete",
+        body: new URLSearchParams({
+          communities_id: communities_id,
+          id: replies_id,
+        })
+      }).then(res => {
+        if (res.ok) {
+          let reply = document.getElementsByClassName('reply');
+          // console.log(reply.length);
+          if (reply && reply.length <= 1) {
+            location.href = location.pathname;
+          } else {
+            location.reload();
+          }
+        } else {
+          throw new Error();
+        }
+      }).catch(err => {
+        alert("<%= __('Error') %>");
+        location.href = location.pathname;
+      })
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

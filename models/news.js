@@ -9,9 +9,13 @@ module.exports = function(sequelize, DataTypes) {
       comment: "공지사항 식별번호"
     },
     users_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      comment: "사용자 식별번호"
+      comment: "사용자 식별번호",
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     title: {
       type: DataTypes.STRING(100),
@@ -51,6 +55,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "news_FK",
+        using: "BTREE",
+        fields: [
+          { name: "users_id" },
         ]
       },
     ]

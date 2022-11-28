@@ -28,165 +28,101 @@
 
           <!-- BREADCRUMB -->
           <div class="row px-3">
-            <div class="breadcrumb align-items-start d-flex pt-3 br-20">
-              <div class="p-1 col-3">
-                <h5><strong>
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Lounge') %>
+                </h6>
+                <h4><strong>
                     <%= __('News') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col">
+                <h5><strong>
+                    <%= __('users.news.subtitle') %>
                   </strong></h5>
               </div>
             </div>
           </div>
+
           <!-- CONTENT AREA -->
           <div class="row px-3 justify-content-center">
             <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
               <div class="widget w-100">
 
 
-              <!-- News -->
-              <div class="widget-content widget-content-area br-20 px-4">
+                <!-- News -->
                 <div class="form-group ms-3">
-                  <div class="row">
-                    <div class="col-6 col-md-4">
-                      <h5><strong>
-                          <%= __('users.community.header.News') %>
-                        </strong></h5>
-                    </div>
-                  </div>
+
                   <!-- list -->
                   <div class="row mt-3">
-                    <% news.data.forEach((item, index)=>{ %>
-                    <div class="my-1">
-                      <button class="col-12 btn br-15" type="button" onclick="location.href='<%= codezip.url.users.news.main + '/' + item.id %>'">
-                        <h6 class="m-1">
-                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                        ${item.last_name}${item.first_name} ${formatDate(item.updateDate)}` %>
-                          <% } else { %>
-                          <%= `${item.title} ${__('users.community.news.index.WrittenBy')}
-                                            ${item.first_name} ${item.last_name} ${formatDate(item.updateDate)}` %>
-                          <% } %>
-                        </h6>
-                      </button>
+                    <div class="text-black align-self-center">
+                      <div id="index_head" class="d-flex form-control text-center h6 p-0">
+                        <div class="col-1 py-3">
+                          <%= __('users.myPage.table.thead.number') %>
+                        </div>
+                        <div class="col-6 py-3">
+                          <%= __('users.myPage.table.thead.title') %>
+                        </div>
+                        <div class="col-2 py-3">
+                          <%= __('users.myPage.table.thead.date') %>
+                        </div>
+                        <div class="col-3 py-3">
+                          <%= __('users.myPage.table.thead.writer') %>
+                        </div>
+                      </div>
+                      <div id="index_body">
+                        <% news.data.forEach((item,index)=>{ %>
+                        <a class="d-flex border-bottom py-3 page-link text-black" href='<%= codezip.url.users.news.main + `/` + item.id %>'>
+                          <div class="col-1 text-center"><%= item.id %></div>
+                          <div class="col-6 text-ellipsis">
+                            <%- include('../partials/badge/new', {date:item.create_date}) %>
+                            <%= item.title %>
+                          </div>
+                          <div class="col-2 text-center flex-grow-1">
+                            <%= formatDate(item.create_date) %>
+                          </div>
+                          <div class="col-3 text-center text-ellipsis">
+                            <%# __('users.community.index.WrittenBy') %>
+                            <%= __('admin.userName') %>
+                          </div>
+                        </a>
+                        <% }) %>
+                      </div>
                     </div>
-                    <% }) %>
                   </div>
 
                   <!-- pagination -->
-                  <% let page=+news.page %>
-                  <% let count=+news.count %>
-                  <% let end_page=parseInt((count-1)/4)+1; %>
-                  <% if(end_page>1) { %>
-                  <div class="d-flex justify-content-center mt-3">
-                    <!-- 페이징처리 시작 -->
-                    <!-- 처음 & 이전페이지 -->
-                    <ul class="p-2 pagination">
-                      <% if (page==1) { %>
-                      <li class="page-item disabled"><a class="page-link">
-                          <%- __('users.pagination.처음으로') %>
-                        </a>
-                      </li>
-                      <li class="page-item disabled"><a class="page-link">
-                          <%- __('users.pagination.이전으로') %>
-                        </a>
-                      </li>
-                      <% } else { %>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.news.main %>?np=1&cp=<%= news.page %>">
-                          <%- __('users.pagination.처음으로') %>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= page-1 %>&cp=<%= news.page %>">
-                          <%- __('users.pagination.이전으로') %>
-                        </a>
-                      </li>
-                      <% } %>
-                    </ul>
-                    <!-- 페이지 리스트 -->
-                    <ul class="p-2 pagination">
-                      <% let end_list_num=end_page> 6 ? 5:end_page %>
-                      <% if (page < 4) { for (let i=1; i<=end_list_num; i++) { if (page==i) { %>
-                      <li class="page-item disabled">
-                        <a class="page-link current_page">
-                          <%= i %>
-                        </a>
-                      </li>
-                      <% } else { %>
-                      <li class="page-item"><a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= i %>&cp=<%= news.page %>">
-                          <%= i %>
-                        </a></li>
-                      <% }} %>
-                      <% } else if ( page> end_page-3 ) {
-                                                for (let i = end_page-4; i <= end_page; i++) { if (page==i) { %>
-                      <li class="page-item disabled">
-                        <a class="page-link current_page">
-                          <%= i %>
-                        </a>
-                      </li>
-                      <% } else { %>
-                      <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= i %>&cp=<%= news.page %>">
-                          <%= i %>
-                        </a>
-                      </li>
-                      <% }} %>
-                      <% } else { for (let i=page-2; i < page+3; i++) { if (page==i) {
-                                                        %>
-                      <li class="page-item disabled">
-                        <a class="page-link current_page">
-                          <%= i %>
-                        </a>
-                      </li>
-                      <% } else { %>
-                      <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.news %>?np=<%= i %>&cp=<%= news.page %>">
-                          <%= i %>
-                        </a>
-                      </li>
-                      <% }} %>
-                      <% } %>
-                    </ul>
-                    <!-- 다음 & 마지막페이지 -->
-                    <ul class="p-2 pagination">
-                      <% if(page==end_page){ %>
-                      <li class="page-item disabled">
-                        <a class="page-link">
-                          <%- __('users.pagination.다음으로') %>
-                        </a>
-                      </li>
-                      <li class="page-item disabled">
-                        <a class="page-link">
-                          <%- __('users.pagination.마지막으로') %>
-                        </a>
-                      </li>
-                      <% } else { %>
-                      <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= +page+1 %>&cp=<%= news.page %>">
-                          <%- __('users.pagination.다음으로') %>
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="<%= codezip.url.users.news.main %>?np=<%= end_page %>&cp=<%= news.page %>">
-                          <%- __('users.pagination.마지막으로') %>
-                        </a>
-                      </li>
-                      <% } %>
-                    </ul>
-                    <!-- 페이징처리 끝 -->
-                  </div>
+                  <% if(+news.count) { %>
+                  <!-- make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) -->
+                  <%- make_pagination_by_href(
+                    __,
+                    +news.page,
+                    +news.count,
+                    codezip.url.users.news.main,
+                    5
+                  ) %>
                   <% } %>
 
                 </div>
               </div>
-              </div>
-
             </div>
-          </div>
 
+          </div>
         </div>
+
       </div>
     </div>
-    <!--  END CONTENT AREA  -->
+  </div>
+  <!--  END CONTENT AREA  -->
 
-    <%- include ("../partials/footer.ejs") %>
+  <%- include ("../partials/footer.ejs") %>
 
   </div>
   <!-- END MAIN CONTAINER -->

@@ -1,4 +1,5 @@
 const formulasService = require('../services/formulas');
+const like_formulas = require('../services/like_formulas');
 
 exports.add = async (req, res, next) => {
     let body = req.body;
@@ -45,6 +46,11 @@ exports.delete = async (req, res, next) => {
         .hide(condition)
         .then((result) => {
             if (result == 1) {
+                // like_formulas
+                //     .delete({ formulas_id: id })
+                //     .then((cnt) => {
+                //         console.log("like delete count:", cnt)
+                //     })
                 res.status(200).end();
             }
             else if (result == 0) {
@@ -138,22 +144,61 @@ exports.detail = async (req, res, next) => {
     }
     condition.id = req.params.id;
 
-    await formulasService
-        .readOne(condition)
-        .then((result) => {
-            console.log("find :", result);
-            if (req.api) {
-                res.json({
-                    formula: result
-                })
-            } else {
-                res.render('formula/detail', {
-                    formula: result
-                })
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).end();
-        })
+    const like_list = like_formulas.getLikelist(user.id);
+
+    const formula = formulasService.readOne(condition);
+
+
+    Promise.all([formula, like_list]).then(([formula, like_list]) => {
+        console.log(formula);
+        console.log(like_list);
+        console.log(like_list.list.includes(formula.id));
+
+        let is_like = false;
+        if (like_list.list.includes(formula.id)) is_like = true;
+
+        if (req.api) {
+            res.json({
+                formula: formula
+            })
+        } else {
+            res.render('formula/detail', {
+                formula: formula,
+                is_like: is_like,
+            })
+        }
+
+    }).catch((err) => {
+        console.error(err);
+        res.status(500).end();
+    })
+}
+
+exports.like = async (req, res, next) => {
+    const user = res.locals.user;
+    const id = +req.params.id;
+    const like_list = await like_formulas.getLikelist(user.id);
+    // console.log(like_list);
+    // console.log(id);
+
+    let condition = {
+        formulas_id: id,
+        users_id: user.id
+    }
+
+    let result = null;
+    if (like_list.list.includes(id)) {
+        result = like_formulas.delete(condition);
+    } else {
+        result = like_formulas.create(condition);
+    }
+
+    result.then(result => {
+        console.log(result)
+        res.end();
+    }).catch(err => {
+        console.error(err);
+        res.status(500).end();
+    })
+
 }

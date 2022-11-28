@@ -161,28 +161,28 @@
                   title:"테스트추천프로젝트5",
                   first_name: user.first_name,
                   last_name: user.last_name,
-                  createDate:new Date(2022,10,15),
+                  create_date:new Date(2022,10,15),
                 })%>
                 <% myPost.data.push({
                   community_id:13,
                   title:"테스트추천프로젝트4",
                   first_name: user.first_name,
                   last_name: user.last_name,
-                  createDate:new Date(2022,10,14),
+                  create_date:new Date(2022,10,14),
                 })%>
                 <% myPost.data.push({
                   community_id:10,
                   title:"테스트추천프로젝트3",
                   first_name: user.first_name,
                   last_name: user.last_name,
-                  createDate:new Date(2022,10,13),
+                  create_date:new Date(2022,10,13),
                 })%>
                 <% myPost.data.push({
                   community_id:6,
                   title:"테스트추천프로젝트2",
                   first_name: user.first_name,
                   last_name: user.last_name,
-                  createDate:new Date(2022,10,12),
+                  create_date:new Date(2022,10,12),
                 })%>
               </div>
               <!-- 테스트 데이터 생성 */ -->
@@ -223,11 +223,11 @@
                             </thead>
                             <tbody class="table-group-divider text-break">
                               <% myPost.data.forEach((item,index)=>{ %>
-                              <tr scope="row">
+                              <tr>
                                 <td class="col-1 text-center"><%= item.community_id %></td>
                                 <td><%= item.title %></td>
                                 <td class="col-2 text-center flex-grow-1">
-                                  <%= formatDate(item.createDate) %>
+                                  <%= formatDate(item.create_date) %>
                                 </td>
                                 <td class="col-3 text-center">
                                   <%= __('users.community.index.WrittenBy') %>
@@ -283,28 +283,28 @@
                           title:"테스트추천프로젝트5",
                           first_name:"tester5",
                           last_name:"테스터5",
-                          createDate:new Date(2022,10,15),
+                          create_date:new Date(2022,10,15),
                           profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
                         })%>
                         <% myFavoritePosts.data.push({
                           title:"테스트추천프로젝트4",
                           first_name:"tester4",
                           last_name:"테스터4",
-                          createDate:new Date(2022,10,14),
+                          create_date:new Date(2022,10,14),
                           profile_image_path:"http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"
                         })%>
                         <% myFavoritePosts.data.push({
                           title:"테스트추천프로젝트3",
                           first_name:"tester3",
                           last_name:"테스터3",
-                          createDate:new Date(2022,10,13),
+                          create_date:new Date(2022,10,13),
                           profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
                         })%>
                         <% myFavoritePosts.data.push({
                           title:"테스트추천프로젝트2",
                           first_name:"tester2",
                           last_name:"테스터2",
-                          createDate:new Date(2022,10,12),
+                          create_date:new Date(2022,10,12),
                           profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0009.jpg"
                         })%>
                       </div>
@@ -339,7 +339,7 @@
                                   </div>
                                 </td>
                                 <td>
-                                  <%= formatDate(item.createDate) %>
+                                  <%= formatDate(item.create_date) %>
                                 </td>
                                 <td><%= item.title %></td>
                               </tr>
@@ -381,24 +381,24 @@
                       <div>
                         <% let myFavoriteComments={data:[],count:3}; %>
                         <% myFavoriteComments.data.push({
-                            contents:"댓글내용1",
+                            content:"댓글내용1",
                             first_name:"tester1",
                             last_name:"테스터1",
-                            createDate:new Date(2022,10,10),
+                            create_date:new Date(2022,10,10),
                             profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0001.jpg"
                           })%>
                         <% myFavoriteComments.data.push({
-                            contents:"댓글내용2",
+                            content:"댓글내용2",
                             first_name:"tester2",
                             last_name:"테스터2",
-                            createDate:new Date(2022,10,10),
+                            create_date:new Date(2022,10,10),
                             profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0002.jpg"
                           })%>
                         <% myFavoriteComments.data.push({
-                            contents:"댓글내용3",
+                            content:"댓글내용3",
                             first_name:"tester3",
                             last_name:"테스터3",
-                            createDate:new Date(2022,10,10),
+                            create_date:new Date(2022,10,10),
                             profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0003.jpg"
                           })%>
                       </div>
@@ -433,9 +433,9 @@
                                   </div>
                                 </td>
                                 <td>
-                                  <%= formatDate(item.createDate) %>
+                                  <%= formatDate(item.create_date) %>
                                 </td>
-                                <td><%= item.contents %></td>
+                                <td><%= item.content %></td>
                               </tr>
                               <% }) %>
                             </tbody>

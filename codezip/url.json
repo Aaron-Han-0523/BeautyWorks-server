@@ -25,7 +25,10 @@
             "_": "/users/newProject/draft",
             "_5": "/users/newProject/order"
         },
-        "formula": "/users/formula",
+        "formula": {
+            "main": "/users/formula",
+            "like": "/users/formula/like"
+        },
         "packaging": "/users/packaging",
         "ingredient": "/users/ingredient",
         "news": {

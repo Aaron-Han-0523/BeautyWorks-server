@@ -16,7 +16,7 @@ exports.add = async (req, res, next) => {
     try {
         let result = await communitiesService.create(body);
         // console.log("result :",result);
-        return res.status(201).redirect(codezip.url.users.communities.main);
+        return res.status(201).redirect(codezip.url.users.community.main);
     }
     catch (e) {
         console.error(e);
@@ -47,7 +47,7 @@ exports.edit = async (req, res, next) => {
     communitiesService
         .update(body)
         .then(result => {
-            return res.redirect(codezip.url.users.communities.main + '/' + id);
+            return res.redirect(codezip.url.users.community.main + '/' + id);
         })
         .catch(err => {
             console.error(err);
@@ -56,23 +56,19 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    const news_page = req.query.np || 1;
-    const communities_page = req.query.cp || 1;
-    console.log("page query :", news_page, communities_page)
+    const communities_page = req.query.p || 1;
+    console.log("page query :", communities_page)
 
     let word = req.query.q
     if (word) word = word.replace(/\;/g, '').trim();
-    const skip = req.query.skip;
-    const limit = req.query.limit;
+    const limit = req.query.limit || 5;
+    const skip = req.query.skip || (communities_page - 1) * limit;
 
-    let news_paging = {
-        skip: skip ? skip : (news_page - 1) * 4,
-        limit: limit ? limit : 4
-    }
     let communities_paging = {
-        skip: skip ? skip : (communities_page - 1) * 4,
-        limit: limit ? limit : 4
+        skip: skip,
+        limit: limit
     }
+
     let condition = word ?
         // {
         //     [Op.or]: [
@@ -87,28 +83,20 @@ exports.index = async (req, res, next) => {
 
     const communities = communitiesService
         .allRead(condition, communities_paging)
-        .catch(err => console.error(err));
-
-    const news = newsService
-        .allRead(condition, news_paging)
-        .catch(err => console.error(err));
-
-    Promise.all([communities, news]).then(data => {
-        return res.render('community/index', {
-            communities: {
-                count: data[0][0].count,
-                data: data[0][1],
-                page: communities_page,
-                word: word
-            },
-            news: {
-                count: data[1][0].count,
-                data: data[1][1],
-                page: news_page,
-                word: word
-            }
-        });
-    })
+        .then(data => {
+            // console.log(data);
+            return res.render('community/index', {
+                communities: {
+                    count: data[0].count,
+                    data: data[1],
+                    page: communities_page,
+                    word: word
+                }
+            }).catch(err => {
+                console.error(err);
+                res.status(500).end();
+            });
+        })
 }
 
 exports.detail = async (req, res, next) => {
@@ -181,7 +169,7 @@ exports.delete = async (req, res, next) => {
 
     // console.log("delete result :", result)
 
-    if (result) return res.redirect(codezip.url.users.communities.main);
+    if (result) return res.redirect(codezip.url.users.community.main);
     else res.ststus(500).send(`fail id:${id}`)
 }
 

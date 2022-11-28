@@ -72,13 +72,30 @@ body {
     border: 1px solid #ebedf2;
 }
 
-.table thead {
+.table thead tr th {
     background-color: var(--BW-form-color);
 }
 
 .form-check-input:checked~label,
 .form-check-input[checked]~label {
     color: black;
+}
+
+.bc-white {
+    border-color: #fff;
+}
+
+.border-gray {
+    border-color: var(--bs-gray-100);
+}
+
+.dropdown-item {
+    padding: 0;
+}
+
+.dropdown-item * {
+    margin: auto;
+    padding: 0.25rem;
 }
 
 /***********************/
@@ -279,13 +296,67 @@ h5 {
     height: 100%;
 }
 
-.outline-badge-new {
+.mark.mark-outline-new {
     font-size: xx-small;
     color: #e2a03f !important;
     background-color: transparent;
     border: 1px solid #e2a03f;
     border-radius: 5px;
+    padding: 0 1rem;
 }
+
+/************************/
+/*      gallery        */
+/************************/
+.gallery {
+    position: relative
+}
+
+.gallery-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden
+}
+
+.gallery-prev,
+.gallery-next {
+    position: absolute;
+    top: 5rem;
+    bottom: 5rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    padding: 0;
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    opacity: .5;
+    transition: opacity .15s ease
+}
+
+.gallery-prev {
+    left: 0;
+}
+
+.gallery-next {
+    right: 0;
+}
+
+.like {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.like>.active {
+    color: red;
+}
+
+/************************/
+/*      gallery end     */
+/************************/
 
 /************************/
 /*      progress        */

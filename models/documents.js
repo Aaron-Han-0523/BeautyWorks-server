@@ -2,16 +2,24 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('documents', {
     users_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "사용자 식별번호"
+      comment: "사용자 식별번호",
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "프로젝트 식별번호"
+      comment: "프로젝트 식별번호",
+      references: {
+        model: 'projects',
+        key: 'id'
+      }
     },
     title: {
       type: DataTypes.STRING(100),

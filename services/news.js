@@ -7,7 +7,7 @@ exports.create = async (obj) => {
     return await news
         .create(Object.assign(obj, {
             createUser: obj.user,
-            createDate: new Date(),
+            create_date: new Date(),
         }))
         .then(result => {
             console.log("news create success");

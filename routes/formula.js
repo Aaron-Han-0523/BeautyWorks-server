@@ -31,8 +31,8 @@ router
   .get('/:id', formulasController.detail)
 
 // 좋아요
-// router
-//   .post('/like', formulasController.like)
+router
+  .get('/like/:id', formulasController.like)
 
 // 목록 조회
 router

@@ -3635,7 +3635,7 @@ fieldset:disabled .btn {
 
 .table thead tr th {
   border: none;
-  background: rgb(242, 244, 247);
+  /* background: rgb(242, 244, 247); */
   padding: 10px 21px 10px 21px;
   vertical-align: middle;
 }
@@ -3645,13 +3645,13 @@ fieldset:disabled .btn {
 }
 
 .table:not(.dataTable) thead tr th:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .table:not(.dataTable) thead tr th:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .table.table-no-space:not(.dataTable) thead tr th:first-child {
@@ -3757,12 +3757,12 @@ fieldset:disabled .btn {
   cursor: pointer;
 }
 
-.table-hover>tbody>tr:hover td:first-child {
+.table-hover>tbody>tr:last-child:hover td:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
-.table-hover>tbody>tr:hover td:last-child {
+.table-hover>tbody>tr:last-child:hover td:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }

@@ -2,26 +2,38 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('projects', {
     users_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "사용자 식별번호"
+      comment: "사용자 식별번호",
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "프로젝트 식별번호"
     },
     formulas_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
-      comment: "formulas 식별번호"
+      comment: "formulas 식별번호",
+      references: {
+        model: 'formulas',
+        key: 'id'
+      }
     },
     packages_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
-      comment: "용기 식별번호"
+      comment: "용기 식별번호",
+      references: {
+        model: 'packages',
+        key: 'id'
+      }
     },
     project_name: {
       type: DataTypes.STRING(100),
@@ -207,11 +219,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "이메일"
     },
-    request_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment: "의뢰서 접수 날짜"
-    },
     image_paths: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -243,6 +250,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "삭제일"
+    },
+    request_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "의뢰서 접수 날짜"
     }
   }, {
     sequelize,
@@ -256,6 +268,20 @@ module.exports = function(sequelize, DataTypes) {
         fields: [
           { name: "users_id" },
           { name: "id" },
+        ]
+      },
+      {
+        name: "projects_FK",
+        using: "BTREE",
+        fields: [
+          { name: "packages_id" },
+        ]
+      },
+      {
+        name: "projects_FK2",
+        using: "BTREE",
+        fields: [
+          { name: "formulas_id" },
         ]
       },
     ]

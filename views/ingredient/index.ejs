@@ -32,10 +32,10 @@
             <div class="breadcrumb align-items-end d-flex pt-3 br-20">
               <div class="col-3">
                 <h6 class="main-menu">
-                  <%= __('Customizing') %>
+                  <%= __('Service') %>
                 </h6>
                 <h4><strong>
-                    <%= __('Formula') %>
+                    <%= __('Ingredient') %>
                   </strong></h4>
               </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="breadcrumb align-items-start d-flex br-20">
               <div class="col-3">
                 <h5><strong>
-                    <%= __('users.formula.title.Benchmark') %>
+                    <%= __('users.ingredient.title') %>
                   </strong></h5>
               </div>
             </div>
@@ -55,59 +55,97 @@
           <div class="row px-3 justify-content-center">
             <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
 
-              <div class="widget w-100 py-5 px-4">
+              <div class="widget w-100 py-5 px-5">
                 <!-- select -->
-                <form>
-                  <div class="my-4 text-center mx-5 px-5">
-                    <div class="row align-items-center">
-                      <div class="col-2 h6"><%= __('users.formula.select.label.top_or_new') %></div>
-                      <div class="col">
-                        <select class="form-select" name="top_or_new">
-                          <option value="1"><%= __('users.formula.select.label.top') %></option>
-                          <option value="0"><%= __('users.formula.select.label.new') %></option>
-                        </select>
+                <form id="search_ingredients">
+                  <!-- 검색 폼 -->
+                  <div class="form-group mx-5 px-5">
+                    <!-- 통합 검색-->
+                    <div class="d-flex">
+                      <label class="col-2 h6 align-self-center mb-0">
+                        <%= __('통합 검색') %>
+                      </label>
+                      <div class="col form-control d-flex p-0">
+                        <input name="ingredient_name" class="col form-control" placeholder="<%= __('plzInputText') %>">
+                        <button class="col-1 form-control text-primary p-0" type="button" onclick="searching_ingredients();"><i class="fa-solid fa-magnifying-glass"></i></button>
                       </div>
                     </div>
+                    <!-- 종류/기능 검색-->
+                    <div class="d-flex mt-3">
+                      <!-- 컨셉성분 종류 -->
+                      <label class="col-2 h6 align-self-center mb-0 ">
+                        <%= __('ingredients.종류') %>
+                      </label>
+                      <!-- <input hidden name="type"> -->
+                      <div class="col-4">
+                        <button class="form-select text-start" type="button" id="select_type" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                          <%= __('select') %>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="select_type">
+                          <% codezip.ingredient_type.forEach((code,index)=>{ %>
+                          <li class="dropdown-item d-flex">
+                            <input class="form-check-input mx-3 ingredient_type" name="type" type="checkbox" id="ingredient_type-<%= code %>" value="<%= code %>">
+                            <label class="form-check-label flex-fill pe-3 ingredient_type-label" for="ingredient_type-<%= code %>">
+                              <%= __(code) %>
+                            </label>
 
-                    <div class="row align-items-center my-3">
-                      <div class="col-2 h6"><%= __('users.formula.select.label.category1') %></div>
-                      <div class="col-3">
-                        <select class="form-select" name="category1">
-                          <option value=""><%= __('Select') %></option>
-                          <% for(let i=0; i< numberOfProduct.category1; i++) { %>
-                          <option value="<%= i %>" onclick="select_category1_func('<%= i %>','<%= __(`product`+i) %>');"><%= __('product'+i) %></option>
-                          <% } %>
-                        </select>
+                          </li>
+                          <% }) %>
+                        </ul>
                       </div>
-                      <div class="col-2 h6"><%= __('users.formula.select.label.category2') %></div>
-                      <div class="col">
-                        <select class="form-select" name="category2" id="category2_list">
-                          <option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>
-                        </select>
+                      <!-- 컨셉성분 기능 -->
+                      <label class="col-2 h6 align-self-center mb-0 text-center">
+                        <%= __('ingredients.기능') %>
+                      </label>
+                      <div class="col-4">
+                        <button class="form-select text-start" type="button" id="select_effects" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                          <%= __('select') %>
+                        </button>
+                        <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_effects">
+                          <% codezip.effects.ingredient.forEach((code, index)=>{ %>
+                          <li class="dropdown-item d-flex">
+                            <input class="form-check-input mx-3 ingredient_effects" name="effects" type="checkbox" id="ingredient_effects-<%= code %>" value="<%= code %>">
+                            <label class="form-check-label flex-fill pe-3 ingredient_effects-label" for="ingredient_effects-<%= code %>">
+                              <%= __(code) %>
+                            </label>
+                          </li>
+                          <% }) %>
+                        </ul>
                       </div>
                     </div>
                   </div>
+                  <!-- 결과 테이블 -->
+                  <div class="table-responsive mt-4 pt-4 mb-auto ">
+                    <table class="table table-no-space table-bordered text-break text-center br-10">
+                      <thead class="">
+                        <th>
+                          <%= __('ingredients.성분명') %>
+                        </th>
+                        <th>
+                          <%= __('ingredients.원료명') %>
+                        </th>
+                        <th>
+                          <%= __('ingredients.종류') %>
+                        </th>
+                        <th>
+                          <%= __('ingredients.기능') %>
+                        </th>
+                        <th>
+                          <%= __('ingredients.특징') %>
+                        </th>
+                      </thead>
+                      <tbody class="table-group-divider bbr-15" id="ingredients_result">
+
+                      </tbody>
+                    </table>
+
+                    <!-- pagination -->
+                    <div id="ingredients_pagination">
+
+                    </div>
+                  </div>
+
                 </form>
-
-                <!-- formulas -->
-                <div class="layout-top-spacing pt-5 px-3">
-                  <div id="subTitle" class="h5 text-black"><%= __('users.formula.subTitle.top') %></div>
-                  <div id="formulas_content" class="row pt-4">
-                  </div>
-                </div>
-
-                <!-- Pagination -->
-                <div id="formulas_pagination">
-                  <!-- make_pagination_by_func = function (i18n_func, page, count, func_name, limit = 10) -->
-                  <%- make_pagination_by_func(
-                  __,
-                  page,
-                  formulas.count,
-                  "load_formula",
-                  limit
-                ) %>
-                </div>
-
               </div>
             </div>
           </div>
@@ -124,102 +162,76 @@
   <%- include ("../partials/commonScrpits.ejs") %>
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-
   <div>
-    <% let category1_name_list=[]; %>
-    <% let category2_name_list={}; %>
-    <% for (let i=0; i < numberOfProduct.category1; i++) { %>
-    <% category1_name_list.push(__('product'+i)); %>
-    <% category2_name_list[i]={}; %>
-    <% for (let j=0; j < numberOfProduct.category2[i]; j++) { %>
-    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
-    <% } } %>
+    <%
+    let ingredient_type_text_dict = {};
+    codezip.ingredient_type.forEach((code, index)=>{
+      ingredient_type_text_dict[code] = __(code);
+    })
+    let ingredient_effects_text_dict = {};
+    codezip.effects.ingredient.forEach((code, index)=>{
+      ingredient_effects_text_dict[code] = __(code);
+    })
+    %>
   </div>
   <script>
-    const numberOfProduct = JSON.parse('<%- JSON.stringify(numberOfProduct) %>');
-    const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
-    const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
+    const ingredient_type_text_dict = JSON.parse('<%- JSON.stringify(ingredient_type_text_dict) %>');
+    const ingredient_effects_text_dict = JSON.parse('<%- JSON.stringify(ingredient_effects_text_dict) %>');
 
-    function change_subTitle() {
-      if (+document.forms[0]["top_or_new"].value) {
-        subTitle.innerText = "<%= __('users.formula.subTitle.top') %>";
-      } else {
-        subTitle.innerText = "<%= __('users.formula.subTitle.new') %>";
-      }
-    }
-
-    function load_formula(page = 1) {
-      // console.log('p', page);
-
-      change_subTitle()
-
-      let body = {};
-      for ([name, value] of new FormData(document.forms[0])) {
-        if (value) {
-          body[name] = value;
-        }
-      }
-      body['p'] = page;
-
-      // console.log(new URLSearchParams(body).toString())
-      const url = '<%= codezip.url.users.api.formula %>';
-      fetch(url + '?' + new URLSearchParams(body)).then(res => {
-        if (res.ok) {
-          show_formula(res.json())
-        } else {
-          throw new Error(res.status)
-        }
-      }).catch(err => {
-        console.error(err)
-        alert("<%= __('users.formula.msg.FailSearch') %> :", err)
+    function searching_ingredients(page = 1) {
+      let search_params = new URLSearchParams(new FormData(search_ingredients))
+      search_params.set('p', page)
+      const url = '<%= codezip.url.users.api.ingredient %>?' + search_params;
+      fetch(url).then(res => {
+        ingredients_reload(res.json());
       })
     }
 
-    async function show_formula(res) {
-      res.then(result => {
-        console.log(result);
-        let formulas = result.formulas;
-        let temp_html = "";
-
-        formulas.rows.forEach((item, index) => {
-          let href = location.pathname + '/' + item.id + location.search;
-          temp_html += `<div class="w-25 my-3 hover"><a class="" href="${href}">`
-          if (item.image_paths) {
-            temp_html += `<div class="preview"><img class="br-10" src="${item.image_paths.split(',')[0]}"></div>`
-          }
-          temp_html += `<div class="fs-6 text-black">${category1_name_list[item.category1]}</div>
-        <div>${item.product_name}</div>
-      </a></div>`
-        })
-        formulas_content.innerHTML = temp_html;
-
-        //make_pagination_by_func(page, count, func_name, limit)
-        formulas_pagination.innerHTML = make_pagination_by_func(+result.page, +formulas.count, "load_formula", 8)
-      });
-
+    search_ingredients.onsubmit = (event) => {
+      event.preventDefault();
+      searching_ingredients();
     }
 
+    function ingredients_reload(res_json) {
+      res_json.then(result => {
+        // console.log(result);
+        let ingredients = result.ingredients;
+        let temp_html = "";
+
+        ingredients.rows.forEach((item, index) => {
+          let ingredient_effects = [];
+          if (item.effects) {
+            item.effects.split(',').forEach((code, index) => {
+              ingredient_effects.push(ingredient_effects_text_dict[code])
+            })
+          }
+
+          temp_html += `<tr>
+            <td id="${item.id}-ingredient_name">${item.ingredient_name}</td>
+            <td>${item.material_name}</td>
+            <td>${ingredient_type_text_dict[item.type]}</td>
+            
+            <td>${ingredient_effects.join(', ')}</td>
+            <td>${item.feature ? item.feature : ''}</td>
+          </tr>`
+        })
+        ingredients_result.innerHTML = temp_html;
+
+        //make_pagination_by_func(page, count, func_name, limit)
+        ingredients_pagination.innerHTML = make_pagination_by_func(+result.page, +ingredients.count, "searching_ingredients")
+      });
+    }
+  </script>
+  <script>
+    document.querySelectorAll('.ingredient_type, .ingredient_effects').forEach(el => {
+      el.addEventListener("change", event => {
+        searching_ingredients();
+      })
+    })
+  </script>
+  <script>
     window.addEventListener('load', event => {
-      load_formula();
-    })
-
-    document.forms[0]['category1'].addEventListener('input', (event) => {
-      let value = event.target.value;
-      let temp_html = "";
-      if (value) {
-        let category2_n = numberOfProduct.category2[value];
-        temp_html += `<option value=''><%= __('Select') %></option>`
-        for (let i = 0; i < category2_n; i++) {
-          temp_html += `<option value='${i}'>${category2_name_list[value][i]}</option>`
-        }
-      } else {
-        temp_html = `<option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>`
-      }
-      category2_list.innerHTML = temp_html;
-    })
-
-    document.forms[0].addEventListener('input', (event) => {
-      load_formula()
+      searching_ingredients();
     })
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

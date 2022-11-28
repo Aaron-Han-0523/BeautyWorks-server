@@ -56,7 +56,7 @@ exports.logout = async (req, res, next) => {
 }
 
 exports.validationEmail = async (req, res, next) => {
-    const targetEmail = req.body.email;
+    const targetEmail = req.body.email.toLowerCase();
 
     const isEmail = await usersService.getUser(targetEmail).then(result => {
         if (result) {
@@ -104,7 +104,7 @@ exports.add = async (req, res, next) => {
     let body = req.body;
     body.password = await encryption.hashing(body.password);
     body.user_type = 0;
-    body.email = body.emailId + '@' + body.emailDomain;
+    body.email = (body.emailId + '@' + body.emailDomain).toLowerCase();
     body.mobile_contact = "(" + body.country_number + ")" + body.phoneNum;
     console.log("Users body :", body);
 

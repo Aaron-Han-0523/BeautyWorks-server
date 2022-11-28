@@ -159,7 +159,7 @@
       e.preventDefault();
 
       if (!isTarget[0].value) {
-        return location.replace('<%= codezip.url.users.formula %>' + location.search);
+        return location.replace('<%= codezip.url.users.formula.main %>' + location.search);
       }
 
       let response = await fetch(isTarget.action, {
@@ -169,7 +169,7 @@
         console.log(res);
         if (res.ok) {
           // alert("<%= __('users.msg.SuccessSave') %>")
-          location.replace('<%= codezip.url.users.formula %>' + location.search);
+          location.replace('<%= codezip.url.users.formula.main %>' + location.search);
         } else {
           throw new Error(res.status)
         }

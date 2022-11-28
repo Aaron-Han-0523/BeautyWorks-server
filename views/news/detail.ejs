@@ -9,114 +9,131 @@
 
   <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/client-nav.ejs") %>
-      <%- include ("../partials/chatMark.ejs") %>
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
 
-        <!--  BEGIN MAIN CONTAINER  -->
-        <div class="main-container" id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
 
-          <div class="overlay"></div>
-          <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-          <%- include ("../partials/client-sidebar.ejs") %>
+    <%- include ("../partials/client-sidebar.ejs") %>
 
-            <!--  BEGIN CONTENT AREA  -->
-            <div id="content" class="main-content">
-              <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                <div class="middle-content  p-0">
+        <div class="middle-content  p-0">
 
-                  <!-- BREADCRUMB -->
-                  <div class="row px-3">
-                    <div class="breadcrumb align-datas-start d-flex br-20">
-                      <div class="p-1 col-3">
-                        <h5><strong>
-                            <%= __('News') %>
-                          </strong></h5>
-                      </div>
-                    </div>
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Lounge') %>
+                </h6>
+                <h4><strong>
+                    <%= __('News') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col">
+                <h5><strong>
+                    <%= __('users.news.subtitle') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
+              <div class="widget w-100">
+
+                <!-- title -->
+                <div class="form-control m-2 d-flex justify-content-between">
+                  <div class="p-1 align-self-center">
+                    <h6>
+                      <%= `${news.title}` %>
+                      <%- include('../partials/badge/new.ejs',{date:news.create_date}) %>
+                    </h6>
                   </div>
-                  <!-- CONTENT AREA -->
-                  <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-
-                      <div class="widget-content widget-content-area br-20 p-3">
-
-                        <!-- title -->
-                        <div class="row breadcrumb m-2 br-20">
-                          <div class="text-center align-self-center">
-                            <h5><strong>
-                                <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                  <%= `${data.title} ${__('users.community.news.index.WrittenBy')}
-                                    ${data.last_name}${data.first_name} ${formatDate(data.updateDate)}` %>
-                                    <% } else { %>
-                                      <%= `${data.title} ${__('users.community.news.index.WrittenBy')} ${data.first_name}
-                                        ${data.last_name} ${formatDate(data.updateDate)}` %>
-                                        <% } %>
-                              </strong></h5>
-                          </div>
-                        </div>
-
-                        <!-- content -->
-                        <div class="row breadcrumb m-2 mt-3 br-20 p-3">
-                          <div class="">
-                            <h5>
-                              <%= data.content %>
-                            </h5>
-                          </div>
-
-                          <!-- 네비게이션 -->
-                          <div class="row mt-5">
-                            <div class="col-4 text-start">
-                              <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.id %>">
-                                  <h5><i class="fa-solid fa-chevron-left"></i>
-                                    <%= __('users.news.이전글') %>
-                                  </h5>
-                                </a>
-                                <% } %>
-                            </div>
-                            <div class="col-4 text-center"><a href="<%= codezip.url.users.community.main %>">
-                                <h5>
-                                  <%= __('users.news.목록') %>
-                                </h5>
-                              </a></div>
-                            <div class="col-4 text-end">
-                              <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.id %>">
-                                  <h5>
-                                    <%= __('users.news.다음글') %><i class="fa-solid fa-chevron-right"></i>
-                                  </h5>
-                                </a>
-                                <% } %>
-                            </div>
-                          </div>
-
-                        </div>
-
-                      </div>
-                    </div>
-
-
+                  <div class="p-1 d-flex">
+                    <h6 class="me-3">
+                      <%= `${formatDate(news.update_date)} | ${__('users.news.index.WrittenBy')} ${__('admin.userName')}` %>
+                    </h6>
                   </div>
                 </div>
+
+                <!-- content -->
+                <div class="row m-3 p-3 my-5">
+                  <div class="">
+                    <h6>
+                      <%= news.content %>
+                    </h6>
+                  </div>
+                </div>
+
+                <hr>
+
+                <!-- 네비게이션 -->
+                <div class="d-flex mt-4 justify-content-center">
+                  <div class="col-5 d-flex justify-content-center align-items-end">
+                    <div class="w-auto mx-3 hover">
+                      <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.id %>">
+                        <h6><i class="fa-solid fa-chevron-left fs-5 me-3"></i>
+                          <%= __('btn.이전글') %>
+                        </h6>
+                      </a>
+                      <% } %>
+                    </div>
+                    <div class="w-auto text-center mx-3 hover"><a href="<%= codezip.url.users.news.main %>">
+                        <h6>
+                          <%= __('btn.목록') %>
+                        </h6>
+                      </a></div>
+                    <div class="w-auto text-end mx-3 hover">
+                      <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.id %>">
+                        <h6>
+                          <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right fs-5 ms-3"></i>
+                        </h6>
+                      </a>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-
             </div>
-        </div>
-        </div>
-        <!--  END CONTENT AREA  -->
 
-        <%- include ("../partials/footer.ejs") %>
 
           </div>
-          <!-- END MAIN CONTAINER -->
+        </div>
+      </div>
 
-          <%- include ("../partials/commonScrpits.ejs") %>
+    </div>
+  </div>
+  </div>
+  <!--  END CONTENT AREA  -->
 
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-            <script>
+  <%- include ("../partials/footer.ejs") %>
 
-            </script>
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>
