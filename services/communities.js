@@ -44,7 +44,11 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     select users.first_name, users.last_name, communities.* from communities
     join users
         on users.id=(select communities.users_id
-        where (communities.title like('%${word}%') or communities.content like('%${word}%')))
+        where (communities.title like('%${word}%') or communities.content like('%${word}%')))`
+    if (condition.delete_date === null) {
+        query += ` and communities.delete_date is null `
+    }
+    query += `
     order by communities.id desc
     limit ${paging.skip}, ${paging.limit};
     `
@@ -81,26 +85,33 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
         .then((data) => {
             return data
         })
-    // return await communities
-    //     .findAndCountAll({
-    //         raw: true,
-    //         where: Object.assign(condition, {
-    //         }),
-    //         order: [
-    //             ['id', 'DESC'],
-    //         ],
-    //         offset: paging.skip,
-    //         limit: paging.limit
-    //     })
-    //     .then(result => {
-    //         console.log("communities 'count' and 'rows' read success");
-    //         console.log("data count :", result.count)
-    //         return result;
-    //     })
-    //     .catch(err => {
-    //         // console.error(err);
-    //         throw (err);
-    //     })
+    //     return await communities
+    //         .findAndCountAll({
+    //             raw: true,
+    //             where: condition,
+    //             include: {
+    //                 model: models.users,
+    //                 as: "user",
+    //                 attributes: [
+    //                     "first_name",
+    //                     "last_name"
+    //                 ]
+    //             },
+    //             order: [
+    //                 ['id', 'DESC'],
+    //             ],
+    //             offset: paging.skip,
+    //             limit: paging.limit
+    //         })
+    //         .then(result => {
+    //             console.log("communities 'count' and 'rows' read success");
+    //             console.log("data count :", result.count)
+    //             return result;
+    //         })
+    //         .catch(err => {
+    //             console.error(err);
+    //             throw (err);
+    //         })
 }
 
 exports.readOne = async (id) => {
@@ -140,7 +151,7 @@ exports.delete = async (id) => {
 }
 
 exports.getPrevID = async (id) => {
-    let query = `SELECT id FROM communities WHERE id < ${id} ORDER BY id DESC LIMIT 1;`
+    let query = `SELECT id FROM communities WHERE id < ${id} and delete_date is null ORDER BY id DESC LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
             // 쿼리 실행 성공
@@ -154,7 +165,7 @@ exports.getPrevID = async (id) => {
 }
 
 exports.getNextID = async (id) => {
-    let query = `SELECT id FROM communities WHERE id > ${id} ORDER BY id LIMIT 1;`
+    let query = `SELECT id FROM communities WHERE id > ${id} and delete_date is null  ORDER BY id LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
             // 쿼리 실행 성공

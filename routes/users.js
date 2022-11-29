@@ -97,7 +97,7 @@ router.use('/dashboard', usersController.main)
 router.get('/signOut', usersController.logout);
 
 // 사용자 마이페이지
-router.get('/myPage', (req, res) => res.render('users/myPage'));
+router.get('/myPage', usersController.myPage);
 
 // 사용자 계정
 router

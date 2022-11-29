@@ -128,6 +128,10 @@ body {
     height: 40px;
 }
 
+.reply .profileImage img {
+    width: 50px;
+    height: 50px;
+}
 /************************/
 /*      nav bar end     */
 /************************/

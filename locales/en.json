@@ -645,10 +645,11 @@
 	"users.basic.msg.required": "Required field",
 	"users.basic.msg": "users.basic.msg",
 	"users.news.subtitle": "BeautyWorks Curation for your success",
-	"users.community.subtitle": "Get instights with BeautyWorks",
+	"users.community.subtitle": "Get instights with BeautyWorkers",
 	"Ingredient": "Ingredient",
 	"users.ingredient.title": "Concept ingredient",
 	"admin.userName": "BeautyWorks",
-	"users.news.news.index.WrittenBy": "users.news.news.index.WrittenBy",
-	"users.news.index.WrittenBy": "Written By"
+	"users.news.news.index.WrittenBy": "Written By",
+	"users.news.index.WrittenBy": "Written By",
+	"users.community.reply": "comment"
 }

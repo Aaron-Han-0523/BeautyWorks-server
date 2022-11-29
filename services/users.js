@@ -30,7 +30,7 @@ exports.changePassword = async (obj) => {
             updateUser: obj.user,
             updateDate: new Date()
         }, {
-            where: { users_id: obj.id }
+            where: { id: obj.id }
         })
         .then(result => {
             console.log("users update success");
@@ -62,7 +62,7 @@ exports.update = async (obj) => {
     return await users
         .update(Object.assign(obj, {
         }), {
-            where: { users_id: obj.users_id || obj.id }
+            where: { id: obj.users_id || obj.id }
         })
         .then(result => {
             console.log("users update success");
@@ -84,7 +84,7 @@ exports.allRead = async (condition = {}) => {
                 deleteDate: null
             }),
             order: [
-                ['users_id', 'DESC']
+                ['id', 'DESC']
             ]
         })
         .then(result => {
@@ -123,7 +123,7 @@ exports.delete = async (obj) => {
             deleteUser: obj.user,
             deleteDate: new Date()
         }, {
-            where: { users_id: obj.id }
+            where: { id: obj.id }
         })
         .then(result => {
             console.log("users delete success");

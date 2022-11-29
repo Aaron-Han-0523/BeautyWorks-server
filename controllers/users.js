@@ -1,9 +1,12 @@
 const usersService = require('../services/users');
 const projectsService = require('../services/projects');
 const formulasService = require('../services/formulas');
+const like_formulasService = require('../services/like_formulas');
 const ingredientsService = require('../services/ingredients');
 const newsService = require('../services/news');
 const communitiesService = require('../services/communities');
+const like_communitiesService = require('../services/like_communities');
+const like_repliesService = require('../services/like_replies');
 const nodemailer = require('nodemailer');
 const systemInfo = require('../config/system.json');
 const encryption = require('../utils/encryption');
@@ -226,6 +229,25 @@ exports.main = async (req, res) => {
             });
         })
 
+}
+
+exports.myPage = async (req, res, next) => {
+    const user = res.locals.user;
+
+    const myWishList = like_formulasService.getLikelist(user.id);
+    const myFavoritePosts = like_communitiesService.getLikelist(user.id);
+    const myFavoriteComments = like_repliesService.getLikelist(user.id);
+    const myPost = communitiesService.allRead({ users_id: user.id, delete_date: null });
+
+    Promise.all([myPost, myWishList, myFavoritePosts, myFavoriteComments])
+        .then(([myPost, myWishList, myFavoritePosts, myFavoriteComments]) => {
+            console.log("11",(myPost[1]));
+            console.log("22",(myWishList.list));
+            console.log("33",(myFavoritePosts.list));
+            console.log("44",(myFavoriteComments));
+
+            return res.render('users/myPage');
+        })
 }
 
 exports.index = async (req, res, next) => {

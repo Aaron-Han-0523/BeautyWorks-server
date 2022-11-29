@@ -81,6 +81,11 @@ exports.index = async (req, res, next) => {
         }
         : {}
 
+    if (req.baseUrl.split('/')[1] != 'admin') {
+        // condition.users_id = user.id;
+        condition.delete_date = null;
+    }
+
     const communities = communitiesService
         .allRead(condition, communities_paging)
         .then(data => {
@@ -92,19 +97,19 @@ exports.index = async (req, res, next) => {
                     page: communities_page,
                     word: word
                 }
-            }).catch(err => {
-                console.error(err);
-                res.status(500).end();
-            });
-        })
+            })
+        }).catch(err => {
+            console.error(err);
+            res.status(500).end();
+        });
 }
 
 exports.detail = async (req, res, next) => {
     const id = req.params.id;
     console.log(`open one data id-${id}`)
-    const reply_page = req.query.rp || 1;
-    const skip = req.query.skip;
-    const limit = req.query.limit;
+    const reply_page = req.query.p || 1;
+    const limit = req.query.limit || 5;
+    const skip = req.query.skip || (reply_page - 1) * limit;
 
     const prev_id = communitiesService.getPrevID(id);
     const next_id = communitiesService.getNextID(id);
@@ -112,10 +117,17 @@ exports.detail = async (req, res, next) => {
     const communitylike_count = likeService.countLike(id);
 
     let reply_paging = {
-        skip: skip ? skip : (reply_page - 1) * 4,
-        limit: limit ? limit : 4
+        skip: skip,
+        limit: limit
     }
-    const reply = repliesService.allRead({ id: id }, reply_paging);
+
+    let condition = { communities_id: id };
+    if (req.baseUrl.split('/')[1] != 'admin') {
+        // condition.users_id = user.id;
+        condition.delete_date = null;
+    }
+
+    const reply = repliesService.allRead(condition, reply_paging);
 
 
     Promise.all([community, communitylike_count, prev_id, next_id, reply])
@@ -181,7 +193,7 @@ exports.like = async (req, res, next) => {
     }
     let body = Object.assign(req.body, { users_id: user.id });
 
-    // console.log(body);
+    console.log(body);
     let result;
     if (body.is_like) {
         result = likeService.create(body);
@@ -190,8 +202,8 @@ exports.like = async (req, res, next) => {
     }
 
     result.then(result => {
-        // console.log(body);
-        // console.log(result);
+        console.log(body);
+        console.log(result);
         res.end()
     }).catch(err => {
         console.error(err);

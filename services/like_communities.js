@@ -60,10 +60,14 @@ exports.countLike = async (id) => {
 
 exports.getLikelist = async (id) => {
   return await like_communities
-    .findAll({
+    .findOne({
+      raw: true,
       where: {
         users_id: id,
-      }
+      },
+      attributes: [
+        [Sequelize.fn('json_arrayagg', Sequelize.col('communities_id')), 'list']
+      ]
     })
     .then(result => {
       console.log("like_communities get list success");

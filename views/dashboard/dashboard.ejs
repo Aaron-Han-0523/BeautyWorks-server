@@ -435,7 +435,7 @@
                     <!-- 테스트 데이터 생성 */ -->
                     <% news.forEach((item,index)=>{ %>
                     <a class="pb-2 hover" href="<%= codezip.url.users.news.main + '/' + item.id %>">
-                      <div class="widget row mx-0 h-50 align-content-center mt-3 h-100 text-ellipsis">
+                      <div class="widget row mx-0 align-content-center mt-3 h-100 text-ellipsis">
                         <div>
                           <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
                         </div>
@@ -490,7 +490,7 @@
                     <!-- 테스트 데이터 생성 */ -->
                     <% community.forEach((item,index)=>{ %>
                     <a class="pb-2 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
-                      <div class="widget row mx-0 h-50 align-content-center mt-3 h-100 text-ellipsis">
+                      <div class="widget row mx-0 align-content-center mt-3 h-100 text-ellipsis">
                         <div class="">
                           <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
                         </div>

@@ -76,7 +76,7 @@
                       </div>
                       <div id="index_body">
                         <% communities.data.forEach((item,index)=>{ %>
-                        <a class="d-flex border-bottom py-3 hover" href='<%= codezip.url.users.community.main + `/` + item.id %>'>
+                        <a class="d-flex border-bottom py-3 page-link text-black" href='<%= codezip.url.users.community.main + `/` + item.id %>'>
                           <div class="col-1 text-center"><%= item.id %></div>
                           <div class="col-6 text-ellipsis">
                             <%- include('../partials/badge/new', {date:item.create_date}) %>
