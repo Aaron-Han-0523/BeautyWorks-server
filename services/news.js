@@ -42,18 +42,25 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     // console.log('all news read');
     let word = condition.word || '';
     let query = `
-    select users.first_name, users.last_name, news.* from news
+    select users.first_name, users.last_name, users.profile_image_path, news.* from news
     join users
-        on users.id=(
-            select news.users_id
-            where (
-                news.title like('%${word}%') or news.content like('%${word}%')
-                )
-            )
-    order by news.id desc
-    limit ${paging.skip}, ${paging.limit};
-    `
-    const data = models.sequelize.query(query)
+        on users.id=news.users_id`
+    let where = `
+        where (news.title like('%${word}%') or news.content like('%${word}%'))`;
+    if (condition.delete_date === null) {
+        where += ` and news.delete_date is null `;
+    }
+    if (condition.id instanceof Array) {
+        where += ` and news.id in (` + condition.id.join(',') + ')';
+    }
+    if (condition.users_id) {
+        where += ` and news.users_id =${condition.users_id} `;
+    }
+    let option = `
+        order by news.id desc
+        limit ${paging.skip}, ${paging.limit};
+        `
+    const data = models.sequelize.query(query + where + option)
         .then(function (results, metadata) {
             // 쿼리 실행 성공
             return results[0];
@@ -85,29 +92,11 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     return Promise.all([count, data])
         .then(data => {
             // console.log(data)
-            return data
+            return {
+                count: data[0].count,
+                rows: data[1]
+            }
         })
-
-    // return await news
-    //     .findAndCountAll({
-    //         raw: true,
-    //         where: Object.assign(condition, {
-    //         }),
-    //         order: [
-    //             ['id', 'DESC'],
-    //         ],
-    //         offset: paging.skip,
-    //         limit: paging.limit
-    //     })
-    //     .then(result => {
-    //         console.log("news 'count' and 'rows' read success");
-    //         console.log("data count :", result.count)
-    //         return result;
-    //     })
-    //     .catch(err => {
-    //         // console.error(err);
-    //         throw new Error(err);
-    //     })
 }
 
 exports.readOne = async (id) => {

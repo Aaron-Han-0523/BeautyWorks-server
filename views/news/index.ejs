@@ -81,7 +81,7 @@
                         <% news.data.forEach((item,index)=>{ %>
                         <a class="d-flex border-bottom py-3 page-link text-black" href='<%= codezip.url.users.news.main + `/` + item.id %>'>
                           <div class="col-1 text-center"><%= item.id %></div>
-                          <div class="col-6 text-ellipsis">
+                          <div class="col-6 text-ellipsis d-flex">
                             <%- include('../partials/badge/new', {date:item.create_date}) %>
                             <%= item.title %>
                           </div>

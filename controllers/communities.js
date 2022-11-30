@@ -89,11 +89,11 @@ exports.index = async (req, res, next) => {
     const communities = communitiesService
         .allRead(condition, communities_paging)
         .then(data => {
-            // console.log(data);
+            console.log(data);
             return res.render('community/index', {
                 communities: {
-                    count: data[0].count,
-                    data: data[1],
+                    count: data.count,
+                    data: data.rows,
                     page: communities_page,
                     word: word
                 }

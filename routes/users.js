@@ -8,6 +8,7 @@ const myProjectRouter = require('./myProject');
 const formulaRouter = require('./formula');
 const projectsRouter = require('./projects');
 const ingredientRouter = require('./ingredient');
+const myPageRouter = require('./myPage');
 
 const usersController = require('../controllers/users');
 const usersService = require('../services/users');
@@ -97,7 +98,7 @@ router.use('/dashboard', usersController.main)
 router.get('/signOut', usersController.logout);
 
 // 사용자 마이페이지
-router.get('/myPage', usersController.myPage);
+router.use('/myPage', myPageRouter);
 
 // 사용자 계정
 router

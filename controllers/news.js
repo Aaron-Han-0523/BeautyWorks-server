@@ -74,26 +74,32 @@ exports.index = async (req, res, next) => {
     //        .allRead(condition, communities_paging)
     //        .catch(err => console.error(err));
 
+    if (req.baseUrl.split('/')[1] != 'admin') {
+        // condition.users_id = user.id;
+        condition.delete_date = null;
+    }
+    
     const news = newsService
         .allRead(condition, news_paging)
-        .catch(err => console.error(err));
-
-    Promise.all([news]).then(data => {
-        return res.render('news/index', {
-            //            communities: {
-            //                count: data[0][0].count,
-            //                data: data[0][1],
-            //                page: communities_page,
-            //                word: word
-            //            },
-            news: {
-                count: data[0][0].count,
-                data: data[0][1],
-                page: news_page,
-                word: word
-            }
+        .then(data => {
+            console.log(data.rows);
+            return res.render('news/index', {
+                //            communities: {
+                //                count: data[0][0].count,
+                //                data: data[0][1],
+                //                page: communities_page,
+                //                word: word
+                //            },
+                news: {
+                    count: data.count,
+                    data: data.rows,
+                    page: news_page,
+                    word: word
+                }
+            })
+        }).catch(err => {
+            console.error(err)
         });
-    })
 }
 
 exports.detail = async (req, res, next) => {

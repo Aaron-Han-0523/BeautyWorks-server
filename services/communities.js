@@ -1,7 +1,6 @@
 const models = require('../models');
 const communities = require('../models').communities;
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const { Op, QueryTypes } = require('sequelize');
 
 exports.create = async (obj) => {
     return await communities
@@ -41,49 +40,60 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     console.log(paging.skip, '~', paging.limit);
     let word = condition.word || '';
     let query = `
-    select users.first_name, users.last_name, communities.* from communities
+    select users.first_name, users.last_name, users.profile_image_path, communities.* from communities
     join users
-        on users.id=(select communities.users_id
-        where (communities.title like('%${word}%') or communities.content like('%${word}%')))`
+        on users.id=communities.users_id`
+    let where = `
+    where (communities.title like('%${word}%') or communities.content like('%${word}%'))`;
     if (condition.delete_date === null) {
-        query += ` and communities.delete_date is null `
+        where += ` and communities.delete_date is null `;
     }
-    query += `
+    if (condition.id instanceof Array) {
+        where += ` and communities.id in (` + condition.id.join(',') + ')';
+    }
+    if (condition.users_id) {
+        where += ` and communities.users_id =${condition.users_id} `;
+    }
+    let option = `
     order by communities.id desc
     limit ${paging.skip}, ${paging.limit};
     `
-    const data = models.sequelize.query(query)
-        .then(function (results, metadata) {
-            // 쿼리 실행 성공
-            return results[0];
-        })
-        .catch(function (err) {
-            // 쿼리 실행 에러 
-            console.error(err);
-            throw err;
-        });
+    const data = models.sequelize.query(query + where + option, {
+        type: QueryTypes.SELECT
+    }).then(function (results, metadata) {
+        // 쿼리 실행 성공
+        // console.log("results")
+        // console.log(results)
 
-    query = `
-    select count(*) as count from communities
-    join users
-        on communities.users_id=users.id
-    where (communities.title like('%${word}%') or communities.content like('%${word}%'))
-    `
-    const count = models.sequelize.query(query)
-        .then(function (results, metadata) {
-            // 쿼리 실행 성공
-            return results[0][0];
-        })
-        .catch(function (err) {
-            // 쿼리 실행 에러 
-            console.error(err);
-            throw err;
-        });
+        return results;
+    }).catch(function (err) {
+        // 쿼리 실행 에러 
+        console.error(err);
+        throw err;
+    });
+
+    query = `select count(*) as count from communities`;
+    const count = models.sequelize.query(query + where, {
+        type: QueryTypes.SELECT
+    }).then(function (results, metadata) {
+        // 쿼리 실행 성공
+        console.log("results")
+        console.log(results)
+
+        return results[0];
+    }).catch(function (err) {
+        // 쿼리 실행 에러 
+        console.error(err);
+        throw err;
+    });
 
 
     return Promise.all([count, data])
-        .then((data) => {
-            return data
+        .then(([count, data]) => {
+            return {
+                count: count.count,
+                rows: data
+            }
         })
     //     return await communities
     //         .findAndCountAll({

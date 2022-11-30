@@ -611,5 +611,6 @@
 	"placeholder.mobilePhone": "Enter vertification code",
 	"placeholder.vertificationCode": "Enter vertification code",
 	"plzInputText.logistics_address": "plzInputText.logistics_address",
-	"plzInputText.company_address": "plzInputText.company_address"
+	"plzInputText.company_address": "plzInputText.company_address",
+	"users.myPage.table.thead.content": "users.myPage.table.thead.content"
 }

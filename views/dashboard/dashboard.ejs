@@ -399,8 +399,8 @@
               <!-- News & Community -->
               <div class="row mt-5">
                 <!-- News -->
-                <div class="col-6 h-100">
-                  <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 ps-4 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0">
                       <div>
@@ -415,47 +415,29 @@
                         </a>
                       </div>
                     </div>
-                    <!-- /* 테스트 데이터 생성 -->
-                    <div>
-                      <%# let news=[]; %>
-                      <%# news.push({
-                        title:"반갑습니다.",
-                        first_name:"이름",
-                        last_name:"성",
-                        update_date:new Date(2022,10,15),
-                      })%>
-                      <%# news.push({
-                        title:"환영합니다.",
-                        first_name:"first_name",
-                        last_name:"last_name",
-                        update_date:new Date(2022,10,25),
-                      })%>
-                      <%# console.log(news) %>
+                    <div class="h-100">
+                      <% news.forEach((item,index)=>{ %>
+                      <a class="pb-2 hover h-50" href="<%= codezip.url.users.news.main + '/' + item.id %>">
+                        <div class="widget row mx-0 align-content-center mt-3 text-ellipsis" style="height: 110px;">
+                            <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
+                          <div class="fs-6"><%= item.title %></div>
+                          <div>
+                            <%= `${formatDate(item.update_date)}` %>
+                            <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                            <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
+                            <% } else { %>
+                            <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
+                            <% } %>
+                          </div>
+                        </div>
+                      </a>
+                      <% }) %>
                     </div>
-                    <!-- 테스트 데이터 생성 */ -->
-                    <% news.forEach((item,index)=>{ %>
-                    <a class="pb-2 hover" href="<%= codezip.url.users.news.main + '/' + item.id %>">
-                      <div class="widget row mx-0 align-content-center mt-3 h-100 text-ellipsis">
-                        <div>
-                          <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
-                        </div>
-                        <div class="fs-6"><%= item.title %></div>
-                        <div>
-                          <%= `${formatDate(item.update_date)}` %>
-                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                          <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
-                          <% } else { %>
-                          <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
-                          <% } %>
-                        </div>
-                      </div>
-                    </a>
-                    <% }) %>
                   </div>
                 </div>
                 <!-- community -->
-                <div class="col-6 h-100">
-                  <div class="widget-content widget-content-area p-0 pe-2 h-100 d-flex flex-column">
+                <div class="col-6">
+                  <div class="widget-content widget-content-area p-0 pe-2 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0">
                       <div>
                         <h5><strong>
@@ -469,43 +451,24 @@
                         </a>
                       </div>
                     </div>
-
-                    <!-- /* 테스트 데이터 생성 -->
-                    <div>
-                      <%# let community=[]; %>
-                      <%# community.push({
-                        title:"감사합니다.",
-                        first_name:"이름",
-                        last_name:"성",
-                        update_date:new Date(2022,10,15),
-                      })%>
-                      <%# community.push({
-                        title:"안녕하세요.",
-                        first_name:"first_name",
-                        last_name:"last_name",
-                        update_date:new Date(2022,10,25),
-                      })%>
-                      <%# console.log(community) %>
+                    <div class="">
+                      <% community.forEach((item,index)=>{ %>
+                      <a class="pb-2 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
+                        <div class="widget row mx-0 align-content-center mt-3 text-ellipsis" style="height: 110px;">
+                            <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
+                          <div class="fs-6"><%= item.title %></div>
+                          <div class="">
+                            <%= `${formatDate(item.update_date)}` %>
+                            <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                            <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
+                            <% } else { %>
+                            <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
+                            <% } %>
+                          </div>
+                        </div>
+                      </a>
+                      <% }) %>
                     </div>
-                    <!-- 테스트 데이터 생성 */ -->
-                    <% community.forEach((item,index)=>{ %>
-                    <a class="pb-2 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
-                      <div class="widget row mx-0 align-content-center mt-3 h-100 text-ellipsis">
-                        <div class="">
-                          <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
-                        </div>
-                        <div class="fs-6"><%= item.title %></div>
-                        <div class="">
-                          <%= `${formatDate(item.update_date)}` %>
-                          <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                          <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
-                          <% } else { %>
-                          <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
-                          <% } %>
-                        </div>
-                      </div>
-                    </a>
-                    <% }) %>
                   </div>
                 </div>
               </div>

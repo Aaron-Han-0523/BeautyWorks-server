@@ -216,7 +216,7 @@ exports.main = async (req, res) => {
 
     Promise.all([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community])
         .then(([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community]) => {
-            // console.log(completed_project);
+            console.log(community);
             res.render('dashboard/dashboard', {
                 page: page,
                 project: project.rows,
@@ -224,8 +224,8 @@ exports.main = async (req, res) => {
                 completed_project: completed_project,
                 recommended_formula: recommended_formula,
                 remommended_ingredient: remommended_ingredient,
-                news: news[1],
-                community: community[1]
+                news: news.rows,
+                community: community.rows
             });
         })
 
@@ -234,17 +234,33 @@ exports.main = async (req, res) => {
 exports.myPage = async (req, res, next) => {
     const user = res.locals.user;
 
-    const myWishList = like_formulasService.getLikelist(user.id);
-    const myFavoritePosts = like_communitiesService.getLikelist(user.id);
+    const myWishList = like_formulasService
+        .getLikelist(user.id)
+        .then(result => {
+            if (result.list) {
+                return formulasService.allRead({ id: result.list });
+            } else {
+                return {};
+            }
+        });
+    const myFavoritePosts = like_communitiesService
+        .getLikelist(user.id)
+        .then(result => {
+            if (result.list) {
+                return communitiesService.allRead({ id: result.list });
+            } else {
+                return {};
+            }
+        });
     const myFavoriteComments = like_repliesService.getLikelist(user.id);
     const myPost = communitiesService.allRead({ users_id: user.id, delete_date: null });
 
     Promise.all([myPost, myWishList, myFavoritePosts, myFavoriteComments])
         .then(([myPost, myWishList, myFavoritePosts, myFavoriteComments]) => {
-            console.log("11",(myPost[1]));
-            console.log("22",(myWishList.list));
-            console.log("33",(myFavoritePosts.list));
-            console.log("44",(myFavoriteComments));
+            console.log("11", (myPost));
+            console.log("22", (myWishList));
+            console.log("33", (myFavoritePosts));
+            // console.log("44", (myFavoriteComments));
 
             return res.render('users/myPage');
         })

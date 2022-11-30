@@ -1,16 +1,13 @@
-function formatDate(d_t) {
-    if (!d_t) return '';
+const en_month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    d_t = new Date(d_t);
-    //console.log(typeof d_t);
-
-    let year = d_t.getFullYear();
-    let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
-    let day = ("0" + d_t.getDate()).slice(-2);
-    let hour = ("0" + d_t.getHours()).slice(-2);
-    let minute = ("0" + d_t.getMinutes()).slice(-2);
-    let seconds = ("0" + d_t.getSeconds()).slice(-2);
-    return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + seconds;
+function formatDate(d_t, sep = '.') {
+  if (!d_t) return '';
+  d_t = new Date(d_t)
+  let year = ("" + d_t.getFullYear()).slice(-2);
+  let month = en_month[d_t.getMonth()];
+  // let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
+  let day = ("0" + d_t.getDate()).slice(-2);
+  return day + sep + month + sep + year;
 }
 
 function cancel() {

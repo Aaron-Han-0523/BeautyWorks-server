@@ -31,6 +31,7 @@
         },
         "packaging": "/users/packaging",
         "ingredient": "/users/ingredient",
+        "documents": "/users/documents",
         "news": {
             "main": "/users/news",
             "add": "/users/news/add",
@@ -66,6 +67,12 @@
             "ingredient": "/users/api/ingredient",
             "projects": {
                 "edit": "users/api/projects/edit"
+            },
+            "myPage": {
+                "wishList": "/users/api/myPage/wishList",
+                "myPosts": "/users/api/myPage/myPosts",
+                "favoritePosts": "/users/api/myPage/favoritePosts",
+                "favoriteComments": "/users/api/myPage/favoriteComments"
             }
         }
     },

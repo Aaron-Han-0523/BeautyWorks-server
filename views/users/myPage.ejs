@@ -59,53 +59,6 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
               <!-- 내가 찜한 내용물 -->
-              <!-- /* 테스트 데이터 생성 -->
-              <div>
-                <% let myWishList={data:[],count:100}; %>
-                <% myWishList.data.push({
-                  product_name:"My Suncream1",
-                  top_or_new:1,
-                  capacity:"110ml",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:10000,
-                  recent_order_date:new Date(2022,10,5),
-                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                })%>
-                <% myWishList.data.push({
-                  product_name:"My Suncream2",
-                  top_or_new:1,
-                  capacity:"120ml",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:20000,
-                  recent_order_date:new Date(2022,10,15),
-                  image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                
-                })%>
-                <% myWishList.data.push({
-                  product_name:"My Suncream3",
-                  top_or_new:1,
-                  capacity:"110g",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:30000,
-                  recent_order_date:new Date(2022,10,25),
-                  image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
-                })%>
-                <% myWishList.data.push({
-                  product_name:"My Suncream4",
-                  top_or_new:1,
-                  capacity:"210g",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:10000,
-                  recent_order_date:new Date(2022,10,5),
-                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
-                })%>
-              </div>
-              <!-- 테스트 데이터 생성 */ -->
-              <!-- 내가 찜한 내용물 -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
                 <div class="form-group ms-3">
                   <div class="row mb-3">
@@ -120,72 +73,13 @@
                   </div>
 
                   <div class="row">
-                    <div class="widget pt-5 pb-0 row mx-0" id="myWishList">
-                      <% myWishList.data.forEach((item,index)=>{ %>
-                      <div class="col d-flex flex-column">
-                        <!-- style="height: calc(100%-50px);" -->
-                        <div class="preview">
-                          <img class="br-10" src="<%= item.image_paths.split(`,`)[0] %>">
-                        </div>
-                        <div class="row mt-3 justify-content-center text-break">
-                          <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
-                          <p style="color: gray;">
-                            <%= __('product'+item.category1+'.'+item.category2) %>
-                          </p>
-                          <p><strong><%= item.product_name %></strong></p>
-                        </div>
-                      </div>
-                      <% }) %>
-                      <!-- pagination -->
-                      <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
-                      <%- make_pagination_by_func(
-                          __,
-                          1,
-                          myWishList.count,
-                          codezip.url.users.community.main,
-                          "myWishListReload",
-                          4
-                        ) %>
+                    <div class="widget pt-5 pb-0 row mx-0" id="wishList">
 
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- 내가 작성한 게시글 -->
-              <!-- /* 테스트 데이터 생성 -->
-              <div>
-                <% let myPost={data:[], count:5}; %>
-                <% myPost.data.push({
-                  community_id:17,
-                  title:"테스트추천프로젝트5",
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  create_date:new Date(2022,10,15),
-                })%>
-                <% myPost.data.push({
-                  community_id:13,
-                  title:"테스트추천프로젝트4",
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  create_date:new Date(2022,10,14),
-                })%>
-                <% myPost.data.push({
-                  community_id:10,
-                  title:"테스트추천프로젝트3",
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  create_date:new Date(2022,10,13),
-                })%>
-                <% myPost.data.push({
-                  community_id:6,
-                  title:"테스트추천프로젝트2",
-                  first_name: user.first_name,
-                  last_name: user.last_name,
-                  create_date:new Date(2022,10,12),
-                })%>
-              </div>
-              <!-- 테스트 데이터 생성 */ -->
               <!-- 내가 작성한 게시글 -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
                 <div class="form-group ms-3">
@@ -201,61 +95,39 @@
                   </div>
 
                   <div class="row mt-3">
-                    <div class="widget p-4 pb-0 row mx-0" id="completed_project">
-                      <div class="flex-row row mb-auto">
-                        <div class="table-responsive p-0">
-                          <table class="table text-break">
-                            <thead class="text-center">
-                              <tr>
-                                <th scope="col">
-                                  <%= __('users.myPage.table.thead.number') %>
-                                </th>
-                                <th scope="col">
-                                  <%= __('users.myPage.table.thead.title') %>
-                                </th>
-                                <th scope="col">
-                                  <%= __('users.myPage.table.thead.date') %>
-                                </th>
-                                <th scope="col">
-                                  <%= __('users.myPage.table.thead.writer') %>
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody class="table-group-divider text-break">
-                              <% myPost.data.forEach((item,index)=>{ %>
-                              <tr>
-                                <td class="col-1 text-center"><%= item.community_id %></td>
-                                <td><%= item.title %></td>
-                                <td class="col-2 text-center flex-grow-1">
-                                  <%= formatDate(item.create_date) %>
-                                </td>
-                                <td class="col-3 text-center">
-                                  <%= __('users.community.index.WrittenBy') %>
-                                  <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                  <%= ` ${item.last_name} ${item.first_name}` %>
-                                  <% } else { %>
-                                  <%= ` ${item.first_name} ${item.last_name}` %>
-                                  <% } %>
-                                </td>
-                                <% }) %>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
 
-                      <div>
+                    <div class="widget w-100">
+                      <div class="form-group mx-3">
+
+                        <!-- list -->
+                        <div class="row mt-3">
+                          <div class="text-black align-self-center">
+                            <div class="d-flex form-control text-center h6 p-0 m-0 pe-3">
+                              <div class="col-1 py-3">
+                                <%= __('users.myPage.table.thead.number') %>
+                              </div>
+                              <div class="col-6 py-3">
+                                <%= __('users.myPage.table.thead.title') %>
+                              </div>
+                              <div class="col-2 py-3">
+                                <%= __('users.myPage.table.thead.date') %>
+                              </div>
+                              <div class="col-3 py-3">
+                                <%= __('users.myPage.table.thead.writer') %>
+                              </div>
+                            </div>
+                            <div id="myPosts">
+
+                            </div>
+                          </div>
+                        </div>
+
                         <!-- pagination -->
-                        <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
-                        <%- make_pagination_by_func(
-                          __,
-                          1,
-                          myPost.count,
-                          codezip.url.users.community.main,
-                          "myPostReload",
-                          4
-                        ) %>
+                        <div id="myPosts_pagination"></div>
+
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -275,90 +147,32 @@
                       </div>
                     </div>
 
-                    <div class="widget row pt-5 ps-5 mx-0 h-100 align-content-center d-flex flex-column">
-                      <!-- /* 테스트 데이터 생성 -->
-                      <div>
-                        <% let myFavoritePosts={data:[],count:10}; %>
-                        <% myFavoritePosts.data.push({
-                          title:"테스트추천프로젝트5",
-                          first_name:"tester5",
-                          last_name:"테스터5",
-                          create_date:new Date(2022,10,15),
-                          profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
-                        })%>
-                        <% myFavoritePosts.data.push({
-                          title:"테스트추천프로젝트4",
-                          first_name:"tester4",
-                          last_name:"테스터4",
-                          create_date:new Date(2022,10,14),
-                          profile_image_path:"http://ktsmemo.cdn3.cafe24.com/p/0455.jpg"
-                        })%>
-                        <% myFavoritePosts.data.push({
-                          title:"테스트추천프로젝트3",
-                          first_name:"tester3",
-                          last_name:"테스터3",
-                          create_date:new Date(2022,10,13),
-                          profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                        })%>
-                        <% myFavoritePosts.data.push({
-                          title:"테스트추천프로젝트2",
-                          first_name:"tester2",
-                          last_name:"테스터2",
-                          create_date:new Date(2022,10,12),
-                          profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0009.jpg"
-                        })%>
-                      </div>
-                      <!-- 테스트 데이터 생성 */ -->
-                      <div class="flex-row row mb-auto">
-                        <div class="table-responsive p-0">
-                          <table class="table text-break">
-                            <thead class="text-center">
-                              <th>
+                    <div class="widget row pt-4 mx-0 h-100 align-content-center d-flex flex-column">
+                      <div class="form-group">
+
+                        <!-- list -->
+                        <div class="row mt-3">
+                          <div class="text-black align-self-center">
+                            <div class="d-flex form-control text-center h6 p-0 m-0 px-3">
+                              <div class="col-4 py-3">
                                 <%= __('users.myPage.table.thead.writer') %>
-                              </th>
-                              <th>
-                                <%= __('users.myPage.table.thead.date') %>
-                              </th>
-                              <th>
+                              </div>
+                              <div class="col py-3">
                                 <%= __('users.myPage.table.thead.title') %>
-                              </th>
-                            </thead>
-                            <tbody class="table-group-divider text-break">
-                              <% myFavoritePosts.data.forEach((item,index)=>{ %>
-                              <tr>
-                                <td class="d-flex align-items-center">
-                                  <div class="profileImage me-1">
-                                    <img alt="avatar" src="<%= item.profile_image_path %>" class="rounded-circle">
-                                  </div>
-                                  <div>
-                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                    <%= `${item.last_name} ${item.first_name}` %>
-                                    <% } else { %>
-                                    <%= `${item.first_name} ${item.last_name}` %>
-                                    <% } %>
-                                  </div>
-                                </td>
-                                <td>
-                                  <%= formatDate(item.create_date) %>
-                                </td>
-                                <td><%= item.title %></td>
-                              </tr>
-                              <% }) %>
-                            </tbody>
-                          </table>
+                              </div>
+                              <div class="col-2 py-3">
+                                <%= __('users.myPage.table.thead.date') %>
+                              </div>
+                            </div>
+                            <div id="favoritePosts">
+
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div>
+
                         <!-- pagination -->
-                        <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
-                        <%- make_pagination_by_func(
-                          __,
-                          1,
-                          myFavoritePosts.count,
-                          codezip.url.users.community.main,
-                          "myFavoritePostsReload",
-                          4
-                        ) %>
+                        <div id="favoritePosts_pagination"></div>
+
                       </div>
                     </div>
                   </div>
@@ -376,84 +190,33 @@
                       </div>
                     </div>
 
-                    <div class="widget row pt-5 ps-5  mx-0 h-100 align-content-center d-flex flex-column">
-                      <!-- /* 테스트 데이터 생성 -->
-                      <div>
-                        <% let myFavoriteComments={data:[],count:3}; %>
-                        <% myFavoriteComments.data.push({
-                            content:"댓글내용1",
-                            first_name:"tester1",
-                            last_name:"테스터1",
-                            create_date:new Date(2022,10,10),
-                            profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0001.jpg"
-                          })%>
-                        <% myFavoriteComments.data.push({
-                            content:"댓글내용2",
-                            first_name:"tester2",
-                            last_name:"테스터2",
-                            create_date:new Date(2022,10,10),
-                            profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0002.jpg"
-                          })%>
-                        <% myFavoriteComments.data.push({
-                            content:"댓글내용3",
-                            first_name:"tester3",
-                            last_name:"테스터3",
-                            create_date:new Date(2022,10,10),
-                            profile_image_path:"http://oldmidi.cdn3.cafe24.com/p/0003.jpg"
-                          })%>
-                      </div>
-                      <!-- 테스트 데이터 생성 */ -->
-                      <div class="flex-row row mb-auto">
-                        <div class="table-responsive p-0">
-                          <table class="table text-break">
-                            <thead class="text-center">
-                              <th>
+                    <div class="widget row pt-4 mx-0 h-100 align-content-center d-flex flex-column">
+                      <div class="form-group">
+
+                        <!-- list -->
+                        <div class="row mt-3">
+                          <div class="text-black align-self-center">
+                            <div class="d-flex form-control text-center h6 p-0 m-0 px-3">
+                              <div class="col-4 py-3">
                                 <%= __('users.myPage.table.thead.writer') %>
-                              </th>
-                              <th>
+                              </div>
+                              <div class="col py-3">
+                                <%= __('users.myPage.table.thead.content') %>
+                              </div>
+                              <div class="col-2 py-3">
                                 <%= __('users.myPage.table.thead.date') %>
-                              </th>
-                              <th>
-                                <%= __('users.myPage.table.thead.title') %>
-                              </th>
-                            </thead>
-                            <tbody class="table-group-divider text-break">
-                              <% myFavoriteComments.data.forEach((item,index)=>{ %>
-                              <tr>
-                                <td class="d-flex align-items-center">
-                                  <div class="profileImage me-1">
-                                    <img alt="avatar" src="<%= item.profile_image_path %>" class="rounded-circle">
-                                  </div>
-                                  <div>
-                                    <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
-                                    <%= `${item.last_name} ${item.first_name}` %>
-                                    <% } else { %>
-                                    <%= `${item.first_name} ${item.last_name}` %>
-                                    <% } %>
-                                  </div>
-                                </td>
-                                <td>
-                                  <%= formatDate(item.create_date) %>
-                                </td>
-                                <td><%= item.content %></td>
-                              </tr>
-                              <% }) %>
-                            </tbody>
-                          </table>
+                              </div>
+                            </div>
+                            <div id="favoriteComments">
+
+                            </div>
+                          </div>
                         </div>
+
+                        <!-- pagination -->
+                        <div id="favoriteComments_pagination"></div>
+
                       </div>
-
-                      <!-- pagination -->
-                      <!--make_pagination_by_fun( i18n_func, page, count, baseURL, func_name, limit = 10) -->
-                      <%- make_pagination_by_func(
-                          __,
-                          1,
-                          myFavoriteComments.count,
-                          codezip.url.users.community.main,
-                          "myFavoriteCommentsReload",
-                          4
-                        ) %>
-
                     </div>
                   </div>
                 </div>
@@ -478,7 +241,213 @@
   <%- include ("../partials/commonScrpits.ejs") %>
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-  
+  <div>
+    <% let category1_name_list=[]; %>
+    <% let category2_name_list={} %>
+    <% for (let i=0; i < codezip.numberOfProduct.category1; i++) { %>
+    <% category1_name_list.push(__('product'+i)); %>
+    <% category2_name_list[i]={}; %>
+    <% for (let j=0; j < codezip.numberOfProduct.category2[i]; j++) { %>
+    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
+    <% } } %>
+  </div>
+  <script>
+    const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
+    const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
+    const top_or_new = ["NEW", "TOP"];
+    const badge_new_html = '<span class="me-1 mark mark-outline-new bg-white">New</span>';
+    const WrittenBy_text = "<%= __('users.community.index.WrittenBy') %>"
+    const locale = "<%= locale %>"
+    const nameOrderInKorean = JSON.parse('<%- JSON.stringify(nameOrderInKorean) %>');
+  </script>
+  <script>
+    function load_wishList(page = 1) {
+      const url = "<%= codezip.url.users.api.myPage.wishList %>";
+      const data = fetch(url + `?p=${page}`)
+        .then(res => {
+          return res.json();
+        }).then(data => {
+          // console.log("wishList", data);
+          show_wishList(data, page);
+        }).catch(err => {
+          console.error(err);
+        })
+    }
+
+    function show_wishList(data, page) {
+      let temp_html = '';
+
+      data.rows.forEach((item, index) => {
+        temp_html += `<div class="col-3 d-flex flex-column">
+              <div class="preview">
+                <img class="br-10" src="${item.image_paths.split(`,`)[0]}">
+              </div>
+              <div class="row mt-3 justify-content-center text-break">
+                <p><strong>${top_or_new[item.top_or_new] +' / '+ category1_name_list[item.category1]}</strong></p>
+                <p style="color: gray;">
+                  ${category2_name_list[item.category1][item.category2]}
+                </p>
+                <p><strong>${item.product_name}</strong></p>
+              </div>
+            </div>`
+      })
+
+      temp_html += make_pagination_by_func(page, data.count, "load_wishList", 4)
+
+      wishList.innerHTML = temp_html;
+    }
+  </script>
+  <script>
+    function load_myPosts(page = 1) {
+      myPosts
+      const url = "<%= codezip.url.users.api.myPage.myPosts %>";
+      fetch(url + `?p=${page}`)
+        .then(res => {
+          return res.json();
+        }).then(data => {
+          // console.log("myPosts", data);
+          show_myPosts(data, page);
+        }).catch(err => {
+          console.error(err);
+        })
+
+    }
+
+    function show_myPosts(data, page) {
+      let temp_html = '';
+      const community_url = '<%= codezip.url.users.community.main %>'
+
+      data.rows.forEach((item, index) => {
+        temp_html += `<a class="d-flex border-bottom py-3 page-link text-black ps-0 pe-3" href='${community_url}/${item.id}'>
+              <div class="col-1 text-center">${item.id}</div>
+              <div class="col text-ellipsis">`
+        let day_1_ago = new Date(Date.now() - 1 * 24 * 3600 * 1000);
+        if (new Date(item.create_date) > day_1_ago) {
+          temp_html += badge_new_html;
+        }
+        temp_html += `${item.title}
+              </div>
+              <div class="col-2 text-center text-ellipsis">
+                ${formatDate(item.create_date)}
+              </div>
+              <div class="col-3 text-center text-ellipsis">
+                ${WrittenBy_text} `
+        if (nameOrderInKorean.indexOf(locale) != -1) {
+          temp_html += `${item.last_name} ${item.first_name}`
+        } else {
+          temp_html += `${item.first_name} ${item.last_name}`
+        }
+        temp_html += `</div>
+            </a>`
+      })
+      myPosts.innerHTML = temp_html;
+
+      // make_pagination_by_func(page, count, func_name, limit = 10)
+      myPosts_pagination.innerHTML = make_pagination_by_func(page, data.count, "load_myPosts", 4)
+    }
+  </script>
+  <script>
+    function load_favoritePosts(page = 1) {
+      const url = "<%= codezip.url.users.api.myPage.favoritePosts %>";
+      fetch(url + `?p=${page}`)
+        .then(res => {
+          return res.json();
+        }).then(data => {
+          // console.log("favoritePosts", data);
+          show_favoritePosts(data, page);
+        }).catch(err => {
+          console.error(err);
+        })
+    }
+
+    function show_favoritePosts(data, page) {
+      let temp_html = '';
+      const community_url = '<%= codezip.url.users.community.main %>'
+
+      data.rows.forEach((item, index) => {
+        temp_html += `<a class="d-flex border-bottom py-3 page-link text-black align-items-center px-3" href='${community_url}/${item.id}'>
+          <div class="col-4 d-flex align-items-center">
+            <div class="profileImage me-1">
+              <img alt="avatar" src="${item.profile_image_path}" class="rounded-circle">
+            </div>
+            <div class="text-ellipsis">`
+        if (nameOrderInKorean.indexOf(locale) != -1) {
+          temp_html += `${item.last_name} ${item.first_name}`
+        } else {
+          temp_html += `${item.first_name} ${item.last_name}`
+        }
+        temp_html += `</div>
+          </div>
+          <div class="col flex-grow-1 px-3">
+            ${item.title}
+          </div>
+          <div class="col-2 text-center text-ellipsis">
+            ${formatDate(item.create_date)}
+          </div>
+        </a>`
+      })
+
+      favoritePosts.innerHTML = temp_html;
+
+      // make_pagination_by_func(page, count, func_name, limit = 10)
+      favoritePosts_pagination.innerHTML = make_pagination_by_func(page, data.count, "load_favoritePosts", 4)
+    }
+  </script>
+  <script>
+    function load_favoriteComments(page = 1) {
+      const url = "<%= codezip.url.users.api.myPage.favoriteComments %>";
+      fetch(url + `?p=${page}`)
+        .then(res => {
+          return res.json();
+        }).then(data => {
+          // console.log("favoriteComments", data);
+          show_favoriteComments(data, page);
+        }).catch(err => {
+          console.error(err);
+        })
+    }
+
+    function show_favoriteComments(data, page) {
+      let temp_html = '';
+      const community_url = '<%= codezip.url.users.community.main %>'
+
+      data.rows.forEach((item, index) => {
+        temp_html += `<a class="d-flex border-bottom py-3 page-link text-black align-items-center px-3" href='${community_url}/${item.communities_id}'>
+              <div class="col-4 d-flex align-items-center">
+                <div class="profileImage me-1">
+                  <img alt="avatar" src="${item.profile_image_path}" class="rounded-circle">
+                </div>
+                <div class="text-ellipsis">`
+        if (nameOrderInKorean.indexOf(locale) != -1) {
+          temp_html += `${item.last_name} ${item.first_name}`
+        } else {
+          temp_html += `${item.first_name} ${item.last_name}`
+        }
+        temp_html += `</div>
+              </div>
+              <div class="col text-center flex-grow-1 text-ellipsis px-3">
+                ${item.content}
+              </div>
+              <div class="col-2 text-center text-ellipsis">
+                ${formatDate(item.create_date)}
+              </div>
+            </a>`
+      })
+
+      favoriteComments.innerHTML = temp_html;
+
+      // make_pagination_by_func(page, count, func_name, limit = 10)
+      favoriteComments_pagination.innerHTML = make_pagination_by_func(page, data.count, "load_favoriteComments", 4)
+    }
+  </script>
+  <script>
+    window.addEventListener('load', event => {
+      load_wishList();
+      load_myPosts();
+      load_favoritePosts();
+      load_favoriteComments();
+    })
+  </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
