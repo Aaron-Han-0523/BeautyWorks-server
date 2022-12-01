@@ -219,6 +219,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "이메일"
     },
+    request_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "의뢰서 접수 날짜"
+    },
     image_paths: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -250,11 +255,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "삭제일"
-    },
-    request_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment: "의뢰서 접수 날짜"
     }
   }, {
     sequelize,

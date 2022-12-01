@@ -20,7 +20,6 @@ module.exports = function(sequelize, DataTypes) {
     users_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      primaryKey: true,
       comment: "사용자 식별번호",
       references: {
         model: 'users',
@@ -61,7 +60,6 @@ module.exports = function(sequelize, DataTypes) {
         fields: [
           { name: "communities_id" },
           { name: "id" },
-          { name: "users_id" },
         ]
       },
       {

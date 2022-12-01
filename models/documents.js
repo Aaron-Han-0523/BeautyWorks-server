@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "프로젝트 식별번호",
       references: {
         model: 'projects',
-        key: 'users_id'
+        key: 'id'
       }
     },
     title: {
@@ -64,22 +64,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "users_id" },
-          { name: "id" },
-        ]
-      },
-      {
-        name: "documents_users_id_id_unique",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "users_id" },
-          { name: "id" },
-        ]
-      },
-      {
-        name: "id",
-        using: "BTREE",
-        fields: [
           { name: "id" },
         ]
       },
