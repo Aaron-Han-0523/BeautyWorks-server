@@ -157,11 +157,7 @@
       }
     }
 
-    moq[0].addEventListener('keyup', (event) => {
-      unitPriceCalc()
-    })
-
-    moq[1].addEventListener('change', (event) => {
+    moq.addEventListener('input', (event) => {
       unitPriceCalc()
     })
 

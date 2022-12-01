@@ -130,7 +130,7 @@ exports.index = async (req, res, next) => {
     const user = res.locals.user;
 
     let condition = {};
-    if ([1].includes(user.user_type)) {
+    if (req.baseUrl.split('/')[1] != 'admin') {
         condition.users_id = user.id;
         condition.delete_date = null;
     }

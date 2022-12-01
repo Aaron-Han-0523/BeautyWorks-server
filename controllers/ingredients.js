@@ -97,21 +97,25 @@ exports.index = async (req, res, next) => {
 
     let condition = {};
     for ([key, value] of Object.entries(req.query)) {
-        // condition[key] = { [Op.substring]: value }; // 배열은 in 연산
-        if (typeof value === "string") {
-            condition[key] = { [Op.substring]: value }
-        } else {
-            condition[Op.or] = [];
-            value.forEach((code, index) => {
-                condition[Op.or].push({ [key]: { [Op.substring]: code } })
-            });
+        if (value) {
+            // condition[key] = { [Op.substring]: value }; // 배열은 in 연산
+            if (typeof value === "string") {
+                condition[key] = { [Op.substring]: value }
+            } else {
+                condition[Op.or] = [];
+                value.forEach((code, index) => {
+                    condition[Op.or].push({ [key]: { [Op.substring]: code } })
+                });
+            }
         }
     }
-    console.log(condition)
+    
     if (req.baseUrl.split('/')[1] != 'admin') {
         // condition.users_id = user.id;
         condition.delete_date = null;
     }
+    
+    console.log(condition)
 
     await ingredientsService
         .allRead(condition, limit, skip)
