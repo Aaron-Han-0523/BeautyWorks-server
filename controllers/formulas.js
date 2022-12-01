@@ -152,10 +152,9 @@ exports.detail = async (req, res, next) => {
     Promise.all([formula, like_list]).then(([formula, like_list]) => {
         console.log(formula);
         console.log(like_list);
-        console.log(like_list.list.includes(formula.id));
 
         let is_like = false;
-        if (like_list.list.includes(formula.id)) is_like = true;
+        if (like_list && like_list.list && like_list.list.includes(formula.id)) is_like = true;
 
         if (req.api) {
             res.json({
@@ -187,7 +186,7 @@ exports.like = async (req, res, next) => {
     }
 
     let result = null;
-    if (like_list.list.includes(id)) {
+    if (like_list && like_list.list && like_list.list.includes(id)) {
         result = like_formulas.delete(condition);
     } else {
         result = like_formulas.create(condition);

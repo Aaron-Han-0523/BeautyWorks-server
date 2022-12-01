@@ -279,9 +279,12 @@
 
       data.rows.forEach((item, index) => {
         temp_html += `<div class="col-3 d-flex flex-column">
-              <div class="preview">
-                <img class="br-10" src="${item.image_paths.split(`,`)[0]}">
-              </div>
+          <a class="hover" href="/users/formula/${item.id}">
+              <div class="preview">`
+        if (item.image_paths) {
+          temp_html += `<img class="br-10" src="${item.image_paths.split(`,`)[0]}">`
+        }
+        temp_html += `</div>
               <div class="row mt-3 justify-content-center text-break">
                 <p><strong>${top_or_new[item.top_or_new] +' / '+ category1_name_list[item.category1]}</strong></p>
                 <p style="color: gray;">
@@ -289,6 +292,7 @@
                 </p>
                 <p><strong>${item.product_name}</strong></p>
               </div>
+            </a>
             </div>`
       })
 

@@ -65,6 +65,7 @@
                     <!-- gallery -->
                     <div class="col-5">
                       <div class="preview text-center gallery">
+                        <% if(formula.image_paths) { %>
                         <div class="gallery-inner">
                           <img id="largeImg" src="<%= formula.image_paths.split(',')[0] %>" alt="0">
                         </div>
@@ -74,6 +75,7 @@
                         <button class="gallery-next fs-1" type="button" onclick="gallery_next();">
                           <i class="fa-solid fa-angle-right"></i>
                         </button>
+                        <% } %>
                         <a class="fs-2 like" href="javascript:void(0);" onclick="like_formula();">
                           <% if(is_like) { %>
                           <i class="fa-solid fa-heart active"></i>
@@ -82,6 +84,7 @@
                           <% } %>
                         </a>
                       </div>
+                      <% if(formula.image_paths) { %>
                       <div id="thumbs" class="row mt-3 mx-1">
                         <% formula.image_paths.split(',').forEach((item,index)=>{ %>
                         <div class="w-20 preview px-1">
@@ -95,6 +98,7 @@
                         </div>
                         <% }) %>
                       </div>
+                      <% } %>
 
                     </div>
                     <!-- content -->
