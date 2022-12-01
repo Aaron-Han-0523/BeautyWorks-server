@@ -15,11 +15,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "댓글 식별번호",
-      references: {
-        model: 'replies',
-        key: 'id'
-      }
+      comment: "댓글 식별번호"
     },
     users_id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -47,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "like_replies_FK1",
+        name: "users_id",
         using: "BTREE",
         fields: [
           { name: "users_id" },

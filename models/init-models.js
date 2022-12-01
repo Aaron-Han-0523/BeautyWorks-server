@@ -29,11 +29,15 @@ function initModels(sequelize) {
   var users = _users(sequelize, DataTypes);
 
   communities.belongsToMany(users, { as: 'users_id_users_like_communities', through: like_communities, foreignKey: "communities_id", otherKey: "users_id" });
+  communities.belongsToMany(users, { as: 'users_id_users_replies', through: replies, foreignKey: "communities_id", otherKey: "users_id" });
   formulas.belongsToMany(users, { as: 'users_id_users_like_formulas', through: like_formulas, foreignKey: "formulas_id", otherKey: "users_id" });
   projects.belongsToMany(users, { as: 'users_id_users', through: documents, foreignKey: "id", otherKey: "users_id" });
+  replies.belongsToMany(users, { as: 'users_id_users_like_replies', through: like_replies, foreignKey: "communities_id", otherKey: "users_id" });
   users.belongsToMany(communities, { as: 'communities_id_communities', through: like_communities, foreignKey: "users_id", otherKey: "communities_id" });
+  users.belongsToMany(communities, { as: 'communities_id_communities_replies', through: replies, foreignKey: "users_id", otherKey: "communities_id" });
   users.belongsToMany(formulas, { as: 'formulas_id_formulas', through: like_formulas, foreignKey: "users_id", otherKey: "formulas_id" });
   users.belongsToMany(projects, { as: 'id_projects', through: documents, foreignKey: "users_id", otherKey: "id" });
+  users.belongsToMany(replies, { as: 'communities_id_replies', through: like_replies, foreignKey: "users_id", otherKey: "communities_id" });
   like_communities.belongsTo(communities, { as: "community", foreignKey: "communities_id"});
   communities.hasMany(like_communities, { as: "like_communities", foreignKey: "communities_id"});
   replies.belongsTo(communities, { as: "community", foreignKey: "communities_id"});
@@ -48,8 +52,6 @@ function initModels(sequelize) {
   projects.hasMany(documents, { as: "documents", foreignKey: "id"});
   like_replies.belongsTo(replies, { as: "community", foreignKey: "communities_id"});
   replies.hasMany(like_replies, { as: "like_replies", foreignKey: "communities_id"});
-  like_replies.belongsTo(replies, { as: "reply", foreignKey: "replies_id"});
-  replies.hasMany(like_replies, { as: "replies_like_replies", foreignKey: "replies_id"});
   communities.belongsTo(users, { as: "user", foreignKey: "users_id"});
   users.hasMany(communities, { as: "communities", foreignKey: "users_id"});
   documents.belongsTo(users, { as: "user", foreignKey: "users_id"});
