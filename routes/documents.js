@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const directory_name = "packaging"
+const directory_name = "documents"
 
 // 업로드 파일 저장 설정
-let storage = (fileName) => multer.diskStorage({
+let storage = (newFilename) => multer.diskStorage({
     destination: function (req, file, callback) {
         const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, directory_name);
         const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
@@ -12,6 +12,9 @@ let storage = (fileName) => multer.diskStorage({
 
         callback(null, FILES_PATH)
     }, filename: function (req, file, callback) {
+
+        console.log(file);
+        
         let extension = path.extname(file.originalname);
         let basename = path.basename(file.originalname, extension);
         let encoding = ""
@@ -24,14 +27,15 @@ let storage = (fileName) => multer.diskStorage({
 });
 
 // 미들웨어 등록
-const upload = (fileName) => multer({
-    storage: storage(fileName),
+const upload = (newFilename) => multer({
+    storage: storage(newFilename),
     // file size 제한(MB)
     limits: {
         fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
     },
 });
 
-router.get('/', (req, res, next) => res.render('packaging/index'))
+router.get('/:id', (req, res, next) => res.render('documents/detail'))
+router.get('/', (req, res, next) => res.render('documents/index'))
 
 module.exports = router;

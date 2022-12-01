@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/client-sidebar.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Service') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Documents') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col-3">
+                <h5><strong>
+                    <%= __('Management') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
+              <div class="widget w-100 p-5">
+                <div>
+                  <!-- 테스트 데이터 -->
+                  <%
+                    let document={
+                            project_name:"테스트프로젝트",
+                            message:"테스트데이터입니다.",
+                            file_path: "/uploads/documents/1-1123123-fafdb348d79f5a0fd7a.zip",
+                            create_date: new Date()
+                        }
+                    %>
+                </div>
+                <div>
+                  <!-- 제목 -->
+                  <div class="form-control my-3 p-3">
+                    <div class="d-flex justify-content-between h6 m-0">
+                      <!-- 프로젝트 명-->
+                      <div><%= document.project_name %></div>
+                      <!-- 생성일 -->
+                      <div><%= formatDate(document.create_date) %></div>
+                    </div>
+                  </div>
+                  <!-- 메시지 -->
+                  <div class="m-4">
+                    <%= document.message %>
+                  </div>
+                </div>
+
+                <!-- 파일 -->
+                <div class="text-black">
+                  <i class="fa-regular fa-file-lines"></i>
+                  <span><%= __('File') %></span>
+                </div>
+                <hr>
+                <% if(document.file_path) { %>
+                <div class="d-flex justify-content-between h6 px-3">
+                  <div class="align-self-center text-gray">
+                    <i class="fa-solid fa-download"></i>
+                    <span><%= document.file_path.split('/')[3] %></span>
+                  </div>
+                  <div>
+                    <button type="button" class="w-auto btn btn-outline-primary px-3">
+                      <%= __('Download') %>
+                    </button>
+                  </div>
+                </div>
+                <% } %>
+
+                <hr>
+
+                <!-- 네비게이션 -->
+                <div class="text-center d-flex justify-content-center">
+                  <div class="m-3 hover">
+                    <a href="<%= codezip.url.users.documents %>">
+                      <h6>
+                        <%= __('btn.목록') %>
+                      </h6>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  END CONTENT AREA  -->
+
+  <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

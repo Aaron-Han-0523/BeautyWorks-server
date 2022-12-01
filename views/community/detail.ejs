@@ -58,11 +58,9 @@
 
                 <!-- title -->
                 <div class="form-control d-flex justify-content-between">
-                  <div class="p-1">
-                    <h6>
-                      <%= `${community.title}` %>
-                      <%- include('../partials/badge/new', {date:community.create_date}) %>
-                    </h6>
+                  <div class="p-1 d-flex h6">
+                    <%- include('../partials/badge/new', {date:community.create_date}) %>
+                    <%= `${community.title}` %>
                   </div>
                   <div class="p-1 d-flex">
                     <h6 class="me-3">

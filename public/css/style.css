@@ -3,6 +3,14 @@
     src: url('/fonts/Poppins-Medium.ttf') format('truetype');
 }
 
+ul.info {
+    list-style: "· ";
+}
+
+ul.info li p{
+    color: #000;
+}
+
 .btn {
     padding: .5rem 0;
 }
@@ -33,6 +41,10 @@ body {
 
 .text-gray {
     color: var(--bs-gray-600);
+}
+
+.border-gray {
+    border-color: var(--bs-gray-500) !important;
 }
 
 .text-ellipsis,
@@ -123,6 +135,31 @@ body {
     height: 30px;
 }
 
+/************************/
+/*      nav bar end     */
+/************************/
+
+/************************/
+/*      image           */
+/************************/
+
+.card-thumbnail {
+    position: relative;
+
+    width: 100%;
+    padding-bottom: 100%;
+    /* --url : attr(data-url); */
+    /* background-image: url(--url); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+}
+
 .profileImage img {
     width: 40px;
     height: 40px;
@@ -132,9 +169,11 @@ body {
     width: 50px;
     height: 50px;
 }
+
 /************************/
-/*      nav bar end     */
+/*      image end       */
 /************************/
+
 @media (min-width: 1400px) {
 
     .container,
@@ -152,7 +191,7 @@ body {
     top: 60px;
     /* margin-top: 10px; */
     padding: 20px 20px 20px 20px;
-    min-height: 60px;
+    /* min-height: 60px; */
     /* box-shadow: 0 6px 10px 0 rgba(255, 255, 255, 0.14), 0 1px 18px 0 rgba(255, 255, 255, 0.12), 0 3px 5px -1px rgba(255, 255, 255, 0.2); */
     /* background-color: rgba(224, 230, 237, 0.9) !important; */
     /* border: 1px solid #e0e6ed; */
@@ -295,11 +334,6 @@ h5 {
     color: #000;
 }
 
-.preview img {
-    width: 100%;
-    height: 100%;
-}
-
 .mark.mark-outline-new {
     font-size: xx-small;
     color: #e2a03f !important;
@@ -308,7 +342,6 @@ h5 {
     border-radius: 5px;
     padding: 0 1rem;
 }
-
 /************************/
 /*      gallery        */
 /************************/

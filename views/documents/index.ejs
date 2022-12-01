@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/client-sidebar.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Service') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Documents') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col-3">
+                <h5><strong>
+                    <%= __('Management') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
+              <div class="widget w-100 p-5">
+                <div>
+                  <!-- 테스트 데이터 -->
+                  <%
+                    let page = 1;
+                    let documents = {count:100, rows:[]};
+                    for(let i=0; i< 10; i++){
+                        documents.rows.push({
+                            id:i,
+                            project_name:"테스트프로젝트"+i,
+                            message:i+"번째 테스트데이터입니다.",
+                            file_path: null,
+                            create_date: new Date()
+                        })
+                    }
+                    %>
+                </div>
+                <div>
+                  <% documents.rows.forEach((item, index)=>{ %>
+                  <a class="form-control my-3 p-3" href="<%= codezip.url.users.documents +'/'+ item.id %>">
+                    <div class="d-flex justify-content-between h6 m-0">
+                      <!-- 프로젝트 명-->
+                      <div><%= item.project_name %></div>
+                      <!-- 생성일 -->
+                      <div><%= formatDate(item.create_date) %></div>
+                    </div>
+                  </a>
+                  <% }) %>
+                </div>
+                <!-- pagination -->
+                <div>
+                  <!-- make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) { -->
+                  <%-
+                    make_pagination_by_href(
+                        __,
+                        page,
+                        documents.count,
+                        codezip.url.users.documents
+                    )
+                    %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  END CONTENT AREA  -->
+
+  <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

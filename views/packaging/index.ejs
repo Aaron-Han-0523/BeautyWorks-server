@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/client-sidebar.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex pt-3 br-20">
+              <div class="col-3">
+                <h6 class="main-menu">
+                  <%= __('Customizing') %>
+                </h6>
+                <h4><strong>
+                    <%= __('Packaging') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col-3">
+                <h5><strong>
+                    <%= __('Tube') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb py-0">
+
+              <div class="widget w-100" style="padding: 10% 5%;">
+                <!-- 카드 그룹 -->
+                <!-- /* 테스트 데이터 생성 -->
+                <div>
+                  <%
+                    let packages={count:100, rows:[]};
+                    for(let i=0; i< 6; i++){
+                        packages.rows.push({
+                            packaging_name:"테스트용기"+i,
+                            packaging_type:0,
+                            category1:i%3,
+                            category2:i%3,
+                            category3:i%5,
+                            capacity:i+" ml",
+                            price:(i+1)+"000",
+                            use:"Eyecream",
+                            image_paths:"https://via.placeholder.com/150x1" + i + "0.jpg"
+                        })
+                    }
+                    %>
+                </div>
+                <!-- 테스트 데이터 생성 */ -->
+                <div class="d-flex flex-wrap">
+                  <!-- 카드 -->
+                  <% packages.rows.forEach((item, index)=>{ %>
+                  <div class="col-4 p-2">
+                    <!-- 카드 이미지-->
+                    <div>
+                      <% if(item.image_paths) { %>
+                      <% let image_url = item.image_paths.split(',')[0] %>
+                      <div class="card-thumbnail" style="background-image: url('<%= image_url %>')"></div>
+                      <% }else{ %>
+                      <div class="card-thumbnail" style="background-image: url(https://via.placeholder.com/150.jpg);"></div>
+                      <% } %>
+                    </div>
+                    <!-- 카드 내용-->
+                    <div class="my-3">
+                      <p><%= item.packaging_name %></p>
+                      <p><%= __('packaging'+item.packaging_type) %></p>
+                      <p><%= __('packaging'+item.packaging_type+'.category1.'+item.category1) %></p>
+                      <p><%= __('packaging'+item.packaging_type+'.category2.'+item.category2) %></p>
+                      <p><%= __('packaging'+item.packaging_type+'.category3.'+item.category3) %></p>
+                      <p><%= item.capacity %></p>
+                      <p><%= new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(item.price) %></p>
+                    </div>
+                  </div>
+                  <% }) %>
+                </div>
+                <!-- 페이지네이션 -->
+                <div>
+                  <!-- make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) -->
+                  <%-
+                    make_pagination_by_href(
+                        __,
+                        1,
+                        packages.count,
+                        codezip.url.users.packaging,
+                        6
+                    )
+                    %>
+                </div>
+                <hr class="my-5">
+                <!-- 정보 -->
+                <div class="">
+                  <!-- 제목 -->
+                  <div class="h6">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span><%= __('Information') %></span>
+                  </div>
+                  <!-- 내용 -->
+                  <div class="form-control p-4 d-flex">
+                    <div class="align-self-center p-3">
+                      <ul class="info m-0">
+                        <li>
+                          <p><%= __('users.packaging.info.dia19') %></p>
+                        </li>
+                        <li>
+                          <p><%= __('users.packaging.info.dia25') %></p>
+                        </li>
+                        <li>
+                          <p><%= __('users.packaging.info.dia35') %></p>
+                        </li>
+                        <li>
+                          <p><%= __('users.packaging.info.dia40') %></p>
+                        </li>
+                        <li>
+                          <p><%= __('users.packaging.info.dia50') %></p>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="border-end border-gray mx-5"></div>
+                    <div class="align-self-center">
+                      <p><%= __('users.packaging.info1') %></p>
+                      <p><%= __('users.packaging.info2') %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+
+    <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

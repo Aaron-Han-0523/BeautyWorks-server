@@ -9,7 +9,8 @@ const formulaRouter = require('./formula');
 const projectsRouter = require('./projects');
 const ingredientRouter = require('./ingredient');
 const myPageRouter = require('./myPage');
-
+const packagingRouter = require('./packaging')
+const documentsRouter = require('./documents')
 const usersController = require('../controllers/users');
 const usersService = require('../services/users');
 const multer = require("multer");
@@ -17,10 +18,12 @@ const path = require("path");
 const myUtils = require('../utils/myUtils');
 const codezip = require('../codezip');
 
+const directory_name = "profileImage"
+
 // 업로드 파일 저장 설정
 let storage = (fileName) => multer.diskStorage({
   destination: function (req, file, callback) {
-    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, "profileImage");
+    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, directory_name);
     const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
     myUtils.mkdir(FOLDER_PATH);
 
@@ -122,11 +125,13 @@ router.use('/newProject', newProjectRouter)
 router.use('/formula', formulaRouter)
 
 // Packaing
+router.use('/packaging', packagingRouter)
 
 // Ingredient
 router.use('/ingredient', ingredientRouter)
 
 // Documents
+router.use('/documents', documentsRouter)
 
 // Projects
 router.use('/projects', projectsRouter)
@@ -138,6 +143,6 @@ router.use('/api', (req, res, next) => {
   next();
 }, router)
 
-
 router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))
+
 module.exports = router;

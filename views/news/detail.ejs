@@ -58,11 +58,9 @@
 
                 <!-- title -->
                 <div class="form-control m-2 d-flex justify-content-between">
-                  <div class="p-1 align-self-center">
-                    <h6>
-                      <%= `${news.title}` %>
+                  <div class="p-1 align-self-center d-flex h6">
                       <%- include('../partials/badge/new.ejs',{date:news.create_date}) %>
-                    </h6>
+                      <%= `${news.title}` %>
                   </div>
                   <div class="p-1 d-flex">
                     <h6 class="me-3">

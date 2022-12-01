@@ -79,16 +79,18 @@
                       </div>
                       <div id="index_body">
                         <% news.data.forEach((item,index)=>{ %>
-                        <a class="d-flex border-bottom py-3 page-link text-black" href='<%= codezip.url.users.news.main + `/` + item.id %>'>
-                          <div class="col-1 text-center"><%= item.id %></div>
-                          <div class="col-6 text-ellipsis d-flex">
+                        <a class="d-flex border-bottom py-3 page-link text-black px-0 text-center" href='<%= codezip.url.users.news.main + `/` + item.id %>'>
+                          <div class="col-1 text-ellipsis"><%= item.id %></div>
+                          <div class="col-6 d-flex px-3">
                             <%- include('../partials/badge/new', {date:item.create_date}) %>
-                            <%= item.title %>
+                            <div class="text-ellipsis">
+                              <%= item.title %>
+                            </div>
                           </div>
-                          <div class="col-2 text-center flex-grow-1">
+                          <div class="col-2 text-ellipsis">
                             <%= formatDate(item.create_date) %>
                           </div>
-                          <div class="col-3 text-center text-ellipsis">
+                          <div class="col-3 text-ellipsis">
                             <%# __('users.community.index.WrittenBy') %>
                             <%= __('admin.userName') %>
                           </div>

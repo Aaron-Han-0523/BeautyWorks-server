@@ -3,9 +3,6 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
-  <!-- 이미지 그룹 슬라이드 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
 </head>
 
 <body class="layout-boxed">
@@ -64,23 +61,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- /* 테스트 데이터 생성 -->
-                  <div>
-                    <%# let project=[]; %>
-                    <%# project.push({
-                      project_name:"My Suncream1",
-                      phase:7
-                    }) %>
-                    <%# project.push({
-                      project_name:"My Suncream2",
-                      phase:8
-                    }) %>
-                    <%# project.push({
-                      project_name:"My Suncream3",
-                      phase:1
-                    }) %>
-                  </div>
-                  <!-- 테스트 데이터 생성 */ -->
+                  
                   <% project.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
@@ -120,22 +101,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- /* 테스트 데이터 생성 -->
-                  <div>
-                    <%# let temp_project=[]; %>
-                    <%# temp_project.push({
-                      project_name:"My Suncream",
-                      phase:0,
-                      detail_phase:1
-                    }) %>
-                    <%# temp_project.push({
-                      project_name:"My Suncream",
-                      phase:0,
-                      detail_phase:2
-                    }) %>
-                    <%# console.log(temp_project) %>
-                  </div>
-                  <!-- 테스트 데이터 생성 */ -->
+                  
                   <% temp_project.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
@@ -158,49 +124,7 @@
                 </div>
               </div>
 
-              <!-- Completed Project -->
-              <!-- /* 테스트 데이터 생성 -->
-              <div>
-                <%# let completed_project={rows:[],page:1,count:2}; %>
-                <%# completed_project.rows.push({
-                  project_name:"My Suncream1",
-                  capacity:"110ml",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:10000,
-                  recent_order_date:new Date(2022,10,5),
-                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                })%>
-                <%# completed_project.rows.push({
-                  project_name:"My Suncream2",
-                  capacity:"120ml",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:20000,
-                  recent_order_date:new Date(2022,10,15),
-                  image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                
-                })%>
-                <%# completed_project.rows.push({
-                  project_name:"My Suncream3",
-                  capacity:"110g",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:30000,
-                  recent_order_date:new Date(2022,10,25),
-                  image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
-                })%>
-                <%# completed_project.rows.push({
-                  project_name:"My Suncream4",
-                  capacity:"210g",
-                  category1:0,
-                  category2:0,
-                  total_order_quantity:10000,
-                  recent_order_date:new Date(2022,10,5),
-                  image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
-                })%>
-              </div>
-              <!-- 테스트 데이터 생성 */ -->
+              
               <!-- Completed Project -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
                 <div class="form-group ms-3">
@@ -287,30 +211,7 @@
                     </div>
 
                     <div class="widget row mx-0 h-100 align-content-center">
-                      <!-- /* 테스트 데이터 생성 -->
-                      <div>
-                        <%# let recommended_formula=[]; %>
-                        <%# recommended_formula.push({
-                          product_name:"테스트추천프로젝트1",
-                          category1:0,
-                          category2:0,
-                          image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                        })%>
-                        <%# recommended_formula.push({
-                          product_name:"테스트추천프로젝트2",
-                          category1:1,
-                          category2:0,
-                          image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                        })%>
-                        <%# recommended_formula.push({
-                          product_name:"테스트추천프로젝트3",
-                          category1:2,
-                          category2:0,
-                          image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
-                        })%>
-                        <%# console.log(recommended_formula) %>
-                      </div>
-                      <!-- 테스트 데이터 생성 */ -->
+                      
                       <% recommended_formula.forEach((item,index)=>{ %>
                       <div class="col-4">
                         <a class="hover" href="<%= codezip.url.users.formula.main +'/'+item.id %>">
@@ -350,18 +251,7 @@
                     </div>
 
                     <div class="widget row mx-0 h-100 align-content-center">
-                      <!-- /* 테스트 데이터 생성 -->
-                      <div>
-                        <%# let remommended_ingredient=[]; %>
-                        <%# remommended_ingredient.push({ingredient_name:"테스트추천성분1", type:"IC00,IC03",
-                                              effects:"IE00,IE01,IE02"}) %>
-                        <%# remommended_ingredient.push({ingredient_name:"테스트추천성분2",
-                                                type:"IC01,IC03", effects:"IE03,IE04,IE05"}) %>
-                        <%# remommended_ingredient.push({ingredient_name:"테스트추천성분3",
-                                                  type:"IC00,IC02", effects:"IE06,IE07,IE08"}) %>
-                        <%# console.log(remommended_ingredient) %>
-                      </div>
-                      <!-- 테스트 데이터 생성 */ -->
+                      
                       <div class="table-responsive p-0">
                         <table class="table text-break">
                           <thead class="text-center">

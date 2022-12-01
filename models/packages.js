@@ -48,6 +48,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "이미지"
     },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "가격"
+    },
     create_date: {
       type: DataTypes.DATE,
       allowNull: false,
