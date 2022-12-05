@@ -26,6 +26,10 @@ router
 router
   .get('/delete/:id', newsController.delete)
 
+// 복구
+router
+  .get('/recovery/:id', newsController.recovery)
+
 // 상세 조회
 router
   .get('/:id', newsController.detail)

@@ -15,8 +15,12 @@ router
 
 // 삭제
 router
-    .get('/delete//:community_id/:reply_id', replyController.delete)
+    .get('/delete/:community_id/:reply_id', replyController.delete)
     .delete('/:community_id/:reply_id', replyController.delete)
+
+// 복구
+router
+    .get('/recovery/:community_id/:reply_id', replyController.recovery)
 
 // 좋아요
 router

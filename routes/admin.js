@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
+var createError = require('http-errors');
+
 const communityRouter = require('./community');
 const newsRouter = require('./news');
-const newProjectRouter = require('./newProject');
-const myProjectRouter = require('./myProject');
+const formulaRouter = require('./formula');
+const projectsRouter = require('./projects');
+const ingredientRouter = require('./ingredient');
+const packagingRouter = require('./packaging')
+const documentsRouter = require('./documents')
 
+const adminController = require('../controllers/admin');
 const usersController = require('../controllers/users');
+
 const usersService = require('../services/users');
 const multer = require("multer");
 const path = require("path");
@@ -46,11 +53,10 @@ const upload = (fileName) => multer({
 /* GET users listing. */
 // 사용자 접속
 router
-  .post('/login', usersController.login)
+  .post('/login', adminController.login)
   .get('/login', (req, res, next) => {
     res.render('admin/login');
   })
-
 
 ////////////////////////////////////
 //    관리자 로그인 필요한 곳      //
@@ -61,37 +67,26 @@ router
 
     if (!req.session.user) {
       if (process.env.NODE_ENV == "development") {
-        req.session.user = await usersService.getUser("user-dev@email.com");
+          console.log("env :", process.env.NODE_ENV);
+          req.session.user = await usersService.getUser("superadmin");
+        // return res.redirect('/users/signIn');
       }
-      else return res.redirect('/users/signIn');
+      else return next(createError(404));
     }
 
     req.session.save(() => {
-      res.locals.user = req.session.user;
+      const user = req.session.user;
+      if (![100, 200].includes(user.user_type)) return next(createError(404));
+
+      res.locals.user = user;
       // console.log(res.locals.user)
       next();
     })
   })
 
-
-// router.get('/layout', (req, res) => res.render('layout/layout'));
-// 알람 체크
-router.get('/checkAlarm', usersController.checkAlarm);
-
-// 사용자 대시보드
-router.use('/dashboard', (req, res) => res.render('dashboard/dashboard'));
-
-// 사용자 접속해제
-router.get('/signOut', usersController.logout);
-
-// 사용자 마이페이지
-router.get('/myPage', (req, res) => res.render('users/myPage'));
-
-// 사용자 계정
+// 사용자 접속 종료
 router
-  .post('/myAccount', upload().single('profile_image_path'), usersController.edit)
-  .put('/myAccount', upload().single('profile_image_path'), usersController.edit)
-  .get('/myAccount', (req, res) => res.render('users/myAccount'));
+  .get('/logout', adminController.logout)
 
 // news
 router.use('/news', newsRouter)
@@ -99,20 +94,26 @@ router.use('/news', newsRouter)
 // Community
 router.use('/community', communityRouter)
 
-// My Project
-router.use('/myProject', myProjectRouter)
-
-// New Project
-router.use('/newProject', newProjectRouter)
-
 // Formula
+router.use('/formula', formulaRouter)
 
 // Packaing
+router.use('/packaging', packagingRouter)
 
 // Ingredient
+router.use('/ingredient', ingredientRouter)
 
 // Documents
+router.use('/documents', documentsRouter)
 
+// Projects
+router.use('/projects', projectsRouter)
 
-router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))
+// api
+router.use('/api', (req, res, next) => {
+  console.log("api request")
+  req.api = true;
+  next();
+}, router)
+
 module.exports = router;

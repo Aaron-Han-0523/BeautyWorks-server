@@ -40,7 +40,7 @@
                     </h6>
                     <div class="col-12">
                       <div class="mb-3">
-                        <input type="text" id="<%= __('users.id') %>" class="form-control" name="<%= __('users.id') %>" placeholder="<%= __('users.signIn.id.placeholder') %>" autofocus>
+                        <input type="text" id="email" class="form-control" name="email" placeholder="<%= __('users.signIn.id.placeholder') %>" autofocus>
                       </div>
                     </div>
 
@@ -57,7 +57,7 @@
                       <div class="mb-3">
                         <div class="form-check form-check-primary form-check-inline">
                           <input class="form-check-input me-3" type="checkbox" id="rememberId">
-                          <label class="form-check-label" for="form-check-default">
+                          <label class="form-check-label" for="rememberId">
                             <%= __('admin.signIn.inputLabel.ID저장') %>
                           </label>
                         </div>
@@ -125,7 +125,7 @@
   </script>
   <script>
     let rememberflag = false;
-    const inputId = document.getElementById("<%= __('users.id') %>");
+    const inputId = document.getElementById("email");
     const cookieName = "rememberId"
 
     window.addEventListener("load", (event) => {

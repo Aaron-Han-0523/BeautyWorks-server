@@ -4,7 +4,26 @@ const router = express.Router();
 const formulasController = require('../controllers/formulas');
 const formulasService = require('../services/formulas');
 
+const myUtils = require('../utils/myUtils');
+
 /* GET formulas listing. */
+router
+  .use(myUtils.upload("formulas").array("image_paths"), (req, res, next) => {
+    console.log("files", req.files);
+    const files = req.files;
+
+    if (files) {
+      let paths = [];
+      files.forEach((file, index) => {
+        paths.push('/' + file.path)
+      })
+      req.body["image_paths"] = paths.join(',');
+    }
+
+
+    next();
+  })
+
 // 추가
 router
   .post('/add', formulasController.add)
@@ -22,13 +41,17 @@ router
     });
   })
 
+// 상세 조회
+router
+  .get('/:id', formulasController.detail)
+
 // 삭제
 router
   .get('/delete/:id', formulasController.delete)
 
-// 상세 조회
+// 복구
 router
-  .get('/:id', formulasController.detail)
+  .get('/recovery/:id', formulasController.recovery)
 
 // 좋아요
 router

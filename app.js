@@ -18,7 +18,8 @@ const i18n = require('./i18n');
 const codezip = require('./codezip');
 const myUtils = require('./utils/myUtils');
 process.env.codezip = codezip;
-adminRouter
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');

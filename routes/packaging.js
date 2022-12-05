@@ -1,37 +1,59 @@
 const express = require('express');
 const router = express.Router();
 
-const directory_name = "packaging"
+const packagesController = require('../controllers/packages');
 
-// 업로드 파일 저장 설정
-let storage = (fileName) => multer.diskStorage({
-    destination: function (req, file, callback) {
-        const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, directory_name);
-        const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
-        myUtils.mkdir(FOLDER_PATH);
+const myUtils = require('../utils/myUtils');
 
-        callback(null, FILES_PATH)
-    }, filename: function (req, file, callback) {
-        let extension = path.extname(file.originalname);
-        let basename = path.basename(file.originalname, extension);
-        let encoding = ""
-        for (let i = 0; i < basename.length; i++) {
-            encoding += basename.codePointAt(i).toString(16);
+router
+    .use(myUtils.upload("packages").array("image_paths"), (req, res, next) => {
+        console.log(req.files);
+        const files = req.files;
+
+        if (files) {
+            let paths = [];
+            files.forEach((file, index) => {
+                paths.push('/' + file.path)
+            })
+            req.body["image_paths"] = paths.join(',');
         }
-        encoding = encoding.slice(0, 200);
-        callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + encoding + extension);
-    },
-});
 
-// 미들웨어 등록
-const upload = (fileName) => multer({
-    storage: storage(fileName),
-    // file size 제한(MB)
-    limits: {
-        fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
-    },
-});
 
-router.get('/', (req, res, next) => res.render('packaging/index'))
+        next();
+    })
+
+
+// 추가
+router
+    .post('/add', packagesController.add)
+    .get('/add', (req, res, next) => res.render('packages/add'))
+
+// 편집
+router
+    .put('/edit/:id', packagesController.edit)
+    .post('/edit/:id', packagesController.edit)
+    .get('/edit/:id', async (req, res, next) => {
+        const formula = await packagesService.readOne(req.params.id);
+        if (req.baseUrl.split('/')[1] != 'admin') return res.status(403).end();
+        return res.render('packages/edit', {
+            formula: formula
+        });
+    })
+
+// 상세 조회
+router
+    .get('/:id', packagesController.detail)
+
+// 삭제
+router
+    .get('/delete/:id', packagesController.delete)
+
+// 복구
+router
+    .get('/recovery/:id', packagesController.recovery)
+
+// 목록 조회
+router
+    .get('/', packagesController.index)
 
 module.exports = router;

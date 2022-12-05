@@ -2,11 +2,16 @@ const models = require('../models');
 const communities = require('../models').communities;
 const { Op, QueryTypes } = require('sequelize');
 
-exports.create = async (obj) => {
+const { Service } = require('../utils/template');
+
+const service = new Service(communities);
+
+
+service.create = async (obj) => {
     return await communities
         .create(Object.assign(obj, {
             create_date: new Date(),
-            updateDate: new Date(),
+            update_date: new Date(),
         }))
         .then(result => {
             console.log("communities create success");
@@ -18,11 +23,11 @@ exports.create = async (obj) => {
         });
 }
 
-exports.update = async (obj) => {
+service.update = async (obj) => {
     console.log("update obj :", obj)
     return await communities
         .update(Object.assign(obj, {
-            updateDate: new Date()
+            update_date: new Date()
         }), {
             where: { id: obj.id }
         })
@@ -36,7 +41,7 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
+service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     console.log(paging.skip, '~', paging.limit);
     let word = condition.word || '';
     let query = `
@@ -124,7 +129,7 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     //         })
 }
 
-exports.readOne = async (id) => {
+service.readOne = async (id) => {
     try {
         console.log('find', id)
         var result = await communities
@@ -143,7 +148,7 @@ exports.readOne = async (id) => {
     }
 }
 
-exports.delete = async (id) => {
+service.delete = async (id) => {
     return await communities
         .update({
             delete_date: new Date()
@@ -160,7 +165,7 @@ exports.delete = async (id) => {
         })
 }
 
-exports.getPrevID = async (id) => {
+service.getPrevID = async (id) => {
     let query = `SELECT id FROM communities WHERE id < ${id} and delete_date is null ORDER BY id DESC LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
@@ -174,7 +179,7 @@ exports.getPrevID = async (id) => {
         });
 }
 
-exports.getNextID = async (id) => {
+service.getNextID = async (id) => {
     let query = `SELECT id FROM communities WHERE id > ${id} and delete_date is null  ORDER BY id LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
@@ -187,3 +192,5 @@ exports.getNextID = async (id) => {
             throw err;
         });
 }
+
+module.exports = service;

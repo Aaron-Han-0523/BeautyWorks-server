@@ -2,23 +2,38 @@ const formulasService = require('../services/formulas');
 const like_formulas = require('../services/like_formulas');
 
 exports.add = async (req, res, next) => {
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end()
+    }
+
     let body = req.body;
 
     await formulasService
         .create(body)
         .then((created_obj) => {
-            res.stutus(201).send(created_obj.id);
+            console.log(created_obj.id);
+            res.status(201).json(created_obj.id);
         })
         .catch((err) => {
             console.log("fail to create formulas");
             console.log(body);
             console.error(err);
-            res.stutus(500).end();
+            res.status(500).end();
         });
 }
 
 exports.edit = async (req, res, next) => {
     const id = req.params.id;
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end()
+    }
+
     let condition = { id: id };
 
     let body = req.body;
@@ -40,6 +55,13 @@ exports.edit = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end()
+    }
+
     let condition = { id: id };
 
     await formulasService
@@ -53,11 +75,11 @@ exports.delete = async (req, res, next) => {
                 //     })
                 res.status(200).end();
             }
-            else if (result == 0) {
+            else if (result === [0]) {
                 res.status(400).send("Nothing to delete data.");
             }
             else {
-                throw new Error("Something to wrong!! check to project delete")
+                throw new Error("Something to wrong!! check to formulas delete")
             }
         })
         .catch((err) => {
@@ -67,6 +89,13 @@ exports.delete = async (req, res, next) => {
 
 exports.recovery = async (req, res, next) => {
     const id = req.params.id;
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end()
+    }
+
     let condition = { id: id };
 
     await formulasService
@@ -79,7 +108,7 @@ exports.recovery = async (req, res, next) => {
                 res.status(400).send("Nothing to delete data.");
             }
             else {
-                throw new Error("Something to wrong!! check to project recovery")
+                throw new Error("Something to wrong!! check to formulas recovery")
             }
         })
         .catch((err) => {
@@ -88,8 +117,10 @@ exports.recovery = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    console.log('api', req.query)
     const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+    // console.log('base url', base);
+    // console.log('user type', user);
 
     const page = req.query.p || 1;
     delete req.query.p;
@@ -104,24 +135,31 @@ exports.index = async (req, res, next) => {
             condition[key] = value;
         }
     }
-    console.log(condition)
-    if (req.baseUrl.split('/')[1] != 'admin') {
+    if (base != 'admin') {
         // condition.users_id = user.id;
         condition.delete_date = null;
     }
 
+    console.log(condition)
     await formulasService
         .allRead(condition, limit, skip)
         .then((result) => {
             console.log("keys :", Object.keys(result))
             if (req.api) {
-                res.json({
+                console.log('complete')
+                return res.json({
                     page: page,
                     limit: limit,
                     formulas: result
                 })
-            } else {
-                res.render('formula/index', {
+            } else if (base == 'users') {
+                return res.render('formula/index', {
+                    page: page,
+                    limit: limit,
+                    formulas: result
+                })
+            } else if (base == 'admin') {
+                return res.render('admin/formula/index', {
                     page: page,
                     limit: limit,
                     formulas: result
@@ -129,16 +167,18 @@ exports.index = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.log("error");
             console.error(err);
-            res.status(500).end();
+            return res.status(500).end();
         })
 }
 
 exports.detail = async (req, res, next) => {
     const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
 
     let condition = {};
-    if (req.baseUrl.split('/')[1] != 'admin') {
+    if (base != 'admin') {
         // condition.users_id = user.id;
         condition.delete_date = null;
     }
@@ -160,10 +200,14 @@ exports.detail = async (req, res, next) => {
             res.json({
                 formula: formula
             })
-        } else {
+        } else if (base == 'users') {
             res.render('formula/detail', {
                 formula: formula,
                 is_like: is_like,
+            })
+        } else if (base == 'admin') {
+            res.render('admin/formula/detail', {
+                formula: formula
             })
         }
 

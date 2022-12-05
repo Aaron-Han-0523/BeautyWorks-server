@@ -1,10 +1,15 @@
 const fs = require('fs');
+const multer = require('multer');
+const path = require('path');
 
-module.exports.mkdir = (dir) => {
+
+
+module.exports.mkdir = mkdir = (dir) => {
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir, { recursive: true });
   }
 }
+
 
 module.exports.getRandomInt = (min, max) => {
   if (max === undefined) {
@@ -48,7 +53,37 @@ module.exports.array_i18n = (array, i18n_func) => {
   return result;
 }
 
-// 부트스트랩 v5 이용
+
+// 업로드 파일 저장 설정
+let storage = (dir_path) => multer.diskStorage({
+  destination: function (req, file, callback) {
+    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, dir_path);
+    const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
+    exports.mkdir(FOLDER_PATH);
+
+    callback(null, FILES_PATH)
+  }, filename: function (req, file, callback) {
+    let extension = path.extname(file.originalname);
+    let basename = path.basename(file.originalname, extension);
+    let encoding = ""
+    for (let i = 0; i < basename.length; i++) {
+      encoding += basename.codePointAt(i).toString(16);
+    }
+    encoding = encoding.slice(0, 200);
+    callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + basename + extension);
+  },
+});
+
+// 미들웨어 등록
+module.exports.upload = (dir_path) => multer({
+  storage: storage(dir_path),
+  // file size 제한(MB)
+  limits: {
+    fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
+  },
+});
+
+// 부트스트랩 v5, fontawesome 이용
 module.exports.make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) {
   let end_page = parseInt((count - 1) / limit) + 1;
   let end_list_num = end_page > 6 ? 5 : end_page;
@@ -181,7 +216,7 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
 </div>`
   return temp_html;
 }
-// 부트스트랩 v5 이용
+// 부트스트랩 v5, fontawesome 이용
 module.exports.make_pagination_by_func = function (i18n_func, page, count, func_name, limit = 10) {
   let end_page = parseInt((count - 1) / limit) + 1;
   let end_list_num = end_page > 6 ? 5 : end_page;

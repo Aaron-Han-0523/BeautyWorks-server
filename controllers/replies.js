@@ -13,8 +13,11 @@ exports.add = async (req, res, next) => {
 
     await repliesService.create(body)
         .then(result => {
-            console.log(result);
-            return res.redirect(req.headers.referer.split('?')[0])
+            if (req.api) {
+                return res.json(result.id);
+            } else {
+                return res.redirect("back")
+            }
         })
         .catch(err => {
             console.error(err);
@@ -57,7 +60,7 @@ exports.delete = async (req, res, next) => {
     }
 
     let result = await repliesService
-        .delete(obj)
+        .hide(obj)
         .then(result => {
             res.end();
         })
@@ -65,6 +68,39 @@ exports.delete = async (req, res, next) => {
             console.error(err);
             res.status(500).end();
         });
+}
+
+exports.recovery = async (req, res, next) => {
+    const communities_id = req.params.community_id;
+    const id = req.params.reply_id;
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end()
+    }
+
+    let condition = {
+        communities_id: communities_id,
+        id: id
+    };
+
+    await repliesService
+        .show(condition)
+        .then((result) => {
+            if (result == 1) {
+                res.status(200).end();
+            }
+            else if (result == 0) {
+                res.status(400).send("Nothing to delete data.");
+            }
+            else {
+                throw new Error("Something to wrong!! check to news recovery")
+            }
+        })
+        .catch((err) => {
+            res.status(500).end();
+        })
 }
 
 // exports.search = async (req, res, next) => {

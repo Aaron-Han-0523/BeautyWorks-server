@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     product_name: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
       comment: "제품명"
     },
     award: {
@@ -20,18 +20,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     top_or_new: {
       type: DataTypes.TINYINT,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0,
       comment: "대분류"
     },
     category1: {
       type: DataTypes.TINYINT,
-      allowNull: true,
+      allowNull: false,
       comment: "카테고리"
     },
     category2: {
       type: DataTypes.TINYINT,
-      allowNull: true,
+      allowNull: false,
       comment: "품목명"
     },
     efficacy: {

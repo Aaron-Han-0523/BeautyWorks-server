@@ -598,11 +598,6 @@
 	"users.myPage.table.thead.title": "Title",
 	"users.myPage.table.thead.content": "Content",
 	"users.myPage.table.thead.number": "No.",
-	"admin.signIn.title": "admin.signIn.title",
-	"admin.signIn.inputLabel.ID": "admin.signIn.inputLabel.ID",
-	"admin.signIn.inputLabel.비밀번호": "admin.signIn.inputLabel.비밀번호",
-	"admin.login.btnName": "admin.login.btnName",
-	"admin.signIn.inputLabel.ID저장": "admin.signIn.inputLabel.ID저장",
 	"users.news.이전글": "users.news.이전글",
 	"users.news.목록": "users.news.목록",
 	"users.community.reply.btn.댓글 남기기": "Confirm",
@@ -680,5 +675,11 @@
 	"users.packaging.info.dia40": "40mm Dia : 100~130ml, Use : Toothpaste",
 	"users.packaging.info.dia50": "50mm Dia : 150~200ml, Use : Form",
 	"File": "File",
-	"Download": "Download"
+	"Download": "Download",
+	"admin.signIn.subTitle": "매니저 로그인",
+	"admin.signIn.title": "LOGIN",
+	"admin.signIn.inputLabel.ID": "Email",
+	"admin.signIn.inputLabel.비밀번호": "Password",
+	"admin.login.btnName": "Login",
+	"admin.signIn.inputLabel.ID저장": "remember ID"
 }

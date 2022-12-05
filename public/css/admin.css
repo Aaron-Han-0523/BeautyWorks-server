@@ -1,0 +1,249 @@
+/* 사이드바 */
+
+/* VARIABLES CSS */
+:root {
+  --nav--width: 92px;
+
+  /* Colores */
+  --first-color: #0c5df4;
+  --bg-color: rgb(242, 244, 247);
+  --sub-color: #b6cefc;
+  --white-color: rgb(11, 11, 11);
+
+  /* Fuente y tipografia */
+  --body-font: "Poppins", sans-serif;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+
+  /* z index */
+  --z-fixed: 100;
+}
+
+/* BASE */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0 1rem 0 6.75rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+}
+
+h1 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  margin-right: 5px;
+  /* font-size: 1.25rem; */
+}
+
+.hover > *:hover {
+  color: var(--BW-blue) !important;
+}
+
+/* l NAV */
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--nav--width);
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--white-color);
+  padding: 1.5rem 1.5rem 2rem;
+  transition: 0.5s;
+  z-index: var(--z-fixed);
+}
+
+/* NAV */
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav__brand {
+  position: relative;
+  grid-template-columns: max-content max-content;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.nav__toggle {
+  font-size: 1.25rem;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.nav__logo {
+  color: var(--white-color);
+  font-weight: 600;
+}
+
+.nav__link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  /* align-items: start; */
+  column-gap: 0.75rem;
+  padding: 0.75rem;
+  color: var(--white-color);
+  margin-bottom: 1rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.menu {
+  padding: 0.75rem 2.25rem 0 3.5rem;
+}
+
+.menu li {
+  list-style: outside;
+}
+
+.sublink {
+  font-size: var(--small-font-size);
+}
+
+.nav_name {
+  font-size: var(--small-font-size);
+}
+
+/* Expander menu */
+.expander {
+  width: calc(var(--nav--width) + 13.5rem);
+}
+
+/* Active links menu */
+.active {
+  background-color: #fff;
+}
+
+.navbar-btn {
+  position: absolute;
+  top: 0;
+  right: 2rem;
+}
+
+.navbar-btn button {
+  border: none;
+  background-color: transparent;
+}
+
+/* 게시판 nav */
+
+.admin-header {
+  z-index: 50;
+  right: 0;
+  width: calc(100vw - 92px);
+  height: 72px;
+  border: 0;
+  padding-right: 3rem;
+  margin-right: 0;
+  margin-left: 92px;
+}
+
+.admin-nav {
+  width: 100%;
+  height: 3rem;
+  padding-right: 2rem;
+
+  border: 3px solid rgb(242, 244, 247);
+  border-radius: 0.5rem;
+
+  color: rgb(51, 51, 51);
+  text-align: end;
+  line-height: 3rem;
+}
+
+.main-container {
+  padding-top: 5rem;
+}
+
+/* 게시판 리스트 통합 */
+
+.title {
+  margin-bottom: 3rem;
+}
+
+.title h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.search input,
+.search button {
+  width: 100%;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.search input {
+  border: 3px solid rgb(242, 244, 247);
+  border-right: 0;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.search button {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.table {
+  text-align: center;
+}
+
+.table .table-header th,
+.table .table-body td {
+  border: 1px solid #000;
+}
+
+.add-button {
+  position: absolute;
+  right: 30px;
+}
+
+.add-button button {
+  width: 10rem;
+  padding: 5px;
+  border-radius: 0.5rem;
+}
+
+/* 원료 작성 */
+
+/* 공지사항 작성 */
+
+.admin-add#content {
+  margin-left: 0;
+}
+
+.admin-add .breadcrumb {
+  padding: 0;
+}
+
+.admin-add .widget-content {
+  width: 60vw;
+  height: auto;
+  border: 1px solid #000;
+  margin: auto;
+}

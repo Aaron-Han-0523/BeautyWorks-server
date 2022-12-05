@@ -350,27 +350,42 @@
     }
 
     async function reply_edit_active(communities_id, replies_id) {
+      document.getElementById("reply").remove();
       const target = document.getElementById('reply_area' + replies_id);
-      const text = document.getElementById('reply_content' + replies_id).innerText;
-      let temp_html = `<div class="bg-white p-2 m-2 br-20">
-                <textarea id="replyEditTarget${replies_id}" rows="10" maxlength="3000" name="content" class="form-control br-20">${text}</textarea>
-                  <div class="text-end mt-2 me-3">
-                    <button class="btn btn-outline-primary" type="button" onclick="reply_edit(${communities_id},${replies_id});">
-                      <%= __('users.community.reply.btn.확인') %>
-                    </button>
-                    <button class="btn btn-outline-primary" type="button" onclick="location.reload();">
-                      <%= __('users.community.reply.btn.취소') %>
-                    </button>
-                  </div>
-                </div>
-                <hr/>
-                `
+      const text = document.getElementById('reply_content' + replies_id).querySelector('p').innerText;
+
+      let temp_html = `<div class='w-100'>
+        <form id="reply" class="border border-gray px-4 py-2 br-4">
+          <textarea rows="5" maxlength="3000" name="content" class="form-control bg-white bc-white" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>">${text}</textarea>
+          <hr class="m-0">
+          <div class="d-flex justify-content-between">
+            <div id="textCount" class="align-self-center">
+              0 / 3000
+            </div>
+            <div class="w-auto">
+            <button class="btn btn-outline-primary mt-2 px-3 me-auto" type="button" onclick="reply_edit(${communities_id}, ${replies_id});">
+              <%= __('users.community.reply.btn.댓글 남기기') %>
+            </button>
+            <button class="btn btn-outline-primary mt-2 px-3" type="button" onclick="location.reload();">
+              <%= __('users.community.reply.btn.취소') %>
+            </button>
+            <div>
+          </div>
+        </form>
+      </div>`
+
       target.innerHTML = temp_html;
+
+      reply.addEventListener("input", event => {
+        let text_cnt = event.target.value.length;
+        textCount.innerText = text_cnt + " / 3000";
+      })
     }
 
     async function reply_edit(communities_id, replies_id) {
+      console.log("??");
       const url = '<%= codezip.url.users.community.reply.edit %>';
-      let content = document.getElementById('replyEditTarget' + replies_id).value;
+      let content = reply.content.value;
       fetch(url, {
         method: "put",
         body: new URLSearchParams({

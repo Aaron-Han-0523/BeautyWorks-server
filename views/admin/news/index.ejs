@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/admin-header.ejs") %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
+</head>
+
+<body>
+  <%- include ("../partials/loader.ejs") %>
+
+  <!--  BEGIN CONTENT AREA  -->
+  <div class="main-container" id="container">
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="title">
+            <h1>공지사항 관리</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="search">
+        <div class="row">
+          <div class="col-11" style="padding-right: 0 !important;">
+            <input type="number" placeholder="검색할 전화번호를 입력해주세요.">
+          </div>
+          <div class="col-1" style="padding-left: 0 !important;">
+            <button type="button">검색</button>
+          </div>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead class="table-header">
+          <tr>
+            <th scope="col">번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성일</th>
+            <th scope="col">수정 / 삭제</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-body">
+          <tr>
+            <td>0</td>
+            <td>제목</td>
+            <td>관리자</td>
+            <td>2022.12.01</td>
+            <td><a href="#">수정</a> / <a href="#">삭제</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-2">
+          <div class="add-button">
+            <button type="button" onclick="location.href='newsAdd'">추가하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

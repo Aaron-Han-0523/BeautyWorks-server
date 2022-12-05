@@ -3,7 +3,12 @@ const news = require('../models').news;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-exports.create = async (obj) => {
+const { Service } = require('../utils/template');
+
+let service = new Service(news);
+
+
+service.create = async (obj) => {
     return await news
         .create(Object.assign(obj, {
             createUser: obj.user,
@@ -19,14 +24,13 @@ exports.create = async (obj) => {
         });
 }
 
-exports.update = async (obj) => {
+service.update = async (obj, condition) => {
     console.log("update obj :", obj)
     return await news
         .update(Object.assign(obj, {
-            updateUser: obj.user,
-            updateDate: new Date()
+            update_date: new Date()
         }), {
-            where: { id: obj.id }
+            where: condition
         })
         .then(result => {
             console.log("news update success");
@@ -38,8 +42,8 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
-    // console.log('all news read');
+service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
+    console.log('all news read');
     let word = condition.word || '';
     let query = `
     select users.first_name, users.last_name, users.profile_image_path, news.* from news
@@ -99,26 +103,26 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
         })
 }
 
-exports.readOne = async (id) => {
-    try {
-        console.log('find', id)
-        var result = await news
-            .findOne({
-                raw: true,
-                where: {
-                    id: id,
-                }
-            })
-            .then(result => result)
-            .catch(err => { throw (err) })
-        return result;
-    } catch (e) {
-        console.log(e);
-        // throw (' while getUser');
-    }
-}
+// service.readOne = async (id) => {
+//     try {
+//         console.log('find', id)
+//         var result = await news
+//             .findOne({
+//                 raw: true,
+//                 where: {
+//                     id: id,
+//                 }
+//             })
+//             .then(result => result)
+//             .catch(err => { throw (err) })
+//         return result;
+//     } catch (e) {
+//         console.log(e);
+//         // throw (' while getUser');
+//     }
+// }
 
-exports.delete = async (obj) => {
+service.delete = async (obj) => {
     return await news
         .update({
             deleteUser: obj.user,
@@ -136,7 +140,7 @@ exports.delete = async (obj) => {
         })
 }
 
-exports.getPrevID = async (id) => {
+service.getPrevID = async (id) => {
     let query = `SELECT id FROM news WHERE id < ${id} ORDER BY id DESC LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
@@ -150,7 +154,7 @@ exports.getPrevID = async (id) => {
         });
 }
 
-exports.getNextID = async (id) => {
+service.getNextID = async (id) => {
     let query = `SELECT id FROM news WHERE id > ${id} ORDER BY id LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
@@ -163,3 +167,6 @@ exports.getNextID = async (id) => {
             throw err;
         });
 }
+
+
+module.exports = service;

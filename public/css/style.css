@@ -106,7 +106,8 @@ body {
 }
 
 .dropdown-item * {
-    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     padding: 0.25rem;
 }
 

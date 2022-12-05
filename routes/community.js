@@ -27,6 +27,10 @@ router
 router
   .get('/delete/:id', communityController.delete)
 
+// 복구
+router
+  .get('/recovery/:id', communityController.recovery)
+
 // 상세 조회
 router
   .get('/:id', communityController.detail)

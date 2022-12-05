@@ -1,4 +1,4 @@
-const ingredientsService = require('../services/ingredients');
+const packagesService = require('../services/packages');
 const { Op } = require('sequelize');
 
 exports.add = async (req, res, next) => {
@@ -11,13 +11,13 @@ exports.add = async (req, res, next) => {
 
     let body = req.body;
 
-    await ingredientsService
+    await packagesService
         .create(body)
         .then((created_obj) => {
             res.status(201).json(created_obj.id);
         })
         .catch((err) => {
-            console.log("fail to create ingredients");
+            console.log("fail to create packages");
             console.log(body);
             console.error(err);
             res.status(500).end();
@@ -37,7 +37,7 @@ exports.edit = async (req, res, next) => {
 
     let body = req.body;
 
-    await ingredientsService
+    await packagesService
         .update(body, condition)
         .then((result) => {
             if (result == 1) {
@@ -63,7 +63,7 @@ exports.delete = async (req, res, next) => {
     const id = req.params.id;
     let condition = { id: id };
 
-    await ingredientsService
+    await packagesService
         .hide(condition)
         .then((result) => {
             if (result == 1) {
@@ -73,7 +73,7 @@ exports.delete = async (req, res, next) => {
                 res.status(400).send("Nothing to delete data.");
             }
             else {
-                throw new Error("Something to wrong!! check to project delete")
+                throw new Error("Something to wrong!! check to packaging delete")
             }
         })
         .catch((err) => {
@@ -92,7 +92,7 @@ exports.recovery = async (req, res, next) => {
     const id = req.params.id;
     let condition = { id: id };
 
-    await ingredientsService
+    await packagesService
         .show(condition)
         .then((result) => {
             if (result == 1) {
@@ -102,7 +102,7 @@ exports.recovery = async (req, res, next) => {
                 res.status(400).send("Nothing to delete data.");
             }
             else {
-                throw new Error("Something to wrong!! check to project recovery")
+                throw new Error("Something to wrong!! check to packaging recovery")
             }
         })
         .catch((err) => {
@@ -146,7 +146,7 @@ exports.index = async (req, res, next) => {
 
     console.log(condition)
 
-    await ingredientsService
+    await packagesService
         .allRead(condition, limit, skip)
         .then((result) => {
             console.log("keys :", Object.keys(result))
@@ -154,19 +154,19 @@ exports.index = async (req, res, next) => {
                 return res.json({
                     page: page,
                     limit: limit,
-                    ingredients: result
+                    packages: result
                 })
             } else if (base == 'users') {
                 return res.render('ingredient/index', {
                     page: page,
                     limit: limit,
-                    ingredients: result
+                    packages: result
                 })
             } else if (base == 'admin') {
                 return res.render('admin/ingredient/index', {
                     page: page,
                     limit: limit,
-                    ingredients: result
+                    packages: result
                 })
             }
         })
@@ -185,9 +185,10 @@ exports.detail = async (req, res, next) => {
         condition.users_id = user.id;
         condition.delete_date = null;
     }
+    
     condition.id = req.params.id;
 
-    await ingredientsService
+    await packagesService
         .readOne(condition)
         .then((result) => {
             console.log("find :", result);

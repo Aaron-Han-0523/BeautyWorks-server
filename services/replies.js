@@ -1,15 +1,18 @@
 const models = require('../models');
 const replies = models.replies;
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const { Op, QueryTypes } = require('sequelize');
 
-exports.count = async (condition) => {
+const { Service } = require('../utils/template');
+
+const service = new Service(replies);
+
+service.count = async (condition) => {
     return await replies.count({
         where: condition
     })
 }
 
-exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
+service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     console.log(paging.skip, '~', paging.limit);
     let query = `
     select users.profile_image_path, users.first_name, users.last_name, rp.*, count(like_rp.users_id) as like_count, JSON_ARRAYAGG(like_rp.users_id) as users
@@ -37,7 +40,7 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
             throw err;
         });
 
-    const count = this.count(condition);
+    const count = service.count(condition);
 
     return Promise.all([count, data]).then(result => {
         return result;
@@ -47,14 +50,14 @@ exports.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     })
 }
 
-exports.maxId = async (id) => {
+service.maxId = async (id) => {
     return replies.max('id', {
         where: { communities_id: id }
     })
 }
 
-exports.create = async (obj) => {
-    const newId = await this.maxId(obj.communities_id)
+service.create = async (obj) => {
+    const newId = await service.maxId(obj.communities_id)
         .then(result => {
             // console.log("max id :", result);
             if (result === null) {
@@ -83,7 +86,7 @@ exports.create = async (obj) => {
         });
 }
 
-exports.readOne = async (obj) => {
+service.readOne = async (obj) => {
     console.log("find community replies", obj);
     return await replies.findOne({
         raw: true,
@@ -94,7 +97,7 @@ exports.readOne = async (obj) => {
     })
 }
 
-exports.update = async (obj) => {
+service.update = async (obj) => {
     console.log("update obj :", obj)
     return await replies
         .update(Object.assign(obj, {
@@ -114,13 +117,6 @@ exports.update = async (obj) => {
         })
 }
 
-exports.delete = async (obj) => {
-    return await replies.update({
-        delete_date: new Date()
-    }, {
-        where: {
-            communities_id: obj.communities_id,
-            id: obj.id
-        }
-    })
-}
+
+
+module.exports = service;

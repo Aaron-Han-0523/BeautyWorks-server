@@ -76,5 +76,24 @@
             }
         }
     },
-    "admin": {}
+    "admin": {
+        "community":{
+            "main":"/admin/community",
+            "add":"/admin/community/add",
+            "edit":"/admin/community/edit",
+            "delete":"/admin/community/delete",
+            "recovery":"/admin/community/recovery"
+        },
+        "news":{
+            "main":"/admin/news",
+            "add":"/admin/news/add",
+            "edit":"/admin/news/edit",
+            "delete":"/admin/news/delete",
+            "recovery":"/admin/news/recovery"
+        },
+        "users": {
+            "main": "admin/users"
+        }
+
+    }
 }

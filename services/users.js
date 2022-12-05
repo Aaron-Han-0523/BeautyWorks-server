@@ -28,7 +28,7 @@ exports.changePassword = async (obj) => {
         .update({
             password: obj.newPassword,
             updateUser: obj.user,
-            updateDate: new Date()
+            update_date: new Date()
         }, {
             where: { id: obj.id }
         })

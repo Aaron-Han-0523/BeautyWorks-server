@@ -11,8 +11,11 @@ const ingredientRouter = require('./ingredient');
 const myPageRouter = require('./myPage');
 const packagingRouter = require('./packaging')
 const documentsRouter = require('./documents')
+
 const usersController = require('../controllers/users');
+
 const usersService = require('../services/users');
+
 const multer = require("multer");
 const path = require("path");
 const myUtils = require('../utils/myUtils');
@@ -73,22 +76,28 @@ router
 ////////////////////////////////////
 router
   .use(async (req, res, next) => {
-    console.log("env :", process.env.NODE_ENV);
 
-    if (!req.session.user) {
-      if (process.env.NODE_ENV == "development") {
-        req.session.user = await usersService.getUser("dev@email.com");
+    if (!res.locals.user) {
+      if (!req.session.user) {
+        if (process.env.NODE_ENV == "development") {
+          console.log("env :", process.env.NODE_ENV);
+          req.session.user = await usersService.getUser("dev@email.com");
+        }
+        else return res.redirect('/users/signIn');
       }
-      else return res.redirect('/users/signIn');
-    }
 
-    req.session.save(() => {
-      res.locals.user = req.session.user;
-      // console.log(res.locals.user)
+      req.session.save(() => {
+        res.locals.user = req.session.user;
+        console.log("locals.user", res.locals.user)
+        next();
+      })
+    } else {
       next();
-    })
+    }
   })
 
+// 사용자 접속해제
+router.get('/signOut', usersController.logout);
 
 // router.get('/layout', (req, res) => res.render('layout/layout'));
 // 알람 체크
@@ -96,9 +105,6 @@ router.get('/checkAlarm', usersController.checkAlarm);
 
 // 사용자 대시보드
 router.use('/dashboard', usersController.main)
-
-// 사용자 접속해제
-router.get('/signOut', usersController.logout);
 
 // 사용자 마이페이지
 router.use('/myPage', myPageRouter);
@@ -136,6 +142,8 @@ router.use('/documents', documentsRouter)
 // Projects
 router.use('/projects', projectsRouter)
 
+router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))
+
 // api
 router.use('/api', (req, res, next) => {
   console.log("api request")
@@ -143,6 +151,5 @@ router.use('/api', (req, res, next) => {
   next();
 }, router)
 
-router.get('/', (req, res, next) => res.redirect(codezip.url.users.dashboard))
 
 module.exports = router;
