@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const myUtils = require('../utils/myUtils');
+
 const projectsController = require('../controllers/projects');
 const projectsService = require('../services/projects');
 
@@ -12,26 +14,38 @@ const projectsService = require('../services/projects');
 
 // 편집
 router
-    .put('/edit/:id', projectsController.edit)
-    .post('/edit/:id', projectsController.edit)
-    .get('/edit/:id', async (req, res, next) => {
-        const data = await projectsService.readOne(req.params.id);
-        if (res.locals.user.id != data.users_id) return res.status(403).end();
-        return res.render('projects/edit', {
-            data: data
-        });
-    })
+    .post('/edit/:id',
+        myUtils.upload('projects').fields([{ name: 'file_paths' }, { name: 'image_paths' }]),
+        myUtils.multerConsoleError,
+        projectsController.edit
+    )
+    .put('/edit/:id',
+        myUtils.upload('projects').fields([{ name: 'file_paths' }, { name: 'image_paths' }]),
+        myUtils.multerConsoleError,
+        projectsController.edit
+    )
 
 // 삭제
-// router
-//   .get('/delete/:id', projectsController.delete)
+router
+    .get('/delete/:id', projectsController.delete)
+
+// 복구
+router
+    .get('/recovery/:id', projectsController.recovery)
 
 // 상세 조회
 router
     .get('/:id', projectsController.detail)
 
-// 목록 조회
+//// 목록 조회
+// 임시 저장 프로젝트
 router
-    .get('/', projectsController.index)
+    .get('/temp_projects/:id', projectsController.temp_projects)
+// 진행 중인 프로젝트
+router
+    .get('/progress_projects/:id', projectsController.progress_projects)
+// 완료된 프로젝트
+router
+    .get('/completed_projects/:id', projectsController.completed_projects)
 
 module.exports = router;

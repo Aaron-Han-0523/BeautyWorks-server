@@ -32,8 +32,8 @@ module.exports.Service = class {
             .then((result) => {
                 console.log("updated row count :", result);
 
-                if (result != 1) throw new Error("Use to update only one date!");
-                else if (result == 0) console.log("Nothing to update data.");
+                if (result == 0) console.log("Nothing to update data.");
+                else if (result != 1) throw new Error("Use to update only one date!");
                 return result;
             })
             .catch((err) => {

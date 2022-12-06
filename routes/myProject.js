@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const projectsController = require('../controllers/projects');
-// const myProjectService = require('../services/myProject');
+const projectsService = require('../services/projects');
 
 /* GET myProject listing. */
 
@@ -13,8 +13,9 @@ router
 
 // 샘플 확정
 router
-// .post('/샘플확정', myProjectController.edit)
+    .post('/formulaConfirmed', projectsController.edit)
 
 // 메인
 router.get('/', projectsController.index)
+
 module.exports = router;

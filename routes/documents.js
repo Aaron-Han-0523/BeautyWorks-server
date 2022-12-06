@@ -50,26 +50,16 @@ router.get('/', (req, res, next) => res.render('documents/index'));
 //    관리자 로그인 필요한 곳      //
 ////////////////////////////////////
 
+var createError = require('http-errors');
+
 router
     .use(async (req, res, next) => {
-        console.log("env :", process.env.NODE_ENV);
+        const user = res.locals.user;
+        const base = req.baseUrl.split('/')[1];
 
-        if (!req.session.user) {
-            if (process.env.NODE_ENV == "development") {
-                req.session.user = await usersService.getUser("superadmin");
-            }
-            else return res.redirect('/users/signIn');
+        if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+            return next(createError(404));
         }
-
-        req.session.save(() => {
-            const user = req.session.user;
-            if (![100, 200].includes(user.user_type)) return res.redirect('/users/signIn');
-            if (req.baseUrl.split('/')[1] != 'admin') return res.redirect('/users/signIn');
-
-            res.locals.user = user;
-            // console.log(res.locals.user)
-            next();
-        })
     })
 
 router.get('/edit/:id', (req, res, next) => res.render('documents/detail'))

@@ -63,12 +63,12 @@ router
 ////////////////////////////////////
 router
   .use(async (req, res, next) => {
-    console.log("env :", process.env.NODE_ENV);
+    console.log("admin env :", process.env.NODE_ENV);
 
     if (!req.session.user) {
       if (process.env.NODE_ENV == "development") {
-          console.log("env :", process.env.NODE_ENV);
-          req.session.user = await usersService.getUser("superadmin");
+        console.log("development env auto access");
+        req.session.user = await usersService.getUser({ email: "superadmin" });
         // return res.redirect('/users/signIn');
       }
       else return next(createError(404));
@@ -76,7 +76,10 @@ router
 
     req.session.save(() => {
       const user = req.session.user;
-      if (![100, 200].includes(user.user_type)) return next(createError(404));
+      // console.log(user);
+      if (![100, 200].includes(user.user_type)) {
+        return res.redirect(codezip.url.users.dashboard)
+      }
 
       res.locals.user = user;
       // console.log(res.locals.user)
@@ -87,6 +90,18 @@ router
 // 사용자 접속 종료
 router
   .get('/logout', adminController.logout)
+
+// 이용자 관리
+router
+  .get('/users/add', usersController.add)
+
+  .get('/users', adminController.index)
+  .post('/users/edit/:id', adminController.edit)
+  .get('/users/:id', adminController.detail)
+  .get('/users/delete/:id', adminController.delete)
+  .get('/users/recovery/:id', adminController.recovery)
+  .post('/users/checkEmail', adminController.checkEmail)
+
 
 // news
 router.use('/news', newsRouter)

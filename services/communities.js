@@ -83,7 +83,7 @@ service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     }).then(function (results, metadata) {
         // 쿼리 실행 성공
         console.log("results")
-        console.log(results)
+        // console.log(results)
 
         return results[0];
     }).catch(function (err) {

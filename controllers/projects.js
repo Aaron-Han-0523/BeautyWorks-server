@@ -1,4 +1,6 @@
 const projectsService = require('../services/projects');
+const documentsService = require('../services/documents');
+const usersService = require('../services/users');
 const myUtils = require('../utils/myUtils');
 const { Op } = require('sequelize');
 
@@ -40,40 +42,52 @@ exports.add = async (req, res, next) => {
 
 exports.edit = async (req, res, next) => {
     console.log("Project edit");
-
+    const base = req.baseUrl.split('/')[1];
     const user = res.locals.user;
-    const id = req.query.n || req.params.id;
-    if (!id) return;
+    const id = req.query.n;
+    if (!id) {
+        console.error("Neet to project id");
+        return;
+    }
 
     let condition = { id: id };
-    if (req.baseUrl.split('/')[1] == 'users') {
+    if (base == 'users') {
         condition.users_id = user.id;
-        let project = await projectsService.readOne(condition);
-        if ([0].includes(project.phase) && project.detail_phase > req.body.detail_phase) {
+        let target = await projectsService.readOne(condition);
+        if ([0].includes(target.phase) && target.detail_phase > req.body.detail_phase) {
             delete req.body.detail_phase;
         }
     }
-    else if (req.baseUrl.split('/')[1] == 'admin') {
-        throw new Error("미구현");
+    else if (base == 'admin') {
+        condition.users_id = req.params.id;
     }
-    else {
-        return;
-    }
+
     let body = req.body;
     for ([key, value] of Object.entries(body)) {
         if (!value) body[key] = null;
     }
 
-    console.log(body);
+    console.log("files", req.files);
 
-    await projectsService
-        .update(body, condition)
+    if (req.files) {
+        const files = req.files;
+        for (key in files) {
+            let paths = [];
+            files[key].forEach((item, index) => {
+                paths.push('/' + item.path);
+            })
+            body[key] = paths.join(',');
+        }
+    }
+
+    let document = documentsService.update(body, condition);
+    let project = projectsService.update(body, condition);
+
+    Promise.all([project, document])
         .then((result) => {
-            if (result == 1) {
-                res.status(200).end();
-            }
-            else if (result == 0) {
-                res.status(400).send("Nothing to update data.");
+            res.end();
+            if (base == "admin") {
+                usersService.update({ is_project_update: 1 }, { id: condition.users_id })
             }
         })
         .catch((err) => {
@@ -84,7 +98,7 @@ exports.edit = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
     const id = req.query.n;
-    let condition = { id: id };
+    let condition = { users_id: req.params.id, id: id };
 
     await projectsService
         .hide(condition)
@@ -106,7 +120,7 @@ exports.delete = async (req, res, next) => {
 
 exports.recovery = async (req, res, next) => {
     const id = req.query.n;
-    let condition = { id: id };
+    let condition = { users_id: req.params.id, id: id };
 
     await projectsService
         .show(condition)
@@ -130,10 +144,9 @@ exports.index = async (req, res, next) => {
     const user = res.locals.user;
 
     let condition = {};
-    if (req.baseUrl.split('/')[1] != 'admin') {
-        condition.users_id = user.id;
-        condition.delete_date = null;
-    }
+    condition.users_id = user.id;
+    condition.delete_date = null;
+
     const page = req.query.p || 1;
     const limit = req.query.limit || 4;
     const skip = (page - 1) * limit;
@@ -157,31 +170,108 @@ exports.index = async (req, res, next) => {
         })
 }
 
-exports.detail = async (req, res, next) => {
+exports.temp_projects = async (req, res, next) => {
     const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
 
-    const id = req.query.n || req.params.id;
-    if (!id) return;
-
-    let condition = { id: id };
-    if (req.baseUrl.split('/')[1] == 'users') {
+    let condition = { phase: 0 };
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         condition.users_id = user.id;
-        let project = await projectsService.readOne(condition);
-        if ([0].includes(project.phase) && project.detail_phase > req.body.detail_phase) {
-            delete req.body.detail_phase;
-        }
+        condition.delete_date = null;
+    } else {
+        condition.users_id = req.params.id;
     }
-    else if (req.baseUrl.split('/')[1] == 'admin') {
-        throw new Error("미구현");
+
+    const page = req.query.p || 1;
+    const limit = req.query.limit || 10;
+    const skip = (page - 1) * limit;
+
+    projectsService
+        .allRead(condition, limit, skip)
+        .then(result => {
+            res.json(result);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        })
+}
+
+exports.progress_projects = async (req, res, next) => {
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    let condition = { phase: { [Op.between]: [1, 8] } };
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        condition.users_id = user.id;
+        condition.delete_date = null;
+    } else {
+        condition.users_id = req.params.id;
     }
-    else {
-        return;
+
+    const page = req.query.p || 1;
+    const limit = req.query.limit || 10;
+    const skip = (page - 1) * limit;
+
+    projectsService
+        .allRead(condition, limit, skip)
+        .then(result => {
+            res.json(result);
+        }).catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        })
+}
+
+exports.completed_projects = async (req, res, next) => {
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    let condition = { phase: 9 };
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        condition.users_id = user.id;
+        condition.delete_date = null;
+    } else {
+        condition.users_id = req.params.id;
     }
+
+    const page = req.query.p || 1;
+    const limit = req.query.limit || 4;
+    const skip = (page - 1) * limit;
+
+    projectsService
+        .allRead(condition, limit, skip)
+        .then(result => {
+            res.json(result);
+        }).catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        })
+}
+
+
+exports.detail = async (req, res, next) => {
+    const id = req.query.n;
+    let condition = { id: id }
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        condition.users_id = user.id;
+        condition.delete_date = null;
+    } else {
+        condition.users_id = req.params.id;
+    }
+
     projectsService
         .readOne(condition)
         .then((result) => {
             console.log("find :", result);
-            res.render('newProject/draft', { project: result })
+            if (req.api) {
+                res.json({ project: result })
+            } else if (base == 'users') {
+                res.render('newProject/draft', { project: result })
+            }
         })
         .catch((err) => {
             console.error(err);

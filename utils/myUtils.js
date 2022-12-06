@@ -1,5 +1,6 @@
 const fs = require('fs');
 const multer = require('multer');
+const { resolve } = require('path');
 const path = require('path');
 
 
@@ -67,10 +68,10 @@ let storage = (dir_path) => multer.diskStorage({
     let basename = path.basename(file.originalname, extension);
     let encoding = ""
     for (let i = 0; i < basename.length; i++) {
-      encoding += basename.codePointAt(i).toString(16);
+      encoding += basename.codePointAt(i).toString(16) + '_';
     }
     encoding = encoding.slice(0, 200);
-    callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + basename + extension);
+    callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + encoding + extension);
   },
 });
 
@@ -82,6 +83,13 @@ module.exports.upload = (dir_path) => multer({
     fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
   },
 });
+
+module.exports.multerConsoleError = (err, req, res, next) => {
+  if (err instanceof Error) {
+    console.error(err);
+  }
+  next(err);
+}
 
 // 부트스트랩 v5, fontawesome 이용
 module.exports.make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) {

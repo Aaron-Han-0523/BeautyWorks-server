@@ -3,11 +3,17 @@ const models = require('../models');
 const codezip = require('../codezip')
 
 const service = new Service(models.projects);
+
+
 service.readOne = async (condition) => {
     return await service.model
         .findOne({
             raw: true,
-            where: condition
+            where: condition,
+            include: [{
+                model: models.documents,
+                as: "documents",
+            }],
         })
         .then(async (result) => {
             // 컨셉 성분 리스트 toString
@@ -48,6 +54,32 @@ service.readOne = async (condition) => {
                 else result.applies_list.push(false);
             }
 
+            return result;
+        })
+        .catch((err) => {
+            throw err;
+        })
+}
+
+service.allRead = async (condition = {}, limit, skip) => {
+    return await service.model
+        .findAndCountAll({
+            raw: true,
+            include: [{
+                model: models.formulas,
+                as: "formula",
+                attributes:
+                    ["product_name"]
+            }],
+            where: condition,
+            order: [
+                ['id', 'DESC']
+            ],
+            offset: skip,
+            limit: limit
+        })
+        .then(async (result) => {
+            console.log("find data Total :", result.count);
             return result;
         })
         .catch((err) => {

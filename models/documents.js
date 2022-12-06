@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "메시지"
     },
-    file_path: {
+    file_paths: {
       type: DataTypes.TEXT,
       allowNull: true,
       comment: "파일 경로"

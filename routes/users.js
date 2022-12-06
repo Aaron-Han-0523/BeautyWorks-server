@@ -81,14 +81,14 @@ router
       if (!req.session.user) {
         if (process.env.NODE_ENV == "development") {
           console.log("env :", process.env.NODE_ENV);
-          req.session.user = await usersService.getUser("dev@email.com");
+          req.session.user = await usersService.getUser({ email: "dev@email.com" });
         }
         else return res.redirect('/users/signIn');
       }
 
       req.session.save(() => {
         res.locals.user = req.session.user;
-        console.log("locals.user", res.locals.user)
+        // console.log("locals.user", res.locals.user)
         next();
       })
     } else {
@@ -104,7 +104,7 @@ router.get('/signOut', usersController.logout);
 router.get('/checkAlarm', usersController.checkAlarm);
 
 // 사용자 대시보드
-router.use('/dashboard', usersController.main)
+router.use('/dashboard', usersController.main);
 
 // 사용자 마이페이지
 router.use('/myPage', myPageRouter);

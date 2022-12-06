@@ -20,7 +20,7 @@ exports.login = async function (req, res, next) {
     // console.log(body)
     console.log("try", body.email, "login by", req.ip);
 
-    const user = await usersService.getUser(body.email)
+    const user = await usersService.getUser({ email: body.email, delete_date: null })
     // console.log(user)
 
     const hashedPassword = await encryption.hashing(body.password);
@@ -61,7 +61,7 @@ exports.logout = async (req, res, next) => {
 exports.validationEmail = async (req, res, next) => {
     const targetEmail = req.body.email.toLowerCase();
 
-    const isEmail = await usersService.getUser(targetEmail).then(result => {
+    const isEmail = await usersService.getUser({ email: targetEmail }).then(result => {
         if (result) {
             return true;
         } else {
@@ -104,28 +104,37 @@ exports.validationEmail = async (req, res, next) => {
 
 
 exports.add = async (req, res, next) => {
+    const base = req.baseUrl.split('/')[1];
+
     let body = req.body;
     body.password = await encryption.hashing(body.password);
     body.user_type = 0;
-    body.email = (body.emailId + '@' + body.emailDomain).toLowerCase();
-    body.mobile_contact = "(" + body.country_number + ")" + body.phoneNum;
+    if (!body.email) {
+        body.email = (body.emailId + '@' + body.emailDomain).toLowerCase();
+    }
+    if (!body.mobile_contact) {
+        body.mobile_contact = body.country_number + ")" + body.phoneNum;
+    }
     console.log("Users body :", body);
 
-    try {
-        let result = await usersService.create(body);
-        // console.log("result :",result);
-        return res.status(201).redirect('/users/signIn');
-    }
-    catch (e) {
+    usersService.create(body).then(result => {
+        if (req.api) {
+            return res.status(201).json(result.id);
+        } else if (base == "users") {
+            return res.status(201).redirect('/users/signIn');
+        } else if (base == "admin") {
+            return res.status(201).redirect('admin/users');
+        }
+    }).catch((e) => {
         console.error(e);
-        return res.status(500).send(e);
-    }
+        return res.status(500).end(e);
+    })
 }
 
 exports.edit = async (req, res, next) => {
     console.log("users edit")
 
-    let user = res.locals.user;
+    const user = res.locals.user;
     // console.log('user :', user);
 
     let body = req.body;
@@ -138,9 +147,9 @@ exports.edit = async (req, res, next) => {
         // console.log('file :', file);
         if (file) body[file.fieldname] = '/' + file.path;
     }
-    body = Object.assign(user, body);
+
     usersService
-        .update(body)
+        .update(body, { id: user.id })
         .then(result => {
             console.log("update result :", result);
             return res.end()
@@ -155,15 +164,14 @@ exports.edit = async (req, res, next) => {
 exports.checkAlarm = async (req, res, next) => {
     console.log("user check alram")
 
-    let user = res.locals.user;
+    const user = res.locals.user;
     // console.log('user :', user);
 
     let body = {};
-    body.id = user.id;
     body.is_project_update = false;
 
     usersService
-        .update(body)
+        .update(body, { id: user.id })
         .then(result => {
             console.log("update data count :", result);
             return res.redirect(codezip.url.users.myProject.main)
@@ -176,15 +184,20 @@ exports.checkAlarm = async (req, res, next) => {
 
 exports.main = async (req, res) => {
     const user = res.locals.user;
+
+    let condition = {};
+    condition.users_id = user.id;
+    condition.delete_date = null;
+
     const page = req.query.p || 1;
     const limit = req.query.limit || 4;
     const skip = (page - 1) * limit;
 
-    const project = projectsService.allRead({ users_id: user.id, phase: { [Op.between]: [1, 8] } }, 3)
-    const temp_project = projectsService.allRead({ users_id: user.id, phase: 0 }, 2)
-    const completed_project = projectsService.allRead({ users_id: user.id, phase: 9 }, limit, skip)
+    const project = projectsService.allRead(Object.assign(condition, { phase: { [Op.between]: [1, 8] } }), 3)
+    const temp_project = projectsService.allRead(Object.assign(condition, { phase: 0 }), 2)
+    const completed_project = projectsService.allRead(Object.assign(condition, { phase: 9 }), limit, skip)
 
-    const recommended_formula = formulasService.allRead()
+    const recommended_formula = formulasService.allRead({ delete_date: null })
         .then(result => {
             let data = [];
             let random_index = [];
@@ -197,7 +210,7 @@ exports.main = async (req, res) => {
             }
             return data
         })
-    const remommended_ingredient = ingredientsService.allRead()
+    const remommended_ingredient = ingredientsService.allRead({ delete_date: null })
         .then(result => {
             let data = [];
             let random_index = [];
@@ -267,88 +280,37 @@ exports.myPage = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    // let data = await usersService
-    //     .allRead()
-    //     .catch(err => console.error(err));
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
 
-    // // console.log("data :", data);
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end()
+    }
 
-    // return res.render('users/index', {
-    //     count: data.count,
-    //     data: data.rows,
-    //     user: req.userInfo
-    // });
-}
+    const page = req.query.p || 1;
+    const limit = req.query.limit || 10;
+    const skip = (page - 1) * limit;
 
-exports.detail = async (req, res, next) => {
-    // const id = req.params.id;
-    // console.log(`open one data id-${id}`)
+    let condition = {
+        id: { [Op.ne]: 1 },
+    }
 
-    // const user = req.userInfo;
-    // let data = await usersService
-    //     .readOne(id)
-    //     .catch(err => console.error(err));
-
-    // console.log("data :", data);
-
-    // if (data) return res.render('users/detail', {
-    //     user: user,
-    //     data: data
-    // });
-    // else res.json(`fail id:${id}`)
-    return res.send('My Account')
-}
-
-exports.delete = async (req, res, next) => {
-    // const id = req.params.id;
-    // const user = req.userInfo;
-
-    // console.log('delete', id);
-
-    // let obj = {};
-    // obj.id = id;
-    // obj.user = user.userid;
-
-    // let result = await usersService
-    //     .delete(obj)
-    //     .catch(err => console.error(err));
-
-    // // console.log("delete result :", result)
-
-    // if (result) return res.redirect('/users');
-    // else res.json(`fail id:${id}`)
-}
-
-exports.checkID = async (req, res, next) => {
-    // let userid = req.body.userid;
-    // // console.log(userid)
-    // const user = await usersService.checkID(userid);
-    // if (user) return res.status(409).json({ exist: true });
-    // else return res.status(200).json({ exist: false });
-}
-
-exports.search = async (req, res, next) => {
-    // const user = req.userInfo;
-    // let word = req.query.q;
-    // console.log("search", word, "start")
-
-    // let result = null;
-    // let condition = {};
-    // try {
-    //     if (word) {
-    //         condition = {
-    //             [Op.or]: [
-    //                 { userName: { [Op.like]: `%${word}%` } }
-    //             ]
-    //         }
-    //     }
-    //     result = await usersService.allRead(condition);
-    // } catch (err) {
-    //     console.error(err)
-    // }
-
-    // console.log("search result :", result)
-
-    // if (result) return res.status(200).json({ user: user, data: result });
-    // else res.status(400).json(`don't find ${word}`)
+    usersService
+        .allRead(condition, limit, skip)
+        .then(result => {
+            if (req.api) {
+                return res.json({
+                    users: result,
+                    page: page,
+                })
+            } else if (base == 'admin') {
+                return res.render("admin/users/index", {
+                    users: result,
+                    page: page,
+                })
+            }
+        }).catch(err => {
+            console.error(err);
+            return res.status(500).end();
+        })
 }
