@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/admin-header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container" style="padding-top: 0;">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content admin-add">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0 ">
+
+          <!-- BREADCRUMB -->
+          <div class="row">
+            <div class="breadcrumb align-datas-start d-flex br-20 ">
+              <div class="p-1 col-4 ">
+                <h5>
+                  <strong>
+                    내용물 데이터 수정/추가
+                  </strong>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT AREA -->
+          <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <div class="widget-content widget-content-area br-20 p-4">
+                <form method="post">
+                  <!-- sort -->
+                  <div class="row">
+                    <div class="d-flex"><label for="top_or_new">대분류</label>
+                      <select name="top_or_new" id="top_or_new" class="form-select">
+                        <option value="">선택</option>
+                        <option value="top">Top</option>
+                        <option value="new">New</option>
+                      </select>
+                    </div>
+
+                    <div class="d-flex"><label for="product_name">제품명</label>
+                      <input class=" form-control br-15 mt-3" id="product_name" name="product_name" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="award">어워드</label>
+                      <input class=" form-control br-15 mt-3" id="award" name="award" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="category1">카테고리</label>
+                      <select name="category1" id="category1" class="form-select">
+                        <option value="">선택</option>
+                        <option value="test">test</option>
+
+                      </select>
+                    </div>
+                    <div class="d-flex"><label for="category2">품목</label>
+                      <select name="category2" id="category2" class="form-select">
+                        <option value="">선택</option>
+                        <option value="test">test</option>
+
+                      </select>
+                    </div>
+                    <div class="d-flex"><label for="efficacy">제품 효과</label>
+                      <input class="form-control br-15 mt-3" id="efficacy" name="efficacy" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="ingredients">성분</label>
+                      <input class="form-control br-15 mt-3" id="ingredients" name="ingredients" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="viscosity">제형</label>
+                      <input class="form-control br-15 mt-3" id="viscosity" name="viscosity" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="applies">사용감</label>
+                      <input class="form-control br-15 mt-3" id="applies" name="applies" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="color">색상</label>
+                      <input class="form-control br-15 mt-3" id="color" name="color" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="d-flex"><label for="fragrance">향</label>
+                      <input class="form-control br-15 mt-3" id="fragrance" name="fragrance" type="text" placeholder="입력해주세요." required>
+                    </div>
+
+                    <div class="d-flex">
+                      <label style="width: 48%;">이미지</label>
+
+                      <div class="inputImage mt-3">
+                        <input id="image" name="image" type="file" accept=".jpg, .png, .gif" style="display: none;" multiple>
+
+                        <ul id="Preview" class="sortable"></ul>
+                        <label for="image" class="addImgBtn btn">파일등록</label>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <button class="btn btn-lg px-5">
+                      수정/추가
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <!--  END CONTENT AREA  -->
+
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+
+  <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+  <script>
+    $(function() {
+      //드래그 앤 드롭
+      $(".sortable").sortable();
+
+      //이미지 등록
+      $("#image").change(function(e) {
+        //div 내용 비워주기
+        $('#Preview').empty();
+
+        var files = e.target.files;
+        var arr = Array.prototype.slice.call(files);
+
+        //업로드 가능 파일인지 체크
+        for (var i = 0; i < files.length; i++) {
+          if (!checkExtension(files[i].name, files[i].size)) {
+            return false;
+          }
+        }
+        preview(arr);
+
+        function checkExtension(fileName, fileSize) {
+          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+          var maxSize = 10485760; //20MB
+
+          if (fileSize >= maxSize) {
+            alert('이미지 크기가 초과되었습니다.');
+            $("#image").val(""); //파일 초기화
+            return false;
+          }
+
+          if (regex.test(fileName)) {
+            alert('확장자명을 확인해주세요.');
+            $("#image").val(""); //파일 초기화
+            return false;
+          }
+          return true;
+        }
+
+        function preview(arr) {
+          arr.forEach(function(f) {
+            //파일명이 길면 파일명...으로 처리
+            /*
+            var fileName = f.name;
+            if(fileName.length > 10){
+                fileName = fileName.substring(0,7)+"...";
+            }
+            */
+
+            //div에 이미지 추가
+            var str = '<li class="ui-state-default">';
+            //str += '<span>'+fileName+'</span><br>';
+
+            //이미지 파일 미리보기
+            if (f.type.match('image.*')) {
+              //파일을 읽기 위한 FileReader객체 생성
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                str += '<img src="' + e.target.result + '" title="' + f.name + '" width=80 height=80>';
+                str += '<span class="delBtn" onclick="delImg(this)">x</span>';
+                str += '</li>';
+                $(str).appendTo('#Preview');
+              }
+              reader.readAsDataURL(f);
+            } else {
+              //이미지 파일 아닐 경우 대체 이미지
+              /*
+              str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=60 height=60 />';
+              $(str).appendTo('#Preview');
+              */
+            }
+          })
+        }
+      })
+    })
+
+    //이미지 삭제
+    function delImg(_this) {
+      $(_this).parent('li').remove()
+    }
+  </script>
+
+</body>
+
+</html>

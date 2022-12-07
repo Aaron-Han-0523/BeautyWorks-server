@@ -1,7 +1,30 @@
 <!--  BEGIN NAVBAR  -->
-<div class="header-container container-xxl py-aut admin-header">
-  <div class="admin-nav">
-    <p>안녕하세요,관리자님</p>
-  </div>
+<div class="header-container container-xxl py-auto admin-header">
+  <header class="header navbar navbar-expand-sm expand-header my-auto">
+    <div class="admin-nav d-flex justify-content-between">
+      <div></div>
+      <ul class="navbar-item flex-row ms-lg-auto ms-0">
+        <!-- 언어 설정 -->
+        <li class="nav-item dropdown language-dropdown">
+          <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= __('language') %>
+          </a>
+          <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
+            <a class="dropdown-item d-flex" href="/en"><span class="align-self-center">&nbsp;English</span></a>
+            <a class="dropdown-item d-flex" href="/ko"><span class="align-self-center">&nbsp;한국어</span></a>
+          </div>
+        </li>
+
+        <!-- -->
+        <li class="nav-item">
+          <% if(nameOrderInKorean.includes(locale)) { %>
+          <%= __('nav_welcome_ment', user.last_name+' '+user.first_name) %>
+          <% } else { %>
+          <%= __('nav_welcome_ment', user.first_name+' '+user.last_name) %>
+          <% } %>
+        </li>
+      </ul>
+    </div>
+  </header>
 </div>
 <!--  END NAVBAR  -->

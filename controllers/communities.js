@@ -74,6 +74,16 @@ exports.edit = async (req, res, next) => {
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
+
+    const communities_page = +req.query.p || 1;
+    let limit = +req.query.limit || 10;
+    const skip = req.query.skip || (communities_page - 1) * limit;
+
+    let communities_paging = {
+        skip: skip,
+        limit: limit
+    }
+
     let word = req.query.q
     if (word) word = word.replace(/\;/g, '').trim();
 
@@ -90,18 +100,8 @@ exports.index = async (req, res, next) => {
         : {}
 
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        limit = +req.query.limit || 5;
         condition.delete_date = null;
-    }
-
-    const communities_page = req.query.p || 1;
-    console.log("page query :", communities_page)
-
-    const limit = req.query.limit || 5;
-    const skip = req.query.skip || (communities_page - 1) * limit;
-
-    let communities_paging = {
-        skip: skip,
-        limit: limit
     }
 
     const communities = communitiesService
@@ -118,7 +118,6 @@ exports.index = async (req, res, next) => {
                     }
                 })
             } else if (base == 'users') {
-
                 return res.render('community/index', {
                     communities: {
                         count: data.count,
@@ -131,10 +130,10 @@ exports.index = async (req, res, next) => {
                 return res.render('admin/community/index', {
                     communities: {
                         count: data.count,
-                        data: data.rows,
-                        page: communities_page,
-                        word: word
-                    }
+                        rows: data.rows,
+                    },
+                    page: communities_page,
+                    word: word
                 })
             }
 
@@ -151,7 +150,7 @@ exports.detail = async (req, res, next) => {
 
     console.log(`open one data id-${id}`)
     const reply_page = req.query.p || 1;
-    const limit = req.query.limit || 5;
+    const limit = +req.query.limit || 5;
     const skip = req.query.skip || (reply_page - 1) * limit;
 
     const prev_id = communitiesService.getPrevID(id);

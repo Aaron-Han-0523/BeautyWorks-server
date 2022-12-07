@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/admin-header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container" style="padding-top: 0;">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content admin-add">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row ">
+            <div class="breadcrumb align-datas-start d-flex br-20">
+              <div class="p-1 col-3">
+                <h5>
+                  <strong>
+                    원료 관리
+                  </strong>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT AREA -->
+          <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <div class="widget-content widget-content-area br-20 p-4">
+                <form method="post">
+                  <!-- sort -->
+                  <div class="row">
+
+                    <div class="col-4"><label for="type" style="margin-top: 8px;">종류</label></div>
+                    <div class="col-8">
+                      <input class="form-control br-15" id="type" name="type" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="col-4"><label for="effect">기능</label></div>
+                    <div class="col-8">
+                      <input class="form-control br-15 mt-3" id="effect" name="effect" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="col-4"><label for="material_name">원료명</label></div>
+                    <div class="col-8">
+                      <input class="form-control br-15 mt-3" id="material_name" name="material_name" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="col-4"><label for="ingredient_name">성분명</label></div>
+                    <div class="col-8">
+                      <input class="form-control br-15 mt-3" id="ingredient_name" name="ingredient_name" type="text" placeholder="입력해주세요." required>
+                    </div>
+                    <div class="col-4"><label for="feature">특징</label></div>
+                    <div class="col-8">
+                      <input class="form-control br-15 mt-3" id="feature" name="feature" type="text" placeholder="입력해주세요." required>
+                    </div>
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <button class="btn btn-lg px-5">
+                      수정/추가
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <!--  END CONTENT AREA  -->
+
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+</body>
+
+</html>

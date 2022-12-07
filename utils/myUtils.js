@@ -91,11 +91,18 @@ module.exports.multerConsoleError = (err, req, res, next) => {
   next(err);
 }
 
+function make_url(baseURL, page, limit, word) {
+  if (!page) page = '';
+  if (!limit) limit = '';
+  if (!word) word = '';
+  return baseURL + '?' + new URLSearchParams({ p: page, limit: limit, q: word });
+}
+
 // 부트스트랩 v5, fontawesome 이용
-module.exports.make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) {
+module.exports.make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10, word) {
   let end_page = parseInt((count - 1) / limit) + 1;
   let end_list_num = end_page > 6 ? 5 : end_page;
-  let temp_html = `<div class="d-flex justify-content-center mt-4">
+  let temp_html = `<div class="d-flex justify-content-center">
   <!-- 페이징처리 시작 -->
   <!-- 처음 & 이전페이지 -->
   <ul class="p-2 pagination">
@@ -113,11 +120,11 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
     `;
   } else {
     temp_html += `
-    <li class="page-item"><a class="page-link" href="${baseURL}?p=1&limit=${limit}">
+    <li class="page-item"><a class="page-link" href="${make_url(baseURL, 1, limit, word)}">
         ${i18n_func('users.pagination.처음으로')}
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="${baseURL}?p=${page - 1}&limit=${limit}">
+    <li class="page-item"><a class="page-link" href="${make_url(baseURL, page - 1, limit, word)}">
         ${i18n_func('users.pagination.이전으로')}
       </a>
     </li>
@@ -140,7 +147,7 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
     `;
       } else {
         temp_html += `
-    <li class="page-item"><a class="page-link" href="${baseURL}?p=${i}&limit=${limit}">
+    <li class="page-item"><a class="page-link" href="${make_url(baseURL, i, limit, word)}">
         ${i}
       </a></li>
     `;
@@ -160,7 +167,7 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
       } else {
         temp_html += `
     <li class="page-item">
-      <a class="page-link" href="${baseURL}?p=${i}&limit=${limit}">
+      <a class="page-link" href="${make_url(baseURL, i, limit, word)}">
         ${i}
       </a>
     </li>
@@ -180,7 +187,7 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
       } else {
         temp_html += `
     <li class="page-item">
-      <a class="page-link" href="${baseURL}?p=${i}&limit=${limit}">
+      <a class="page-link" href="${make_url(baseURL, i, limit, word)}">
         ${i}
       </a>
     </li>
@@ -208,12 +215,12 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
   } else {
     temp_html += `
     <li class="page-item">
-      <a class="page-link" href="${baseURL}?p=${page + 1}&limit=${limit}">
+      <a class="page-link" href="${make_url(baseURL, page + 1, limit, word)}">
         ${i18n_func('users.pagination.다음으로')}
       </a>
     </li>
     <li class="page-item">
-      <a class="page-link" href="${baseURL}?p=${end_page}&limit=${limit}">
+      <a class="page-link" href="${make_url(baseURL, end_page, limit, word)}">
         ${i18n_func('users.pagination.마지막으로')}
       </a>
     </li>

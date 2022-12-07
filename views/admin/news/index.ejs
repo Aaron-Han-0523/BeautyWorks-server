@@ -3,8 +3,6 @@
 
 <head>
   <%- include ("../partials/admin-header.ejs") %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
 </head>
 
 <body>
@@ -23,54 +21,116 @@
       <div class="row">
         <div class="col">
           <div class="title">
-            <h1>공지사항 관리</h1>
+            <h1><%= __('admin.menu.공지사항관리') %></h1>
           </div>
         </div>
       </div>
 
       <div class="search">
-        <div class="row">
-          <div class="col-11" style="padding-right: 0 !important;">
-            <input type="number" placeholder="검색할 전화번호를 입력해주세요.">
+        <form id="search">
+          <div class="row">
+            <div class="col-11" style="padding-right: 0 !important;">
+              <input name="q" type="text" placeholder="<%= __('placeholder.admin.news.search') %>" value="<%= word %>">
+            </div>
+            <div class="col-1" style="padding-left: 0 !important;">
+              <button><%= __('btn.검색') %></button>
+            </div>
           </div>
-          <div class="col-1" style="padding-left: 0 !important;">
-            <button type="button">검색</button>
-          </div>
-        </div>
+        </form>
       </div>
 
-      <table class="table">
+      <table class="table table-hover">
         <thead class="table-header">
           <tr>
-            <th scope="col">번호</th>
-            <th scope="col">제목</th>
-            <th scope="col">작성자</th>
-            <th scope="col">작성일</th>
-            <th scope="col">수정 / 삭제</th>
+            <th scope="col"><%= __('table.head.번호') %></th>
+            <th scope="col"><%= __('table.head.제목') %></th>
+            <th scope="col"><%= __('table.head.작성자') %></th>
+            <th scope="col"><%= __('table.head.작성일') %></th>
+            <th scope="col"><%= __('table.head.삭제/복구') %></th>
           </tr>
+          <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
 
         <tbody class="table-body">
-          <tr>
-            <td>0</td>
-            <td>제목</td>
-            <td>관리자</td>
-            <td>2022.12.01</td>
-            <td><a href="#">수정</a> / <a href="#">삭제</a></td>
+          <% news.rows.forEach((item,index)=>{ %>
+          <tr onclick="location.href='<%= codezip.url.admin.news.main %>/<%= item.id %>';">
+            <td><%= item.id %></td>
+            <td><%= item.title %></td>
+            <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+            <td><%= item.last_name + ' ' + item.first_name %></td>
+            <% } else { %>
+            <td><%= item.first_name + ' ' + item.last_name %></td>
+            <% } %>
+            <td><%= formatDate(item.create_date) %></td>
+            <td>
+              <div id="action_btn-<%= item.id %>" class="hover">
+                <% if(item.delete_date) { %>
+                <div onclick="recovery_news('<%= item.id %>');"><%= __('btn.복구') %></div>
+                <% }else{ %>
+                <div onclick="delete_news('<%= item.id %>');"><%= __('btn.삭제') %></div>
+                <% } %>
+              </div>
+            </td>
           </tr>
+          <% }) %>
         </tbody>
       </table>
 
-      <div class="row">
-        <div class="col-2">
-          <div class="add-button">
-            <button type="button" onclick="location.href='newsAdd'">추가하기</button>
-          </div>
+      <!-- pagination-->
+      <div class="d-flex justify-content-between pt-5">
+        <div></div>
+        <%-
+              make_pagination_by_href(
+                __,
+                +page,
+                +news.count,
+                codezip.url.admin.news.main,
+                10,
+                word
+              )
+            %>
+        <div>
+          <button type="button" class="px-3 py-2 br-10" onclick="location.href='<%= codezip.url.admin.news.add %>';"><%= __('btn.추가') %></button>
         </div>
       </div>
+
+
     </div>
   </div>
 
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <script>
+    function recovery_news(id) {
+      event.stopPropagation();
+
+      const url = '<%= codezip.url.admin.news.recovery %>/' + id;
+      fetch(url)
+        .then(res => {
+          if (res.ok) {
+            document.getElementById("action_btn-" + id).innerHTML = `<div onclick="delete_news(${id});"><%= __('btn.삭제') %></div>`;
+          } else {
+            alert("<%= __('msg.fail') %>")
+            location.reload();
+          }
+        })
+    }
+
+    function delete_news(id) {
+      event.stopPropagation();
+
+      const url = '<%= codezip.url.admin.news.delete %>/' + id;
+      fetch(url)
+        .then(res => {
+          if (res.ok) {
+            document.getElementById("action_btn-" + id).innerHTML = `<div onclick="recovery_news(${id});"><%= __('btn.복구') %></div>`
+          } else {
+            alert("<%= __('msg.fail') %>");
+            location.reload();
+          }
+        })
+    }
+  </script>
 
 </body>
 

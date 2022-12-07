@@ -77,23 +77,58 @@
         }
     },
     "admin": {
-        "community":{
-            "main":"/admin/community",
-            "add":"/admin/community/add",
-            "edit":"/admin/community/edit",
-            "delete":"/admin/community/delete",
-            "recovery":"/admin/community/recovery"
+        "api": {
+            "users": "/admin/api/users",
+            "temp_projects": "/admin/api/projects/temp_projects",
+            "progress_projects": "/admin/api/projects/progress_projects",
+            "completed_projects": "/admin/api/projects/completed_projects",
+            "formula": "/admin/api/formula",
+            "ingredient": "/admin/api/ingredient",
+            "packaging": "/admin/api/packaging",
+            "news": "/admin/api/news",
+            "community": "/admin/api/community"
         },
-        "news":{
-            "main":"/admin/news",
-            "add":"/admin/news/add",
-            "edit":"/admin/news/edit",
-            "delete":"/admin/news/delete",
-            "recovery":"/admin/news/recovery"
+        "community": {
+            "main": "/admin/community",
+            "add": "/admin/community/add",
+            "edit": "/admin/community/edit",
+            "delete": "/admin/community/delete",
+            "recovery": "/admin/community/recovery"
+        },
+        "news": {
+            "main": "/admin/news",
+            "add": "/admin/news/add",
+            "edit": "/admin/news/edit",
+            "delete": "/admin/news/delete",
+            "recovery": "/admin/news/recovery"
         },
         "users": {
-            "main": "admin/users"
+            "main": "/admin/users",
+            "add": "/admin/users/add",
+            "edit": "/admin/users/edit",
+            "delete": "/admin/users/delete",
+            "recovery": "/admin/users/recovery"
+        },
+        "formula": {
+            "main": "/admin/formula",
+            "add": "/admin/formula/add",
+            "edit": "/admin/formula/edit",
+            "delete": "/admin/formula/delete",
+            "recovery": "/admin/formula/recovery"
+        },
+        "ingredient": {
+            "main": "/admin/ingredient",
+            "add": "/admin/ingredient/add",
+            "edit": "/admin/ingredient/edit",
+            "delete": "/admin/ingredient/delete",
+            "recovery": "/admin/ingredient/recovery"
+        },
+        "packaging": {
+            "main": "/admin/packaging",
+            "add": "/admin/packaging/add",
+            "edit": "/admin/packaging/edit",
+            "delete": "/admin/packaging/delete",
+            "recovery": "/admin/packaging/recovery"
         }
-
     }
 }

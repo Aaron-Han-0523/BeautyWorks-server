@@ -165,6 +165,8 @@ exports.edit = async (req, res, next) => {
 
 
 exports.index = async (req, res, next) => {
+    console.log("user query", req.query);
+
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
 
@@ -172,12 +174,16 @@ exports.index = async (req, res, next) => {
         return res.status(403).end()
     }
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 10;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 10;
     const skip = (page - 1) * limit;
+    const word = req.query.q;
 
     let condition = {
         id: { [Op.ne]: 1 },
+    }
+    if (word) {
+        condition.company_name = { [Op.substring]: word }
     }
 
     usersService
@@ -187,11 +193,13 @@ exports.index = async (req, res, next) => {
                 return res.json({
                     users: result,
                     page: page,
+                    word: word
                 })
             } else if (base == 'admin') {
                 return res.render("admin/users/index", {
                     users: result,
                     page: page,
+                    word: word
                 })
             }
         }).catch(err => {

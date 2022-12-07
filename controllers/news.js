@@ -69,7 +69,17 @@ exports.edit = async (req, res, next) => {
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
-    let word = req.query.q
+
+    const news_page = +req.query.p || 1;
+    let limit = +req.query.limit || 10;
+    const skip = req.query.skip || (news_page - 1) * limit;
+
+    let news_paging = {
+        skip: skip,
+        limit: limit
+    }
+
+    let word = req.query.q;
     if (word) word = word.replace(/\;/g, '').trim();
 
     let condition = word ?
@@ -80,15 +90,7 @@ exports.index = async (req, res, next) => {
 
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         condition.delete_date = null;
-    }
-
-    const news_page = req.query.p || 1;
-    const limit = req.query.limit || 5;
-    const skip = req.query.skip || (news_page - 1) * limit;
-
-    let news_paging = {
-        skip: skip,
-        limit: limit
+        limit = +req.query.limit || 5;
     }
 
     console.log("where", condition);
@@ -119,10 +121,10 @@ exports.index = async (req, res, next) => {
                 return res.render('admin/news/index', {
                     news: {
                         count: data.count,
-                        page: news_page,
-                        word: word,
-                        data: data.rows
-                    }
+                        rows: data.rows
+                    },
+                    word: word,
+                    page: news_page,
                 })
             }
         }).catch(err => {

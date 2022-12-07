@@ -93,11 +93,12 @@ router
 
 // 이용자 관리
 router
-  .get('/users/add', usersController.add)
+  .get('/users/add', (req, res) => res.render('admin/users/add'))
+  .post('/users/add', usersController.add)
 
   .get('/users', adminController.index)
-  .post('/users/edit/:id', adminController.edit)
   .get('/users/:id', adminController.detail)
+  .post('/users/edit/:id', adminController.edit)
   .get('/users/delete/:id', adminController.delete)
   .get('/users/recovery/:id', adminController.recovery)
   .post('/users/checkEmail', adminController.checkEmail)

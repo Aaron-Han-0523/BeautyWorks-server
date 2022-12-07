@@ -114,9 +114,9 @@ exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
 
-    const page = req.query.p || 1;
+    const page = +req.query.p || 1;
     delete req.query.p;
-    const limit = req.query.limit || 10;
+    const limit = +req.query.limit || 10;
     delete req.query.limit;
     const skip = (page - 1) * limit;
 

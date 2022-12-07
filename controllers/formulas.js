@@ -1,5 +1,7 @@
 const formulasService = require('../services/formulas');
 const like_formulas = require('../services/like_formulas');
+const { Op } = require('sequelize');
+
 
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
@@ -119,27 +121,31 @@ exports.recovery = async (req, res, next) => {
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
-    // console.log('base url', base);
-    // console.log('user type', user);
 
-    const page = req.query.p || 1;
-    delete req.query.p;
-    const limit = req.query.limit || 8;
-    delete req.query.limit;
+    let condition = {};
+
+    let word = req.query.q;
+    if (word) condition.product_name = { [Op.substring]: word };
+
+    const page = +req.query.p || 1;
+    let limit = +req.query.limit || 10;
+
+    if (base != 'admin') {
+        condition.delete_date = null;
+        limit = +req.query.limit || 8;
+    }
+
     const skip = (page - 1) * limit;
 
     delete req.query.n;
-    let condition = {};
+    delete req.query.q;
+    delete req.query.p;
+    delete req.query.limit;
     for ([key, value] of Object.entries(req.query)) {
         if (value) {
             condition[key] = value;
         }
     }
-    if (base != 'admin') {
-        // condition.users_id = user.id;
-        condition.delete_date = null;
-    }
-
     console.log(condition)
     await formulasService
         .allRead(condition, limit, skip)
@@ -150,19 +156,22 @@ exports.index = async (req, res, next) => {
                 return res.json({
                     page: page,
                     limit: limit,
-                    formulas: result
+                    formulas: result,
+                    word: word
                 })
             } else if (base == 'users') {
                 return res.render('formula/index', {
                     page: page,
                     limit: limit,
-                    formulas: result
+                    formulas: result,
+                    word: word
                 })
             } else if (base == 'admin') {
                 return res.render('admin/formula/index', {
                     page: page,
                     limit: limit,
-                    formulas: result
+                    formulas: result,
+                    word: word
                 })
             }
         })

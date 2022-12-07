@@ -17,8 +17,8 @@ const codezip = require('../codezip');
 exports.wishList = async (req, res, next) => {
     const user = res.locals.user;
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 4;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
     let condition = {};
@@ -48,8 +48,8 @@ exports.wishList = async (req, res, next) => {
 exports.myPosts = async (req, res, next) => {
     const user = res.locals.user;
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 4;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
     let condition = { users_id: user.id };
@@ -71,8 +71,8 @@ exports.myPosts = async (req, res, next) => {
 exports.favoritePosts = async (req, res, next) => {
     const user = res.locals.user;
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 4;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
     let condition = {};
@@ -101,8 +101,8 @@ exports.favoritePosts = async (req, res, next) => {
 exports.favoriteComments = async (req, res, next) => {
     const user = res.locals.user;
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 4;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
     let condition = { users_id: user.id };

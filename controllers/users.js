@@ -189,8 +189,8 @@ exports.main = async (req, res) => {
     condition.users_id = user.id;
     condition.delete_date = null;
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 4;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
     const project = projectsService.allRead(Object.assign(condition, { phase: { [Op.between]: [1, 8] } }), 3)
@@ -287,8 +287,8 @@ exports.index = async (req, res, next) => {
         return res.status(403).end()
     }
 
-    const page = req.query.p || 1;
-    const limit = req.query.limit || 10;
+    const page = +req.query.p || 1;
+    const limit = +req.query.limit || 10;
     const skip = (page - 1) * limit;
 
     let condition = {

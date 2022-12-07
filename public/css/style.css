@@ -7,7 +7,7 @@ ul.info {
     list-style: "· ";
 }
 
-ul.info li p{
+ul.info li p {
     color: #000;
 }
 
@@ -343,6 +343,7 @@ h5 {
     border-radius: 5px;
     padding: 0 1rem;
 }
+
 /************************/
 /*      gallery        */
 /************************/
@@ -659,7 +660,7 @@ h5 {
 
 .bg-gray {
     --bs-bg-opacity: 1;
-    background-color: rgba(224, 230, 237, 0.9) !important
+    background-color: var(--bs-gray-300) !important
 }
 
 .bg-darkgray {

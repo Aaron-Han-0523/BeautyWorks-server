@@ -8,7 +8,7 @@ const ingredientsService = require('../services/ingredients');
 // 추가
 router
   .post('/add', ingredientsController.add)
-  .get('/add', (req, res, next) => res.render('ingredients/add'))
+  .get('/add', (req, res, next) => res.render('ingredients/detail', { ingredient: {} }))
 
 // 편집
 router
@@ -17,7 +17,7 @@ router
   .get('/edit/:id', async (req, res, next) => {
     const ingredient = await ingredientsService.readOne(req.params.id);
     if (req.baseUrl.split('/')[1] != 'admin') return res.status(403).end();
-    return res.render('ingredients/edit', {
+    return res.render('ingredients/detail', {
       ingredient: ingredient
     });
   })

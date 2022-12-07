@@ -58,6 +58,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.locals.codezip = codezip;
+  res.locals.myUtils = myUtils;
   res.locals.formatDate = myUtils.formatDate;
   res.locals.formatDateTime = myUtils.formatDateTime;
   res.locals.array_i18n = myUtils.array_i18n;

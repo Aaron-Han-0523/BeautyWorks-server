@@ -5,7 +5,28 @@ const Op = Sequelize.Op;
 const { Service } = require('../utils/template');
 
 const service = new Service(users);
+attributes: { exclude: ['baz'] }
 
+service.allRead = async (condition = {}, limit, skip) => {
+    return await service.model
+        .findAndCountAll({
+            raw: true,
+            where: condition,
+            order: [
+                ['id', 'DESC']
+            ],
+            offset: skip,
+            limit: limit,
+            attributes: { exclude: ['password'] }
+        })
+        .then((result) => {
+            console.log("find data Total :", result.count);
+            return result;
+        })
+        .catch((err) => {
+            throw err;
+        })
+}
 
 service.getUser = async function (condition) {
     try {

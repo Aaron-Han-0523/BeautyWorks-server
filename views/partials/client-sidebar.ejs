@@ -4,15 +4,15 @@
   <nav id="sidebar">
 
     <div class="navbar-nav theme-brand text-center">
-      <div class="nav-item row">
-        <div class="col-3 theme-logo p-0">
+      <div class="nav-item d-flex mt-5">
+        <div class="theme-logo p-0 me-3" style="width: 55px; height: 55px; display:table;">
           <div>
             <a href="<%= codezip.url.users.myPage %>">
               <img alt="avatar" src="<%= user.profile_image_path %>" class="rounded-circle">
             </a>
           </div>
         </div>
-        <div class="col-9 pt-2 text-break">
+        <div class="pt-2 text-break">
           <div>
             <h6 style="color: rgb(26,26,26);"><strong>
                 <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
@@ -40,10 +40,10 @@
       <li class="menu active"></li>
 
       <div class="ms-3 main-menu">
-        <h5><strong>
+        <h6><strong>
             <%= __("Main") %>
           </strong>
-        </h5>
+        </h6>
       </div>
       <li class="menu">
         <a href="<%= codezip.url.users.dashboard %>" aria-expanded="false" class="dropdown-toggle">
@@ -60,10 +60,10 @@
 
 
       <div class="ms-3 main-menu">
-        <h5><strong>
+        <h6><strong>
             <%= __('Project') %>
           </strong>
-        </h5>
+        </h6>
       </div>
       <li class="menu">
         <a href="<%= codezip.url.users.myProject.main %>" aria-expanded="false" class="dropdown-toggle">
@@ -99,10 +99,10 @@
 
 
       <div class="ms-3 main-menu">
-        <h5><strong>
+        <h6><strong>
             <%= __('Customizing') %>
           </strong>
-        </h5>
+        </h6>
       </div>
       <li class="menu">
         <a href="<%= codezip.url.users.formula.main %>" aria-expanded="false" class="dropdown-toggle">
@@ -134,10 +134,10 @@
 
 
       <div class="ms-3 main-menu">
-        <h5><strong>
+        <h6><strong>
             <%= __('Service') %>
           </strong>
-        </h5>
+        </h6>
       </div>
 
       <li class="menu">
@@ -167,10 +167,10 @@
 
 
       <div class="ms-3 main-menu">
-        <h5><strong>
+        <h6><strong>
             <%= __('Lounge') %>
           </strong>
-        </h5>
+        </h6>
       </div>
       <!-- fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" -->
       <li class="menu">
@@ -210,6 +210,7 @@
         </a>
       </li>
 
+      <div class="py-5"></div>
 
     </ul>
   </nav>

@@ -54,7 +54,7 @@ i {
   /* font-size: 1.25rem; */
 }
 
-.hover > *:hover {
+.hover>*:hover {
   color: var(--BW-blue) !important;
 }
 
@@ -195,6 +195,7 @@ i {
   width: 100%;
   margin-bottom: 3rem;
   font-weight: 700;
+  padding: 0.5rem 0.5rem;
 }
 
 .search input {

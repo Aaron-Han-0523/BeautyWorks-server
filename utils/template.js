@@ -100,8 +100,8 @@ module.exports.Service = class {
             .then((result) => {
                 console.log("deleteed row count :", result);
 
-                if (result != 1) throw new Error("Use to delete only one date!");
-                else if (result == 0) console.log("Nothing to delete data.");
+                if (result == 0) console.log("Nothing to delete data.");
+                else if (result != 1) throw new Error("Use to delete only one date!");
                 return result;
             })
             .catch((err) => {
@@ -119,8 +119,8 @@ module.exports.Service = class {
             .then((result) => {
                 console.log("hide row count :", result);
 
-                if (result != 1) throw new Error("Use to hide only one date!");
-                else if (result == 0) console.log("Nothing to hide data.");
+                if (result == 0) console.log("Nothing to hide data.");
+                else if (result != 1) throw new Error("Use to hide only one date!");
                 return result;
             })
             .catch((err) => {
@@ -138,8 +138,8 @@ module.exports.Service = class {
             .then((result) => {
                 console.log("show row count :", result);
 
-                if (result != 1) throw new Error("Use to show only one date!");
-                else if (result == 0) console.log("Nothing to show data.");
+                if (result == 0) console.log("Nothing to show data.");
+                else if (result != 1) throw new Error("Use to show only one date!");
                 return result;
             })
             .catch((err) => {

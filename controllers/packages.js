@@ -114,17 +114,25 @@ exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
 
-    const page = req.query.p || 1;
-    delete req.query.p;
-    const limit = req.query.limit || 10;
-    delete req.query.limit;
+    let condition = {};
+
+    let word = req.query.q;
+    if (word) condition.packaging_name = { [Op.substring]: word };
+
+    const page = +req.query.p || 1;
+    let limit = +req.query.limit || 10;
+
+    if (base != 'admin') {
+        condition.delete_date = null;
+        limit = +req.query.limit || 6;
+    }
+
     const skip = (page - 1) * limit;
 
     delete req.query.n;
-
-    console.log('api', req.query)
-
-    let condition = {};
+    delete req.query.q;
+    delete req.query.p;
+    delete req.query.limit;
     for ([key, value] of Object.entries(req.query)) {
         if (value) {
             // condition[key] = { [Op.substring]: value }; // 배열은 in 연산
@@ -139,11 +147,6 @@ exports.index = async (req, res, next) => {
         }
     }
 
-    if (base != 'admin') {
-        // condition.users_id = user.id;
-        condition.delete_date = null;
-    }
-
     console.log(condition)
 
     await packagesService
@@ -154,19 +157,22 @@ exports.index = async (req, res, next) => {
                 return res.json({
                     page: page,
                     limit: limit,
-                    packages: result
+                    packages: result,
+                    word: word
                 })
             } else if (base == 'users') {
-                return res.render('ingredient/index', {
+                return res.render('packaging/index', {
                     page: page,
                     limit: limit,
-                    packages: result
+                    packages: result,
+                    word: word
                 })
             } else if (base == 'admin') {
-                return res.render('admin/ingredient/index', {
+                return res.render('admin/packaging/index', {
                     page: page,
                     limit: limit,
-                    packages: result
+                    packages: result,
+                    word: word
                 })
             }
         })
@@ -185,7 +191,7 @@ exports.detail = async (req, res, next) => {
         condition.users_id = user.id;
         condition.delete_date = null;
     }
-    
+
     condition.id = req.params.id;
 
     await packagesService
