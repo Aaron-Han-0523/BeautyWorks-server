@@ -8,19 +8,12 @@ const newsService = require('../services/news');
 // 추가
 router
   .post('/add', newsController.add)
-  .get('/add', (req, res, next) => res.render('news/add'))
+  .get('/add', (req, res, next) => res.render('admin/news/detail', { news: {} }))
 
 // 편집
 router
   .put('/edit/:id', newsController.edit)
   .post('/edit/:id', newsController.edit)
-  .get('/edit/:id', async (req, res, next) => {
-    const data = await newsService.readOne(req.params.id);
-    if (res.locals.user.id != data.users_id) return res.status(403).end();
-    return res.render('news/edit', {
-      data: data
-    });
-  })
 
 // 삭제
 router

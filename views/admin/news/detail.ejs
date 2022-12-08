@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/admin-header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container" style="padding-top: 0;">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content admin-add">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0 ">
+
+          <!-- BREADCRUMB -->
+          <div class="row">
+            <div class="breadcrumb align-datas-start d-flex br-20 ">
+              <div class="p-1 col-4 ">
+                <h5>
+                  <strong>
+                    <% if(news.id) { %>
+                    <%= __('admin.menu.공지사항.수정') %>
+                    <% }else{ %>
+                    <%= __('admin.menu.공지사항.추가') %>
+                    <% } %>
+                  </strong>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT AREA -->
+          <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <div class="widget-content widget-content-area br-20 p-4">
+                <form id="news" method="post">
+                  <!-- title -->
+                  <input class="form-control bc-white bg-white" name="title" type="text" required value="<%= news.title %>" placeholder="<%= __('title') %>">
+
+                  <hr>
+
+                  <!-- content -->
+                  <textarea rows="10" maxlength="5000" class="form-control bc-white bg-white" name="content" type="text" required placeholder="<%= __('text') %>"><%= news.content %></textarea>
+
+                  <hr>
+
+                  <!-- image -->
+                  <!-- <div class=" d-flex mt-3" style="min-height: 90px;">
+                    <label class="col-3"><%= __('news.image_paths') %></label>
+
+                    <div class="inputImage">
+                      <input id="image" name="images" type="file" accept=".jpg, .png, .gif" style="display: none;" multiple>
+
+                      <ul id="Preview" class="d-flex sortable">
+                        <% if(news.image_paths) { %>
+                        <% news.image_paths.split(',').forEach((item, index)=>{ %>
+                        <li class="ui-state-default mx-1 position-relative">
+                          <img src="<%= item %>" width=80 height=80>
+                        </li>
+                        <% }) %>
+                        <% } %>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text-center mt-3">
+                    <label for="image" class="addImgBtn btn px-3"><%= __('btn.파일등록') %></label>
+                  </div> -->
+
+                  <div class="text-end mt-4">
+                    <button class="btn px-5">
+                      <% if(news.id) { %>
+                      <%= __('btn.수정') %>
+                      <% }else{ %>
+                      <%= __('btn.추가') %>
+                      <% } %>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <!--  END CONTENT AREA  -->
+
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+
+  <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+  <script>
+    $(function() {
+      //드래그 앤 드롭
+      $(".sortable").sortable();
+
+      //이미지 등록
+      $("#image").change(function(e) {
+        //div 내용 비워주기
+        $('#Preview').empty();
+
+        var files = e.target.files;
+        var arr = Array.prototype.slice.call(files);
+
+        if (files.length > 1) {
+          alert('이미지 개수가 초과되었습니다.');
+          image.value = '';
+          return false;
+        }
+        //업로드 가능 파일인지 체크
+        for (var i = 0; i < files.length; i++) {
+          if (!checkExtension(files[i].name, files[i].size)) {
+            return false;
+          }
+        }
+        preview(arr);
+
+        function checkExtension(fileName, fileSize) {
+          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+          var maxSize = 5 * 1024 * 1024; // 5 MB
+
+          if (fileSize >= maxSize) {
+            alert('이미지 크기가 초과되었습니다.');
+            image.value = '';
+            $("#image").val(""); //파일 초기화
+            return false;
+          }
+
+          if (regex.test(fileName)) {
+            alert('확장자명을 확인해주세요.');
+            image.value = '';
+            $("#image").val(""); //파일 초기화
+            return false;
+          }
+          return true;
+        }
+
+        function preview(arr) {
+          arr.forEach(function(f) {
+            //파일명이 길면 파일명...으로 처리
+            /*
+            var fileName = f.name;
+            if(fileName.length > 10){
+                fileName = fileName.substring(0,7)+"...";
+            }
+            */
+
+            //div에 이미지 추가
+            var str = '<li class="ui-state-default mx-1 position-relative">';
+            //str += '<span>'+fileName+'</span><br>';
+
+            //이미지 파일 미리보기
+            if (f.type.match('image.*')) {
+              //파일을 읽기 위한 FileReader객체 생성
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                str += '<img src="' + e.target.result + '" title="' + f.name + '" width=80 height=80>';
+                // str += '<div class="imgDelBtn" onclick="delImg(this)">x</div>';
+                str += '</li>';
+                document.getElementById("Preview").innerHTML += str;
+              }
+              reader.readAsDataURL(f);
+            } else {
+              //이미지 파일 아닐 경우 대체 이미지
+              /*
+              str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=60 height=60 />';
+              $(str).appendTo('#Preview');
+              */
+            }
+          })
+        }
+      })
+    })
+
+    //이미지 삭제
+    /*
+    function delImg(_this) {
+      $(_this).parent('li').remove()
+    }
+    */
+  </script>
+
+</body>
+
+</html>

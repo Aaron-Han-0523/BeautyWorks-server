@@ -9,18 +9,25 @@ const communityService = require('../services/communities');
 // 추가
 router
   .post('/add', communityController.add)
-  .get('/add', (req, res, next) => res.render('community/add'))
+  .get('/add', (req, res, next) => { res.render('community/add') })
 
 // 편집
 router
   .put('/edit/:id', communityController.edit)
   .post('/edit/:id', communityController.edit)
   .get('/edit/:id', async (req, res, next) => {
+    const base = req.originalUrl.split('/')[1];
     const data = await communityService.readOne(req.params.id);
-    if (res.locals.user.id != data.users_id) return res.status(403).end();
-    return res.render('community/edit', {
-      data: data
-    });
+    if (!(res.locals.user.id == data.users_id || [100, 200].includes(res.locals.user.user_type))) return res.status(403).end();
+    if (base == 'users') {
+      return res.render('community/edit', {
+        data: data
+      });
+    } else if (base == 'admin') {
+      return res.render('admin/community/edit', {
+        data: data
+      });
+    }
   })
 
 // 삭제

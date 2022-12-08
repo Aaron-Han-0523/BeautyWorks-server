@@ -45,9 +45,11 @@ service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     console.log(paging.skip, '~', paging.limit);
     let word = condition.word || '';
     let query = `
-    select users.first_name, users.last_name, users.profile_image_path, communities.* from communities
-    join users
-        on users.id=communities.users_id`
+    select users.first_name, users.last_name, users.profile_image_path, communities.*, count(like_communities.users_id) as recommended_count from communities
+    left join users
+        on users.id=communities.users_id
+    left join like_communities
+    on like_communities.communities_id = communities.id`
     let where = `
     where (communities.title like('%${word}%') or communities.content like('%${word}%'))`;
     if (condition.delete_date === null) {
@@ -63,7 +65,7 @@ service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     order by communities.id desc
     limit ${paging.skip}, ${paging.limit};
     `
-    const data = models.sequelize.query(query + where + option, {
+    const data = models.sequelize.query(query + where + `group by communities.id` + option, {
         type: QueryTypes.SELECT
     }).then(function (results, metadata) {
         // 쿼리 실행 성공

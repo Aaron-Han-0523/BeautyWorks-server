@@ -42,9 +42,9 @@
       <table class="table table-hover">
         <thead class="table-header">
           <tr>
+            <th scope="col"><%= __('table.head.원료.종류') %></th>
             <th scope="col"><%= __('table.head.원료.성분명') %></th>
             <th scope="col"><%= __('table.head.원료.원료명') %></th>
-            <th scope="col"><%= __('table.head.원료.종류') %></th>
             <th scope="col"><%= __('table.head.원료.기능') %></th>
             <th scope="col"><%= __('table.head.원료.특징') %></th>
             <th scope="col"><%= __('table.head.삭제/복구') %></th>
@@ -55,9 +55,9 @@
         <tbody class="table-body">
           <% ingredients.rows.forEach((item,index)=>{ %>
           <tr onclick="location.href='<%= codezip.url.admin.ingredient.main %>/<%= item.id %>';">
+            <td><%= __(item.type) %></td>
             <td><%= item.ingredient_name %></td>
             <td><%= item.material_name %></td>
-            <td><%= __(item.type) %></td>
             <%
             let decording_effect = [];
             item.effects.split(',').forEach((code,index)=>{

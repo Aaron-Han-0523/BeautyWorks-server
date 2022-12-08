@@ -6,39 +6,44 @@ const packagesController = require('../controllers/packages');
 const myUtils = require('../utils/myUtils');
 
 router
-    .use(myUtils.upload("packages").array("image_paths"), (req, res, next) => {
-        console.log(req.files);
+    .use(myUtils.upload("packages").array("images", 1), (req, res, next) => {
+        console.log("files", req.files);
         const files = req.files;
 
-        if (files) {
+        if (files && files.length != 0) {
             let paths = [];
             files.forEach((file, index) => {
                 paths.push('/' + file.path)
             })
             req.body["image_paths"] = paths.join(',');
-        }
 
+            console.log(req.body);
+        }
 
         next();
     })
 
+router
+    .use((req, res, next) => {
+        for (let key in req.body) {
+            if (!req.body[key]) {
+                req.body[key] = null;
+            }
+        }
+
+        console.log("packaging request body :", req.body)
+        next();
+    })
 
 // 추가
 router
     .post('/add', packagesController.add)
-    .get('/add', (req, res, next) => res.render('packages/add'))
+    .get('/add', (req, res, next) => res.render('admin/packaging/detail', { package: {} }))
 
 // 편집
 router
-    .put('/edit/:id', packagesController.edit)
-    .post('/edit/:id', packagesController.edit)
-    .get('/edit/:id', async (req, res, next) => {
-        const formula = await packagesService.readOne(req.params.id);
-        if (req.baseUrl.split('/')[1] != 'admin') return res.status(403).end();
-        return res.render('packages/edit', {
-            formula: formula
-        });
-    })
+    .put('/:id', packagesController.edit)
+    .post('/:id', packagesController.edit)
 
 // 상세 조회
 router

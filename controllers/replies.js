@@ -31,7 +31,7 @@ exports.edit = async (req, res, next) => {
     let body = req.body;
     const target = await repliesService.readOne(body);
     // console.log(target);
-    if (user.id != target.users_id) {
+    if (!(user.id == target.users_id || [100, 200].includes(user.user_type))) {
         return res.status(403).end();
     }
     console.log("reply edit body :", body);

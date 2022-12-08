@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/admin-header.ejs") %>
+
+  <% const country_codes=codezip.country.codes; %>
+  <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
+</head>
+
+<body>
+  <%- include ("../partials/loader.ejs") %>
+
+  <!--  BEGIN CONTENT AREA  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
+
+    <div class="container mx-auto">
+
+      <div class="row">
+
+        <div class="col-10 flex-column mx-auto">
+          <div class="row mt-5 pt-5 pb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h2><strong>
+                    회원 개인정보
+                  </strong>
+                </h2>
+              </div>
+              <!-- <div class="align-self-end">
+                <p style="color: gray;">
+                  
+                  <%= __('users.signUp.msg.required') %>
+                </p>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="widget bg-white" style="position: relative;">
+            <div class="card-body">
+
+              <div class="row p-5">
+                <form method="post" id="join">
+
+                  <!-- Profile Image -->
+                  <div class="row">
+                    <div class="col-3">
+                      <h6>
+                        <%= __('users.myAccount.label.ProfileImage') %>
+                      </h6>
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col-4 pe-1">
+                          <img id="profileImage" class="br-10 w-100" src="">
+                        </div>
+                      </div>
+                      <div class="mt-2 row">
+                        <div class="col-4 pe-1 py-2">
+                          <label class="m-0 p-0 w-100 h-100" for="profile_image_path">
+                            <div class="btn btn-outline-primary w-100">
+                              <%= __('users.myAccount.btn.UploadImage') %>
+                            </div>
+                          </label>
+                          <input type="file" name="profile_image_path" id="profile_image_path" hidden>
+                        </div>
+                        <div class="col-4 px-1 py-2">
+                          <button type="button" class="btn btn-outline-primary w-100" onclick="removeImage();">
+                            <%= __('users.myAccount.btn.RemoveImage') %>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 권한 설정 -->
+                  <div class="d-flex mt-3" style="position: absolute; top: 64px; right: 80px;"><label for="" style="margin-right: 5px; line-height: 40.5px;">권한 설정</label>
+                    <select name="" id="" class="form-select" style="width: 200px;">
+                      <option value="">선택</option>
+                      <option value="user">일반회원</option>
+                      <option value="admin">관리자</option>
+
+                    </select>
+                  </div>
+
+                  <!-- 국가 선택 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.Country') %>
+                      </h6>
+                    </div>
+                    <div class="col col">
+                      <div class="dropdown">
+                        <input hidden name="country" id="country">
+                        <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
+                          <%= __('plzSelectText') %>
+                        </button>
+                        <ul class="dropdown-menu scrollable-menu w-100" aria-labelledby="select_country">
+                          <% for(let i=0; i< country_codes.length; i++) { %>
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0);" onclick="select_country_func('<%= country_codes[i] %>','<%= __(country_codes[i]) %>');">
+                              <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
+                              <%= __(country_codes[i]) %>
+                            </a>
+                          </li>
+                          <% } %>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Email 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.Email') %>
+                      </h6>
+                    </div>
+                    <div class="col col-7 d-flex align-items-baseline">
+                      <input type="text" class="form-control" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" required>
+                      <h6 class="mx-3">@</h6>
+                      <input type="text" class="form-control" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" required>
+                    </div>
+                  </div>
+
+
+                  <!-- 이름 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.first_name') %>
+                      </h6>
+                    </div>
+                    <div class="col ">
+                      <input type="text" class="form-control" name="first_name" placeholder="<%= __('plzInputText') %>" required>
+                    </div>
+                  </div>
+                  <div class="row mb-4 align-items-center">
+
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.last_name') %>
+                      </h6>
+                    </div>
+                    <div class="col ">
+                      <input type="text" class="form-control" name="last_name" placeholder="<%= __('plzInputText') %>" required>
+                    </div>
+                  </div>
+
+                  <!-- 회사 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.company_name') %>
+                      </h6>
+                    </div>
+                    <div class="col col-7">
+                      <input type="text" class="form-control" placeholder="<%= __('plzInputText') %>">
+                    </div>
+                  </div>
+
+                  <!-- 팀/직책 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.Team') %> / <%=
+                                                                __('users.signUp.InputLabel.Position') %>
+                      </h6>
+                    </div>
+                    <div class="col d-flex align-items-baseline">
+                      <input type="text" class="form-control" name="team" placeholder="<%= __('plzInputText.team') %>">
+                      <h6 class="mx-3">/</h6>
+                      <input type="text" class="form-control" name="position" placeholder="<%= __('plzInputText.position') %>">
+                    </div>
+                  </div>
+
+                  <!-- 연락처 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.MobileContact') %>
+                      </h6>
+                    </div>
+                    <div class="col col-3">
+                      <div class="dropdown">
+                        <input hidden name="country_number" id="country_number">
+                        <button class="form-select " type="button" id="select_country_number" data-bs-toggle="dropdown" aria-expanded="false">
+                          <%= __('plzSelectText') %>
+                        </button>
+                        <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country_number">
+                          <% for(let i=0; i< country_codes.length; i++) { %>
+                          <li>
+                            <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
+                              <div class="col-1">
+                                <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
+                              </div>
+                              <div class="col-2">
+                                <%= country_code2phoneNum[country_codes[i]] %>
+                              </div>
+                              <div>
+                                <%= __(country_codes[i]) %>
+                              </div>
+                            </a>
+                          </li>
+                          <% } %>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col ">
+                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('plzInputText.mobilePhone') %>" required>
+                    </div>
+                  </div>
+
+                  <!-- Logistics Address 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.logistics_address') %>
+                        <!--  -->
+                      </h6>
+                    </div>
+                    <div class="col ">
+                      <input type="text" class="form-control" name="logistics_address" placeholder="<%= __('plzInputText.logistics_address') %>">
+                    </div>
+                  </div>
+
+
+                  <!-- 회사 주소 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.company_address') %>
+                        <!--  -->
+                      </h6>
+                    </div>
+                    <div class="col ">
+                      <input type="text" class="form-control" name="company_address" placeholder="<%= __('plzInputText.company_address') %>">
+                    </div>
+                  </div>
+
+
+                  <!-- 연락 방법 입력 -->
+                  <!-- <div class="row mb-4 align-items-center">
+                                                <div class="col col-3">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.ContactMethod') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="contactMethod"
+                                                        placeholder="<%= __('plzInputText') %>" required>
+                                                </div>
+                                            </div> -->
+
+
+                  <!-- Remark 입력 -->
+                  <!-- <div class="row mb-4 align-items-center">
+                                                <div class="col col-3">
+                                                    <h6>
+                                                        <%= __('users.signUp.InputLabel.Remark') %>
+                                                    </h6>
+                                                </div>
+                                                <div class="col col-4">
+                                                    <input type="text" class="form-control" name="remark"
+                                                        placeholder="<%= __('plzInputText') %>" required>
+                                                </div>
+                                            </div> -->
+                  <hr class="my-5">
+
+                  <div class="d-flex mt-5 justify-content-center">
+                    <button class="btn col-3 mx-3 p-3 br-15">
+                      저장
+                    </button>
+                    <button class="btn col-3 mx-3 p-3 br-15" type="button" onclick="cancel();">
+                      <%= __('users.signUp.btn.Cancel') %>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" style="margin-top: 30px">
+      <div class="row">
+        <div class="col">
+          <div class="title">
+            <h1>회원 임시 저장한 프로젝트</h1>
+          </div>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead class="table-header">
+          <tr>
+            <th scope="col">프로젝트 명</th>
+            <th scope="col">현재 임시 저장단계</th>
+            <th scope="col">MOQ</th>
+            <th scope="col">예산</th>
+            <th scope="col">타겟제품 링크</th>
+            <th scope="col">타겟 내용물데이터</th>
+            <th scope="col">프로젝트 생성 날짜</th>
+            <th scope="col">삭제</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-body">
+          <tr>
+            <td>프로젝트 명</td>
+            <td>타겟제품 유무확인</td>
+            <td>5000개</td>
+            <td>$ 100,000</td>
+            <td>링크</td>
+            <td>상품명</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플의뢰서 기본</td>
+            <td>5000개</td>
+            <td>$ 100,000</td>
+            <td>링크</td>
+            <td>상품명</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플의뢰서 초안</td>
+            <td>5000개</td>
+            <td>$ 100,000</td>
+            <td>링크</td>
+            <td>상품명</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플의뢰서 옵션</td>
+            <td>5000개</td>
+            <td>$ 100,000</td>
+            <td>링크</td>
+            <td>상품명</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>MOQ 예산확인</td>
+            <td>5000개</td>
+            <td>$ 100,000</td>
+            <td>링크</td>
+            <td>상품명</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>의뢰서 접수</td>
+            <td>타겟제품 유무확인</td>
+            <td>5000개</td>
+            <td>$ 100,000</td>
+            <td>링크</td>
+            <td>상품명</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container" style="margin-top: 30px">
+      <div class="row">
+        <div class="col">
+          <div class="title">
+            <h1>회원 진행중인 프로젝트</h1>
+          </div>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead class="table-header">
+          <tr>
+            <th scope="col">프로젝트 명</th>
+            <th scope="col">현재 진행단계</th>
+            <th scope="col">상세 진행단계</th>
+            <th scope="col">프로젝트 최종 수정 날짜</th>
+            <th scope="col">프로젝트 생성날짜</th>
+            <th scope="col">삭제</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-body">
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+          <tr>
+            <td>프로젝트 명</td>
+            <td>샘플링</td>
+            <td>샘플의뢰서</td>
+            <td>2022.12.05</td>
+            <td>2022.12.05</td>
+            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Completed Project -->
+    <!-- /* 테스트 데이터 생성 -->
+    <div>
+      <% let completed_project={data:[],page:1,count:10}; %>
+      <% completed_project.data.push({
+                  productName:"My Suncream1",
+                  volume:"110ml",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
+                })%>
+      <% completed_project.data.push({
+                  productName:"My Suncream2",
+                  volume:"120ml",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:20000,
+                  lastOrderDate:new Date(2022,10,15),
+                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
+                
+                })%>
+      <% completed_project.data.push({
+                  productName:"My Suncream3",
+                  volume:"110g",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:30000,
+                  lastOrderDate:new Date(2022,10,25),
+                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
+                })%>
+      <% completed_project.data.push({
+                  productName:"My Suncream4",
+                  volume:"210g",
+                  category1:0,
+                  category2:0,
+                  totalOrderAmount:10000,
+                  lastOrderDate:new Date(2022,10,5),
+                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
+                })%>
+    </div>
+    <!-- 테스트 데이터 생성 */ -->
+    <!-- Completed Project -->
+    <div class="widget-content widget-content-area br-20 px-4 mt-3">
+      <div class="form-group ms-3">
+        <div class="row mb-3">
+          <div class="justify-content-between d-flex px-0">
+            <div>
+              <h5><strong>
+                  <%= __("users.dashboard.header.CompletedProject") %>
+                </strong>
+              </h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="widget p-4 row mx-0" id="completed_project">
+            <% completed_project.data.forEach((item,index)=>{ %>
+            <div class="col d-flex flex-column">
+              <!-- style="height: calc(100%-50px);" -->
+              <div class="preview">
+                <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
+              </div>
+              <div class="mb-auto mt-3 text-center">
+                <h6>
+                  <%= item.productName %>
+                </h6>
+                <h6>
+                  <%= __("product"+item.category1+"."+item.category2) %>
+                  <%= " " + item.volume %>
+                </h6>
+                <p>
+                  <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                  <%= ' : ' + item.totalOrderAmount %>
+                  <br>
+                  <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                  <%= ' : ' + formatDate(item.lastOrderDate) %>
+                </p>
+              </div>
+            </div>
+            <% }) %>
+
+            <!-- pagination -->
+            <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
+            <%- make_pagination_by_href(
+                          __,
+                          completed_project.page,
+                          completed_project.count,
+                          codezip.url.users.community.main,
+                          4
+                        ) %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+  <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/validator.js"></script>
+  <script>
+    // 프로필 이미지
+    let isRemoveImage = false;
+
+    profile_image_path.addEventListener('change', (event) => {
+      loadImageFile(event.target, profileImage)
+      isRemoveImage = false;
+    })
+
+    function removeImage() {
+      profile_image_path.value = null;
+      profileImage.src = '<%= codezip.url.users.defaultProfileImage %>'
+      isRemoveImage = true;
+    }
+
+
+    // 국가 선택
+    function select_country_func(code, name) {
+      let country = document.getElementById('country');
+      let select_country = document.getElementById('select_country');
+
+      country.value = code;
+      select_country.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${name}`
+    }
+
+    function select_mobile_func(code, number) {
+      let country_number = document.getElementById('country_number');
+      let select_country_number = document.getElementById('select_country_number');
+
+      country_number.value = number;
+      select_country_number.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${number}`
+    }
+
+
+
+    userAccount.onsubmit = async (e) => {
+      e.preventDefault();
+
+      let body = new FormData(userAccount);
+      body.append("isRemoveImage", isRemoveImage);
+
+      let response = await fetch(userAccount.action, {
+        method: 'POST',
+        body: body
+      }).then(res => {
+        if (res.ok) {
+          alert("<%= __('users.MyAccount.msg.SaveSuccess') %>");
+          window.location.reload();
+        } else {
+          alert("<%= __('users.MyAccount.msg.SaveFail') %>");
+        }
+        return res.json();
+      }).then(result => {
+        console.log(result);
+      });
+    }
+  </script>
+  <!-- END GLOBAL MANDATORY SCRIPTS -->
+  <input hidden id="CertificationNumber">
+
+</body>
+
+</html>

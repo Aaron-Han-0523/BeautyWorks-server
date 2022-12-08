@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/admin-header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content admin-add">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0 ">
+
+          <!-- BREADCRUMB -->
+          <div class="row">
+            <div class="breadcrumb align-datas-start d-flex br-20 ">
+              <div class="p-1 col-4 ">
+                <h5>
+                  <strong>
+                    <%= __('admin.menu.커뮤니티') %>
+                  </strong>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <!-- CONTENT AREA -->
+          <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <div class="widget-content widget-content-area br-20 p-4">
+
+                <!-- title -->
+                <div class="form-control d-flex justify-content-between">
+                  <div class="p-1 d-flex h6">
+                    <%- include('../../partials/badge/new', {date:community.create_date}) %>
+                    <%= `${community.title}` %>
+                  </div>
+                  <div class="p-1 d-flex">
+                    <h6 class="me-3">
+                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                      <%= `${formatDate(community.update_date)} | ${__('users.community.index.WrittenBy')} ${community.last_name} ${community.first_name}` %>
+                      <% } else { %>
+                      <%= `${formatDate(community.update_date)} | ${__('users.community.index.WrittenBy')} ${community.first_name} ${community.last_name}` %>
+                      <% } %>
+                    </h6>
+                    <h6 id="communitylike_count" class="mx-1"><strong>
+                        <%= communityLike.count %>
+                      </strong>
+                    </h6>
+                    <h5>
+                      <!-- <a id="communityLikeBtn" href="javascript:void(0);" onclick="toggleLike('<%= community.id %>');">
+                        <% if(communityLike.rows.indexOf(user.id)==-1) { %>
+                        <i class="fa-star fa-regular"></i>
+                        <% }else{ %>
+                        <i class="fa-star fa-solid text-primary"></i>
+                        <% } %>
+                      </a> -->
+                      <i class="fa-star fa-regular"></i>
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- content -->
+                <div class="p-4">
+                  <p>
+                    <%= community.content %>
+                  </p>
+                </div>
+
+                <hr>
+
+                <div class="d-flex align-items-center">
+                  <div class="col-4"></div>
+                  <!-- 네비게이션 -->
+                  <div class="col-4 d-flex justify-content-center align-items-end">
+                    <!-- <div class="w-auto mx-3 hover">
+                      <% if(prev) { %><a href="<%= codezip.url.admin.community.main %>/<%= prev.id %>">
+                        <h6><i class="fa-solid fa-chevron-left fs-5 me-3"></i>
+                          <%= __('btn.이전글') %>
+                        </h6>
+                      </a>
+                      <% } %>
+                    </div>
+                    <div class="w-auto text-center mx-3 hover"><a href="<%= codezip.url.admin.community.main %>">
+                        <h6>
+                          <%= __('btn.목록') %>
+                        </h6>
+                      </a></div>
+                    <div class="w-auto mx-3 hover">
+                      <% if(next) { %><a href="<%= codezip.url.admin.community.main %>/<%= next.id %>">
+                        <h6>
+                          <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right fs-5 ms-3"></i>
+                        </h6>
+                      </a>
+                      <% } %>
+                    </div> -->
+                  </div>
+                  <!-- 수정 삭제 버튼 -->
+                  <div class="text-end col-4">
+                    <a class="col-4 btn mx-2 px-2 br-10" href="<%= codezip.url.admin.community.edit %>/<%= community.id %>">
+                      <%= __('btn.수정') %>
+                    </a>
+                    <% if(community.delete_date) { %>
+                    <a class="col-4 btn mx-2 px-2 br-10" href="<%= codezip.url.admin.community.recovery %>/<%= community.id %>">
+                      <%= __('btn.복구') %>
+                    </a>
+                    <% }else{ %>
+                    <a class="col-4 btn mx-2 px-2 br-10" href="<%= codezip.url.admin.community.delete %>/<%= community.id %>">
+                      <%= __('btn.삭제') %>
+                    </a>
+                    <% } %>
+                  </div>
+                </div>
+
+
+
+                <!-- 댓글 -->
+                <div class="mx-3">
+                  <i class="fa-regular fa-comment-dots"></i>
+                  <%= __('users.community.reply') +' '+ reply.count %>
+                </div>
+
+                <hr>
+
+                <!-- 댓글 내용 -->
+                <% reply.data.forEach((item,index)=>{ %>
+                <div id="reply_area<%= item.id %>" class="d-flex reply mx-4">
+                  <div class="col-1">
+                    <div class="profileImage">
+                      <img class="rounded-circle" src="<%= item.profile_image_path %>">
+                    </div>
+                  </div>
+                  <div id="reply_content<%= item.id %>" class="col text-break">
+                    <h6>
+                      <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
+                      <%= item.last_name + ' ' + item.first_name %>
+                      <% } else { %>
+                      <%= item.first_name + ' ' + item.last_name%>
+                      <% } %>
+                    </h6>
+                    <p><%= item.content %></p>
+                    <h6><%= formatDate(item.update_date) %></h6>
+                  </div>
+                  <!-- 댓글 좋아요 -->
+                  <div class="w-auto text-end mx-3">
+                    <div class="p-1 d-flex">
+                      <h6>
+                        <!-- <% if(item.users_id==user.id) { %>
+                        <i class="fa-thumbs-up fa-regular"></i>
+                        <% }else{ %>
+                        <a id="replyLikeBtn<%= item.id %>" href="javascript:void(0);" onclick="toggleReplyLike('<%= item.communities_id %>','<%= item.id %>');">
+                          <% if(item.users.indexOf(user.id)==-1) { %>
+                          <i class="fa-thumbs-up fa-regular"></i>
+                          <% }else{ %>
+                          <i class="fa-thumbs-up fa-solid text-primary"></i>
+                          <% }} %>
+                        </a> -->
+                        <i class="fa-thumbs-up fa-regular"></i>
+                      </h6>
+                      <h6 id="replylike_count<%= item.id %>" class="mx-1"><strong>
+                          <%= item.like_count %>
+                        </strong>
+                      </h6>
+                    </div>
+                  </div>
+                  <!-- 수정/삭제 -->
+                  <div class="w-auto">
+                    <!-- <div class="dropdown d-inline-block">
+                      <a class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal">
+                          <circle cx="12" cy="12" r="1"></circle>
+                          <circle cx="19" cy="12" r="1"></circle>
+                          <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                      </a>
+
+                      <div class="dropdown-menu left text-center"> -->
+                    <a class="btn px-2" href="javascript:void(0);" onclick="reply_edit_active('<%= item.communities_id %>','<%= item.id %>');"> <%= __('users.community.btn.수정') %> </a>
+                    <% if(item.delete_date) { %>
+                    <a class="btn px-2" href="javascript:void(0);" onclick="reply_recovery('<%= item.communities_id %>','<%= item.id %>');"> <%= __('btn.복구') %> </a>
+                    <% }else{ %>
+                    <a class="btn px-2" href="javascript:void(0);" onclick="reply_delete('<%= item.communities_id %>','<%= item.id %>');"> <%= __('btn.삭제') %> </a>
+                    <% } %>
+                    <!-- </div>
+                  </div> -->
+                  </div>
+
+
+                </div>
+                <hr>
+                <% }) %>
+
+                <!-- pagination -->
+                <% if(+reply.count) { originalUrl %>
+                <!-- make_pagination_by_href = function (i18n_func, page, count, baseURL, limit = 10) -->
+                <%- make_pagination_by_href(
+                    __,
+                    +reply.page,
+                    +reply.count,
+                    originalUrl,
+                    5
+                  ) %>
+                <% } %>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+    <!--  END CONTENT AREA  -->
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    // 게시글 좋아요
+    async function toggleLike(id) {
+      const communityLikeBtn = document.getElementById('communityLikeBtn');
+      const target = communityLikeBtn.getElementsByClassName('fa-star')[0];
+      let is_like;
+
+      if (target.classList.contains('fa-regular')) {
+        target.classList.remove('fa-regular');
+        target.classList.add('fa-solid');
+        target.classList.add('text-primary');
+        //communitylike_count.innerText = +communitylike_count.innerText + 1
+        is_like = true;
+      } else {
+        target.classList.remove('text-primary');
+        target.classList.remove('fa-solid');
+        target.classList.add('fa-regular');
+        //communitylike_count.innerText = +communitylike_count.innerText - 1
+        is_like = false;
+      }
+
+      const url = '<%= codezip.url.admin.community.like %>'
+      fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          communities_id: id,
+          is_like: is_like
+        })
+      }).then(res => {
+        if (res.ok) {
+
+        } else {
+          throw new Error(res.statusText);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.community.msg.likeFail') %>");
+        window.location.reload();
+      })
+    }
+  </script>
+  <!-- 
+  <script>
+    // 댓글 좋아요
+    async function toggleReplyLike(communities_id, replies_id) {
+      const replyLikeBtn = document.getElementById('replyLikeBtn' + replies_id);
+      const target = replyLikeBtn.getElementsByClassName('fa-thumbs-up')[0];
+      const replylike_count = document.getElementById('replylike_count' + replies_id);
+
+      let is_like;
+
+      if (target.classList.contains('fa-regular')) {
+        target.classList.remove('fa-regular');
+        target.classList.add('fa-solid');
+        target.classList.add('text-primary');
+        replylike_count.innerText = +replylike_count.innerText + 1
+        is_like = true;
+      } else {
+        target.classList.remove('text-primary');
+        target.classList.remove('fa-solid');
+        target.classList.add('fa-regular');
+        replylike_count.innerText = +replylike_count.innerText - 1
+        is_like = false;
+      }
+
+      const url = '<%= codezip.url.users.community.reply.like %>'
+      fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          communities_id: communities_id,
+          replies_id: replies_id,
+          is_like: is_like
+        })
+      }).then(res => {
+        if (res.ok) {
+
+        } else {
+          throw new Error(res.text());
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.community.msg.likeFail') %>");
+        window.location.reload();
+      })
+    }
+  </script>
+   -->
+  <script>
+    async function reply_edit_active(communities_id, replies_id) {
+      if (document.getElementById("reply")) {
+        document.getElementById("reply").remove();
+      }
+      const target = document.getElementById('reply_area' + replies_id);
+      const text = document.getElementById('reply_content' + replies_id).querySelector('p').innerText;
+
+      let temp_html = `<div class='w-100'>
+        <form id="reply" class="border border-gray px-4 py-2 br-4">
+          <textarea rows="5" maxlength="3000" name="content" class="form-control bg-white bc-white" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>">${text}</textarea>
+          <hr class="m-0">
+          <div class="d-flex justify-content-between">
+            <div id="textCount" class="align-self-center">
+              0 / 3000
+            </div>
+            <div class="w-auto">
+            <button class="btn mt-2 px-3 me-auto" type="button" onclick="reply_edit(${communities_id}, ${replies_id});">
+              <%= __('users.community.reply.btn.댓글 남기기') %>
+            </button>
+            <button class="btn mt-2 px-3" type="button" onclick="location.reload();">
+              <%= __('users.community.reply.btn.취소') %>
+            </button>
+            <div>
+          </div>
+        </form>
+      </div>`
+
+      target.innerHTML = temp_html;
+
+      reply.addEventListener("input", event => {
+        let text_cnt = event.target.value.length;
+        textCount.innerText = text_cnt + " / 3000";
+      })
+    }
+
+    async function reply_edit(communities_id, replies_id) {
+      console.log("??");
+      const url = '<%= codezip.url.admin.community.reply.edit %>';
+      let content = reply.content.value;
+      fetch(url, {
+        method: "put",
+        body: new URLSearchParams({
+          communities_id: communities_id,
+          id: replies_id,
+          content: content
+        })
+      }).then(res => {
+        if (res.ok) {
+          location.reload();
+        } else {
+          throw new Error();
+        }
+      }).catch(err => {
+        alert("<%= __('users.community.msg.replyEditFail') %>");
+        window.location.reload();
+      })
+    }
+
+    async function reply_delete(communities_id, replies_id) {
+      let url = '<%= codezip.url.admin.community.reply.delete %>/' + communities_id + '/' + replies_id;
+      fetch(url, {
+        method: "delete",
+        body: new URLSearchParams({
+          communities_id: communities_id,
+          id: replies_id,
+        })
+      }).then(res => {
+        if (res.ok) {
+          let reply = document.getElementsByClassName('reply');
+          // console.log(reply.length);
+          if (reply && reply.length <= 1) {
+            location.href = location.pathname;
+          } else {
+            location.reload();
+          }
+        } else {
+          throw new Error();
+        }
+      }).catch(err => {
+        alert("<%= __('Error') %>");
+        location.href = location.pathname;
+      })
+    }
+  </script>
+
+  <script>
+    function reply_recovery(communities_id, replies_id) {
+      let url = '<%= codezip.url.admin.community.reply.recovery %>/' + communities_id + '/' + replies_id;
+      fetch(url, {
+        method: "put",
+        body: new URLSearchParams({
+          communities_id: communities_id,
+          id: replies_id,
+        })
+      }).then(res => {
+        if (res.ok) {
+          let reply = document.getElementsByClassName('reply');
+          // console.log(reply.length);
+          if (reply && reply.length <= 1) {
+            location.href = location.pathname;
+          } else {
+            location.reload();
+          }
+        } else {
+          throw new Error();
+        }
+      }).catch(err => {
+        alert("<%= __('Error') %>");
+        location.href = location.pathname;
+      })
+    }
+  </script>
+
+  <script>
+    reply.addEventListener("input", event => {
+      // console.log(event.target.value.length)
+      let text_cnt = event.target.value.length;
+      textCount.innerText = text_cnt + " / 3000";
+    })
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

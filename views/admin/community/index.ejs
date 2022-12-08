@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col">
           <div class="title">
-            <h1><%= __('admin.menu.커뮤니티관리') %></h1>
+            <h1><%= __('admin.menu.커뮤니티') %></h1>
           </div>
         </div>
       </div>
@@ -45,6 +45,7 @@
             <th scope="col"><%= __('table.head.번호') %></th>
             <th scope="col"><%= __('table.head.제목') %></th>
             <th scope="col"><%= __('table.head.작성자') %></th>
+            <th scope="col"><%= __('table.head.추천수') %></th>
             <th scope="col"><%= __('table.head.작성일') %></th>
             <th scope="col"><%= __('table.head.삭제/복구') %></th>
           </tr>
@@ -61,6 +62,7 @@
             <% } else { %>
             <td><%= item.first_name + ' ' + item.last_name %></td>
             <% } %>
+            <td><%= item.recommended_count %></td>
             <td><%= formatDate(item.create_date) %></td>
             <td>
               <div id="action_btn-<%= item.id %>" class="hover">
@@ -89,9 +91,7 @@
               word
             )
           %>
-        <div>
-          <button type="button" class="px-3 py-2 br-10" onclick="location.href='<%= codezip.url.admin.community.add %>';"><%= __('btn.추가') %></button>
-        </div>
+        <div> </div>
       </div>
 
 

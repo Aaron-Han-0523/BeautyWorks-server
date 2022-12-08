@@ -1,3 +1,4 @@
+const codezip = require('../codezip');
 const packagesService = require('../services/packages');
 const { Op } = require('sequelize');
 
@@ -14,7 +15,11 @@ exports.add = async (req, res, next) => {
     await packagesService
         .create(body)
         .then((created_obj) => {
-            res.status(201).json(created_obj.id);
+            if (req.api) {
+                res.status(201).json(created_obj.id);
+            } else {
+                res.redirect(codezip.url.admin.packaging.main);
+            }
         })
         .catch((err) => {
             console.log("fail to create packages");
@@ -40,11 +45,15 @@ exports.edit = async (req, res, next) => {
     await packagesService
         .update(body, condition)
         .then((result) => {
-            if (result == 1) {
-                res.status(200).end();
-            }
-            else if (result == 0) {
-                res.status(400).send("Nothing to update data.");
+            if (req.api) {
+                if (result == 1) {
+                    res.status(200).end();
+                }
+                else if (result == 0) {
+                    res.status(400).send("Nothing to update data.");
+                }
+            } else {
+                res.redirect(codezip.url.admin.packaging.main);
             }
         })
         .catch((err) => {
@@ -200,15 +209,15 @@ exports.detail = async (req, res, next) => {
             console.log("find :", result);
             if (req.api) {
                 res.json({
-                    ingredient: result
+                    package: result
                 })
             } else if (base == 'users') {
-                res.render('ingredient/detail', {
-                    ingredient: result,
+                res.render('packaging/detail', {
+                    package: result,
                 })
             } else if (base == 'admin') {
-                res.render('admin/ingredient/detail', {
-                    ingredient: result
+                res.render('admin/packaging/detail', {
+                    package: result
                 })
             }
         }).catch((err) => {

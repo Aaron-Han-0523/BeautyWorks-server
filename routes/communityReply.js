@@ -20,7 +20,8 @@ router
 
 // 복구
 router
-    .get('/recovery/:community_id/:reply_id', replyController.recovery)
+    .put('/recovery/:community_id/:reply_id', replyController.recovery)
+    .post('/recovery/:community_id/:reply_id', replyController.recovery)
 
 // 좋아요
 router

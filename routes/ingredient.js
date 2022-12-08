@@ -5,22 +5,24 @@ const ingredientsController = require('../controllers/ingredients');
 const ingredientsService = require('../services/ingredients');
 
 /* GET ingredients listing. */
+router
+  .use((req, res, next) => {
+    if (req.body.effects instanceof Array) {
+      req.body.effects = req.body.effects.join(',')
+    }
+
+    next();
+  })
+
 // 추가
 router
   .post('/add', ingredientsController.add)
-  .get('/add', (req, res, next) => res.render('ingredients/detail', { ingredient: {} }))
+  .get('/add', (req, res, next) => res.render('admin/ingredient/detail', { ingredient: {} }))
 
 // 편집
 router
-  .put('/edit/:id', ingredientsController.edit)
-  .post('/edit/:id', ingredientsController.edit)
-  .get('/edit/:id', async (req, res, next) => {
-    const ingredient = await ingredientsService.readOne(req.params.id);
-    if (req.baseUrl.split('/')[1] != 'admin') return res.status(403).end();
-    return res.render('ingredients/detail', {
-      ingredient: ingredient
-    });
-  })
+  .put('/:id', ingredientsController.edit)
+  .post('/:id', ingredientsController.edit)
 
 // 삭제
 router

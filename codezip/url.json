@@ -93,7 +93,14 @@
             "add": "/admin/community/add",
             "edit": "/admin/community/edit",
             "delete": "/admin/community/delete",
-            "recovery": "/admin/community/recovery"
+            "recovery": "/admin/community/recovery",
+            "reply": {
+                "add": "/admin/community/reply/add",
+                "edit": "/admin/community/reply/edit",
+                "delete": "/admin/community/reply/delete",
+                "recovery": "/admin/community/reply/recovery",
+                "like": "/admin/community/reply/like"
+            }
         },
         "news": {
             "main": "/admin/news",

@@ -1,3 +1,4 @@
+const codezip = require('../codezip');
 const formulasService = require('../services/formulas');
 const like_formulas = require('../services/like_formulas');
 const { Op } = require('sequelize');
@@ -17,7 +18,11 @@ exports.add = async (req, res, next) => {
         .create(body)
         .then((created_obj) => {
             console.log(created_obj.id);
-            res.status(201).json(created_obj.id);
+            if (req.api) {
+                res.status(201).json(created_obj.id);
+            } else {
+                res.status(201).redirect(codezip.url.admin.formula.main);
+            }
         })
         .catch((err) => {
             console.log("fail to create formulas");
@@ -43,11 +48,15 @@ exports.edit = async (req, res, next) => {
     await formulasService
         .update(body, condition)
         .then((result) => {
-            if (result == 1) {
-                res.status(200).end();
-            }
-            else if (result == 0) {
-                res.status(400).send("Nothing to update data.");
+            if (req.api) {
+                if (result == 1) {
+                    res.status(200).end();
+                }
+                else if (result == 0) {
+                    res.status(400).send("Nothing to update data.");
+                }
+            } else {
+                res.redirect(codezip.url.admin.formula.main);
             }
         })
         .catch((err) => {

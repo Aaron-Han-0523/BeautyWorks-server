@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../../partials/admin-header.ejs") %>
+  <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../../partials/loader.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container 진" id="container" style="padding-top: 0;">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../../partials/admin-nav.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content admin-add">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0 ">
+
+          <!-- BREADCRUMB -->
+          <div class="row">
+            <div class="breadcrumb align-datas-start d-flex br-20 ">
+              <div class="p-1 col-4 ">
+                <h5>
+                  <strong>회원 진행중인 프로젝트 상세 </strong>
+                </h5>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- CONTENT AREA -->
+          <div class="row layout-top-spacing">
+
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+              <div class="widget-content widget-content-area br-20 p-4">
+
+
+                <form method="post">
+
+
+
+                  <div class="form-group p-5">
+                    <div class="d-flex" style="justify-content: space-between; margin-bottom: 34px;">
+                      <h3 style="display: inline-block;">프로젝트 명</h3>
+                      <button type="button">적용</button>
+                    </div>
+
+                    <div class="d-flex mt-3"><label for="phase">현재 진행단계</label>
+                      <select name="phase" id="phase" class="form-select">
+                        <option value="">선택</option>
+                        <option value="test">test</option>
+
+                      </select>
+                    </div>
+
+                    <div class="d-flex mt-3"><label for="detail_phase">상세 진행단계</label>
+                      <select name="detail_phase" id="detail_phase" class="form-select">
+                        <option value="">선택</option>
+                        <option value="test">test</option>
+
+                      </select>
+                    </div>
+
+                    <div class="d-flex mt-3"><label for="sample_number">샘플링 차수</label>
+                      <input class="form-control" id="sample_number" name="sample_number" type="text" placeholder="">
+
+                    </div>
+
+                    <div class="d-flex mt-3"><label for="tracking_number">운송장번호 by 택배사</label>
+                      <input class="form-control" id="tracking_number" name="tracking_number" type="text" placeholder="">
+
+                    </div>
+
+                    <div style="margin-top: 30px">
+
+                      <h5 style="font-weight: 700;">샘플링 피드백 내용</h5>
+
+                      <div class="d-flex mt-3"><label for="product_name">Product Name</label>
+                        <input class="form-control" id="product_name" name="product_name" type="text" placeholder="">
+                      </div>
+
+                      <div class="d-flex mt-3"><label for="brand_name">Brand Name</label>
+                        <input class="form-control" id="brand_name" name="brand_name" type="text" placeholder="">
+                      </div>
+
+                      <div class="d-flex mt-3"><label for="category1">Category</label>
+                        <input class="form-control" id="category1" name="category1" type="text" placeholder="">
+
+                      </div>
+
+                      <div class="d-flex mt-3"><label for="feedback">Write feedback</label>
+                        <textarea class="form-control" id="feedback" name="feedback" type="text" placeholder="" style="height: 150px;"></textarea>
+
+                      </div>
+                    </div>
+
+                    <div class="mt-3"><label for="packaging_tooltip">용기 단상자 부자재 입고 알림 내용 작성</label>
+                      <textarea class="form-control" id="packaging_tooltip" name="packaging_tooltip" type="text" placeholder="진행단계 설명을 입력해주세요" style="height: 150px;"></textarea>
+
+                    </div>
+
+                    <div class="d-flex mt-3"><label for="shipment_date">제고 출고 완료 날짜 선택</label>
+                      <input class="form-control" id="shipment_date" name="shipment_date" type="date" placeholder="">
+
+                    </div>
+
+                    <div class="mt-3">
+                      <input class="form-control" id="title" name="title" type="text" placeholder="문서 제목">
+
+                    </div>
+
+                    <div class="zip-upload d-flex mt-3"><label for="file_paths">문서 업로드</label>
+                      <input class="form-control" id="file_paths" name="file_paths" type="file" placeholder="압축 파일명" style="line-height: 38.5px;">
+
+                    </div>
+
+                    <textarea class="form-control mt-3" id="message" name="message" type="text" placeholder="문서 설명을 입력해주세요" style="height: 200px;"></textarea>
+
+
+
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <button class="btn btn-lg px-5">
+                      적용
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <!--  END CONTENT AREA  -->
+
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../../partials/commonScrpits.ejs") %>
+
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+
+  <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+  <script>
+    $(function() {
+      //드래그 앤 드롭
+      $(".sortable").sortable();
+
+      //이미지 등록
+      $("#image").change(function(e) {
+        //div 내용 비워주기
+        $('#Preview').empty();
+
+        var files = e.target.files;
+        var arr = Array.prototype.slice.call(files);
+
+        //업로드 가능 파일인지 체크
+        for (var i = 0; i < files.length; i++) {
+          if (!checkExtension(files[i].name, files[i].size)) {
+            return false;
+          }
+        }
+        preview(arr);
+
+        function checkExtension(fileName, fileSize) {
+          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+          var maxSize = 20971520; //20MB
+
+          if (fileSize >= maxSize) {
+            alert('이미지 크기가 초과되었습니다.');
+            $("#image").val(""); //파일 초기화
+            return false;
+          }
+
+          if (regex.test(fileName)) {
+            alert('확장자명을 확인해주세요.');
+            $("#image").val(""); //파일 초기화
+            return false;
+          }
+          return true;
+        }
+
+        function preview(arr) {
+          arr.forEach(function(f) {
+            //파일명이 길면 파일명...으로 처리
+            /*
+            var fileName = f.name;
+            if(fileName.length > 10){
+                fileName = fileName.substring(0,7)+"...";
+            }
+            */
+
+            //div에 이미지 추가
+            var str = '<li class="ui-state-default">';
+            //str += '<span>'+fileName+'</span><br>';
+
+            //이미지 파일 미리보기
+            if (f.type.match('image.*')) {
+              //파일을 읽기 위한 FileReader객체 생성
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                str += '<img src="' + e.target.result + '" title="' + f.name + '" width=80 height=80>';
+                str += '<span class="delBtn" onclick="delImg(this)">x</span>';
+                str += '</li>';
+                $(str).appendTo('#Preview');
+              }
+              reader.readAsDataURL(f);
+            } else {
+              //이미지 파일 아닐 경우 대체 이미지
+              /*
+              str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=60 height=60 />';
+              $(str).appendTo('#Preview');
+              */
+            }
+          })
+        }
+      })
+    })
+
+    //이미지 삭제
+    function delImg(_this) {
+      $(_this).parent('li').remove()
+    }
+  </script>
+
+</body>
+
+</html>

@@ -31,7 +31,11 @@
               <div class="p-1 col-3">
                 <h5>
                   <strong>
-                    원료 관리
+                    <% if(ingredient.id) { %>
+                    <%= __('admin.menu.제품관리.원료.수정') %>
+                    <% }else{ %>
+                    <%= __('admin.menu.제품관리.원료.추가') %>
+                    <% } %>
                   </strong>
                 </h5>
               </div>
@@ -42,37 +46,81 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
               <div class="widget-content widget-content-area br-20 p-4">
-                <form method="post">
+                <form id="ingredient" method="post">
                   <!-- sort -->
                   <div class="row">
 
-                    <div class="col-4"><label for="type" style="margin-top: 8px;">종류</label></div>
-                    <div class="col-8">
-                      <input class="form-control br-15" id="type" name="type" type="text" placeholder="입력해주세요." required>
+                    <div class="d-flex mt-3">
+                      <div class="col-3"><label for="type" style="margin-top: 8px;">종류</label></div>
+                      <div class="col">
+                        <select class="form-select" id="type" name="type" type="text">
+                          <% codezip.ingredient_type.forEach((code, index)=>{ %>
+                          <% if(code==ingredient.type) { %>
+                          <option value="<%= code %>" selected>
+                            <% }else{ %>
+                          <option value="<%= code %>">
+                            <% } %>
+                            <%= __(code) %>
+                          </option>
+                          <% }) %>
+                        </select>
+                      </div>
                     </div>
-                    <div class="col-4"><label for="effect">기능</label></div>
-                    <div class="col-8">
-                      <input class="form-control br-15 mt-3" id="effect" name="effect" type="text" placeholder="입력해주세요." required>
+
+                    <div class="d-flex mt-3">
+                      <div class="col-3"><label for="effect">기능</label></div>
+                      <div class="col">
+                        <button class="form-select text-start" type="button" id="select_effects" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_effects">
+                          <% codezip.effects.ingredient.forEach((code, index)=>{ %>
+                          <li class="dropdown-item d-flex">
+                            <% if(ingredient.effects&&ingredient.effects.split(',').includes(code)) { %>
+                            <input checked class="form-check-input mx-3 ingredient_effects" name="effects" type="checkbox" id="ingredient_effects-<%= code %>" value="<%= code %>">
+                            <% }else{ %>
+                            <input class="form-check-input mx-3 ingredient_effects" name="effects" type="checkbox" id="ingredient_effects-<%= code %>" value="<%= code %>">
+                            <% } %>
+                            <label class="form-check-label flex-fill pe-3 ingredient_effects-label" for="ingredient_effects-<%= code %>">
+                              <%= __(code) %>
+                            </label>
+                          </li>
+                          <% }) %>
+                        </ul>
+                      </div>
                     </div>
-                    <div class="col-4"><label for="material_name">원료명</label></div>
-                    <div class="col-8">
-                      <input class="form-control br-15 mt-3" id="material_name" name="material_name" type="text" placeholder="입력해주세요." required>
+
+                    <div class="d-flex mt-3">
+                      <div class="col-3"><label for="material_name">원료명</label></div>
+                      <div class="col">
+                        <input class="form-control" id="material_name" name="material_name" type="text" value="<%= ingredient.material_name %>">
+                      </div>
                     </div>
-                    <div class="col-4"><label for="ingredient_name">성분명</label></div>
-                    <div class="col-8">
-                      <input class="form-control br-15 mt-3" id="ingredient_name" name="ingredient_name" type="text" placeholder="입력해주세요." required>
+
+                    <div class="d-flex mt-3">
+                      <div class="col-3"><label for="ingredient_name">성분명</label></div>
+                      <div class="col">
+                        <input class="form-control" id="ingredient_name" name="ingredient_name" type="text" value="<%= ingredient.ingredient_name %>">
+                      </div>
                     </div>
-                    <div class="col-4"><label for="feature">특징</label></div>
-                    <div class="col-8">
-                      <input class="form-control br-15 mt-3" id="feature" name="feature" type="text" placeholder="입력해주세요." required>
+
+                    <div class="d-flex mt-3">
+                      <div class="col-3"><label for="feature">특징</label></div>
+                      <div class="col">
+                        <input class="form-control" id="feature" name="feature" type="text" value="<%= ingredient.feature %>">
+                      </div>
                     </div>
                   </div>
 
                   <div class="text-center mt-4">
                     <button class="btn btn-lg px-5">
-                      수정/추가
+                      <% if(ingredient.id) { %>
+                      <%= __('btn.수정') %>
+                      <% }else{ %>
+                      <%= __('btn.추가') %>
+                      <% } %>
                     </button>
                   </div>
+
                 </form>
               </div>
             </div>
@@ -83,13 +131,44 @@
       </div>
 
     </div>
-  </div>
-  </div>
-  <!--  END CONTENT AREA  -->
-
+    <!--  END CONTENT AREA  -->
 
   </div>
   <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <%
+  let ingredient_effects_code2text = {};
+  codezip.effects.ingredient.forEach((code, index)=>{
+    ingredient_effects_code2text[code] = __(code);
+  })
+  %>
+  <script>
+    const ingredient_effects_code2text = JSON.parse('<%- JSON.stringify(ingredient_effects_code2text) %>');
+  </script>
+  <script>
+    function show_select_effects(effects_csv) {
+      let effects_text_list = [];
+      effects_csv.split(',').forEach((code, index) => {
+        effects_text_list.push(ingredient_effects_code2text[code]);
+      })
+      select_effects.innerText = effects_text_list.join(', ')
+    }
+    document.querySelectorAll('.ingredient_effects').forEach(el => {
+      el.addEventListener("change", event => {
+        let formdata = new FormData(ingredient);
+        let effects_csv = formdata.getAll('effects').join(',');
+        show_select_effects(effects_csv);
+      })
+    })
+  </script>
+  <script>
+    window.addEventListener('load', event => {
+      show_select_effects('<%= ingredient.effects %>')
+    })
+  </script>
+
 
 </body>
 

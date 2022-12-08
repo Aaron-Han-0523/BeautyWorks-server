@@ -236,18 +236,19 @@ exports.delete = async (req, res, next) => {
     const base = req.baseUrl.split('/')[1];
 
     let community_result = communitiesService
-        .delete(id)
-
+        .hide({ id: id })
 
     let reply_result = repliesService
-        .delete({ communities_id: id })
-    // console.log("delete result :", result)
+        .hide({ communities_id: id })
 
     Promise.all([community_result, reply_result]).then(result => {
+        console.log("community delete result :", result)
         if (result[0] == 1) {
             if (base == "users") {
                 return res.redirect(codezip.url.users.community.main);
-            } else {
+            } else if (base == "admin") {
+                return res.redirect("back");
+            } else if (req.api) {
                 return res.status(200).end();
             }
         }
@@ -259,7 +260,7 @@ exports.delete = async (req, res, next) => {
         }
     }).catch(err => {
         console.error(err);
-        res.ststus(500).send(err)
+        res.status(500).send(err)
     });
 }
 
@@ -304,7 +305,11 @@ exports.recovery = async (req, res, next) => {
         .show(condition)
         .then((result) => {
             if (result == 1) {
-                res.status(200).end();
+                if (req.api) {
+                    res.status(200).end();
+                } else {
+                    res.redirect('back');
+                }
             }
             else if (result == 0) {
                 res.status(400).send("Nothing to delete data.");

@@ -1,3 +1,4 @@
+const codezip = require('../codezip');
 const ingredientsService = require('../services/ingredients');
 const { Op } = require('sequelize');
 
@@ -14,7 +15,11 @@ exports.add = async (req, res, next) => {
     await ingredientsService
         .create(body)
         .then((created_obj) => {
-            res.status(201).json(created_obj.id);
+            if (req.api) {
+                res.status(201).json(created_obj.id);
+            } else {
+                res.redirect(codezip.url.admin.ingredient.main);
+            }
         })
         .catch((err) => {
             console.log("fail to create ingredients");
@@ -40,11 +45,15 @@ exports.edit = async (req, res, next) => {
     await ingredientsService
         .update(body, condition)
         .then((result) => {
-            if (result == 1) {
-                res.status(200).end();
-            }
-            else if (result == 0) {
-                res.status(400).send("Nothing to update data.");
+            if (req.api) {
+                if (result == 1) {
+                    res.status(200).end();
+                }
+                else if (result == 0) {
+                    res.status(400).send("Nothing to update data.");
+                }
+            } else {
+                res.redirect(codezip.url.admin.ingredient.main);
             }
         })
         .catch((err) => {
@@ -186,9 +195,10 @@ exports.detail = async (req, res, next) => {
     const base = req.baseUrl.split('/')[1];
 
     let condition = {};
-    if (base != 'admin') {
-        condition.users_id = user.id;
-        condition.delete_date = null;
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end();
+        // condition.users_id = user.id;
+        // condition.delete_date = null;
     }
     condition.id = req.params.id;
 

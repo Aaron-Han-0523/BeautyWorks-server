@@ -6,6 +6,35 @@ const myUtils = require('../utils/myUtils');
 const projectsController = require('../controllers/projects');
 const projectsService = require('../services/projects');
 
+router
+    .use(myUtils.upload("projects").fields([{ name: 'file_paths' }, { name: 'image_paths' }]), (req, res, next) => {
+        console.log(req.files);
+        const files = req.files;
+
+        if (files) {
+            let paths = [];
+            files.forEach((file, index) => {
+                paths.push('/' + file.path)
+            })
+            req.body["image_paths"] = paths.join(',');
+        }
+
+
+        next();
+    })
+
+router
+    .use((req, res, next) => {
+        for (let key in req.body) {
+            if (!req.body[key]) {
+                req.body[key] = null;
+            }
+        }
+
+        console.log("project request body :", req.body)
+        next();
+    })
+
 /* GET projects listing. */
 // 추가
 // router

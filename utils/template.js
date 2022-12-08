@@ -21,7 +21,7 @@ module.exports.Service = class {
 
     update = async (obj, condition) => {
         if (!condition || Object.keys(condition).length == 0) {
-            throw new Error("Missing where attribute in the options parameter");
+            console.warn("Missing where attribute in the options parameter");
         }
         return await this.model
             .update(Object.assign({
@@ -33,7 +33,7 @@ module.exports.Service = class {
                 console.log("updated row count :", result);
 
                 if (result == 0) console.log("Nothing to update data.");
-                else if (result != 1) throw new Error("Use to update only one date!");
+                else if (result != 1) console.warn("Use to update only one date!");
                 return result;
             })
             .catch((err) => {
@@ -101,7 +101,7 @@ module.exports.Service = class {
                 console.log("deleteed row count :", result);
 
                 if (result == 0) console.log("Nothing to delete data.");
-                else if (result != 1) throw new Error("Use to delete only one date!");
+                else if (result != 1) console.warn("Use to delete only one date!");
                 return result;
             })
             .catch((err) => {
@@ -120,7 +120,7 @@ module.exports.Service = class {
                 console.log("hide row count :", result);
 
                 if (result == 0) console.log("Nothing to hide data.");
-                else if (result != 1) throw new Error("Use to hide only one date!");
+                else if (result != 1) console.warn("Use to hide only one date!");
                 return result;
             })
             .catch((err) => {
@@ -139,7 +139,7 @@ module.exports.Service = class {
                 console.log("show row count :", result);
 
                 if (result == 0) console.log("Nothing to show data.");
-                else if (result != 1) throw new Error("Use to show only one date!");
+                else if (result != 1) console.warn("Use to show only one date!");
                 return result;
             })
             .catch((err) => {
@@ -189,6 +189,7 @@ module.exports.Service = class {
                 where: condition
             })
             .then((result) => {
+                if (!result) return 0;
                 return result;
             })
             .catch((err) => {

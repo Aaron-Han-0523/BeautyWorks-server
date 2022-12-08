@@ -66,12 +66,12 @@ let storage = (dir_path) => multer.diskStorage({
   }, filename: function (req, file, callback) {
     let extension = path.extname(file.originalname);
     let basename = path.basename(file.originalname, extension);
-    let encoding = ""
+    let encoding = []
     for (let i = 0; i < basename.length; i++) {
-      encoding += basename.codePointAt(i).toString(16) + '_';
+      encoding.push(basename.codePointAt(i).toString(36));
     }
     encoding = encoding.slice(0, 200);
-    callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + encoding + extension);
+    callback(null, req.res.locals.user.id + '-' + Date.now() + "-" + encoding.join('_') + extension);
   },
 });
 

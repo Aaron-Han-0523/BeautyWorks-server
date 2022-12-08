@@ -31,7 +31,7 @@
               <div class="p-1 col-4 ">
                 <h5>
                   <strong>
-                    <% if(formula.id) { %>
+                    <% if(package.id) { %>
                     <%= __('admin.menu.제품관리.내용물.수정') %>
                     <% }else{ %>
                     <%= __('admin.menu.제품관리.내용물.추가') %>
@@ -46,86 +46,65 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
               <div class="widget-content widget-content-area br-20 p-4">
-                <form id="formula" method="post" enctype="multipart/form-data">
+                <form id="package" method="post" enctype="multipart/form-data">
                   <!-- sort -->
                   <div class="row">
+
                     <div class="d-flex mt-3">
-                      <label class="col-3" for="top_or_new"><%= __('formulas.top_or_new') %></label>
-                      <select name="top_or_new" id="top_or_new" class="form-select" required>
-                        <% for(let i=0; i< 2; i++) { %>
-                        <% if(i==formula.top_or_new) { %>
-                        <option selected value="<%= i %>"><%= __('top_or_new.'+i) %></option>
+                      <label class="col-3" for="packaging_name"><%= __('packages.packaging_name') %></label>
+                      <input class=" form-control" id="packaging_name" name="packaging_name" type="text" value="<%= package.packaging_name %>" required>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                      <label class="col-3" for="packaging_type"><%= __('packages.packaging_type') %></label>
+                      <select name="packaging_type" id="packaging_type" class="form-select" required>
+                        <% for(let i=0; i< codezip.numberOfPackaging.length; i++) { %>
+                        <% if(i==package.packaging_type) { %>
+                        <option selected value="<%= i %>"><%= __('packaging'+i) %></option>
                         <% }else{ %>
-                        <option value="<%= i %>"><%= __('top_or_new.'+i) %></option>
+                        <option value="<%= i %>"><%= __('packaging'+i) %></option>
                         <% } %>
                         <% } %>
                       </select>
                     </div>
 
                     <div class="d-flex mt-3">
-                      <label class="col-3" for="product_name"><%= __('formulas.product_name') %></label>
-                      <input class=" form-control" id="product_name" name="product_name" type="text" value="<%= formula.product_name %>" required>
-                    </div>
-                    <div class="d-flex mt-3">
-                      <label class="col-3" for="award"><%= __('formulas.award') %></label>
-                      <input class=" form-control" id="award" name="award" type="text" value="<%= formula.award %>">
-                    </div>
-                    <div class="d-flex mt-3">
-                      <label class="col-3" for="category1"><%= __('formulas.category1') %></label>
+                      <label class="col-3" for="category1"><%= __('packages.category1') %></label>
                       <select name="category1" id="category1" class="form-select" required>
-                        <% for(let i=0; i< codezip.numberOfProduct.category1; i++) { %>
-                        <% if(formula.category1==i){ %>
-                        <option selected value="<%= i %>">
-                          <% }else{ %>
-                        <option value="<%= i %>">
-                          <% } %>
-                          <%= __('product'+i) %>
-                        </option>
-                        <% } %>
                       </select>
                     </div>
-                    <div class="d-flex mt-3">
-                      <label class="col-3" for="category2"><%= __('formulas.category2') %></label>
-                      <select name="category2" id="category2" class="form-select" required>
-                        <option value="">선택</option>
-                        <option value="test">test</option>
 
+                    <div class="d-flex mt-3">
+                      <label class="col-3" for="category2"><%= __('packages.category2') %></label>
+                      <select name="category2" id="category2" class="form-select" required>
                       </select>
                     </div>
+
                     <div class="d-flex mt-3">
-                      <label class="col-3" for="efficacy"><%= __('formulas.efficacy') %></label>
-                      <textarea rows="5" maxlength="100" class="form-control" id="efficacy" name="efficacy"><%= formula.efficacy %></textarea>
+                      <label class="col-3" for="category3"><%= __('packages.category3') %></label>
+                      <select name="category3" id="category3" class="form-select" required>
+                      </select>
                     </div>
+
                     <div class="d-flex mt-3">
-                      <label class="col-3" for="ingredients"><%= __('formulas.ingredients') %></label>
-                      <textarea rows="5" maxlength="100" class="form-control" id="ingredients" name="ingredients"><%= formula.ingredients %></textarea>
+                      <label class="col-3" for="capacity"><%= __('packages.capacity') %></label>
+                      <input class="form-control" id="capacity" name="capacity" type="text" value="<%= package.capacity %>">
                     </div>
+
                     <div class="d-flex mt-3">
-                      <label class="col-3" for="viscosity"><%= __('formulas.viscosity') %></label>
-                      <input class="form-control" id="viscosity" name="viscosity" type="number" value="<%= formula.viscosity %>">
-                    </div>
-                    <div class="d-flex mt-3">
-                      <label class="col-3" for="applies"><%= __('formulas.applies') %></label>
-                      <textarea rows="5" maxlength="100" class="form-control" id="applies" name="applies"><%= formula.applies %></textarea>
-                    </div>
-                    <div class="d-flex mt-3">
-                      <label class="col-3" for="color"><%= __('formulas.color') %></label>
-                      <input class="form-control" id="color" name="color" type="text" value="<%= formula.color %>">
-                    </div>
-                    <div class="d-flex mt-3">
-                      <label class="col-3" for="fragrance"><%= __('formulas.fragrance') %></label>
-                      <input class="form-control" id="fragrance" name="fragrance" type="text" value="<%= formula.fragrance %>">
+                      <label class="col-3" for="use"><%= __('packages.use') %></label>
+                      <input class="form-control" id="use" name="use" type="text" value="<%= package.use %>">
                     </div>
 
                     <div class="d-flex mt-3" style="min-height: 90px;">
-                      <label class="col-3"><%= __('formulas.image_paths') %></label>
+                      <label class="col-3"><%= __('packages.image_paths') %></label>
 
                       <div class="inputImage">
-                        <input id="image" name="images" type="file" accept=".jpg, .png, .gif" style="display: none;" multiple>
+                        <input id="image" name="images" type="file" accept=".jpg, .png, .gif" style="display: none;">
 
                         <ul id="Preview" class="d-flex sortable">
-                          <% if(formula.image_paths) { %>
-                          <% formula.image_paths.split(',').forEach((item, index)=>{ %>
+                          <% if(package.image_paths) { %>
+                          <% package.image_paths.split(',').forEach((item, index)=>{ %>
                           <li class="ui-state-default mx-1 position-relative">
                             <img src="<%= item %>" width=80 height=80>
                           </li>
@@ -134,6 +113,7 @@
                         </ul>
                       </div>
                     </div>
+
                     <div class="text-center mt-3">
                       <label for="image" class="addImgBtn btn px-3"><%= __('btn.파일등록') %></label>
                     </div>
@@ -142,7 +122,7 @@
 
                   <div class="text-center mt-4">
                     <button class="btn btn-lg px-5">
-                      <% if(formula.id) { %>
+                      <% if(package.id) { %>
                       <%= __('btn.수정') %>
                       <% }else{ %>
                       <%= __('btn.추가') %>
@@ -265,25 +245,51 @@
     */
   </script>
   <div>
-    <% let category1_name_list=[]; %>
-    <% let category2_name_list={} %>
-    <% for (let i=0; i < codezip.numberOfProduct.category1; i++) { %>
-    <% category1_name_list.push(__('product'+i)); %>
-    <% category2_name_list[i]={}; %>
-    <% for (let j=0; j < codezip.numberOfProduct.category2[i]; j++) { %>
-    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
-    <% } } %>
+    <%
+    let category1_name_list={};
+    let category2_name_list={};
+    let category3_name_list={};
+    for (let i=0; i < codezip.numberOfPackaging.length; i++) {
+      let info = codezip.numberOfPackaging[i];
+
+      category1_name_list[i]=[];
+      category2_name_list[i]=[];
+      category3_name_list[i]=[];
+
+      for (let j=0; j < info.category1; j++) { 
+        category1_name_list[i].push(__('packaging'+i+'.category1.'+j));
+      }
+      for (let j=0; j < info.category2; j++) { 
+        category2_name_list[i].push(__('packaging'+i+'.category2.'+j));
+      }
+      for (let j=0; j < info.category3; j++) { 
+        category3_name_list[i].push(__('packaging'+i+'.category3.'+j));
+      }
+    }
+    %>
   </div>
   <script>
-    const numberOfProduct = JSON.parse('<%- JSON.stringify(codezip.numberOfProduct) %>');
+    const numberOfPackaging = JSON.parse('<%- JSON.stringify(codezip.numberOfPackaging) %>');
     const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
     const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
+    const category3_name_list = JSON.parse('<%- JSON.stringify(category3_name_list) %>');
   </script>
   <script>
+    function load_category1_menu(value) {
+      let temp_html = "";
+      let n = numberOfPackaging[value].category1;
+      for (let i = 0; i < n; i++) {
+        temp_html += `<option value="${i}">
+                          ${category1_name_list[value][i]}
+        </option>`
+      }
+      category1.innerHTML = temp_html;
+    }
+
     function load_category2_menu(value) {
       let temp_html = "";
-      let category2_n = numberOfProduct.category2[value];
-      for (let i = 0; i < category2_n; i++) {
+      let n = numberOfPackaging[value].category2;
+      for (let i = 0; i < n; i++) {
         temp_html += `<option value="${i}">
                           ${category2_name_list[value][i]}
         </option>`
@@ -291,14 +297,29 @@
       category2.innerHTML = temp_html;
     }
 
-    formula.category1.addEventListener('change', e => {
+    function load_category3_menu(value) {
+      let temp_html = "";
+      let n = numberOfPackaging[value].category3;
+      for (let i = 0; i < n; i++) {
+        temp_html += `<option value="${i}">
+                          ${category3_name_list[value][i]}
+        </option>`
+      }
+      category3.innerHTML = temp_html;
+    }
+
+    package.packaging_type.addEventListener('change', e => {
       let value = +category1.value;
       load_category2_menu(value);
     })
 
     window.addEventListener('load', e => {
-      load_category2_menu('<%= formula.category1 %>' || 0);
-      category2.value = '<%= formula.category2 %>' || 0;
+      load_category1_menu('<%= package.packaging_type %>' || 0);
+      load_category2_menu('<%= package.packaging_type %>' || 0);
+      load_category3_menu('<%= package.packaging_type %>' || 0);
+      category1.value = '<%= package.category1 %>' || 0;
+      category2.value = '<%= package.category2 %>' || 0;
+      category3.value = '<%= package.category3 %>' || 0;
     })
   </script>
 </body>

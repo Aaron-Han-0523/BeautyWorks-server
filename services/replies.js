@@ -117,6 +117,20 @@ service.update = async (obj) => {
         })
 }
 
-
+service.hide = async (condition) => {
+    return await service.model
+        .update({
+            delete_date: new Date()
+        }, {
+            where: condition
+        })
+        .then((result) => {
+            console.log("hide row count :", result);
+            return result;
+        })
+        .catch((err) => {
+            throw err;
+        })
+}
 
 module.exports = service;
