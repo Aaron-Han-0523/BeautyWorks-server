@@ -48,7 +48,8 @@ app.set('view engine', 'ejs');
 // print the request log on console
 // logger 인수 dev, combined, common, short, tiny
 if (env == 'development') app.use(logger('dev'));
-else app.use(logger('combined'));
+// else app.use(logger(':req[X-Real-IP] - :remote-user - [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :total-time[digits]ms'));
+// app.use(logger(':req[X-Real-IP] - :remote-user - [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time ms'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -64,7 +65,7 @@ app.use((req, res, next) => {
   res.locals.array_i18n = myUtils.array_i18n;
   res.locals.make_pagination_by_href = myUtils.make_pagination_by_href;
   res.locals.make_pagination_by_func = myUtils.make_pagination_by_func;
-  res.locals.nameOrderInKorean = ['ko','ja'];
+  res.locals.nameOrderInKorean = ['ko', 'ja'];
   return next();
 })
 
@@ -110,6 +111,9 @@ app.get('/ko', (req, res) => {
 // 초기화
 app.use((req, res, next) => {
   res.locals.user = false;
+  if (env != "development") {
+    req.ip = req.headers.ip;
+  }
   next();
 })
 

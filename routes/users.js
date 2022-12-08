@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var logger = require('morgan');
 
 const communityRouter = require('./community');
 const newsRouter = require('./news');
@@ -95,6 +96,22 @@ router
       next();
     }
   })
+
+logger.token("remote-user", (req, res) => {
+  if (res.locals.user) {
+    return res.locals.user.email;
+  }
+})
+
+let logger_setting = ':req[X-Real-IP] :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":user-agent" :response-time ms';
+
+let logger_option = {
+  skip: function (req, res) { return res.statusCode == 304 }
+}
+
+if (process.env == 'development') router.use(logger(logger_setting, logger_option));
+else router.use(logger(logger_setting));
+
 
 // 사용자 접속해제
 router.get('/signOut', usersController.logout);

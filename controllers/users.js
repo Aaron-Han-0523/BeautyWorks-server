@@ -229,7 +229,7 @@ exports.main = async (req, res) => {
 
     Promise.all([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community])
         .then(([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community]) => {
-            console.log(community);
+            // console.log(community);
             res.render('dashboard/dashboard', {
                 page: page,
                 project: project.rows,
