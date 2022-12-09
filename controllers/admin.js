@@ -139,7 +139,7 @@ exports.recovery = async (req, res, next) => {
 exports.edit = async (req, res, next) => {
     console.log("users edit")
     const id = req.params.id;
-    
+
     let body = req.body;
     // if (!body.email) {
     //     body.email = (body.emailId + '@' + body.emailDomain).toLowerCase();

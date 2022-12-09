@@ -132,4 +132,6 @@ router.use('/api', (req, res, next) => {
   next();
 }, router)
 
+router.get('/', (req, res, next) => res.redirect(codezip.url.admin.login))
+
 module.exports = router;

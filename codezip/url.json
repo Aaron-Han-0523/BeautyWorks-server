@@ -78,6 +78,8 @@
         }
     },
     "admin": {
+        "login":"/admin/login",
+        "logout":"/admin/logout",
         "api": {
             "users": "/admin/api/users",
             "temp_projects": "/admin/api/projects/temp_projects",
