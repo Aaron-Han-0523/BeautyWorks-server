@@ -78,21 +78,19 @@ router
 router
   .use(async (req, res, next) => {
 
-    if (!res.locals.user) {
-      if (!req.session.user) {
-        if (process.env.NODE_ENV == "development") {
-          console.log("env :", process.env.NODE_ENV);
-          req.session.user = await usersService.getUser({ email: "dev@email.com" });
-        }
-        else return res.redirect('/users/signIn');
+    if (!req.session.user) {
+      if (process.env.NODE_ENV == "development") {
+        console.log("env :", process.env.NODE_ENV);
+        req.session.user = await usersService.getUser({ email: "dev@email.com" });
+        req.session.save(() => {
+          res.locals.user = req.session.user;
+          // console.log("locals.user", res.locals.user)
+          next();
+        })
       }
-
-      req.session.save(() => {
-        res.locals.user = req.session.user;
-        // console.log("locals.user", res.locals.user)
-        next();
-      })
+      else return res.redirect('/users/signIn');
     } else {
+      res.locals.user = await usersService.readOne({ id: req.session.user.id });
       next();
     }
   })

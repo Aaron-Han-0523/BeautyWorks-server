@@ -121,9 +121,9 @@ exports.add = async (req, res, next) => {
         if (req.api) {
             return res.status(201).json(result.id);
         } else if (base == "users") {
-            return res.status(201).redirect('/users/signIn');
+            return res.status(201).redirect(codezip.url.users.signIn);
         } else if (base == "admin") {
-            return res.status(201).redirect('admin/users');
+            return res.status(201).redirect(codezip.url.admin.users.main);
         }
     }).catch((e) => {
         console.error(e);
@@ -148,15 +148,15 @@ exports.edit = async (req, res, next) => {
         if (file) body[file.fieldname] = '/' + file.path;
     }
 
-    usersService
+    return usersService
         .update(body, { id: user.id })
         .then(result => {
             console.log("update result :", result);
-            return res.end()
+            res.redirect('back')
         })
         .catch(err => {
             console.error(err);
-            return res.status(500).send();
+            res.status(500).send();
         });
 }
 

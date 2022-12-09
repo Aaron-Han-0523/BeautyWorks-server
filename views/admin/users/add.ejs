@@ -2,18 +2,24 @@
 <html lang="ko">
 
 <head>
-  <%- include ("../partials/header.ejs") %>
+  <%- include ("../partials/admin-header.ejs") %>
 
   <% const country_codes=codezip.country.codes; %>
   <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
 </head>
 
-<body class="form" style="background-color: var(--BW-form-color);">
-
+<body>
   <%- include ("../partials/loader.ejs") %>
-  <%- include ("../partials/client-nav.ejs") %>
 
-  <div class="d-flex">
+  <!--  BEGIN CONTENT AREA  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/admin-sidebar.ejs") %>
+
+    <%- include ("../partials/admin-nav.ejs") %>
 
     <div class="container mx-auto">
 
@@ -23,8 +29,9 @@
           <div class="row mt-5 pt-5 pb-3">
             <div class="d-flex justify-content-between">
               <div>
-                <h2><strong>
-                    <%= __('users.signUp.title') %>
+                <h2>
+                  <strong>
+                    <%= __("admin.menu.회원관리.개인정보.추가") %>
                   </strong>
                 </h2>
               </div>
@@ -128,47 +135,29 @@
                       </div>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('placeholder.mobilePhone') %>" required  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('placeholder.mobilePhone') %>" required>
                     </div>
                   </div>
 
 
                   <!-- Email 입력 -->
                   <div class="row mb-4 align-items-center">
-                    <div class="col col-3">
+                    <div class="col-3">
                       <h6>
                         <%= __('users.signUp.InputLabel.Email') %><span style="color: red;">*</span>
                       </h6>
                     </div>
-                    <div class="col col-7 d-flex align-items-baseline">
-                      <input type="text" class="form-control" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" required  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                    <div class="col-7 d-flex align-items-baseline">
+                      <input type="text" class="form-control email" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" required>
                       <h6 class="mx-3">@</h6>
-                      <input type="text" class="form-control" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" required  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                      <input type="text" class="form-control email" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" required>
                     </div>
                     <div class="col">
                       <button class="w-100 btn btn-outline-primary" type="button" onclick="send_validation_email();">
-                        <%= __('users.signUp.btn.emailCertification') %>
+                        <%= __('btn.duplicateCheck') %>
                       </button>
                     </div>
                   </div>
-
-                  <!-- Email 검증 -->
-                  <div class="row mb-4 align-items-center">
-                    <div class="col col-3">
-                      <h6>
-                        <%= __('users.signUp.InputLabel.CertificationNumber') %><span style="color: red;">*</span>
-                      </h6>
-                    </div>
-                    <div class="col col-7">
-                      <input type="text" class="form-control" name="emailConfirmNumber" id="emailConfirmNumber" placeholder="<%= __('placeholder.vertificationCode') %>" required>
-                    </div>
-                    <div class="col">
-                      <h6 id="emailConfirmResult" class="text-muted">
-                        <%= __('users.signUp.ConfirmResultSuccess') %>
-                      </h6>
-                    </div>
-                  </div>
-
 
                   <!-- 비밀번호 입력 -->
                   <div class="row mb-4 align-items-center">
@@ -178,7 +167,7 @@
                       </h6>
                     </div>
                     <div class="col col-7">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="<%= __('plzInputText') %>" required  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="<%= __('plzInputText') %>" required>
                     </div>
                   </div>
 
@@ -191,7 +180,7 @@
                       </h6>
                     </div>
                     <div class="col col-7">
-                      <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="<%= __('plzInputText') %>" required  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                      <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="<%= __('plzInputText') %>" required>
                     </div>
                     <div class="col">
                       <h6 id="passwordConfirmResult" class="text-muted">
@@ -301,7 +290,7 @@
                   <hr class="my-5">
 
                   <div class="d-flex mt-5 justify-content-center">
-                    <button class="btn btn-outline-primary col-3 mx-3 p-3 br-15">
+                    <button class="btn col-3 mx-3 p-3 br-15">
                       <%= __('users.signUp.btn.Join') %>
                     </button>
                     <!-- <button class="btn col-3 mx-3 p-3 br-15" type="button"
@@ -352,8 +341,8 @@
         return;
       }
 
-      const url = '/users/validationEmail';
-      const certificationNumber = await fetch(url, {
+      const url = '<%= codezip.url.admin.users.checkEmail %>';
+      await fetch(url, {
         method: "post",
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -363,19 +352,18 @@
         })
       }).then(res => {
         if (res.ok) {
-          return res.json();
+          CertificationNumber.value = true;
+          alert("<%= __('users.signUp.msg.emailAllow') %>")
         } else if (res.status == 400) {
           alert("<%= __('users.signUp.msg.emailExist') %>")
         }
       })
-      CertificationNumber.value = certificationNumber;
-      printEmailConfirm()
     }
 
     function checkEmailConfirm() {
-      if (CertificationNumber.value)
-        return CertificationNumber.value == emailConfirmNumber.value;
-      else return false;
+      if (CertificationNumber.value) {
+        return true;
+      } else return false;
     }
 
     function printEmailConfirm() {
@@ -387,10 +375,6 @@
         emailConfirmResult.classList.add("text-muted");
       }
     }
-
-    document.getElementById('emailConfirmNumber').addEventListener('keyup', (event) => {
-      printEmailConfirm();
-    });
 
     function checkPasswordConfirm() {
       return passwordConfirm.value == password.value;
@@ -437,7 +421,7 @@
       let body = {};
       for ([name, value] of new FormData(join)) body[name] = value;
 
-      const url = "/users/signUp";
+      const url = "<%= codezip.url.admin.users.add %>";
       fetch(url, {
         method: "post",
         headers: {
@@ -453,6 +437,13 @@
         } else return alert("<%= __('users.signUp.msg.FailJoin') %>");
       })
     }
+  </script>
+  <script>
+    document.querySelectorAll(".email").forEach(el => {
+      el.addEventListener("input", event => {
+        CertificationNumber.value = "";
+      })
+    })
   </script>
   <!-- END GLOBAL MANDATORY SCRIPTS -->
   <input hidden id="CertificationNumber">

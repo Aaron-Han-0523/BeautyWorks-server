@@ -6,9 +6,6 @@
 
   <% const country_codes=codezip.country.codes; %>
   <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.js"></script>
 </head>
 
 <body>
@@ -32,8 +29,9 @@
           <div class="row mt-5 pt-5 pb-3">
             <div class="d-flex justify-content-between">
               <div>
-                <h2><strong>
-                    회원 개인정보
+                <h2>
+                  <strong>
+                    <%= __("admin.menu.회원관리.개인정보.수정") %>
                   </strong>
                 </h2>
               </div>
@@ -50,10 +48,10 @@
             <div class="card-body">
 
               <div class="row p-5">
-                <form method="post" id="join">
+                <form method="post" id="userAccount" enctype="multipart/form-data">
 
                   <!-- Profile Image -->
-                  <div class="row">
+                  <div class="row mb-4">
                     <div class="col-3">
                       <h6>
                         <%= __('users.myAccount.label.ProfileImage') %>
@@ -62,20 +60,20 @@
                     <div class="col">
                       <div class="row">
                         <div class="col-4 pe-1">
-                          <img id="profileImage" class="br-10 w-100" src="">
+                          <img id="profileImage" class="br-10 w-100" src="<%= member.profile_image_path %>">
                         </div>
                       </div>
                       <div class="mt-2 row">
                         <div class="col-4 pe-1 py-2">
                           <label class="m-0 p-0 w-100 h-100" for="profile_image_path">
-                            <div class="btn btn-outline-primary w-100">
+                            <div class="btn w-100">
                               <%= __('users.myAccount.btn.UploadImage') %>
                             </div>
                           </label>
                           <input type="file" name="profile_image_path" id="profile_image_path" hidden>
                         </div>
                         <div class="col-4 px-1 py-2">
-                          <button type="button" class="btn btn-outline-primary w-100" onclick="removeImage();">
+                          <button type="button" class="btn w-100" onclick="removeImage();">
                             <%= __('users.myAccount.btn.RemoveImage') %>
                           </button>
                         </div>
@@ -84,12 +82,18 @@
                   </div>
 
                   <!-- 권한 설정 -->
-                  <div class="d-flex mt-3" style="position: absolute; top: 64px; right: 80px;"><label for="" style="margin-right: 5px; line-height: 40.5px;">권한 설정</label>
-                    <select name="" id="" class="form-select" style="width: 200px;">
-                      <option value="">선택</option>
-                      <option value="user">일반회원</option>
-                      <option value="admin">관리자</option>
-
+                  <div class="d-flex mt-3" style="position: absolute; top: 64px; right: 80px;">
+                    <h6 style="margin-right: 5px; line-height: 40.5px;">
+                      <%= __('admin.users.permission') %>
+                    </h6>
+                    <select name="user_type" id="user_type" class="form-select ms-3" style="width: 200px;">
+                      <% codezip.user_type.forEach((code, index)=>{ %>
+                      <% if(member.user_type==code){ %>
+                      <option selected value="<%= code %>"><%= __("user_type."+code) %></option>
+                      <% }else{ %>
+                      <option value="<%= code %>"><%= __("user_type."+code) %></option>
+                      <% } %>
+                      <% }) %>
                     </select>
                   </div>
 
@@ -102,9 +106,9 @@
                     </div>
                     <div class="col col">
                       <div class="dropdown">
-                        <input hidden name="country" id="country">
+                        <input hidden name="country" id="country" value="<%= member.country %>">
                         <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" aria-expanded="false">
-                          <%= __('plzSelectText') %>
+                          <%- `<img class="me-2" src="/images/flag/${member.country}.png">${__(member.country)}` %>
                         </button>
                         <ul class="dropdown-menu scrollable-menu w-100" aria-labelledby="select_country">
                           <% for(let i=0; i< country_codes.length; i++) { %>
@@ -128,9 +132,9 @@
                       </h6>
                     </div>
                     <div class="col col-7 d-flex align-items-baseline">
-                      <input type="text" class="form-control" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="text" class="form-control" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" disabled value="<%= member.email.split('@')[0] %>">
                       <h6 class="mx-3">@</h6>
-                      <input type="text" class="form-control" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="text" class="form-control" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" disabled value="<%= member.email.split('@')[1] %>">
                     </div>
                   </div>
 
@@ -143,7 +147,7 @@
                       </h6>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="first_name" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="text" class="form-control" name="first_name" placeholder="<%= __('plzInputText') %>" required value="<%= member.first_name %>">
                     </div>
                   </div>
                   <div class="row mb-4 align-items-center">
@@ -154,7 +158,7 @@
                       </h6>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="last_name" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="text" class="form-control" name="last_name" placeholder="<%= __('plzInputText') %>" required value="<%= member.last_name %>">
                     </div>
                   </div>
 
@@ -166,7 +170,7 @@
                       </h6>
                     </div>
                     <div class="col col-7">
-                      <input type="text" class="form-control" placeholder="<%= __('plzInputText') %>">
+                      <input type="text" class="form-control" name="company_name" placeholder="<%= __('plzInputText') %>" value="<%= member.company_name %>">
                     </div>
                   </div>
 
@@ -174,14 +178,13 @@
                   <div class="row mb-4 align-items-center">
                     <div class="col col-3">
                       <h6>
-                        <%= __('users.signUp.InputLabel.Team') %> / <%=
-                                                                __('users.signUp.InputLabel.Position') %>
+                        <%= __('users.signUp.InputLabel.Team') %> / <%= __('users.signUp.InputLabel.Position') %>
                       </h6>
                     </div>
                     <div class="col d-flex align-items-baseline">
-                      <input type="text" class="form-control" name="team" placeholder="<%= __('plzInputText.team') %>">
+                      <input type="text" class="form-control" name="team" placeholder="<%= __('plzInputText.team') %>" value="<%= member.team %>">
                       <h6 class="mx-3">/</h6>
-                      <input type="text" class="form-control" name="position" placeholder="<%= __('plzInputText.position') %>">
+                      <input type="text" class="form-control" name="position" placeholder="<%= __('plzInputText.position') %>" value="<%= member.position %>">
                     </div>
                   </div>
 
@@ -194,18 +197,18 @@
                     </div>
                     <div class="col col-3">
                       <div class="dropdown">
-                        <input hidden name="country_number" id="country_number">
+                        <input hidden name="country_number" id="country_number" value="<%= member.mobile_contact.split('\)')[0] %>">
                         <button class="form-select " type="button" id="select_country_number" data-bs-toggle="dropdown" aria-expanded="false">
-                          <%= __('plzSelectText') %>
+                          <%= member.mobile_contact.split('\)')[0] %>
                         </button>
                         <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country_number">
                           <% for(let i=0; i< country_codes.length; i++) { %>
                           <li>
-                            <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
-                              <div class="col-1">
+                            <a class="dropdown-item d-flex country" href="javascript:void(0);" onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
+                              <div class="col-1 country_flag">
                                 <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
                               </div>
-                              <div class="col-2">
+                              <div class="col-2 country_code2phoneNum">
                                 <%= country_code2phoneNum[country_codes[i]] %>
                               </div>
                               <div>
@@ -218,7 +221,7 @@
                       </div>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('plzInputText.mobilePhone') %>" required>
+                      <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('placeholder.mobilePhone') %>" required value="<%= member.mobile_contact.split('\)')[1] %>">
                     </div>
                   </div>
 
@@ -231,7 +234,7 @@
                       </h6>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="logistics_address" placeholder="<%= __('plzInputText.logistics_address') %>">
+                      <input type="text" class="form-control" name="logistics_address" placeholder="<%= __('plzInputText.logistics_address') %>" value="<%= member.logistics_address %>">
                     </div>
                   </div>
 
@@ -245,7 +248,7 @@
                       </h6>
                     </div>
                     <div class="col ">
-                      <input type="text" class="form-control" name="company_address" placeholder="<%= __('plzInputText.company_address') %>">
+                      <input type="text" class="form-control" name="company_address" placeholder="<%= __('plzInputText.company_address') %>" value="<%= member.company_address %>">
                     </div>
                   </div>
 
@@ -280,10 +283,10 @@
 
                   <div class="d-flex mt-5 justify-content-center">
                     <button class="btn col-3 mx-3 p-3 br-15">
-                      저장
+                      <%= __('btn.Save') %>
                     </button>
                     <button class="btn col-3 mx-3 p-3 br-15" type="button" onclick="cancel();">
-                      <%= __('users.signUp.btn.Cancel') %>
+                      <%= __('btn.Cancel') %>
                     </button>
                   </div>
                 </form>
@@ -296,16 +299,18 @@
     </div>
 
 
-    <div class="container" style="margin-top: 30px">
+    <!-- 임시저장 프로젝트 -->
+
+    <div class="container mt-5">
       <div class="row">
         <div class="col">
-          <div class="title">
-            <h1>회원 임시 저장한 프로젝트</h1>
+          <div class="title text-center">
+            <h2><%= __("admin.menu.회원관리.개인정보.임시저장프로젝트") %></h2>
           </div>
         </div>
       </div>
 
-      <table class="table">
+      <table class="table table-hover">
         <thead class="table-header">
           <tr>
             <th scope="col">프로젝트 명</th>
@@ -315,85 +320,31 @@
             <th scope="col">타겟제품 링크</th>
             <th scope="col">타겟 내용물데이터</th>
             <th scope="col">프로젝트 생성 날짜</th>
-            <th scope="col">삭제</th>
+            <th scope="col"><%= __('table.head.삭제/복구') %></th>
+          <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
           </tr>
         </thead>
-
-        <tbody class="table-body">
-          <tr>
-            <td>프로젝트 명</td>
-            <td>타겟제품 유무확인</td>
-            <td>5000개</td>
-            <td>$ 100,000</td>
-            <td>링크</td>
-            <td>상품명</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플의뢰서 기본</td>
-            <td>5000개</td>
-            <td>$ 100,000</td>
-            <td>링크</td>
-            <td>상품명</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플의뢰서 초안</td>
-            <td>5000개</td>
-            <td>$ 100,000</td>
-            <td>링크</td>
-            <td>상품명</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플의뢰서 옵션</td>
-            <td>5000개</td>
-            <td>$ 100,000</td>
-            <td>링크</td>
-            <td>상품명</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>MOQ 예산확인</td>
-            <td>5000개</td>
-            <td>$ 100,000</td>
-            <td>링크</td>
-            <td>상품명</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>의뢰서 접수</td>
-            <td>타겟제품 유무확인</td>
-            <td>5000개</td>
-            <td>$ 100,000</td>
-            <td>링크</td>
-            <td>상품명</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
+        <tbody id="temp_projects_tbody" class="table-body">
         </tbody>
       </table>
+
+      <div id="temp_projects_pagination"></div>
+
     </div>
 
-    <div class="container" style="margin-top: 30px">
+
+    <!-- 진행중인 프로젝트 -->
+
+    <div class="container mt-5">
       <div class="row">
         <div class="col">
-          <div class="title">
-            <h1>회원 진행중인 프로젝트</h1>
+          <div class="title text-center">
+            <h2><%= __("admin.menu.회원관리.개인정보.진행중인프로젝트") %></h2>
           </div>
         </div>
       </div>
 
-      <table class="table">
+      <table class="table table-hover">
         <thead class="table-header">
           <tr>
             <th scope="col">프로젝트 명</th>
@@ -401,164 +352,36 @@
             <th scope="col">상세 진행단계</th>
             <th scope="col">프로젝트 최종 수정 날짜</th>
             <th scope="col">프로젝트 생성날짜</th>
-            <th scope="col">삭제</th>
+            <th scope="col"><%= __('table.head.삭제/복구') %></th>
+          <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
           </tr>
         </thead>
-
-        <tbody class="table-body">
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-          <tr>
-            <td>프로젝트 명</td>
-            <td>샘플링</td>
-            <td>샘플의뢰서</td>
-            <td>2022.12.05</td>
-            <td>2022.12.05</td>
-            <td><button type="button" class="del-btn" onclick="">삭제</button></td>
-          </tr>
-        </tbody>
+        <tbody id="progress_projects_tbody" class="table-body"> </tbody>
       </table>
+
+      <div id="progress_projects_pagination"></div>
+
     </div>
 
     <!-- Completed Project -->
-    <!-- /* 테스트 데이터 생성 -->
-    <div>
-      <% let completed_project={data:[],page:1,count:10}; %>
-      <% completed_project.data.push({
-                  productName:"My Suncream1",
-                  volume:"110ml",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                })%>
-      <% completed_project.data.push({
-                  productName:"My Suncream2",
-                  volume:"120ml",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:20000,
-                  lastOrderDate:new Date(2022,10,15),
-                  imagePaths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                
-                })%>
-      <% completed_project.data.push({
-                  productName:"My Suncream3",
-                  volume:"110g",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:30000,
-                  lastOrderDate:new Date(2022,10,25),
-                  imagePaths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
-                })%>
-      <% completed_project.data.push({
-                  productName:"My Suncream4",
-                  volume:"210g",
-                  category1:0,
-                  category2:0,
-                  totalOrderAmount:10000,
-                  lastOrderDate:new Date(2022,10,5),
-                  imagePaths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
-                })%>
-    </div>
-    <!-- 테스트 데이터 생성 */ -->
-    <!-- Completed Project -->
-    <div class="widget-content widget-content-area br-20 px-4 mt-3">
+    <div class="widget-content widget-content-area br-20 px-4 mt-3 w-100">
       <div class="form-group ms-3">
         <div class="row mb-3">
-          <div class="justify-content-between d-flex px-0">
+          <div class="justify-content-center d-flex px-0">
             <div>
-              <h5><strong>
-                  <%= __("users.dashboard.header.CompletedProject") %>
-                </strong>
-              </h5>
+              <h2>
+                <%= __("admin.menu.회원관리.개인정보.완료된프로젝트") %>
+              </h2>
             </div>
           </div>
         </div>
 
         <div class="row mt-3">
-          <div class="widget p-4 row mx-0" id="completed_project">
-            <% completed_project.data.forEach((item,index)=>{ %>
-            <div class="col d-flex flex-column">
-              <!-- style="height: calc(100%-50px);" -->
-              <div class="preview">
-                <img class="br-10" src="<%= item.imagePaths.split(`,`)[0] %>">
-              </div>
-              <div class="mb-auto mt-3 text-center">
-                <h6>
-                  <%= item.productName %>
-                </h6>
-                <h6>
-                  <%= __("product"+item.category1+"."+item.category2) %>
-                  <%= " " + item.volume %>
-                </h6>
-                <p>
-                  <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                  <%= ' : ' + item.totalOrderAmount %>
-                  <br>
-                  <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                  <%= ' : ' + formatDate(item.lastOrderDate) %>
-                </p>
-              </div>
-            </div>
-            <% }) %>
+          <div class="widget p-4 row mx-0">
+            <div id="completed_projects"> </div>
 
             <!-- pagination -->
-            <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
-            <%- make_pagination_by_href(
-                          __,
-                          completed_project.page,
-                          completed_project.count,
-                          codezip.url.users.community.main,
-                          4
-                        ) %>
+            <div id="completed_projects_pagination"></div>
 
           </div>
         </div>
@@ -567,9 +390,12 @@
   </div>
 
   <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+  <!-- END GLOBAL MANDATORY SCRIPTS -->
+
   <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/js/script.js"></script>
   <script src="/js/validator.js"></script>
+
   <script>
     // 프로필 이미지
     let isRemoveImage = false;
@@ -627,9 +453,210 @@
       });
     }
   </script>
-  <!-- END GLOBAL MANDATORY SCRIPTS -->
-  <input hidden id="CertificationNumber">
+  <script>
+    function recovery_user(id) {
+      event.stopPropagation();
 
+      const url = '<%= codezip.url.admin.projects.recovery %>/' + location.pathname.split('/')[3] + '?n=' + id;
+      fetch(url)
+        .then(res => {
+          if (res.ok) {
+            document.getElementById("action_btn-" + id).innerHTML = `<div onclick="delete_user(${id});"><%= __('btn.삭제') %></div>`;
+          } else {
+            alert("<%= __('msg.fail') %>");
+            location.reload();
+          }
+        })
+    }
+
+    function delete_user(id) {
+      event.stopPropagation();
+
+      const url = '<%= codezip.url.admin.projects.delete %>/' + location.pathname.split('/')[3] + '?n=' + id;
+      fetch(url)
+        .then(res => {
+          if (res.ok) {
+            document.getElementById("action_btn-" + id).innerHTML = `<div onclick="recovery_user(${id});"><%= __('btn.복구') %></div>`
+          } else {
+            alert("<%= __('msg.fail') %>");
+            location.reload();
+          }
+        })
+    }
+  </script>
+  <%
+  const project_phase = [];
+  const project_detail_phase = {};
+  const product_type = {};
+
+  for(let i=0; i< codezip.numberOfProduct.category1; i++){
+    product_type[i]=[];
+    for(let j=0; j< codezip.numberOfProduct.category2[i]; j++){
+      product_type[i].push(__('product'+i+'.'+j));
+    }
+  }
+
+  for(let i=0; i< codezip.numberOfProjectState.phase; i++){
+    project_phase.push(__('project_phase'+i))
+    project_detail_phase[i]=[];
+    for(let j=0; j< codezip.numberOfProjectState.detail_phase[i]; j++){
+      project_detail_phase[i].push(__('project_phase'+i+'.'+j));
+    }
+  }
+  %>
+  <script>
+    const project_phase = JSON.parse('<%- JSON.stringify(project_phase) %>');
+    const project_detail_phase = JSON.parse('<%- JSON.stringify(project_detail_phase) %>');
+  </script>
+  <script>
+    function load_temp_projects(page = 1) {
+      const url = '<%= codezip.url.admin.api.temp_projects %>/' + location.pathname.split('/')[3];
+      fetch(url + "?p=" + page).then(res => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error(res.status);
+          }
+        }).then(data => {
+          show_temp_projects(data);
+        })
+        .catch(err => {
+          console.error(err);
+          alert('<%= __("msg.fail") %>');
+        })
+    }
+
+    function show_temp_projects(data) {
+      console.log(data);
+      let temp_html = '';
+      data.rows.forEach((item, index) => {
+        temp_html += `<tr>
+          <td>${item.project_name}</td>
+          <td>${project_detail_phase[0][item.detail_phase]}</td>
+          <td>${new Intl.NumberFormat('<%= locale %>').format(item.moq)}</td>
+          <td>${new Intl.NumberFormat('<%= locale %>').format(item.budget)}</td>
+          <td><a href="${item.target_url||''}">${item.target_url||''}<a></td>
+          <td>${item["formula.product_name"]||''}</td>
+          <td>${formatDate(item.create_date)}</td>
+          <td>
+            <div id="action_btn-${item.id}" class="hover">`;
+        if (item.delete_date) {
+          temp_html += `<div onclick="recovery_user('${item.id}');"><%= __('btn.복구') %></div>`;
+        } else {
+          temp_html += `<div onclick="delete_user('${item.id}');"><%= __('btn.삭제') %></div>`;
+        }
+        temp_html += `</div>
+                    </td>
+                  </tr>`;
+      })
+      temp_projects_tbody.innerHTML = temp_html;
+
+      temp_projects_pagination.innerHTML = make_pagination_by_func(data.page, data.count, "load_temp_projects", limit = 10);
+
+    }
+  </script>
+  '<%= locale %>'
+  <script>
+    function load_progress_projects(page = 1) {
+      const url = '<%= codezip.url.admin.api.progress_projects %>/' + location.pathname.split('/')[3];
+      fetch(url + "?p=" + page).then(res => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error(res.status);
+          }
+        }).then(data => {
+          show_progress_projects(data);
+        })
+        .catch(err => {
+          console.error(err);
+          alert('<%= __("msg.fail") %>');
+        })
+    }
+
+    function show_progress_projects(data) {
+      console.log(data);
+      let temp_html = '';
+      data.rows.forEach((item, index) => {
+        temp_html += `<tr>
+          <td>${item.project_name}</td>
+          <td>${project_phase[item.phase]}</td>
+          <td>${project_detail_phase[item.phase][item.detail_phase]}</td>
+          <td>${formatDate(item.update_date)}</td>
+          <td>${formatDate(item.create_date)}</td>
+          <td>
+            <div id="action_btn-${item.id}" class="hover">`;
+        if (item.delete_date) {
+          temp_html += `<div onclick="recovery_user('${item.id}');"><%= __('btn.복구') %></div>`;
+        } else {
+          temp_html += `<div onclick="delete_user('${item.id}');"><%= __('btn.삭제') %></div>`;
+        }
+        temp_html += `</div>
+                    </td>
+                  </tr>`;
+      })
+      progress_projects_tbody.innerHTML = temp_html;
+
+      progress_projects_pagination.innerHTML = make_pagination_by_func(data.page, data.count, "load_progress_projects", limit = 10);
+    }
+  </script>
+
+  <script>
+    const product_type = JSON.parse('<%- JSON.stringify(product_type) %>');
+  </script>
+  <script>
+    function load_completed_projects(page = 1) {
+      const url = '<%= codezip.url.admin.api.completed_projects %>/' + location.pathname.split('/')[3];
+      fetch(url + "?p=" + page).then(res => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error(res.status);
+          }
+        }).then(data => {
+          show_completed_projects(data);
+        })
+        .catch(err => {
+          console.error(err);
+          alert('<%= __("msg.fail") %>');
+        })
+    }
+
+    function show_completed_projects(data) {
+      console.log(data);
+      let temp_html = '<div class="col d-flex flex-column">';
+      data.rows.forEach((item, index) => {
+        if (item.image_paths) {
+          temp_html += `<div class="preview">
+            <img class="br-15" src="${item.image_paths.split(',')[0]}">
+          </div>`
+        }
+        temp_html += `<div class="mb-auto mt-3">
+            <h6>${item.project_name}</h6>
+            <h6>${product_type[item.category1][item.category2] + " " + item.capacity}</h6>
+            <p>
+              <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+              ${' : ' + item.total_order_quantity}
+              <br>
+              <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+              ${' : ' + formatDate(item.recent_order_date)}
+            </p>
+          </div>
+        </div>`
+      })
+      completed_projects.innerHTML = temp_html;
+
+      completed_projects_pagination.innerHTML = make_pagination_by_func(data.page, data.count, "load_completed_projects", limit = 10);
+    }
+  </script>
+
+  <script>
+    window.addEventListener('load', event => {
+      load_temp_projects();
+      load_progress_projects();
+      load_completed_projects();
+    })
+  </script>
 </body>
 
 </html>

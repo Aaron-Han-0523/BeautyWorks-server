@@ -49,13 +49,7 @@ router
 
 // 상세 조회
 router
-  .get('/:id', async (req, res, next) => {
-    const formula = await formulasService.readOne({ id: req.params.id });
-    if (req.baseUrl.split('/')[1] != 'admin') return res.status(403).end();
-    return res.render('admin/formula/detail', {
-      formula: formula
-    });
-  })
+  .get('/:id', formulasController.detail)
 
 // 삭제
 router

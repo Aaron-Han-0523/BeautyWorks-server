@@ -8,6 +8,7 @@
         "signUp": "/users/signUp",
         "signIn": "/users/signIn",
         "signOut": "/users/signOut",
+        "checkAlarm": "/users/checkAlarm",
         "myPage": "/users/myPage",
         "myAccount": "/users/myAccount",
         "dashboard": "/users/Dashboard",
@@ -114,7 +115,15 @@
             "add": "/admin/users/add",
             "edit": "/admin/users/edit",
             "delete": "/admin/users/delete",
-            "recovery": "/admin/users/recovery"
+            "recovery": "/admin/users/recovery",
+            "checkEmail": "/admin/users/checkEmail"
+        },
+        "projects": {
+            "main": "/admin/projects",
+            "add": "/admin/projects/add",
+            "edit": "/admin/projects/edit",
+            "delete": "/admin/projects/delete",
+            "recovery": "/admin/projects/recovery"
         },
         "formula": {
             "main": "/admin/formula",

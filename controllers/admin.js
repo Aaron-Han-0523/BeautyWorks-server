@@ -63,7 +63,7 @@ exports.checkEmail = async (req, res, next) => {
     const user = await usersService.getUser({ email: body.email });
 
     if (user) {
-        res.status(403).end()
+        res.status(400).end()
     } else {
         res.status(200).end()
     }
@@ -86,7 +86,7 @@ exports.detail = async (req, res, next) => {
             if (req.api) {
                 return res.json(result);
             } else {
-                return res.render("admin/users/detail", { client: result })
+                return res.render("admin/users/detail", { member: result })
             }
         })
         .catch(err => {
@@ -139,9 +139,17 @@ exports.recovery = async (req, res, next) => {
 exports.edit = async (req, res, next) => {
     console.log("users edit")
     const id = req.params.id;
-
+    
     let body = req.body;
+    // if (!body.email) {
+    //     body.email = (body.emailId + '@' + body.emailDomain).toLowerCase();
+    // }
+    if (!body.mobile_contact) {
+        body.mobile_contact = body.country_number + ")" + body.phoneNum;
+    }
+
     delete body.password;
+
     if (body.isRemoveImage == 'true') {
         body.profile_image_path = codezip.url.users.defaultProfileImage;
         console.log("default profile image path :", body.profile_image_path);
@@ -151,11 +159,12 @@ exports.edit = async (req, res, next) => {
         if (file) body[file.fieldname] = '/' + file.path;
     }
 
+    console.log('body :', body);
     usersService
         .update(body, { id: id })
         .then(result => {
             console.log("update result :", result);
-            return res.end()
+            return res.redirect('back');
         })
         .catch(err => {
             console.error(err);
@@ -179,9 +188,14 @@ exports.index = async (req, res, next) => {
     const skip = (page - 1) * limit;
     const word = req.query.q;
 
-    let condition = {
-        id: { [Op.ne]: 1 },
+    let condition = {}
+
+    if (user.user_type == 100) {
+        condition.user_type = { [Op.notIn]: [100, 200] };
+    } else if (user.user_type == 200) {
+        condition.user_type = { [Op.ne]: 200 };
     }
+
     if (word) {
         condition.company_name = { [Op.substring]: word }
     }

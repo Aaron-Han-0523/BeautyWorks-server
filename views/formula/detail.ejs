@@ -219,6 +219,7 @@
       })
     }
   </script>
+
   <script>
     const img_total_n = "<%= formula.image_paths ? formula.image_paths.split(',').length : 0 %>"
 
@@ -257,7 +258,9 @@
       if (!thumbnail) return;
       select_gallery(thumbnail);
     }
-
+  </script>
+  
+  <script>
     function project_next(formula_id, category1, category2) {
       const project_id = new URLSearchParams(location.search).get('n');
       if (!project_id) return location.href = "<%= codezip.url.users.myProject.main %>";
@@ -284,7 +287,8 @@
         alert('fail');
       })
     }
-
+  </script>
+  <script>
     window.addEventListener('load', event => {
       const project_id = new URLSearchParams(location.search).get('n');
       if (project_id) nextBtn.hidden = false;

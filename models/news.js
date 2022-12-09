@@ -27,6 +27,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "내용"
     },
+    image_paths: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "이미지"
+    },
     create_date: {
       type: DataTypes.DATE,
       allowNull: false,

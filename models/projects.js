@@ -224,6 +224,21 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "의뢰서 접수 날짜"
     },
+    tracking_number: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "운송장 번호"
+    },
+    packaging_tooltip: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: "용기 알림"
+    },
+    shipment_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "출고 날짜"
+    },
     image_paths: {
       type: DataTypes.TEXT,
       allowNull: true,

@@ -34,7 +34,7 @@ module.exports = {
             , brand_name: 'devbrandName'
             , first_name: 'devfirstName'
             , last_name: "devlastName"
-            , mobile_contact: "123-1234-1234"
+            , mobile_contact: "+82)123-1234-1234"
             , company_name: "devcompanyName"
             , team: "devTeam"
             , position: "devPosition"

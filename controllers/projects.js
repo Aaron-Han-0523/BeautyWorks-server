@@ -44,9 +44,10 @@ exports.edit = async (req, res, next) => {
     console.log("Project edit");
     const base = req.baseUrl.split('/')[1];
     const user = res.locals.user;
-    const id = req.query.n;
+    const id = req.query.n || req.params.id;
+    console.log(id);
     if (!id) {
-        console.error("Neet to project id");
+        console.error("Need to project id");
         return;
     }
 
@@ -114,6 +115,7 @@ exports.delete = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err);
             res.status(500).end();
         })
 }
@@ -189,6 +191,7 @@ exports.temp_projects = async (req, res, next) => {
     projectsService
         .allRead(condition, limit, skip)
         .then(result => {
+            result.page = page;
             res.json(result);
         })
         .catch((err) => {
@@ -216,6 +219,7 @@ exports.progress_projects = async (req, res, next) => {
     projectsService
         .allRead(condition, limit, skip)
         .then(result => {
+            result.page = page;
             res.json(result);
         }).catch((err) => {
             console.error(err);
@@ -242,6 +246,7 @@ exports.completed_projects = async (req, res, next) => {
     projectsService
         .allRead(condition, limit, skip)
         .then(result => {
+            result.page = page;
             res.json(result);
         }).catch((err) => {
             console.error(err);

@@ -702,5 +702,14 @@
 	"table.head.작성일": "Date",
 	"table.head.삭제/복구": "Delete / Recovery",
 	"btn.추가": "Add",
-	"msg.fail": "msg.fail"
+	"msg.fail": "msg.fail",
+	"admin.menu.회원관리.개인정보.수정": "Account Edit",
+	"admin.users.permission": "Permission setting",
+	"user_type.0": "user",
+	"user_type.100": "admin",
+	"btn.Save": "Save",
+	"btn.Cancel": "Cancel",
+	"admin.menu.회원관리.개인정보.임시저장프로젝트": "User's Project in draft",
+	"admin.menu.회원관리.개인정보.진행중인프로젝트": "User's Project in progress",
+	"admin.menu.회원관리.개인정보.완료된프로젝트": "User's Completed Project"
 }

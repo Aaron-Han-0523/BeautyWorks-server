@@ -263,6 +263,7 @@
                         <div class="col col-3">
                           <h6>
                             <%= __('users.newProject.basic.distribution_channel') %>
+                            <span style="color: red;">*</span>
                           </h6>
                         </div>
                         <div class="col">
@@ -434,8 +435,6 @@
     }
 
     function select_category1_func(value) {
-      console.log('00')
-
       // console.log("v:", value, "p", printName);
       document.forms[0]['category1'].value = value;
       category1_print.value = category1_name_list[value];
@@ -450,13 +449,10 @@
                           </li>`
       }
       category2_list.innerHTML = temp_html;
-      console.log('11')
       //checkValues();
     }
 
     function select_category2_func(value) {
-      console.log('22')
-
       // console.log("v:", value, "p", printName);
       let category = document.forms[0]['category1'].value;
       document.forms[0]["category2"].value = value;
@@ -524,7 +520,7 @@
 
         if (!value) break;
         cnt += 1;
-        if (cnt > 7) {
+        if (cnt > 8) {
           checkReady = true;
           break;
         }

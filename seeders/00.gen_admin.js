@@ -33,7 +33,7 @@ module.exports = {
             , company_name: 'BeautyWorks'
             , first_name: 'Administrator'
             , last_name: "관리자"
-            , mobile_contact: "000-0000-0000"
+            , mobile_contact: "+82)000-0000-0000"
         }
         let admin = {
             email: "admin"
@@ -43,7 +43,7 @@ module.exports = {
             , company_name: 'BeautyWorks'
             , first_name: 'Administrator'
             , last_name: "관리자"
-            , mobile_contact: "000-0000-0000"
+            , mobile_contact: "+82)000-0000-0000"
         }
 
         await queryInterface.bulkInsert('users', [super_admin, admin], {});

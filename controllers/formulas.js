@@ -196,7 +196,7 @@ exports.detail = async (req, res, next) => {
     const base = req.baseUrl.split('/')[1];
 
     let condition = {};
-    if (base != 'admin') {
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         // condition.users_id = user.id;
         condition.delete_date = null;
     }
