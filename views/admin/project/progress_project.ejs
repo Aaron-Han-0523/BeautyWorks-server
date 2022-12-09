@@ -2,23 +2,23 @@
 <html lang="ko">
 
 <head>
-  <%- include ("../../partials/admin-header.ejs") %>
+  <%- include ("../partials/admin-header.ejs") %>
   <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="layout-boxed">
 
-  <%- include ("../../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
   <!--  BEGIN MAIN CONTAINER  -->
-  <div class="main-container 진" id="container" style="padding-top: 0;">
+  <div class="main-container" id="container" style="padding-top: 0;">
 
     <div class="overlay"></div>
     <div class="search-overlay"></div>
 
-    <%- include ("../../partials/admin-sidebar.ejs") %>
+    <%- include ("../partials/admin-sidebar.ejs") %>
 
-    <%- include ("../../partials/admin-nav.ejs") %>
+    <%- include ("../partials/admin-nav.ejs") %>
 
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content admin-add">
@@ -27,12 +27,14 @@
         <div class="middle-content container-xxl p-0 ">
 
           <!-- BREADCRUMB -->
-          <div class="row">
-            <div class="breadcrumb align-datas-start d-flex br-20 ">
-              <div class="p-1 col-4 ">
-                <h5>
-                  <strong>회원 진행중인 프로젝트 상세 </strong>
-                </h5>
+          <div class="row mt-5">
+            <div class="breadcrumb justify-content-center br-20 ">
+              <div class="p-1 col-4 text-center">
+                <h2>
+                  <strong>
+                    <%= __("admin.menu.회원관리.개인정보.진행중인프로젝트.상세") %>
+                  </strong>
+                </h2>
               </div>
             </div>
           </div>
@@ -154,7 +156,7 @@
   </div>
   <!-- END MAIN CONTAINER -->
 
-  <%- include ("../../partials/commonScrpits.ejs") %>
+  <%- include ("../partials/commonScrpits.ejs") %>
 
   <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 

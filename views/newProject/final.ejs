@@ -75,572 +75,573 @@
                   <div class="widget" style="padding:5% 5%">
 
                     <form id="draft" method="post" enctype="multipart/form-data" style="padding:3% 5%">
-
-                      <!-- 제품명 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.project_name') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.project_name %>">
-                        </div>
-                      </div>
-
-                      <!-- 브랜드명 입력 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.brand_name') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.brand_name %>">
-                        </div>
-                      </div>
-
-                      <input hidden id="formulas_id" value="<%= project.formulas_id %>">
-
-                      <!-- 카테고리 선택 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.category1') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input hidden type="text" name="category1" required>
-                          <input type="text" class="form-control" id="category1_print" placeholder="<%= __('Select') %>" readonly required>
-                        </div>
-                        <div class="col col-3">
-                          <button class="form-select text-start" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('Select') %>
-                          </button>
-                          <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_category1">
-                            <% for(let i=0; i< numberOfProduct.category1; i++) { %>
-                            <li>
-                              <a class="dropdown-item" href="javascript:void(0);" onclick="select_category1_func('<%= i %>');">
-                                <%= __('product'+i) %>
-                              </a>
-                            </li>
-                            <% } %>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <!-- 품목 선택 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.category2') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input hidden type="text" name="category2" required>
-                          <input type="text" class="form-control" id="category2_print" placeholder="<%= __('Select') %>" readonly required>
-                        </div>
-                        <div class="col col-3">
-                          <button class="form-select text-start" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= __('Select') %>
-                          </button>
-                          <ul id="category2_list" class="dropdown-menu scrollable-menu" aria-labelledby="select_category2">
-                            <li>
-                              <%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <!-- 용량 선택 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.capacity') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="number" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" required value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
-                        </div>
-                        <div class="col col-3">
-                          <%# console.log("??",project.capacity.split(' ')[1],"??") %>
-                          <input hidden type="text" id="capacity_unit" value="<%= project.capacity ? project.capacity.split(' ')[1] : '' %>">
-                          <button class="form-select text-start" type="button" id="select_capacity_unit" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= project.capacity&&project.capacity.split(' ')[1] ? project.capacity.split(' ')[1] : __('Select') %>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="capacity_unit">
-                            <% codezip.capacity_unit.forEach((item,index)=>{ %>
-                            <li class="dropdown-item capacity_unit">
-                              <%= item %>
-                            </li>
-                            <% }) %>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <!-- 대상연령 입력 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.target_age') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input hidden type="text" name="target_age" required>
-                          <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('placeholder.target_age') %>" readonly required>
-                        </div>
-                        <div class="col col-3">
-                          <button class="form-select text-start" type="button" id="select_age" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                            <%= __('Select') %>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="select_age">
-                            <% for(let i=0; i< 9; i++) { %>
-                            <li class="dropdown-item d-flex">
-                              <input class="form-check-input age me-3" type="checkbox" id="age<%= i %>">
-                              <label class="form-check-label flex-grow-1 target_age_label" for="age<%= i %>">
-                                <%= __('age'+i) %>
-                              </label>
-                            </li>
-                            <% } %>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <!-- 성별 입력 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.target_gender') %><span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input hidden type="text" name="target_gender" required>
-                          <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('placeholder.target_gender') %>" readonly required>
-                        </div>
-                        <div class="col col-3">
-                          <button class="form-select text-start" type="button" id="select_gender" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                            <%= __('Select') %>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="select_gender">
-                            <% for(let i=0; i< 2; i++) { %>
-                            <li class="dropdown-item d-flex">
-                              <input class="form-check-input gender me-3" type="checkbox" id="gender<%= i %>">
-                              <label class="form-check-label flex-grow-1 target_gender_label" for="gender<%= i %>">
-                                <%= __('gender'+i) %>
-                              </label>
-                            </li>
-                            <% } %>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <!-- 판매국가 입력 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.target_country') %>
-                            <span style="color: red;">*</span>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input hidden type="text" name="target_country" value="">
-                          <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('placeholder.target_country') %>" readonly required>
-                        </div>
-                        <div class="col col-3">
-                          <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                            <%= __('Select') %>
-                          </button>
-                          <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
-                            <% country_codes.forEach((item,index)=>{ country_code2name[item] = __(item); %>
-                            <li class="dropdown-item">
-                              <div class="d-flex">
-                                <input class="form-check-input country me-3" type="checkbox" id="country-<%= item %>">
-                                <img class="me-2" src="/images/flag/<%= item %>.png">
-                                <label class="form-check-label flex-grow-1 target_country_label" for="country-<%= item %>">
-                                  <%= __(item) %>
-                                </label>
-                              </div>
-                            </li>
-                            <% }) %>
-                          </ul>
-                        </div>
-                      </div>
-
-                      <!-- 유통채널 입력 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.distribution_channel') %>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>">
-                        </div>
-                      </div>
-
-                      <!-- 해외 인증 여부 입력 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.overseas_certifications') %>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>">
-                        </div>
-                      </div>
-
-
-                      <!-- 한국 기능성 인증 진행 여부 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.korea_certification') %>
-                          </h6>
-                        </div>
-                        <div class="col col-9 col-xxl-6 d-flex align-items-baseline">
-                          <% if(project.korea_certification=="1") { %>
-                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1" checked>
-                          <% }else{ %>
-                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1">
-                          <% } %>
-
-                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="korea_certification_true">
-                            <%= __('users.newProject.basic.btn.yes') %>
-                          </label>
-
-                          <% if(project.korea_certification=="0") { %>
-                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0" checked>
-                          <% }else{ %>
-                          <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0">
-                          <% } %>
-
-                          <label class="col-5 btn btn-outline-primary my-0" for="korea_certification_false">
-                            <%= __('users.newProject.basic.btn.no') %>
-                          </label>
-                        </div>
-                      </div>
-
-
-                      <!-- 부자재 입고 유무 -->
-                      <div class="row mb-3 align-items-center">
-                        <div class="col col-3">
-                          <h6>
-                            <%= __('users.newProject.basic.sourcing_of_packaging') %>
-                          </h6>
-                        </div>
-                        <div class="col col-9 col-xxl-4 d-flex align-items-baseline">
-                          <% if(project.sourcing_of_packaging=="1") { %>
-                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1" checked>
-                          <% }else{ %>
-                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1">
-                          <% } %>
-
-                          <label class="col-5 btn btn-outline-primary my-0 me-4" for="sourcing_of_packaging_true">
-                            <%= __('users.newProject.basic.sourcing_of_packaging.btn.yes') %>
-                          </label>
-
-                          <% if(project.sourcing_of_packaging=="0") { %>
-                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0" checked>
-                          <% }else{ %>
-                          <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0">
-                          <% } %>
-
-                          <label class="col-5 btn btn-outline-primary my-0" for="sourcing_of_packaging_false">
-                            <%= __('users.newProject.basic.sourcing_of_packaging.btn.no') %>
-                          </label>
-                        </div>
-                      </div>
-
-
-                      <!-- option -->
-
-                      <!-- 제품 효과 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.efficacy') %>
-                          </h6>
-                        </div>
-                        <div class="col col-5">
-                          <input hidden type="text" name="efficacy" value="<%= project.efficacy %>">
-                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
-                            <div class="flex-fill" id="efficacy_print">
-                              <%= __('Select') %>
-                            </div>
-                            <div class="text-primary">
-                              <i class="fa-solid fa-plus"></i>
-                            </div>
-                          </button>
-                          <!-- 제품효과 모달창 -->
-                          <div class=" modal" id="select_efficacy" aria-labelledby="" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered col-7">
-                              <div class="modal-content br-15">
-                                <div class="modal-header justify-content-end text-gray p-3">
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                  </button>
-                                </div>
-                                <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
-                                  <%= __('users.newProject.option.efficacy') %>
-                                </div>
-                                <div class="modal-body mx-5 mt-0 pt-0 text-gray">
-                                  <div class="d-flex flex-wrap">
-                                    <!-- 일반 제품효과 -->
-                                    <% codezip.effects.product.forEach((item, index)=>{ %>
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex dropdown-item">
-                                        <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
-                                        <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1">
-                                          <%= __(item)%>
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <% }) %>
-
-                                    <!-- 선케어 제품효과-->
-                                    <% codezip.effects.suncare.forEach((item, index)=>{ %>
-                                    <% if(project.category1&&(project.category1==3)) { %>
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex dropdown-item">
-                                        <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
-                                        <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1">
-                                          <%= __(item) %>
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <% }else{ %>
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex text-nowrap">
-                                        <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>" disabled>
-                                        <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1 form-check-label">
-                                          <%= __(item) %>
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <% } %>
-                                    <% }) %>
-
-                                    <!-- 기타 -->
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex dropdown-item">
-                                        <% if(project.etc_efficacy) { %>
-                                        <input class="etc_efficacy form-check-input mx-3 my-auto" type="checkbox" id="etc_efficacy_check" checked>
-                                        <% }else{ %>
-                                        <input class="etc_efficacy form-check-input mx-3 my-auto" type="checkbox" id="etc_efficacy_check">
-                                        <% } %>
-                                        <label for="etc_efficacy_check" class="flex-fill m-0 py-1">
-                                          <%= __("기타")%>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- <div class="modal-footer text-center my-3">
-                                  <button type="button" class="btn-outline-gray  br-15 p-3 px-5" data-bs-dismiss="modal">
-                                    <%= __('users.newProject.option.btn.확인') %>
-                                  </button>
-                                </div> -->
-                              </div>
-                            </div>
+                      <div>
+                        <!-- 제품명 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.project_name') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.project_name %>">
                           </div>
                         </div>
-                        <div class="col">
-                          <% if(project.etc_efficacy) { %>
-                          <input type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('기타') %>" value="<%= project.etc_efficacy %>">
-                          <% }else{ %>
-                          <input hidden type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('기타') %>">
-                          <% } %>
-                        </div>
-                      </div>
 
-                      <!-- 컨셉성분 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.ingredients') %>
-                          </h6>
+                        <!-- 브랜드명 입력 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.brand_name') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.brand_name %>">
+                          </div>
                         </div>
-                        <div class="col-9">
-                          <input hidden type="text" name="ingredients" value="<%= project.ingredients %>">
-                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
-                            <div class="flex-grow-1" id="ingredients_print">
-                              <%= project.concept_ingredients || __('통합 검색') %>
-                            </div>
-                            <div class="text-primary">
-                              <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                          </button>
-                        </div>
-                      </div>
 
+                        <input hidden id="formulas_id" value="<%= project.formulas_id %>">
 
-                      <!-- 제형 선택 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.viscosity') %>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <select class="form-select" name="viscosity">
-                            <option value="">
+                        <!-- 카테고리 선택 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.category1') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input hidden type="text" name="category1" required>
+                            <input type="text" class="form-control" id="category1_print" placeholder="<%= __('Select') %>" readonly required>
+                          </div>
+                          <div class="col col-3">
+                            <button class="form-select text-start" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
                               <%= __('Select') %>
-                            </option>
-                            <% codezip.viscosity.forEach((item,index)=>{ %>
-                            <% if(project.viscosity==item.slice(0,-1)) { %>"
-                            <option value="<%= item.slice(0,-1) %>" selected>
-                              <% }else{ %>
-                            <option value="<%= item.slice(0,-1) %>">
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_category1">
+                              <% for(let i=0; i< numberOfProduct.category1; i++) { %>
+                              <li>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="select_category1_func('<%= i %>');">
+                                  <%= __('product'+i) %>
+                                </a>
+                              </li>
                               <% } %>
-                              <%= item %>
-                            </option>
-
-                            <% }) %>
-                          </select>
+                            </ul>
+                          </div>
                         </div>
-                      </div>
 
-
-                      <!-- 사용감 입력 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.applies') %>
-                          </h6>
-                        </div>
-                        <div class="col-9">
-                          <input hidden type="text" name="applies" value="<%= project.applies %>">
-                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
-                            <div class="flex-fill" id="applies_print">
+                        <!-- 품목 선택 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.category2') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input hidden type="text" name="category2" required>
+                            <input type="text" class="form-control" id="category2_print" placeholder="<%= __('Select') %>" readonly required>
+                          </div>
+                          <div class="col col-3">
+                            <button class="form-select text-start" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
                               <%= __('Select') %>
-                            </div>
-                            <div class="text-primary">
-                              <i class="fa-solid fa-plus"></i>
-                            </div>
-                          </button>
-                          <!-- 사용감 모달창 -->
-                          <div class="modal br-15" id="select_applies" data-bs-scroll="true" data-bs-backdrop="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-                              <div class="modal-content br-15 w-100">
-                                <div class="modal-header justify-content-end text-gray p-3">
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                  </button>
+                            </button>
+                            <ul id="category2_list" class="dropdown-menu scrollable-menu" aria-labelledby="select_category2">
+                              <li>
+                                <%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <!-- 용량 선택 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.capacity') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="number" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" required value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
+                          </div>
+                          <div class="col col-3">
+                            <%# console.log("??",project.capacity.split(' ')[1],"??") %>
+                            <input hidden type="text" id="capacity_unit" value="<%= project.capacity ? project.capacity.split(' ')[1] : '' %>">
+                            <button class="form-select text-start" type="button" id="select_capacity_unit" data-bs-toggle="dropdown" aria-expanded="false">
+                              <%= project.capacity&&project.capacity.split(' ')[1] ? project.capacity.split(' ')[1] : __('Select') %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="capacity_unit">
+                              <% codezip.capacity_unit.forEach((item,index)=>{ %>
+                              <li class="dropdown-item capacity_unit">
+                                <%= item %>
+                              </li>
+                              <% }) %>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <!-- 대상연령 입력 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.target_age') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input hidden type="text" name="target_age" required>
+                            <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('placeholder.target_age') %>" readonly required>
+                          </div>
+                          <div class="col col-3">
+                            <button class="form-select text-start" type="button" id="select_age" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                              <%= __('Select') %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="select_age">
+                              <% for(let i=0; i< 9; i++) { %>
+                              <li class="dropdown-item d-flex">
+                                <input class="form-check-input age me-3" type="checkbox" id="age<%= i %>">
+                                <label class="form-check-label flex-grow-1 target_age_label" for="age<%= i %>">
+                                  <%= __('age'+i) %>
+                                </label>
+                              </li>
+                              <% } %>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <!-- 성별 입력 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.target_gender') %><span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input hidden type="text" name="target_gender" required>
+                            <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('placeholder.target_gender') %>" readonly required>
+                          </div>
+                          <div class="col col-3">
+                            <button class="form-select text-start" type="button" id="select_gender" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                              <%= __('Select') %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="select_gender">
+                              <% for(let i=0; i< 2; i++) { %>
+                              <li class="dropdown-item d-flex">
+                                <input class="form-check-input gender me-3" type="checkbox" id="gender<%= i %>">
+                                <label class="form-check-label flex-grow-1 target_gender_label" for="gender<%= i %>">
+                                  <%= __('gender'+i) %>
+                                </label>
+                              </li>
+                              <% } %>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <!-- 판매국가 입력 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.target_country') %>
+                              <span style="color: red;">*</span>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input hidden type="text" name="target_country" value="">
+                            <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('placeholder.target_country') %>" readonly required>
+                          </div>
+                          <div class="col col-3">
+                            <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                              <%= __('Select') %>
+                            </button>
+                            <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
+                              <% country_codes.forEach((item,index)=>{ country_code2name[item] = __(item); %>
+                              <li class="dropdown-item">
+                                <div class="d-flex">
+                                  <input class="form-check-input country me-3" type="checkbox" id="country-<%= item %>">
+                                  <img class="me-2" src="/images/flag/<%= item %>.png">
+                                  <label class="form-check-label flex-grow-1 target_country_label" for="country-<%= item %>">
+                                    <%= __(item) %>
+                                  </label>
                                 </div>
-                                <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
-                                  <%= __('users.newProject.option.applies') %>
-                                </div>
-                                <div class="modal-body mx-5 pt-0 pb-5">
-                                  <div>
-                                    <% codezip.effects.use.boolean.forEach((item,index)=> { %>
-                                    <div class="row py-3 border-bottom">
-                                      <div class="col-4 align-self-center">
-                                        <h6>
-                                          <%= __("use_effects."+item) %>
-                                        </h6>
-                                      </div>
-                                      <% applies_true_text_list.push(__("use_effects."+item+".true")) %>
-                                      <% applies_false_text_list.push(__("use_effects."+item+".false")) %>
-                                      <div class="col row">
-                                        <div class="col d-flex dropdown-item p-0">
-                                          <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-1">
-                                          <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label fs-6">
-                                            <%= __("use_effects."+item+".true") %>
+                              </li>
+                              <% }) %>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <!-- 유통채널 입력 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.distribution_channel') %>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>">
+                          </div>
+                        </div>
+
+                        <!-- 해외 인증 여부 입력 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.overseas_certifications') %>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>">
+                          </div>
+                        </div>
+
+
+                        <!-- 한국 기능성 인증 진행 여부 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.korea_certification') %>
+                            </h6>
+                          </div>
+                          <div class="col col-9 col-xxl-6 d-flex align-items-baseline">
+                            <% if(project.korea_certification=="1") { %>
+                            <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1" checked>
+                            <% }else{ %>
+                            <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_true" autocomplete="off" value="1">
+                            <% } %>
+
+                            <label class="col-5 btn btn-outline-primary my-0 me-4" for="korea_certification_true">
+                              <%= __('users.newProject.basic.btn.yes') %>
+                            </label>
+
+                            <% if(project.korea_certification=="0") { %>
+                            <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0" checked>
+                            <% }else{ %>
+                            <input type="radio" class="btn-check" name="korea_certification" id="korea_certification_false" autocomplete="off" value="0">
+                            <% } %>
+
+                            <label class="col-5 btn btn-outline-primary my-0" for="korea_certification_false">
+                              <%= __('users.newProject.basic.btn.no') %>
+                            </label>
+                          </div>
+                        </div>
+
+
+                        <!-- 부자재 입고 유무 -->
+                        <div class="row mb-3 align-items-center">
+                          <div class="col col-3">
+                            <h6>
+                              <%= __('users.newProject.basic.sourcing_of_packaging') %>
+                            </h6>
+                          </div>
+                          <div class="col col-9 col-xxl-4 d-flex align-items-baseline">
+                            <% if(project.sourcing_of_packaging=="1") { %>
+                            <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1" checked>
+                            <% }else{ %>
+                            <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_true" autocomplete="off" value="1">
+                            <% } %>
+
+                            <label class="col-5 btn btn-outline-primary my-0 me-4" for="sourcing_of_packaging_true">
+                              <%= __('users.newProject.basic.sourcing_of_packaging.btn.yes') %>
+                            </label>
+
+                            <% if(project.sourcing_of_packaging=="0") { %>
+                            <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0" checked>
+                            <% }else{ %>
+                            <input type="radio" class="btn-check" name="sourcing_of_packaging" id="sourcing_of_packaging_false" autocomplete="off" value="0">
+                            <% } %>
+
+                            <label class="col-5 btn btn-outline-primary my-0" for="sourcing_of_packaging_false">
+                              <%= __('users.newProject.basic.sourcing_of_packaging.btn.no') %>
+                            </label>
+                          </div>
+                        </div>
+
+
+                        <!-- option -->
+
+                        <!-- 제품 효과 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.efficacy') %>
+                            </h6>
+                          </div>
+                          <div class="col col-5">
+                            <input hidden type="text" name="efficacy" value="<%= project.efficacy %>">
+                            <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
+                              <div class="flex-fill" id="efficacy_print">
+                                <%= __('Select') %>
+                              </div>
+                              <div class="text-primary">
+                                <i class="fa-solid fa-plus"></i>
+                              </div>
+                            </button>
+                            <!-- 제품효과 모달창 -->
+                            <div class=" modal" id="select_efficacy" aria-labelledby="" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered col-7">
+                                <div class="modal-content br-15">
+                                  <div class="modal-header justify-content-end text-gray p-3">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                      </svg>
+                                    </button>
+                                  </div>
+                                  <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
+                                    <%= __('users.newProject.option.efficacy') %>
+                                  </div>
+                                  <div class="modal-body mx-5 mt-0 pt-0 text-gray">
+                                    <div class="d-flex flex-wrap">
+                                      <!-- 일반 제품효과 -->
+                                      <% codezip.effects.product.forEach((item, index)=>{ %>
+                                      <div class="col-4 py-3 border-bottom">
+                                        <div class="d-flex dropdown-item">
+                                          <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
+                                          <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1">
+                                            <%= __(item)%>
                                           </label>
                                         </div>
-                                        <div class="col d-flex dropdown-item p-0">
-                                          <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-0">
-                                          <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label fs-6">
-                                            <%= __("use_effects."+item+".false") %>
+                                      </div>
+                                      <% }) %>
+
+                                      <!-- 선케어 제품효과-->
+                                      <% codezip.effects.suncare.forEach((item, index)=>{ %>
+                                      <% if(project.category1&&(project.category1==3)) { %>
+                                      <div class="col-4 py-3 border-bottom">
+                                        <div class="d-flex dropdown-item">
+                                          <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
+                                          <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1">
+                                            <%= __(item) %>
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <% }else{ %>
+                                      <div class="col-4 py-3 border-bottom">
+                                        <div class="d-flex text-nowrap">
+                                          <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>" disabled>
+                                          <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1 form-check-label">
+                                            <%= __(item) %>
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <% } %>
+                                      <% }) %>
+
+                                      <!-- 기타 -->
+                                      <div class="col-4 py-3 border-bottom">
+                                        <div class="d-flex dropdown-item">
+                                          <% if(project.etc_efficacy) { %>
+                                          <input class="etc_efficacy form-check-input mx-3 my-auto" type="checkbox" id="etc_efficacy_check" checked>
+                                          <% }else{ %>
+                                          <input class="etc_efficacy form-check-input mx-3 my-auto" type="checkbox" id="etc_efficacy_check">
+                                          <% } %>
+                                          <label for="etc_efficacy_check" class="flex-fill m-0 py-1">
+                                            <%= __("기타")%>
                                           </label>
                                         </div>
                                       </div>
                                     </div>
-                                    <% }) %>
                                   </div>
-                                  <!-- Other effects -->
-                                  <div class="row py-3 border-bottom">
-                                    <div class="col-4">
-                                      <h6>
-                                        <%= __("use_effects.OtherEffects") %>
-                                      </h6>
-                                      <p style="color: red;">
-                                        * <%= __("use_effects.중복선택가능") %>
-                                      </p>
-                                    </div>
-                                    <div class="col row">
-                                      <% for(let i=0; i< codezip.effects.use.other; i++){ %>
-                                      <% applies_true_text_list.push(__("use_effects."+i)) %>
-                                      <div class="col d-flex dropdown-item p-0">
-                                        <input class="applies_other form-check-input mx-3" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>-1">
-                                        <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill fs-6">
-                                          <%= __("use_effects."+i) %>
-                                        </label>
-                                      </div>
-                                      <% if(i%2==1){ %>
-                                      <div></div>
-                                      <% } %>
-                                      <% } %>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- <div class="modal-footer text-center my-3">
+                                  <!-- <div class="modal-footer text-center my-3">
                                   <button type="button" class="btn-outline-gray  br-15 p-3 px-5" data-bs-dismiss="modal">
                                     <%= __('users.newProject.option.btn.확인') %>
                                   </button>
                                 </div> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <% if(project.etc_efficacy) { %>
+                            <input type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('기타') %>" value="<%= project.etc_efficacy %>">
+                            <% }else{ %>
+                            <input hidden type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('기타') %>">
+                            <% } %>
+                          </div>
+                        </div>
+
+                        <!-- 컨셉성분 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.ingredients') %>
+                            </h6>
+                          </div>
+                          <div class="col-9">
+                            <input hidden type="text" name="ingredients" value="<%= project.ingredients %>">
+                            <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
+                              <div class="flex-grow-1" id="ingredients_print">
+                                <%= project.concept_ingredients || __('통합 검색') %>
+                              </div>
+                              <div class="text-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+
+
+                        <!-- 제형 선택 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.viscosity') %>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <select class="form-select" name="viscosity">
+                              <option value="">
+                                <%= __('Select') %>
+                              </option>
+                              <% codezip.viscosity.forEach((item,index)=>{ %>
+                              <% if(project.viscosity==item.slice(0,-1)) { %>"
+                              <option value="<%= item.slice(0,-1) %>" selected>
+                                <% }else{ %>
+                              <option value="<%= item.slice(0,-1) %>">
+                                <% } %>
+                                <%= item %>
+                              </option>
+
+                              <% }) %>
+                            </select>
+                          </div>
+                        </div>
+
+
+                        <!-- 사용감 입력 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.applies') %>
+                            </h6>
+                          </div>
+                          <div class="col-9">
+                            <input hidden type="text" name="applies" value="<%= project.applies %>">
+                            <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
+                              <div class="flex-fill" id="applies_print">
+                                <%= __('Select') %>
+                              </div>
+                              <div class="text-primary">
+                                <i class="fa-solid fa-plus"></i>
+                              </div>
+                            </button>
+                            <!-- 사용감 모달창 -->
+                            <div class="modal br-15" id="select_applies" data-bs-scroll="true" data-bs-backdrop="true">
+                              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                                <div class="modal-content br-15 w-100">
+                                  <div class="modal-header justify-content-end text-gray p-3">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                      </svg>
+                                    </button>
+                                  </div>
+                                  <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
+                                    <%= __('users.newProject.option.applies') %>
+                                  </div>
+                                  <div class="modal-body mx-5 pt-0 pb-5">
+                                    <div>
+                                      <% codezip.effects.use.boolean.forEach((item,index)=> { %>
+                                      <div class="row py-3 border-bottom">
+                                        <div class="col-4 align-self-center">
+                                          <h6>
+                                            <%= __("use_effects."+item) %>
+                                          </h6>
+                                        </div>
+                                        <% applies_true_text_list.push(__("use_effects."+item+".true")) %>
+                                        <% applies_false_text_list.push(__("use_effects."+item+".false")) %>
+                                        <div class="col row">
+                                          <div class="col d-flex dropdown-item p-0">
+                                            <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-1">
+                                            <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label fs-6">
+                                              <%= __("use_effects."+item+".true") %>
+                                            </label>
+                                          </div>
+                                          <div class="col d-flex dropdown-item p-0">
+                                            <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-0">
+                                            <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label fs-6">
+                                              <%= __("use_effects."+item+".false") %>
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <% }) %>
+                                    </div>
+                                    <!-- Other effects -->
+                                    <div class="row py-3 border-bottom">
+                                      <div class="col-4">
+                                        <h6>
+                                          <%= __("use_effects.OtherEffects") %>
+                                        </h6>
+                                        <p style="color: red;">
+                                          * <%= __("use_effects.중복선택가능") %>
+                                        </p>
+                                      </div>
+                                      <div class="col row">
+                                        <% for(let i=0; i< codezip.effects.use.other; i++){ %>
+                                        <% applies_true_text_list.push(__("use_effects."+i)) %>
+                                        <div class="col d-flex dropdown-item p-0">
+                                          <input class="applies_other form-check-input mx-3" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>-1">
+                                          <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill fs-6">
+                                            <%= __("use_effects."+i) %>
+                                          </label>
+                                        </div>
+                                        <% if(i%2==1){ %>
+                                        <div></div>
+                                        <% } %>
+                                        <% } %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- <div class="modal-footer text-center my-3">
+                                  <button type="button" class="btn-outline-gray  br-15 p-3 px-5" data-bs-dismiss="modal">
+                                    <%= __('users.newProject.option.btn.확인') %>
+                                  </button>
+                                </div> -->
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
+
+
+                        <!-- 색상 입력 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.color') %>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" name="color" id="color" placeholder="<%= __('plzInputText') %>" value="<%= project.color %>">
+                          </div>
+                        </div>
+
+
+                        <!-- 향 입력 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.fragrance') %>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" name="fragrance" id="fragrance" placeholder="<%= __('plzInputText') %>" value="<%= project.fragrance %>">
+                          </div>
+                        </div>
+
+
+                        <!-- 추가사항 입력 -->
+                        <div class="row mt-3 align-items-center">
+                          <div class="col-3">
+                            <h6>
+                              <%= __('users.newProject.option.etc') %>
+                            </h6>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" name="others" id="others" placeholder="<%= __('placeholder.options') %>" value="<%= project.others %>">
+                          </div>
+                        </div>
+
                       </div>
-
-
-                      <!-- 색상 입력 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.color') %>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" name="color" id="color" placeholder="<%= __('plzInputText') %>" value="<%= project.color %>">
-                        </div>
-                      </div>
-
-
-                      <!-- 향 입력 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.fragrance') %>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" name="fragrance" id="fragrance" placeholder="<%= __('plzInputText') %>" value="<%= project.fragrance %>">
-                        </div>
-                      </div>
-
-
-                      <!-- 추가사항 입력 -->
-                      <div class="row mt-3 align-items-center">
-                        <div class="col-3">
-                          <h6>
-                            <%= __('users.newProject.option.etc') %>
-                          </h6>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" name="others" id="others" placeholder="<%= __('placeholder.options') %>" value="<%= project.others %>">
-                        </div>
-                      </div>
-
                     </form>
 
                     <hr>

@@ -453,11 +453,16 @@
       });
     }
   </script>
+
+  <script>
+    const users_id = location.pathname.split('/')[3];
+  </script>
+
   <script>
     function recovery_user(id) {
       event.stopPropagation();
 
-      const url = '<%= codezip.url.admin.projects.recovery %>/' + location.pathname.split('/')[3] + '?n=' + id;
+      const url = '<%= codezip.url.admin.projects.recovery %>/' + users_id + '?n=' + id;
       fetch(url)
         .then(res => {
           if (res.ok) {
@@ -472,7 +477,7 @@
     function delete_user(id) {
       event.stopPropagation();
 
-      const url = '<%= codezip.url.admin.projects.delete %>/' + location.pathname.split('/')[3] + '?n=' + id;
+      const url = '<%= codezip.url.admin.projects.delete %>/' + users_id + '?n=' + id;
       fetch(url)
         .then(res => {
           if (res.ok) {
@@ -508,9 +513,10 @@
     const project_phase = JSON.parse('<%- JSON.stringify(project_phase) %>');
     const project_detail_phase = JSON.parse('<%- JSON.stringify(project_detail_phase) %>');
   </script>
+
   <script>
     function load_temp_projects(page = 1) {
-      const url = '<%= codezip.url.admin.api.temp_projects %>/' + location.pathname.split('/')[3];
+      const url = '<%= codezip.url.admin.api.temp_projects %>/' + users_id;
       fetch(url + "?p=" + page).then(res => {
           if (res.ok) {
             return res.json();
@@ -530,7 +536,7 @@
       console.log(data);
       let temp_html = '';
       data.rows.forEach((item, index) => {
-        temp_html += `<tr>
+        temp_html += `<tr onclick="location.href='<%= codezip.url.admin.projects.temp_project %>/${users_id}?n=${item.id}';">
           <td>${item.project_name}</td>
           <td>${project_detail_phase[0][item.detail_phase]}</td>
           <td>${new Intl.NumberFormat('<%= locale %>').format(item.moq)}</td>
@@ -558,7 +564,7 @@
   '<%= locale %>'
   <script>
     function load_progress_projects(page = 1) {
-      const url = '<%= codezip.url.admin.api.progress_projects %>/' + location.pathname.split('/')[3];
+      const url = '<%= codezip.url.admin.api.progress_projects %>/' + users_id;
       fetch(url + "?p=" + page).then(res => {
           if (res.ok) {
             return res.json();
@@ -578,7 +584,7 @@
       console.log(data);
       let temp_html = '';
       data.rows.forEach((item, index) => {
-        temp_html += `<tr>
+        temp_html += `<tr onclick="location.href='<%= codezip.url.admin.projects.progress_project %>/${users_id}?n=${item.id}';">
           <td>${item.project_name}</td>
           <td>${project_phase[item.phase]}</td>
           <td>${project_detail_phase[item.phase][item.detail_phase]}</td>
@@ -606,7 +612,7 @@
   </script>
   <script>
     function load_completed_projects(page = 1) {
-      const url = '<%= codezip.url.admin.api.completed_projects %>/' + location.pathname.split('/')[3];
+      const url = '<%= codezip.url.admin.api.completed_projects %>/' + users_id;
       fetch(url + "?p=" + page).then(res => {
           if (res.ok) {
             return res.json();

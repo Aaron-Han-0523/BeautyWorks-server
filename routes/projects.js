@@ -65,6 +65,12 @@ router
 // 상세 조회
 router
     .get('/:id', projectsController.detail)
+// 임시 저장 프로젝트
+router
+    .get('/temp_project/:id', projectsController.temp_project_detail)
+// 진행 중인 프로젝트
+router
+    .get('/progress_project/:id', projectsController.progress_project_detail)
 
 //// 목록 조회
 // 임시 저장 프로젝트
@@ -76,5 +82,6 @@ router
 // 완료된 프로젝트
 router
     .get('/completed_projects/:id', projectsController.completed_projects)
+
 
 module.exports = router;

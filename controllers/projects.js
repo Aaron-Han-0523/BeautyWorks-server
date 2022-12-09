@@ -283,3 +283,59 @@ exports.detail = async (req, res, next) => {
             res.status(500).end();
         })
 }
+
+exports.temp_project_detail = async (req, res, next) => {
+    const id = req.query.n;
+    let condition = { id: id }
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end();
+    } else {
+        condition.users_id = req.params.id;
+    }
+
+    projectsService
+        .readOne(condition)
+        .then((result) => {
+            console.log("find :", result);
+            if (req.api) {
+                res.json({ project: result })
+            } else if (base == 'admin') {
+                res.render('admin/project/temp_project', { project: result })
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        })
+}
+
+exports.progress_project_detail = async (req, res, next) => {
+    const id = req.query.n;
+    let condition = { id: id }
+    const user = res.locals.user;
+    const base = req.baseUrl.split('/')[1];
+
+    if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
+        return res.status(403).end();
+    } else {
+        condition.users_id = req.params.id;
+    }
+
+    projectsService
+        .readOne(condition)
+        .then((result) => {
+            console.log("find :", result);
+            if (req.api) {
+                res.json({ project: result })
+            } else if (base == 'admin') {
+                res.render('admin/project/progress_project', { project: result })
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).end();
+        })
+}

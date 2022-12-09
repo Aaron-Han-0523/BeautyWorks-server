@@ -653,7 +653,9 @@
 	"admin.menu.회원관리.개인정보.추가": "개인정보 추가",
 	"admin.menu.회원관리.개인정보.수정": "개인정보 수정",
 	"admin.menu.회원관리.개인정보.임시저장프로젝트": "회원 임시 저장한 프로젝트",
+	"admin.menu.회원관리.개인정보.임시저장프로젝트.상세": "임시 저장한 프로젝트 상세",
 	"admin.menu.회원관리.개인정보.진행중인프로젝트": "회원 진행중인 프로젝트",
+	"admin.menu.회원관리.개인정보.진행중인프로젝트.상세": "진행중인 프로젝트 상세",
 	"admin.menu.회원관리.개인정보.완료된프로젝트": "완료된 프로젝트",
 	"admin.menu.제품관리": "제품관리",
 	"admin.menu.제품관리.내용물": "내용물 데이터 관리",
@@ -742,5 +744,11 @@
 	"user_type.0": "일반회원",
 	"user_type.100": "관리자",
 	"admin.users.permission": "권한 설정",
-	"users.signUp.msg.emailAllow": "사용가능합니다."
+	"users.signUp.msg.emailAllow": "사용가능합니다.",
+	"placeholder.capacity": "placeholder.capacity",
+	"placeholder.target_age": "placeholder.target_age",
+	"placeholder.target_gender": "placeholder.target_gender",
+	"placeholder.target_country": "placeholder.target_country",
+	"placeholder.distribution_channel": "placeholder.distribution_channel",
+	"placeholder.overseas_certifications": "placeholder.overseas_certifications"
 }
