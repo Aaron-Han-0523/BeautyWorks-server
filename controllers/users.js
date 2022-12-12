@@ -193,7 +193,7 @@ exports.main = async (req, res) => {
     const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
-    const project = projectsService.allRead(Object.assign(condition, { phase: { [Op.between]: [1, 8] } }), 3)
+    const project = projectsService.allRead(Object.assign(condition, { phase: [1, 8] }), 3)
     const temp_project = projectsService.allRead(Object.assign(condition, { phase: 0 }), 2)
     const completed_project = projectsService.allRead(Object.assign(condition, { phase: 9 }), limit, skip)
 

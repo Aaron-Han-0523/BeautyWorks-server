@@ -153,7 +153,7 @@ exports.index = async (req, res, next) => {
     const limit = +req.query.limit || 4;
     const skip = (page - 1) * limit;
 
-    const project = projectsService.allRead(Object.assign(condition, { phase: { [Op.between]: [1, 8] } }))
+    const project = projectsService.allRead(Object.assign(condition, { phase: [1, 8] }))
     const temp_project = projectsService.allRead(Object.assign(condition, { phase: 0 }))
     const completed_project = projectsService.allRead(Object.assign(condition, { phase: 9 }), limit, skip)
 
@@ -204,7 +204,7 @@ exports.progress_projects = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
 
-    let condition = { phase: { [Op.between]: [1, 8] } };
+    let condition = { phase: [1, 8] };
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         condition.users_id = user.id;
         condition.delete_date = null;

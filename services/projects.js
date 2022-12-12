@@ -1,5 +1,6 @@
 const { Service } = require('../utils/template');
 const models = require('../models');
+const { Op, QueryTypes } = require('sequelize')
 const codezip = require('../codezip')
 
 const service = new Service(models.projects);
@@ -13,6 +14,7 @@ service.readOne = async (condition) => {
             include: [{
                 model: models.documents,
                 as: "documents",
+                where: condition,
             }],
         })
         .then(async (result) => {
@@ -61,33 +63,91 @@ service.readOne = async (condition) => {
         })
 }
 
-service.allRead = async (condition = {}, limit, skip) => {
-    return await service.model
-        .findAndCountAll({
-            raw: true,
-            include: [{
-                model: models.formulas,
-                as: "formula",
-                attributes:
-                    ["product_name"]
-            }, {
-                model: models.documents,
-                as: "documents",
-            }],
-            where: condition,
-            order: [
-                ['id', 'DESC']
-            ],
-            offset: skip,
-            limit: limit
+service.allRead = async (condition = {}, limit = 10, skip = 0) => {
+    let query = `
+    select formulas.product_name as "formula.product_name", documents.title as "documents.title", projects.*
+    from projects
+    left join formulas
+        on formulas.id=projects.formulas_id
+    left join documents
+        on documents.id = projects.id and documents.users_id = projects.users_id`
+    let where = `
+    where projects.users_id=${condition.users_id}`
+    if (condition.delete_date === null) {
+        where += ` and projects.delete_date is null `;
+    }
+    if (condition.phase != null) {
+        if (condition.phase instanceof Array) {
+            where += ` and projects.phase between ${condition.phase[0]} and ${condition.phase[1]} `;
+        } else {
+            where += ` and projects.phase=${condition.phase} `;
+        }
+    }
+    let option = `
+    order by projects.id desc
+    limit ${skip}, ${limit};
+    `
+    const data = models.sequelize.query(query + where + option, {
+        type: QueryTypes.SELECT
+    }).then(function (results, metadata) {
+        // 쿼리 실행 성공
+        // console.log("results")
+        // console.log(results)
+
+        return results;
+    }).catch(function (err) {
+        // 쿼리 실행 에러 
+        console.error(err);
+        throw err;
+    });
+
+    query = `select count(*) as count from projects`;
+    const count = models.sequelize.query(query + where, {
+        type: QueryTypes.SELECT
+    }).then(function (results, metadata) {
+        // 쿼리 실행 성공
+        console.log("results")
+        // console.log(results)
+
+        return results[0];
+    }).catch(function (err) {
+        // 쿼리 실행 에러 
+        console.error(err);
+        throw err;
+    });
+
+
+    return Promise.all([count, data])
+        .then(([count, data]) => {
+            return {
+                count: count.count,
+                rows: data
+            }
         })
-        .then(async (result) => {
-            console.log("find data Total :", result.count);
-            return result;
-        })
-        .catch((err) => {
-            throw err;
-        })
+
+    // return await service.model
+    //     .findAndCountAll({
+    //         raw: true,
+    //         include: [{
+    //             model: models.formulas,
+    //             as: "formula",
+    //             attributes:
+    //                 ["product_name"]
+    //         }],
+    //         where: condition,
+    //         order: [
+    //             ['id', 'DESC']
+    //         ],
+    //         offset: skip,
+    //         limit: limit
+    //     })
+    //     .then(async (result) => {
+    //         console.log("find data Total :", result.count);
+    //         return result;
+    //     })
+    //     .catch((err) => {
+    //         throw err;
+    //     })
 }
 
 module.exports = service;

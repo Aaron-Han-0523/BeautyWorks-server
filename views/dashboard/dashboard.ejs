@@ -61,7 +61,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <% project.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
@@ -101,7 +101,8 @@
                       </div>
                     </div>
                   </div>
-                  
+
+                  <% console.log(temp_project) %>
                   <% temp_project.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
@@ -124,7 +125,7 @@
                 </div>
               </div>
 
-              
+
               <!-- Completed Project -->
               <div class="widget-content widget-content-area br-20 px-4 mt-3">
                 <div class="form-group ms-3">
@@ -211,7 +212,7 @@
                     </div>
 
                     <div class="widget row mx-0 h-100 align-content-center">
-                      
+
                       <% recommended_formula.forEach((item,index)=>{ %>
                       <div class="col-4">
                         <a class="hover" href="<%= codezip.url.users.formula.main +'/'+item.id %>">
@@ -251,7 +252,7 @@
                     </div>
 
                     <div class="widget row mx-0 h-100 align-content-center">
-                      
+
                       <div class="table-responsive p-0">
                         <table class="table text-break">
                           <thead class="text-center">
@@ -309,7 +310,7 @@
                       <% news.forEach((item,index)=>{ %>
                       <a class="pb-2 hover h-50" href="<%= codezip.url.users.news.main + '/' + item.id %>">
                         <div class="widget row mx-0 align-content-center mt-3 text-ellipsis" style="height: 110px;">
-                            <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
+                          <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
                           <div class="fs-6"><%= item.title %></div>
                           <div>
                             <%= `${formatDate(item.update_date)}` %>
@@ -345,7 +346,7 @@
                       <% community.forEach((item,index)=>{ %>
                       <a class="pb-2 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
                         <div class="widget row mx-0 align-content-center mt-3 text-ellipsis" style="height: 110px;">
-                            <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
+                          <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
                           <div class="fs-6"><%= item.title %></div>
                           <div class="">
                             <%= `${formatDate(item.update_date)}` %>

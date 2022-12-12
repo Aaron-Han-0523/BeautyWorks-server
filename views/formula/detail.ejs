@@ -259,16 +259,16 @@
       select_gallery(thumbnail);
     }
   </script>
-  
+
   <script>
     function project_next(formula_id, category1, category2) {
       const project_id = new URLSearchParams(location.search).get('n');
       if (!project_id) return location.href = "<%= codezip.url.users.myProject.main %>";
 
-      const url = location.origin + '/<%= codezip.url.users.api.projects.edit %>/' + project_id;
+      const url = '<%= codezip.url.users.newProject._1 %>?n=' + project_id;
 
       fetch(url, {
-        method: 'put',
+        method: 'post',
         body: new URLSearchParams({
           formulas_id: formula_id,
           category1: category1,

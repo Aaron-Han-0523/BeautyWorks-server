@@ -54,6 +54,10 @@ i {
   /* font-size: 1.25rem; */
 }
 
+label {
+  color: #000;
+}
+
 .hover>*:hover {
   color: var(--BW-blue) !important;
 }
