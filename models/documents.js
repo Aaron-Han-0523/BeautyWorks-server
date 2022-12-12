@@ -7,8 +7,8 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       comment: "사용자 식별번호",
       references: {
-        model: 'users',
-        key: 'id'
+        model: 'projects',
+        key: 'users_id'
       }
     },
     id: {

@@ -70,6 +70,9 @@ service.allRead = async (condition = {}, limit, skip) => {
                 as: "formula",
                 attributes:
                     ["product_name"]
+            }, {
+                model: models.documents,
+                as: "documents",
             }],
             where: condition,
             order: [

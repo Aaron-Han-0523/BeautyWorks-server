@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body class="layout-boxed">
+
+  <%- include ("../partials/loader.ejs") %>
+
+  <%- include ("../partials/client-nav.ejs") %>
+  <%- include ("../partials/chatMark.ejs") %>
+
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <%- include ("../partials/client-sidebar.ejs") %>
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
+
+        <div class="middle-content  p-0">
+
+          <!-- BREADCRUMB -->
+          <div class="row px-3">
+            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
+              <div class="col-3 h6 pt-2">
+                <h6 class="main-menu">
+                  <%= __('Project') %>
+                </h6>
+                <h4><strong>
+                    <%= __('My Project') %>
+                  </strong></h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-3 ">
+            <div class="breadcrumb align-items-start d-flex br-20">
+              <div class="col">
+                <h5><strong>
+                    <%= __('users.myProject.feedback') %>
+                  </strong></h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 justify-content-center">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+
+              <div class="widget w-100" style="padding: 5%;">
+                <form id="feedback" method="post">
+                  <div class="form-group p-5">
+                    <div class="d-flex mt-3">
+                      <div class="col-3 h6 pt-2">
+                        <%= __('project.project_name') %>
+                      </div>
+                      <input class="form-control" type="text" required value="<%= project.project_name %>" disabled>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                      <div class="col-3 h6 pt-2">
+                        <%= __('project.brand_name') %>
+                      </div>
+                      <input class="form-control" type="text" required value="<%= project.brand_name %>" disabled>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                      <div class="col-3 h6 pt-2">
+                        <%= __('project.category2') %>
+                      </div>
+                      <input class="form-control" type="text" required value="<%= __('product'+project.category1+'.'+project.category2) %>" disabled>
+                    </div>
+
+                    <!-- feedback -->
+                    <div class="d-flex mt-3">
+                      <div class="col-3 h6 pt-2">
+                        <%= __('project.feedback') %>
+                      </div>
+                      <textarea rows="10" maxlength="5000" class="form-control" name="feedback" type="text" required><%= project.feedback %></textarea>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="text-center mt-4">
+                    <button class="btn btn-outline-primary px-5">
+                      <%= __('btn.submit') %>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--  END CONTENT AREA  -->
+
+    <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    feedback.onsubmit = (event) => {
+      event.preventDefault();
+
+      let body = new FormData(feedback);
+      body.set("detail_phase", 4);
+
+      fetch(feedback.action, {
+        method: feedback.method,
+        body: new URLSearchParams(body)
+      }).then(res => {
+        if (res.ok) {
+          location.href = "<%= codezip.url.users.myProject.main %>";
+        } else {
+          throw new Error(res.statusText);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('msg.fail') %>");
+      })
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+</html>

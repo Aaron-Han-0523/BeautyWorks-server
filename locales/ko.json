@@ -767,5 +767,22 @@
 	"users.formula.select.label.category2": "users.formula.select.label.category2",
 	"users.formula.subTitle.top": "users.formula.subTitle.top",
 	"users.formula.subTitle.new": "users.formula.subTitle.new",
-	"users.formula.msg.FailSearch": "users.formula.msg.FailSearch"
+	"users.formula.msg.FailSearch": "users.formula.msg.FailSearch",
+	"project.phase": "현재 진행단계",
+	"project.detail_phase": "상세 진행단계",
+	"project.sample_number": "샘플링 차수",
+	"project.tracking_number": "운송장번호 by 택배사",
+	"project.sample_feedback": "샘플링 피드백 내용",
+	"project.product_name": "제품명",
+	"project.brand_name": "브랜드명",
+	"project.category1": "품목",
+	"project.feedback": "피드백 내용",
+	"project.packaging_tooltip": "용기 단상자 부자재 입고 알림 내용",
+	"project.shipment_date": "제품 출고 완료 날짜",
+	"documents.title": "문서 제목",
+	"placeholder.message": "문서 설명을 입력해주세요.",
+	"project.project_name": "프로젝트명(제품명)",
+	"placeholder.content": "내용을 입력해주세요.",
+	"msg.success": "msg.success",
+	"Download": "Download"
 }

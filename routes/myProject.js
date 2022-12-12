@@ -6,10 +6,20 @@ const projectsService = require('../services/projects');
 
 /* GET myProject listing. */
 
-// 샘플의뢰서
+// 샘플 피드백
 router
     //   .post('/isTarget', myProjectController.edit)
-    .get('/sampleReq', (req, res, next) => res.render('myProject/sampleReq'))
+    .post('/feedback', projectsController.edit)
+    .get('/feedback', (req, res, next) => {
+        projectsService.readOne({
+            id: req.query.n,
+            users_id: res.locals.user.id
+        }).then(result => {
+            res.render('myProject/feedback', { project: result });
+        }).catch(err => {
+            res.status(500);
+        })
+    })
 
 // 샘플 확정
 router

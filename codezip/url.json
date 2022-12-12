@@ -14,7 +14,7 @@
         "dashboard": "/users/Dashboard",
         "myProject": {
             "main": "/users/myProject",
-            "dashboard": "/users/myProject/dashboard"
+            "feedback": "/users/myProject/feedback"
         },
         "newProject": {
             "main": "/users/newProject",
@@ -67,7 +67,7 @@
             "formula": "/users/api/formula",
             "ingredient": "/users/api/ingredient",
             "projects": {
-                "edit": "users/api/projects/edit"
+                "edit": "/users/api/projects/edit"
             },
             "myPage": {
                 "wishList": "/users/api/myPage/wishList",
@@ -78,8 +78,8 @@
         }
     },
     "admin": {
-        "login":"/admin/login",
-        "logout":"/admin/logout",
+        "login": "/admin/login",
+        "logout": "/admin/logout",
         "api": {
             "users": "/admin/api/users",
             "temp_projects": "/admin/api/projects/temp_projects",
@@ -126,8 +126,8 @@
             "edit": "/admin/projects/edit",
             "delete": "/admin/projects/delete",
             "recovery": "/admin/projects/recovery",
-            "temp_project":"/admin/projects/temp_project",
-            "progress_project":"/admin/projects/progress_project"
+            "temp_project": "/admin/projects/temp_project",
+            "progress_project": "/admin/projects/progress_project"
         },
         "formula": {
             "main": "/admin/formula",

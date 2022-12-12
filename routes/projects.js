@@ -11,12 +11,22 @@ router
         console.log(req.files);
         const files = req.files;
 
-        if (files) {
-            let paths = [];
-            files.forEach((file, index) => {
-                paths.push('/' + file.path)
-            })
-            req.body["image_paths"] = paths.join(',');
+        if (files && Object.keys(files).length > 0) {
+            if (files.image_paths) {
+                let paths = [];
+                files.image_paths.forEach((file, index) => {
+                    paths.push('/' + file.path)
+                })
+                req.body["image_paths"] = paths.join(',');
+            }
+
+            if (files.file_paths) {
+                let paths = [];
+                files.file_paths.forEach((file, index) => {
+                    paths.push('/' + file.path)
+                })
+                req.body["file_paths"] = paths.join(',');
+            }
         }
 
 
@@ -43,6 +53,7 @@ router
 
 // 편집
 router
+    .post('/edit', projectsController.edit)
     .post('/edit/:id',
         myUtils.upload('projects').fields([{ name: 'file_paths' }, { name: 'image_paths' }]),
         myUtils.multerConsoleError,
@@ -68,9 +79,12 @@ router
 // 임시 저장 프로젝트
 router
     .get('/temp_project/:id', projectsController.temp_project_detail)
+    .post('/temp_project/:id', projectsController.edit)
+
 // 진행 중인 프로젝트
 router
     .get('/progress_project/:id', projectsController.progress_project_detail)
+    .post('/progress_project/:id', projectsController.edit)
 
 //// 목록 조회
 // 임시 저장 프로젝트

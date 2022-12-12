@@ -58,23 +58,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- /* 테스트 데이터 생성 -->
-                  <div>
-                    <%# let temp_project=[]; %>
-                    <%# temp_project.push({
-                      project_name:"My Suncream",
-                      phase:0,
-                      detail_phase:1,
-                      create_date: new Date(2022,10,15)
-                      }) %>
-                    <%# temp_project.push({
-                      project_name:"My Suncream",
-                      phase:0,
-                      detail_phase:2,
-                      create_date: new Date(2022,10,25)
-                      }) %>
-                  </div>
-                  <!-- 테스트 데이터 생성 */ -->
+
                   <% temp_project.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
@@ -111,20 +95,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- /* 테스트 데이터 생성 -->
-                  <div>
-                    <%# let project=[]; %>
-                    <%# for(let i=1;i< 9;i++){
-                      project.push({
-                        project_name:"My Suncream"+i,
-                        phase:i,
-                        detail_phase:1,
-                        sampleNumber: 10,
-                        create_date: new Date(2022,10,i)
-                      })
-                    } %>
-                  </div>
-                  <!-- 테스트 데이터 생성 */ -->
+
                   <% project.forEach((item,index)=>{
                     let number_of_detail_phase = codezip.numberOfProjectState.detail_phase[item.phase] %>
                   <div class="row">
@@ -143,10 +114,10 @@
                             </div>
                             <div class="row text-end me-4">
                               <% if(item.phase==1) { %>
-                              <% if((item.detail_phase+1)==number_of_detail_phase) { %>
-                              <button class="btn btn-outline-primary" type="button"><%= __('users.myProject.btn.샘플확정') %></button>
+                              <% if([3,4].includes(item.detail_phase)) { %>
+                              <button class="btn btn-outline-primary px-3" type="button" onclick="formula_confirmed('<%= item.id %>');"><%= __('users.myProject.btn.샘플확정') %></button>
                               <% }else{ %>
-                              <button class="btn btn-outline-gray" disabled><%= __('users.myProject.btn.샘플확정') %></button>
+                              <button class="btn btn-outline-gray px-3" disabled><%= __('users.myProject.btn.샘플확정') %></button>
                               <% }}else{ %>
                               <% } %>
                             </div>
@@ -155,177 +126,204 @@
                         </div>
                         <div class="stepper-wrapper">
                           <% for(let i=0; i < number_of_detail_phase; i++ ) { %>
+                          <!-- 완료된 단계 -->
                           <% if(i < item.detail_phase) { %>
-                          <div class="stepper-item _<%= item.phase %> completed">
-                            <% }else if(i == item.detail_phase) { %>
-                            <div class="stepper-item _<%= item.phase %> active">
+                          <% if(item.phase==1 && i==0){ %>
+                          <div class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.request_date') + ' : ' + formatDate(item.request_date)  %>">
+                            <!-- <%# }else if(item.phase==1 && i==2){ %>
+                            <div class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tracking_number') + ' : ' + item.tracking_number  %>"> -->
+                            <% }else if(item.phase==2 && i==0){ %>
+                            <div class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
                               <% }else{ %>
-                              <div class="stepper-item _<%= item.phase %>">
+                              <div class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip">
                                 <% } %>
-                                <div class="step-counter"></div>
-                                <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
-                                  <% if(item.phase==1 && i==1) { %>
-                                  <%=  '(' + __('users.myProject.stepName.add.sampleNumber',item.sample_number) + ')' %>
-                                  <% } %>
-                                </div>
-                              </div>
-                              <% } %>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <% }) %>
+                                <!-- 진행중인 단계 -->
+                                <% }else if(i == item.detail_phase) { %>
+                                <% if(item.phase==1 && i==0){ %>
+                                <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.request_date') + ' : ' + formatDate(item.request_date)  %>">
+                                  <% }else if(item.phase==1 && i==2){ %>
+                                  <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tracking_number') + ' : ' + item.tracking_number  %>">
+                                    <% }else if(item.phase==1 && [3,4].includes(i)){ %>
+                                    <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip hover" onclick="location.href='<%= codezip.url.users.myProject.feedback %>?n=<%= item.id %>';" style="cursor: pointer;">
+                                      <% }else if(item.phase==2 && i==1){ %>
+                                      <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.2-1') %>">
+                                        <% }else if(item.phase==3 && i==0){ %>
+                                        <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;" title="<%= __('project.tooltip.3') %>">
+                                          <% }else if(item.phase==3 && i==1){ %>
+                                          <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.3') %>">
+                                            <% }else if(item.phase==4 && i==0){ %>
+                                            <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.4-0') %>">
+                                              <% }else if(item.phase==4 && i==1){ %>
+                                              <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.4-1') %>">
+                                                <% }else if(item.phase==4 && i==2){ %>
+                                                <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
+                                                  <% }else if(item.phase==5 && i==0){ %>
+                                                  <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= item.packaging_tooltip %>">
+                                                    <% }else if(item.phase==5 && i==1){ %>
+                                                    <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.5-1') %>">
+                                                      <% }else if(item.phase==7 && i==0){ %>
+                                                      <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.7-0') %>">
+                                                        <% }else if(item.phase==7 && i==1){ %>
+                                                        <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
+                                                          <% }else if(item.phase==8 && i==0){ %>
+                                                          <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.tooltip.8-0') %>">
+                                                            <% }else if(item.phase==8 && i==1){ %>
+                                                            <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip" title="<%= __('project.shipment_date') + ' : ' + formatDate(item.shipment_date)  %>">
 
-                    </div>
-                  </div>
+                                                              <% }else{ %>
+                                                              <div class="stepper-item _<%= item.phase %> _<%= i %>_ active bs-tooltip">
+                                                                <% } %>
+                                                                <% }else{ %>
+                                                                <div class="stepper-item _<%= item.phase %> _<%= i %>_">
+                                                                  <% } %>
+                                                                  <div class="step-counter"></div>
+                                                                  <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
+                                                                    <% if(item.phase==1 && i==1) { %>
+                                                                    <%=  '(' + __('users.myProject.stepName.add.sampleNumber',item.sample_number) + ')' %>
+                                                                    <% } %>
+                                                                  </div>
+                                                                </div>
+                                                                <% } %>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <% }) %>
 
-                  <!-- Completed Project -->
-                  <!-- /* 테스트 데이터 생성 -->
-                  <div>
-                    <%# let completed_project={rows:[],page:1,count:10}; %>
-                    <%# completed_project.rows.push({
-                      project_name:"My Suncream1",
-                      capacity:"110ml",
-                      category1:0,
-                      category2:0,
-                      total_order_quantity:10000,
-                      recent_order_date:new Date(2022,10,5),
-                      image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg,http://ktsmemo.cdn3.cafe24.com/p/0455.jpg,http://oldmidi.cdn3.cafe24.com/p/0099.jpg"
-                    })%>
-                    <%# completed_project.rows.push({
-                      project_name:"My Suncream2",
-                      capacity:"120ml",
-                      category1:0,
-                      category2:0,
-                      total_order_quantity:20000,
-                      recent_order_date:new Date(2022,10,15),
-                      image_paths:"https://ktsmemo.cafe24.com/p/0716.jpg,http://oldmidi.cdn3.cafe24.com/p/0786.jpg,http://ktsmemo.cdn3.cafe24.com/p/0731.jpg"
-                    })%>
-                    <%# completed_project.rows.push({
-                      project_name:"My Suncream3",
-                      capacity:"110g",
-                      category1:0,
-                      category2:0,
-                      total_order_quantity:30000,
-                      recent_order_date:new Date(2022,10,25),
-                      image_paths:"http://ktsmemo.cdn3.cafe24.com/p/0742.jpg,https://ktsmemo.cafe24.com/p/0646.jpg,https://ktsmemo.cafe24.com/p/0289.jpg"
-                    })%>
-                    <%# completed_project.rows.push({
-                      project_name:"My Suncream4",
-                      capacity:"210g",
-                      category1:0,
-                      category2:0,
-                      total_order_quantity:10000,
-                      recent_order_date:new Date(2022,10,5),
-                      image_paths:"http://oldmidi.cdn3.cafe24.com/p/0553.jpg"
-                    })%>
-                  </div>
-                  <!-- 테스트 데이터 생성 */ -->
-                  <!-- Completed Project -->
-                  <div class="widget-content widget-content-area br-20 px-4 mt-3">
-                    <div class="form-group ms-3">
-                      <div class="row mb-3">
-                        <div class="justify-content-between d-flex px-0">
-                          <div>
-                            <h5><strong>
-                                <%= __("users.dashboard.header.CompletedProject") %>
-                              </strong>
-                            </h5>
-                          </div>
-                        </div>
-                      </div>
+                                                      </div>
+                                                    </div>
 
-                      <div class="row mt-3">
-                        <% if(completed_project.count){ %>
-                        <div class="widget p-4 row mx-0 justify-content-center" id="completed_project">
-                          <% completed_project.rows.forEach((item,index)=>{ %>
-                          <div class="col-3 d-flex flex-column">
-                            <!-- style="height: calc(100%-50px);" -->
-                            <% if(item.image_paths) { %>
-                            <div class="preview">
-                              <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
-                            </div>
-                            <% } %>
-                            <div class="mb-auto mt-3">
-                              <h6>
-                                <%= item.project_name %>
-                              </h6>
-                              <h6>
-                                <%= __("product"+item.category1+"."+item.category2) %>
-                                <%= " " + item.capacity %>
-                              </h6>
-                              <p>
-                                <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                                <%= ' : ' + item.total_order_quantity %>
-                                <br>
-                                <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                                <%= ' : ' + formatDate(item.recent_order_date) %>
-                              </p>
-                            </div>
-                            <div class="row mx-0 mt-3">
-                              <button class="btn btn-outline-primary" type="button">
-                                <%= __('REORDER') %>
-                              </button>
-                            </div>
-                          </div>
-                          <% }) %>
+                                                    <!-- Completed Project -->
+                                                    <div class="widget-content widget-content-area br-20 px-4 mt-3">
+                                                      <div class="form-group ms-3">
+                                                        <div class="row mb-3">
+                                                          <div class="justify-content-between d-flex px-0">
+                                                            <div>
+                                                              <h5><strong>
+                                                                  <%= __("users.dashboard.header.CompletedProject") %>
+                                                                </strong>
+                                                              </h5>
+                                                            </div>
+                                                          </div>
+                                                        </div>
 
-                          <!-- pagination -->
-                          <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
-                          <%- make_pagination_by_href(
-                              __,
-                              page,
-                              completed_project.count,
-                              codezip.url.users.dashboard,
-                              4
-                            ) %>
+                                                        <div class="row mt-3">
+                                                          <% if(completed_project.count){ %>
+                                                          <div class="widget p-4 row mx-0 justify-content-center" id="completed_project">
+                                                            <% completed_project.rows.forEach((item,index)=>{ %>
+                                                            <div class="col-3 d-flex flex-column">
+                                                              <!-- style="height: calc(100%-50px);" -->
+                                                              <% if(item.image_paths) { %>
+                                                              <div class="preview">
+                                                                <img class="br-15" src="<%= item.image_paths.split(',')[0] %>">
+                                                              </div>
+                                                              <% } %>
+                                                              <div class="mb-auto mt-3">
+                                                                <h6>
+                                                                  <%= item.project_name %>
+                                                                </h6>
+                                                                <h6>
+                                                                  <%= __("product"+item.category1+"."+item.category2) %>
+                                                                  <%= " " + item.capacity %>
+                                                                </h6>
+                                                                <p>
+                                                                  <%= __("users.dashboard.CompletedProject.Total발주수량") %>
+                                                                  <%= ' : ' + item.total_order_quantity %>
+                                                                  <br>
+                                                                  <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
+                                                                  <%= ' : ' + formatDate(item.recent_order_date) %>
+                                                                </p>
+                                                              </div>
+                                                              <div class="row mx-0 mt-3">
+                                                                <button class="btn btn-outline-primary" type="button">
+                                                                  <%= __('REORDER') %>
+                                                                </button>
+                                                              </div>
+                                                            </div>
+                                                            <% }) %>
 
-                        </div>
-                        <% } %>
-                      </div>
-                    </div>
-                  </div>
+                                                            <!-- pagination -->
+                                                            <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
+                                                            <%- make_pagination_by_href(
+                                  __,
+                                  page,
+                                  completed_project.count,
+                                  codezip.url.users.dashboard,
+                                  4
+                                ) %>
 
-                </div>
+                                                          </div>
+                                                          <% } %>
+                                                        </div>
+                                                      </div>
+                                                    </div>
 
-              </div>
-            </div>
-          </div>
-          <!--  END CONTENT AREA  -->
+                                                  </div>
 
-          <%- include ("../partials/footer.ejs") %>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!--  END CONTENT AREA  -->
 
-        </div>
-        <!-- END MAIN CONTAINER -->
+                                          <%- include ("../partials/footer.ejs") %>
 
-        <%- include ("../partials/commonScrpits.ejs") %>
+                                        </div>
+                                        <!-- END MAIN CONTAINER -->
 
-        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-        <script>
-          let _ = new Swiper('.swiper-container', {
+                                        <%- include ("../partials/commonScrpits.ejs") %>
 
-            slidesPerView: 3, // 동시에 보여줄 슬라이드 갯수
-            spaceBetween: 20, // 슬라이드간 간격
-            slidesPerGroup: 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+                                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                                        <!-- <script>
+                let _ = new Swiper('.swiper-container', {
 
-            // 그룹수가 맞지 않을 경우 빈칸으로 메우기
-            // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-            loopFillGroupWithBlank: true,
+                  slidesPerView: 3, // 동시에 보여줄 슬라이드 갯수
+                  spaceBetween: 20, // 슬라이드간 간격
+                  slidesPerGroup: 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 
-            loop: false, // 무한 반복
+                  // 그룹수가 맞지 않을 경우 빈칸으로 메우기
+                  // 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+                  loopFillGroupWithBlank: true,
 
-            pagination: { // 페이징
-              el: '.swiper-indicator',
-              clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-            },
-            navigation: { // 네비게이션
-              nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
-              prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
-            }
-          });
-        </script>
-        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-        <%- include ("../partials/chatMark.ejs") %>
+                  loop: false, // 무한 반복
+
+                  pagination: { // 페이징
+                    el: '.swiper-indicator',
+                    clickable: true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+                  },
+                  navigation: { // 네비게이션
+                    nextEl: '.swiper-btn-next', // 다음 버튼 클래스명
+                    prevEl: '.swiper-btn-prev', // 이번 버튼 클래스명
+                  }
+                });
+              </script> -->
+                                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                                        <%- include ("../partials/chatMark.ejs") %>
+
+                                        <script>
+                                          function formula_confirmed(id) {
+                                            let chk = confirm("<%= __('msg.confirm') %>");
+                                            if (chk) {
+                                              const url = "<%= codezip.url.users.api.projects.edit %>";
+                                              fetch(url + "?n=" + id, {
+                                                method: "post",
+                                                body: new URLSearchParams({
+                                                  phase: 2,
+                                                  detail_phase: 0
+                                                })
+                                              }).then(res => {
+                                                if (res.ok) {
+                                                  location.reload();
+                                                } else {
+                                                  throw new Error(res.statusText);
+                                                }
+                                              }).catch(err => {
+                                                console.error(err);
+                                                alert("<%= __('msg.fail') %>");
+                                              })
+                                            }
+                                          }
+                                        </script>
 
 </body>
 

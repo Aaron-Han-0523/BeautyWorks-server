@@ -81,12 +81,12 @@ exports.edit = async (req, res, next) => {
         }
     }
 
-    let document = documentsService.update(body, condition);
+    let document = documentsService.upsert(Object.assign(body, condition));
     let project = projectsService.update(body, condition);
 
     Promise.all([project, document])
         .then((result) => {
-            res.end();
+            res.redirect("back");
             if (base == "admin") {
                 usersService.update({ is_project_update: 1 }, { id: condition.users_id })
             }

@@ -55,30 +55,17 @@
             <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
 
               <div class="widget w-100 p-5">
-                <div>
-                  <!-- 테스트 데이터 -->
-                  <%
-                    let page = 1;
-                    let documents = {count:100, rows:[]};
-                    for(let i=0; i< 10; i++){
-                        documents.rows.push({
-                            id:i,
-                            project_name:"테스트프로젝트"+i,
-                            message:i+"번째 테스트데이터입니다.",
-                            file_path: null,
-                            create_date: new Date()
-                        })
-                    }
-                    %>
-                </div>
+                
                 <div>
                   <% documents.rows.forEach((item, index)=>{ %>
                   <a class="form-control my-3 p-3" href="<%= codezip.url.users.documents +'/'+ item.id %>">
                     <div class="d-flex justify-content-between h6 m-0">
                       <!-- 프로젝트 명-->
                       <div><%= item.project_name %></div>
+                      <!-- 문서 제목 -->
+                      <div><%= item["documents.title"] %></div>
                       <!-- 생성일 -->
-                      <div><%= formatDate(item.create_date) %></div>
+                      <div><%= formatDate(item.update_date) %></div>
                     </div>
                   </a>
                   <% }) %>

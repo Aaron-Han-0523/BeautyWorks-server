@@ -29,7 +29,7 @@
           <!-- BREADCRUMB -->
           <div class="row mt-5">
             <div class="breadcrumb justify-content-center br-20 ">
-              <div class="p-1 col-4 text-center">
+              <div class="text-center">
                 <h2>
                   <strong>
                     <%= __("admin.menu.회원관리.개인정보.진행중인프로젝트.상세") %>
@@ -47,95 +47,126 @@
 
               <div class="widget-content widget-content-area br-20 p-4">
 
-
-                <form method="post">
-
-
+                <form id="progress_project" method="post" enctype="multipart/form-data">
 
                   <div class="form-group p-5">
                     <div class="d-flex" style="justify-content: space-between; margin-bottom: 34px;">
-                      <h3 style="display: inline-block;">프로젝트 명</h3>
-                      <button type="button">적용</button>
+                      <h3 style="display: inline-block;"><%= project.project_name %></h3>
+                      <button class="btn px-5"><%= __("btn.Save") %></button>
                     </div>
 
-                    <div class="d-flex mt-3"><label for="phase">현재 진행단계</label>
+                    <div class="d-flex mt-3">
+                      <label class="col-3" for="phase"><%= __("project.phase") %></label>
                       <select name="phase" id="phase" class="form-select">
-                        <option value="">선택</option>
-                        <option value="test">test</option>
-
+                        <% for(let i=0; i< codezip.numberOfProjectState.phase; i++){ %>
+                        <% if(project.phase==i){ %>
+                        <option selected value="<%= i %>"><%= __("project_phase"+i) %></option>
+                        <% }else{ %>
+                        <option value="<%= i %>"><%= __("project_phase"+i) %></option>
+                        <% } %>
+                        <% } %>
                       </select>
                     </div>
 
-                    <div class="d-flex mt-3"><label for="detail_phase">상세 진행단계</label>
+                    <div class="d-flex mt-3"><label class="col-3" for="detail_phase"><%= __("project.detail_phase") %></label>
                       <select name="detail_phase" id="detail_phase" class="form-select">
-                        <option value="">선택</option>
-                        <option value="test">test</option>
-
+                        <% for(let i=0; i< codezip.numberOfProjectState.detail_phase[project.phase]; i++){ %>
+                        <% if(project.detail_phase==i){ %>
+                        <option selected value="<%= i %>"><%= __("project_phase"+project.phase+'.'+i) %></option>
+                        <% }else{ %>
+                        <option value="<%= i %>"><%= __("project_phase"+project.phase+'.'+i) %></option>
+                        <% } %>
+                        <% } %>
                       </select>
                     </div>
 
-                    <div class="d-flex mt-3"><label for="sample_number">샘플링 차수</label>
-                      <input class="form-control" id="sample_number" name="sample_number" type="text" placeholder="">
+                    <div class="d-flex mt-3"><label class="col-3" for="sample_number"><%= __("project.sample_number") %></label>
+                      <input class="form-control" id="sample_number" name="sample_number" type="text" value="<%= project.sample_number %>">
 
                     </div>
 
-                    <div class="d-flex mt-3"><label for="tracking_number">운송장번호 by 택배사</label>
-                      <input class="form-control" id="tracking_number" name="tracking_number" type="text" placeholder="">
+                    <div class="d-flex mt-3"><label class="col-3" for="tracking_number"><%= __("project.tracking_number") %></label>
+                      <input class="form-control" id="tracking_number" name="tracking_number" type="text" value="<%= project.tracking_number %>">
 
                     </div>
 
-                    <div style="margin-top: 30px">
+                    <hr class="my-5">
 
-                      <h5 style="font-weight: 700;">샘플링 피드백 내용</h5>
+                    <div class="py-5">
 
-                      <div class="d-flex mt-3"><label for="product_name">Product Name</label>
-                        <input class="form-control" id="product_name" name="product_name" type="text" placeholder="">
+                      <h5 style="font-weight: 700;"><%= __("project.sample_feedback") %></h5>
+
+                      <div class="d-flex mt-3"><label class="col-3" for="project_name"><%= __("project.project_name") %></label>
+                        <input class="form-control" id="project_name" name="project_name" type="text" value="<%= project.project_name %>">
                       </div>
 
-                      <div class="d-flex mt-3"><label for="brand_name">Brand Name</label>
-                        <input class="form-control" id="brand_name" name="brand_name" type="text" placeholder="">
+                      <div class="d-flex mt-3"><label class="col-3" for="brand_name"><%= __("project.brand_name") %></label>
+                        <input class="form-control" id="brand_name" name="brand_name" type="text" value="<%= project.brand_name %>">
                       </div>
 
-                      <div class="d-flex mt-3"><label for="category1">Category</label>
-                        <input class="form-control" id="category1" name="category1" type="text" placeholder="">
-
+                      <div class="d-flex mt-3"><label class="col-3" for="category1"><%= __("project.category1") %></label>
+                        <input class="form-control" id="category1" name="category1" type="text" value="<%= __('product'+project.category1+'.'+project.category2) %>" disabled>
                       </div>
 
-                      <div class="d-flex mt-3"><label for="feedback">Write feedback</label>
-                        <textarea class="form-control" id="feedback" name="feedback" type="text" placeholder="" style="height: 150px;"></textarea>
-
+                      <div class="d-flex mt-3"><label class="col-3" for="feedback"><%= __("project.feedback") %></label>
+                        <textarea class="form-control" id="feedback" name="feedback" type="text" placeholder="" style="height: 150px;"><%= project.feedback %></textarea>
                       </div>
                     </div>
 
-                    <div class="mt-3"><label for="packaging_tooltip">용기 단상자 부자재 입고 알림 내용 작성</label>
-                      <textarea class="form-control" id="packaging_tooltip" name="packaging_tooltip" type="text" placeholder="진행단계 설명을 입력해주세요" style="height: 150px;"></textarea>
+                    <hr>
 
+                    <div class="py-5">
+                      <label for="packaging_tooltip"><%= __("project.packaging_tooltip") %></label>
+                      <textarea class="form-control" id="packaging_tooltip" name="packaging_tooltip" type="text" placeholder="<%= __('placeholder.content') %>" style="height: 150px;"><%= project.packaging_tooltip %></textarea>
                     </div>
 
-                    <div class="d-flex mt-3"><label for="shipment_date">제고 출고 완료 날짜 선택</label>
-                      <input class="form-control" id="shipment_date" name="shipment_date" type="date" placeholder="">
+                    <hr>
 
+                    <div class="py-5">
+                      <label for="shipment_date"><%= __("project.shipment_date") %></label>
+                      <input class="form-control w-auto" id="shipment_date" name="shipment_date" type="date" placeholder="" value="<%= formatDateTime(project.shipment_date,'-').slice(0,10) %>">
                     </div>
 
-                    <div class="mt-3">
-                      <input class="form-control" id="title" name="title" type="text" placeholder="문서 제목">
+                    <hr>
 
+                    <div class="mt-5">
+                      <input class="form-control" id="title" name="title" type="text" placeholder="<%= __('documents.title') %>" value="<%= project['documents.title'] %>">
                     </div>
 
-                    <div class="zip-upload d-flex mt-3"><label for="file_paths">문서 업로드</label>
-                      <input class="form-control" id="file_paths" name="file_paths" type="file" placeholder="압축 파일명" style="line-height: 38.5px;">
+                    <% if(project["documents.file_paths"]) { %>
+                    <%
+                          let file = path.parse(project["documents.file_paths"]);
+                          let filename = "";
+                        
+                          console.log(file);
+                          file.name.split('-')[2].split('_').forEach((code,index)=>{
+                            filename += String.fromCodePoint(parseInt(code,36));
+                          })
+                        %>
+                    <div class="d-flex justify-content-between h6 px-3 mt-3">
+                      <div class="align-self-center text-gray">
+                        <i class="fa-solid fa-download"></i>
+                        <span><%= filename + file.ext %></span>
+                      </div>
+                      <div>
+                        <a download="<%= filename + file.ext %>" class="w-auto btn px-3" href="<%= project['documents.file_paths'] %>">
+                          <%= __('Download') %>
+                        </a>
+                      </div>
+                    </div>
+                    <% } %>
 
+                    <div class="zip-upload d-flex mt-3">
+
+                      <input class="form-control" id="file_paths" name="file_paths" type="file" style="line-height: 38.5px;">
                     </div>
 
-                    <textarea class="form-control mt-3" id="message" name="message" type="text" placeholder="문서 설명을 입력해주세요" style="height: 200px;"></textarea>
-
-
-
+                    <textarea class="form-control mt-3" id="message" name="message" type="text" placeholder="<%= __('placeholder.message') %>" style="height: 200px;"><%= project["documents.message"] %></textarea>
                   </div>
 
                   <div class="text-center mt-4">
                     <button class="btn btn-lg px-5">
-                      적용
+                      <%= __('btn.Save') %>
                     </button>
                   </div>
                 </form>
@@ -162,88 +193,55 @@
 
   <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
+  <div>
+    <%
+    let detail_phase_dict = {};
+    for(let i=0; i< codezip.numberOfProjectState.phase; i++){
+      detail_phase_dict[i] = [];
+      for(let j=0; j< codezip.numberOfProjectState.detail_phase[i]; j++){
+        detail_phase_dict[i].push(__("project_phase"+i+'.'+j))
+      }
+    }
+    %>
+  </div>
+
   <script>
-    $(function() {
-      //드래그 앤 드롭
-      $(".sortable").sortable();
+    const detail_phase_dict = JSON.parse(`<%- JSON.stringify(detail_phase_dict) %>`);
 
-      //이미지 등록
-      $("#image").change(function(e) {
-        //div 내용 비워주기
-        $('#Preview').empty();
-
-        var files = e.target.files;
-        var arr = Array.prototype.slice.call(files);
-
-        //업로드 가능 파일인지 체크
-        for (var i = 0; i < files.length; i++) {
-          if (!checkExtension(files[i].name, files[i].size)) {
-            return false;
-          }
-        }
-        preview(arr);
-
-        function checkExtension(fileName, fileSize) {
-          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-          var maxSize = 20971520; //20MB
-
-          if (fileSize >= maxSize) {
-            alert('이미지 크기가 초과되었습니다.');
-            $("#image").val(""); //파일 초기화
-            return false;
-          }
-
-          if (regex.test(fileName)) {
-            alert('확장자명을 확인해주세요.');
-            $("#image").val(""); //파일 초기화
-            return false;
-          }
-          return true;
-        }
-
-        function preview(arr) {
-          arr.forEach(function(f) {
-            //파일명이 길면 파일명...으로 처리
-            /*
-            var fileName = f.name;
-            if(fileName.length > 10){
-                fileName = fileName.substring(0,7)+"...";
-            }
-            */
-
-            //div에 이미지 추가
-            var str = '<li class="ui-state-default">';
-            //str += '<span>'+fileName+'</span><br>';
-
-            //이미지 파일 미리보기
-            if (f.type.match('image.*')) {
-              //파일을 읽기 위한 FileReader객체 생성
-              var reader = new FileReader();
-              reader.onload = function(e) {
-                //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-                str += '<img src="' + e.target.result + '" title="' + f.name + '" width=80 height=80>';
-                str += '<span class="delBtn" onclick="delImg(this)">x</span>';
-                str += '</li>';
-                $(str).appendTo('#Preview');
-              }
-              reader.readAsDataURL(f);
-            } else {
-              //이미지 파일 아닐 경우 대체 이미지
-              /*
-              str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=60 height=60 />';
-              $(str).appendTo('#Preview');
-              */
-            }
-          })
-        }
-      })
+    progress_project["phase"].addEventListener("input", event => {
+      load_detail_phase_list(progress_project["phase"].value);
     })
 
-    //이미지 삭제
-    function delImg(_this) {
-      $(_this).parent('li').remove()
+    function load_detail_phase_list(phase) {
+      let temp_html = '';
+      detail_phase_dict[phase].forEach((item, index) => {
+        temp_html += `<option value="${index}">${item}</option>`
+      })
+
+      progress_project["detail_phase"].innerHTML = temp_html;
     }
   </script>
+
+  <script>
+    progress_project.onsubmit = (e) => {
+      e.preventDefualt();
+
+      fetch(progress_project.action, {
+        method: progress_project.method,
+        body: new URLSearchParams(progress_project)
+      }).then(res => {
+        if (res.ok) {
+          alert("<%= __('msg.success') %>");
+        } else {
+          throw new Error(res.statusText);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%=  __('msg.fail') %>");
+      })
+    }
+  </script>
+
 
 </body>
 

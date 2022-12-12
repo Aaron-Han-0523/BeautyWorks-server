@@ -1,4 +1,5 @@
 const documentsService = require('../services/documents');
+const projectsService = require('../services/projects');
 const { Op } = require('sequelize');
 
 exports.add = async (req, res, next) => {
@@ -124,20 +125,8 @@ exports.index = async (req, res, next) => {
 
     console.log('api', req.query)
 
-    let condition = {};
-    for ([key, value] of Object.entries(req.query)) {
-        if (value) {
-            // condition[key] = { [Op.substring]: value }; // 배열은 in 연산
-            if (typeof value === "string") {
-                condition[key] = { [Op.substring]: value }
-            } else {
-                condition[Op.or] = [];
-                value.forEach((code, index) => {
-                    condition[Op.or].push({ [key]: { [Op.substring]: code } })
-                });
-            }
-        }
-    }
+    let condition = { users_id: user.id };
+
 
     if (base != 'admin') {
         // condition.users_id = user.id;
@@ -146,10 +135,11 @@ exports.index = async (req, res, next) => {
 
     console.log(condition)
 
-    await documentsService
+    await projectsService
         .allRead(condition, limit, skip)
         .then((result) => {
             console.log("keys :", Object.keys(result))
+            console.log((result))
             if (req.api) {
                 return res.json({
                     page: page,
@@ -157,18 +147,19 @@ exports.index = async (req, res, next) => {
                     documents: result
                 })
             } else if (base == 'users') {
-                return res.render('ingredient/index', {
-                    page: page,
-                    limit: limit,
-                    documents: result
-                })
-            } else if (base == 'admin') {
-                return res.render('admin/ingredient/index', {
+                return res.render('documents/index', {
                     page: page,
                     limit: limit,
                     documents: result
                 })
             }
+            //  else if (base == 'admin') {
+            //     return res.render('admin/documents/index', {
+            //         page: page,
+            //         limit: limit,
+            //         documents: result
+            //     })
+            // }
         })
         .catch((err) => {
             console.error(err);
@@ -190,23 +181,24 @@ exports.detail = async (req, res, next) => {
 
     condition.id = req.params.id;
 
-    await documentsService
+    await projectsService
         .readOne(condition)
         .then((result) => {
             console.log("find :", result);
             if (req.api) {
                 res.json({
-                    ingredient: result
+                    document: result
                 })
             } else if (base == 'users') {
-                res.render('ingredient/detail', {
-                    ingredient: result,
-                })
-            } else if (base == 'admin') {
-                res.render('admin/ingredient/detail', {
-                    ingredient: result
+                res.render('documents/detail', {
+                    document: result,
                 })
             }
+            //  else if (base == 'admin') {
+            //     res.render('admin/ingredient/detail', {
+            //         ingredient: result
+            //     })
+            // }
         }).catch((err) => {
             console.error(err);
             res.status(500).end();

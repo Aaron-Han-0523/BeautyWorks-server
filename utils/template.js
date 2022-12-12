@@ -67,7 +67,8 @@ module.exports.Service = class {
                     ['id', 'DESC']
                 ],
                 offset: skip,
-                limit: limit
+                limit: limit,
+                include: { all: true }
             })
             .then((result) => {
                 console.log("find data Total :", result.count);

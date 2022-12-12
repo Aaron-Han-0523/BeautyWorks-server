@@ -55,30 +55,22 @@
             <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
 
               <div class="widget w-100 p-5">
-                <div>
-                  <!-- 테스트 데이터 -->
-                  <%
-                    let document={
-                            project_name:"테스트프로젝트",
-                            message:"테스트데이터입니다.",
-                            file_path: "/uploads/documents/1-1123123-fafdb348d79f5a0fd7a.zip",
-                            create_date: new Date()
-                        }
-                    %>
-                </div>
+
                 <div>
                   <!-- 제목 -->
                   <div class="form-control my-3 p-3">
                     <div class="d-flex justify-content-between h6 m-0">
                       <!-- 프로젝트 명-->
                       <div><%= document.project_name %></div>
+                      <!-- 문서 제목-->
+                      <div><%= document["documents.title"] %></div>
                       <!-- 생성일 -->
-                      <div><%= formatDate(document.create_date) %></div>
+                      <div><%= formatDate(document.update_date) %></div>
                     </div>
                   </div>
                   <!-- 메시지 -->
                   <div class="m-4">
-                    <%= document.message %>
+                    <%= document["documents.message"] %>
                   </div>
                 </div>
 
@@ -88,16 +80,24 @@
                   <span><%= __('File') %></span>
                 </div>
                 <hr>
-                <% if(document.file_path) { %>
+                <% if(document["documents.file_paths"]) { %>
+                <%
+                  let file = path.parse(document["documents.file_paths"]);
+                  let filename = "";
+                
+                  file.name.split('-')[2].split('_').forEach((code,index)=>{
+                    filename += String.fromCodePoint(parseInt(code,36));
+                  })
+                %>
                 <div class="d-flex justify-content-between h6 px-3">
                   <div class="align-self-center text-gray">
                     <i class="fa-solid fa-download"></i>
-                    <span><%= document.file_path.split('/')[3] %></span>
+                    <span><%= filename + file.ext %></span>
                   </div>
                   <div>
-                    <button type="button" class="w-auto btn btn-outline-primary px-3">
+                    <a download="<%= filename + file.ext %>" class="w-auto btn btn-outline-primary px-3" href="<%= document['documents.file_paths'] %>">
                       <%= __('Download') %>
-                    </button>
+                    </a>
                   </div>
                 </div>
                 <% } %>
@@ -133,6 +133,9 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    function file_download() {
+
+    }
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
