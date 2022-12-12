@@ -2,7 +2,7 @@
 <html lang="ko">
 
 <head>
-  <%- include ("../partials/admin-header.ejs") %>
+  <%- include ("../../partials/admin-header.ejs") %>
 
   <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
   <% const country_codes=codezip.country.codes; %>
@@ -16,7 +16,7 @@
 
 <body class="layout-boxed">
 
-  <%- include ("../partials/loader.ejs") %>
+  <%- include ("../../partials/loader.ejs") %>
 
   <!--  BEGIN MAIN CONTAINER  -->
   <div class="main-container" id="container" style="padding-top: 0;">
@@ -24,9 +24,9 @@
     <div class="overlay"></div>
     <div class="search-overlay"></div>
 
-    <%- include ("../partials/admin-sidebar.ejs") %>
+    <%- include ("../../partials/admin-sidebar.ejs") %>
 
-    <%- include ("../partials/admin-nav.ejs") %>
+    <%- include ("../../partials/admin-nav.ejs") %>
 
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content admin-add">
@@ -37,7 +37,7 @@
           <!-- BREADCRUMB -->
           <div class="row mt-5">
             <div class="breadcrumb justify-content-center br-20">
-              <div class="p-1 col-4 text-center">
+              <div class="p-1 text-center">
                 <h2>
                   <strong>
                     <%= __("admin.menu.회원관리.개인정보.임시저장프로젝트.상세") %>
@@ -62,27 +62,33 @@
                     </div> -->
                     <!-- 예산 입력 -->
                     <div class="mt-4">
-                      <div>
+                      <!-- <div>
                         <%= __('users.newProject.moq.budgetInput.before') %>
+                      </div> -->
+                      <div>
+                        <%= __('project.budget') %>
                       </div>
-                      <div class="form-control my-2 d-flex align-items-baseline px-0 br-15">
-                        <span class="ms-2" style="left:0px;">$</span>
-                        <input type="number" class="form-control w-100 align-placeholder" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" autofocus required value="<%= project.budget %>">
+                      <div class="form-control my-2 d-flex align-items-baseline py-0 pe-0">
+                        <span class="mx-2" style="left:0px;">$</span>
+                        <input type="number" class="form-control w-100 align-placeholder" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" required value="<%= project.budget %>">
                       </div>
-                      <div style="color: red;">
+                      <!-- <div style="color: red;">
                         <%= __('users.newProject.moq.budgetInput.after') %>
-                      </div>
+                      </div> -->
                     </div>
                     <!-- MOQ 선택 -->
                     <div class="mt-5">
-                      <div>
+                      <!-- <div>
                         <%= __('users.newProject.moq.moqSelect.before1') %>
-                      </div>
+                      </div> -->
                       <!-- <div>
                         <%= __('users.newProject.moq.moqSelect.before2') %>
                       </div> -->
                       <div>
-                        <select class="form-select br-15" name="moq" required>
+                        <%= __('project.moq') %>
+                      </div>
+                      <div>
+                        <select class="form-select" name="moq" required>
                           <option value="">
                             <%= __('users.newProject.moq.moqSelect.placeholder') %>
                           </option>
@@ -101,20 +107,20 @@
                           </option>
                         </select>
                       </div>
-                      <div style="color: red;">
+                      <!-- <div style="color: red;">
                         <%- __('users.newProject.moq.moqSelect.after') %>
-                      </div>
+                      </div> -->
                     </div>
                     <!-- 개당 단가 출력 -->
-                    <div class="mt-5">
+                    <!-- <div class="mt-5">
                       <div>
                         <%= __('users.newProject.moq.checkUnitPrice.before') %>
                       </div>
-                      <div class="form-control my-2 d-flex align-items-baseline px-0 br-15 bg-gray">
+                      <div class="form-control my-2 d-flex align-items-baseline py-0 pe-0 bg-gray">
                         <span class="ms-2" style="left:0px;">$</span>
                         <input class="form-control w-100 align-placeholder" style="border: 0px;" id="unitPrice" placeholder="<%= __('users.newProject.moq.checkUnitPrice.placeholder') %>" disabled>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
 
                   <hr>
@@ -122,7 +128,7 @@
                   <!-- target product -->
                   <div class="form-group p-5">
                     <!-- title -->
-                    <div>
+                    <!-- <div>
                       <div class="h6">
                         <%= __('users.newProject.isTarget.question') %>
                       </div>
@@ -145,9 +151,14 @@
                           <%= __('users.newProject.basic.btn.no') %>
                         </label>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- target url input -->
-                    <div class="mt-5">
+                    <div>
+                      <%= __('project.target_url') %>
+                    </div>
+                    <input type="url" class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="<%= project.target_url %>">
+
+                    <!-- <div class="mt-5">
                       <div class="h6">
                         <%= __('users.newProject.isTarget.urlInput.before') %>
                       </div>
@@ -158,13 +169,13 @@
                         <input type="url" class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="" disabled>
                         <% } %>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
 
                   <hr>
 
                   <!-- draft -->
-                  <div>
+                  <div class="form-group p-5">
                     <!-- 제품명 -->
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
@@ -360,6 +371,7 @@
                       <div class="col col-3">
                         <h6>
                           <%= __('users.newProject.basic.distribution_channel') %>
+                          <span style="color: red;">*</span>
                         </h6>
                       </div>
                       <div class="col">
@@ -735,7 +747,7 @@
                   <hr>
 
                   <!-- order -->
-                  <div class="form-group" style="padding: 0 5vmax;">
+                  <div class="form-group p-5" style="padding: 0 5vmax;">
                     <!-- 출시국가 -->
                     <div class="row align-items-center">
                       <div class="col-3">
@@ -815,11 +827,11 @@
                       </div>
                     </div>
                     <!-- 연락처 warning-->
-                    <div class="row align-items-center mt-3">
+                    <!-- <div class="row align-items-center mt-3">
                       <div class="col-3">
                       </div>
                       <div class="col fs-8" style="color: red; white-space: pre-line;"><%= __('users.newProject.order.연락처.warning') %></div>
-                    </div>
+                    </div> -->
 
                     <!-- 주소 -->
                     <div class="row align-items-center mt-4">
@@ -903,16 +915,589 @@
       </div>
 
     </div>
-  </div>
-  </div>
-  <!--  END CONTENT AREA  -->
+    <!--  END CONTENT AREA  -->
 
 
   </div>
   <!-- END MAIN CONTAINER -->
 
-  <%- include ("../partials/commonScrpits.ejs") %>
+  <!-- 컨셉성분 모달창 -->
+  <div class="modal" id="select_ingredients" data-bs-scroll="true" data-bs-backdrop="true">
+    <div class="modal-dialog modal-dialog-scrollable col-8 mw-100">
+      <div class="modal-content br-15 w-100">
+        <div class="modal-header justify-content-end text-gray p-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body mx-5 mt-0 pt-0" style="border-top:0px;">
+          <form id="search_ingredients">
+            <!-- 통합 검색-->
+            <div class="d-flex">
+              <label class="col-2 h6 align-self-center mb-0">
+                <%= __('통합 검색') %>
+              </label>
+              <div class="col form-control d-flex p-0">
+                <input name="ingredient_name" class="col form-control" placeholder="<%= __('plzInputText') %>">
+                <button class="col-1 form-control text-primary p-0" type="button" onclick="searching_ingredients();"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </div>
+            </div>
+            <!-- 종류/기능 검색-->
+            <div class="d-flex mt-3">
+              <!-- 컨셉성분 종류 -->
+              <label class="col-2 h6 align-self-center mb-0 ">
+                <%= __('ingredients.종류') %>
+              </label>
+              <!-- <input hidden name="type"> -->
+              <div class="col-4">
+                <button class="form-select text-start" type="button" id="select_type" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                  <%= __('select') %>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="select_type">
+                  <% codezip.ingredient_type.forEach((code,index)=>{ %>
+                  <li class="dropdown-item d-flex">
+                    <input class="form-check-input mx-3 ingredient_type" name="type" type="checkbox" id="ingredient_type-<%= code %>" value="<%= code %>">
+                    <label class="form-check-label flex-fill pe-3 ingredient_type-label" for="ingredient_type-<%= code %>">
+                      <%= __(code) %>
+                    </label>
 
+                  </li>
+                  <% }) %>
+                </ul>
+              </div>
+              <!-- 컨셉성분 기능 -->
+              <label class="col-2 h6 align-self-center mb-0 text-center">
+                <%= __('ingredients.기능') %>
+              </label>
+              <div class="col-4">
+                <button class="form-select text-start" type="button" id="select_effects" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                  <%= __('select') %>
+                </button>
+                <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_effects">
+                  <% codezip.effects.ingredient.forEach((code, index)=>{ %>
+                  <li class="dropdown-item d-flex">
+                    <input class="form-check-input mx-3 ingredient_effects" name="effects" type="checkbox" id="ingredient_effects-<%= code %>" value="<%= code %>">
+                    <label class="form-check-label flex-fill pe-3 ingredient_effects-label" for="ingredient_effects-<%= code %>">
+                      <%= __(code) %>
+                    </label>
+                  </li>
+                  <% }) %>
+                </ul>
+              </div>
+            </div>
+            <!-- 결과 테이블 -->
+            <div class="table-responsive mt-4 pt-4 mb-auto ">
+              <table class="table table-no-space table-bordered table-hover text-break text-center br-10">
+                <thead class="">
+                  <th>
+                  </th>
+                  <th>
+                    <%= __('ingredients.성분명') %>
+                  </th>
+                  <th>
+                    <%= __('ingredients.원료명') %>
+                  </th>
+                  <th>
+                    <%= __('ingredients.종류') %>
+                  </th>
+                  <th>
+                    <%= __('ingredients.기능') %>
+                  </th>
+                  <th>
+                    <%= __('ingredients.특징') %>
+                  </th>
+                </thead>
+                <tbody class="table-group-divider bbr-15" id="ingredients_result">
+
+                </tbody>
+              </table>
+
+              <!-- pagination -->
+              <div id="ingredients_pagination">
+
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include ("../../partials/commonScrpits.ejs") %>
+
+  <div>
+    <% let category1_name_list=[]; %>
+    <% let category2_name_list={} %>
+    <% for (let i=0; i < codezip.numberOfProduct.category1; i++) { %>
+    <% category1_name_list.push(__('product'+i)); %>
+    <% category2_name_list[i]={}; %>
+    <% for (let j=0; j < codezip.numberOfProduct.category2[i]; j++) { %>
+    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
+    <% } } %>
+  </div>
+  <script>
+    const numberOfProduct = JSON.parse('<%- JSON.stringify(codezip.numberOfProduct) %>');
+    const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
+    const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
+    const country_codes = JSON.parse('<%- JSON.stringify(country_codes) %>');
+    const target_country_dict = JSON.parse(`<%- JSON.stringify(country_code2name) %>`);
+    let target_age_list = [];
+    let target_gender_list = [];
+
+    function print_target_country(value) {
+      let text_list = [];
+      if (!value) {
+        target_country_print.value = ''
+        return;
+      }
+      value.split(',').forEach((code, index) => {
+        text_list.push(target_country_dict[code])
+        document.getElementById('country-' + code).checked = true;
+      })
+      target_country_print.value = text_list.join(', ')
+    }
+
+    function print_target_gender(value) {
+      let text_list = [];
+      for (let i = 0; i < target_gender_list.length; i++) {
+        if (value & (1 << i)) {
+          text_list.push(target_gender_list[i]);
+          document.getElementById('gender' + i).checked = true;
+        }
+      }
+      target_gender_print.value = text_list.join(', ')
+    }
+
+    function print_target_age(value) {
+      let text_list = [];
+      for (let i = 0; i < target_age_list.length; i++) {
+        if (value & (1 << i)) {
+          text_list.push(target_age_list[i]);
+          document.getElementById('age' + i).checked = true;
+        }
+      }
+      target_age_print.value = text_list.join(', ')
+    }
+
+    function select_category1_func(value) {
+      // console.log("v:", value, "p", printName);
+      if (document.forms[0]['category1'].value != value) {
+        document.forms[0]['category2'].value = "";
+        category2_print.value = "";
+      }
+      document.forms[0]['category1'].value = value;
+      category1_print.value = category1_name_list[value];
+      let temp_html = "";
+      let category2_n = numberOfProduct.category2[value];
+      for (let i = 0; i < category2_n; i++) {
+        temp_html += `<li>
+                        <a class="dropdown-item" href="javascript:void(0);"
+                          onclick="select_category2_func('${i}');">
+                          ${category2_name_list[value][i]}
+                        </a>
+                      </li>`
+      }
+      category2_list.innerHTML = temp_html;
+      //checkValues();
+    }
+
+    function select_category2_func(value) {
+      // console.log("v:", value, "p", printName);
+      let category = document.forms[0]['category1'].value;
+      document.forms[0]["category2"].value = value;
+      category2_print.value = category2_name_list[category][value];
+      //checkValues();
+    }
+
+    document.forms[0].getElementsByClassName('age').forEach((item, index) => {
+      item.addEventListener("change", (event) => {
+        const obj = document.forms[0]['target_age'];
+        let value = +obj.value;
+
+        if (event.target.checked) {
+          value += 1 << index;
+          obj.value = value;
+        } else {
+          value -= 1 << index;
+          obj.value = value || '';
+        }
+        print_target_age(obj.value);
+      })
+    })
+
+    document.forms[0].getElementsByClassName('gender').forEach((item, index) => {
+      item.addEventListener("change", (event) => {
+        const obj = document.forms[0]['target_gender'];
+        let value = +obj.value;
+
+        if (event.target.checked) {
+          value += 1 << index;
+          obj.value = value;
+        } else {
+          value -= 1 << index;
+          obj.value = value || '';
+        }
+        print_target_gender(obj.value);
+      })
+    })
+
+    document.forms[0].getElementsByClassName('country').forEach((item, index) => {
+      item.addEventListener("change", (event) => {
+        const obj = document.forms[0]['target_country'];
+        let values = obj.value ? obj.value.split(',') : [];
+        let code = country_codes[index];
+
+        //console.log(values)
+        if (event.target.checked) {
+          values.push(code);
+        } else {
+          values.splice(values.indexOf(code), 1);
+        }
+        //console.log(values)
+        obj.value = values.join(',')
+        print_target_country(obj.value);
+      })
+    })
+
+    function temp_project_body() {
+      let body = new FormData(temp_project);
+      body.set('capacity', temp_project.capacity.value + ' ' + capacity_unit.value);
+      return body;
+    }
+
+    function save() {
+      let body = temp_project_body();
+
+      fetch(temp_project.action, {
+        method: "post",
+        body: new URLSearchParams(body)
+      }).then(res => {
+        if (res.ok) {
+          alert("<%= __('users.msg.SuccessSave') %>");
+        } else {
+          throw new Error(res.status);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.msg.FailSave') %>");
+      })
+    }
+
+    function next() {
+      if (!checkRequired()) return alert("<%= __('users.msg.need_to_check_rquired_field') %>");
+
+      let body = temp_project_body();
+      body.set('detail_phase', 5)
+
+      fetch(temp_project.action, {
+        method: "post",
+        body: new URLSearchParams(body)
+      }).then(res => {
+        if (res.ok) {
+          // alert("<%= __('users.msg.SuccessSave') %>");
+          location.replace('<%= codezip.url.users.newProject._ %>' + location.search);
+        } else {
+          throw new Error(res.status);
+        }
+      }).catch(err => {
+        console.error(err);
+        alert("<%= __('users.msg.FailSave') %>");
+      })
+    }
+
+    document.getElementsByClassName('capacity_unit').forEach((item, index) => {
+      item.addEventListener('click', (event) => {
+        const text = event.target.innerText;
+        select_capacity_unit.innerText = text;
+        capacity_unit.value = text;
+      })
+    })
+  </script>
+  <script>
+    window.addEventListener('load', event => {
+      select_category1_func('<%= project.category1 %>')
+      select_category2_func('<%= project.category2 %>')
+
+      document.getElementsByClassName('target_gender_label').forEach((item, index) => {
+        let text = item.innerText.trim();
+        target_gender_list.push(text);
+      })
+
+      document.getElementsByClassName('target_age_label').forEach((item, index) => {
+        let text = item.innerText.trim();
+        target_age_list.push(text);
+      })
+
+      let target_age = '<%= project.target_age %>';
+      print_target_age(target_age);
+      temp_project['target_age'].value = target_age;
+
+      let target_gender = '<%= project.target_gender %>';
+      print_target_gender(target_gender);
+      temp_project['target_gender'].value = target_gender;
+
+      let target_country = '<%= project.target_country %>';
+      print_target_country(target_country);
+      temp_project['target_country'].value = target_country;
+    })
+  </script>
+
+  <!-- option -->
+  <script>
+    const option = document.forms[0];
+    const effects = JSON.parse('<%- JSON.stringify(codezip.effects) %>');
+    const applies_true_text_list = JSON.parse('<%- JSON.stringify(applies_true_text_list) %>');
+    const applies_false_text_list = JSON.parse('<%- JSON.stringify(applies_false_text_list) %>');
+    let product_effect = {};
+  </script>
+  <script>
+    function print_applies(value) {
+      let text_list = [];
+      for (let i = 0; i < applies_true_text_list.length; i++) {
+        if (value & 1 << i) {
+          text_list.push(applies_true_text_list[i])
+          document.getElementById('applies-' + i + '-1').checked = true;
+        } else if (i < applies_false_text_list.length) {
+          text_list.push(applies_false_text_list[i])
+          document.getElementById('applies-' + i + '-0').checked = true;
+        }
+      }
+
+      applies_print.innerText = text_list.join(', ')
+    }
+  </script>
+  <script>
+    function print_efficacy(value) {
+      if (!value) return efficacy_print.innerText = "<%= __('Select') %>"
+
+      let text_list = [];
+      value.split(',').forEach((code, index) => {
+        text_list.push(product_effect[code]);
+        document.getElementById(code).checked = true;
+      })
+
+      efficacy_print.innerText = text_list.join(', ')
+    }
+  </script>
+  <script>
+    etc_efficacy_check.addEventListener('change', (event) => {
+      if (event.target.checked) {
+        option['etc_efficacy'].hidden = false;
+      } else {
+        option['etc_efficacy'].hidden = true;
+      }
+
+    })
+  </script>
+  <script>
+    // 제품 효과 추가/제거
+    document.forms[0].getElementsByClassName('efficacy').forEach((item, index) => {
+      let code = null;
+      if (index < effects.product.length) {
+        code = effects.product[index];
+      } else {
+        index -= effects.product.length;
+        code = effects.suncare[index];
+      }
+      product_effect[code] = document.getElementsByClassName('efficacyLabel')[index].innerText.trim();
+      item.addEventListener("change", (e) => {
+        const obj = option['efficacy'];
+        let values = obj.value ? obj.value.split(',') : [];
+
+        if (e.target.checked) {
+          values.push(code);
+        } else {
+          values.splice(values.indexOf(code), 1);
+        }
+        obj.value = values.join(',');
+        print_efficacy(obj.value);
+      })
+    })
+  </script>
+  <script>
+    // 사용감 추가/제거 1
+    document.forms[0].getElementsByClassName('applies_bool').forEach((item, index) => {
+      item.addEventListener("change", (e) => {
+        const obj = option['applies'];
+        let value = +obj.value;
+        const code = 1 << parseInt(index / 2);
+
+        let info = item.id.split('-');
+        let item_bool = parseInt(info.pop())
+        info.push(item_bool ? '0' : '1');
+        const opposition = document.getElementById(info.join('-'));
+
+        if (e.target.checked) {
+          opposition.checked = false;
+          obj.value = item_bool ? value | code : value & ~code;
+        } else {
+          opposition.checked = true;
+          obj.value = item_bool ? value & ~code : value | code;
+        }
+
+        print_applies(obj.value);
+      })
+    })
+
+    // 사용감 추가/제거 2
+    document.forms[0].getElementsByClassName('applies_other').forEach((item, index) => {
+      item.addEventListener("change", (e) => {
+        const obj = option['applies'];
+        const code = 1 << effects.use.boolean.length + index;
+        let value = +obj.value;
+
+        if (e.target.checked) {
+          obj.value = value + code;
+        } else {
+          obj.value = value - code;
+        }
+
+        print_applies(obj.value);
+      })
+    })
+  </script>
+  <div>
+    <%
+let ingredient_type_text_dict = {};
+codezip.ingredient_type.forEach((code, index)=>{
+  ingredient_type_text_dict[code] = __(code);
+})
+let ingredient_effects_text_dict = {};
+codezip.effects.ingredient.forEach((code, index)=>{
+  ingredient_effects_text_dict[code] = __(code);
+})
+%>
+  </div>
+  <script>
+    const ingredient_type_text_dict = JSON.parse('<%- JSON.stringify(ingredient_type_text_dict) %>');
+    const ingredient_effects_text_dict = JSON.parse('<%- JSON.stringify(ingredient_effects_text_dict) %>');
+
+    function searching_ingredients(page = 1) {
+      let search_params = new URLSearchParams(new FormData(search_ingredients))
+      search_params.set('p', page)
+      const url = '<%= codezip.url.users.api.ingredient %>?' + search_params;
+      fetch(url).then(res => {
+        ingredients_reload(res.json());
+      })
+    }
+
+    search_ingredients.onsubmit = (event) => {
+      event.preventDefault();
+      searching_ingredients();
+    }
+
+    function ingredients_reload(res_json) {
+      res_json.then(result => {
+        // console.log(result);
+        let ingredients = result.ingredients;
+        let temp_html = "";
+
+        ingredients.rows.forEach((item, index) => {
+          let ingredient_effects = [];
+          if (item.effects) {
+            item.effects.split(',').forEach((code, index) => {
+              ingredient_effects.push(ingredient_effects_text_dict[code])
+            })
+          }
+
+          temp_html += `<tr onclick="select_ingredient('${item.id}');">
+        <td><input type="checkbox" class="form-check-input ingredient-checkbox opacity-100" id="ingredient-${item.id}" disabled></td>
+        <td id="${item.id}-ingredient_name">${item.ingredient_name}</td>
+        <td>${item.material_name}</td>
+        <td>${ingredient_type_text_dict[item.type]}</td>
+        
+        <td>${ingredient_effects.join(', ')}</td>
+        <td>${item.feature ? item.feature : ''}</td>
+      </tr>`
+        })
+        ingredients_result.innerHTML = temp_html;
+
+        let values = option.ingredients.value ? option.ingredients.value.split(',') : [];
+        values.forEach((id, index) => {
+          const target = document.getElementById(`ingredient-${id}`);
+          if (!target) return;
+          else target.checked = true;
+        })
+
+
+        //make_pagination_by_func(page, count, func_name, limit)
+        ingredients_pagination.innerHTML = make_pagination_by_func(+result.page, +ingredients.count, "searching_ingredients")
+      });
+    }
+  </script>
+  <script>
+    document.querySelectorAll('.ingredient_type, .ingredient_effects').forEach(el => {
+      el.addEventListener("change", event => {
+        searching_ingredients();
+      })
+    })
+  </script>
+  <script>
+    function select_ingredient(id) {
+      const target = document.getElementById(`ingredient-${id}`);
+      const target_name = document.getElementById(`${id}-ingredient_name`).innerText;
+      if (!target) return;
+
+      target.checked = !target.checked;
+      let values = option.ingredients.value ? option.ingredients.value.split(',') : [];
+      let text_list = option.ingredients.value ? ingredients_print.innerText.split(', ') : [];
+      if (target.checked) {
+        values.push(id);
+        text_list.push(target_name)
+      } else {
+        values.splice(values.indexOf(id), 1);
+        text_list.splice(text_list.indexOf(target_name), 1);
+      }
+      option.ingredients.value = values.join(',');
+      if (values.length) {
+        ingredients_print.innerText = text_list.join(', ');
+      } else {
+        ingredients_print.innerText = "<%= __('통합 검색') %>";
+      }
+    }
+  </script>
+
+  <script>
+    function unitPriceCalc() {
+      if (temp_project["moq"].value == '0') {
+        unitPrice.value = "<%= __('챗봇으로 문의해주세요.') %>"
+        return;
+      }
+      if (+temp_project["budget"].value && +temp_project["moq"].value) {
+        unitPrice.value = parseInt(+temp_project["budget"].value / +temp_project["moq"].value)
+      }
+    }
+
+    temp_project["moq"].addEventListener('input', (event) => {
+      unitPriceCalc()
+    })
+    temp_project["budget"].addEventListener('input', (event) => {
+      unitPriceCalc()
+    })
+  </script>
+
+  <script>
+    function select_mobile_func(code, number) {
+      let country_number = document.getElementById('country_number');
+      let select_country_number = document.getElementById('select_country_number');
+
+      country_number.value = number;
+      select_country_number.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${number}`
+    }
+  </script>
+
+  <script>
+    window.addEventListener('load', event => {
+      print_efficacy(option.efficacy.value);
+      print_applies(option.applies.value);
+      searching_ingredients();
+
+
+      // unitPriceCalc()
+    })
+  </script>
 
 </body>
 

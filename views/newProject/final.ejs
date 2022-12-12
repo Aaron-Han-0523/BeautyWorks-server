@@ -271,6 +271,7 @@
                           <div class="col col-3">
                             <h6>
                               <%= __('users.newProject.basic.distribution_channel') %>
+                              <span style="color: red;">*</span>
                             </h6>
                           </div>
                           <div class="col">
@@ -854,6 +855,10 @@
 
         function select_category1_func(value) {
           // console.log("v:", value, "p", printName);
+          if (document.forms[0]['category1'].value != value) {
+            document.forms[0]['category2'].value = "";
+            category2_print.value = "";
+          }
           document.forms[0]['category1'].value = value;
           category1_print.value = category1_name_list[value];
           let temp_html = "";
@@ -938,7 +943,7 @@
 
             if (!value) break;
             cnt += 1;
-            if (cnt > 7) {
+            if (cnt > 8) {
               checkReady = true;
               break;
             }

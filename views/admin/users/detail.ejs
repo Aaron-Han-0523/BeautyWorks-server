@@ -2,14 +2,14 @@
 <html lang="ko">
 
 <head>
-  <%- include ("../partials/admin-header.ejs") %>
+  <%- include ("../../partials/admin-header.ejs") %>
 
   <% const country_codes=codezip.country.codes; %>
   <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
 </head>
 
 <body>
-  <%- include ("../partials/loader.ejs") %>
+  <%- include ("../../partials/loader.ejs") %>
 
   <!--  BEGIN CONTENT AREA  -->
   <div class="main-container" id="container">
@@ -17,9 +17,9 @@
     <div class="overlay"></div>
     <div class="search-overlay"></div>
 
-    <%- include ("../partials/admin-sidebar.ejs") %>
+    <%- include ("../../partials/admin-sidebar.ejs") %>
 
-    <%- include ("../partials/admin-nav.ejs") %>
+    <%- include ("../../partials/admin-nav.ejs") %>
 
     <div class="container mx-auto">
 
@@ -561,7 +561,6 @@
 
     }
   </script>
-  '<%= locale %>'
   <script>
     function load_progress_projects(page = 1) {
       const url = '<%= codezip.url.admin.api.progress_projects %>/' + users_id;

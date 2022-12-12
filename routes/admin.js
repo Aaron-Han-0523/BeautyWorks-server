@@ -49,8 +49,16 @@ const codezip = require('../codezip');
 //   },
 // });
 
+// 관리자 페이지 한글로 고정
+router
+  .use((req, res, next) => {
+    res.cookie('lang', 'ko');
+    next();
+  })
+
 
 /* GET users listing. */
+
 // 사용자 접속
 router
   .post('/login', adminController.login)
@@ -86,6 +94,7 @@ router
       next();
     })
   })
+
 
 // 사용자 접속 종료
 router

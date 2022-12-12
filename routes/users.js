@@ -53,6 +53,17 @@ const upload = (fileName) => multer({
   },
 });
 
+// 사용자 페이지 영어로 고정
+router
+  .use((req, res, next) => {
+    const url_parse = req.originalUrl.split('/');
+    if (url_parse[1] == "users" && url_parse[2] != "api") {
+      // console.log("??", url_parse)
+      res.cookie('lang', 'en');
+    }
+    next();
+  })
+
 
 /* GET users listing. */
 // 사용자 등록
@@ -101,14 +112,14 @@ logger.token("remote-user", (req, res) => {
   }
 })
 
-let logger_setting = ':req[X-Real-IP] :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":user-agent" :response-time ms';
+// let logger_setting = ':req[X-Real-IP] :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":user-agent" :response-time ms';
 
-let logger_option = {
-  skip: function (req, res) { return res.statusCode == 304 }
-}
+// let logger_option = {
+//   skip: function (req, res) { return res.statusCode == 304 }
+// }
 
-if (process.env == 'development') router.use(logger(logger_setting, logger_option));
-else router.use(logger(logger_setting));
+// if (process.env == 'development') router.use(logger(logger_setting, logger_option));
+// else router.use(logger(logger_setting));
 
 
 // 사용자 접속해제

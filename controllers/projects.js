@@ -51,21 +51,21 @@ exports.edit = async (req, res, next) => {
         return;
     }
 
+    let body = req.body;
+    for ([key, value] of Object.entries(body)) {
+        if (!value) body[key] = null;
+    }
+
     let condition = { id: id };
     if (base == 'users') {
         condition.users_id = user.id;
         let target = await projectsService.readOne(condition);
-        if ([0].includes(target.phase) && target.detail_phase > req.body.detail_phase) {
-            delete req.body.detail_phase;
+        if (body.phase == 0 && [0].includes(target.phase) && target.detail_phase > body.detail_phase) {
+            delete body.detail_phase;
         }
     }
     else if (base == 'admin') {
         condition.users_id = req.params.id;
-    }
-
-    let body = req.body;
-    for ([key, value] of Object.entries(body)) {
-        if (!value) body[key] = null;
     }
 
     console.log("files", req.files);

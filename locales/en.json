@@ -711,5 +711,19 @@
 	"btn.Cancel": "Cancel",
 	"admin.menu.회원관리.개인정보.임시저장프로젝트": "User's Project in draft",
 	"admin.menu.회원관리.개인정보.진행중인프로젝트": "User's Project in progress",
-	"admin.menu.회원관리.개인정보.완료된프로젝트": "User's Completed Project"
+	"admin.menu.회원관리.개인정보.완료된프로젝트": "User's Completed Project",
+	"admin.menu.회원관리.개인정보.임시저장프로젝트.상세": "admin.menu.회원관리.개인정보.임시저장프로젝트.상세",
+	"project.budget": "project.budget",
+	"project.moq": "project.moq",
+	"project.target_url": "project.target_url",
+	"btn.수정": "btn.수정",
+	"placeholder.admin.users.search": "placeholder.admin.users.search",
+	"table.head.나라": "table.head.나라",
+	"table.head.이메일": "table.head.이메일",
+	"table.head.성": "table.head.성",
+	"table.head.이름": "table.head.이름",
+	"table.head.회사명": "table.head.회사명",
+	"table.head.브랜드명": "table.head.브랜드명",
+	"table.head.전화번호": "table.head.전화번호",
+	"table.head.가입일": "table.head.가입일"
 }
