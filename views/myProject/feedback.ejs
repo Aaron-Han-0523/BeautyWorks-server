@@ -89,10 +89,35 @@
                   <hr>
 
                   <div class="text-center mt-4">
-                    <button class="btn btn-outline-primary px-5">
+                    <button type="button" class="btn btn-outline-primary px-5" data-bs-toggle="modal" data-bs-target="#confirmModal">
                       <%= __('btn.submit') %>
                     </button>
                   </div>
+
+                  <!-- Confirm Modal -->
+                  <div class="modal" id="confirmModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; width: 50%;">
+                      <div class="modal-content br-10 p-5">
+                        <div>
+                          <div class="text-center text-black mx-5">
+                            <div>
+                              <img style="margin-bottom: 2rem; width:4rem; height: 4rem;" src="/images/popup/Pop up - Request feedback.svg">
+                            </div>
+                            <%- __('users.myProject.feedback.msg.confirm') %>
+                          </div>
+                          <div class="mt-5 text-center">
+                            <button class="col-4 btn btn-lg btn-outline-primary me-3">
+                              <%= __('btn.yes') %>
+                            </button>
+                            <button type="button" class="col-4 btn btn-lg btn-outline-primary" data-bs-dismiss="modal">
+                              <%= __('btn.no') %>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>
