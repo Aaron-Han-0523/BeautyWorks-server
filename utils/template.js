@@ -59,20 +59,25 @@ module.exports.Service = class {
     }
 
     allRead = async (condition = {}, limit, skip) => {
+        // console.log("????", Object.keys(this.model))
         return await this.model
             .findAndCountAll({
-                raw: true,
+                //raw: true,
                 where: condition,
                 order: [
                     ['id', 'DESC']
                 ],
                 offset: skip,
                 limit: limit,
-                include: { all: true }
+                include: { all: true },
+                group: this.model.tableName + ".id"
             })
             .then((result) => {
-                console.log("find data Total :", result.count);
-                return result;
+                console.log("find data Total :", result.count.length);
+                return {
+                    count: result.count.length,
+                    rows: result.rows
+                }
             })
             .catch((err) => {
                 throw err;

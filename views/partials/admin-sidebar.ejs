@@ -16,8 +16,8 @@
 
         <div class="nav__list">
 
-          <div class="nav__toggle">
-            <i class="fa-solid fa-user-group"></i>
+          <div class="p-2 ms-1">
+            <i class="fa-solid fa-user-group nav__toggle p-0"></i>
             <span class="nav_name"><%= __('admin.menu.회원관리') %></span>
 
             <ul class="menu">
@@ -26,8 +26,8 @@
           </div>
 
 
-          <div class="nav__toggle">
-            <i class="fa-solid fa-list-check"></i>
+          <div class="p-2 ms-1">
+            <i class="fa-solid fa-list-check nav__toggle p-0"></i>
             <span class="nav_name"><%= __('admin.menu.제품관리') %></span>
 
 
@@ -39,7 +39,18 @@
           </div>
 
           <a href="<%= codezip.url.admin.news.main %>" class="nav__link">
-            <i class="fa-regular fa-rectangle-list"></i>
+            <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="레이어_1" x="0px" y="0px" viewBox="0 0 16.4 18.2" style="enable-background:new 0 0 16.4 18.2;" xml:space="preserve" fill="currentColor" stroke-linecap="round" stroke-linejoin="round" width="1.25rem" height="1.25rem">
+              <switch>
+                <g i:extraneous="self">
+                  <g>
+                    <path d="M10.2,10.6h-7c-0.3,0-0.6,0.3-0.6,0.6s0.3,0.6,0.6,0.6h7c0.3,0,0.6-0.3,0.6-0.6S10.5,10.6,10.2,10.6z" />
+                    <path d="M10.2,13.6h-7c-0.3,0-0.6,0.3-0.6,0.6s0.3,0.6,0.6,0.6h7c0.3,0,0.6-0.3,0.6-0.6S10.5,13.6,10.2,13.6z" />
+                    <path d="M10.2,2.8h-7c-0.3,0-0.6,0.3-0.6,0.6v5C2.6,8.8,2.9,9,3.2,9h7c0.3,0,0.6-0.3,0.6-0.6v-5     C10.8,3.1,10.6,2.8,10.2,2.8z M9.6,7.8H3.8V4h5.8V7.8z" />
+                    <path d="M14.3,6.8h-0.9V1.5c0-0.9-0.7-1.5-1.5-1.5H1.5C0.7,0,0,0.7,0,1.5v14.5c0,1.2,0.9,2.1,2.1,2.1h12.1     c0,0,0.1,0,0.1,0c1.2,0,2.1-0.9,2.1-2.1V8.9C16.4,7.8,15.5,6.8,14.3,6.8z M2.1,17c-0.5,0-0.9-0.4-0.9-0.9V1.5     c0-0.2,0.2-0.3,0.3-0.3h10.3c0.2,0,0.3,0.2,0.3,0.3v14.5c0,0.3,0.1,0.6,0.2,0.9H2.1z M15.2,16.1c0,0.5-0.4,0.9-0.9,0.9     s-0.9-0.4-0.9-0.9V8h0.9c0.5,0,0.9,0.4,0.9,0.9V16.1z" />
+                  </g>
+                </g>
+              </switch>
+            </svg>
             <span class="nav_name"><%= __('admin.menu.공지사항') %></span>
           </a>
           <a href="<%= codezip.url.admin.community.main %>" class="nav__link">

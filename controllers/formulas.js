@@ -155,7 +155,7 @@ exports.index = async (req, res, next) => {
             condition[key] = value;
         }
     }
-    console.log(condition)
+    console.log(condition, skip, limit)
     await formulasService
         .allRead(condition, limit, skip)
         .then((result) => {

@@ -100,8 +100,6 @@
                           </div>
                         </div>
 
-                        <input hidden id="formulas_id" value="<%= project.formulas_id %>">
-
                         <!-- 카테고리 선택 -->
                         <div class="row mb-3 align-items-center">
                           <div class="col col-3">
@@ -648,10 +646,10 @@
                     <hr>
 
                     <div class="d-flex mt-4 justify-content-center">
-                      <button id="saveBtn" class="btn btn-outline-primary col-1 py-3 br-10 me-5" type="button" onclick="save();">
+                      <button id="saveBtn" class="col-2 btn btn-lg btn-outline-primary py-2 me-5" type="button" onclick="save();">
                         <%= __('btn.edit') %>
                       </button>
-                      <button id="nextBtn" class="btn btn-outline-primary col-1 py-3 br-10" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                      <button id="nextBtn" class="col-2 btn btn-lg btn-outline-primary py-2" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">
                         <%= __('btn.확인') %>
                       </button>
 
@@ -671,16 +669,21 @@
         <div class="modal fade" id="confirmModal" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; width: 50%;">
             <div class="modal-content p-5">
-              <div class="text-center text-black">
-                <%- __('users.newProject.draft.msg.confirm') %>
-              </div>
-              <div class="mt-5 text-center">
-                <button type="button" class="btn btn-outline-primary me-3 py-3 px-5 br-10" onclick="next();">
-                  <%= __('btn.done') %>
-                </button>
-                <button type="button" class="btn btn-outline-primary py-3 px-5 br-10" data-bs-dismiss="modal">
-                  <%= __('btn.cancel') %>
-                </button>
+              <div class="mx-5">
+                <div class="text-center text-black">
+                  <div>
+                    <img style="margin-bottom: 2rem; width:3rem; height:3rem;" src="/images/popup/Pop up - Draft request form.svg" />
+                  </div>
+                  <%- __('users.newProject.draft.msg.confirm') %>
+                </div>
+                <div class="mt-5 text-center">
+                  <button type="button" class="btn btn-outline-primary me-3 py-3 px-5 br-10" onclick="next();">
+                    <%= __('btn.done') %>
+                  </button>
+                  <button type="button" class="btn btn-outline-primary py-3 px-5 br-10" data-bs-dismiss="modal">
+                    <%= __('btn.cancel') %>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

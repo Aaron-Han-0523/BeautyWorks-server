@@ -15,6 +15,7 @@ service.readOne = async (condition) => {
                 model: models.documents,
                 as: "documents",
                 where: condition,
+                required: false
             }],
         })
         .then(async (result) => {

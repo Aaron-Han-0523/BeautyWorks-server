@@ -104,9 +104,9 @@
 
                   <!-- 버튼 -->
                   <div class="mt-5 d-flex justify-content-center">
-                    <a class="col-1 btn btn-outline-primary py-3 br-10 me-5" href="<%= codezip.url.users.newProject._0 %>?n=<%= project.id %>">
+                    <button type="button" class="col-1 btn btn-outline-primary py-3 br-10 me-5" onclick="location.replace('<%= codezip.url.users.newProject._0 %>?n=<%= project.id %>');">
                       <%= __('btn.previous') %>
-                    </a>
+                    </button>
                     <button class="col-1 btn btn-outline-primary py-3 br-10">
                       <%= __('btn.next') %>
                     </button>

@@ -67,12 +67,12 @@
                 <div class="widget" style="padding: 0 5vmax; padding-bottom:5vmax;">
 
                   <div class="align-self-center" style="padding: 5vmax;">
-                    <div class="form-control px-3 py-5 text-center text-black fs-5 h-25" style="white-space: pre-line;"><%- __("users.newProject.order.msg.head") %></div>
+                    <div class="form-control px-3 py-5 text-center text-black fs-6 h-25" style="white-space: pre-line;"><%- __("users.newProject.order.msg.head") %></div>
                   </div>
 
                   <hr style="margin-bottom: 5vmax;">
 
-                  <div class="mb-5 text-center fs-5 text-black">
+                  <div class="mb-5 text-center fs-6 text-black">
                     <%= __("users.newProject.order.head.수취인") %><span style="color: red;">
                       <%= __("users.newProject.order.head.warning") %>
                     </span><span style="color: blue;">
@@ -238,7 +238,7 @@
 
                   <div class="form-group mt-5">
                     <div class="text-center">
-                      <button type="button" id="btn_apply" class="col-1 btn btn-outline-primary py-3 br-10" data-bs-toggle="modal" data-bs-target="#confirmModal" disabled>
+                      <button type="button" id="btn_apply" class="col-2 btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#confirmModal" disabled>
                         <%= __('users.newProject.order.btn.배송 신청') %>
                       </button>
                     </div>
@@ -263,13 +263,16 @@
       <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; width: 50%;">
         <div class="modal-content br-10 p-5">
           <div class="text-center text-black">
+            <div>
+              <img style="margin-bottom: 2rem; width:4rem; height: 4rem;" src="/images/popup/Pop up - Delivery address.svg">
+            </div>
             <%- __('users.newProject.order.msg.confirm') %>
           </div>
           <div class="mt-5 text-center">
-            <button class="col-3 btn btn-outline-primary br-10 me-3 py-3" form="order">
+            <button class="col-3 btn btn-lg btn-outline-primary me-3" form="order">
               <%= __('btn.확인') %>
             </button>
-            <button type="button" class="col-3 btn-outline-primary br-10 py-3" data-bs-dismiss="modal">
+            <button type="button" class="col-3 btn btn-lg btn-outline-primary" data-bs-dismiss="modal">
               <%= __('btn.cancel') %>
             </button>
           </div>

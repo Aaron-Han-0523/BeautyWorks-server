@@ -785,5 +785,8 @@
 	"project.project_name": "프로젝트명(제품명)",
 	"placeholder.content": "내용을 입력해주세요.",
 	"msg.success": "msg.success",
-	"Download": "Download"
+	"Download": "Download",
+	"use_effects.Finish": "use_effects.Finish",
+	"use_effects.Finish.true": "use_effects.Finish.true",
+	"use_effects.Finish.false": "use_effects.Finish.false"
 }

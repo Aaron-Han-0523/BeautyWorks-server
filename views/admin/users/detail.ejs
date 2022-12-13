@@ -378,7 +378,7 @@
 
         <div class="row mt-3">
           <div class="widget p-4 row mx-0">
-            <div id="completed_projects"> </div>
+            <div id="completed_projects" class="d-flex"></div>
 
             <!-- pagination -->
             <div id="completed_projects_pagination"></div>
@@ -629,8 +629,9 @@
 
     function show_completed_projects(data) {
       console.log(data);
-      let temp_html = '<div class="col d-flex flex-column">';
+      let temp_html = '';
       data.rows.forEach((item, index) => {
+        temp_html += '<div class="col-3 d-flex flex-column">';
         if (item.image_paths) {
           temp_html += `<div class="preview">
             <img class="br-15" src="${item.image_paths.split(',')[0]}">

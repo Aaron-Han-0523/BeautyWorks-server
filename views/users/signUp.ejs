@@ -423,8 +423,8 @@
       if (!country_number.value) return alert("<%= __('users.signUp.msg.NeedCountryNumberSelect') %>")
 
       if (!checkPasswordConfirm()) return alert("<%= __('users.signUp.msg.NeedPasswordConfirm') %>");
-      else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
-      else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
+      // else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
+      // else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
 
       if (checkEmailConfirm()) {
         const receiverId = document.getElementById('emailId').value;

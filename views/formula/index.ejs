@@ -92,21 +92,11 @@
                 <!-- formulas -->
                 <div class="layout-top-spacing pt-5 px-3">
                   <div id="subTitle" class="h5 text-black"><%= __('users.formula.subTitle.top') %></div>
-                  <div id="formulas_content" class="row pt-4">
-                  </div>
+                  <div id="formulas_content" class="row pt-4"></div>
                 </div>
 
                 <!-- Pagination -->
-                <div id="formulas_pagination">
-                  <!-- make_pagination_by_func = function (i18n_func, page, count, func_name, limit = 10) -->
-                  <%- make_pagination_by_func(
-                  __,
-                  page,
-                  formulas.count,
-                  "load_formula",
-                  limit
-                ) %>
-                </div>
+                <div id="formulas_pagination"></div>
 
               </div>
             </div>
