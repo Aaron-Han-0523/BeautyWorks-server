@@ -790,5 +790,14 @@
 	"msg.success": "msg.success",
 	"Download": "Download",
 	"users.news.subtitle": "users.news.subtitle",
-	"admin.userName": "admin.userName"
+	"admin.userName": "admin.userName",
+	"Tube": "Tube",
+	"Information": "Information",
+	"users.packaging.info.dia19": "users.packaging.info.dia19",
+	"users.packaging.info.dia25": "users.packaging.info.dia25",
+	"users.packaging.info.dia35": "users.packaging.info.dia35",
+	"users.packaging.info.dia40": "users.packaging.info.dia40",
+	"users.packaging.info.dia50": "users.packaging.info.dia50",
+	"users.packaging.info1": "users.packaging.info1",
+	"users.packaging.info2": "users.packaging.info2"
 }

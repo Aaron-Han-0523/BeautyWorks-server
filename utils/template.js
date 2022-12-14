@@ -62,20 +62,17 @@ module.exports.Service = class {
         // console.log("????", Object.keys(this.model))
         return await this.model
             .findAndCountAll({
-                //raw: true,
                 where: condition,
                 order: [
                     ['id', 'DESC']
                 ],
                 offset: skip,
                 limit: limit,
-                include: { all: true },
-                group: this.model.tableName + ".id"
             })
             .then((result) => {
-                console.log("find data Total :", result.count.length);
+                console.log("find data Total :", result.count);
                 return {
-                    count: result.count.length,
+                    count: result.count,
                     rows: result.rows
                 }
             })

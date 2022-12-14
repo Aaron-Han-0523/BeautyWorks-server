@@ -79,14 +79,14 @@ router
         req.session.user = await usersService.getUser({ email: "superadmin" });
         // return res.redirect('/users/signIn');
       }
-      else return next(createError(404));
+      else return next();
     }
 
     req.session.save(() => {
       const user = req.session.user;
       // console.log(user);
       if (![100, 200].includes(user.user_type)) {
-        return res.redirect(codezip.url.users.dashboard)
+        return next(createError(404));
       }
 
       res.locals.user = user;
@@ -141,6 +141,13 @@ router.use('/api', (req, res, next) => {
   next();
 }, router)
 
-router.get('/', (req, res, next) => res.redirect(codezip.url.admin.login))
+router.get('/', (req, res, next) => {
+  console.log
+  if (req.session.user) {
+    res.redirect(codezip.url.admin.users.main)
+  } else {
+    res.redirect(codezip.url.admin.login)
+  }
+})
 
 module.exports = router;

@@ -751,5 +751,21 @@
 	"title": "title",
 	"text": "text",
 	"news.image_paths": "news.image_paths",
-	"btn.파일등록": "btn.파일등록"
+	"btn.파일등록": "btn.파일등록",
+	"placeholder.admin.package.search": "placeholder.admin.package.search",
+	"table.head.용기.용기명": "table.head.용기.용기명",
+	"table.head.용기.용기종류": "table.head.용기.용기종류",
+	"table.head.용기.대분류": "table.head.용기.대분류",
+	"table.head.용기.중분류": "table.head.용기.중분류",
+	"table.head.용기.소분류": "table.head.용기.소분류",
+	"table.head.용기.용도": "table.head.용기.용도",
+	"admin.menu.제품관리.내용물.수정": "admin.menu.제품관리.내용물.수정",
+	"packages.packaging_name": "packages.packaging_name",
+	"packages.packaging_type": "packages.packaging_type",
+	"packages.category1": "packages.category1",
+	"packages.category2": "packages.category2",
+	"packages.category3": "packages.category3",
+	"packages.capacity": "packages.capacity",
+	"packages.use": "packages.use",
+	"packages.image_paths": "packages.image_paths"
 }

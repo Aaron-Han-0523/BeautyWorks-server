@@ -56,25 +56,6 @@
 
               <div class="widget w-100" style="padding: 10% 5%;">
                 <!-- 카드 그룹 -->
-                <!-- /* 테스트 데이터 생성 -->
-                <div>
-                  <%
-                    let packages={count:100, rows:[]};
-                    for(let i=0; i< 6; i++){
-                        packages.rows.push({
-                            packaging_name:"테스트용기"+i,
-                            packaging_type:0,
-                            category1:i%3,
-                            category2:i%3,
-                            category3:i%5,
-                            capacity:i+" ml",
-                            price:(i+1)+"000",
-                            use:"Eyecream",
-                            image_paths:"https://via.placeholder.com/150x1" + i + "0.jpg"
-                        })
-                    }
-                    %>
-                </div>
                 <!-- 테스트 데이터 생성 */ -->
                 <div class="d-flex flex-wrap">
                   <!-- 카드 -->
@@ -83,10 +64,13 @@
                     <!-- 카드 이미지-->
                     <div>
                       <% if(item.image_paths) { %>
-                      <% let image_url = item.image_paths.split(',')[0] %>
-                      <div class="card-preview" style="background-image: url('<%= image_url %>')"></div>
+                      <% let image_url = encodeURI(item.image_paths.split(',')[0].replace(/\\/g,"/")) %>
+                      <div class="card-preview" style="background-image: url('<%= image_url %>')">
+                        <!--  -->
+                        <!-- <img style="width: 100%;" src="<%= image_url %>"> -->
+                      </div>
                       <% }else{ %>
-                      <div class="card-preview" style="background-image: url(https://via.placeholder.com/150.jpg);"></div>
+                      <div class="card-preview" style="background-image: url('https://via.placeholder.com/150.jpg?text=No%20Image');"></div>
                       <% } %>
                     </div>
                     <!-- 카드 내용-->
