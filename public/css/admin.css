@@ -122,6 +122,7 @@ label {
 
 .menu li {
   list-style: outside;
+  white-space: nowrap;
 }
 
 .sublink {
