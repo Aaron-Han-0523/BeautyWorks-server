@@ -48,7 +48,7 @@ app.set('view engine', 'ejs');
 // print the request log on console
 // logger 인수 dev, combined, common, short, tiny
 if (env == 'development') app.use(logger('dev'));
-// else app.use(logger(':req[X-Real-IP] - :remote-user - [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :total-time[digits]ms'));
+else app.use(logger(':req[X-Real-IP] - :remote-user - [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time ms'));
 // app.use(logger(':req[X-Real-IP] - :remote-user - [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time ms'));
 
 app.use(express.json());
