@@ -10,15 +10,18 @@ service.readOne = async (condition) => {
     return await service.model
         .findOne({
             raw: true,
-            where: condition,
-            include: [{
-                model: models.documents,
-                as: "documents",
-                where: condition,
-                required: false
-            }],
+            where: condition
         })
         .then(async (result) => {
+            // 문서
+            let document = await models.documents.findOne({
+                raw: true,
+                where: condition
+            })
+            if (document) {
+                result.document = document;
+            }
+            
             // 컨셉 성분 리스트 toString
             if (result.ingredients) {
                 let ingredients_list = result.ingredients.split(',');

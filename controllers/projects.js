@@ -44,7 +44,7 @@ exports.edit = async (req, res, next) => {
     console.log("Project edit");
     const base = req.baseUrl.split('/')[1];
     const user = res.locals.user;
-    const id = req.query.n || req.params.id;
+    const id = +req.query.n || +req.params.id;
     console.log(id);
     if (!id) {
         console.error("Need to project id");
@@ -65,7 +65,7 @@ exports.edit = async (req, res, next) => {
         }
     }
     else if (base == 'admin') {
-        condition.users_id = req.params.id;
+        condition.users_id = +req.params.id;
     }
 
     console.log("files", req.files);
@@ -81,6 +81,7 @@ exports.edit = async (req, res, next) => {
         }
     }
 
+    console.log(Object.assign(body, condition));
     let document = documentsService.upsert(Object.assign(body, condition));
     let project = projectsService.update(body, condition);
 

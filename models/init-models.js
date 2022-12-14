@@ -28,18 +28,12 @@ function initModels(sequelize) {
   var user_log = _user_log(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
 
-  projects.belongsToMany(projects, { as: 'id_projects', through: documents, foreignKey: "users_id", otherKey: "id" });
-  projects.belongsToMany(projects, { as: 'users_id_projects', through: documents, foreignKey: "id", otherKey: "users_id" });
   replies.belongsTo(communities, { as: "community", foreignKey: "communities_id"});
   communities.hasMany(replies, { as: "replies", foreignKey: "communities_id"});
   projects.belongsTo(formulas, { as: "formula", foreignKey: "formulas_id"});
   formulas.hasMany(projects, { as: "projects", foreignKey: "formulas_id"});
   projects.belongsTo(packages, { as: "package", foreignKey: "packages_id"});
   packages.hasMany(projects, { as: "projects", foreignKey: "packages_id"});
-  documents.belongsTo(projects, { as: "user", foreignKey: "users_id"});
-  projects.hasMany(documents, { as: "documents", foreignKey: "users_id"});
-  documents.belongsTo(projects, { as: "id_project", foreignKey: "id"});
-  projects.hasMany(documents, { as: "id_documents", foreignKey: "id"});
   communities.belongsTo(users, { as: "user", foreignKey: "users_id"});
   users.hasMany(communities, { as: "communities", foreignKey: "users_id"});
   news.belongsTo(users, { as: "user", foreignKey: "users_id"});

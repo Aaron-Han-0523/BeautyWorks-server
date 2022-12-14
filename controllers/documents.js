@@ -191,7 +191,7 @@ exports.detail = async (req, res, next) => {
                 })
             } else if (base == 'users') {
                 res.render('documents/detail', {
-                    document: result,
+                    project: result,
                 })
             }
             //  else if (base == 'admin') {

@@ -61,16 +61,16 @@
                   <div class="form-control my-3 p-3">
                     <div class="d-flex justify-content-between h6 m-0">
                       <!-- 프로젝트 명-->
-                      <div><%= document.project_name %></div>
+                      <div class="col-4"><%= project.project_name %></div>
                       <!-- 문서 제목-->
-                      <div><%= document["documents.title"] %></div>
+                      <div class="col-4 text-center"><%= project.document.title %></div>
                       <!-- 생성일 -->
-                      <div><%= formatDate(document.update_date) %></div>
+                      <div class="col-4 text-end"><%= formatDate(project.update_date) %></div>
                     </div>
                   </div>
                   <!-- 메시지 -->
                   <div class="m-4">
-                    <%= document["documents.message"] %>
+                    <%= project.document.message %>
                   </div>
                 </div>
 
@@ -80,9 +80,9 @@
                   <span><%= __('File') %></span>
                 </div>
                 <hr>
-                <% if(document["documents.file_paths"]) { %>
+                <% if(project.document.file_paths) { %>
                 <%
-                  let file = path.parse(document["documents.file_paths"]);
+                  let file = path.parse(project.document.file_paths);
                   let filename = "";
                 
                   file.name.split('-')[2].split('_').forEach((code,index)=>{
@@ -95,7 +95,7 @@
                     <span><%= filename + file.ext %></span>
                   </div>
                   <div>
-                    <a download="<%= filename + file.ext %>" class="w-auto btn btn-outline-primary px-3" href="<%= document['documents.file_paths'] %>">
+                    <a download="<%= filename + file.ext %>" class="w-auto btn btn-outline-primary px-3" href="<%= project.document.file_paths %>">
                       <%= __('Download') %>
                     </a>
                   </div>
@@ -132,11 +132,7 @@
   <%- include ("../partials/commonScrpits.ejs") %>
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-  <script>
-    function file_download() {
 
-    }
-  </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 

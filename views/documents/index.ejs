@@ -61,11 +61,11 @@
                   <a class="form-control my-3 p-3" href="<%= codezip.url.users.documents +'/'+ item.id %>">
                     <div class="d-flex justify-content-between h6 m-0">
                       <!-- 프로젝트 명-->
-                      <div><%= item.project_name %></div>
+                      <div class="col-4"><%= item.project_name %></div>
                       <!-- 문서 제목 -->
-                      <div><%= item["documents.title"] %></div>
+                      <div class="col-4 text-center"><%= item["documents.title"] %></div>
                       <!-- 생성일 -->
-                      <div><%= formatDate(item.update_date) %></div>
+                      <div class="col-4 text-end"><%= formatDate(item.update_date) %></div>
                     </div>
                   </a>
                   <% }) %>

@@ -5,21 +5,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "사용자 식별번호",
-      references: {
-        model: 'projects',
-        key: 'users_id'
-      }
+      comment: "사용자 식별번호"
     },
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "프로젝트 식별번호",
-      references: {
-        model: 'projects',
-        key: 'id'
-      }
+      comment: "프로젝트 식별번호"
     },
     title: {
       type: DataTypes.STRING(100),

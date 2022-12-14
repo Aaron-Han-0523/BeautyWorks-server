@@ -16,13 +16,13 @@ module.exports = function(sequelize, DataTypes) {
     award: {
       type: DataTypes.STRING(100),
       allowNull: true,
-      comment: "어워드"
+      comment: "A.I 디테일"
     },
     top_or_new: {
       type: DataTypes.TINYINT,
       allowNull: false,
       defaultValue: 0,
-      comment: "대분류"
+      comment: "BW A.I"
     },
     category1: {
       type: DataTypes.TINYINT,
