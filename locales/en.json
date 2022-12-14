@@ -745,5 +745,11 @@
 	"project.tooltip.5-1": "After packaging inspection, manufacturing will be started.",
 	"project.tooltip.7-0": "If you need any documents other than MSDS and COA, please contact Chatbot.",
 	"project.tooltip.8-0": "Please contact Chatbot.",
-	"project.shipment_date": "Date of shipment"
+	"project.shipment_date": "Date of shipment",
+	"admin.menu.커뮤니티.수정": "admin.menu.커뮤니티.수정",
+	"admin.menu.공지사항.추가": "admin.menu.공지사항.추가",
+	"title": "title",
+	"text": "text",
+	"news.image_paths": "news.image_paths",
+	"btn.파일등록": "btn.파일등록"
 }

@@ -388,13 +388,7 @@
 
     async function reply_delete(communities_id, replies_id) {
       let url = '<%= codezip.url.admin.community.reply.delete %>/' + communities_id + '/' + replies_id;
-      fetch(url, {
-        method: "delete",
-        body: new URLSearchParams({
-          communities_id: communities_id,
-          id: replies_id,
-        })
-      }).then(res => {
+      fetch(url).then(res => {
         if (res.ok) {
           let reply = document.getElementsByClassName('reply');
           // console.log(reply.length);

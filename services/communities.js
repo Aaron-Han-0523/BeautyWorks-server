@@ -24,7 +24,7 @@ service.create = async (obj) => {
 }
 
 service.update = async (obj) => {
-    console.log("update obj :", obj)
+    // console.log("update obj :", obj)
     return await communities
         .update(Object.assign(obj, {
             update_date: new Date()

@@ -2,15 +2,12 @@
 <html lang="ko">
 
 <head>
-  <%- include ("../../partials/header.ejs") %>
+  <%- include ("../../partials/admin-header.ejs") %>
 </head>
 
 <body class="layout-boxed">
 
   <%- include ("../../partials/loader.ejs") %>
-
-  <%- include ("../../partials/client-nav.ejs") %>
-  <%- include ("../../partials/chatMark.ejs") %>
 
   <!--  BEGIN MAIN CONTAINER  -->
   <div class="main-container" id="container">
@@ -18,43 +15,33 @@
     <div class="overlay"></div>
     <div class="search-overlay"></div>
 
-    <%- include ("../../partials/client-sidebar.ejs") %>
+    <%- include ("../../partials/admin-sidebar.ejs") %>
 
+    <%- include ("../../partials/admin-nav.ejs") %>
     <!--  BEGIN CONTENT AREA  -->
-    <div id="content" class="main-content">
+    <div id="content" class="main-content admin-add">
       <div class="layout-px-spacing">
 
-        <div class="middle-content  p-0">
+        <div class="middle-content container-xxl p-0 ">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
-              <div class="col-3">
-                <h6 class="main-menu">
-                  <%= __('Lounge') %>
-                </h6>
-                <h4><strong>
-                    <%= __('Community') %>
-                  </strong></h4>
+          <div class="row">
+            <div class="breadcrumb align-datas-start d-flex br-20 ">
+              <div class="p-1 col-4 ">
+                <h5>
+                  <strong>
+                    <%= __('admin.menu.커뮤니티.수정') %>
+                  </strong>
+                </h5>
               </div>
             </div>
           </div>
-
-          <div class="row px-3 ">
-            <div class="breadcrumb align-items-start d-flex br-20">
-              <div class="col">
-                <h5><strong>
-                    <%= __('users.community.subtitle') %>
-                  </strong></h5>
-              </div>
-            </div>
-          </div>
-
           <!-- CONTENT AREA -->
-          <div class="row px-3 justify-content-center">
-            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+          <div class="row layout-top-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
-              <div class="widget w-100">
+              <div class="widget-content widget-content-area br-20 p-4">
+
                 <form method="post">
                   <!-- title -->
                   <input class="form-control bc-white bg-white" name="title" type="text" placeholder="<%= __('users.community.add.제목을 입력해주세요') %>" required value="<%= data.title %>">
@@ -67,7 +54,7 @@
                   <hr>
 
                   <div class="text-end mt-4">
-                    <button class="btn btn-outline-primary px-5">
+                    <button class="btn px-5">
                       <%= __('users.community.add.btn.확인') %>
                     </button>
                   </div>

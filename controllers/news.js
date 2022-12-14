@@ -24,7 +24,7 @@ exports.add = async (req, res, next) => {
         if (req.api) {
             return res.status(201).json(result.id);
         } else {
-            return res.status(201).redirect(codezip.url.users.news.main);
+            return res.status(201).redirect(codezip.url.admin.news.main);
         }
     }
     catch (e) {

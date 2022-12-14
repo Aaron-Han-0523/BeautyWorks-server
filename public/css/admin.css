@@ -247,7 +247,7 @@ label {
 }
 
 .admin-add .widget-content {
-  width: 60vw;
+  /* width: 60vw; */
   height: auto;
   border: 1px solid #000;
   margin: auto;

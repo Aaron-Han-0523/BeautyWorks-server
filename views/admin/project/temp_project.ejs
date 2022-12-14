@@ -70,7 +70,7 @@
                       </div>
                       <div class="form-control my-2 d-flex align-items-baseline py-0 pe-0">
                         <span class="mx-2" style="left:0px;">$</span>
-                        <input type="number" class="form-control w-100 align-placeholder" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" required value="<%= project.budget %>">
+                        <input type="number" class="form-control w-100 align-placeholder" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" value="<%= project.budget %>">
                       </div>
                       <!-- <div style="color: red;">
                         <%= __('users.newProject.moq.budgetInput.after') %>
@@ -88,7 +88,7 @@
                         <%= __('project.moq') %>
                       </div>
                       <div>
-                        <select class="form-select" name="moq" required>
+                        <select class="form-select" name="moq">
                           <option value="">
                             <%= __('users.newProject.moq.moqSelect.placeholder') %>
                           </option>
@@ -180,11 +180,12 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.project_name') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.project_name') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.project_name %>">
+                        <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" value="<%= project.project_name %>">
                       </div>
                     </div>
 
@@ -192,11 +193,12 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.brand_name') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.brand_name') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" required value="<%= project.brand_name %>">
+                        <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" value="<%= project.brand_name %>">
                       </div>
                     </div>
 
@@ -206,12 +208,13 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.category1') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.category1') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input hidden type="text" name="category1" required>
-                        <input type="text" class="form-control" id="category1_print" placeholder="<%= __('Select') %>" readonly required>
+                        <input hidden type="text" name="category1">
+                        <input type="text" class="form-control" id="category1_print" placeholder="<%= __('Select') %>" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -233,12 +236,13 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.category2') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.category2') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input hidden type="text" name="category2" required>
-                        <input type="text" class="form-control" id="category2_print" placeholder="<%= __('Select') %>" readonly required>
+                        <input hidden type="text" name="category2">
+                        <input type="text" class="form-control" id="category2_print" placeholder="<%= __('Select') %>" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -256,11 +260,12 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.capacity') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.capacity') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="number" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" required value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
+                        <input type="number" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
                       </div>
                       <div class="col col-3">
                         <%# console.log("??",project.capacity.split(' ')[1],"??") %>
@@ -282,12 +287,13 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.target_age') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.target_age') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input hidden type="text" name="target_age" required>
-                        <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('placeholder.target_age') %>" readonly required>
+                        <input hidden type="text" name="target_age">
+                        <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('placeholder.target_age') %>" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_age" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -310,12 +316,13 @@
                     <div class="row mb-3 align-items-center">
                       <div class="col col-3">
                         <h6>
-                          <%= __('users.newProject.basic.target_gender') %><span style="color: red;">*</span>
+                          <%= __('users.newProject.basic.target_gender') %>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
-                        <input hidden type="text" name="target_gender" required>
-                        <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('placeholder.target_gender') %>" readonly required>
+                        <input hidden type="text" name="target_gender">
+                        <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('placeholder.target_gender') %>" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_gender" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -339,12 +346,12 @@
                       <div class="col col-3">
                         <h6>
                           <%= __('users.newProject.basic.target_country') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
                         <input hidden type="text" name="target_country" value="">
-                        <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('placeholder.target_country') %>" readonly required>
+                        <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('placeholder.target_country') %>" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -371,7 +378,7 @@
                       <div class="col col-3">
                         <h6>
                           <%= __('users.newProject.basic.distribution_channel') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
@@ -753,7 +760,7 @@
                       <div class="col-3">
                         <h6>
                           <%= __('users.newProject.order.출시국가') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
@@ -781,7 +788,7 @@
                       <div class="col-3">
                         <h6>
                           <%= __('users.newProject.order.수취인명') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
@@ -794,7 +801,7 @@
                       <div class="col-3">
                         <h6>
                           <%= __('users.newProject.order.연락처') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col col-2">
@@ -823,7 +830,7 @@
                         </div>
                       </div>
                       <div class="col ">
-                        <input type="text" class="form-control" name="phone_num" id="phone_num" placeholder="<%= __('placeholder.mobilePhone') %>" required>
+                        <input type="text" class="form-control" name="phone_num" id="phone_num" placeholder="<%= __('placeholder.mobilePhone') %>">
                       </div>
                     </div>
                     <!-- 연락처 warning-->
@@ -838,7 +845,7 @@
                       <div class="col-3">
                         <h6>
                           <%= __('users.newProject.order.주소') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
@@ -851,7 +858,7 @@
                       <div class="col-3">
                         <h6>
                           <%= __('users.newProject.order.도시') %>
-                          <span style="color: red;">*</span>
+                          <!-- <span style="color: red;">*</span> -->
                         </h6>
                       </div>
                       <div class="col">
@@ -1082,6 +1089,8 @@
     }
 
     function select_category1_func(value) {
+      if(!value) return;
+      
       // console.log("v:", value, "p", printName);
       if (document.forms[0]['category1'].value != value) {
         document.forms[0]['category2'].value = "";
@@ -1104,6 +1113,8 @@
     }
 
     function select_category2_func(value) {
+      if(!value) return;
+
       // console.log("v:", value, "p", printName);
       let category = document.forms[0]['category1'].value;
       document.forms[0]["category2"].value = value;
@@ -1217,8 +1228,8 @@
   </script>
   <script>
     window.addEventListener('load', event => {
-      select_category1_func('<%= project.category1 %>')
-      select_category2_func('<%= project.category2 %>')
+      select_category1_func('<%= project.category1||"" %>')
+      select_category2_func('<%= project.category2||"" %>')
 
       document.getElementsByClassName('target_gender_label').forEach((item, index) => {
         let text = item.innerText.trim();

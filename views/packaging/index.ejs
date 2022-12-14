@@ -84,9 +84,9 @@
                     <div>
                       <% if(item.image_paths) { %>
                       <% let image_url = item.image_paths.split(',')[0] %>
-                      <div class="card-thumbnail" style="background-image: url('<%= image_url %>')"></div>
+                      <div class="card-preview" style="background-image: url('<%= image_url %>')"></div>
                       <% }else{ %>
-                      <div class="card-thumbnail" style="background-image: url(https://via.placeholder.com/150.jpg);"></div>
+                      <div class="card-preview" style="background-image: url(https://via.placeholder.com/150.jpg);"></div>
                       <% } %>
                     </div>
                     <!-- 카드 내용-->

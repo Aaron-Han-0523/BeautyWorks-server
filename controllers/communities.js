@@ -32,6 +32,7 @@ exports.edit = async (req, res, next) => {
     console.log("put - communities edit")
     const user = res.locals.user;
     const id = req.params.id;
+    const base = req.originalUrl.split('/')[1]
     let body = req.body;
     body.id = id;
     console.log("communities body :", body);
@@ -56,9 +57,10 @@ exports.edit = async (req, res, next) => {
             if (result == 1) {
                 if (req.api) {
                     return res.status(200).end();
-                }
-                else {
+                } else if (base == "users") {
                     return res.redirect(codezip.url.users.community.main + '/' + id);
+                } else if (base == "admin") {
+                    return res.redirect(codezip.url.admin.community.main + '/' + id);
                 }
             }
             else if (result == 0) {

@@ -28,12 +28,16 @@ exports.add = async (req, res, next) => {
 exports.edit = async (req, res, next) => {
     console.log("reply edit");
     const user = res.locals.user;
+    const base = req.originalUrl.split('/')[1]
     let body = req.body;
-    const target = await repliesService.readOne(body);
-    // console.log(target);
-    if (!(user.id == target.users_id || [100, 200].includes(user.user_type))) {
-        return res.status(403).end();
+
+    if (!(base == "admin" && [100, 200].includes(user.user_type))) {
+        const target = await repliesService.readOne(body);
+        if (user.id != target.users_id) {
+            return res.status(403).end();
+        }
     }
+
     console.log("reply edit body :", body);
 
     repliesService.update(body)
@@ -50,14 +54,22 @@ exports.edit = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     console.log("reply delete");
     const user = res.locals.user;
+    const base = req.originalUrl.split('/')[1]
     let obj = {}
-    obj.communities_id = req.params.community_id;
-    obj.id = req.params.reply_id;
-    //console.log(obj)
-    const target = await repliesService.readOne(obj);
-    if (user.id != target.users_id) {
-        return res.status(403).end();
+    if (base == "users") {
+        const target = await repliesService.readOne(obj);
+        if (user.id != target.users_id) {
+            return res.status(403).end();
+        } else {
+            obj.communities_id = req.params.community_id;
+            obj.id = req.params.reply_id;
+        }
+    } else if (base == "admin") {
+        obj.communities_id = req.params.community_id;
+        obj.id = req.params.reply_id;
     }
+
+    console.log(obj)
 
     let result = await repliesService
         .hide(obj)
