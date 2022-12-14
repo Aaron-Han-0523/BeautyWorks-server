@@ -74,6 +74,9 @@ router
     // let ingredients = ingredientsService.allRead({}, 10)
     Promise.all([project]).then(([project]) => {
       res.render('newProject/option', { project: project })
+    }).catch(err => {
+      console.error(err);
+      res.status(500).end();
     })
   })
 

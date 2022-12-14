@@ -182,6 +182,9 @@ exports.detail = async (req, res, next) => {
                     next: next_id[0] || null,
                 })
             }
+        }).catch(err=>{
+            console.error(err);
+            res.status(500).end();
         })
 }
 

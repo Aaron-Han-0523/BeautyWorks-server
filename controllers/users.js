@@ -240,6 +240,9 @@ exports.main = async (req, res) => {
                 news: news.rows,
                 community: community.rows
             });
+        }).catch(err=>{
+            console.error(err);
+            res.status(500).end();
         })
 
 }
@@ -276,6 +279,9 @@ exports.myPage = async (req, res, next) => {
             // console.log("44", (myFavoriteComments));
 
             return res.render('users/myPage');
+        }).catch(err=>{
+            console.error(err);
+            res.status(500).end();
         })
 }
 
