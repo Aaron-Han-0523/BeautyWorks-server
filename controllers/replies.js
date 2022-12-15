@@ -56,13 +56,12 @@ exports.delete = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.originalUrl.split('/')[1]
     let obj = {}
+    obj.communities_id = req.params.community_id;
+    obj.id = req.params.reply_id;
     if (base == "users") {
         const target = await repliesService.readOne(obj);
         if (user.id != target.users_id) {
             return res.status(403).end();
-        } else {
-            obj.communities_id = req.params.community_id;
-            obj.id = req.params.reply_id;
         }
     } else if (base == "admin") {
         obj.communities_id = req.params.community_id;
