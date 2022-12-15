@@ -148,9 +148,9 @@
                       </h6>
                     </div>
                     <div class="col-7 d-flex align-items-baseline">
-                      <input type="text" class="form-control email" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="text" class="form-control" name="emailId" id="emailId" placeholder="<%= __('plzInputText') %>" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                       <h6 class="mx-3">@</h6>
-                      <input type="text" class="form-control email" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="text" class="form-control" name="emailDomain" id="emailDomain" placeholder="<%= __('plzInputText') %>" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                     </div>
                     <div class="col">
                       <button class="w-100 btn btn-outline-primary" type="button" onclick="send_validation_email();">
@@ -167,7 +167,7 @@
                       </h6>
                     </div>
                     <div class="col col-7">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="<%= __('plzInputText') %>" required>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="<%= __('plzInputText') %>" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                     </div>
                   </div>
 
@@ -407,16 +407,16 @@
       if (!country_number.value) return alert("<%= __('users.signUp.msg.NeedCountryNumberSelect') %>")
 
       if (!checkPasswordConfirm()) return alert("<%= __('users.signUp.msg.NeedPasswordConfirm') %>");
-      else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
-      else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
+      // else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
+      // else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
 
-      if (checkEmailConfirm()) {
-        const receiverId = document.getElementById('emailId').value;
-        const receiverDomain = document.getElementById('emailDomain').value;
-        const Email = receiverId + '@' + receiverDomain;
-      } else {
-        return alert("<%= __('users.signUp.msg.NeedEmailConfirm') %>");
-      }
+      //if (checkEmailConfirm()) {
+      const receiverId = document.getElementById('emailId').value;
+      const receiverDomain = document.getElementById('emailDomain').value;
+      const Email = receiverId + '@' + receiverDomain;
+      //} else {
+      //  return alert("<%= __('users.signUp.msg.NeedEmailConfirm') %>");
+      //}
 
       let body = {};
       for ([name, value] of new FormData(join)) body[name] = value;
@@ -437,13 +437,6 @@
         } else return alert("<%= __('users.signUp.msg.FailJoin') %>");
       })
     }
-  </script>
-  <script>
-    document.querySelectorAll(".email").forEach(el => {
-      el.addEventListener("input", event => {
-        CertificationNumber.value = "";
-      })
-    })
   </script>
   <!-- END GLOBAL MANDATORY SCRIPTS -->
   <input hidden id="CertificationNumber">
