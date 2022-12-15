@@ -224,8 +224,8 @@ exports.main = async (req, res) => {
             return data
         })
 
-    const news = newsService.allRead(undefined, { skip: 0, limit: 2 })
-    const community = communitiesService.allRead(undefined, { skip: 0, limit: 2 })
+    const news = newsService.allRead({ delete_date: null }, { skip: 0, limit: 2 })
+    const community = communitiesService.allRead({ delete_date: null }, { skip: 0, limit: 2 })
 
     Promise.all([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community])
         .then(([project, temp_project, completed_project, recommended_formula, remommended_ingredient, news, community]) => {
@@ -240,7 +240,7 @@ exports.main = async (req, res) => {
                 news: news.rows,
                 community: community.rows
             });
-        }).catch(err=>{
+        }).catch(err => {
             console.error(err);
             res.status(500).end();
         })
@@ -279,7 +279,7 @@ exports.myPage = async (req, res, next) => {
             // console.log("44", (myFavoriteComments));
 
             return res.render('users/myPage');
-        }).catch(err=>{
+        }).catch(err => {
             console.error(err);
             res.status(500).end();
         })
