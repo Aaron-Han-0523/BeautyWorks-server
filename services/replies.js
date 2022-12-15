@@ -18,13 +18,14 @@ service.allRead = async (condition = {}, paging = { skip: 0, limit: 4 }) => {
     select users.profile_image_path, users.first_name, users.last_name, rp.*, count(like_rp.users_id) as like_count, JSON_ARRAYAGG(like_rp.users_id) as users
     from replies rp
     join users
-        on users.id=(select rp.users_id where rp.communities_id=${condition.communities_id}`
+        on users.id=select rp.users_id
+    left join like_replies like_rp
+		on rp.communities_id=like_rp.communities_id and rp.id=like_rp.replies_id
+    where rp.communities_id=${condition.communities_id}`
     if (condition.delete_date === null) {
         query += ` and rp.delete_date is null `
     }
-    query += `)
-    left join like_replies like_rp
-		on rp.communities_id=like_rp.communities_id and rp.id=like_rp.replies_id
+    query += `
     group by rp.id
     order by rp.id desc
     limit ${paging.skip}, ${paging.limit};
