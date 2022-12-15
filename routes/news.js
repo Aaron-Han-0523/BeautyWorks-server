@@ -12,8 +12,8 @@ router
 
 // 편집
 router
-  .put('/edit/:id', newsController.edit)
-  .post('/edit/:id', newsController.edit)
+  .put('/:id', newsController.edit)
+  .post('/:id', newsController.edit)
 
 // 삭제
 router

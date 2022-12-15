@@ -54,7 +54,7 @@ exports.edit = async (req, res, next) => {
                     return res.status(200).end();
                 }
                 else {
-                    return res.redirect(codezip.url.admin.news.main + `/${id}`);
+                    return res.redirect("back");
                 }
             }
             else if (result == 0) {
@@ -176,6 +176,7 @@ exports.detail = async (req, res, next) => {
                     next: next_id[0] || null,
                 })
             } else if (base == 'admin') {
+                console.log(base)
                 return res.render(`admin/news/detail`, {
                     news: data,
                     prev: prev_id[0] || null,
