@@ -58,7 +58,7 @@
                     <div class="d-flex mt-3">
                       <label class="col-4 pt-2" for="phase"><%= __("project.phase") %></label>
                       <select name="phase" id="phase" class="form-select">
-                        <% for(let i=0; i< codezip.numberOfProjectState.phase+1; i++){ %>
+                        <% for(let i=1; i< codezip.numberOfProjectState.phase+1; i++){ %>
                         <% if(project.phase==i){ %>
                         <option selected value="<%= i %>"><%= __("project_phase"+i) %></option>
                         <% }else{ %>
