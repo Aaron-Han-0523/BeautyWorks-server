@@ -74,11 +74,6 @@ exports.index = async (req, res, next) => {
     let limit = +req.query.limit || 10;
     const skip = req.query.skip || (news_page - 1) * limit;
 
-    let news_paging = {
-        skip: skip,
-        limit: limit
-    }
-
     let word = req.query.q;
     if (word) word = word.replace(/\;/g, '').trim();
 
@@ -91,6 +86,11 @@ exports.index = async (req, res, next) => {
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         condition.delete_date = null;
         limit = +req.query.limit || 5;
+    }
+
+    let news_paging = {
+        skip: skip,
+        limit: limit
     }
 
     console.log("where", condition);
