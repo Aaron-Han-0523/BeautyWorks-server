@@ -3,6 +3,10 @@
     src: url('/fonts/Poppins-Medium.ttf') format('truetype');
 }
 
+html {
+    font-size: 87.5%;
+}
+
 ul.info {
     list-style: "· ";
 }
