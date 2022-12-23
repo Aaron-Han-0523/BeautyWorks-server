@@ -363,8 +363,8 @@
                           </div>
                           <div class="col col-5">
                             <input hidden type="text" name="efficacy" value="<%= project.efficacy %>">
-                            <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
-                              <div class="flex-fill" id="efficacy_print">
+                            <button class="form-control text-start pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
+                              <div class="flex-fill text-ellipsis" id="efficacy_print">
                                 <%= __('Select') %>
                               </div>
                               <div class="text-primary">
@@ -465,8 +465,8 @@
                           </div>
                           <div class="col-9">
                             <input hidden type="text" name="ingredients" value="<%= project.ingredients %>">
-                            <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
-                              <div class="flex-grow-1" id="ingredients_print">
+                            <button class="form-control text-start pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
+                              <div class="flex-grow-1 text-ellipsis" id="ingredients_print">
                                 <%= project.concept_ingredients || __('통합 검색') %>
                               </div>
                               <div class="text-primary">
@@ -513,8 +513,8 @@
                           </div>
                           <div class="col-9">
                             <input hidden type="text" name="applies" value="<%= project.applies %>">
-                            <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
-                              <div class="flex-fill" id="applies_print">
+                            <button class="form-control text-start pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
+                              <div class="flex-fill text-ellipsis" id="applies_print">
                                 <%= __('Select') %>
                               </div>
                               <div class="text-primary">
@@ -647,7 +647,7 @@
 
                     <div class="d-flex mt-4 justify-content-center">
                       <button id="saveBtn" class="col-2 btn btn-lg btn-outline-primary py-2 me-5" type="button" onclick="save();">
-                        <%= __('btn.edit') %>
+                        <%= __('btn.save') %>
                       </button>
                       <button id="nextBtn" class="col-2 btn btn-lg btn-outline-primary py-2" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">
                         <%= __('btn.확인') %>
@@ -677,10 +677,10 @@
                   <%- __('users.newProject.draft.msg.confirm') %>
                 </div>
                 <div class="mt-5 text-center">
-                  <button type="button" class="btn btn-outline-primary me-3 py-3 px-5 br-10" onclick="next();">
+                  <button type="button" class="btn btn-lg btn-outline-primary me-3 px-5" onclick="next();">
                     <%= __('btn.done') %>
                   </button>
-                  <button type="button" class="btn btn-outline-primary py-3 px-5 br-10" data-bs-dismiss="modal">
+                  <button type="button" class="btn btn-lg btn-outline-primary px-5" data-bs-dismiss="modal">
                     <%= __('btn.cancel') %>
                   </button>
                 </div>

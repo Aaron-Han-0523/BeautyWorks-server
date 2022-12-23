@@ -58,13 +58,6 @@
 
                 <form id="moq" class="px-3 mx-2" method="post">
                   <div class="form-group p-5">
-                    <!-- title -->
-                    <!-- <div>
-                      <h3>
-                        <%= __('users.newProject.moq.title') %>
-                      </h3>
-                    </div> -->
-                    <!-- 예산 입력 -->
                     <div class="mt-4">
                       <div>
                         <%= __('users.newProject.moq.budgetInput.before') %>
@@ -153,7 +146,7 @@
         return;
       }
       if (+moq[0].value && +moq[1].value) {
-        unitPrice.value = parseInt(+moq[0].value / +moq[1].value)
+        unitPrice.value = parseFloat(+moq[0].value / +moq[1].value)
       }
     }
 

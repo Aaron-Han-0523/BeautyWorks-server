@@ -107,7 +107,7 @@
                     <button type="button" class="col-1 btn btn-outline-primary py-3 br-10 me-5" onclick="location.replace('<%= codezip.url.users.newProject._0 %>?n=<%= project.id %>');">
                       <%= __('btn.previous') %>
                     </button>
-                    <button class="col-1 btn btn-outline-primary py-3 br-10">
+                    <button id="nextBtn" class="col-1 btn btn-outline-primary py-3 br-10">
                       <%= __('btn.next') %>
                     </button>
                   </div>
@@ -129,8 +129,8 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
-    function check_target_url(target_url) {
-      if (target_url) {
+    function check_target_url() {
+      if (have_benchmark_false.checked || isTarget["target_url"].value) {
         nextBtn.disabled = false;
       } else {
         nextBtn.disabled = true;
@@ -138,19 +138,22 @@
     }
 
     window.addEventListener('load', (event) => {
-      check_target_url(isTarget[0].value)
+      check_target_url()
     })
 
     isTarget.target_url.addEventListener('keyup', (event) => {
-      check_target_url(event.target.value)
+      check_target_url()
     })
 
     document.querySelectorAll('input[name="have"]').forEach(el => {
       el.addEventListener('change', (event) => {
         if (have_benchmark_ture.checked) {
           target_url.disabled = false;
+          check_target_url()
         } else {
           target_url.disabled = true;
+          target_url.value = '';
+          check_target_url()
         }
       })
     })
@@ -169,7 +172,11 @@
         console.log(res);
         if (res.ok) {
           // alert("<%= __('users.msg.SuccessSave') %>")
-          location.replace('<%= codezip.url.users.formula.main %>' + location.search);
+          if (have_benchmark_ture.checked) {
+            location.replace('<%= codezip.url.users.newProject._2 %>' + location.search);
+          } else {
+            location.replace('<%= codezip.url.users.formula.main %>' + location.search);
+          }
         } else {
           throw new Error(res.status)
         }

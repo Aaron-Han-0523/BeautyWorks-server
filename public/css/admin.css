@@ -2,7 +2,7 @@
 
 /* VARIABLES CSS */
 :root {
-  --nav--width: 92px;
+  --nav--width: calc(92 / 16 * 1rem);
 
   /* Colores */
   --first-color: #0c5df4;
@@ -58,7 +58,7 @@ label {
   color: #000;
 }
 
-.hover>*:hover {
+.hover > *:hover {
   color: var(--BW-blue) !important;
 }
 
@@ -159,8 +159,8 @@ label {
 .admin-header {
   z-index: 50;
   right: 0;
-  width: calc(100vw - 92px);
-  height: 72px;
+  width: calc(100vw - 92 / 16 * 1rem);
+  height: calc(72 / 16 * 1rem);
   border: 0;
   padding-right: 3rem;
   margin-right: 0;

@@ -69,8 +69,8 @@
                         </div>
                         <div class="col col-5">
                           <input hidden type="text" name="efficacy" value="<%= project.efficacy %>">
-                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
-                            <div class="flex-fill" id="efficacy_print">
+                          <button class="form-control text-start pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_efficacy" aria-controls="select_efficacy">
+                            <div class="flex-fill text-ellipsis" id="efficacy_print">
                               <%= __('Select') %>
                             </div>
                             <div class="text-primary">
@@ -170,9 +170,9 @@
                           </h6>
                         </div>
                         <div class="col-9">
-                          <input hidden type="text" name="ingredients" value="<%= project.ingredients %>">
-                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
-                            <div class="flex-fill" id="ingredients_print">
+                          <input hidden type="text" name="ingredients" value="<%= project.ingredients %>" title="<%= project.ingredients %>">
+                          <button class="form-control text-start pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_ingredients" aria-controls="select_ingredients">
+                            <div class="flex-fill text-ellipsis" id="ingredients_print" title="<%= project.ingredients %>">
                               <%= project.concept_ingredients || __('통합 검색') %>
                             </div>
                             <div class="text-primary">
@@ -219,8 +219,8 @@
                         </div>
                         <div class="col-9">
                           <input hidden type="text" name="applies" value="<%= project.applies %>">
-                          <button class="form-control text-start text-ellipsis pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
-                            <div class="flex-fill" id="applies_print">
+                          <button class="form-control text-start pe-2-5 d-flex" type="button" data-bs-toggle="modal" data-bs-target="#select_applies" aria-controls="select_applies">
+                            <div class="flex-fill text-ellipsis" id="applies_print">
                               <%= __('Select') %>
                             </div>
                             <div class="text-primary">
@@ -711,8 +711,10 @@
       option.ingredients.value = values.join(',');
       if (values.length) {
         ingredients_print.innerText = text_list.join(', ');
+        ingredients_print.title = text_list.join(', ');
       } else {
         ingredients_print.innerText = "<%= __('통합 검색') %>";
+        ingredients_print.title = "";
       }
     }
   </script>
