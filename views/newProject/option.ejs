@@ -78,80 +78,8 @@
                             </div>
                           </button>
                           <!-- 제품효과 모달창 -->
-                          <div class=" modal" id="select_efficacy" aria-labelledby="" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered col-7">
-                              <div class="modal-content br-15">
-                                <div class="modal-header justify-content-end text-gray p-3">
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                  </button>
-                                </div>
-                                <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
-                                  <%= __('users.newProject.option.efficacy') %>
-                                </div>
-                                <div class="modal-body mx-5 mt-0 pt-0 text-gray">
-                                  <div class="d-flex flex-wrap">
-                                    <!-- 일반 제품효과 -->
-                                    <% codezip.effects.product.forEach((item, index)=>{ %>
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex dropdown-item p-0">
-                                        <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
-                                        <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1">
-                                          <%= __(item)%>
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <% }) %>
+                          <%- include ("../partials/modals/efficacy_modal.ejs") %>
 
-                                    <!-- 선케어 제품효과-->
-                                    <% codezip.effects.suncare.forEach((item, index)=>{ %>
-                                    <% if(project.category1&&(project.category1==3)) { %>
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex dropdown-item p-0">
-                                        <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>">
-                                        <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1">
-                                          <%= __(item) %>
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <% }else{ %>
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex text-nowrap">
-                                        <input class="efficacy form-check-input mx-3 my-auto" type="checkbox" id="<%= item %>" disabled>
-                                        <label for="<%= item %>" class="efficacyLabel flex-fill m-0 py-1 form-check-label">
-                                          <%= __(item) %>
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <% } %>
-                                    <% }) %>
-
-                                    <!-- 기타 -->
-                                    <div class="col-4 py-3 border-bottom">
-                                      <div class="d-flex dropdown-item p-0">
-                                        <% if(project.etc_efficacy) { %>
-                                        <input class="etc_efficacy form-check-input mx-3 my-auto" type="checkbox" id="etc_efficacy_check" checked>
-                                        <% }else{ %>
-                                        <input class="etc_efficacy form-check-input mx-3 my-auto" type="checkbox" id="etc_efficacy_check">
-                                        <% } %>
-                                        <label for="etc_efficacy_check" class="flex-fill m-0 py-1">
-                                          <%= __("기타")%>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- <div class="modal-footer text-center my-3">
-                                  <button type="button" class="btn-outline-gray bg-gray br-15 p-3 px-5" data-bs-dismiss="modal">
-                                    <%= __('users.newProject.option.btn.확인') %>
-                                  </button>
-                                </div> -->
-                              </div>
-                            </div>
-                          </div>
                         </div>
                         <div class="col">
                           <% if(project.etc_efficacy) { %>
@@ -378,108 +306,8 @@
   </div>
 
   <!-- 컨셉성분 모달창 -->
-  <div class="modal" id="select_ingredients" data-bs-scroll="true" data-bs-backdrop="true">
-    <div class="modal-dialog modal-dialog-scrollable col-8 mw-100">
-      <div class="modal-content br-15 w-100">
-        <div class="modal-header justify-content-end text-gray p-3">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-        <div class="modal-body mx-5 mt-0 pt-0" style="border-top:0px;">
-          <form id="search_ingredients">
-            <!-- 통합 검색-->
-            <div class="d-flex">
-              <label class="col-2 h6 align-self-center mb-0">
-                <%= __('통합 검색') %>
-              </label>
-              <div class="col form-control d-flex p-0">
-                <input name="ingredient_name" class="col form-control" placeholder="<%= __('plzInputText') %>">
-                <button class="col-1 form-control text-primary p-0" type="button" onclick="searching_ingredients();"><i class="fa-solid fa-magnifying-glass"></i></button>
-              </div>
-            </div>
-            <!-- 종류/기능 검색-->
-            <div class="d-flex mt-3">
-              <!-- 컨셉성분 종류 -->
-              <label class="col-2 h6 align-self-center mb-0 ">
-                <%= __('ingredients.종류') %>
-              </label>
-              <!-- <input hidden name="type"> -->
-              <div class="col-4">
-                <button class="form-select text-start" type="button" id="select_type" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                  <%= __('select') %>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="select_type">
-                  <% codezip.ingredient_type.forEach((code,index)=>{ %>
-                  <li class="dropdown-item d-flex">
-                    <input class="form-check-input mx-3 ingredient_type" name="type" type="checkbox" id="ingredient_type-<%= code %>" value="<%= code %>">
-                    <label class="form-check-label flex-fill pe-3 ingredient_type-label" for="ingredient_type-<%= code %>">
-                      <%= __(code) %>
-                    </label>
+  <%- include ("../partials/modals/search_ingredients_modal.ejs") %>
 
-                  </li>
-                  <% }) %>
-                </ul>
-              </div>
-              <!-- 컨셉성분 기능 -->
-              <label class="col-2 h6 align-self-center mb-0 text-center">
-                <%= __('ingredients.기능') %>
-              </label>
-              <div class="col-4">
-                <button class="form-select text-start" type="button" id="select_effects" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                  <%= __('select') %>
-                </button>
-                <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_effects">
-                  <% codezip.effects.ingredient.forEach((code, index)=>{ %>
-                  <li class="dropdown-item d-flex">
-                    <input class="form-check-input mx-3 ingredient_effects" name="effects" type="checkbox" id="ingredient_effects-<%= code %>" value="<%= code %>">
-                    <label class="form-check-label flex-fill pe-3 ingredient_effects-label" for="ingredient_effects-<%= code %>">
-                      <%= __(code) %>
-                    </label>
-                  </li>
-                  <% }) %>
-                </ul>
-              </div>
-            </div>
-            <!-- 결과 테이블 -->
-            <div class="table-responsive mt-4 pt-4 mb-auto ">
-              <table class="table table-no-space table-bordered table-hover text-break text-center br-10">
-                <thead class="">
-                  <th>
-                  </th>
-                  <th>
-                    <%= __('ingredients.성분명') %>
-                  </th>
-                  <th>
-                    <%= __('ingredients.원료명') %>
-                  </th>
-                  <th>
-                    <%= __('ingredients.종류') %>
-                  </th>
-                  <th>
-                    <%= __('ingredients.기능') %>
-                  </th>
-                  <th>
-                    <%= __('ingredients.특징') %>
-                  </th>
-                </thead>
-                <tbody class="table-group-divider bbr-15" id="ingredients_result">
-
-                </tbody>
-              </table>
-
-              <!-- pagination -->
-              <div id="ingredients_pagination">
-
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- END MAIN CONTAINER -->
 
@@ -610,7 +438,7 @@
       }).then(res => {
         if (res.ok) {
           // alert("<%= __('users.msg.SuccessSave') %>");
-          location.replace('<%= codezip.url.users.newProject._4 %>'+location.search);
+          location.replace('<%= codezip.url.users.newProject._4 %>' + location.search);
           return;
         } else return alert("<%= __('users.msg.FailSave') %>");
       })

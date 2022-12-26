@@ -3,8 +3,6 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
-  <% const country_codes=codezip.country.codes; %>
-  <% const country_code2phoneNum=codezip.country.code2phoneNum; %>
 </head>
 
 <body class="layout-boxed">
@@ -98,11 +96,11 @@
                               <%= __('placeholder.country') %>
                             </button>
                             <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
-                              <% for(let i=0; i< country_codes.length; i++) { %>
+                              <% for(let i=0; i< codezip.country.codes.length; i++) { %>
                               <li>
-                                <a class="dropdown-item" href="javascript:void(0);" onclick="select_country_func('<%= country_codes[i] %>','<%= __(country_codes[i]) %>');">
-                                  <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
-                                  <%= __(country_codes[i]) %>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="select_country_func('<%= codezip.country.codes[i] %>','<%= __(codezip.country.codes[i]) %>');">
+                                  <img class="me-2" src="/images/flag/<%= codezip.country.codes[i] %>.png">
+                                  <%= __(codezip.country.codes[i]) %>
                                 </a>
                               </li>
                               <% } %>
@@ -139,17 +137,17 @@
                               <%= __('Select') %>
                             </button>
                             <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country_number">
-                              <% for(let i=0; i< country_codes.length; i++) { %>
+                              <% for(let i=0; i< codezip.country.codes.length; i++) { %>
                               <li>
-                                <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="select_mobile_func('<%= country_codes[i] %>','<%= country_code2phoneNum[country_codes[i]] %>');">
+                                <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="select_mobile_func('<%= codezip.country.codes[i] %>','<%= codezip.country.code2phoneNum[codezip.country.codes[i]] %>');">
                                   <div class="col-1">
-                                    <img class="me-2" src="/images/flag/<%= country_codes[i] %>.png">
+                                    <img class="me-2" src="/images/flag/<%= codezip.country.codes[i] %>.png">
                                   </div>
                                   <div class="col-3">
-                                    <%= country_code2phoneNum[country_codes[i]] %>
+                                    <%= codezip.country.code2phoneNum[codezip.country.codes[i]] %>
                                   </div>
                                   <div>
-                                    <%= __(country_codes[i]) %>
+                                    <%= __(codezip.country.codes[i]) %>
                                   </div>
                                 </a>
                               </li>

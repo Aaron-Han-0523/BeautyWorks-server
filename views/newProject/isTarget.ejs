@@ -165,18 +165,18 @@
         return location.replace('<%= codezip.url.users.formula.main %>' + location.search);
       }
 
+
+      let body = new FormData(isTarget);
+      body.set("detail_phase", 2);
+
       let response = await fetch(isTarget.action, {
         method: 'POST',
-        body: new URLSearchParams(new FormData(isTarget))
+        body: new URLSearchParams(body)
       }).then(res => {
         console.log(res);
         if (res.ok) {
           // alert("<%= __('users.msg.SuccessSave') %>")
-          if (have_benchmark_ture.checked) {
-            location.replace('<%= codezip.url.users.newProject._2 %>' + location.search);
-          } else {
-            location.replace('<%= codezip.url.users.formula.main %>' + location.search);
-          }
+          location.replace('<%= codezip.url.users.newProject._2 %>' + location.search);
         } else {
           throw new Error(res.status)
         }
