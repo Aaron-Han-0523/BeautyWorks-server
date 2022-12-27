@@ -5,7 +5,7 @@
       <div></div>
       <ul class="navbar-item flex-row ms-lg-auto ms-0">
         <!-- 언어 설정 -->
-        <!-- <li class="nav-item dropdown language-dropdown">
+        <li class="nav-item dropdown language-dropdown">
           <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= __('language') %>
           </a>
@@ -13,8 +13,9 @@
             <a class="dropdown-item d-flex" href="/en"><span class="align-self-center">&nbsp;English</span></a>
             <a class="dropdown-item d-flex" href="/ko"><span class="align-self-center">&nbsp;한국어</span></a>
           </div>
-        </li> -->
+        </li>
 
+        <% console.log(locale) %>
         <!-- -->
         <li class="nav-item">
           <% if(nameOrderInKorean.includes(locale)) { %>

@@ -62,7 +62,7 @@
                       <div>
                         <%= __('users.newProject.moq.budgetInput.before') %>
                       </div>
-                      <div class="form-control my-2 d-flex align-items-baseline px-0 br-15">
+                      <div class="form-control my-2 d-flex align-items-baseline py-0 pe-0">
                         <span class="ms-2" style="left:0px;">$</span>
                         <input type="number" class="form-control w-100 align-placeholder" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" autofocus required value="<%= project.budget %>">
                       </div>
@@ -79,7 +79,7 @@
                         <%= __('users.newProject.moq.moqSelect.before2') %>
                       </div> -->
                       <div>
-                        <select class="form-select br-15" name="moq" required>
+                        <select class="form-select my-2" name="moq" required>
                           <option value="">
                             <%= __('users.newProject.moq.moqSelect.placeholder') %>
                           </option>
@@ -107,7 +107,7 @@
                       <div>
                         <%= __('users.newProject.moq.checkUnitPrice.before') %>
                       </div>
-                      <div class="form-control my-2 d-flex align-items-baseline px-0 br-15 bg-gray">
+                      <div class="form-control my-2 d-flex align-items-baseline bg-gray py-0">
                         <span class="ms-2" style="left:0px;">$</span>
                         <input class="form-control w-100 align-placeholder" style="border: 0px;" id="unitPrice" placeholder="<%= __('users.newProject.moq.checkUnitPrice.placeholder') %>" disabled>
                       </div>
@@ -118,7 +118,7 @@
 
                   <!-- 버튼 -->
                   <div class="mt-4 text-center">
-                    <button class="col-1 btn-outline-primary py-3 br-10">
+                    <button class="col-1 btn btn-lg btn-outline-primary py-3">
                       <%= __('users.newProject.moq.btn.next') %>
                     </button>
                   </div>

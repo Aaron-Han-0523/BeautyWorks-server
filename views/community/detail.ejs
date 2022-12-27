@@ -58,7 +58,7 @@
 
                 <!-- title -->
                 <div class="form-control d-flex justify-content-between">
-                  <div class="p-1 d-flex h6">
+                  <div class="p-1 d-flex">
                     <%- include('../partials/badge/new', {date:community.create_date}) %>
                     <%= `${community.title}` %>
                   </div>
@@ -224,7 +224,7 @@
                 <!-- 댓글 남기기 -->
                 <div>
                   <form id="reply" method="post" action="<%= codezip.url.users.community.reply.add %>/<%= community.id %>" class="border border-gray px-4 py-2 br-4">
-                    <textarea rows="5" maxlength="3000" name="content" class="form-control bg-white bc-white" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>"></textarea>
+                    <textarea rows="5" maxlength="3000" name="content" class="w-100 bg-white bc-white mt-3" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>"></textarea>
                     <hr class="m-0">
                     <div class="d-flex justify-content-between">
                       <div id="textCount" class="align-self-center">

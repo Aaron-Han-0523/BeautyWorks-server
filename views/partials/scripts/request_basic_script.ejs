@@ -23,6 +23,7 @@
     let text_list = [];
     if (!value) {
       target_country_print.value = ''
+      target_country_print.title = ''
       return;
     }
     value.split(',').forEach((code, index) => {
@@ -30,6 +31,7 @@
       document.getElementById('country-' + code).checked = true;
     })
     target_country_print.value = text_list.join(', ')
+    target_country_print.title = text_list.join(', ')
   }
 
   function print_target_gender(value) {

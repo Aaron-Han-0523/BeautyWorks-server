@@ -63,16 +63,6 @@ const upload = (fileName) =>
     },
   });
 
-// 사용자 페이지 영어로 고정
-router.use((req, res, next) => {
-  const url_parse = req.originalUrl.split("/");
-  if (url_parse[1] == "users" && url_parse[2] != "api") {
-    // console.log("??", url_parse)
-    res.cookie("lang", "en");
-  }
-  next();
-});
-
 /* GET users listing. */
 // 사용자 등록
 router

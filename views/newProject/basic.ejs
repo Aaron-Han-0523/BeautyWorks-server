@@ -108,7 +108,7 @@
                           </button>
                           <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_category1">
                             <% for(let i=0; i< codezip.numberOfProduct.category1; i++) { %>
-                            <li>
+                            <li class="dropdown-item">
                               <a class="dropdown-item" href="javascript:void(0);" onclick="select_category1_func('<%= i %>');">
                                 <%= __('product'+i) %>
                               </a>
@@ -160,7 +160,7 @@
                           <ul class="dropdown-menu" aria-labelledby="capacity_unit">
                             <% codezip.capacity_unit.forEach((item,index)=>{ %>
                             <li class="dropdown-item capacity_unit">
-                              <%= item %>
+                              <div><%= item %></div>
                             </li>
                             <% }) %>
                           </ul>
@@ -185,7 +185,7 @@
                           <ul class="dropdown-menu" aria-labelledby="select_age">
                             <% for(let i=0; i< 9; i++) { %>
                             <li class="dropdown-item d-flex">
-                              <input class="form-check-input age me-3" type="checkbox" id="age<%= i %>">
+                              <input class="form-check-input age mx-2" type="checkbox" id="age<%= i %>">
                               <label class="form-check-label flex-grow-1 target_age_label" for="age<%= i %>">
                                 <%= __('age'+i) %>
                               </label>
@@ -213,7 +213,7 @@
                           <ul class="dropdown-menu" aria-labelledby="select_gender">
                             <% for(let i=0; i< 2; i++) { %>
                             <li class="dropdown-item d-flex">
-                              <input class="form-check-input gender me-3" type="checkbox" id="gender<%= i %>">
+                              <input class="form-check-input gender mx-2" type="checkbox" id="gender<%= i %>">
                               <label class="form-check-label flex-grow-1 target_gender_label" for="gender<%= i %>">
                                 <%= __('gender'+i) %>
                               </label>
@@ -242,8 +242,8 @@
                           <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country">
                             <% codezip.country.codes.forEach((item,index)=>{ %>
                             <li class="dropdown-item">
-                              <div class="d-flex">
-                                <input class="form-check-input country me-3" type="checkbox" id="country-<%= item %>">
+                              <div class="d-flex p-0">
+                                <input class="form-check-input country mx-2" type="checkbox" id="country-<%= item %>">
                                 <img class="me-2" src="/images/flag/<%= item %>.png">
                                 <label class="form-check-label flex-grow-1 target_country_label" for="country-<%= item %>">
                                   <%= __(item) %>

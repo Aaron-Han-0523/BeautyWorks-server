@@ -71,7 +71,9 @@
                       <div class="progress-card-body">
                         <div class="progress-card-name">
                           <h6>
-                            <%= (index+1)+'. '+item.project_name %>
+                            <strong>
+                              <%= (index+1)+'. '+item.project_name %>
+                            </strong>
                           </h6>
                         </div>
                         <%- include("../partials/progressbar/"+item.phase+".ejs") %>
@@ -89,9 +91,8 @@
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
-                        <h5><strong>
-                            <%= __("users.dashboard.header.TempProgress") %>
-                          </strong>
+                        <h5>
+                          <strong><%= __("users.dashboard.header.TempProgress") %></strong>
                         </h5>
                       </div>
                       <div class="row text-end">
@@ -112,7 +113,9 @@
                       <div class="progress-card-body">
                         <div class="progress-card-name">
                           <h6>
-                            <%= (index+1)+". "+item.project_name %>
+                            <strong>
+                              <%= (index+1)+". "+item.project_name %>
+                            </strong>
                             <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
                           </h6>
                         </div>
@@ -194,13 +197,13 @@
               <!-- 추천 프로젝트 & 추천 성분 -->
               <div class="row mt-5">
                 <!-- 추천 프로젝트 -->
-                <div class="col-6">
+                <div class="col-6 pe-3">
                   <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
                         <h5><strong>
-                            <%= __('users.dashboard.header.RemommendedFormula') %>
+                            <%= __('users.dashboard.header.RecommendedFormula') %>
                           </strong>
                         </h5>
                       </div>
@@ -235,12 +238,12 @@
                   </div>
                 </div>
                 <!-- 추천 성분 -->
-                <div class="col-6">
+                <div class="col-6 ps-3">
                   <div class="widget-content widget-content-area p-0 pe-2 h-100 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
                         <h5><strong>
-                            <%= __('users.dashboard.header.RemommendedIngredient') %>
+                            <%= __('users.dashboard.header.RecommendedIngredient') %>
                           </strong>
                         </h5>
                       </div>
@@ -253,7 +256,7 @@
 
                     <div class="widget row mx-0 h-100 align-content-center">
 
-                      <div class="table-responsive p-0">
+                      <div class="table-responsive p-3">
                         <table class="table text-break">
                           <thead class="text-center">
                             <th class="col-5 px-0">
@@ -290,7 +293,7 @@
               <!-- News & Community -->
               <div class="row mt-5">
                 <!-- News -->
-                <div class="col-6">
+                <div class="col-6 pe-3">
                   <div class="widget-content widget-content-area p-0 ps-4 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0">
@@ -327,7 +330,7 @@
                   </div>
                 </div>
                 <!-- community -->
-                <div class="col-6">
+                <div class="col-6 ps-3">
                   <div class="widget-content widget-content-area p-0 pe-2 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0">
                       <div>
