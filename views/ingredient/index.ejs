@@ -162,6 +162,11 @@
   <%- include ("../partials/commonScrpits.ejs") %>
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[5].classList.add("custom-active");
+    })
+  </script>
   <div>
     <%
     let ingredient_type_text_dict = {};

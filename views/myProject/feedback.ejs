@@ -139,6 +139,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[1].classList.add("custom-active");
+    })
+  </script>
+  <script>
     feedback.onsubmit = (event) => {
       event.preventDefault();
 

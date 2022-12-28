@@ -129,6 +129,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[2].classList.add("custom-active");
+    })
+  </script>
+  <script>
     function check_target_url() {
       if (have_benchmark_false.checked || isTarget["target_url"].value) {
         nextBtn.disabled = false;

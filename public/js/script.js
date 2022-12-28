@@ -1,8 +1,6 @@
-document.querySelectorAll("option").forEach((el) => {
-  el.addEventListener("mouseover", (e) => {
-    e.target.style.backgroundColor = "e9ecef";
-  });
-});
+function sideClick(sideNum) {
+  window.localStorage.setItem("side", sideNum);
+}
 
 const en_month = [
   "Jan",

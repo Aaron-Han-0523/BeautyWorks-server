@@ -315,6 +315,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[2].classList.add("custom-active");
+    })
+  </script>
+  <script>
     const option = document.forms[0];
     const effects = JSON.parse('<%- JSON.stringify(codezip.effects) %>');
     const applies_true_text_list = JSON.parse('<%- JSON.stringify(applies_true_text_list) %>');

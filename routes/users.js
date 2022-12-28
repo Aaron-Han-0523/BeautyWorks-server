@@ -79,6 +79,9 @@ router
     res.render("users/signIn");
   });
 
+// 비밀번호 초기화 / 임시비밀번호 발급
+router.post("/resetPassword", usersController.resetPassword);
+
 ////////////////////////////////////
 //    사용자 로그인 필요한 곳      //
 ////////////////////////////////////
@@ -114,6 +117,12 @@ logger.token("remote-user", (req, res) => {
 
 // if (process.env == 'development') router.use(logger(logger_setting, logger_option));
 // else router.use(logger(logger_setting));
+
+// 사용자 비밀번호 변경
+router.get("/changingPassword", (req, res) => {
+  res.render("users/changingPassword");
+});
+router.post("/changingPassword", usersController.changingPassword);
 
 // 사용자 접속해제
 router.get("/signOut", usersController.logout);

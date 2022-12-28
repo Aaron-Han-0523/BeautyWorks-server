@@ -198,6 +198,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[3].classList.add("custom-active");
+    })
+  </script>
+  <script>
     function like_formula() {
       const url = '<%= codezip.url.users.formula.like %>/' + location.pathname.split('/')[location.pathname.split('/').length - 1];
       const target = document.querySelector("a.like");

@@ -1,154 +1,157 @@
 {
-    "logo_img_src": "/images/BeautyWorks_logo.png",
-    "default_formula_img": "/images/default-formula.png",
-    "users": {
-        "defaultProfileImage": "/images/default-user-profile.png",
-        "questionMark": "http://intercome.help",
-        "chatMark": "#",
-        "signUp": "/users/signUp",
-        "signIn": "/users/signIn",
-        "signOut": "/users/signOut",
-        "checkAlarm": "/users/checkAlarm",
-        "myPage": "/users/myPage",
-        "myAccount": "/users/myAccount",
-        "dashboard": "/users/Dashboard",
-        "myProject": {
-            "main": "/users/myProject",
-            "feedback": "/users/myProject/feedback"
-        },
-        "newProject": {
-            "main": "/users/newProject",
-            "_0": "/users/newProject/moq",
-            "_1": "/users/newProject/isTarget",
-            "_2": "/users/newProject/basic",
-            "_3": "/users/newProject/option",
-            "_4": "/users/newProject/final",
-            "_": "/users/newProject/draft",
-            "_5": "/users/newProject/order"
-        },
-        "formula": {
-            "main": "/users/formula",
-            "like": "/users/formula/like"
-        },
-        "packaging": "/users/packaging",
-        "ingredient": "/users/ingredient",
-        "documents": "/users/documents",
-        "news": {
-            "main": "/users/news",
-            "add": "/users/news/add",
-            "edit": "/users/news/edit",
-            "delete": "/users/news/delete"
-        },
-        "community": {
-            "main": "/users/community",
-            "like": "/users/community/like",
-            "add": "/users/community/add",
-            "edit": "/users/community/edit",
-            "delete": "/users/community/delete",
-            "reply": {
-                "add": "/users/community/reply/add",
-                "edit": "/users/community/reply/edit",
-                "delete": "/users/community/reply",
-                "like": "/users/community/reply/like"
-            }
-        },
-        "progress_icon": {
-            "_0": "/images/progress_icon/0.png",
-            "_1": "/images/progress_icon/1.png",
-            "_2": "/images/progress_icon/2.png",
-            "_3": "/images/progress_icon/3.png",
-            "_4": "/images/progress_icon/4.png",
-            "_5": "/images/progress_icon/5.png",
-            "_6": "/images/progress_icon/6.png",
-            "_7": "/images/progress_icon/7.png",
-            "_8": "/images/progress_icon/8.png"
-        },
-        "api": {
-            "formula": "/users/api/formula",
-            "ingredient": "/users/api/ingredient",
-            "projects": {
-                "edit": "/users/api/projects/edit"
-            },
-            "myPage": {
-                "wishList": "/users/api/myPage/wishList",
-                "myPosts": "/users/api/myPage/myPosts",
-                "favoritePosts": "/users/api/myPage/favoritePosts",
-                "favoriteComments": "/users/api/myPage/favoriteComments"
-            }
-        }
+  "logo_img_src": "/images/BeautyWorks_logo.png",
+  "default_formula_img": "/images/default-formula.png",
+  "users": {
+    "defaultProfileImage": "/images/default-user-profile.png",
+    "questionMark": "http://intercome.help",
+    "chatMark": "#",
+    "signUp": "/users/signUp",
+    "signIn": "/users/signIn",
+    "signOut": "/users/signOut",
+    "resetPassword": "/users/resetPassword",
+    "changingPassword": "/users/changingPassword",
+    "checkAlarm": "/users/checkAlarm",
+    "myPage": "/users/myPage",
+    "myAccount": "/users/myAccount",
+    "dashboard": "/users/Dashboard",
+    "myProject": {
+      "main": "/users/myProject",
+      "feedback": "/users/myProject/feedback"
     },
-    "admin": {
-        "login": "/admin/login",
-        "logout": "/admin/logout",
-        "api": {
-            "users": "/admin/api/users",
-            "temp_projects": "/admin/api/projects/temp_projects",
-            "progress_projects": "/admin/api/projects/progress_projects",
-            "completed_projects": "/admin/api/projects/completed_projects",
-            "formula": "/admin/api/formula",
-            "ingredient": "/admin/api/ingredient",
-            "packaging": "/admin/api/packaging",
-            "news": "/admin/api/news",
-            "community": "/admin/api/community"
-        },
-        "community": {
-            "main": "/admin/community",
-            "add": "/admin/community/add",
-            "edit": "/admin/community/edit",
-            "delete": "/admin/community/delete",
-            "recovery": "/admin/community/recovery",
-            "reply": {
-                "add": "/admin/community/reply/add",
-                "edit": "/admin/community/reply/edit",
-                "delete": "/admin/community/reply/delete",
-                "recovery": "/admin/community/reply/recovery",
-                "like": "/admin/community/reply/like"
-            }
-        },
-        "news": {
-            "main": "/admin/news",
-            "add": "/admin/news/add",
-            "edit": "/admin/news/edit",
-            "delete": "/admin/news/delete",
-            "recovery": "/admin/news/recovery"
-        },
-        "users": {
-            "main": "/admin/users",
-            "add": "/admin/users/add",
-            "edit": "/admin/users/edit",
-            "delete": "/admin/users/delete",
-            "recovery": "/admin/users/recovery",
-            "checkEmail": "/admin/users/checkEmail"
-        },
-        "projects": {
-            "main": "/admin/projects",
-            "add": "/admin/projects/add",
-            "edit": "/admin/projects/edit",
-            "delete": "/admin/projects/delete",
-            "recovery": "/admin/projects/recovery",
-            "temp_project": "/admin/projects/temp_project",
-            "progress_project": "/admin/projects/progress_project"
-        },
-        "formula": {
-            "main": "/admin/formula",
-            "add": "/admin/formula/add",
-            "edit": "/admin/formula/edit",
-            "delete": "/admin/formula/delete",
-            "recovery": "/admin/formula/recovery"
-        },
-        "ingredient": {
-            "main": "/admin/ingredient",
-            "add": "/admin/ingredient/add",
-            "edit": "/admin/ingredient/edit",
-            "delete": "/admin/ingredient/delete",
-            "recovery": "/admin/ingredient/recovery"
-        },
-        "packaging": {
-            "main": "/admin/packaging",
-            "add": "/admin/packaging/add",
-            "edit": "/admin/packaging/edit",
-            "delete": "/admin/packaging/delete",
-            "recovery": "/admin/packaging/recovery"
-        }
+    "newProject": {
+      "main": "/users/newProject",
+      "_0": "/users/newProject/moq",
+      "_1": "/users/newProject/isTarget",
+      "_2": "/users/newProject/basic",
+      "_3": "/users/newProject/option",
+      "_4": "/users/newProject/final",
+      "_": "/users/newProject/draft",
+      "_5": "/users/newProject/order"
+    },
+    "formula": {
+      "main": "/users/formula",
+      "like": "/users/formula/like"
+    },
+    "packaging": "/users/packaging",
+    "ingredient": "/users/ingredient",
+    "documents": "/users/documents",
+    "news": {
+      "main": "/users/news",
+      "add": "/users/news/add",
+      "edit": "/users/news/edit",
+      "delete": "/users/news/delete"
+    },
+    "community": {
+      "main": "/users/community",
+      "like": "/users/community/like",
+      "add": "/users/community/add",
+      "edit": "/users/community/edit",
+      "delete": "/users/community/delete",
+      "reply": {
+        "add": "/users/community/reply/add",
+        "edit": "/users/community/reply/edit",
+        "delete": "/users/community/reply",
+        "like": "/users/community/reply/like"
+      }
+    },
+    "progress_icon": {
+      "_0": "/images/progress_icon/0.png",
+      "_1": "/images/progress_icon/1.png",
+      "_2": "/images/progress_icon/2.png",
+      "_3": "/images/progress_icon/3.png",
+      "_4": "/images/progress_icon/4.png",
+      "_5": "/images/progress_icon/5.png",
+      "_6": "/images/progress_icon/6.png",
+      "_7": "/images/progress_icon/7.png",
+      "_8": "/images/progress_icon/8.png"
+    },
+    "api": {
+      "formula": "/users/api/formula",
+      "ingredient": "/users/api/ingredient",
+      "projects": {
+        "edit": "/users/api/projects/edit"
+      },
+      "myPage": {
+        "wishList": "/users/api/myPage/wishList",
+        "myPosts": "/users/api/myPage/myPosts",
+        "favoritePosts": "/users/api/myPage/favoritePosts",
+        "favoriteComments": "/users/api/myPage/favoriteComments"
+      }
     }
+  },
+  "admin": {
+    "login": "/admin/login",
+    "logout": "/admin/logout",
+    "changingPassword": "/admin/changingPassword",
+    "api": {
+      "users": "/admin/api/users",
+      "temp_projects": "/admin/api/projects/temp_projects",
+      "progress_projects": "/admin/api/projects/progress_projects",
+      "completed_projects": "/admin/api/projects/completed_projects",
+      "formula": "/admin/api/formula",
+      "ingredient": "/admin/api/ingredient",
+      "packaging": "/admin/api/packaging",
+      "news": "/admin/api/news",
+      "community": "/admin/api/community"
+    },
+    "community": {
+      "main": "/admin/community",
+      "add": "/admin/community/add",
+      "edit": "/admin/community/edit",
+      "delete": "/admin/community/delete",
+      "recovery": "/admin/community/recovery",
+      "reply": {
+        "add": "/admin/community/reply/add",
+        "edit": "/admin/community/reply/edit",
+        "delete": "/admin/community/reply/delete",
+        "recovery": "/admin/community/reply/recovery",
+        "like": "/admin/community/reply/like"
+      }
+    },
+    "news": {
+      "main": "/admin/news",
+      "add": "/admin/news/add",
+      "edit": "/admin/news/edit",
+      "delete": "/admin/news/delete",
+      "recovery": "/admin/news/recovery"
+    },
+    "users": {
+      "main": "/admin/users",
+      "add": "/admin/users/add",
+      "edit": "/admin/users/edit",
+      "delete": "/admin/users/delete",
+      "recovery": "/admin/users/recovery",
+      "checkEmail": "/admin/users/checkEmail"
+    },
+    "projects": {
+      "main": "/admin/projects",
+      "add": "/admin/projects/add",
+      "edit": "/admin/projects/edit",
+      "delete": "/admin/projects/delete",
+      "recovery": "/admin/projects/recovery",
+      "temp_project": "/admin/projects/temp_project",
+      "progress_project": "/admin/projects/progress_project"
+    },
+    "formula": {
+      "main": "/admin/formula",
+      "add": "/admin/formula/add",
+      "edit": "/admin/formula/edit",
+      "delete": "/admin/formula/delete",
+      "recovery": "/admin/formula/recovery"
+    },
+    "ingredient": {
+      "main": "/admin/ingredient",
+      "add": "/admin/ingredient/add",
+      "edit": "/admin/ingredient/edit",
+      "delete": "/admin/ingredient/delete",
+      "recovery": "/admin/ingredient/recovery"
+    },
+    "packaging": {
+      "main": "/admin/packaging",
+      "add": "/admin/packaging/add",
+      "edit": "/admin/packaging/edit",
+      "delete": "/admin/packaging/delete",
+      "recovery": "/admin/packaging/recovery"
+    }
+  }
 }

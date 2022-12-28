@@ -384,6 +384,9 @@
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script>
+      window.addEventListener('load', e => {
+        document.getElementsByClassName("menu")[0].classList.add("custom-active");
+      })
     </script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <%- include ("../partials/chatMark.ejs") %>

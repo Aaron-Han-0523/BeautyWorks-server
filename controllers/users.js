@@ -383,3 +383,79 @@ exports.index = async (req, res, next) => {
       return res.status(500).end();
     });
 };
+
+exports.changingPassword = async (req, res, next) => {
+  const userInfo = res.locals.user;
+  // console.log("user information :", userInfo);
+  const body = req.body;
+  console.log("body :", body);
+
+  const user = await usersService.getUser({ email: userInfo.email });
+  // console.log("user :", user);
+  if (!user) return res.status(404).end();
+
+  const hashedPassword = await encryption.hashing(body.currentPassword);
+
+  if (hashedPassword == user.password) {
+    const newHashedPassword = await encryption.hashing(body.newPassword);
+
+    await usersService
+      .update({ password: newHashedPassword }, { email: userInfo.email })
+      .then((result) => {
+        return res.end();
+      })
+      .catch((err) => console.error(err));
+  } else return res.status(403).end();
+};
+
+exports.resetPassword = async (req, res, next) => {
+  const body = req.body;
+  console.log("body :", body);
+
+  const user = await usersService.getUser({ email: body.email });
+  // console.log("user :", user);
+  if (!user) return res.status(404).end();
+
+  if (body.firstName == user.first_name && body.lastName == user.last_name) {
+    let newPassword = "";
+    for (let i = 0; i < 4; i++) {
+      newPassword += getRandomInt(10);
+    }
+    console.log(newPassword);
+
+    const hashedPassword = await encryption.hashing(newPassword);
+
+    await usersService
+      .update({ password: hashedPassword }, { email: body.email })
+      .then((result) => {
+        const transporter = nodemailer.createTransport({
+          service: systemInfo.emailService,
+          auth: {
+            user: systemInfo.emailUserid,
+            pass: systemInfo.emailPassword,
+          },
+        });
+
+        let mailOptions = {
+          from: systemInfo.systemEmailName + "<" + systemInfo.emailUserid + ">",
+          to: body.email,
+          subject: res.__("mail.ResetPasswordMailTitle"),
+          text:
+            res.__("mail.ResetPasswordMailcontent") +
+            "\n" +
+            newPassword,
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.error(error);
+            return res.status(500).send(error);
+          } else {
+            console.log("Email sent: " + info.accepted);
+            return res.end();
+          }
+        });
+      })
+      .catch((err) => console.error(err));
+  } else return res.status(403).end();
+};

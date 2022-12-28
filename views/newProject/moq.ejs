@@ -140,6 +140,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[2].classList.add("custom-active");
+    })
+  </script>
+  <script>
     function unitPriceCalc() {
       if (moq[1].value == '0') {
         unitPrice.value = "<%= __('챗봇으로 문의해주세요.') %>"

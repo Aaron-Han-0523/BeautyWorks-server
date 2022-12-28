@@ -24,31 +24,41 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
-    // forEach 사용가능하게 추가
-    HTMLCollection.prototype.forEach = Array.prototype.forEach;
+  // forEach 사용가능하게 추가
+  HTMLCollection.prototype.forEach = Array.prototype.forEach;
 
-    $.datepicker.setDefaults({
-        changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-        changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-    });
-    $.datepicker.regional['<%= locale %>'] = {
-        closeText: '닫기',
-        prevText: '이전달',
-        nextText: '다음달',
-        currentText: '오늘',
-        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-        weekHeader: 'Wk',
-        dateFormat: 'yy-mm-dd',
-        firstDay: 0,
-        isRTL: false,
-        duration: 200,
-        showAnim: 'show',
-        showMonthAfterYear: true,
-        yearSuffix: '년'
-    };
-    $.datepicker.setDefaults($.datepicker.regional['ko']);
+  $.datepicker.setDefaults({
+    changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+    changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+  });
+  $.datepicker.regional['<%= locale %>'] = {
+    closeText: '닫기',
+    prevText: '이전달',
+    nextText: '다음달',
+    currentText: '오늘',
+    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+    weekHeader: 'Wk',
+    dateFormat: 'yy-mm-dd',
+    firstDay: 0,
+    isRTL: false,
+    duration: 200,
+    showAnim: 'show',
+    showMonthAfterYear: true,
+    yearSuffix: '년'
+  };
+  $.datepicker.setDefaults($.datepicker.regional['ko']);
+</script>
+<script>
+  window.addEventListener("load", (e) => {
+    var menu = document.querySelectorAll("#sidebar .menu");
+    for (var i = 0; i < menu.length; i++) {
+      menu[i].classList.remove("custom-active");
+    }
+    // var sideNum = window.localStorage.getItem("side");
+    // document.getElementsByClassName("menu")[sideNum].classList.add("custom-active");
+  });
 </script>

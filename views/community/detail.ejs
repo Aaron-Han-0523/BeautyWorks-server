@@ -99,21 +99,23 @@
                   <div class="col-4"></div>
                   <!-- 네비게이션 -->
                   <div class="col-4 d-flex justify-content-center align-items-end">
-                    <div class="w-auto mx-3 hover">
+                    <div class="col-4 mx-3 hover">
                       <% if(prev) { %><a href="<%= codezip.url.users.community.main %>/<%= prev.id %>">
-                        <h6><i class="fa-solid fa-chevron-left fs-5 me-3"></i>
+                        <h6>
+                          <i class="fa-solid fa-chevron-left fs-5 me-3"></i>
                           <%= __('btn.이전글') %>
                         </h6>
                       </a>
                       <% } %>
                     </div>
-                    <div class="w-auto text-center mx-3 hover"><a href="<%= codezip.url.users.community.main %>">
+                    <div class="col-4 text-center mx-3 hover"><a href="<%= codezip.url.users.community.main %>">
                         <h6>
                           <%= __('btn.목록') %>
                         </h6>
                       </a></div>
-                    <div class="w-auto mx-3 hover">
-                      <% if(next) { %><a href="<%= codezip.url.users.community.main %>/<%= next.id %>">
+                    <div class="col-4 mx-3 hover">
+                      <% if(next) { %>
+                      <a href="<%= codezip.url.users.community.main %>/<%= next.id %>">
                         <h6>
                           <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right fs-5 ms-3"></i>
                         </h6>
@@ -262,6 +264,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[8].classList.add("custom-active");
+    })
+  </script>
+  <script>
     // 게시글 좋아요
     async function toggleLike(id) {
       const communityLikeBtn = document.getElementById('communityLikeBtn');
@@ -358,7 +365,7 @@
 
       let temp_html = `<div class='w-100'>
         <form id="reply" class="border border-gray px-4 py-2 br-4">
-          <textarea rows="5" maxlength="3000" name="content" class="form-control bg-white bc-white" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>">${text}</textarea>
+          <textarea rows="5" maxlength="3000" name="content" class="w-100 bc-white" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>">${text}</textarea>
           <hr class="m-0">
           <div class="d-flex justify-content-between">
             <div id="textCount" class="align-self-center">

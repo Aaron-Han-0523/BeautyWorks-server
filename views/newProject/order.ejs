@@ -283,6 +283,11 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[2].classList.add("custom-active");
+    })
+  </script>
+  <script>
     // const confirmModal = document.getElementById('confirmModal')
     // confirmModal.addEventListener('hidden.bs.modal', event => {
     // })

@@ -278,6 +278,11 @@
                                             <%- include ("../partials/commonScrpits.ejs") %>
 
                                             <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                                            <script>
+                                              window.addEventListener('load', e => {
+                                                document.getElementsByClassName("menu")[1].classList.add("custom-active");
+                                              })
+                                            </script>
                                             <!-- <script>
                 let _ = new Swiper('.swiper-container', {
 

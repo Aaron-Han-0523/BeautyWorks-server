@@ -411,6 +411,11 @@
 
       <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
       <script>
+        window.addEventListener('load', e => {
+          document.getElementsByClassName("menu")[2].classList.add("custom-active");
+        })
+      </script>
+      <script>
         function next() {
           location.replace('<%= codezip.url.users.newProject._5 %>' + location.search);
         }

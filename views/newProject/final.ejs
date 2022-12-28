@@ -625,6 +625,11 @@
       <%- include ("../partials/commonScrpits.ejs") %>
 
       <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+      <script>
+        window.addEventListener('load', e => {
+          document.getElementsByClassName("menu")[2].classList.add("custom-active");
+        })
+      </script>
       <!-- basic -->
       <%- include ("../partials/scripts/request_basic_script.ejs") %>
 

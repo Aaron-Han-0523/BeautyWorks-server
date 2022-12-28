@@ -799,11 +799,14 @@ h5 {
   margin-bottom: 10px;
 }
 
+#sidebar ul.menu-categories li.menu.custom-active,
 #sidebar ul.menu-categories li:hover {
   background-image: url("/images/menu-hover-effect.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
 
 /************************/
 /*      sidebar end     */

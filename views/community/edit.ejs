@@ -57,12 +57,12 @@
               <div class="widget w-100">
                 <form method="post">
                   <!-- title -->
-                  <input class="form-control bc-white bg-white" name="title" type="text" placeholder="<%= __('users.community.add.제목을 입력해주세요') %>" required value="<%= data.title %>">
+                  <input class="w-100 bc-white" name="title" type="text" placeholder="<%= __('users.community.add.제목을 입력해주세요') %>" required value="<%= data.title %>">
 
                   <hr>
 
                   <!-- content -->
-                  <textarea rows="10" maxlength="5000" class="form-control bc-white bg-white" name="content" type="text" placeholder="<%= __('users.community.add.내용을 입력해주세요') %>" required><%= data.content %></textarea>
+                  <textarea rows="10" maxlength="5000" class="w-100 bc-white" name="content" type="text" placeholder="<%= __('users.community.add.내용을 입력해주세요') %>" required><%= data.content %></textarea>
 
                   <hr>
 
@@ -94,6 +94,9 @@
 
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
   <script>
+    window.addEventListener('load', e => {
+      document.getElementsByClassName("menu")[8].classList.add("custom-active");
+    })
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
