@@ -34,15 +34,15 @@
         <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
-          <div class="px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
-              <div class="col-3">
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
+              <div class="">
                 <h6 class="main-menu">
                   <%= __('Project') %>
                 </h6>
-                <h4><strong>
-                    <%= __('New Project') %>
-                  </strong></h4>
+                <div class="menu">
+                  <%= __('New Project') %>
+                </div>
               </div>
             </div>
           </div>
@@ -51,15 +51,15 @@
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
-              <div class="widget-content widget-content-area br-20 py-5">
+              <div class="widget-content widget-content-area br-20 py-4">
 
-                <div class="form-group ms-3 text-break">
+                <div class="form-group mx-4 text-break">
                   <div class="d-flex flex-nowrap mb-3 justify-content-between">
                     <div>
-                      <h5 class="p-0"><strong>
+                      <h4 class="p-0"><strong>
                           <%= __('샘플의뢰서 초안') %>
                         </strong>
-                      </h5>
+                      </h4>
                     </div>
                     <div>
                       <p style="color: gray;">
@@ -70,8 +70,8 @@
                   </div>
 
                   <div class="widget" style="padding:5% 5%">
-
                     <form id="draft" method="post" enctype="multipart/form-data" style="padding:3% 5%">
+
                       <div>
                         <!-- 제품명 -->
                         <div class="row mb-3 align-items-center">
@@ -458,7 +458,7 @@
                                       </svg>
                                     </button>
                                   </div>
-                                  <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
+                                  <div class="modal-title  text-black text-center form-control mx-5 py-4 w-auto">
                                     <%= __('users.newProject.option.applies') %>
                                   </div>
                                   <div class="modal-body mx-5 pt-0 pb-5">
@@ -475,13 +475,13 @@
                                         <div class="col row">
                                           <div class="col d-flex dropdown-item p-0">
                                             <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-1">
-                                            <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label fs-6">
+                                            <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label ">
                                               <%= __("use_effects."+item+".true") %>
                                             </label>
                                           </div>
                                           <div class="col d-flex dropdown-item p-0">
                                             <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-0">
-                                            <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label fs-6">
+                                            <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label ">
                                               <%= __("use_effects."+item+".false") %>
                                             </label>
                                           </div>
@@ -504,7 +504,7 @@
                                         <% applies_true_text_list.push(__("use_effects."+i)) %>
                                         <div class="col d-flex dropdown-item p-0">
                                           <input class="applies_other form-check-input mx-3" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>-1">
-                                          <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill fs-6">
+                                          <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill ">
                                             <%= __("use_effects."+i) %>
                                           </label>
                                         </div>
@@ -729,7 +729,7 @@
           select_category1_func('<%= project.category1 %>')
           select_category2_func('<%= project.category2 %>')
 
-          
+
 
           let target_age = '<%= project.target_age %>';
           print_target_age(target_age);

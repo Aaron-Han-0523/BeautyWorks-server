@@ -410,13 +410,18 @@ exports.changingPassword = async (req, res, next) => {
 
 exports.resetPassword = async (req, res, next) => {
   const body = req.body;
+  body.mobile_contact = body.country_number + ")" + body.phoneNum;
   console.log("body :", body);
 
   const user = await usersService.getUser({ email: body.email });
   // console.log("user :", user);
   if (!user) return res.status(404).end();
 
-  if (body.firstName == user.first_name && body.lastName == user.last_name) {
+  if (
+    body.firstName == user.first_name &&
+    body.lastName == user.last_name &&
+    body.mobile_contact == user.mobile_contact
+  ) {
     let newPassword = "";
     for (let i = 0; i < 4; i++) {
       newPassword += getRandomInt(10);
@@ -440,10 +445,7 @@ exports.resetPassword = async (req, res, next) => {
           from: systemInfo.systemEmailName + "<" + systemInfo.emailUserid + ">",
           to: body.email,
           subject: res.__("mail.ResetPasswordMailTitle"),
-          text:
-            res.__("mail.ResetPasswordMailcontent") +
-            "\n" +
-            newPassword,
+          text: res.__("mail.ResetPasswordMailcontent") + "\n" + newPassword,
         };
 
         transporter.sendMail(mailOptions, function (error, info) {

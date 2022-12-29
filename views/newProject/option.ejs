@@ -30,15 +30,15 @@
         <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
-              <div class="p-1 col-3">
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
+              <div class="">
                 <h6 class="main-menu">
                   <%= __('Project') %>
                 </h6>
-                <h4><strong>
+                <div class="menu">
                     <%= __('New Project') %>
-                  </strong></h4>
+                  </div>
               </div>
             </div>
           </div>
@@ -47,14 +47,14 @@
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
-              <div class="widget-content widget-content-area br-20 py-5">
+              <div class="widget-content widget-content-area br-20 pt-4">
 
-                <div class="form-group ms-3 text-break">
+                <div class="form-group mx-4 px-3 text-break">
                   <div class="row mb-3">
-                    <h5 class="p-0"><strong>
+                    <h4 class="p-0"><strong>
                         <%= __('샘플의뢰서 옵션') %>
                       </strong>
-                    </h5>
+                    </h4>
                   </div>
 
                   <div class="row widget" style="padding:0% 5% 10% 5%">
@@ -167,7 +167,7 @@
                                     </svg>
                                   </button>
                                 </div>
-                                <div class="modal-title fs-5 text-black text-center form-control mx-5 py-4 w-auto">
+                                <div class="modal-title  text-black text-center form-control mx-5 py-4 w-auto">
                                   <%= __('users.newProject.option.applies') %>
                                 </div>
                                 <div class="modal-body mx-5 pt-0 pb-5">
@@ -184,13 +184,13 @@
                                       <div class="col row">
                                         <div class="col d-flex dropdown-item p-0">
                                           <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-1">
-                                          <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label fs-6">
+                                          <label for="applies-<%= index %>-1" class="flex-fill applies_bool-label ">
                                             <%= __("use_effects."+item+".true") %>
                                           </label>
                                         </div>
                                         <div class="col d-flex dropdown-item p-0">
                                           <input class="applies_bool form-check-input mx-3" type="checkbox" id="applies-<%= index %>-0">
-                                          <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label fs-6">
+                                          <label for="applies-<%= index %>-0" class="flex-fill applies_bool-label ">
                                             <%= __("use_effects."+item+".false") %>
                                           </label>
                                         </div>
@@ -213,7 +213,7 @@
                                       <% applies_true_text_list.push(__("use_effects."+i)) %>
                                       <div class="col d-flex dropdown-item p-0">
                                         <input class="applies_other form-check-input mx-3" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>-1">
-                                        <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill fs-6">
+                                        <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill ">
                                           <%= __("use_effects."+i) %>
                                         </label>
                                       </div>
@@ -449,113 +449,10 @@
       })
     }
   </script>
-  <div>
-    <%
-    let ingredient_type_text_dict = {};
-    codezip.ingredient_type.forEach((code, index)=>{
-      ingredient_type_text_dict[code] = __(code);
-    })
-    let ingredient_effects_text_dict = {};
-    codezip.effects.ingredient.forEach((code, index)=>{
-      ingredient_effects_text_dict[code] = __(code);
-    })
-    %>
-  </div>
-  <script>
-    const ingredient_type_text_dict = JSON.parse('<%- JSON.stringify(ingredient_type_text_dict) %>');
-    const ingredient_effects_text_dict = JSON.parse('<%- JSON.stringify(ingredient_effects_text_dict) %>');
-
-    function searching_ingredients(page = 1) {
-      let search_params = new URLSearchParams(new FormData(search_ingredients))
-      search_params.set('p', page)
-      const url = '<%= codezip.url.users.api.ingredient %>?' + search_params;
-      fetch(url).then(res => {
-        ingredients_reload(res.json());
-      })
-    }
-
-    search_ingredients.onsubmit = (event) => {
-      event.preventDefault();
-      searching_ingredients();
-    }
-
-    function ingredients_reload(res_json) {
-      res_json.then(result => {
-        // console.log(result);
-        let ingredients = result.ingredients;
-        let temp_html = "";
-
-        ingredients.rows.forEach((item, index) => {
-          let ingredient_effects = [];
-          if (item.effects) {
-            item.effects.split(',').forEach((code, index) => {
-              ingredient_effects.push(ingredient_effects_text_dict[code])
-            })
-          }
-
-          temp_html += `<tr onclick="select_ingredient('${item.id}');">
-            <td><input type="checkbox" class="form-check-input ingredient-checkbox opacity-100" id="ingredient-${item.id}" disabled></td>
-            <td id="${item.id}-ingredient_name">${item.ingredient_name}</td>
-            <td>${item.material_name}</td>
-            <td>${ingredient_type_text_dict[item.type]}</td>
-            
-            <td>${ingredient_effects.join(', ')}</td>
-            <td>${item.feature ? item.feature : ''}</td>
-          </tr>`
-        })
-        ingredients_result.innerHTML = temp_html;
-
-        let values = option.ingredients.value ? option.ingredients.value.split(',') : [];
-        values.forEach((id, index) => {
-          const target = document.getElementById(`ingredient-${id}`);
-          if (!target) return;
-          else target.checked = true;
-        })
-
-
-        //make_pagination_by_func(page, count, func_name, limit)
-        ingredients_pagination.innerHTML = make_pagination_by_func(+result.page, +ingredients.count, "searching_ingredients")
-      });
-    }
-  </script>
-  <script>
-    document.querySelectorAll('.ingredient_type, .ingredient_effects').forEach(el => {
-      el.addEventListener("change", event => {
-        searching_ingredients();
-      })
-    })
-  </script>
-  <script>
-    function select_ingredient(id) {
-      const target = document.getElementById(`ingredient-${id}`);
-      const target_name = document.getElementById(`${id}-ingredient_name`).innerText;
-      if (!target) return;
-
-      target.checked = !target.checked;
-      let values = option.ingredients.value ? option.ingredients.value.split(',') : [];
-      let text_list = option.ingredients.value ? ingredients_print.innerText.split(', ') : [];
-      if (target.checked) {
-        values.push(id);
-        text_list.push(target_name)
-      } else {
-        values.splice(values.indexOf(id), 1);
-        text_list.splice(text_list.indexOf(target_name), 1);
-      }
-      option.ingredients.value = values.join(',');
-      if (values.length) {
-        ingredients_print.innerText = text_list.join(', ');
-        ingredients_print.title = text_list.join(', ');
-      } else {
-        ingredients_print.innerText = "<%= __('통합 검색') %>";
-        ingredients_print.title = "";
-      }
-    }
-  </script>
   <script>
     window.addEventListener('load', event => {
       print_efficacy(option.efficacy.value);
       print_applies(option.applies.value);
-      searching_ingredients();
     })
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

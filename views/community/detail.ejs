@@ -27,60 +27,61 @@
         <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
               <div class="col-3">
                 <h6 class="main-menu">
                   <%= __('Lounge') %>
                 </h6>
-                <h4><strong>
-                    <%= __('Community') %>
-                  </strong></h4>
+                <div class="menu">
+                  <%= __('Community') %>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="row px-3 ">
-            <div class="breadcrumb align-items-start d-flex br-20">
+            <div class="ms-1 p-3">
               <div class="col">
-                <h5><strong>
+                <h4><strong>
                     <%= __('users.community.subtitle') %>
-                  </strong></h5>
+                  </strong></h4>
               </div>
             </div>
           </div>
 
           <!-- CONTENT AREA -->
           <div class="row px-3 justify-content-center">
-            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 widget-content-area pt-0">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 ms-1 ps-3">
 
               <div class="widget w-100 text-black p-5">
 
                 <!-- title -->
-                <div class="form-control d-flex justify-content-between">
-                  <div class="p-1 d-flex">
+                <div class="form-control title">
+                  <div class="p-1 d-flex h6">
                     <%- include('../partials/badge/new', {date:community.create_date}) %>
-                    <%= `${community.title}` %>
+                    <span class="align-self-center"><%= `${community.title}` %></span>
                   </div>
-                  <div class="p-1 d-flex">
+                  <div class="title">
                     <h6 class="me-3">
                       <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                       <%= `${formatDate(community.update_date)} | ${__('users.community.index.WrittenBy')} ${community.last_name} ${community.first_name}` %>
                       <% } else { %>
                       <%= `${formatDate(community.update_date)} | ${__('users.community.index.WrittenBy')} ${community.first_name} ${community.last_name}` %>
                       <% } %>
-                    </h6>
+                      </h6>
                     <!-- <h6 id="communitylike_count" class="mx-1"><strong>
                         <%# communityLike.count %>
                       </strong>
                     </h6> -->
-                    <h5><a id="communityLikeBtn" href="javascript:void(0);" onclick="toggleLike('<%= community.id %>');">
+                    <div class="fs-2rem"><a id="communityLikeBtn" href="javascript:void(0);" onclick="toggleLike('<%= community.id %>');">
                         <% if(communityLike.rows.indexOf(user.id)==-1) { %>
                         <i class="fa-star fa-regular"></i>
                         <% }else{ %>
                         <i class="fa-star fa-solid text-primary"></i>
                         <% } %>
-                      </a></h5>
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -102,7 +103,7 @@
                     <div class="col-4 mx-3 hover">
                       <% if(prev) { %><a href="<%= codezip.url.users.community.main %>/<%= prev.id %>">
                         <h6>
-                          <i class="fa-solid fa-chevron-left fs-5 me-3"></i>
+                          <i class="fa-solid fa-chevron-left  me-3"></i>
                           <%= __('btn.이전글') %>
                         </h6>
                       </a>
@@ -117,7 +118,7 @@
                       <% if(next) { %>
                       <a href="<%= codezip.url.users.community.main %>/<%= next.id %>">
                         <h6>
-                          <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right fs-5 ms-3"></i>
+                          <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right  ms-3"></i>
                         </h6>
                       </a>
                       <% } %>
@@ -126,10 +127,10 @@
                   <!-- 수정 삭제 버튼 -->
                   <div class="text-end col-4">
                     <% if(community.users_id==user.id) { %>
-                    <a class="col-4 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.edit %>/<%= community.id %>">
+                    <a class="col-3 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.edit %>/<%= community.id %>">
                       <%= __('users.community.btn.수정') %>
                     </a>
-                    <a class="col-4 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.delete %>/<%= community.id %>">
+                    <a class="col-3 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.delete %>/<%= community.id %>">
                       <%= __('users.community.btn.삭제') %>
                     </a>
                     <% } %>
@@ -168,7 +169,7 @@
                   <!-- 댓글 좋아요 -->
                   <div class="w-auto text-end mx-3">
                     <div class="p-1 d-flex">
-                      <h6>
+                      <h4>
                         <% if(item.users_id==user.id) { %>
                         <i class="fa-thumbs-up fa-regular"></i>
                         <% }else{ %>
@@ -179,11 +180,11 @@
                           <i class="fa-thumbs-up fa-solid text-primary"></i>
                           <% }} %>
                         </a>
-                      </h6>
-                      <h6 id="replylike_count<%= item.id %>" class="mx-1"><strong>
+                      </h4>
+                      <h5 id="replylike_count<%= item.id %>" class="mx-1"><strong>
                           <%= item.like_count %>
                         </strong>
-                      </h6>
+                      </h5>
                     </div>
                   </div>
                   <!-- 수정/삭제 -->
@@ -198,7 +199,7 @@
                       </a>
 
                       <% if(item.users_id==user.id) { %>
-                      <div class="dropdown-menu left text-center">
+                      <div class="dropdown-menu left text-center box-shadow">
                         <a class="dropdown-item" href="javascript:void(0);" onclick="reply_edit_active('<%= item.communities_id %>','<%= item.id %>');"> <%= __('users.community.btn.수정') %> </a>
                         <a class="dropdown-item" href="javascript:void(0);" onclick="reply_delete('<%= item.communities_id %>','<%= item.id %>');"> <%= __('users.community.btn.삭제') %> </a>
                       </div>
@@ -227,7 +228,7 @@
                 <div>
                   <form id="reply" method="post" action="<%= codezip.url.users.community.reply.add %>/<%= community.id %>" class="border border-gray px-4 py-2 br-4">
                     <textarea rows="5" maxlength="3000" name="content" class="w-100 bg-white bc-white mt-3" placeholder="<%= __('users.reply.add.내용을 입력해주세요') %>"></textarea>
-                    <hr class="m-0">
+                    <hr class="m-0" style="color: rgb(228,228,228);">
                     <div class="d-flex justify-content-between">
                       <div id="textCount" class="align-self-center">
                         0 / 3000

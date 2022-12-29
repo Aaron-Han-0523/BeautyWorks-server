@@ -107,10 +107,10 @@ function loadImageFile(input, img) {
 function make_pagination_by_func(page, count, func_name, limit = 10) {
   let end_page = parseInt((count - 1) / limit) + 1;
   let end_list_num = end_page > 6 ? 5 : end_page;
-  let temp_html = `<div class="d-flex justify-content-center mt-4">
+  let temp_html = `<div class="d-flex justify-content-center">
     <!-- 페이징처리 시작 -->
     <!-- 처음 & 이전페이지 -->
-    <ul class="p-2 pagination">
+    <ul class="p-2 pagination m-0">
       `;
   if (page == 1) {
     temp_html += `
@@ -140,7 +140,7 @@ function make_pagination_by_func(page, count, func_name, limit = 10) {
   temp_html += `
     </ul>
     <!-- 페이지 리스트 -->
-    <ul class="p-2 pagination">
+    <ul class="p-2 pagination m-0">
       `;
   if (page < 4) {
     for (let i = 1; i <= end_list_num; i++) {
@@ -206,7 +206,7 @@ function make_pagination_by_func(page, count, func_name, limit = 10) {
   temp_html += `
     </ul>
     <!-- 다음 & 마지막페이지 -->
-    <ul class="p-2 pagination">
+    <ul class="p-2 pagination m-0">
       `;
   if (page == end_page) {
     temp_html += `

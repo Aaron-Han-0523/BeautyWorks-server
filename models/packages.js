@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "소분류"
     },
     capacity: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(100),
       allowNull: true,
       comment: "용량"
     },

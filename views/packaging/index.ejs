@@ -27,50 +27,50 @@
         <div class="middle-content p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
               <div class="col-3">
                 <h6 class="main-menu">
                   <%= __('Customizing') %>
                 </h6>
-                <h4><strong>
+                <div class="menu">
                     <%= __('Packaging') %>
-                  </strong></h4>
+                  </div>
               </div>
             </div>
           </div>
 
           <div class="row px-3 ">
-            <div class="breadcrumb align-items-start d-flex br-20">
+            <div class="ms-1 p-3">
               <div class="col-3">
-                <h5><strong>
+                <h4><strong>
                     <%= __('Tube') %>
-                  </strong></h5>
+                  </strong></h4>
               </div>
             </div>
           </div>
 
           <!-- CONTENT AREA -->
           <div class="row px-3 justify-content-center">
-            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb py-0">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12">
 
-              <div class="widget w-100" style="padding: 10% 5%;">
+              <div class="widget w-100 p-4 pt-5">
                 <!-- 카드 그룹 -->
                 <!-- 테스트 데이터 생성 */ -->
-                <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap mt-5 pt-3">
                   <!-- 카드 -->
                   <% packages.rows.forEach((item, index)=>{ %>
-                  <div class="col-4 p-2">
+                  <div class="col-4 p-3">
                     <!-- 카드 이미지-->
                     <div>
                       <% if(item.image_paths) { %>
                       <% let image_url = encodeURI(item.image_paths.split(',')[0].replace(/\\/g,"/")) %>
-                      <div class="card-preview" style="background-image: url('<%= image_url %>')">
+                      <div class="card-preview br-5" style="background-image: url('<%= image_url %>')">
                         <!--  -->
                         <!-- <img style="width: 100%;" src="<%= image_url %>"> -->
                       </div>
                       <% }else{ %>
-                      <div class="card-preview" style="background-image: url('https://via.placeholder.com/150.jpg?text=No%20Image');"></div>
+                      <div class="card-preview br-5" style="background-image: url('https://via.placeholder.com/150.jpg?text=No%20Image');"></div>
                       <% } %>
                     </div>
                     <!-- 카드 내용-->
@@ -81,7 +81,6 @@
                       <p><%= __('packaging'+item.packaging_type+'.category2.'+item.category2) %></p>
                       <p><%= __('packaging'+item.packaging_type+'.category3.'+item.category3) %></p>
                       <p><%= item.capacity %></p>
-                      <p><%= new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(item.price) %></p>
                     </div>
                   </div>
                   <% }) %>

@@ -26,15 +26,15 @@
         <div class="middle-content p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
-              <div class="p-1 col-3">
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
+              <div class="p-1">
                 <h6 class="main-menu">
                   <%= __('Main') %>
                 </h6>
-                <h4><strong>
-                    <%= __('Dashboard') %>
-                  </strong></h4>
+                <div class="menu">
+                  <%= __('Dashboard') %>
+                </div>
               </div>
             </div>
           </div>
@@ -49,10 +49,10 @@
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
-                        <h5><strong>
+                        <h4><strong>
                             <%= __('users.dashboard.header.Progress') %>
                           </strong>
-                        </h5>
+                        </h4>
                       </div>
                       <div class="row text-end">
                         <a href="<%= codezip.url.users.myProject.main %>">
@@ -69,12 +69,8 @@
                         <img src="<%= codezip.url.users.progress_icon['_'+item.phase] %>">
                       </div>
                       <div class="progress-card-body">
-                        <div class="progress-card-name">
-                          <h6>
-                            <strong>
-                              <%= (index+1)+'. '+item.project_name %>
-                            </strong>
-                          </h6>
+                        <div class="progress-card-name project-title">
+                          <%= (index+1)+'. '+item.project_name %>
                         </div>
                         <%- include("../partials/progressbar/"+item.phase+".ejs") %>
                       </div>
@@ -86,14 +82,14 @@
               </div>
 
               <!-- 임시 저장한 Progress -->
-              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+              <div class="widget-content widget-content-area br-20 px-4 mt-5">
                 <div class="form-group ms-3">
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
-                        <h5>
+                        <h4>
                           <strong><%= __("users.dashboard.header.TempProgress") %></strong>
-                        </h5>
+                        </h4>
                       </div>
                       <div class="row text-end">
                         <a href="<%= codezip.url.users.myProject.main %>">
@@ -111,13 +107,9 @@
                         <img src="<%= codezip.url.users.progress_icon[`_`+item.phase] %>">
                       </div>
                       <div class="progress-card-body">
-                        <div class="progress-card-name">
-                          <h6>
-                            <strong>
-                              <%= (index+1)+". "+item.project_name %>
-                            </strong>
-                            <span class="ms-1" style="font-size: small; color:gray;"><%= formatDate(item.create_date) %></span>
-                          </h6>
+                        <div class="progress-card-name project-title">
+                          <%= (index+1)+". "+item.project_name %>
+                          <span class="ms-1"><%= formatDate(item.create_date) %></span>
                         </div>
                         <%- include("../partials/temp_progressbar/"+item.detail_phase+".ejs", {project: item}) %>
                       </div>
@@ -130,15 +122,15 @@
 
 
               <!-- Completed Project -->
-              <div class="widget-content widget-content-area br-20 px-4 mt-3">
+              <div class="widget-content widget-content-area br-20 px-4 mt-5">
                 <div class="form-group ms-3">
                   <div class="row mb-3">
                     <div class="justify-content-between d-flex px-0">
                       <div>
-                        <h5><strong>
+                        <h4><strong>
                             <%= __("users.dashboard.header.CompletedProject") %>
                           </strong>
-                        </h5>
+                        </h4>
                       </div>
                     </div>
                   </div>
@@ -162,7 +154,7 @@
                             <%= __("product"+item.category1+"."+item.category2) %>
                             <%= " " + item.capacity %>
                           </h6>
-                          <p>
+                          <p class="text-gray-500">
                             <%= __("users.dashboard.CompletedProject.Total발주수량") %>
                             <%= ' : ' + item.total_order_quantity %>
                             <br>
@@ -172,22 +164,22 @@
                         </div>
                         <div class="row mx-0 mt-3">
                           <button class="btn btn-outline-primary" type="button">
-                            <%= __('REORDER') %>
+                            <h5 style="color: currentColor;"><%= __('REORDER') %></h5>
                           </button>
                         </div>
                       </div>
                       <% }) %>
 
                       <!-- pagination -->
-                      <!--make_pagination_by_href( i18n_func, page, count, baseURL, limit = 10) -->
-                      <%- make_pagination_by_href(
+                      <div class="mt-3">
+                        <%- make_pagination_by_href(
                           __,
                           page,
                           completed_project.count,
                           codezip.url.users.dashboard,
                           4
                         ) %>
-
+                      </div>
                     </div>
                     <% } %>
                   </div>
@@ -197,15 +189,15 @@
               <!-- 추천 프로젝트 & 추천 성분 -->
               <div class="row mt-5">
                 <!-- 추천 프로젝트 -->
-                <div class="col-6 pe-3">
+                <div class="col-6 pe-4">
                   <div class="widget-content widget-content-area p-0 ps-4 h-100 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
-                        <h5><strong>
+                        <h4><strong>
                             <%= __('users.dashboard.header.RecommendedFormula') %>
                           </strong>
-                        </h5>
+                        </h4>
                       </div>
                       <div class="row text-end">
                         <a href="<%= codezip.url.users.formula.main %>">
@@ -225,11 +217,12 @@
                           </div>
                           <% } %>
                           <div class="row mt-3 justify-content-center text-break">
-                            <p><strong><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></strong></p>
-                            <p style="color: gray;">
+                            <h6><%= __('top_or_new.'+item.top_or_new) +' / '+  __('product'+item.category1) %></h6>
+                            <p class="mt-2">
                               <%= __('product'+item.category1+'.'+item.category2) %>
+                              <br>
+                              <%= item.product_name %>
                             </p>
-                            <p><strong><%= item.product_name %></strong></p>
                           </div>
                         </a>
                       </div>
@@ -238,14 +231,14 @@
                   </div>
                 </div>
                 <!-- 추천 성분 -->
-                <div class="col-6 ps-3">
+                <div class="col-6 ps-4">
                   <div class="widget-content widget-content-area p-0 pe-2 h-100 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0 mb-3">
                       <div>
-                        <h5><strong>
+                        <h4><strong>
                             <%= __('users.dashboard.header.RecommendedIngredient') %>
                           </strong>
-                        </h5>
+                        </h4>
                       </div>
                       <div class="row text-end">
                         <a href="<%= codezip.url.users.ingredient %>">
@@ -273,7 +266,7 @@
                             <% recommended_ingredient.forEach((item,index)=>{ %>
                             <tr>
                               <td>
-                                <%= item.ingredient_name %>
+                                <h6><%= item.ingredient_name %></h6>
                               </td>
                               <td class="text-center">
                                 <%= array_i18n(item.type,__).join(', ') %>
@@ -293,15 +286,15 @@
               <!-- News & Community -->
               <div class="row mt-5">
                 <!-- News -->
-                <div class="col-6 pe-3">
+                <div class="col-6 pe-4">
                   <div class="widget-content widget-content-area p-0 ps-4 d-flex flex-column">
 
                     <div class="justify-content-between d-flex px-0">
                       <div>
-                        <h5><strong>
+                        <h4><strong>
                             <%= __('users.dashboard.header.News') %>
                           </strong>
-                        </h5>
+                        </h4>
                       </div>
                       <div class="row text-end">
                         <a href="<%= codezip.url.users.news.main %>">
@@ -311,18 +304,18 @@
                     </div>
                     <div class="h-100">
                       <% news.forEach((item,index)=>{ %>
-                      <a class="pb-2 hover h-50" href="<%= codezip.url.users.news.main + '/' + item.id %>">
-                        <div class="widget row mx-0 align-content-center mt-3 text-ellipsis" style="height: 110px;">
+                      <a class="hover h-50" href="<%= codezip.url.users.news.main + '/' + item.id %>">
+                        <div class="widget row mx-0 align-content-center mt-3 mb-4 text-ellipsis" style="height: 110px;">
                           <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
-                          <div class="fs-6"><%= item.title %></div>
-                          <div>
+                          <h6><%= item.title %></h6>
+                          <p>
                             <%= `${formatDate(item.update_date)}` %>
                             <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                             <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
                             <% } else { %>
                             <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
                             <% } %>
-                          </div>
+                          </p>
                         </div>
                       </a>
                       <% }) %>
@@ -330,14 +323,14 @@
                   </div>
                 </div>
                 <!-- community -->
-                <div class="col-6 ps-3">
+                <div class="col-6 ps-4">
                   <div class="widget-content widget-content-area p-0 pe-2 d-flex flex-column">
                     <div class="justify-content-between d-flex px-0">
                       <div>
-                        <h5><strong>
+                        <h4><strong>
                             <%= __('users.dashboard.header.Community') %>
                           </strong>
-                        </h5>
+                        </h4>
                       </div>
                       <div class="row text-end">
                         <a href="<%= codezip.url.users.community.main %>">
@@ -348,17 +341,17 @@
                     <div class="">
                       <% community.forEach((item,index)=>{ %>
                       <a class="pb-2 hover" href="<%= codezip.url.users.community.main + '/' + item.id %>">
-                        <div class="widget row mx-0 align-content-center mt-3 text-ellipsis" style="height: 110px;">
+                        <div class="widget row mx-0 align-content-center mt-3 mb-4 text-ellipsis" style="height: 110px;">
                           <%- include('../partials/badge/new.ejs',{date:item.create_date}) %>
-                          <div class="fs-6"><%= item.title %></div>
-                          <div class="">
+                          <h6><%= item.title %></h6>
+                          <p class="">
                             <%= `${formatDate(item.update_date)}` %>
                             <% if(nameOrderInKorean.indexOf(locale) !=-1) { %>
                             <%= `${__('users.community.news.index.WrittenBy')} ${item.last_name} ${item.first_name}` %>
                             <% } else { %>
                             <%= `${__('users.community.news.index.WrittenBy')} ${item.first_name} ${item.last_name}` %>
                             <% } %>
-                          </div>
+                          </p>
                         </div>
                       </a>
                       <% }) %>

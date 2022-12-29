@@ -27,32 +27,32 @@
         <div class="middle-content  p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
-            <div class="breadcrumb align-items-end d-flex mt-4 br-20">
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
               <div class="col-3">
                 <h6 class="main-menu">
                   <%= __('Lounge') %>
                 </h6>
-                <h4><strong>
+                <div class="menu">
                     <%= __('News') %>
-                  </strong></h4>
+                  </div>
               </div>
             </div>
           </div>
 
           <div class="row px-3 ">
-            <div class="breadcrumb align-items-start d-flex br-20">
+            <div class="ms-1 p-3">
               <div class="col">
-                <h5><strong>
+                <h4><strong>
                     <%= __('users.news.subtitle') %>
-                  </strong></h5>
+                  </strong></h4>
               </div>
             </div>
           </div>
 
           <!-- CONTENT AREA -->
           <div class="row px-3 justify-content-center">
-            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 breadcrumb mt-1 py-0">
+            <div class="col-xxl-12 col-xl-12 col-md-12 col-sm-12 ms-1 ps-3">
 
               <div class="widget w-100">
 
@@ -60,7 +60,7 @@
                 <div class="form-control m-2 d-flex justify-content-between">
                   <div class="p-1 align-self-center d-flex">
                       <%- include('../partials/badge/new.ejs',{date:news.create_date}) %>
-                      <%= `${news.title}` %>
+                      <span class="align-self-center"><%= `${news.title}` %></span>
                   </div>
                   <div class="p-1 d-flex">
                     <h6 class="me-3">
@@ -85,7 +85,7 @@
                   <div class="col-5 d-flex justify-content-center align-items-end">
                     <div class="w-auto mx-3 hover">
                       <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.id %>">
-                        <h6><i class="fa-solid fa-chevron-left fs-5 me-3"></i>
+                        <h6><i class="fa-solid fa-chevron-left  me-3"></i>
                           <%= __('btn.이전글') %>
                         </h6>
                       </a>
@@ -99,7 +99,7 @@
                     <div class="w-auto text-end mx-3 hover">
                       <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.id %>">
                         <h6>
-                          <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right fs-5 ms-3"></i>
+                          <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right  ms-3"></i>
                         </h6>
                       </a>
                       <% } %>

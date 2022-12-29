@@ -51,7 +51,7 @@
 
                     <div class="col-12">
                       <div class="mt-4 pt-4 mb-2">
-                        <a href="#">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
                           <%= __('users.signIn.forgotQuestion') %>
                         </a>
                       </div>
@@ -79,11 +79,143 @@
 
   </div>
 
+  <!-- modal -->
+  <div class="modal fade" id="resetPasswordModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 80%;">
+      <div class="modal-content p-5 w-100">
+        <div class="mx-5">
+
+          <div class="form-group">
+            <form id="resetPassword" action="<%= codezip.url.users.resetPassword %>">
+              <div class="row mb-2">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                  <h6><%= __('users.email') %></h6>
+                </div>
+              </div>
+
+              <div class="row layout-spacing">
+                <div class="col-12">
+                  <input type="email" name="email" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                  <h6><%= __('users.firstName') %></h6>
+                </div>
+              </div>
+
+              <div class="row layout-spacing">
+                <div class="col-12">
+                  <input type="text" name="firstName" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                  <h6><%= __('users.lastName') %></h6>
+                </div>
+              </div>
+
+              <div class="row layout-spacing">
+                <div class="col-12">
+                  <input type="text" name="lastName" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                  <h6><%= __('users.mobile_contact') %></h6>
+                </div>
+              </div>
+
+              <div class="row layout-spacing">
+                <div class="col-12 d-flex">
+                  <div class="col col-3">
+                    <div class="dropdown">
+                      <input hidden name="country_number" id="country_number">
+                      <button class="form-select text-start" type="button" id="select_country_number" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= __('Select') %>
+                      </button>
+                      <ul class="dropdown-menu scrollable-menu" aria-labelledby="select_country_number">
+                        <% for(let i=0; i< codezip.country.codes.length; i++) { %>
+                        <li>
+                          <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="select_mobile_func('<%= codezip.country.codes[i] %>','<%= codezip.country.code2phoneNum[codezip.country.codes[i]] %>');">
+                            <div class="col-1">
+                              <img class="me-2" src="/images/flag/<%= codezip.country.codes[i] %>.png">
+                            </div>
+                            <div class="col-2">
+                              <%= codezip.country.code2phoneNum[codezip.country.codes[i]] %>
+                            </div>
+                            <div>
+                              <%= __(codezip.country.codes[i]) %>
+                            </div>
+                          </a>
+                        </li>
+                        <% } %>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col ps-3">
+                    <input type="text" class="form-control" name="phoneNum" id="phoneNum" placeholder="<%= __('placeholder.mobilePhone') %>" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row layout-top-spacing">
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-primary px-3"><%= __('btn.submit') %></button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
   <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
   <script src="/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/script.js"></script>
   <!-- END GLOBAL MANDATORY SCRIPTS -->
   <script>
     localStorage.clear();
     sessionStorage.clear();
+  </script>
+  <script>
+    function select_mobile_func(code, number) {
+      let country_number = document.getElementById('country_number');
+      let select_country_number = document.getElementById('select_country_number');
+
+      country_number.value = number;
+      select_country_number.innerHTML = `<img class="me-2" src="/images/flag/${code}.png">${number}`
+    }
+  </script>
+  <script>
+    resetPassword.onsubmit = (e) => {
+      e.preventDefault();
+
+      fetch(resetPassword.action, {
+        method: "post",
+        body: new URLSearchParams(new FormData(resetPassword))
+      }).then(res => {
+        if (res.ok) {
+          alert("<%= __('msg.임시비밀번호발급') %>")
+        } else if (res.status == 403) {
+          alert("<%= __('msg.개인정보불일치') %>")
+        } else if (res.status == 404) {
+          alert("<%= __('msg.이메일존재하지않음') %>")
+        } else {
+          console.error(res);
+          throw new Error(res.statusText)
+        }
+      }).catch(err => {
+        alert(err)
+      })
+    }
   </script>
 </body>
