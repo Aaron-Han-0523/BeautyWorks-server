@@ -133,12 +133,12 @@ app.use(
 );
 app.use(
   "/admin",
-  (req, res, next) => {
-    req.cookies.lang = "ko";
-    res.cookie("lang", "ko");
-    next();
-  },
-  i18n,
+  // (req, res, next) => {
+  //   req.cookies.lang = "ko";
+  //   res.cookie("lang", "ko");
+  //   next();
+  // },
+  // i18n,
   adminRouter
 );
 app.use("/", indexRouter);
