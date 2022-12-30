@@ -139,9 +139,13 @@
                   </div>
 
                   <div class="text-center mt-4">
-                    <button class="btn btn-lg px-5">
+                    <button class="btn btn-lg col-1 px-0 mx-3">
                       <%= __('btn.Save') %>
                     </button>
+
+                    <a class="btn btn-lg col-1 px-0 mx-3" href="<%= codezip.url.admin.users.main +'/'+ users_id %>">
+                      <%= __('btn.Cancel') %>
+                    </a>
                   </div>
                 </form>
               </div>

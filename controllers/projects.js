@@ -317,7 +317,10 @@ exports.temp_project_detail = async (req, res, next) => {
       if (req.api) {
         res.json({ project: result });
       } else if (base == "admin") {
-        res.render("admin/project/temp_project", { project: result });
+        res.render("admin/project/temp_project", {
+          project: result,
+          users_id: condition.users_id,
+        });
       }
     })
     .catch((err) => {
@@ -345,7 +348,10 @@ exports.progress_project_detail = async (req, res, next) => {
       if (req.api) {
         res.json({ project: result });
       } else if (base == "admin") {
-        res.render("admin/project/progress_project", { project: result });
+        res.render("admin/project/progress_project", {
+          project: result,
+          users_id: condition.users_id,
+        });
       }
     })
     .catch((err) => {
@@ -373,7 +379,10 @@ exports.completed_project_detail = async (req, res, next) => {
       if (req.api) {
         res.json({ project: result });
       } else if (base == "admin") {
-        res.render("admin/project/completed_project", { project: result });
+        res.render("admin/project/completed_project", {
+          project: result,
+          users_id: condition.users_id,
+        });
       }
     })
     .catch((err) => {

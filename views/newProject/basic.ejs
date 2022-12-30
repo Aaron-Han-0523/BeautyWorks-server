@@ -34,8 +34,8 @@
                   <%= __('Project') %>
                 </h6>
                 <div class="menu">
-                    <%= __('New Project') %>
-                  </div>
+                  <%= __('New Project') %>
+                </div>
               </div>
             </div>
           </div>
@@ -264,7 +264,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>">
+                          <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>" title="<%= project.distribution_channel %>">
                         </div>
                       </div>
 
@@ -276,7 +276,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>">
+                          <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>" title="<%= project.overseas_certifications %>">
                         </div>
                       </div>
 
@@ -383,7 +383,15 @@
     })
   </script>
   <%- include ("../partials/scripts/request_basic_script.ejs") %>
+  <script>
+    distribution_channel.addEventListener('input', e => {
+      distribution_channel.title = distribution_channel.value;
+    })
 
+    overseas_certifications.addEventListener('input', e => {
+      overseas_certifications.title = overseas_certifications.value;
+    })
+  </script>
   <script>
     function checkRequired() {
       let formData = new FormData(basic);

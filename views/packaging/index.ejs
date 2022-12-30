@@ -75,7 +75,7 @@
                     </div>
                     <!-- 카드 내용-->
                     <div class="my-3">
-                      <p><%= item.packaging_name %></p>
+                      <h6><%= item.packaging_name %></h6>
                       <p><%= __('packaging'+item.packaging_type) %></p>
                       <p><%= __('packaging'+item.packaging_type+'.category1.'+item.category1) %></p>
                       <p><%= __('packaging'+item.packaging_type+'.category2.'+item.category2) %></p>
@@ -102,16 +102,16 @@
                     )
                     %>
                 </div>
-                <hr class="my-5">
+                <hr class="my-5 mx-3">
                 <!-- 정보 -->
-                <div class="">
+                <div class="p-3 pb-5">
                   <!-- 제목 -->
                   <div class="h6">
-                    <i class="fa-solid fa-circle-info"></i>
+                    <svg fill="CurruntColor" width="1.5rem" height="1.5rem" viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"><path d="M16.417 9.583A7.917 7.917 0 1 1 8.5 1.666a7.917 7.917 0 0 1 7.917 7.917zM5.85 3.309a6.833 6.833 0 1 0 2.65-.534 6.787 6.787 0 0 0-2.65.534zm2.654 1.336A1.136 1.136 0 1 1 7.37 5.78a1.136 1.136 0 0 1 1.135-1.136zm.792 9.223V8.665a.792.792 0 1 0-1.583 0v5.203a.792.792 0 0 0 1.583 0z"></path></g></svg>
                     <span><%= __('Information') %></span>
                   </div>
                   <!-- 내용 -->
-                  <div class="form-control p-4 d-flex">
+                  <div class="form-control p-5 d-flex mt-3">
                     <div class="align-self-center p-3">
                       <ul class="info m-0">
                         <li>
@@ -134,7 +134,8 @@
                     <div class="border-end border-gray mx-5"></div>
                     <div class="align-self-center">
                       <p><%= __('users.packaging.info1') %></p>
-                      <p><%= __('users.packaging.info2') %></p>
+                      <br>
+                      <p><%- __('users.packaging.info2') %></p>
                     </div>
                   </div>
                 </div>
