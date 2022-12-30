@@ -86,6 +86,11 @@ router
     .get('/progress_project/:id', projectsController.progress_project_detail)
     .post('/progress_project/:id', projectsController.edit)
 
+// 진행 중인 프로젝트
+router
+    .get('/completed_project/:id', projectsController.completed_project_detail)
+    .post('/completed_project/:id', projectsController.edit)
+
 //// 목록 조회
 // 임시 저장 프로젝트
 router

@@ -97,7 +97,7 @@
                           </h6>
                         </div>
                         <div class="col">
-                          <input readonly type="text" class="form-control" id="category1_print" value="<%= __('product'+project.category1) %>">
+                          <input readonly type="text" class="form-control" id="category1_print" value="<%= project.category1 ? __('product'+project.category1) : '' %>">
                         </div>
                       </div>
 
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col">
                           <input readonly hidden type="text" name="category2">
-                          <input readonly type="text" class="form-control" id="category2_print" value="<%= __('product'+project.category1+'.'+project.category2) %>">
+                          <input readonly type="text" class="form-control" id="category2_print" value="<%= project.category2 ? __('product'+project.category1+'.'+project.category2) : '' %>">
                         </div>
                       </div>
 
@@ -129,7 +129,7 @@
                       <%
                       let target_age_text_list = [];
                       if(project.target_age_list)
-                      project.target_age_list.forEach((i, index)=>{
+                      project.target_age_list?.forEach((i, index)=>{
                         target_age_text_list.push(__('age'+i));
                       })
                       %>
@@ -147,8 +147,7 @@
 
                       <%
                       let target_gender_text_list = [];
-                      if(project.target_gender_list)
-                      project.target_gender_list.forEach((i, index)=>{
+                      project.target_gender_list?.forEach((i, index)=>{
                         target_gender_text_list.push(__('gender'+i));
                       })
                       %>
@@ -166,8 +165,7 @@
 
                       <%
                       let target_country_text_list = [];
-                      if(project.target_country)
-                      project.target_country.split(',').forEach((code, index)=>{
+                      project.target_country?.split(',').forEach((code, index)=>{
                         target_country_text_list.push(__(code));
                       })
                       %>
@@ -274,13 +272,11 @@
                       <!-- option -->
 
                       <%
-                        let efficacy_text_list = [];
-                        if(project.efficacy) {
-                          project.efficacy.split(',').forEach((code, index)=>{
-                            efficacy_text_list.push(__(code));
-                          })
-                        }
-                        %>
+                      let efficacy_text_list = [];
+                      project.efficacy?.split(',').forEach((code, index)=>{
+                        efficacy_text_list.push(__(code));
+                      })
+                      %>
                       <!-- 제품 효과 -->
                       <div class="row mt-3 align-items-center">
                         <div class="col-3">

@@ -32,7 +32,7 @@
               <div class="text-center">
                 <h2>
                   <strong>
-                    <%= __("admin.menu.회원관리.개인정보.진행중인프로젝트.상세") %>
+                    <%= __("admin.menu.회원관리.개인정보.완료된프로젝트.상세") %>
                   </strong>
                 </h2>
               </div>
@@ -47,7 +47,7 @@
 
               <div class="widget-content widget-content-area br-20 p-4">
 
-                <form id="progress_project" method="post" enctype="multipart/form-data">
+                <form id="completed_project" method="post" enctype="multipart/form-data">
 
                   <div class="form-group p-5">
                     <div class="d-flex" style="justify-content: space-between; margin-bottom: 34px;">
@@ -80,51 +80,24 @@
                       </select>
                     </div>
 
-                    <div class="d-flex mt-3"><label class="col-4 pt-2" for="sample_number"><%= __("project.sample_number") %></label>
-                      <input class="form-control" id="sample_number" name="sample_number" type="number" value="<%= project.sample_number %>">
+                    <hr class="my-5">
 
+                    <div class="d-flex mt-3">
+                      <label class="col-4 pt-2" for="image_paths"><%= __("project.image_paths") %></label>
+                      <input type="file" name="image_paths" id="image_paths" class="form-control">
                     </div>
 
-                    <div class="d-flex mt-3 pb-5"><label class="col-4 pt-2" for="tracking_number"><%= __("project.tracking_number") %></label>
-                      <input class="form-control" id="tracking_number" name="tracking_number" type="text" value="<%= project.tracking_number %>">
-
+                    <div class="d-flex mt-3">
+                      <label class="col-4 pt-2" for="total_order_quantity"><%= __("project.total_order_quantity") %></label>
+                      <input type="number" name="total_order_quantity" id="total_order_quantity" class="form-control">
                     </div>
 
-                    <hr>
-
-                    <div class="py-5">
-
-                      <h4 style="font-weight: 700;"><%= __("project.sample_feedback") %></h4>
-
-                      <div class="d-flex mt-3">
-                        <label class="col-4 pt-2" for="project_name"><%= __("project.project_name") %></label>
-                        <input class="form-control" id="project_name" name="project_name" type="text" value="<%= project.project_name %>" disabled>
-                      </div>
-
-                      <div class="d-flex mt-3">
-                        <label class="col-4 pt-2" for="brand_name"><%= __("project.brand_name") %></label>
-                        <input class="form-control" id="brand_name" name="brand_name" type="text" value="<%= project.brand_name %>" disabled>
-                      </div>
-
-                      <div class="d-flex mt-3">
-                        <label class="col-4 pt-2" for="category1"><%= __("project.category1") %></label>
-                        <input class="form-control" id="category1" name="category1" type="text" value="<%= __('product'+project.category1+'.'+project.category2) %>" disabled>
-                      </div>
-
-                      <div class="d-flex mt-3">
-                        <label class="col-4 pt-2" for="feedback"><%= __("project.feedback") %></label>
-                        <textarea class="form-control" id="feedback" name="feedback" type="text" placeholder="" style="height: 150px;" disabled><%= project.feedback %></textarea>
-                      </div>
+                    <div class="d-flex mt-3">
+                      <label class="col-4 pt-2" for="recent_order_date"><%= __("project.recent_order_date") %></label>
+                      <input class="form-control w-auto" id="recent_order_date" name="recent_order_date" type="date" placeholder="" value="<%= formatDateTime(project.recent_order_date,'-').slice(0,10) %>">
                     </div>
 
-                    <hr>
-
-                    <div class="py-5">
-                      <label for="packaging_tooltip"><%= __("project.packaging_tooltip") %></label>
-                      <textarea class="form-control mt-3" id="packaging_tooltip" name="packaging_tooltip" type="text" placeholder="<%= __('placeholder.content') %>" style="height: 150px;"><%= project.packaging_tooltip %></textarea>
-                    </div>
-
-                    <hr>
+                    <hr class="mt-5">
 
                     <div class="py-5">
                       <label for="shipment_date"><%= __("project.shipment_date") %></label>
@@ -137,15 +110,14 @@
                       <input class="form-control" id="title" name="title" type="text" placeholder="<%= __('documents.title') %>" value="<%= project.document.title %>">
                     </div>
 
-                    <% if(project.document.file_paths) { %>
-                    <%
-                          let file = path.parse(project.document.file_paths);
-                          let filename = "";
-                        
-                          file.name.split('-')[2].split('_').forEach((code,index)=>{
-                            filename += String.fromCodePoint(parseInt(code,36));
-                          })
-                        %>
+                    <% if(project.document.file_paths) {
+                      let file = path.parse(project.document.file_paths);
+                      let filename = "";
+                    
+                      file.name.split('-')[2].split('_').forEach((code,index)=>{
+                        filename += String.fromCodePoint(parseInt(code,36));
+                      })
+                    %>
                     <div class="d-flex justify-content-between h6 px-3 mt-3">
                       <div class="align-self-center text-gray">
                         <i class="fa-solid fa-download"></i>
@@ -210,8 +182,8 @@
   <script>
     const detail_phase_dict = JSON.parse(`<%- JSON.stringify(detail_phase_dict) %>`);
 
-    progress_project["phase"].addEventListener("input", event => {
-      load_detail_phase_list(progress_project["phase"].value);
+    completed_project["phase"].addEventListener("input", event => {
+      load_detail_phase_list(completed_project["phase"].value);
     })
 
     function load_detail_phase_list(phase) {
@@ -220,17 +192,17 @@
         temp_html += `<option value="${index}">${item}</option>`
       })
 
-      progress_project["detail_phase"].innerHTML = temp_html;
+      completed_project["detail_phase"].innerHTML = temp_html;
     }
   </script>
 
   <script>
-    progress_project.onsubmit = (e) => {
+    completed_project.onsubmit = (e) => {
       e.preventDefualt();
 
-      fetch(progress_project.action, {
-        method: progress_project.method,
-        body: new URLSearchParams(progress_project)
+      fetch(completed_project.action, {
+        method: completed_project.method,
+        body: new URLSearchParams(completed_project)
       }).then(res => {
         if (res.ok) {
           alert("<%= __('msg.success') %>");

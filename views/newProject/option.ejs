@@ -37,8 +37,8 @@
                   <%= __('Project') %>
                 </h6>
                 <div class="menu">
-                    <%= __('New Project') %>
-                  </div>
+                  <%= __('New Project') %>
+                </div>
               </div>
             </div>
           </div>
@@ -156,24 +156,24 @@
                             </div>
                           </button>
                           <!-- 사용감 모달창 -->
-                          <div class="modal br-15" id="select_applies" data-bs-scroll="true" data-bs-backdrop="true">
+                          <div class="modal br-10" id="select_applies" data-bs-scroll="true" data-bs-backdrop="true">
                             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                               <div class="modal-content br-15 w-100">
-                                <div class="modal-header justify-content-end text-gray p-3">
+                                <div class="modal-header justify-content-end text-gray" style="padding: 30px;">
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="5px" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                                       <line x1="18" y1="6" x2="6" y2="18"></line>
                                       <line x1="6" y1="6" x2="18" y2="18"></line>
                                     </svg>
                                   </button>
                                 </div>
-                                <div class="modal-title  text-black text-center form-control mx-5 py-4 w-auto">
-                                  <%= __('users.newProject.option.applies') %>
-                                </div>
-                                <div class="modal-body mx-5 pt-0 pb-5">
-                                  <div>
+                                <div style="margin: 16px 90px; padding-bottom:74px">
+                                  <div class="text-black text-center form-control" style="padding: 20px;">
+                                    <%= __('users.newProject.option.applies') %>
+                                  </div>
+                                  <div class="m-0 p-0 text-gray">
                                     <% codezip.effects.use.boolean.forEach((item,index)=> { %>
-                                    <div class="row py-3 border-bottom">
+                                    <div class="row p-3 border-bottom">
                                       <div class="col-4 align-self-center">
                                         <h6>
                                           <%= __("use_effects."+item) %>
@@ -197,38 +197,38 @@
                                       </div>
                                     </div>
                                     <% }) %>
-                                  </div>
-                                  <!-- Other effects -->
-                                  <div class="row py-3 border-bottom">
-                                    <div class="col-4">
-                                      <h6>
-                                        <%= __("use_effects.OtherEffects") %>
-                                      </h6>
-                                      <p style="color: red;">
-                                        * <%= __("use_effects.중복선택가능") %>
-                                      </p>
-                                    </div>
-                                    <div class="col row">
-                                      <% for(let i=0; i< codezip.effects.use.other; i++){ %>
-                                      <% applies_true_text_list.push(__("use_effects."+i)) %>
-                                      <div class="col d-flex dropdown-item p-0">
-                                        <input class="applies_other form-check-input mx-3" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>-1">
-                                        <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill ">
-                                          <%= __("use_effects."+i) %>
-                                        </label>
+                                    <!-- Other effects -->
+                                    <div class="row p-3 border-bottom">
+                                      <div class="col-4 align-self-center">
+                                        <h6>
+                                          <%= __("use_effects.OtherEffects") %>
+                                        </h6>
+                                        <p style="color: red; font-size:0.875rem">
+                                          * <%= __("use_effects.중복선택가능") %>
+                                        </p>
                                       </div>
-                                      <% if(i%2==1){ %>
-                                      <div></div>
-                                      <% } %>
-                                      <% } %>
+                                      <div class="col row">
+                                        <% for(let i=0; i< codezip.effects.use.other; i++){ %>
+                                        <% applies_true_text_list.push(__("use_effects."+i)) %>
+                                        <div class="col d-flex dropdown-item p-0">
+                                          <input class="applies_other form-check-input mx-3" type="checkbox" id="applies-<%= codezip.effects.use.boolean.length +i %>-1">
+                                          <label for="applies-<%= codezip.effects.use.boolean.length +i %>-1" class="applies_other-label flex-fill ">
+                                            <%= __("use_effects."+i) %>
+                                          </label>
+                                        </div>
+                                        <% if(i%2==1){ %>
+                                        <div></div>
+                                        <% } %>
+                                        <% } %>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <!-- <div class="modal-footer text-center my-3">
+                                  <!-- <div class="modal-footer text-center my-3">
                                   <button type="button" class="btn-outline-gray bg-gray br-15 p-3 px-5" data-bs-dismiss="modal">
                                     <%= __('users.newProject.option.btn.확인') %>
                                   </button>
                                 </div> -->
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -285,7 +285,7 @@
                     <hr>
 
                     <div class="d-flex mt-4 justify-content-center">
-                      <button id="saveBtn" class="col-1 btn btn-outline-primary py-3 br-10" type="button" onclick="next();">
+                      <button id="saveBtn" class="btn btn-outline-primary col-1 py-3 br-10" type="button" onclick="next();">
                         <%= __('users.newProject.option.btn.확인') %>
                       </button>
                     </div>

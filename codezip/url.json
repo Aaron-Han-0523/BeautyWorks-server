@@ -8,6 +8,7 @@
     "signUp": "/users/signUp",
     "signIn": "/users/signIn",
     "signOut": "/users/signOut",
+    "findEmail": "findEmail",
     "resetPassword": "/users/resetPassword",
     "changingPassword": "/users/changingPassword",
     "checkAlarm": "/users/checkAlarm",
@@ -130,7 +131,8 @@
       "delete": "/admin/projects/delete",
       "recovery": "/admin/projects/recovery",
       "temp_project": "/admin/projects/temp_project",
-      "progress_project": "/admin/projects/progress_project"
+      "progress_project": "/admin/projects/progress_project",
+      "completed_project": "/admin/projects/completed_project"
     },
     "formula": {
       "main": "/admin/formula",

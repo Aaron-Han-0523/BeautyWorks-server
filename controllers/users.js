@@ -248,7 +248,7 @@ exports.main = async (req, res) => {
     .then((result) => {
       let data = [];
       let random_index = [];
-      while (random_index.length < 3) {
+      while (random_index.length < 4) {
         let n = getRandomInt(result.count);
         if (!random_index.includes(n)) random_index.push(n);
       }
@@ -460,4 +460,20 @@ exports.resetPassword = async (req, res, next) => {
       })
       .catch((err) => console.error(err));
   } else return res.status(403).end();
+};
+
+exports.findEmail = async (req, res, next) => {
+  const body = req.body;
+  body.mobile_contact = body.country_number + ")" + body.phoneNum;
+  console.log("body :", body);
+
+  const user = await usersService.getUser({
+    first_name: body.firstName,
+    last_name: body.lastName,
+    mobile_contact: body.mobile_contact,
+  });
+  // console.log("user :", user);
+  if (!user) return res.status(404).end();
+
+  return res.send(user.email);
 };

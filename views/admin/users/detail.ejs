@@ -11,15 +11,15 @@
 <body>
   <%- include ("../../partials/loader.ejs") %>
 
+  <%- include ("../../partials/admin-sidebar.ejs") %>
+
+  <%- include ("../../partials/admin-nav.ejs") %>
+
   <!--  BEGIN CONTENT AREA  -->
   <div class="main-container" id="container">
 
     <div class="overlay"></div>
     <div class="search-overlay"></div>
-
-    <%- include ("../../partials/admin-sidebar.ejs") %>
-
-    <%- include ("../../partials/admin-nav.ejs") %>
 
     <div class="container mx-auto">
 
@@ -633,23 +633,25 @@
       console.log(data);
       let temp_html = '';
       data.rows.forEach((item, index) => {
-        temp_html += '<div class="col-3 d-flex flex-column">';
+        temp_html += `<div class="col-3 d-flex flex-column">
+          <a class="hover" href="<%= codezip.url.admin.projects.completed_project %>/${users_id}?n=${item.id}">`;
         if (item.image_paths) {
           temp_html += `<div class="preview">
             <img class="br-15" src="${item.image_paths.split(',')[0]}">
           </div>`
         }
         temp_html += `<div class="mb-auto mt-3">
-            <h6>${item.project_name}</h6>
-            <h6>${product_type[item.category1][item.category2] + " " + item.capacity}</h6>
-            <p>
-              <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-              ${' : ' + item.total_order_quantity}
-              <br>
-              <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-              ${' : ' + formatDate(item.recent_order_date)}
-            </p>
-          </div>
+              <h6>${item.project_name}</h6>
+              <h6>${product_type[item.category1][item.category2] + " " + item.capacity}</h6>
+              <p>
+                <%= __("project.total_order_quantity") + ' : ' %>
+                ${item.total_order_quantity ? item.total_order_quantity : '' }
+                <br>
+                <%= __("project.recent_order_date") + ' : ' %>
+                ${formatDate(item.recent_order_date)}
+              </p>
+            </div>
+          </a>
         </div>`
       })
       completed_projects.innerHTML = temp_html;

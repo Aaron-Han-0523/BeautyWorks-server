@@ -3,7 +3,6 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
-  <% const numberOfProduct=codezip.numberOfProduct; %>
 </head>
 
 <body class="layout-boxed">
@@ -35,8 +34,8 @@
                   <%= __('Customizing') %>
                 </h6>
                 <div class="menu">
-                    <%= __('Formula') %>
-                  </div>
+                  <%= __('Formula') %>
+                </div>
               </div>
             </div>
           </div>
@@ -74,14 +73,14 @@
                       <div class="col-3">
                         <select class="form-select" name="category1">
                           <option value=""><%= __('Select') %></option>
-                          <% for(let i=0; i< numberOfProduct.category1; i++) { %>
-                          <option value="<%= i %>" onclick="select_category1_func('<%= i %>','<%= __(`product`+i) %>');"><%= __('product'+i) %></option>
+                          <% for(let i=0; i< codezip.numberOfProduct.category1; i++) { %>
+                          <option value="<%= i %>"><%= __('product'+i) %></option>
                           <% } %>
                         </select>
                       </div>
                       <div class="col-1 h6 text-center"><%= __('users.formula.select.label.category2') %></div>
                       <div class="col">
-                        <select class="form-select" name="category2" id="category2_list">
+                        <select class="form-select" name="category2" id="category2_list" disabled>
                           <option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>
                         </select>
                       </div>
@@ -123,17 +122,20 @@
   </script>
 
   <div>
-    <% let category1_name_list=[]; %>
-    <% let category2_name_list={}; %>
-    <% for (let i=0; i < numberOfProduct.category1; i++) { %>
-    <% category1_name_list.push(__('product'+i)); %>
-    <% category2_name_list[i]={}; %>
-    <% for (let j=0; j < numberOfProduct.category2[i]; j++) { %>
-    <% category2_name_list[i][j]=__('product'+i+'.'+j); %>
-    <% } } %>
+    <%
+    let category1_name_list=[];
+    let category2_name_list={};
+    for (let i=0; i < codezip.numberOfProduct.category1; i++) {
+      category1_name_list.push(__('product'+i));
+      category2_name_list[i]={};
+      for (let j=0; j < codezip.numberOfProduct.category2[i]; j++) {
+        category2_name_list[i][j]=__('product'+i+'.'+j);
+      }
+    }
+    %>
   </div>
   <script>
-    const numberOfProduct = JSON.parse('<%- JSON.stringify(numberOfProduct) %>');
+    const numberOfProduct = JSON.parse('<%- JSON.stringify(codezip.numberOfProduct) %>');
     const category1_name_list = JSON.parse('<%- JSON.stringify(category1_name_list) %>');
     const category2_name_list = JSON.parse('<%- JSON.stringify(category2_name_list) %>');
 
@@ -184,8 +186,8 @@
           if (item.image_paths) {
             temp_html += `<div class="preview"><img class="br-10" src="${item.image_paths.split(',')[0]}"></div>`
           }
-          temp_html += `<div class=" text-black">${category1_name_list[item.category1]}</div>
-        <div>${item.product_name}</div>
+          temp_html += `<h6>${category1_name_list[item.category1]}</h6>
+        <p>${item.product_name}</p>
       </a></div>`
         })
         formulas_content.innerHTML = temp_html;
@@ -204,12 +206,14 @@
       let value = event.target.value;
       let temp_html = "";
       if (value) {
+        document.forms[0]['category2'].disabled = false;
         let category2_n = numberOfProduct.category2[value];
         temp_html += `<option value=''><%= __('Select') %></option>`
         for (let i = 0; i < category2_n; i++) {
           temp_html += `<option value='${i}'>${category2_name_list[value][i]}</option>`
         }
       } else {
+        document.forms[0]['category2'].disabled = true;
         temp_html = `<option value=""><%= __('users.newProject.basic.msg.먼저 카테고리를 선택해주세요.') %></option>`
       }
       category2_list.innerHTML = temp_html;

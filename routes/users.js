@@ -79,6 +79,9 @@ router
     res.render("users/signIn");
   });
 
+// 아이디 찾기
+router.post("/findEmail", usersController.findEmail);
+
 // 비밀번호 초기화 / 임시비밀번호 발급
 router.post("/resetPassword", usersController.resetPassword);
 

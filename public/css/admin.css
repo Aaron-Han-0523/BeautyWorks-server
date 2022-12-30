@@ -158,14 +158,16 @@ label {
 /* 게시판 nav */
 
 .admin-header {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
   z-index: 50;
   right: 0;
   width: calc(100vw - 92 / 16 * 1rem);
-  height: calc(72 / 16 * 1rem);
   border: 0;
-  padding-right: 3rem;
-  margin-right: 0;
-  margin-left: 92px;
+  padding-top: 1rem;
+  padding-left: calc(92 / 16 * 1rem);
 }
 
 .admin-nav {
@@ -269,4 +271,8 @@ label {
 .form-control,
 .form-select {
   min-height: 2.5rem;
+}
+
+.hover:hover * {
+  color: var(--BW-blue) !important;
 }

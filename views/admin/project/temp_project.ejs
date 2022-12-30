@@ -60,7 +60,7 @@
                       </div>
                       <div class="form-control my-2 d-flex align-items-baseline py-0 pe-0">
                         <span class="mx-2" style="left:0px;">$</span>
-                        <input type="number" class="form-control w-100 align-placeholder" name="budget" style="border: 0px;" placeholder="<%= __('users.newProject.moq.budgetInput.placeholder') %>" value="<%= project.budget %>">
+                        <input type="number" class="form-control w-100" name="budget" style="border: 0px;" value="<%= project.budget %>">
                       </div>
                       <!-- <div style="color: red;">
                         <%= __('users.newProject.moq.budgetInput.after') %>
@@ -97,20 +97,7 @@
                           </option>
                         </select>
                       </div>
-                      <!-- <div style="color: red;">
-                        <%- __('users.newProject.moq.moqSelect.after') %>
-                      </div> -->
                     </div>
-                    <!-- 개당 단가 출력 -->
-                    <!-- <div class="mt-5">
-                      <div>
-                        <%= __('users.newProject.moq.checkUnitPrice.before') %>
-                      </div>
-                      <div class="form-control my-2 d-flex align-items-baseline py-0 pe-0 bg-gray">
-                        <span class="ms-2" style="left:0px;">$</span>
-                        <input class="form-control w-100 align-placeholder" style="border: 0px;" id="unitPrice" placeholder="<%= __('users.newProject.moq.checkUnitPrice.placeholder') %>" disabled>
-                      </div>
-                    </div> -->
                   </div>
 
                   <hr>
@@ -146,20 +133,13 @@
                     <div>
                       <%= __('project.target_url') %>
                     </div>
-                    <input type="url" class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="<%= project.target_url %>">
+                    <input type="url" class="form-control" value="<%= project.target_url %>" readonly>
 
-                    <!-- <div class="mt-5">
-                      <div class="h6">
-                        <%= __('users.newProject.isTarget.urlInput.before') %>
-                      </div>
-                      <div class="mt-3 d-flex align-items-baseline br-15">
-                        <% if(project.target_url) { %>
-                        <input type="url" class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="<%= project.target_url %>">
-                        <% }else{ %>
-                        <input type="url" class="form-control w-100 align-placeholder" name="target_url" id="target_url" placeholder="<%= __('users.newProject.isTarget.urlInput.placeholder') %>" value="" disabled>
-                        <% } %>
-                      </div>
-                    </div> -->
+                    <% if(project.formulas_id) { %>
+                    <a class="mt-3" href="<%= codezip.url.admin.formula.main + '/' + project.formulas_id %>">
+                      <%= __('project.target_formula') %>
+                    </a>
+                    <% } %>
                   </div>
 
                   <hr>
@@ -175,7 +155,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="project_name" id="project_name" placeholder="<%= __('plzInputText') %>" value="<%= project.project_name %>">
+                        <input class="form-control" name="project_name" id="project_name" value="<%= project.project_name %>">
                       </div>
                     </div>
 
@@ -188,7 +168,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" value="<%= project.brand_name %>">
+                        <input type="text" class="form-control" name="brand_name" value="<%= project.brand_name %>">
                       </div>
                     </div>
 
@@ -204,7 +184,7 @@
                       </div>
                       <div class="col">
                         <input hidden type="text" name="category1">
-                        <input type="text" class="form-control" id="category1_print" placeholder="<%= __('Select') %>" readonly>
+                        <input type="text" class="form-control" id="category1_print" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_category1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -232,7 +212,7 @@
                       </div>
                       <div class="col">
                         <input hidden type="text" name="category2">
-                        <input type="text" class="form-control" id="category2_print" placeholder="<%= __('Select') %>" readonly>
+                        <input type="text" class="form-control" id="category2_print" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_category2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -255,7 +235,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="number" class="form-control" name="capacity" placeholder="<%= __('placeholder.capacity') %>" value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
+                        <input type="number" class="form-control" name="capacity" value="<%= project.capacity ? project.capacity.split(' ')[0] : '' %>">
                       </div>
                       <div class="col col-3">
                         <%# console.log("??",project.capacity.split(' ')[1],"??") %>
@@ -283,7 +263,7 @@
                       </div>
                       <div class="col">
                         <input hidden type="text" name="target_age">
-                        <input type="text" class="form-control text-ellipsis" id="target_age_print" placeholder="<%= __('placeholder.target_age') %>" readonly>
+                        <input type="text" class="form-control text-ellipsis" id="target_age_print" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_age" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -312,7 +292,7 @@
                       </div>
                       <div class="col">
                         <input hidden type="text" name="target_gender">
-                        <input type="text" class="form-control text-ellipsis" id="target_gender_print" placeholder="<%= __('placeholder.target_gender') %>" readonly>
+                        <input type="text" class="form-control text-ellipsis" id="target_gender_print" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_gender" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -341,7 +321,7 @@
                       </div>
                       <div class="col">
                         <input hidden type="text" name="target_country" value="">
-                        <input type="text" class="form-control text-ellipsis" id="target_country_print" placeholder="<%= __('placeholder.target_country') %>" readonly>
+                        <input type="text" class="form-control text-ellipsis" id="target_country_print" readonly>
                       </div>
                       <div class="col col-3">
                         <button class="form-select text-start" type="button" id="select_country" data-bs-toggle="dropdown" data-bs-auto-close="outside">
@@ -372,7 +352,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" placeholder="<%= __('placeholder.distribution_channel') %>" value="<%= project.distribution_channel %>">
+                        <input type="text" class="form-control" name="distribution_channel" id="distribution_channel" value="<%= project.distribution_channel %>">
                       </div>
                     </div>
 
@@ -384,7 +364,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" placeholder="<%= __('placeholder.overseas_certifications') %>" value="<%= project.overseas_certifications %>">
+                        <input type="text" class="form-control" name="overseas_certifications" id="overseas_certifications" value="<%= project.overseas_certifications %>">
                       </div>
                     </div>
 
@@ -476,9 +456,9 @@
                       </div>
                       <div class="col">
                         <% if(project.etc_efficacy) { %>
-                        <input type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('기타') %>" value="<%= project.etc_efficacy %>">
+                        <input type="text" class="form-control" name="etc_efficacy" value="<%= project.etc_efficacy %>">
                         <% }else{ %>
-                        <input hidden type="text" class="form-control" name="etc_efficacy" placeholder="<%= __('기타') %>">
+                        <input hidden type="text" class="form-control" name="etc_efficacy" >
                         <% } %>
                       </div>
                     </div>
@@ -637,7 +617,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="color" id="color" placeholder="<%= __('plzInputText') %>" value="<%= project.color %>">
+                        <input type="text" class="form-control" name="color" id="color" value="<%= project.color %>">
                       </div>
                     </div>
 
@@ -650,7 +630,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="fragrance" id="fragrance" placeholder="<%= __('plzInputText') %>" value="<%= project.fragrance %>">
+                        <input type="text" class="form-control" name="fragrance" id="fragrance" value="<%= project.fragrance %>">
                       </div>
                     </div>
 
@@ -663,7 +643,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" name="others" id="others" placeholder="<%= __('placeholder.options') %>" value="<%= project.others %>">
+                        <input type="text" class="form-control" name="others" id="others" >
                       </div>
                     </div>
 
@@ -710,7 +690,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="receiver_name" id="receiver_name" placeholder="<%= __('plzInputText') %>">
+                        <input class="form-control" name="receiver_name" id="receiver_name" >
                       </div>
                     </div>
 
@@ -748,7 +728,7 @@
                         </div>
                       </div>
                       <div class="col ">
-                        <input type="text" class="form-control" name="phone_num" id="phone_num" placeholder="<%= __('placeholder.mobilePhone') %>">
+                        <input type="text" class="form-control" name="phone_num" id="phone_num" >
                       </div>
                     </div>
                     <!-- 연락처 warning-->
@@ -767,7 +747,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="street" id="street" placeholder="<%= __('users.newProject.order.주소.warning') %>">
+                        <input class="form-control" name="street" id="street" >
                       </div>
                     </div>
 
@@ -780,7 +760,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="city" id="city" placeholder="<%= __('plzInputText') %>">
+                        <input class="form-control" name="city" id="city" >
                       </div>
                     </div>
 
@@ -792,7 +772,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="state" id="state" placeholder="<%= __('plzInputText') %>">
+                        <input class="form-control" name="state" id="state" >
                       </div>
                     </div>
 
@@ -804,7 +784,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="zip_code" id="zip_code" placeholder="<%= __('plzInputText') %>">
+                        <input class="form-control" name="zip_code" id="zip_code" >
                       </div>
                       <div class="col fs-8" style="color: red; white-space: pre-line;"><%= __('users.newProject.order.우편번호.warning') %></div>
                     </div>
@@ -817,7 +797,7 @@
                         </h6>
                       </div>
                       <div class="col">
-                        <input class="form-control" name="email" id="email" placeholder="<%= __('plzInputText') %>">
+                        <input class="form-control" name="email" id="email" >
                       </div>
                     </div>
 

@@ -237,7 +237,7 @@
 
                     <div class="form-group mt-5">
                       <div class="text-center">
-                        <button type="button" id="btn_apply" class="col-2 btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#confirmModal" disabled>
+                        <button type="button" id="btn_apply" class="btn btn-outline-primary col-1 py-3 br-10" data-bs-toggle="modal" data-bs-target="#confirmModal" disabled>
                           <%= __('users.newProject.order.btn.배송 신청') %>
                         </button>
                       </div>
@@ -262,19 +262,25 @@
     <div class="modal" id="confirmModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; width: 50%;">
         <div class="modal-content br-10 p-5">
-          <div class="text-center text-black">
-            <div>
-              <img style="margin-bottom: 2rem; width:4rem; height: 4rem;" src="/images/popup/Pop up - Delivery address.svg">
-            </div>
-            <%- __('users.newProject.order.msg.confirm') %>
-          </div>
-          <div class="mt-5 text-center">
-            <button class="col-3 btn btn-lg btn-outline-primary me-3" form="order">
-              <%= __('btn.확인') %>
-            </button>
-            <button type="button" class="col-3 btn btn-lg btn-outline-primary" data-bs-dismiss="modal">
-              <%= __('btn.cancel') %>
-            </button>
+          <div class="px-5">
+              <div class="text-center text-black">
+                <div>
+                  <img class="my-5" style="width: 5.25rem; height: 5.25rem;" src="/images/popup/Pop up - Delivery address.svg">
+                </div>
+                <%- __('users.newProject.order.msg.confirm') %>
+              </div>
+              <div class="my-5 text-center d-flex">
+                <div class="col mx-5">
+                  <button class="w-100 btn btn-lg btn-outline-primary py-3" form="order">
+                    <%= __('btn.확인') %>
+                  </button>
+                </div>
+                <div class="col mx-5">
+                  <button type="button" class="w-100 btn btn-lg btn-outline-primary py-3" data-bs-dismiss="modal">
+                    <%= __('btn.cancel') %>
+                  </button>
+                </div>
+              </div>
           </div>
         </div>
       </div>

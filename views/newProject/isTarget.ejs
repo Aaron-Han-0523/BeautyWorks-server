@@ -166,7 +166,7 @@
     isTarget.onsubmit = async (e) => {
       e.preventDefault();
 
-      if (!isTarget[0].value) {
+      if (!isTarget["target_url"].value) {
         return location.replace('<%= codezip.url.users.formula.main %>' + location.search);
       }
 
