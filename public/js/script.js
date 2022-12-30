@@ -142,7 +142,7 @@ function make_pagination_by_func(page, count, func_name, limit = 10) {
     <!-- 페이지 리스트 -->
     <ul class="p-2 pagination m-0">
       `;
-  if (page < 4) {
+  if (page < 5) {
     for (let i = 1; i <= end_list_num; i++) {
       if (page == i) {
         temp_html += `

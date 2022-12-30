@@ -37,8 +37,8 @@
                   <%= __('Project') %>
                 </h6>
                 <div class="menu">
-                    <%= __('New Project') %>
-                  </div>
+                  <%= __('New Project') %>
+                </div>
               </div>
             </div>
           </div>
@@ -128,6 +128,7 @@
 
                       <%
                       let target_age_text_list = [];
+                      if(project.target_age_list)
                       project.target_age_list.forEach((i, index)=>{
                         target_age_text_list.push(__('age'+i));
                       })
@@ -146,6 +147,7 @@
 
                       <%
                       let target_gender_text_list = [];
+                      if(project.target_gender_list)
                       project.target_gender_list.forEach((i, index)=>{
                         target_gender_text_list.push(__('gender'+i));
                       })
@@ -164,6 +166,7 @@
 
                       <%
                       let target_country_text_list = [];
+                      if(project.target_country)
                       project.target_country.split(',').forEach((code, index)=>{
                         target_country_text_list.push(__(code));
                       })
@@ -318,15 +321,19 @@
 
                       <%
                       let applies_text_list = [];
-                      codezip.effects.use.boolean.forEach((item,index)=> {
-                        if(project.applies_list[index]) applies_text_list.push(__('use_effects.'+item+'.true'));
-                        else applies_text_list.push(__('use_effects.'+item+'.false'));
-                      })
+                        if(project.applies_list) {
+                          codezip.effects.use.boolean.forEach((item,index)=> {
+                            if(project.applies_list[index]) applies_text_list.push(__('use_effects.'+item+'.true'));
+                            else applies_text_list.push(__('use_effects.'+item+'.false'));
+                          })
+                        }
 
                       let n_applies_bool = codezip.effects.use.boolean.length;
-                      for(let i=0; i< codezip.effects.use.other; i++){
-                        let index = n_applies_bool + i;
-                        if(project.applies_list[index]) applies_text_list.push(__('use_effects.'+i));
+                      if(project.applies_list) {
+                        for(let i=0; i< codezip.effects.use.other; i++){
+                          let index = n_applies_bool + i;
+                          if(project.applies_list[index]) applies_text_list.push(__('use_effects.'+i));
+                        }
                       }
                       %>
                       <!-- 사용감 입력 -->

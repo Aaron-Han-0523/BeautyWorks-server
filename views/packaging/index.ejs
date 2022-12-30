@@ -34,8 +34,8 @@
                   <%= __('Customizing') %>
                 </h6>
                 <div class="menu">
-                    <%= __('Packaging') %>
-                  </div>
+                  <%= __('Packaging') %>
+                </div>
               </div>
             </div>
           </div>
@@ -81,6 +81,10 @@
                       <p><%= __('packaging'+item.packaging_type+'.category2.'+item.category2) %></p>
                       <p><%= __('packaging'+item.packaging_type+'.category3.'+item.category3) %></p>
                       <p><%= item.capacity %></p>
+                      <p>
+                        <%= __('packages.use') + " : " %>
+                        <%= item.use %>
+                      </p>
                     </div>
                   </div>
                   <% }) %>

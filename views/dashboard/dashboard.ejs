@@ -155,11 +155,11 @@
                             <%= " " + item.capacity %>
                           </h6>
                           <p class="text-gray-500">
-                            <%= __("users.dashboard.CompletedProject.Total발주수량") %>
-                            <%= ' : ' + item.total_order_quantity %>
+                            <%= __("users.dashboard.CompletedProject.Total발주수량") + ' : ' %>
+                            <%= item.total_order_quantity %>
                             <br>
-                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") %>
-                            <%= ' : ' + formatDate(item.recent_order_date) %>
+                            <%= __("users.dashboard.CompletedProject.최근 발주 날짜") + ' : ' %>
+                            <%= formatDate(item.recent_order_date) %>
                           </p>
                         </div>
                         <div class="row mx-0 mt-3">

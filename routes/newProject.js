@@ -1,121 +1,140 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const projectsController = require('../controllers/projects');
-const projectsService = require('../services/projects');
-const ingredientsService = require('../services/ingredients');
-const codezip = require('../codezip')
+const projectsController = require("../controllers/projects");
+const projectsService = require("../services/projects");
+const ingredientsService = require("../services/ingredients");
+const codezip = require("../codezip");
 
 /* GET newProject listing. */
 // MOQ/예산확인
 router
-  .post('/moq', projectsController.add)
-  .get('/moq', async (req, res, next) => {
+  .post("/moq", projectsController.add)
+  .get("/moq", async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
       const user = res.locals.user;
       const condition = {
         users_id: user.id,
-        id: id
-      }
+        id: id,
+      };
       project = await projectsService.readOne(condition);
     }
-    res.render('newProject/moq', { project: project })
-  })
+    res.render("newProject/moq", { project: project });
+  });
 
 // 타겟제품 유무 확인
 router
-  .post('/isTarget', projectsController.edit)
-  .get('/isTarget', async (req, res, next) => {
+  .post("/isTarget", projectsController.edit)
+  .get("/isTarget", async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
       const user = res.locals.user;
       const condition = {
         users_id: user.id,
-        id: id
-      }
+        id: id,
+      };
       project = await projectsService.readOne(condition);
     }
-    res.render('newProject/isTarget', { project: project })
-  })
+    res.render("newProject/isTarget", { project: project });
+  });
 
 // 샘플의뢰서 기본
 router
-  .post('/basic', projectsController.edit)
-  .get('/basic', async (req, res, next) => {
+  .post("/basic", projectsController.edit)
+  .get("/basic", async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
       const user = res.locals.user;
       const condition = {
         users_id: user.id,
-        id: id
-      }
+        id: id,
+      };
       project = await projectsService.readOne(condition);
-    } res.render('newProject/basic', { project: project })
-  })
+    }
+    res.render("newProject/basic", { project: project });
+  });
 
 // 샘플의뢰서 옵션
 router
-  .post('/option', projectsController.edit)
-  .get('/option', async (req, res, next) => {
+  .post("/option", projectsController.edit)
+  .get("/option", async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
       const user = res.locals.user;
       const condition = {
         users_id: user.id,
-        id: id
-      }
+        id: id,
+      };
       project = projectsService.readOne(condition);
     }
     // let ingredients = ingredientsService.allRead({}, 10)
-    Promise.all([project]).then(([project]) => {
-      res.render('newProject/option', { project: project })
-    }).catch(err => {
-      console.error(err);
-      res.status(500).end();
-    })
-  })
+    Promise.all([project])
+      .then(([project]) => {
+        res.render("newProject/option", { project: project });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).end();
+      });
+  });
 
 // 샘플의뢰서 마지막 수정
 router
-  .post('/final', projectsController.edit)
-  .get('/final', async (req, res, next) => {
+  .post("/final", projectsController.edit)
+  .get("/final", async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
       const user = res.locals.user;
       const condition = {
         users_id: user.id,
-        id: id
-      }
+        id: id,
+      };
       project = await projectsService.readOne(condition);
-      console.log(project)
-    } res.render('newProject/final', { project: project })
-  })
+      console.log(project);
+    }
+    res.render("newProject/final", { project: project });
+  });
 
 // 샘플의뢰서 초안
-router
-  .get('/draft', projectsController.detail)
+router.get("/draft", async (req, res, next) => {
+  let project = {};
+  const id = req.query.n;
+  if (id) {
+    const user = res.locals.user;
+    const condition = {
+      users_id: user.id,
+      id: id,
+    };
+    project = await projectsService.readOne(condition);
+    console.log(project);
+  }
+  res.render("newProject/draft", { project: project });
+});
 
 // 샘플 수령주소
 router
-  .post('/order', projectsController.edit)
-  .get('/order', async (req, res, next) => {
+  .post("/order", projectsController.edit)
+  .get("/order", async (req, res, next) => {
     let project = {};
     const id = req.query.n;
     if (id) {
       const user = res.locals.user;
       const condition = {
         users_id: user.id,
-        id: id
-      }
+        id: id,
+      };
       project = await projectsService.readOne(condition);
-    } res.render('newProject/order', { project: project })
-  })
+    }
+    res.render("newProject/order", { project: project });
+  });
 
-router.get('/', (req, res, next) => res.redirect(codezip.url.users.newProject._0))
+router.get("/", (req, res, next) =>
+  res.redirect(codezip.url.users.newProject._0)
+);
 module.exports = router;

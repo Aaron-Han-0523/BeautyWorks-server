@@ -47,11 +47,29 @@
           <div class="widget bg-white" style="position: relative;">
             <div class="card-body">
 
-              <div class="row p-5">
+              <div class="row px-5">
                 <form method="post" id="userAccount" enctype="multipart/form-data">
 
+                  <!-- 권한 설정 -->
+                  <div class="row justify-content-end">
+                    <div class="text-end">
+                      <h6>
+                        <%= __('admin.users.permission') %>
+                      </h6>
+                    </div>
+                    <select name="user_type" id="user_type" class="form-select ms-3" style="width: 200px;">
+                      <% codezip.user_type.forEach((code, index)=>{ %>
+                      <% if(member.user_type==code){ %>
+                      <option selected value="<%= code %>"><%= __("user_type."+code) %></option>
+                      <% }else{ %>
+                      <option value="<%= code %>"><%= __("user_type."+code) %></option>
+                      <% } %>
+                      <% }) %>
+                    </select>
+                  </div>
+
                   <!-- Profile Image -->
-                  <div class="row mb-4">
+                  <div class="row mt-3">
                     <div class="col-3">
                       <h6>
                         <%= __('users.myAccount.label.ProfileImage') %>
@@ -60,7 +78,7 @@
                     <div class="col">
                       <div class="row">
                         <div class="col-4 pe-1">
-                          <img id="profileImage" class="br-10 w-100" src="<%= member.profile_image_path %>">
+                          <img id="profileImage" class="br-6 w-100" src="<%= member.profile_image_path %>">
                         </div>
                       </div>
                       <div class="mt-2 row">
@@ -79,22 +97,6 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <!-- 권한 설정 -->
-                  <div class="d-flex mt-3" style="position: absolute; top: 64px; right: 80px;">
-                    <h6 style="margin-right: 5px; line-height: 40.5px;">
-                      <%= __('admin.users.permission') %>
-                    </h6>
-                    <select name="user_type" id="user_type" class="form-select ms-3" style="width: 200px;">
-                      <% codezip.user_type.forEach((code, index)=>{ %>
-                      <% if(member.user_type==code){ %>
-                      <option selected value="<%= code %>"><%= __("user_type."+code) %></option>
-                      <% }else{ %>
-                      <option value="<%= code %>"><%= __("user_type."+code) %></option>
-                      <% } %>
-                      <% }) %>
-                    </select>
                   </div>
 
                   <!-- 국가 선택 -->

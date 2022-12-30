@@ -134,7 +134,7 @@ module.exports.make_pagination_by_href = function (i18n_func, page, count, baseU
   <!-- 페이지 리스트 -->
   <ul class="p-2 pagination">
     `;
-  if (page < 4) {
+  if (page < 5) {
     for (let i = 1; i <= end_list_num; i++) {
 
       if (page == i) {
@@ -267,7 +267,7 @@ module.exports.make_pagination_by_func = function (i18n_func, page, count, func_
     <!-- 페이지 리스트 -->
     <ul class="p-2 pagination">
       `;
-  if (page < 4) {
+  if (page < 5) {
     for (let i = 1; i <= end_list_num; i++) {
 
       if (page == i) {

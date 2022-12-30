@@ -113,15 +113,15 @@
                   </div>
                   <!-- 수정 삭제 버튼 -->
                   <div class="text-end col-4">
-                    <a class="col-4 btn mx-2 px-2 br-10" href="<%= codezip.url.admin.community.edit %>/<%= community.id %>">
+                    <a class="col-4 btn mx-2 px-2 br-6" href="<%= codezip.url.admin.community.edit %>/<%= community.id %>">
                       <%= __('btn.수정') %>
                     </a>
                     <% if(community.delete_date) { %>
-                    <a class="col-4 btn mx-2 px-2 br-10" href="<%= codezip.url.admin.community.recovery %>/<%= community.id %>">
+                    <a class="col-4 btn mx-2 px-2 br-6" href="<%= codezip.url.admin.community.recovery %>/<%= community.id %>">
                       <%= __('btn.복구') %>
                     </a>
                     <% }else{ %>
-                    <a class="col-4 btn mx-2 px-2 br-10" href="<%= codezip.url.admin.community.delete %>/<%= community.id %>">
+                    <a class="col-4 btn mx-2 px-2 br-6" href="<%= codezip.url.admin.community.delete %>/<%= community.id %>">
                       <%= __('btn.삭제') %>
                     </a>
                     <% } %>
