@@ -752,7 +752,7 @@
   "packages.category2": "중분류",
   "packages.category3": "소분류",
   "packages.capacity": "용량",
-  "packages.use": "용도",
+  "packages.use": "Cap",
   "packages.image_paths": "이미지",
   "news.image_paths": "news.image_paths",
   "title": "제목",
