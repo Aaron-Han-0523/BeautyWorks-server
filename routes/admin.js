@@ -53,7 +53,11 @@ const codezip = require("../codezip");
 
 // 사용자 접속
 router.post("/login", adminController.login).get("/login", (req, res, next) => {
-  res.render("admin/login");
+  if(req.session.suer){
+    res.redirect(codezip.url.admin.users)
+  }else{
+    res.render("admin/login");
+  }
 });
 
 ////////////////////////////////////

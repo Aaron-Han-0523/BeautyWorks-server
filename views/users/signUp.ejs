@@ -447,9 +447,13 @@
         body: JSON.stringify(body)
       }).then(res => {
         if (res.ok) {
-          alert("<%= __('users.signUp.msg.SuccessJoin') %>");
+          alert(`<%= __('users.signUp.msg.SuccessJoin') %>`);
           window.location.href = res.url;
           return;
+        } else if(res.status==409){
+          let email = res.text();
+          alert("<%= __('msg.이미가입되어있음.') %>")
+          return alert(`Email : ${data}`)
         } else return alert("<%= __('users.signUp.msg.FailJoin') %>");
       })
     }

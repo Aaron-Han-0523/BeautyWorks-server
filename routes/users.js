@@ -76,7 +76,11 @@ router.post("/validationEmail", usersController.validationEmail);
 router
   .post("/signIn", usersController.login)
   .get("/signIn", (req, res, next) => {
-    res.render("users/signIn");
+    if (req.session.user) {
+      res.redirect(codezip.url.users.dashboard)
+    } else {
+      res.render("users/signIn");
+    }
   });
 
 // 아이디 찾기

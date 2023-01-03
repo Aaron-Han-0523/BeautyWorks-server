@@ -95,7 +95,7 @@
 
               <div class="row mb-3">
                 <div class="col-12">
-                  <input type="text" name="firstName" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                  <input type="text" name="first_name" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                 </div>
               </div>
 
@@ -107,7 +107,7 @@
 
               <div class="row mb-3">
                 <div class="col-12">
-                  <input type="text" name="lastName" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                  <input type="text" name="last_name" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                 </div>
               </div>
 
@@ -182,7 +182,7 @@
 
               <div class="row mb-3">
                 <div class="col-12">
-                  <input type="text" name="firstName" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                  <input type="text" name="first_name" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                 </div>
               </div>
 
@@ -194,7 +194,7 @@
 
               <div class="row mb-3">
                 <div class="col-12">
-                  <input type="text" name="lastName" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+                  <input type="text" name="last_name" placeholder="" class="form-control" required onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
                 </div>
               </div>
 
@@ -290,18 +290,20 @@
           if (res.ok) {
             return res.text();
           } else if (res.status == 404) {
-            alert("<%= __('msg.일치하는정보없음') %>")
+            alert("<%= __('msg.일치하는정보없음') %>");
+            throw new Error(res.statusText)
           } else {
             console.error(res);
+            alert(res.statusText)
             throw new Error(res.statusText)
           }
         })
         .then(data => {
           // console.log(data);
-          alert(`Email : ${data}`)
+          alert(`<%= __("msg.alertEmail") %>` + data);
         })
         .catch(err => {
-          alert(err)
+          console.error(err)
         })
     }
 
@@ -313,11 +315,11 @@
         body: new URLSearchParams(new FormData(resetPassword))
       }).then(res => {
         if (res.ok) {
-          alert("<%= __('msg.임시비밀번호발급') %>")
+          alert(`<%= __('msg.임시비밀번호발급') %>`)
         } else if (res.status == 403) {
-          alert("<%= __('msg.개인정보불일치') %>")
+          alert(`<%= __('msg.개인정보불일치') %>`)
         } else if (res.status == 404) {
-          alert("<%= __('msg.이메일존재하지않음') %>")
+          alert(`<%= __('msg.이메일존재하지않음') %>`)
         } else {
           console.error(res);
           throw new Error(res.statusText)

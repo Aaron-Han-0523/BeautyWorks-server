@@ -1037,7 +1037,7 @@ h4 {
 }
 
 #thumbs .select img {
-  border: 1px solid black;
+  border: 0px solid black;
 }
 
 #thumbs img:hover {
@@ -1116,16 +1116,24 @@ textarea::placeholder {
   border-radius: 50%;
 }
 
-.form-control[readonly]:not(.flatpickr-input) {
+.form-control[readonly]:not(:disabled) {
   border-color: rgb(244, 245, 245);
   background-color: rgb(244, 245, 245);
 }
 
-.form-control[disabled]:not(.flatpickr-input),
-.form-select[disabled]:not(.flatpickr-input) {
+.form-control[disabled]:not(:read-only),
+.form-select[disabled]:not(:read-only) {
   color: rgb(230, 233, 237);
   border-color: rgb(230, 233, 237);
   background-color: #fff;
+}
+
+.form-control[readonly]:not(.flatpickr-input),
+.form-control[disabled]:not(.flatpickr-input),
+.form-select[readonly]:not(.flatpickr-input),
+.form-select[disabled]:not(.flatpickr-input) {
+  border-color: #fff;
+  background-color: var(--bs-gray-400);
 }
 
 .form-select[disabled]:not(.flatpickr-input) {

@@ -133,8 +133,19 @@ exports.add = async (req, res, next) => {
     body.email = (body.emailId + "@" + body.emailDomain).toLowerCase();
   }
   if (!body.mobile_contact) {
-    body.mobile_contact = body.country_number + ")" + body.phoneNum;
+    body.mobile_contact = body.country_number + ")" + body.phoneNum.trim();
   }
+  body.first_name = body.first_name.trim();
+  body.last_name = body.last_name.trim();
+
+  const user = await usersService.getUser({
+    first_name: body.first_name,
+    last_name: body.last_name,
+    mobile_contact: body.mobile_contact,
+  });
+
+  if (user) return res.status(409).send(user.email);
+
   console.log("Users body :", body);
 
   usersService
@@ -418,8 +429,8 @@ exports.resetPassword = async (req, res, next) => {
   if (!user) return res.status(404).end();
 
   if (
-    body.firstName == user.first_name &&
-    body.lastName == user.last_name &&
+    body.first_name == user.first_name &&
+    body.last_name == user.last_name &&
     body.mobile_contact == user.mobile_contact
   ) {
     let newPassword = "";
@@ -464,12 +475,12 @@ exports.resetPassword = async (req, res, next) => {
 
 exports.findEmail = async (req, res, next) => {
   const body = req.body;
-  body.mobile_contact = body.country_number + ")" + body.phoneNum;
+  body.mobile_contact = body.country_number + ")" + body.phoneNum.trim();
   console.log("body :", body);
 
   const user = await usersService.getUser({
-    first_name: body.firstName,
-    last_name: body.lastName,
+    first_name: body.first_name.trim(),
+    last_name: body.last_name.trim(),
     mobile_contact: body.mobile_contact,
   });
   // console.log("user :", user);

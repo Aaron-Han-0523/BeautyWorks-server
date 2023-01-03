@@ -35,8 +35,8 @@
                   <%= __('Customizing') %>
                 </h6>
                 <div class="menu">
-                    <%= __('Formula') %>
-                  </div>
+                  <%= __('Formula') %>
+                </div>
               </div>
             </div>
           </div>
@@ -89,6 +89,7 @@
                         <% formula.image_paths.split(',').forEach((item,index)=>{ %>
                         <div class="w-20 preview px-1">
                           <% if(index==0) { %>
+                          <!-- select -->
                           <a class="select" href="<%= item %>" title="<%= index %>">
                             <% }else{ %>
                             <a class="" href="<%= item %>" title="<%= index %>">
@@ -101,6 +102,7 @@
                       <% } %>
 
                     </div>
+
                     <!-- content -->
                     <div class="col-7  ms-auto ps-5 text-black me-0 text-break">
                       <div class="row d-flex">

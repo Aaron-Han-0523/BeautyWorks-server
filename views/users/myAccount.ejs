@@ -56,7 +56,7 @@
 
           <!-- CONTENT AREA -->
           <div class="row px-3 mt-3">
-            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
               <div class="widget mx-3">
 
                 <form id="userAccount" class="m-5" method="post" enctype="multipart/form-data">
@@ -102,10 +102,10 @@
                         </div>
                         <div class="col row">
                           <div class="col pe-1">
-                            <input class="form-control" type="text" value="<%= user.first_name %>" readonly>
+                            <input class="form-control" type="text" value="<%= user.first_name %>" readonly disabled>
                           </div>
                           <div class="col ps-1">
-                            <input class="form-control" type="text" value="<%= user.last_name %>" readonly>
+                            <input class="form-control" type="text" value="<%= user.last_name %>" readonly disabled>
                           </div>
                         </div>
                       </div>
@@ -173,7 +173,23 @@
                         </div>
                         <div class="row col">
                           <div class="col">
-                            <input class="form-control" type="text" value="<%= user.email %>" readonly>
+                            <input class="form-control" type="text" value="<%= user.email %>" readonly disabled>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- mobile phone -->
+                    <div class="form-group mt-3">
+                      <div class="row">
+                        <div class="col-3">
+                          <h6>
+                            <%= __('users.myAccount.label.mobile_contact') %>
+                          </h6>
+                        </div>
+                        <div class="row col">
+                          <div class="col">
+                            <input class="form-control" type="text" value="<%= user.mobile_contact %>" readonly disabled>
                           </div>
                         </div>
                       </div>
@@ -228,6 +244,75 @@
             </div>
           </div>
 
+          <!-- BREADCRUMB -->
+          <div class="row px-3 mt-3">
+            <div class="breadcrumb">
+              <div class="p-1">
+                <div class="menu">
+                  <%= __('ChangingPassword') %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT AREA -->
+          <div class="row px-3 mt-3">
+            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+              <div class="widget mx-3">
+
+                <div class="form-group p-5">
+                  <form id="changingPassword" method="post" action="<%= codezip.url.users.changingPassword %>">
+                    <div class="row mb-2">
+                      <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h6><%= __('users.changingPassword.currentPassword') %></h6>
+                      </div>
+                    </div>
+
+                    <div class="row layout-spacing">
+                      <div class="col-12">
+                        <label for="currentPassword" class="visually-hidden">Password</label>
+                        <input id="currentPassword" type="password" name="currentPassword" placeholder="" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-2">
+                      <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h6><%= __('users.changingPassword.newPassword') %></h6>
+                      </div>
+                    </div>
+
+                    <div class="row layout-spacing">
+                      <div class="col-12">
+                        <label for="newPassword" class="visually-hidden">Password</label>
+                        <input id="newPassword" type="password" name="newPassword" placeholder="" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-2">
+                      <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h6><%= __('users.changingPassword.confirmPassword') %></h6>
+                      </div>
+                    </div>
+
+                    <div class="row layout-spacing">
+                      <div class="col-12">
+                        <label for="confirmPassword" class="visually-hidden">Password</label>
+                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="" class="form-control" required>
+                      </div>
+                    </div>
+
+                    <div class="row layout-top-spacing">
+                      <div class="col-12 ">
+                        <button class="col-1 btn btn-outline-primary mb-2 me-4"><%= __('btn.save') %></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -275,6 +360,40 @@
       }).then(result => {
         console.log(result);
       });
+    }
+  </script>
+  <script>
+    function validataion() {
+      if (confirmPassword.value != newPassword.value) {
+        alert("<%= __('msg.신규비밀번호불일치') %>")
+        return false;
+      }
+
+      return true
+    }
+
+    changingPassword.onsubmit = (e) => {
+      e.preventDefault();
+
+      if (!validataion()) return;
+
+      fetch(changingPassword.action, {
+        method: changingPassword.method,
+        body: new URLSearchParams(new FormData(changingPassword))
+      }).then(res => {
+        if (res.ok) {
+          alert(`<%= __('msg.changingPasswordSuccess') %>`)
+        } else if (res.status == 403) {
+          alert("<%= __('msg.현재비밀번호불일치') %>")
+        } else if (res.status == 404) {
+          alert("<%= __('msg.이메일존재하지않음') %>")
+        } else {
+          console.error(res);
+          throw new Error(res.statusText)
+        }
+      }).catch(err => {
+        alert(err)
+      })
     }
   </script>
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
