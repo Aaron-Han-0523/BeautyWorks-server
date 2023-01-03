@@ -42,13 +42,14 @@
       <table class="table table-hover">
         <thead class="table-header">
           <tr>
-            <th scope="col"><%= __("table.head.용기.용기명") %></th>
-            <th scope="col"><%= __("table.head.용기.용기종류") %></th>
-            <th scope="col"><%= __("table.head.용기.대분류") %></th>
-            <th scope="col"><%= __("table.head.용기.중분류") %></th>
-            <th scope="col"><%= __("table.head.용기.소분류") %></th>
-            <th scope="col"><%= __("table.head.용기.용도") %></th>
-            <th scope="col"><%= __("table.head.삭제/복구") %></th>
+            <th scope="col"><%= __("packages.packaging_name") %></th>
+            <th scope="col"><%= __("packages.packaging_type") %></th>
+            <th scope="col"><%= __("packages.category1") %></th>
+            <th scope="col"><%= __("packages.category2") %></th>
+            <th scope="col"><%= __("packages.category3") %></th>
+            <th scope="col"><%= __("packages.capacity") %></th>
+            <th scope="col"><%= __("packages.use") %></th>
+            <th scope="col"><%= __('table.head.삭제/복구') %></th>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
@@ -61,6 +62,7 @@
             <td><%= __('packaging' + item.packaging_type + '.category1.' + item.category1) %></td>
             <td><%= __('packaging' + item.packaging_type + '.category2.' + item.category2) %></td>
             <td><%= __('packaging' + item.packaging_type + '.category3.' + item.category3) %></td>
+            <td><%= item.capacity %></td>
             <td><%= item.use %></td>
             <td>
               <div id="action_btn-<%= item.id %>" class="hover">

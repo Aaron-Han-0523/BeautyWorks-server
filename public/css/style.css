@@ -197,7 +197,7 @@ h5,
   width: 1.1rem;
 }
 
-#sidebar ul.menu-categories li {
+#sidebar ul.menu-categories li.menu {
   height: 2.5rem;
   display: flex;
   align-items: center;
@@ -292,6 +292,7 @@ ul.info li p {
 }
 
 .hover:hover * {
+  cursor: pointer;
   color: var(--BW-blue) !important;
 }
 
