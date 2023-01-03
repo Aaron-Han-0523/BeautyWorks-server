@@ -1122,18 +1122,15 @@ textarea::placeholder {
 }
 
 .form-control[disabled]:not(:read-only),
-.form-select[disabled]:not(:read-only) {
+.form-select:disabled {
   color: rgb(230, 233, 237);
   border-color: rgb(230, 233, 237);
   background-color: #fff;
 }
 
-.form-control[readonly]:not(.flatpickr-input),
-.form-control[disabled]:not(.flatpickr-input),
-.form-select[readonly]:not(.flatpickr-input),
-.form-select[disabled]:not(.flatpickr-input) {
+.form-control[disabled]:not(.flatpickr-input) {
   border-color: #fff;
-  background-color: var(--bs-gray-400);
+  background-color: var(--bs-gray-300)
 }
 
 .form-select[disabled]:not(.flatpickr-input) {
