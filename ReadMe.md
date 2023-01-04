@@ -79,7 +79,10 @@ FILE_MAX_SIZE=10
 <br/>
 
 - ### 서비스 설정
-    - ```'/etc/nginx/sites-avilable/임의의_파일명'```을 생성  
+    - ```'/etc/nginx/sites-avilable/임의의_파일명'```을 생성
+    - ```'/etc/nginx/sites-enabled/'```에 위에 파일로 링크 생성
+        - ```sudo ln -s /etc/nginx/sites-available/임의의_파일명```
+
 #### **파일 내용**
 ```
 server {  
@@ -87,6 +90,10 @@ server {
     server_name 서버 IP or 도메인주소;  
 
     location / {  
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
         proxy_pass http://127.0.0.1:node포트번호/;  
     }  
 }
