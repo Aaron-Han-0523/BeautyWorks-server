@@ -197,7 +197,7 @@
                         <%= __('users.signUp.InputLabel.company_name') %>
                       </h6>
                     </div>
-                    <div class="col col-7">
+                    <div class="col">
                       <input type="text" class="form-control" placeholder="<%= __('plzInputText') %>">
                     </div>
                   </div>
@@ -431,7 +431,7 @@
         body: JSON.stringify(body)
       }).then(res => {
         if (res.ok) {
-          alert(`<%= __('users.signUp.msg.SuccessJoin') %>`);
+          alert(`<%= __('msg.success') %>`);
           window.location.href = res.url;
           return;
         } else return alert(`<%= __('users.signUp.msg.FailJoin') %>`);
