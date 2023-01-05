@@ -63,6 +63,31 @@ label {
   color: var(--BW-blue) !important;
 }
 
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
+.scrollable-menu::-webkit-scrollbar {
+  width: 8px;
+  /* 스크롤바의 너비 */
+}
+
+.scrollable-menu::-webkit-scrollbar-thumb {
+  height: 30%;
+  /* 스크롤바의 길이 */
+  background: #217af4;
+  /* 스크롤바의 색상 */
+
+  border-radius: 10px;
+}
+
+.scrollable-menu::-webkit-scrollbar-track {
+  background: var(--BW-form-color);
+  /*스크롤바 뒷 배경 색상*/
+}
+
 /* l NAV */
 .l-navbar {
   position: fixed;
