@@ -353,9 +353,9 @@
       }).then(res => {
         if (res.ok) {
           CertificationNumber.value = true;
-          alert("<%= __('users.signUp.msg.emailAllow') %>")
+          alert(`<%= __('users.signUp.msg.emailAllow') %>`)
         } else if (res.status == 400) {
-          alert("<%= __('users.signUp.msg.emailExist') %>")
+          alert(`<%= __('users.signUp.msg.emailExist') %>`)
         }
       })
     }
@@ -403,10 +403,10 @@
 
 
       // 검증
-      if (!country.value) return alert("<%= __('users.signUp.msg.NeedCountrySelect') %>")
-      if (!country_number.value) return alert("<%= __('users.signUp.msg.NeedCountryNumberSelect') %>")
+      if (!country.value) return alert(`<%= __('users.signUp.msg.NeedCountrySelect') %>`)
+      if (!country_number.value) return alert(`<%= __('users.signUp.msg.NeedCountryNumberSelect') %>`)
 
-      if (!checkPasswordConfirm()) return alert("<%= __('users.signUp.msg.NeedPasswordConfirm') %>");
+      if (!checkPasswordConfirm()) return alert(`<%= __('users.signUp.msg.NeedPasswordConfirm') %>`);
       // else if (!checkSpecialChar(password.value, 1)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordSpecialChar') %>");
       // else if (!checkLength(password.value, passwordMinLength, passwordMaxLength)) return alert("<%= __('users.signUp.msg.NeedCheckPasswordLength') %>");
 
@@ -431,10 +431,10 @@
         body: JSON.stringify(body)
       }).then(res => {
         if (res.ok) {
-          alert("<%= __('users.signUp.msg.SuccessJoin') %>");
+          alert(`<%= __('users.signUp.msg.SuccessJoin') %>`);
           window.location.href = res.url;
           return;
-        } else return alert("<%= __('users.signUp.msg.FailJoin') %>");
+        } else return alert(`<%= __('users.signUp.msg.FailJoin') %>`);
       })
     }
   </script>

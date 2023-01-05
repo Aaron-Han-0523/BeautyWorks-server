@@ -100,7 +100,7 @@
                   </div>
 
                   <!-- 국가 선택 -->
-                  <div class="row mb-4 align-items-center">
+                  <div class="row my-4 align-items-center">
                     <div class="col col-3">
                       <h6>
                         <%= __('users.signUp.InputLabel.Country') %>
@@ -173,6 +173,18 @@
                     </div>
                     <div class="col col-7">
                       <input type="text" class="form-control" name="company_name" placeholder="<%= __('plzInputText') %>" value="<%= member.company_name %>">
+                    </div>
+                  </div>
+
+                  <!-- 브랜드 입력 -->
+                  <div class="row mb-4 align-items-center">
+                    <div class="col col-3">
+                      <h6>
+                        <%= __('users.signUp.InputLabel.brand_name') %>
+                      </h6>
+                    </div>
+                    <div class="col col-7">
+                      <input type="text" class="form-control" name="brand_name" placeholder="<%= __('plzInputText') %>" value="<%= member.brand_name %>">
                     </div>
                   </div>
 

@@ -434,6 +434,7 @@
   "btn.submit": "Submit",
   "btn.findEmail": "Find Email",
   "btn.resetPassword": "Reset password",
+  "btn.duplicateCheck": "중복 체크",
   "msg.fail": "Fail",
   "msg.confirm": "Confirm",
   "msg.waitingSubscriptionApproval": "msg.waitingSubscriptionApproval",
