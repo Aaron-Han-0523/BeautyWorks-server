@@ -136,48 +136,50 @@
                                   <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
                                     <% }else if(item.phase==2 && i==1){ %>
                                     <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.2-1') %>">
-                                      <% }else if(item.phase==3 && i==1){ %>
-                                      <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.3') %>">
-                                        <% }else if(item.phase==4 && i==0){ %>
-                                        <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.4-0') %>">
-                                          <% }else if(item.phase==4 && i==1){ %>
-                                          <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.4-1') %>">
-                                            <% }else if(item.phase==4 && i==2){ %>
-                                            <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
-                                              <% }else if(item.phase==5 && i==0){ %>
-                                              <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= item.packaging_tooltip %>">
-                                                <% }else if(item.phase==5 && i==1){ %>
-                                                <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.5-1') %>">
-                                                  <% }else if(item.phase==7 && i==0){ %>
-                                                  <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.7-0') %>">
-                                                    <% }else if(item.phase==7 && i==1){ %>
-                                                    <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
-                                                      <% }else if(item.phase==8 && i==0){ %>
-                                                      <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.8-0') %>">
-                                                        <% }else if(item.phase==8 && i==1){ %>
-                                                        <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.shipment_date') + ' : ' + formatDate(item.shipment_date)  %>">
+                                      <% }else if(item.phase==3 && i==0){ %>
+                                      <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
+                                        <% }else if(item.phase==3 && i==1){ %>
+                                        <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.3') %>">
+                                          <% }else if(item.phase==4 && i==0){ %>
+                                          <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.4-0') %>">
+                                            <% }else if(item.phase==4 && i==1){ %>
+                                            <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.4-1') %>">
+                                              <% }else if(item.phase==4 && i==2){ %>
+                                              <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
+                                                <% }else if(item.phase==5 && i==0){ %>
+                                                <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= item.packaging_tooltip %>">
+                                                  <% }else if(item.phase==5 && i==1){ %>
+                                                  <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.5-1') %>">
+                                                    <% }else if(item.phase==7 && i==0){ %>
+                                                    <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.7-0') %>">
+                                                      <% }else if(item.phase==7 && i==1){ %>
+                                                      <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip hover" onclick="location.href='<%= codezip.url.users.documents %>/<%= item.id %>';" style="cursor: pointer;">
+                                                        <% }else if(item.phase==8 && i==0){ %>
+                                                        <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.tooltip.8-0') %>">
+                                                          <% }else if(item.phase==8 && i==1){ %>
+                                                          <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed bs-tooltip" title="<%= __('project.shipment_date') + ' : ' + formatDate(item.shipment_date)  %>">
 
-                                                          <% }else{ %>
-                                                          <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed pe-none">
-                                                            <% } %>
-
-                                                            <!-- 진행중인 단계 -->
-                                                            <% }else if(i == item.detail_phase+1) { %>
-                                                            <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ active pe-none">
-
-                                                              <!-- 진행 안된 단계 -->
-                                                              <% }else{ %>
-                                                              <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ pe-none">
-                                                                <% } %>
-                                                                <div class="step-counter"></div>
-                                                                <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
-                                                                  <% if(item.phase==1 && i==1) { %>
-                                                                  <%=  '(' + __('users.myProject.stepName.add.sampleNumber',item.sample_number) + ')' %>
-                                                                  <% } %>
-                                                                </div>
-                                                              </a>
+                                                            <% }else{ %>
+                                                            <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ completed pe-none">
                                                               <% } %>
-                                                              <!-- stepper-wrapper end -->
+
+                                                              <!-- 진행중인 단계 -->
+                                                              <% }else if(i == item.detail_phase+1) { %>
+                                                              <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ active pe-none">
+
+                                                                <!-- 진행 안된 단계 -->
+                                                                <% }else{ %>
+                                                                <a href="javascript:void(0);" class="stepper-item _<%= item.phase %> _<%= i %>_ pe-none">
+                                                                  <% } %>
+                                                                  <div class="step-counter"></div>
+                                                                  <div class="step-name"><%= __('project_phase' + item.phase + '.' + i) %>
+                                                                    <% if(item.phase==1 && i==1) { %>
+                                                                    <%=  '(' + __('users.myProject.stepName.add.sampleNumber',item.sample_number) + ')' %>
+                                                                    <% } %>
+                                                                  </div>
+                                                                </a>
+                                                                <% } %>
+                                                                <!-- stepper-wrapper end -->
                         </div>
                       </div>
                     </div>
