@@ -80,24 +80,28 @@
 
                 <hr>
 
-                <!-- 네비게이션 -->
-                <div class="d-flex mt-4 justify-content-center">
-                  <div class="col-5 d-flex justify-content-center align-items-end">
-                    <div class="w-auto mx-3 hover">
+                <div class="d-flex align-items-center">
+                  <div class="col-4"></div>
+
+                  <!-- 네비게이션 -->
+                  <div class="col-4 d-flex justify-content-center align-items-end">
+                    <div class="col-4 mx-3 hover">
                       <% if(prev) { %><a href="<%= codezip.url.users.news.main %>/<%= prev.id %>">
-                        <h6><i class="fa-solid fa-chevron-left  me-3"></i>
+                        <h6>
+                          <i class="fa-solid fa-chevron-left  me-3"></i>
                           <%= __('btn.이전글') %>
                         </h6>
                       </a>
                       <% } %>
                     </div>
-                    <div class="w-auto text-center mx-3 hover"><a href="<%= codezip.url.users.news.main %>">
+                    <div class="col-4 text-center mx-3 hover"><a href="<%= codezip.url.users.news.main %>">
                         <h6>
                           <%= __('btn.목록') %>
                         </h6>
                       </a></div>
-                    <div class="w-auto text-end mx-3 hover">
-                      <% if(next) { %><a href="<%= codezip.url.users.news.main %>/<%= next.id %>">
+                    <div class="col-4 text-end mx-3 hover">
+                      <% if(next) { %>
+                      <a href="<%= codezip.url.users.news.main %>/<%= next.id %>">
                         <h6>
                           <%= __('btn.다음글') %><i class="fa-solid fa-chevron-right  ms-3"></i>
                         </h6>
@@ -105,6 +109,8 @@
                       <% } %>
                     </div>
                   </div>
+
+                  <div class="col-4"></div>
                 </div>
 
               </div>

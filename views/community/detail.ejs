@@ -98,6 +98,7 @@
 
                 <div class="d-flex align-items-center">
                   <div class="col-4"></div>
+
                   <!-- 네비게이션 -->
                   <div class="col-4 d-flex justify-content-center align-items-end">
                     <div class="col-4 mx-3 hover">
@@ -114,7 +115,7 @@
                           <%= __('btn.목록') %>
                         </h6>
                       </a></div>
-                    <div class="col-4 mx-3 hover">
+                    <div class="col-4 text-end mx-3 hover">
                       <% if(next) { %>
                       <a href="<%= codezip.url.users.community.main %>/<%= next.id %>">
                         <h6>
@@ -124,13 +125,14 @@
                       <% } %>
                     </div>
                   </div>
+
                   <!-- 수정 삭제 버튼 -->
                   <div class="text-end col-4">
                     <% if(community.users_id==user.id) { %>
-                    <a class="col-3 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.edit %>/<%= community.id %>">
+                    <a class="col-4 btn btn-outline-primary mx-1 br-10" href="<%= codezip.url.users.community.edit %>/<%= community.id %>">
                       <%= __('users.community.btn.수정') %>
                     </a>
-                    <a class="col-3 btn btn-outline-primary mx-2 px-2 br-10" href="<%= codezip.url.users.community.delete %>/<%= community.id %>">
+                    <a class="col-4 btn btn-outline-primary mx-1 br-10" href="<%= codezip.url.users.community.delete %>/<%= community.id %>">
                       <%= __('users.community.btn.삭제') %>
                     </a>
                     <% } %>
@@ -187,7 +189,7 @@
                       </h5>
                     </div>
                   </div>
-                  <!-- 수정/삭제 -->
+                  <!-- 댓글 수정/삭제 -->
                   <div class="w-auto">
                     <div class="dropdown d-inline-block">
                       <a class="dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -240,19 +242,13 @@
                   </form>
                 </div>
 
-
-
-
               </div>
 
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
-
   </div>
   <!--  END CONTENT AREA  -->
 

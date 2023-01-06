@@ -182,7 +182,7 @@ service.getPrevID = async (id) => {
 }
 
 service.getNextID = async (id) => {
-    let query = `SELECT id FROM communities WHERE id > ${id} and delete_date is null  ORDER BY id LIMIT 1;`
+    let query = `SELECT id FROM communities WHERE id > ${id} and delete_date is null ORDER BY id LIMIT 1;`
     return await models.sequelize.query(query)
         .then(function (results, metadata) {
             // 쿼리 실행 성공
