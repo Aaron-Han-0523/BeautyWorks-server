@@ -13,7 +13,10 @@ i18n.configure({
     defaultLocale: 'en',
 
     //사용언어를 저장할 cookie 이름
-    cookie: 'lang'
+    cookie: 'lang',
+
+    // 객체 표기 활성화 
+    objectNotation: false,
 });
 
 module.exports = (req, res, next) => {
