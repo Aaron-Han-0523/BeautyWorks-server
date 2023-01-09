@@ -437,7 +437,7 @@
   "btn.duplicateCheck": "중복 체크",
   "msg.fail": "Fail",
   "msg.confirm": "Confirm",
-  "msg.waitingSubscriptionApproval": "msg.waitingSubscriptionApproval",
+  "msg.waitingSubscriptionApproval": "Please wait for approval.",
   "msg.checkIdAndPassword": "Please check your email / password.",
   "msg.신규비밀번호불일치": "Please enter your valid information.",
   "msg.현재비밀번호불일치": "The current password does not match.",
