@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const formulasController = require('../controllers/formulas');
-const formulasService = require('../services/formulas');
 
 const myUtils = require('../utils/myUtils');
 

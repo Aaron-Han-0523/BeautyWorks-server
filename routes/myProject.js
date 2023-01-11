@@ -8,7 +8,6 @@ const projectsService = require('../services/projects');
 
 // 샘플 피드백
 router
-    //   .post('/isTarget', myProjectController.edit)
     .post('/feedback', projectsController.edit)
     .get('/feedback', (req, res, next) => {
         projectsService.readOne({

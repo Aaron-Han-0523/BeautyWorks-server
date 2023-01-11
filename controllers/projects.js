@@ -2,7 +2,7 @@ const projectsService = require("../services/projects");
 const documentsService = require("../services/documents");
 const usersService = require("../services/users");
 const myUtils = require("../utils/myUtils");
-const { Op } = require("sequelize");
+
 
 exports.add = async (req, res, next) => {
   const user = res.locals.user;
@@ -19,7 +19,6 @@ exports.add = async (req, res, next) => {
     body.id = await projectsService
       .maxId({ users_id: user.id })
       .then((result) => {
-        // console.log("max id :", result);
         if (result === null) {
           return 1;
         } else {
@@ -41,6 +40,7 @@ exports.add = async (req, res, next) => {
       res.status(500).end();
     });
 };
+
 
 exports.edit = async (req, res, next) => {
   console.log("Project edit");
@@ -106,6 +106,7 @@ exports.edit = async (req, res, next) => {
     });
 };
 
+
 exports.delete = async (req, res, next) => {
   const id = req.query.n;
   let condition = { users_id: req.params.id, id: id };
@@ -127,6 +128,7 @@ exports.delete = async (req, res, next) => {
     });
 };
 
+
 exports.recovery = async (req, res, next) => {
   const id = req.query.n;
   let condition = { users_id: req.params.id, id: id };
@@ -146,6 +148,7 @@ exports.recovery = async (req, res, next) => {
       res.status(500).end();
     });
 };
+
 
 exports.index = async (req, res, next) => {
   const user = res.locals.user;
@@ -185,6 +188,7 @@ exports.index = async (req, res, next) => {
     });
 };
 
+
 exports.temp_projects = async (req, res, next) => {
   const user = res.locals.user;
   const base = req.baseUrl.split("/")[1];
@@ -212,6 +216,7 @@ exports.temp_projects = async (req, res, next) => {
       res.status(500).end();
     });
 };
+
 
 exports.progress_projects = async (req, res, next) => {
   const user = res.locals.user;
@@ -241,6 +246,7 @@ exports.progress_projects = async (req, res, next) => {
     });
 };
 
+
 exports.completed_projects = async (req, res, next) => {
   const user = res.locals.user;
   const base = req.baseUrl.split("/")[1];
@@ -268,6 +274,7 @@ exports.completed_projects = async (req, res, next) => {
       res.status(500).end();
     });
 };
+
 
 exports.detail = async (req, res, next) => {
   const id = req.query.n;
@@ -297,6 +304,7 @@ exports.detail = async (req, res, next) => {
       res.status(500).end();
     });
 };
+
 
 exports.temp_project_detail = async (req, res, next) => {
   const id = req.query.n;
@@ -329,6 +337,7 @@ exports.temp_project_detail = async (req, res, next) => {
     });
 };
 
+
 exports.progress_project_detail = async (req, res, next) => {
   const id = req.query.n;
   let condition = { id: id };
@@ -359,6 +368,7 @@ exports.progress_project_detail = async (req, res, next) => {
       res.status(500).end();
     });
 };
+
 
 exports.completed_project_detail = async (req, res, next) => {
   const id = req.query.n;

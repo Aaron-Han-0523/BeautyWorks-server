@@ -2,6 +2,7 @@ const codezip = require('../codezip');
 const packagesService = require('../services/packages');
 const { Op } = require('sequelize');
 
+
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -28,6 +29,7 @@ exports.add = async (req, res, next) => {
             res.status(500).end();
         });
 }
+
 
 exports.edit = async (req, res, next) => {
     const user = res.locals.user;
@@ -61,6 +63,7 @@ exports.edit = async (req, res, next) => {
         })
 }
 
+
 exports.delete = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -89,6 +92,7 @@ exports.delete = async (req, res, next) => {
             res.status(500).end();
         })
 }
+
 
 exports.recovery = async (req, res, next) => {
     const user = res.locals.user;
@@ -119,6 +123,7 @@ exports.recovery = async (req, res, next) => {
         })
 }
 
+
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -142,19 +147,6 @@ exports.index = async (req, res, next) => {
     delete req.query.q;
     delete req.query.p;
     delete req.query.limit;
-    // for ([key, value] of Object.entries(req.query)) {
-    //     if (value) {
-    //         // condition[key] = { [Op.substring]: value }; // 배열은 in 연산
-    //         if (typeof value === "string") {
-    //             condition[key] = { [Op.substring]: value }
-    //         } else {
-    //             condition[Op.or] = [];
-    //             value.forEach((code, index) => {
-    //                 condition[Op.or].push({ [key]: { [Op.substring]: code } })
-    //             });
-    //         }
-    //     }
-    // }
 
     console.log(condition)
 
@@ -190,6 +182,7 @@ exports.index = async (req, res, next) => {
             res.status(500).end();
         })
 }
+
 
 exports.detail = async (req, res, next) => {
     const user = res.locals.user;

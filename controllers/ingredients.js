@@ -2,6 +2,7 @@ const codezip = require('../codezip');
 const ingredientsService = require('../services/ingredients');
 const { Op } = require('sequelize');
 
+
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -28,6 +29,7 @@ exports.add = async (req, res, next) => {
             res.status(500).end();
         });
 }
+
 
 exports.edit = async (req, res, next) => {
     const user = res.locals.user;
@@ -61,6 +63,7 @@ exports.edit = async (req, res, next) => {
         })
 }
 
+
 exports.delete = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -90,6 +93,7 @@ exports.delete = async (req, res, next) => {
         })
 }
 
+
 exports.recovery = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -118,6 +122,7 @@ exports.recovery = async (req, res, next) => {
             res.status(500).end();
         })
 }
+
 
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
@@ -190,6 +195,7 @@ exports.index = async (req, res, next) => {
         })
 }
 
+
 exports.detail = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -197,8 +203,6 @@ exports.detail = async (req, res, next) => {
     let condition = {};
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         return res.status(403).end();
-        // condition.users_id = user.id;
-        // condition.delete_date = null;
     }
     condition.id = req.params.id;
 

@@ -17,18 +17,14 @@ const codezip = require("../codezip");
 exports.login = async function (req, res, next) {
   const body = req.body;
 
-  // console.log(body)
   console.log("try", body.email, "login by", req.ip);
 
   const user = await usersService.getUser({
     email: body.email,
     delete_date: null,
   });
-  // console.log(user)
 
   const hashedPassword = await encryption.hashing(body.password);
-  // console.log("해싱된 패스워드", hashedPassword);
-  // console.log("저장된 패스워드", user.password);
 
   if (user) {
     if (user.user_type === 0) {
@@ -64,6 +60,7 @@ exports.login = async function (req, res, next) {
   }
 };
 
+
 exports.logout = async (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
@@ -74,6 +71,7 @@ exports.logout = async (req, res, next) => {
     return res.redirect("/users/signIn");
   });
 };
+
 
 exports.validationEmail = async (req, res, next) => {
   const targetEmail = req.body.email.toLowerCase();
@@ -91,7 +89,6 @@ exports.validationEmail = async (req, res, next) => {
     return res.status(400).send("The email exists.");
   }
 
-  // console.log(systemInfo);
   const transporter = nodemailer.createTransport({
     service: systemInfo.emailService,
     auth: {
@@ -100,9 +97,7 @@ exports.validationEmail = async (req, res, next) => {
     },
   });
 
-  let validationNumber = (
-    "000000" + parseInt((Math.random() * 1000000) / 1)
-  ).slice(-6);
+  let validationNumber = ("000000" + parseInt((Math.random() * 1000000) / 1)).slice(-6);
 
   let mailOptions = {
     from: systemInfo.systemEmailName + "<" + systemInfo.emailUserid + ">",
@@ -122,6 +117,7 @@ exports.validationEmail = async (req, res, next) => {
     }
   });
 };
+
 
 exports.add = async (req, res, next) => {
   const base = req.baseUrl.split("/")[1];
@@ -165,20 +161,18 @@ exports.add = async (req, res, next) => {
     });
 };
 
+
 exports.edit = async (req, res, next) => {
   console.log("users edit");
 
   const user = res.locals.user;
-  // console.log('user :', user);
 
   let body = req.body;
-  // console.log('body :', body);
   if (body.isRemoveImage == "true") {
     body.profile_image_path = codezip.url.users.defaultProfileImage;
     console.log("default profile image path :", body.profile_image_path);
   } else {
     let file = req.file;
-    // console.log('file :', file);
     if (file) body[file.fieldname] = "/" + file.path;
   }
 
@@ -194,11 +188,11 @@ exports.edit = async (req, res, next) => {
     });
 };
 
+
 exports.checkAlarm = async (req, res, next) => {
   console.log("user check alram");
 
   const user = res.locals.user;
-  // console.log('user :', user);
 
   let body = {};
   body.is_project_update = false;
@@ -214,6 +208,7 @@ exports.checkAlarm = async (req, res, next) => {
       return res.status(500).send();
     });
 };
+
 
 exports.main = async (req, res) => {
   const user = res.locals.user;
@@ -297,7 +292,6 @@ exports.main = async (req, res) => {
         news,
         community,
       ]) => {
-        // console.log(community);
         res.render("dashboard/dashboard", {
           page: page,
           project: project.rows,
@@ -315,6 +309,7 @@ exports.main = async (req, res) => {
       res.status(500).end();
     });
 };
+
 
 exports.myPage = async (req, res, next) => {
   const user = res.locals.user;
@@ -358,6 +353,7 @@ exports.myPage = async (req, res, next) => {
     });
 };
 
+
 exports.index = async (req, res, next) => {
   const user = res.locals.user;
   const base = req.baseUrl.split("/")[1];
@@ -395,6 +391,7 @@ exports.index = async (req, res, next) => {
     });
 };
 
+
 exports.changingPassword = async (req, res, next) => {
   const userInfo = res.locals.user;
   // console.log("user information :", userInfo);
@@ -418,6 +415,7 @@ exports.changingPassword = async (req, res, next) => {
       .catch((err) => console.error(err));
   } else return res.status(403).end();
 };
+
 
 exports.resetPassword = async (req, res, next) => {
   const body = req.body;
@@ -473,6 +471,7 @@ exports.resetPassword = async (req, res, next) => {
   } else return res.status(403).end();
 };
 
+
 exports.findEmail = async (req, res, next) => {
   const body = req.body;
   body.mobile_contact = body.country_number + ")" + body.phoneNum.trim();
@@ -483,7 +482,6 @@ exports.findEmail = async (req, res, next) => {
     last_name: body.last_name.trim(),
     mobile_contact: body.mobile_contact,
   });
-  // console.log("user :", user);
   if (!user) return res.status(404).end();
 
   return res.send(user.email);

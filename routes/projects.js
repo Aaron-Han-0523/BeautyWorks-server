@@ -4,8 +4,8 @@ const router = express.Router();
 const myUtils = require('../utils/myUtils');
 
 const projectsController = require('../controllers/projects');
-const projectsService = require('../services/projects');
 
+// 업로드 파일 처리
 router
     .use(myUtils.upload("projects").fields([{ name: 'file_paths' }, { name: 'image_paths' }]), (req, res, next) => {
         console.log(req.files);
@@ -29,10 +29,10 @@ router
             }
         }
 
-
         next();
     })
 
+// 빈 값 삭제
 router
     .use((req, res, next) => {
         for (let key in req.body) {
@@ -46,11 +46,6 @@ router
     })
 
 /* GET projects listing. */
-// 추가
-// router
-//   .post('/add', projectsController.add)
-//   .get('/add', (req, res, next) => res.render('projects/add'))
-
 // 편집
 router
     .post('/edit', projectsController.edit)

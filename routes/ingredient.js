@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const ingredientsController = require('../controllers/ingredients');
-const ingredientsService = require('../services/ingredients');
 
 /* GET ingredients listing. */
 router
@@ -35,10 +34,6 @@ router
 // 상세 조회
 router
   .get('/:id', ingredientsController.detail)
-
-// 좋아요
-// router
-//   .post('/like', ingredientsController.like)
 
 // 목록 조회
 router

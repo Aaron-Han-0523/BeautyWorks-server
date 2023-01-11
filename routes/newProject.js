@@ -3,7 +3,6 @@ const router = express.Router();
 
 const projectsController = require("../controllers/projects");
 const projectsService = require("../services/projects");
-const ingredientsService = require("../services/ingredients");
 const codezip = require("../codezip");
 
 /* GET newProject listing. */

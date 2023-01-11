@@ -1,6 +1,6 @@
 const documentsService = require('../services/documents');
 const projectsService = require('../services/projects');
-const { Op } = require('sequelize');
+
 
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
@@ -24,6 +24,7 @@ exports.add = async (req, res, next) => {
             res.status(500).end();
         });
 }
+
 
 exports.edit = async (req, res, next) => {
     const user = res.locals.user;
@@ -49,9 +50,11 @@ exports.edit = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err);
             res.status(500).end();
         })
 }
+
 
 exports.delete = async (req, res, next) => {
     const user = res.locals.user;
@@ -78,9 +81,11 @@ exports.delete = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err);
             res.status(500).end();
         })
 }
+
 
 exports.recovery = async (req, res, next) => {
     const user = res.locals.user;
@@ -107,9 +112,11 @@ exports.recovery = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err);
             res.status(500).end();
         })
 }
+
 
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
@@ -127,9 +134,7 @@ exports.index = async (req, res, next) => {
 
     let condition = { users_id: user.id };
 
-
     if (base != 'admin') {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
 
@@ -153,19 +158,13 @@ exports.index = async (req, res, next) => {
                     documents: result
                 })
             }
-            //  else if (base == 'admin') {
-            //     return res.render('admin/documents/index', {
-            //         page: page,
-            //         limit: limit,
-            //         documents: result
-            //     })
-            // }
         })
         .catch((err) => {
             console.error(err);
             res.status(500).end();
         })
 }
+
 
 exports.detail = async (req, res, next) => {
     const user = res.locals.user;
@@ -194,11 +193,6 @@ exports.detail = async (req, res, next) => {
                     project: result,
                 })
             }
-            //  else if (base == 'admin') {
-            //     res.render('admin/ingredient/detail', {
-            //         ingredient: result
-            //     })
-            // }
         }).catch((err) => {
             console.error(err);
             res.status(500).end();

@@ -1,10 +1,8 @@
-var createError = require('http-errors');
+const createError = require('http-errors');
 const codezip = require('../codezip');
-const models = require('../models');
 const usersService = require('../services/users');
 const newsService = require('../services/news');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+
 
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
@@ -20,7 +18,6 @@ exports.add = async (req, res, next) => {
 
     try {
         let result = await newsService.create(body);
-        // console.log("result :",result);
         if (req.api) {
             return res.status(201).json(result.id);
         } else {
@@ -32,6 +29,7 @@ exports.add = async (req, res, next) => {
         return res.status(409).json(`add fail`)
     }
 }
+
 
 exports.edit = async (req, res, next) => {
     const user = res.locals.user;
@@ -66,6 +64,7 @@ exports.edit = async (req, res, next) => {
         })
 }
 
+
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -77,11 +76,7 @@ exports.index = async (req, res, next) => {
     let word = req.query.q;
     if (word) word = word.replace(/\;/g, '').trim();
 
-    let condition = word ?
-        {
-            word: word
-        }
-        : {}
+    let condition = word ? { word: word } : {}
 
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         condition.delete_date = null;
@@ -132,6 +127,7 @@ exports.index = async (req, res, next) => {
         });
 }
 
+
 exports.detail = async (req, res, next) => {
     const id = req.params.id;
     const user = res.locals.user;
@@ -152,15 +148,12 @@ exports.detail = async (req, res, next) => {
     Promise.all([data, prev_id, next_id])
         .then(async ([data, prev_id, next_id]) => {
             console.log("data :", [data, prev_id, next_id]);
-            // console.log("prev_id :", results[1][0]);
-            // console.log("next_id :", results[2][0]);
 
             if (!data) {
                 return next(createError(404));
             }
 
             const user = await usersService.readOne(data.users_id);
-            console.log(user)
             data.first_name = user.first_name;
             data.last_name = user.last_name;
             if (req.api) {
@@ -183,11 +176,12 @@ exports.detail = async (req, res, next) => {
                     next: next_id[0] || null,
                 })
             }
-        }).catch(err=>{
+        }).catch(err => {
             console.error(err);
             res.status(500).end();
         })
 }
+
 
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
@@ -214,9 +208,11 @@ exports.delete = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err)
             res.status(500).end();
         })
 }
+
 
 exports.recovery = async (req, res, next) => {
     const id = req.params.id;
@@ -243,6 +239,7 @@ exports.recovery = async (req, res, next) => {
             }
         })
         .catch((err) => {
+            console.error(err)
             res.status(500).end();
         })
 }

@@ -1,11 +1,9 @@
-const models = require('../models');
 const codezip = require('../codezip');
 const usersService = require('../services/users');
 const communitiesService = require('../services/communities');
 const likeService = require('../services/like_communities');
 const repliesService = require('../services/replies');
-const newsService = require('../services/news');
-const { Op } = require('sequelize');
+
 
 exports.add = async (req, res, next) => {
     const user = res.locals.user;
@@ -15,18 +13,19 @@ exports.add = async (req, res, next) => {
 
     try {
         let result = await communitiesService.create(body);
-        // console.log("result :",result);
+
         if (req.api) {
             return res.status(201).json(result.id);
         } else {
             return res.status(201).redirect(codezip.url.users.community.main);
         }
     }
-    catch (e) {
-        console.error(e);
+    catch (err) {
+        console.error(err);
         return res.status(409).json(`add fail`)
     }
 }
+
 
 exports.edit = async (req, res, next) => {
     console.log("put - communities edit")
@@ -45,7 +44,6 @@ exports.edit = async (req, res, next) => {
             console.error(err);
             throw res.status(500).send(err);
         })
-        // console.log(checkAuthor);
         if (!checkAuthor) {
             return res.status(403).end();
         }
@@ -73,6 +71,7 @@ exports.edit = async (req, res, next) => {
         });
 }
 
+
 exports.index = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
@@ -81,28 +80,16 @@ exports.index = async (req, res, next) => {
     let limit = +req.query.limit || 10;
     const skip = req.query.skip || (communities_page - 1) * limit;
 
-    
     let word = req.query.q
     if (word) word = word.replace(/\;/g, '').trim();
 
-    let condition = word ?
-        // {
-        //     [Op.or]: [
-        //         { title: { [Op.like]: `%${word}%` } },
-        //         { content: { [Op.like]: `%${word}%` } }
-        //     ]
-        // }
-        {
-            word: word
-        }
-        : {}
+    let condition = word ? { word: word } : {}
 
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
         limit = +req.query.limit || 5;
         condition.delete_date = null;
     }
 
-    
     let communities_paging = {
         skip: skip,
         limit: limit
@@ -147,6 +134,7 @@ exports.index = async (req, res, next) => {
         });
 }
 
+
 exports.detail = async (req, res, next) => {
     const id = req.params.id;
     const user = res.locals.user;
@@ -169,16 +157,13 @@ exports.detail = async (req, res, next) => {
 
     let condition = { communities_id: id };
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
 
     const reply = repliesService.allRead(condition, reply_paging);
 
-
     Promise.all([community, communitylike_count, prev_id, next_id, reply])
         .then(async ([community, communitylike_count, prev_id, next_id, reply]) => {
-            // console.log('??', reply)
             if (!community) {
                 return next(createError(404));
             }
@@ -234,6 +219,7 @@ exports.detail = async (req, res, next) => {
         })
 }
 
+
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
     const user = res.locals.user;
@@ -268,9 +254,9 @@ exports.delete = async (req, res, next) => {
     });
 }
 
+
 exports.like = async (req, res, next) => {
     const user = res.locals.user;
-    // console.log(user);
     if (!user) {
         return res.status(403).redirect(codezip.url.users.signIn);
     }
@@ -326,30 +312,3 @@ exports.recovery = async (req, res, next) => {
             res.status(500).end();
         })
 }
-
-// exports.search = async (req, res, next) => {
-//     const user = req.userInfo;
-//     let word = req.query.q;
-//     console.log("search", word, "start")
-
-//     let result = null;
-//     try {
-//         if (word) {
-//             result = await communitiesService.allRead({
-//                 [Op.or]: [
-//                     { title: { [Op.like]: `%${word}%` } },
-//                     { content: { [Op.like]: `%${word}%` } }
-//                 ]
-//             })
-//         } else {
-//             result = await communitiesService.allRead()
-//         }
-//     } catch (err) {
-//         console.error(err)
-//     }
-
-//     console.log("search result :", result)
-
-//     if (result) return res.status(200).json({ user: user, data: result });
-//     else res.status(400).json(`don't find ${word}`)
-// }

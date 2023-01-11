@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const newsController = require('../controllers/news');
-const newsService = require('../services/news');
 
 /* GET news listing. */
 // 추가

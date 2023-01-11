@@ -1,34 +1,19 @@
 const usersService = require("../services/users");
-const projectsService = require("../services/projects");
-const formulasService = require("../services/formulas");
-const like_formulasService = require("../services/like_formulas");
-const ingredientsService = require("../services/ingredients");
-const newsService = require("../services/news");
-const communitiesService = require("../services/communities");
-const like_communitiesService = require("../services/like_communities");
-const like_repliesService = require("../services/like_replies");
-const nodemailer = require("nodemailer");
-const systemInfo = require("../config/system.json");
 const encryption = require("../utils/encryption");
-const { getRandomInt } = require("../utils/myUtils");
 const { Op } = require("sequelize");
 const codezip = require("../codezip");
 
 exports.login = async function (req, res, next) {
   const body = req.body;
 
-  // console.log(body)
-  console.log("try", body.email, "login by", req.ip);
+  console.log("try", body.email, "login by", req.headers["X-Real-Ip"] || req.ip);
 
   const user = await usersService.getUser({
     email: body.email,
     delete_date: null,
   });
-  // console.log(user)
 
   const hashedPassword = await encryption.hashing(body.password);
-  // console.log("해싱된 패스워드", hashedPassword);
-  // console.log("저장된 패스워드", user.password);
 
   if (user && [100, 200].includes(user.user_type)) {
     if (user.password == hashedPassword) {
@@ -144,9 +129,6 @@ exports.edit = async (req, res, next) => {
   const id = req.params.id;
 
   let body = req.body;
-  // if (!body.email) {
-  //     body.email = (body.emailId + '@' + body.emailDomain).toLowerCase();
-  // }
   if (!body.mobile_contact) {
     body.mobile_contact = body.country_number + ")" + body.phoneNum;
   }
@@ -155,10 +137,8 @@ exports.edit = async (req, res, next) => {
 
   if (body.isRemoveImage == "true") {
     body.profile_image_path = codezip.url.users.defaultProfileImage;
-    console.log("default profile image path :", body.profile_image_path);
   } else {
     let file = req.file;
-    // console.log('file :', file);
     if (file) body[file.fieldname] = "/" + file.path;
   }
 

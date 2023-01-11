@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 
 const { Service } = require('../utils/template');
 
-let service = new Service(news);
+const service = new Service(news);
 
 
 service.create = async (obj) => {

@@ -1,18 +1,9 @@
-const usersService = require('../services/users');
-const projectsService = require('../services/projects');
 const formulasService = require('../services/formulas');
 const like_formulasService = require('../services/like_formulas');
-const ingredientsService = require('../services/ingredients');
-const newsService = require('../services/news');
 const communitiesService = require('../services/communities');
 const like_communitiesService = require('../services/like_communities');
 const like_repliesService = require('../services/like_replies');
-const nodemailer = require('nodemailer');
-const systemInfo = require('../config/system.json');
-const encryption = require('../utils/encryption');
-const { getRandomInt } = require('../utils/myUtils');
-const { Op } = require('sequelize');
-const codezip = require('../codezip');
+
 
 exports.wishList = async (req, res, next) => {
     const user = res.locals.user;
@@ -23,7 +14,6 @@ exports.wishList = async (req, res, next) => {
 
     let condition = {};
     if (req.baseUrl.split('/')[1] != 'admin') {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
 
@@ -45,6 +35,7 @@ exports.wishList = async (req, res, next) => {
         });
 }
 
+
 exports.myPosts = async (req, res, next) => {
     const user = res.locals.user;
 
@@ -54,7 +45,6 @@ exports.myPosts = async (req, res, next) => {
 
     let condition = { users_id: user.id };
     if (req.baseUrl.split('/')[1] != 'admin') {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
 
@@ -65,8 +55,8 @@ exports.myPosts = async (req, res, next) => {
             console.error(err);
             res.status(500).end();
         });
-
 }
+
 
 exports.favoritePosts = async (req, res, next) => {
     const user = res.locals.user;
@@ -77,7 +67,6 @@ exports.favoritePosts = async (req, res, next) => {
 
     let condition = {};
     if (req.baseUrl.split('/')[1] != 'admin') {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
 
@@ -98,6 +87,7 @@ exports.favoritePosts = async (req, res, next) => {
         });
 }
 
+
 exports.favoriteComments = async (req, res, next) => {
     const user = res.locals.user;
 
@@ -107,7 +97,6 @@ exports.favoriteComments = async (req, res, next) => {
 
     let condition = { users_id: user.id };
     if (req.baseUrl.split('/')[1] != 'admin') {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
 

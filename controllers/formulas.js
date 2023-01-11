@@ -32,6 +32,7 @@ exports.add = async (req, res, next) => {
         });
 }
 
+
 exports.edit = async (req, res, next) => {
     const id = req.params.id;
     const user = res.locals.user;
@@ -64,6 +65,7 @@ exports.edit = async (req, res, next) => {
         })
 }
 
+
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
     const user = res.locals.user;
@@ -79,11 +81,6 @@ exports.delete = async (req, res, next) => {
         .hide(condition)
         .then((result) => {
             if (result == 1) {
-                // like_formulas
-                //     .delete({ formulas_id: id })
-                //     .then((cnt) => {
-                //         console.log("like delete count:", cnt)
-                //     })
                 res.status(200).end();
             }
             else if (result === [0]) {
@@ -97,6 +94,7 @@ exports.delete = async (req, res, next) => {
             res.status(500).end();
         })
 }
+
 
 exports.recovery = async (req, res, next) => {
     const id = req.params.id;
@@ -127,8 +125,8 @@ exports.recovery = async (req, res, next) => {
         })
 }
 
+
 exports.index = async (req, res, next) => {
-    const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
 
     let condition = {};
@@ -191,13 +189,13 @@ exports.index = async (req, res, next) => {
         })
 }
 
+
 exports.detail = async (req, res, next) => {
     const user = res.locals.user;
     const base = req.baseUrl.split('/')[1];
 
     let condition = {};
     if (!(base == 'admin' && [100, 200].includes(user.user_type))) {
-        // condition.users_id = user.id;
         condition.delete_date = null;
     }
     condition.id = req.params.id;
@@ -235,12 +233,11 @@ exports.detail = async (req, res, next) => {
     })
 }
 
+
 exports.like = async (req, res, next) => {
     const user = res.locals.user;
     const id = +req.params.id;
     const like_list = await like_formulas.getLikelist(user.id);
-    // console.log(like_list);
-    // console.log(id);
 
     let condition = {
         formulas_id: id,

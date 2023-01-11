@@ -116,6 +116,7 @@ logger.token("remote-user", (req, res) => {
   }
 });
 
+// 로거 설정
 // let logger_setting = ':req[X-Real-IP] :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":user-agent" :response-time ms';
 
 // let logger_option = {
@@ -134,7 +135,6 @@ router.post("/changingPassword", usersController.changingPassword);
 // 사용자 접속해제
 router.get("/signOut", usersController.logout);
 
-// router.get('/layout', (req, res) => res.render('layout/layout'));
 // 알람 체크
 router.get("/checkAlarm", usersController.checkAlarm);
 
