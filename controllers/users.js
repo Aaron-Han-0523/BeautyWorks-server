@@ -35,10 +35,13 @@ exports.login = async function (req, res, next) {
       );
     } else if (user.password == hashedPassword) {
       console.log(body.email, "connect");
+      // 마지막 접속날짜 업데이트
+      usersService.update({ last_access_date: new Date() }, { id: user.id })
+
       delete user.password;
       req.session.user = user;
 
-      //세션 스토어가 이루어진 후 redirect를 해야함.
+      // 세션 스토어가 이루어진 후 redirect를 해야함.
       req.session.save(() => {
         return res.redirect("/");
       });
@@ -294,8 +297,8 @@ exports.main = async (req, res) => {
       ]) => {
         res.render("dashboard/dashboard", {
           page: page,
-          project: project.rows,
-          temp_project: temp_project.rows,
+          project: project,
+          temp_project: temp_project,
           completed_project: completed_project,
           recommended_formula: recommended_formula,
           recommended_ingredient: recommended_ingredient,

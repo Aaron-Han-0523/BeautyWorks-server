@@ -177,8 +177,8 @@ exports.index = async (req, res, next) => {
     .then(([project, temp_project, completed_project]) => {
       res.render("myProject/main", {
         page: page,
-        project: project.rows,
-        temp_project: temp_project.rows,
+        project: project,
+        temp_project: temp_project,
         completed_project: completed_project,
       });
     })

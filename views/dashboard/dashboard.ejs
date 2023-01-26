@@ -42,6 +42,8 @@
           <div class="row mt-3">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
+              <% if(project.count||temp_project.count||completed_project.count){ %>
+              <% if(project.count){ %>
               <!-- Progress -->
               <div class="widget-content widget-content-area br-20 px-4">
                 <div class="form-group ms-3">
@@ -62,7 +64,7 @@
                     </div>
                   </div>
 
-                  <% project.forEach((item,index)=>{ %>
+                  <% project.rows.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
                       <div class="progress-card-img progress-<%= item.phase %>">
@@ -80,7 +82,9 @@
 
                 </div>
               </div>
+              <% } %>
 
+              <% if(temp_project.count){ %>
               <!-- 임시 저장한 Progress -->
               <div class="widget-content widget-content-area br-20 px-4 mt-5">
                 <div class="form-group ms-3">
@@ -100,7 +104,7 @@
                   </div>
 
                   <% console.log(temp_project) %>
-                  <% temp_project.forEach((item,index)=>{ %>
+                  <% temp_project.rows.forEach((item,index)=>{ %>
                   <div class="row">
                     <div class="progress-card">
                       <div class="progress-card-img progress-<%= item.phase %>">
@@ -119,8 +123,9 @@
 
                 </div>
               </div>
+              <% } %>
 
-
+              <% if(completed_project.count){ %>
               <!-- Completed Project -->
               <div class="widget-content widget-content-area br-20 px-4 mt-5">
                 <div class="form-group ms-3">
@@ -185,6 +190,23 @@
                   </div>
                 </div>
               </div>
+              <% } %>
+              <% }else{ %>
+              <div class="widget-content widget-content-area br-20 px-4">
+                <div class="form-group ms-3">
+
+                  <div class="row mb-3">
+                    <div class="justify-content-between d-flex px-0">
+                      <div>
+                        <a class="hover" href="<%= codezip.url.users.newProject._0 %>">
+                          <h4><strong><%= __('msg.noProject') %></strong></h4>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
 
               <!-- 추천 프로젝트 & 추천 성분 -->
               <div class="row mt-5">

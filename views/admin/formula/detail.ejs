@@ -175,9 +175,6 @@
 
   <script>
     $(function() {
-      //드래그 앤 드롭
-      $(".sortable").sortable();
-
       //이미지 등록
       $("#image").change(function(e) {
         //div 내용 비워주기
@@ -191,34 +188,9 @@
           image.value = '';
           return false;
         }
-        //업로드 가능 파일인지 체크
-        for (var i = 0; i < files.length; i++) {
-          if (!checkExtension(files[i].name, files[i].size)) {
-            return false;
-          }
-        }
+        
         preview(arr);
-
-        function checkExtension(fileName, fileSize) {
-          var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-          var maxSize = 5 * 1024 * 1024; // 5 MB
-
-          if (fileSize >= maxSize) {
-            alert('이미지 크기가 초과되었습니다.');
-            image.value = '';
-            $("#image").val(""); //파일 초기화
-            return false;
-          }
-
-          if (regex.test(fileName)) {
-            alert('확장자명을 확인해주세요.');
-            image.value = '';
-            $("#image").val(""); //파일 초기화
-            return false;
-          }
-          return true;
-        }
-
+        
         function preview(arr) {
           arr.forEach(function(f) {
             //파일명이 길면 파일명...으로 처리

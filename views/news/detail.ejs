@@ -34,8 +34,8 @@
                   <%= __('Lounge') %>
                 </h6>
                 <div class="menu">
-                    <%= __('News') %>
-                  </div>
+                  <%= __('News') %>
+                </div>
               </div>
             </div>
           </div>
@@ -59,8 +59,8 @@
                 <!-- title -->
                 <div class="form-control m-2 d-flex justify-content-between">
                   <div class="p-1 align-self-center d-flex">
-                      <%- include('../partials/badge/new.ejs',{date:news.create_date}) %>
-                      <span class="align-self-center"><%= `${news.title}` %></span>
+                    <%- include('../partials/badge/new.ejs',{date:news.create_date}) %>
+                    <span class="align-self-center"><%= `${news.title}` %></span>
                   </div>
                   <div class="p-1 d-flex">
                     <h6 class="me-3">
@@ -72,9 +72,7 @@
                 <!-- content -->
                 <div class="row m-3 p-3 my-5">
                   <div class="">
-                    <h6>
-                      <%= news.content %>
-                    </h6>
+                    <h6 style="white-space: pre-line;"><%= news.content %></h6>
                   </div>
                 </div>
 

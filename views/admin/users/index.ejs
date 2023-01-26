@@ -45,6 +45,7 @@
           <thead class="table-header">
             <tr>
               <th scope="col"><%= __('table.head.나라') %></th>
+              <th scope="col"><%= __('table.head.권한') %></th>
               <th scope="col"><%= __('table.head.이메일') %></th>
               <th scope="col"><%= __('table.head.성') %></th>
               <th scope="col"><%= __('table.head.이름') %></th>
@@ -52,6 +53,7 @@
               <th scope="col"><%= __('table.head.브랜드명') %></th>
               <th scope="col"><%= __('table.head.전화번호') %></th>
               <th scope="col"><%= __('table.head.가입일') %></th>
+              <th scope="col"><%= __('table.head.마지막 접속일') %></th>
               <th scope="col"><%= __('table.head.삭제/복구') %></th>
             </tr>
             <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
@@ -61,6 +63,7 @@
             <% users.rows.forEach((item,index)=>{ %>
             <tr onclick="location.href='<%= codezip.url.admin.users.main %>/<%= item.id %>';">
               <td><%= __(item.country) %></td>
+              <td><%= __("user_type."+item.user_type) %></td>
               <td><%= item.email %></td>
               <td><%= item.last_name %></td>
               <td><%= item.first_name %></td>
@@ -68,6 +71,7 @@
               <td><%= item.brand_name %></td>
               <td><%= item.mobile_contact %></td>
               <td><%= formatDate(item.create_date) %></td>
+              <td><%= formatDate(item.last_access_date) %></td>
               <td>
                 <div id="action_btn-<%= item.id %>" class="hover">
                   <% if(item.delete_date) { %>
