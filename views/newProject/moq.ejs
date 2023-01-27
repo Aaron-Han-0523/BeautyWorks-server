@@ -27,9 +27,9 @@
         <div class="middle-content p-0">
 
           <!-- BREADCRUMB -->
-          <div class="row px-3">
+          <div class="row px-3 mt-3">
             <div class="breadcrumb">
-              <div class="col-3">
+              <div class="">
                 <h6 class="main-menu">
                   <%= __('Project') %>
                 </h6>
@@ -75,9 +75,6 @@
                       <h6>
                         <%= __('users.newProject.moq.moqSelect.before1') %>
                       </h6>
-                      <!-- <div>
-                        <%= __('users.newProject.moq.moqSelect.before2') %>
-                      </div> -->
                       <div>
                         <select class="form-select my-2" name="moq" required>
                           <option value="">
@@ -151,7 +148,7 @@
         return;
       }
       if (+moq[0].value && +moq[1].value) {
-        unitPrice.value = parseFloat(+moq[0].value / +moq[1].value)
+        unitPrice.value = parseFloat(+moq[0].value * +moq[1].value)
       }
     }
 
